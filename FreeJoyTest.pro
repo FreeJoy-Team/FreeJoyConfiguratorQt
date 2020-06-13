@@ -1,0 +1,99 @@
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+CONFIG += c++17
+
+# The following define makes your compiler emit warnings if you use
+# any Qt feature that has been marked deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS \
+WIN_DESKTOP
+
+# You can also make your code fail to compile if it uses deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+SOURCES += \
+    appconfig.cpp \
+    deviceconfig.cpp \
+    hidapi.c \
+    hiddevice.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    reportconverter.cpp \
+    stm_main.c \
+    test.cpp \
+    widgets/advancedsettings.cpp \
+    widgets/axesconfig.cpp \
+    widgets/axescurves.cpp \
+    widgets/axestobuttons.cpp \
+    widgets/buttonconfig.cpp \
+    widgets/buttonlogical.cpp \
+    widgets/buttonphysical.cpp \
+    widgets/encoders.cpp \
+    widgets/led.cpp \
+    widgets/pincombobox.cpp \
+    widgets/pinconfig.cpp \
+    widgets/shiftregisters.cpp
+
+HEADERS += \
+    appconfig.h \
+    common_defines.h \
+    common_types.h \
+    deviceconfig.h \
+    global.h \
+    hidapi.h \
+    hiddevice.h \
+    mainwindow.h \
+    reportconverter.h \
+    stm_main.h \
+    test.h \
+    widgets/advancedsettings.h \
+    widgets/axesconfig.h \
+    widgets/axescurves.h \
+    widgets/axestobuttons.h \
+    widgets/buttonconfig.h \
+    widgets/buttonlogical.h \
+    widgets/buttonphysical.h \
+    widgets/encoders.h \
+    widgets/led.h \
+    widgets/pincombobox.h \
+    widgets/pinconfig.h \
+    widgets/shiftregisters.h
+
+FORMS += \
+    mainwindow.ui \
+    widgets/advancedsettings.ui \
+    widgets/axesconfig.ui \
+    widgets/axescurves.ui \
+    widgets/axestobuttons.ui \
+    widgets/buttonconfig.ui \
+    widgets/buttonlogical.ui \
+    widgets/buttonphysical.ui \
+    widgets/encoders.ui \
+    widgets/led.ui \
+    widgets/pincombobox.ui \
+    widgets/pinconfig.ui \
+    widgets/shiftregisters.ui
+
+TRANSLATIONS += \
+    FreeJoyTest_ru.ts
+
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc \
+    qdarkstyle/style.qrc \
+    qss/qss.qrc \
+    darkstyle/darkstyle.qrc
+
+win32 {
+LIBS += -lhid -lsetupapi
+}
