@@ -29,7 +29,7 @@ public:
     QList<PinComboBox *> PinComboBoxPtrList;
 
 private slots:
-    void setCurrentConfig();
+    void PinInteraction(int index, int sender_index, int pin);
 
 private:
     Ui::PinConfig *ui;
