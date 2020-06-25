@@ -99,7 +99,9 @@ public:
     ~PinComboBox();
     int GetIndex();
     void SetIndex(int index, int sender_index);
-    void InitializationPins(int pin);
+    void InitializationPins(uint pin);
+    void ReadFromConfig(uint pin);
+    void WriteToConfig(uint pin);
 
     int GetEnumValue();       //?
 
@@ -108,7 +110,8 @@ public:
     int EnumToIndex(int deviceEnum);
     int pin_number_ = -1;
     //! номер элемента в pin_types
-    std::vector<int> enum_gui_index;
+    std::vector<int> enum_gui_index;            // rename to pin_types_index
+    std::vector<int> enum_index;
 
     // public private _
     bool is_call_interaction_ = false;

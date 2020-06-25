@@ -105,14 +105,14 @@ void PinConfig::PinInteraction(int index, int sender_index, int pin)
 }
 
 void PinConfig::ReadFromConfig(){
-//    for (uint i = 0; i < pin_count_; ++i) {
-//        PinComboBoxPtrList[i]->ReadFromConfig(i);
-//    }
+    for (uint i = 0; i < pin_count_; ++i) {
+        PinComboBoxPtrList[i]->ReadFromConfig(i);
+    }
 }
 
 void PinConfig::WriteToConfig(){
-//    for (uint i = 0; i < pin_count_; ++i) {
-//        PinComboBoxPtrList[i]->WriteToConfig(i);
-//    }
+    for (uint i = 0; i < pin_count_; ++i) {
+        PinComboBoxPtrList[i]->WriteToConfig(i);
+    }
 }
 
