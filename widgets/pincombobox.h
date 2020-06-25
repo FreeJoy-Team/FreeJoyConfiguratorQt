@@ -67,7 +67,18 @@ enum
 
     ALL = 999,
 };
-typedef int8_t pin_type_t;
+
+enum
+{
+    AXIS_SOURCE,
+    BUTTON_FROM_AXES,
+    SINGLE_BUTTON,
+    ROW_OF_BUTTONS,
+    COLUMN_OF_BUTTONS,
+    SINGLE_LED,
+    ROW_OF_LED,
+    COLUMN_LED,
+};
 
 struct cBox
 {
@@ -112,6 +123,7 @@ public:
     //! номер элемента в pin_types
     std::vector<int> enum_gui_index;            // rename to pin_types_index
     std::vector<int> enum_index;
+    int previous_index_ = 0;
 
     // public private _
     bool is_call_interaction_ = false;
@@ -120,9 +132,9 @@ public:
     int call_interaction_;
     QString styleSheet_default_;
 
-signals:
-    void valueChanged(int index, int sender_index, int pin);
-    //void valueChanged2(int pin_list_index);        // CHANGE SUM BUTTONS
+signals:        // add send current pin if its axis source for axis config
+    void valueChangedForInteraction(int index, int sender_index, int pin);
+    void currentIndexChanged(int current_device_enum, int previous_device_enum);        // CHANGE SUM BUTTONS
 private slots:
     void IndexChanged(int index);
 

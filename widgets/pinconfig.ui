@@ -29,7 +29,7 @@
       <number>0</number>
      </property>
      <item row="3" column="1">
-      <widget class="QLabel" name="label_32">
+      <widget class="QLabel" name="text_B15">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -50,7 +50,7 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLabel" name="label_33">
+      <widget class="QLabel" name="text_A8">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -71,7 +71,7 @@
       </widget>
      </item>
      <item row="10" column="1">
-      <widget class="QLabel" name="label_39">
+      <widget class="QLabel" name="text_B3">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -92,7 +92,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QLabel" name="label_34">
+      <widget class="QLabel" name="text_A9">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -113,7 +113,7 @@
       </widget>
      </item>
      <item row="13" column="1">
-      <widget class="QLabel" name="label_42">
+      <widget class="QLabel" name="text_B6">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -134,7 +134,7 @@
       </widget>
      </item>
      <item row="14" column="1">
-      <widget class="QLabel" name="label_43">
+      <widget class="QLabel" name="text_B7">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -155,7 +155,7 @@
       </widget>
      </item>
      <item row="19" column="1">
-      <widget class="QLabel" name="label_48">
+      <widget class="QLabel" name="text_33V_2">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -176,7 +176,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLabel" name="label_31">
+      <widget class="QLabel" name="text_B14">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -197,7 +197,7 @@
       </widget>
      </item>
      <item row="15" column="1">
-      <widget class="QLabel" name="label_44">
+      <widget class="QLabel" name="text_B8">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -218,7 +218,7 @@
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="QLabel" name="label_36">
+      <widget class="QLabel" name="text_A11_2">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -239,7 +239,7 @@
       </widget>
      </item>
      <item row="11" column="1">
-      <widget class="QLabel" name="label_40">
+      <widget class="QLabel" name="text_B4">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -260,7 +260,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="label_9">
+      <widget class="QLabel" name="text_B12">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -281,7 +281,7 @@
       </widget>
      </item>
      <item row="12" column="1">
-      <widget class="QLabel" name="label_41">
+      <widget class="QLabel" name="text_B5">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -302,7 +302,7 @@
       </widget>
      </item>
      <item row="16" column="1">
-      <widget class="QLabel" name="label_45">
+      <widget class="QLabel" name="text_B9">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -323,7 +323,7 @@
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="QLabel" name="label_37">
+      <widget class="QLabel" name="text_A12_2">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -344,7 +344,7 @@
       </widget>
      </item>
      <item row="17" column="1">
-      <widget class="QLabel" name="label_46">
+      <widget class="QLabel" name="text_5V_2">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -365,7 +365,7 @@
       </widget>
      </item>
      <item row="9" column="1">
-      <widget class="QLabel" name="label_38">
+      <widget class="QLabel" name="text_A15">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -386,7 +386,7 @@
       </widget>
      </item>
      <item row="18" column="1">
-      <widget class="QLabel" name="label_47">
+      <widget class="QLabel" name="text_GND_2">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -407,7 +407,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="label_30">
+      <widget class="QLabel" name="text_B13">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -437,7 +437,7 @@
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="QLabel" name="label_35">
+      <widget class="QLabel" name="text_A10">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -584,7 +584,7 @@
       </widget>
      </item>
      <item row="18" column="0">
-      <widget class="QLabel" name="label_51">
+      <widget class="QLabel" name="text_GND">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -602,7 +602,7 @@
       </widget>
      </item>
      <item row="19" column="0">
-      <widget class="QLabel" name="label_52">
+      <widget class="QLabel" name="text_33V">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -620,7 +620,7 @@
       </widget>
      </item>
      <item row="17" column="0">
-      <widget class="QLabel" name="label_53">
+      <widget class="QLabel" name="text_5V">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -638,7 +638,7 @@
       </widget>
      </item>
      <item row="7" column="0">
-      <widget class="QLabel" name="label_57">
+      <widget class="QLabel" name="text_A11">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -656,7 +656,7 @@
       </widget>
      </item>
      <item row="8" column="0">
-      <widget class="QLabel" name="label_58">
+      <widget class="QLabel" name="text_A12">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -712,7 +712,7 @@
       <number>0</number>
      </property>
      <item row="15" column="0">
-      <widget class="QLabel" name="label_25">
+      <widget class="QLabel" name="text_A0">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -733,7 +733,7 @@
       </widget>
      </item>
      <item row="10" column="0">
-      <widget class="QLabel" name="label_20">
+      <widget class="QLabel" name="text_A5">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -754,7 +754,7 @@
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QLabel" name="label_15">
+      <widget class="QLabel" name="text_B10">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -775,7 +775,7 @@
       </widget>
      </item>
      <item row="18" column="0">
-      <widget class="QLabel" name="label_28">
+      <widget class="QLabel" name="text_C13">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -796,7 +796,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_11">
+      <widget class="QLabel" name="text_GND_3">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -817,7 +817,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_12">
+      <widget class="QLabel" name="text_33V_3">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -838,7 +838,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="text_GND_4">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -880,7 +880,7 @@
       </widget>
      </item>
      <item row="11" column="0">
-      <widget class="QLabel" name="label_21">
+      <widget class="QLabel" name="text_A4">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -901,7 +901,7 @@
       </widget>
      </item>
      <item row="19" column="0">
-      <widget class="QLabel" name="label_29">
+      <widget class="QLabel" name="text_VB">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -922,7 +922,7 @@
       </widget>
      </item>
      <item row="9" column="0">
-      <widget class="QLabel" name="label_19">
+      <widget class="QLabel" name="text_A6">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -943,7 +943,7 @@
       </widget>
      </item>
      <item row="8" column="0">
-      <widget class="QLabel" name="label_18">
+      <widget class="QLabel" name="text_A7">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -964,7 +964,7 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_13">
+      <widget class="QLabel" name="text_RST">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -985,7 +985,7 @@
       </widget>
      </item>
      <item row="14" column="0">
-      <widget class="QLabel" name="label_24">
+      <widget class="QLabel" name="text_A1">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1006,7 +1006,7 @@
       </widget>
      </item>
      <item row="16" column="0">
-      <widget class="QLabel" name="label_26">
+      <widget class="QLabel" name="text_C15">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1027,7 +1027,7 @@
       </widget>
      </item>
      <item row="6" column="0">
-      <widget class="QLabel" name="label_16">
+      <widget class="QLabel" name="text_B1">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1048,7 +1048,7 @@
       </widget>
      </item>
      <item row="12" column="0">
-      <widget class="QLabel" name="label_22">
+      <widget class="QLabel" name="text_A3">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1069,7 +1069,7 @@
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QLabel" name="label_14">
+      <widget class="QLabel" name="text_B11">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1090,7 +1090,7 @@
       </widget>
      </item>
      <item row="17" column="0">
-      <widget class="QLabel" name="label_27">
+      <widget class="QLabel" name="text_C14">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1111,7 +1111,7 @@
       </widget>
      </item>
      <item row="13" column="0">
-      <widget class="QLabel" name="label_23">
+      <widget class="QLabel" name="text_A2">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1132,7 +1132,7 @@
       </widget>
      </item>
      <item row="7" column="0">
-      <widget class="QLabel" name="label_17">
+      <widget class="QLabel" name="text_B0">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -1288,7 +1288,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="label_49">
+      <widget class="QLabel" name="text_GND_6">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1306,7 +1306,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="label_50">
+      <widget class="QLabel" name="text_GND_5">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1324,7 +1324,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLabel" name="label_54">
+      <widget class="QLabel" name="text_33V_4">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1342,7 +1342,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLabel" name="label_55">
+      <widget class="QLabel" name="text_RST_2">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1360,7 +1360,7 @@
       </widget>
      </item>
      <item row="19" column="1">
-      <widget class="QLabel" name="label_56">
+      <widget class="QLabel" name="text_VBUS">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1498,7 +1498,7 @@
          </font>
         </property>
         <property name="text">
-         <string>999</string>
+         <string>0</string>
         </property>
        </widget>
       </item>

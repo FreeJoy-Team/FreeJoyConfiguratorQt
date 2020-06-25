@@ -1,37 +1,18 @@
 #include "pincombobox.h"
 #include "ui_pincombobox.h"
 
-#define PIN_TYPES_FOR_ALL 16
-
 PinComboBox::PinComboBox(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PinComboBox)
 {
     ui->setupUi(this);
-    // во все комбобоксы из pin_list_ в количестве PIN_TYPES_FOR_ALL
-//    for (int i = 0; i < PIN_TYPES_FOR_ALL; i++) {
-//        ui->comboBox_PinsType->addItem(pin_list_[i].gui_name);
-//    }
-    styleSheet_default_ = ui->comboBox_PinsType->styleSheet();                  // will not work with styles, remove from constructor
+
+    styleSheet_default_ = ui->comboBox_PinsType->styleSheet();       // will not work with styles, remove from constructor
 
     connect(ui->comboBox_PinsType, SIGNAL(currentIndexChanged(int)),
                 this, SLOT(IndexChanged(int)));
 
 }
-
-struct cBox22
-{
-    int device_enum_index;      // контроллер enum
-    QString gui_name;           // имя в gui
-    int pin_type[10];           // добавление в конкретный пин или в пины типа
-    int pin_except[10];         // исключая пины или пины типа
-    int interaction[10];        // взаимодействие с другими типами
-    QString styleSheet;         // стиль взаимодействия
-};
-struct PIIIn
-{
-
-};
 
 //! Set pin items
 void PinComboBox::InitializationPins(uint pin)      // pin_number_ - 1 так се
@@ -89,12 +70,6 @@ void PinComboBox::InitializationPins(uint pin)      // pin_number_ - 1 так с
             }
         }
     }
-    //qDebug()<<enum_gui_index.size();
-    //qDebug()<<enum_gui_index[pin];
-    for (size_t i = 0; i < enum_gui_index.size(); ++i) {
-        qDebug()<<enum_gui_index[i];
-    }
-    qDebug()<< "Done"<<pin;
 }
 
 
@@ -109,6 +84,7 @@ PinComboBox::~PinComboBox()
 
 void PinComboBox::IndexChanged(int index)
 {
+    // pins interaction
     if(enum_gui_index.size() && is_interacts_ == false)
     {
         ui->comboBox_PinsType->setStyleSheet(pin_types[enum_gui_index[index]].styleSheet);      // временно
@@ -136,7 +112,7 @@ void PinComboBox::IndexChanged(int index)
                                 //ui->comboBox_PinsType->setStyleSheet(pin_types[enum_gui_index[index]].styleSheet);          // ?????
                                 for (int k = 0; k < PIN_TYPE_COUNT; ++k) {
                                     if(pin_types[k].device_enum_index == pin_types[enum_gui_index[index]].interaction[t]){
-                                        emit valueChanged(k, enum_gui_index[index], pin_number_);
+                                        emit valueChangedForInteraction(k, enum_gui_index[index], pin_number_);
                                         qDebug()<<"add";
                                         break;
                                     }
@@ -154,7 +130,7 @@ void PinComboBox::IndexChanged(int index)
 
                         for (int m = 0; m < PIN_TYPE_COUNT; ++m) {
                             if(pin_types[m].device_enum_index == pin_types[call_interaction_].interaction[n]){
-                                emit valueChanged(NOT_USED, m, pin_number_);
+                                emit valueChangedForInteraction(NOT_USED, m, pin_number_);
                             }
                         }
                     }
@@ -173,13 +149,20 @@ void PinComboBox::IndexChanged(int index)
                     if(pin_types[k].device_enum_index == pin_types[enum_gui_index[index]].interaction[i]){
                         //is_interacts_++;
                         call_interaction_ = enum_gui_index[index];
-                        emit valueChanged(k, enum_gui_index[index], pin_number_);
+                        emit valueChangedForInteraction(k, enum_gui_index[index], pin_number_);
                         tmp++;
                         break;
                     }
                 }
             }
         }
+    }
+
+    // set current config
+    //if(enum_index[index] == )
+    if(enum_gui_index.size()){
+        emit currentIndexChanged(enum_index[index], previous_index_);
+        previous_index_ = enum_index[index];
     }
 }
 
@@ -247,12 +230,6 @@ void PinComboBox::SetIndex(int index, int sender_index)
     }
 }
 
-
-
-
-
-
-
 void PinComboBox::ReadFromConfig(uint pin)          // try?
 {
     //int tmp_pin = pin;  // anti-warning int and uint      // size_t  enum_gui_index[i]
@@ -260,13 +237,13 @@ void PinComboBox::ReadFromConfig(uint pin)          // try?
         if (gEnv.pDeviceConfig->config.pins[pin] == enum_index[i])
         {
             qDebug()<<i;
-            ui->comboBox_PinsType->setCurrentIndex(i);  //вместо i - ui->comboBox_PinsType->findText(pin_list_[i].gui_name)
+            ui->comboBox_PinsType->setCurrentIndex(int(i));  //вместо i - ui->comboBox_PinsType->findText(pin_list_[i].gui_name)
             break;
         }
     }
 }
 
-void PinComboBox::WriteToConfig(uint pin)           // if pin = 0 try?      // size_t
+void PinComboBox::WriteToConfig(uint pin)           // if pin = 0 try?      // поиск по тексту так се наверно
 {
     //int tmp_pin = pin;  // anti-warning int and uint
     for (size_t i = 0; i < PIN_TYPE_COUNT; ++i) {
