@@ -18,7 +18,7 @@ public:
     bool is_activated_ = false;
 
 //private: ??
-    int button_number_;
+    int button_number_;     // удалить?
 
 private:
     Ui::ButtonPhysical *ui;

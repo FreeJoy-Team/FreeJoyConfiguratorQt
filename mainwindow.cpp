@@ -87,8 +87,12 @@ MainWindow::MainWindow(QWidget *parent)
 //    // needs to be deleted by you
 //    m_HeapNoQObj = new NoQObjectDerivedClass();
 
-    connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),
+    // buttons pin changed
+    connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),  // add buttons from axes
                 button_config, SLOT(setUiOnOff(int)));
+    // LEDs changed
+    connect(pin_config, SIGNAL(totalLEDsValueChanged(int)),
+                led_config, SLOT(SpawnLEDs(int)));
 
 
     hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!
@@ -149,7 +153,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-MainWindow::~MainWindow()
+MainWindow::~MainWindow()   // для ядра сделать выключатель is_finish_
 {
     //thread->quit();
     //thread->wait();

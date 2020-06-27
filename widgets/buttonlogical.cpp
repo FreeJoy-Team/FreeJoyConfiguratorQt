@@ -8,23 +8,17 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
     ui->setupUi(this);
     button_number_ = button_number;
     ui->label_LogicalButtonNumber->setNum(button_number_ + 1);
-    //Initialization();
 
     // add gui text
-    if (text_added_ == false)           // to initialization
-    {
-        for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
-            ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
-        }
-        for (int i = 0; i < SHIFT_COUNT; i++) {
-            ui->comboBox_ShiftIndex->addItem(shift_list_[i].gui_name);
-        }
-        for (int i = 0; i < TIMER_COUNT; i++) {
-            ui->comboBox_DelayTimerIndex->addItem(timer_list_[i].gui_name);
-            ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
-        }
-        text_added_ = true;
-
+    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
+        ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
+    }
+    for (int i = 0; i < SHIFT_COUNT; i++) {
+        ui->comboBox_ShiftIndex->addItem(shift_list_[i].gui_name);
+    }
+    for (int i = 0; i < TIMER_COUNT; i++) {
+        ui->comboBox_DelayTimerIndex->addItem(timer_list_[i].gui_name);
+        ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
     }
 
     connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
@@ -77,11 +71,6 @@ void ButtonLogical::ReadFromConfig()                // rename to ReadFromConfig
             break;
         }
     }
-//    // enable
-//    if(gEnv.pDeviceConfig->config.buttons[button_number_].physical_num >= 0)
-//    {
-//        ui->spinBox_PhysicalButtonNumber->setEnabled(true);
-//    }
 }
 
 void ButtonLogical::WriteToConfig()

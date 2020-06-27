@@ -163,127 +163,127 @@ public:     // private?
     };
     cBox const pin_types[PIN_TYPE_COUNT] =
     {
-        {NOT_USED,       "Not Used",
+        {NOT_USED,       tr("Not Used"),
          {ALL},
          {},
          {}, {}},
 
-        {BUTTON_GND,     "Button Gnd",          // контроллер enum,  имя в ui
+        {BUTTON_GND,     tr("Button Gnd"),      // контроллер enum,  имя в ui   tr(нужен перевод)
          {ALL},                                 // добавление в конкретный пин или пины типа
          {},                                    // исключая пины
          {}, {"color: rgb(255, 0, 255);"}},     // взаимодействие с другими типами // стиль color, background-color, border-color...
 
-        {BUTTON_VCC,     "Button Vcc",
+        {BUTTON_VCC,     tr("Button Vcc"),
          {ALL},
          {},
          {}, {}},
 
-        {BUTTON_ROW,     "Button Row",
+        {BUTTON_ROW,     tr("Button Row"),
          {ALL},
          {},
          {}, {}},
 
-        {BUTTON_COLUMN,  "Button Column",
+        {BUTTON_COLUMN,  tr("Button Column"),
          {ALL},
          {},
          {}, {}},
 
-        {SHIFT_REG_LATCH,"ShiftReg LATCH",
+        {SHIFT_REG_LATCH,tr("ShiftReg LATCH"),
          {ALL},
          {SPI1_SCK},
          {SPI_SCK}, {"color: rgb(0, 153, 0);"}},
 
-        {SHIFT_REG_DATA, "ShiftReg DATA",
+        {SHIFT_REG_DATA, tr("ShiftReg DATA"),
          {ALL},
          {SPI1_SCK},
          {SPI_SCK}, {"color: rgb(0, 153, 0);"}},
 
-        {TLE5011_CS,     "TLE5011 CS",
+        {TLE5011_CS,     tr("TLE5011 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, PB_6},
          {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 155);"}},
 
-        {MCP3201_CS,     "MCP3201 CS",
+        {MCP3201_CS,     tr("MCP3201 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
          {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(153, 153, 55);"}},
 
-        {MCP3202_CS,     "MCP3202 CS",
+        {MCP3202_CS,     tr("MCP3202 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
          {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(153, 53, 155);"}},
 
-        {MCP3204_CS,     "MCP3204 CS",
+        {MCP3204_CS,     tr("MCP3204 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
          {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 53, 0);"}},
 
-        {MCP3208_CS,     "MCP3208 CS",
+        {MCP3208_CS,     tr("MCP3208 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
          {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 0, 55);"}},
 
-        {MLX90393_CS,    "MLX90393 CS",
+        {MLX90393_CS,    tr("MLX90393 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
          {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(0, 53, 55);"}},
 
-        {LED_SINGLE,     "LED Single",
+        {LED_SINGLE,     tr("LED Single"),
          {ALL},
          {},
          {}, {}},
 
-        {LED_ROW,        "LED Row",
+        {LED_ROW,        tr("LED Row"),
          {ALL},
          {},
          {}, {}},
 
-        {LED_COLUMN,     "LED Column",
+        {LED_COLUMN,     tr("LED Column"),
          {ALL},
          {},
          {}, {}},
 
-        {LED_PWM,        "LED PWM",
+        {LED_PWM,        tr("LED PWM"),
          {PB_0, PB_1, PB_4},
          {},
          {}, {}},
 
-        {AXIS_ANALOG,    "Axis Analog",
+        {AXIS_ANALOG,    tr("Axis Analog"),
          {ANALOG_IN},
          {},
          {}, {}},
 
-        {FAST_ENCODER,   "Fast Encoder",
+        {FAST_ENCODER,   tr("Fast Encoder"),
          {PA_8, PA_9},
          {},
          {}, {}},
 
-        {SPI_SCK,        "SPI SCK",
+        {SPI_SCK,        tr("SPI SCK"),
          {SPI1_SCK},
          {},
          {}, {}},
 
-        {SPI_MOSI,       "SPI MOSI",
+        {SPI_MOSI,       tr("SPI MOSI"),
          {SPI1_MOSI},
          {},
          {}, {}},
 
-        {SPI_MISO,       "SPI MISO",
+        {SPI_MISO,       tr("SPI MISO"),
          {SPI1_MISO},
          {},
          {}, {}},
 
-        {TLE5011_GEN,    "TLE5011 GEN",
+        {TLE5011_GEN,    tr("TLE5011 GEN"),
          {PB_6},
          {},
          {}, {}},
 
-        {I2C_SCL,        "I2C SCL",
+        {I2C_SCL,        tr("I2C SCL"),
          {I2C1_SCL},
          {},
          {I2C_SDA}, {"color: rgb(53, 53, 255);"}},
 
-        {I2C_SDA,        "I2C SDA",
+        {I2C_SDA,        tr("I2C SDA"),
          {I2C1_SDA},
          {},
          {I2C_SCL}, {"color: rgb(53, 53, 255);"}},
