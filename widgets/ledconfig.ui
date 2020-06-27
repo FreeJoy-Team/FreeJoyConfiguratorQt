@@ -43,7 +43,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox"/>
+          <widget class="QSpinBox" name="spinBox_LedPB0">
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_5">
@@ -75,7 +79,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox_2"/>
+          <widget class="QSpinBox" name="spinBox_LedPB1">
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_7">
@@ -107,7 +115,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox_3"/>
+          <widget class="QSpinBox" name="spinBox_LedPB4">
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_9">

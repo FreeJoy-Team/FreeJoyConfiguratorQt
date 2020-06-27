@@ -10,6 +10,23 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
     ui->label_LogicalButtonNumber->setNum(button_number_ + 1);
     //Initialization();
 
+    // add gui text
+    if (text_added_ == false)           // to initialization
+    {
+        for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
+            ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
+        }
+        for (int i = 0; i < SHIFT_COUNT; i++) {
+            ui->comboBox_ShiftIndex->addItem(shift_list_[i].gui_name);
+        }
+        for (int i = 0; i < TIMER_COUNT; i++) {
+            ui->comboBox_DelayTimerIndex->addItem(timer_list_[i].gui_name);
+            ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
+        }
+        text_added_ = true;
+
+    }
+
     connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
             this, SLOT(editingOnOff(int)));
 }
@@ -27,23 +44,6 @@ void ButtonLogical::ReadFromConfig()                // rename to ReadFromConfig
     ui->checkBox_IsDisable->setChecked(gEnv.pDeviceConfig->config.buttons[button_number_].is_disabled);
     // isInvert
     ui->checkBox_IsInvert->setChecked(gEnv.pDeviceConfig->config.buttons[button_number_].is_inverted);
-
-    // add gui text
-    if (text_added_ == false)           // to initialization
-    {
-        for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
-            ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
-        }
-        for (int i = 0; i < SHIFT_COUNT; i++) {
-            ui->comboBox_ShiftIndex->addItem(shift_list_[i].gui_name);
-        }
-        for (int i = 0; i < TIMER_COUNT; i++) {
-            ui->comboBox_DelayTimerIndex->addItem(timer_list_[i].gui_name);
-            ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
-        }
-        text_added_ = true;
-
-    }
 
     // logical button function
     for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // get config

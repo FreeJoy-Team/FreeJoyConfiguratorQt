@@ -1,7 +1,10 @@
 #include "deviceconfig.h"
-//dev_config_t InitConfig (void);
 
-DeviceConfig::DeviceConfig()       // raname?
+extern "C" {
+#include "stm_main.h"
+}
+
+DeviceConfig::DeviceConfig()
 {
     config = InitConfig();
 }
