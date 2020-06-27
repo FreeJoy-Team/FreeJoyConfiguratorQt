@@ -15,17 +15,14 @@ ButtonPhysical::~ButtonPhysical()
     delete ui;
 }
 
-#include <QDebug>
 void ButtonPhysical::ButtonState(bool is_activated)
 {
     is_activated_ = is_activated;
     if (is_activated_){
         ui->label_PhysicalButton->setStyleSheet("QLabel {  border-radius: 11px; min-height: 22px; min-width: 22px; "
                                                 "background-color: rgb(0, 128, 0); color: rgb(255, 255, 255);}");
-        qDebug()<< "green";
     } else {
         ui->label_PhysicalButton->setStyleSheet("QLabel {  border-radius: 11px; min-height: 22px; min-width: 22px; "
                                                 "background-color: rgb(190, 0, 0); color: rgb(255, 255, 255);}");
-        qDebug()<< "red";
     }
 }

@@ -24,6 +24,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     reportconverter.cpp \
+    signalhandler.cpp \
     stm_main.c \
     test.cpp \
     widgets/advancedsettings.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
     widgets/buttonphysical.cpp \
     widgets/encoders.cpp \
     widgets/led.cpp \
+    widgets/ledconfig.cpp \
     widgets/pincombobox.cpp \
     widgets/pinconfig.cpp \
     widgets/shiftregisters.cpp
@@ -49,6 +51,7 @@ HEADERS += \
     hiddevice.h \
     mainwindow.h \
     reportconverter.h \
+    signalhandler.h \
     stm_main.h \
     test.h \
     widgets/advancedsettings.h \
@@ -60,6 +63,7 @@ HEADERS += \
     widgets/buttonphysical.h \
     widgets/encoders.h \
     widgets/led.h \
+    widgets/ledconfig.h \
     widgets/pincombobox.h \
     widgets/pinconfig.h \
     widgets/shiftregisters.h
@@ -75,6 +79,7 @@ FORMS += \
     widgets/buttonphysical.ui \
     widgets/encoders.ui \
     widgets/led.ui \
+    widgets/ledconfig.ui \
     widgets/pincombobox.ui \
     widgets/pinconfig.ui \
     widgets/shiftregisters.ui

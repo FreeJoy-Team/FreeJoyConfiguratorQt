@@ -6,13 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1062</width>
-    <height>603</height>
+    <width>580</width>
+    <height>38</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1,3">
+   <property name="spacing">
+    <number>77</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label_LEDNumber">
+     <property name="text">
+      <string>1</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSpinBox" name="spinBox_InputNumber"/>
+   </item>
+   <item>
+    <widget class="QComboBox" name="comboBox_Function"/>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

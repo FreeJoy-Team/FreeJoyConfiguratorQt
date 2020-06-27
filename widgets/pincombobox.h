@@ -68,19 +68,8 @@ enum
     ALL = 999,
 };
 
-enum
-{
-    AXIS_SOURCE,
-    BUTTON_FROM_AXES,
-    SINGLE_BUTTON,
-    ROW_OF_BUTTONS,
-    COLUMN_OF_BUTTONS,
-    SINGLE_LED,
-    ROW_OF_LED,
-    COLUMN_LED,
-};
 
-struct cBox
+struct cBox         // private:
 {
     int device_enum_index;
     QString gui_name;
@@ -90,7 +79,7 @@ struct cBox
     QString styleSheet;         // стиль взаимодействия
 };
 
-struct pins
+struct pins         // private:
 {
     int pin;
     int pin_type[10];
@@ -108,21 +97,21 @@ class PinComboBox : public QWidget
 public:
     explicit PinComboBox(QWidget *parent = nullptr);
     ~PinComboBox();
-    int GetIndex();
+    int GetIndex();                         // удалить?
     void SetIndex(int index, int sender_index);
     void InitializationPins(uint pin);
     void ReadFromConfig(uint pin);
     void WriteToConfig(uint pin);
 
-    int GetEnumValue();       //?
+    int GetEnumValue();                     // удалить?
 
     //private?
-    QString EnumToString(int deviceEnum);
-    int EnumToIndex(int deviceEnum);
+    QString EnumToString(int deviceEnum);   // удалить?
+    int EnumToIndex(int deviceEnum);        // удалить?
     int pin_number_ = -1;
     //! номер элемента в pin_types
     std::vector<int> enum_gui_index;            // rename to pin_types_index
-    std::vector<int> enum_index;
+    std::vector<int> enum_index;                // в динамическую память?
     int previous_index_ = 0;
 
     // public private _
@@ -130,7 +119,7 @@ public:
     bool is_interacts_ = false;
     uint interact_count_ = 0;
     int call_interaction_;
-    QString styleSheet_default_;
+    QString styleSheet_default_;            // убрать из конструктора, настроить для смены стилей
 
 signals:        // add send current pin if its axis source for axis config
     void valueChangedForInteraction(int index, int sender_index, int pin);
@@ -138,7 +127,7 @@ signals:        // add send current pin if its axis source for axis config
 private slots:
     void IndexChanged(int index);
 
-public:     // private
+public:     // private?
     pins const pin_list[30] =
     {
         {PA_0,  {ANALOG_IN}},   // пин // его типы
@@ -304,7 +293,7 @@ public:     // private
 
 private:
     Ui::PinComboBox *ui;
-    int last_deleted_ = 0;
+    int last_deleted_ = 0;              // удалить?
 };
 
 #endif // PINCOMBOBOX_H

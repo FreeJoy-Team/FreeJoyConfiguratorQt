@@ -9,6 +9,9 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
     button_number_ = button_number;
     ui->label_LogicalButtonNumber->setNum(button_number_ + 1);
     //Initialization();
+
+    connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
+            this, SLOT(editingOnOff(int)));
 }
 
 ButtonLogical::~ButtonLogical()
@@ -16,7 +19,7 @@ ButtonLogical::~ButtonLogical()
     delete ui;
 }
 
-void ButtonLogical::Initialization()                // rename to ReadFromConfig
+void ButtonLogical::ReadFromConfig()                // rename to ReadFromConfig
 {
     // physical
     ui->spinBox_PhysicalButtonNumber->setValue(gEnv.pDeviceConfig->config.buttons[button_number_].physical_num + 1);        // !!!!
@@ -74,17 +77,11 @@ void ButtonLogical::Initialization()                // rename to ReadFromConfig
             break;
         }
     }
-    // enable
-    if(gEnv.pDeviceConfig->config.buttons[button_number_].physical_num >= 0)
-    {
-        ui->spinBox_PhysicalButtonNumber->setEnabled(true);
-        ui->checkBox_IsInvert->setEnabled(true);
-        ui->checkBox_IsDisable->setEnabled(true);
-        ui->comboBox_ButtonFunction->setEnabled(true);
-        ui->comboBox_ShiftIndex->setEnabled(true);
-        ui->comboBox_DelayTimerIndex->setEnabled(true);
-        ui->comboBox_PressTimerIndex->setEnabled(true);
-    }
+//    // enable
+//    if(gEnv.pDeviceConfig->config.buttons[button_number_].physical_num >= 0)
+//    {
+//        ui->spinBox_PhysicalButtonNumber->setEnabled(true);
+//    }
 }
 
 void ButtonLogical::WriteToConfig()
@@ -99,16 +96,45 @@ void ButtonLogical::WriteToConfig()
     gEnv.pDeviceConfig->config.buttons[button_number_].press_timer = timer_list_[ui->comboBox_PressTimerIndex->currentIndex()].device_enum_index;
 }
 
+void ButtonLogical::SetMaxPhysButtons(int max_phys_buttons)
+{
+    ui->spinBox_PhysicalButtonNumber->setMaximum(max_phys_buttons);
+}
 
-#include <QDebug>
+void ButtonLogical::SetSpinBoxOnOff(int max_phys_buttons)
+{
+    if (max_phys_buttons > 0){
+        ui->spinBox_PhysicalButtonNumber->setEnabled(true);
+    } else {
+        ui->spinBox_PhysicalButtonNumber->setEnabled(false);
+    }
+}
+
+void ButtonLogical::editingOnOff(int value)
+{
+    if(value > 0){
+        ui->checkBox_IsInvert->setEnabled(true);
+        ui->checkBox_IsDisable->setEnabled(true);
+        ui->comboBox_ButtonFunction->setEnabled(true);
+        ui->comboBox_ShiftIndex->setEnabled(true);
+        ui->comboBox_DelayTimerIndex->setEnabled(true);
+        ui->comboBox_PressTimerIndex->setEnabled(true);
+    } else {
+        ui->checkBox_IsInvert->setEnabled(false);
+        ui->checkBox_IsDisable->setEnabled(false);
+        ui->comboBox_ButtonFunction->setEnabled(false);
+        ui->comboBox_ShiftIndex->setEnabled(false);
+        ui->comboBox_DelayTimerIndex->setEnabled(false);
+        ui->comboBox_PressTimerIndex->setEnabled(false);
+    }
+}
+
 void ButtonLogical::ButtonState(bool is_activated)
 {
     is_activated_ = is_activated;
     if (is_activated_){
         this->setStyleSheet("background-color: rgb(0, 128, 0);");   // надо сохранять текущий стиль и возвращать обратно
-        qDebug()<< "green";
     } else {
         this->setStyleSheet("background: palette(window)");        // баг тряска если ("") // текущий вариант не пашет с чёрным стилем
-        qDebug()<< "red";
     }
 }

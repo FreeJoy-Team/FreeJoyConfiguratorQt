@@ -1,5 +1,6 @@
 #include "pinconfig.h"
 #include "ui_pinconfig.h"
+#include "signalhandler.h"
 
 #define PINS_IN_GROUP_RANGE 16          // range A0-A15 = 16
 #include <QDebug>
@@ -39,7 +40,7 @@ PinConfig::PinConfig(QWidget *parent) :
             PinComboBoxPtrList.append(pinComboBox);
         }
     }
-    qDebug()<<"PIN COUNT = "<<PinComboBoxPtrList.size();    //currentIndexChanged
+    qDebug()<<"PIN COUNT = "<<PinComboBoxPtrList.size();    //currentIndexChanged a2bCountChanged
 
     for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
             connect(PinComboBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),
@@ -47,6 +48,10 @@ PinConfig::PinConfig(QWidget *parent) :
             connect(PinComboBoxPtrList[i], SIGNAL(currentIndexChanged(int, int)),
                         this, SLOT(SetCurrentConfig(int, int)));
     }
+    connect(gEnv.pSignalHandler, SIGNAL(a2bCountChanged(int, int)),     // временно
+                this, SLOT(SetCurrentConfig(int, int)));
+//    connect(dynamic_cast<SignalHandler*>(qApp), &SignalHandler::a2bCountChanged,
+//            this, &PinConfig::SetCurrentConfig);
 }
 
 PinConfig::~PinConfig()
@@ -94,56 +99,68 @@ void PinConfig::PinInteraction(int index, int sender_index, int pin)
     }
 }
 
-// BUTTON_FROM_AXES сделать
-void PinConfig::SetCurrentConfig(int current_device_enum, int previous_device_enum)
+// 678 - так се реализация
+void PinConfig::SetCurrentConfig(int current_device_enum, int previous_device_enum) // mutex
 {
-    for (int i = 0; i < 8; ++i) {
-        for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
-            if(source[i].pin_type[j] == 0){
-                break;
-            }
-            else if(source[i].pin_type[j] == current_device_enum || source[i].pin_type[j] == previous_device_enum){
+    qDebug()<< current_device_enum;
+    if (current_device_enum == 678){            // 678 в DeviceConfig
+        ui->label_ButtonFromAxes->setNum(previous_device_enum);
+    } else {
 
-                int tmp;
-                if (source[i].pin_type[j] == current_device_enum){
-                    tmp = 1;
-                } else {
-                    tmp = -1;
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
+                if(source[i].pin_type[j] == 0){
+                    break;
                 }
+                else if(source[i].pin_type[j] == current_device_enum || source[i].pin_type[j] == previous_device_enum){
 
-                if (i == AXIS_SOURCE){
-                    axis_sources_+=tmp;
-                    ui->label_AxisSources->setNum(axis_sources_);
-                }
-                else if (i == BUTTON_FROM_AXES){
-                    buttons_from_axes_+=tmp;
-                }
-                else if (i == SINGLE_BUTTON){
-                    single_buttons_+=tmp;
-                    ui->label_SingleButtons->setNum(single_buttons_);
-                    ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                }
-                else if (i == ROW_OF_BUTTONS){
-                    rows_of_buttons_+=tmp;
-                    ui->label_RowsOfButtons->setNum(rows_of_buttons_);
-                    ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                }
-                else if (i == COLUMN_OF_BUTTONS){
-                    columns_of_buttons_+=tmp;
-                    ui->label_ColumnsOfButtons->setNum(columns_of_buttons_);
-                    ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                }
-                else if (i == SINGLE_LED){
-                    single_LED_+=tmp;
-                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                }
-                else if (i == ROW_OF_LED){
-                    rows_of_LED_+=tmp;
-                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                }
-                else if (i == COLUMN_OF_LED){
-                    columns_of_LED_+=tmp;
-                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    int tmp;
+                    if (source[i].pin_type[j] == current_device_enum){
+                        tmp = 1;
+                    } else {
+                        tmp = -1;
+                    }
+
+                    if (i == AXIS_SOURCE){
+                        axis_sources_+=tmp;
+                        ui->label_AxisSources->setNum(axis_sources_);
+                    }
+//                    else if (i == BUTTON_FROM_AXES){
+//                        buttons_from_axes_+=tmp;
+//                    }
+                    else if (i == SINGLE_BUTTON){
+                        single_buttons_+=tmp;
+                        ui->label_SingleButtons->setNum(single_buttons_);
+                        ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    }
+                    else if (i == ROW_OF_BUTTONS){
+                        rows_of_buttons_+=tmp;
+                        ui->label_RowsOfButtons->setNum(rows_of_buttons_);
+                        ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    }
+                    else if (i == COLUMN_OF_BUTTONS){
+                        columns_of_buttons_+=tmp;
+                        ui->label_ColumnsOfButtons->setNum(columns_of_buttons_);
+                        ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    }
+                    else if (i == SINGLE_LED){
+                        single_LED_+=tmp;
+                        ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                        emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    }
+                    else if (i == ROW_OF_LED){
+                        rows_of_LED_+=tmp;
+                        ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                        emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    }
+                    else if (i == COLUMN_OF_LED){
+                        columns_of_LED_+=tmp;
+                        ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                        emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    }
                 }
             }
         }

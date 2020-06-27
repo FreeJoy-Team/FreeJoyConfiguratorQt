@@ -14,7 +14,7 @@
 #include "global.h"
 //GlobalEnvironment gEnv;
 #include "appconfig.h"
-
+// отсортировать include
 
 //#include "reportconverter.h"
 //#include "hiddevice.h"
@@ -54,16 +54,19 @@ MainWindow::MainWindow(QWidget *parent)
     connect( scroll , SIGNAL(valueChanged(int)) ,this , SLOT(addvalues(int)) );
 
     // add button config
-    button_config = new ButtonConfig(this);     // not need delete. this - parent
+    button_config = new ButtonConfig(this);     // not need delete. this - parent led_config
     ui->layoutV_tabButtonConfig->addWidget(button_config);
     // add pin config
     pin_config = new PinConfig(this);
     ui->layoutV_tabPinConfig->addWidget(pin_config);
+    // add led config
+    led_config = new LedConfig(this);
+    ui->layoutV_tabLedConfig->addWidget(led_config);
 
 
 
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            button_config, &ButtonConfig::Initialization);
+            button_config, &ButtonConfig::ReadFromConfig);
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             pin_config, &PinConfig::ReadFromConfig);
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
@@ -83,6 +86,9 @@ MainWindow::MainWindow(QWidget *parent)
 //    m_HeapWidgetWithParent = new QWidget(this);
 //    // needs to be deleted by you
 //    m_HeapNoQObj = new NoQObjectDerivedClass();
+
+    connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),
+                button_config, SLOT(setUiOnOff(int)));
 
 
     hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!
@@ -154,6 +160,10 @@ MainWindow::~MainWindow()
 //        thread->free();
 //        thread = 0;
 //    }
+//    thread->quit();
+//    thread->wait();
+//    thread->deleteLater();
+//    delete thread;
     delete ui;
 }
 

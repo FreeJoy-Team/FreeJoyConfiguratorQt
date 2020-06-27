@@ -650,8 +650,8 @@ dev_config_t InitConfig (void)
         .axes_to_buttons[0].points[0] = 0,
         .axes_to_buttons[0].points[1] = 127,
         .axes_to_buttons[0].points[2] = 255,
-        .axes_to_buttons[0].buttons_cnt = 2,
-        .axes_to_buttons[0].is_enabled = 0,
+        .axes_to_buttons[0].buttons_cnt = 12,
+        .axes_to_buttons[0].is_enabled = 1,
 
         .axes_to_buttons[1].points[0] = 0,
         .axes_to_buttons[1].points[1] = 127,

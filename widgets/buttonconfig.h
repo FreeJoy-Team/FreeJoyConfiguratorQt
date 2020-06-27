@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "buttonlogical.h"
+#include "buttonlogical.h"      // ?
 #include "buttonphysical.h"
 
 #include "common_defines.h"
@@ -25,17 +25,16 @@ public:
     explicit ButtonConfig(QWidget *parent = nullptr);
     ~ButtonConfig();
 
-    void Initialization();
+    void ReadFromConfig();
     void WriteToConfig();
     void ButtonStateChanged();
 
     // private:?
-    ButtonPhysical* physical_button_widget;
+    ButtonPhysical* physical_button_widget;     // нужны ли?
     ButtonLogical* logical_buttons_widget;
-    //ButtonLogical*
 
-//public slots:
-//    void setValue(int value);
+public slots:
+    void setUiOnOff(int value);
 
 
 private:

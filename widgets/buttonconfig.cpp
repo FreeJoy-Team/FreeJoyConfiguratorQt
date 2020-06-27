@@ -13,7 +13,7 @@ ButtonConfig::ButtonConfig(QWidget *parent) :
 
 
     // make dynamic spawn
-    for (int i = 0; i < MAX_BUTTONS_NUM; i++)
+    for (int i = 0; i < MAX_BUTTONS_NUM; i++)       // logical_buttons_widget объявлен в хедере? убрать?
     {
         logical_buttons_widget = new ButtonLogical(i, this);
         ui->layoutV_LogicalButton->addWidget(logical_buttons_widget);
@@ -34,11 +34,11 @@ ButtonConfig::~ButtonConfig()
     delete ui;
 }
 
-void ButtonConfig::Initialization()                 // rename to ReadFromConfig
+void ButtonConfig::ReadFromConfig()                 // rename to ReadFromConfig
 {
     // inizializate logical buttons
     for (int i = 0; i < LogicButtonAdrList.size(); i++) {
-        LogicButtonAdrList[i]->Initialization();
+        LogicButtonAdrList[i]->ReadFromConfig();
     }
     // inizializate physical buttons           // PHYSIC. вынести?
     //delete
@@ -122,6 +122,27 @@ void ButtonConfig::WriteToConfig()
     // logical buttons write to config
     for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
         LogicButtonAdrList[i]->WriteToConfig();
+    }
+}
+
+void ButtonConfig::setUiOnOff(int value)
+{
+    if (value > 0){
+        ui->spinBox_Shift1->setEnabled(true);
+        ui->spinBox_Shift2->setEnabled(true);
+        ui->spinBox_Shift3->setEnabled(true);
+        ui->spinBox_Shift4->setEnabled(true);
+        ui->spinBox_Shift5->setEnabled(true);
+    } else {
+        ui->spinBox_Shift1->setEnabled(false);
+        ui->spinBox_Shift2->setEnabled(false);
+        ui->spinBox_Shift3->setEnabled(false);
+        ui->spinBox_Shift4->setEnabled(false);
+        ui->spinBox_Shift5->setEnabled(false);
+    }
+    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
+        LogicButtonAdrList[i]->SetMaxPhysButtons(value);
+        LogicButtonAdrList[i]->SetSpinBoxOnOff(value);
     }
 }
 

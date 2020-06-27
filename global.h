@@ -5,19 +5,21 @@
 
 class AppConfig;
 class DeviceConfig;
-// CryEngine global environment
+class SignalHandler;
+//! CryEngine style global environment
 //!	Global environment. Contains pointers to all global often needed interfaces.
 //!	This is a faster way to get interface pointer then calling ISystem interface to retrieve one.
 struct GlobalEnvironment
 {
     AppConfig*                 pAppConfig = nullptr;
     DeviceConfig*              pDeviceConfig = nullptr;
+    SignalHandler*             pSignalHandler = nullptr;
     // thread
 };
 extern GlobalEnvironment gEnv;
 
 
-struct deviceEnum_guiName_t
+struct deviceEnum_guiName_t     // снести?
 {
     int device_enum_index;
     QString gui_name;

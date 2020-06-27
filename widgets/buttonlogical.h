@@ -24,8 +24,10 @@ class ButtonLogical : public QWidget
 public:
     explicit ButtonLogical(int button_number, QWidget *parent = nullptr);
     ~ButtonLogical();
-    void Initialization();
+    void ReadFromConfig();
     void WriteToConfig();
+    void SetMaxPhysButtons(int max_phys_buttons);
+    void SetSpinBoxOnOff(int max_phys_buttons);
     void ButtonState(bool is_activated);
     bool is_activated_ = false;
 //private: ??
@@ -81,6 +83,9 @@ public:
         {SEQUENTIAL_TOGGLE,    tr("Sequential toggle")},
         {SEQUENTIAL_BUTTON,    tr("Sequential button")},
     };
+
+private slots:
+    void editingOnOff (int value);
 
 private:
     Ui::ButtonLogical *ui;

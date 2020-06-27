@@ -22,6 +22,7 @@
 #include "widgets/axescurves.h"
 #include "widgets/axestobuttons.h"
 #include "widgets/led.h"
+#include "widgets/ledconfig.h"
 #include "widgets/shiftregisters.h"
 
 QT_BEGIN_NAMESPACE
@@ -52,6 +53,7 @@ public:
 
     PinConfig* pin_config;
     ButtonConfig* button_config;
+    LedConfig* led_config;
 
     signals:
     void test_signal();

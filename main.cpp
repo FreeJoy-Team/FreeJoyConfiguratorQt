@@ -9,6 +9,7 @@
 GlobalEnvironment gEnv;
 #include "appconfig.h"
 #include "deviceconfig.h"
+#include "signalhandler.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,8 +31,10 @@ int main(int argc, char *argv[])
     // new?
     AppConfig app_config;
     DeviceConfig device_config;
+    SignalHandler signal_handler;   // снести нахер это ненужное говно
     gEnv.pAppConfig = &app_config;
     gEnv.pDeviceConfig = &device_config;
+    gEnv.pSignalHandler = &signal_handler;
 
 
     MainWindow w;

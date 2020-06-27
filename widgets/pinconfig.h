@@ -19,14 +19,16 @@ public:
     void WriteToConfig();
     void ReadFromConfig();
 
-    // make valueChanged for singleButtons_count and etc
-
     //private:?
     //! 0 if no pins
-    uint pin_count_ = 0;
-
+    uint pin_count_ = 0;    // need?
     //! PinComboBox widget list
     QList<PinComboBox *> PinComboBoxPtrList;
+
+signals:
+    void totalButtonsValueChanged(int total_buttons);
+    void totalLEDsValueChanged(int total_led);
+
 
 private slots:
     void PinInteraction(int index, int sender_index, int pin);
@@ -54,7 +56,7 @@ private:
     {
         {AXIS_SOURCE,        {AXIS_ANALOG, TLE5011_CS, MCP3201_CS, MCP3202_CS, MCP3204_CS, MCP3208_CS, MLX90393_CS}},
 
-        {BUTTON_FROM_AXES,   {}},
+        {BUTTON_FROM_AXES,   {678}},        // 678 в DeviceConfig
 
         {SINGLE_BUTTON,      {BUTTON_VCC, BUTTON_GND}},
         {ROW_OF_BUTTONS,     {BUTTON_ROW}},
