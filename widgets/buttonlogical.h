@@ -84,11 +84,16 @@ public:
         {SEQUENTIAL_BUTTON,    tr("Sequential button")},
     };
 
+signals:
+    void functionIndexChanged(int index, int previous_index, int button_number);
+
 private slots:
     void editingOnOff (int value);
+    void functionTypeChanged(int index);
 
 private:
     Ui::ButtonLogical *ui;
+    int function_previous_index_ = 0;
 
 };
 

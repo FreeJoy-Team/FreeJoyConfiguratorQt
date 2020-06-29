@@ -137,7 +137,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -201,29 +201,22 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <attribute name="title">
         <string>Encoders</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_12">
-        <item row="0" column="0">
-         <widget class="QScrollArea" name="scrollArea_2">
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_3">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>1060</width>
-             <height>601</height>
-            </rect>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_14">
-            <item row="0" column="0">
-             <layout class="QVBoxLayout" name="verticalLayout_3"/>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
+       <layout class="QVBoxLayout" name="layoutV_tabEncodersConfig">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_LED">

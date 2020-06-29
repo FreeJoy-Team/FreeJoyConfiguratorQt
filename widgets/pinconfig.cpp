@@ -40,7 +40,7 @@ PinConfig::PinConfig(QWidget *parent) :
             PinComboBoxPtrList.append(pinComboBox);
         }
     }
-    qDebug()<<"PIN COUNT = "<<PinComboBoxPtrList.size();    //currentIndexChanged a2bCountChanged
+    //qDebug()<<"PIN COUNT = "<<PinComboBoxPtrList.size();    //currentIndexChanged a2bCountChanged
 
     for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
             connect(PinComboBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),

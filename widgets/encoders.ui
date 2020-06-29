@@ -22,6 +22,9 @@
   <layout class="QGridLayout" name="gridLayout" rowstretch="3,10" columnstretch="3,10,10,10,15">
    <item row="1" column="1">
     <widget class="QLabel" name="label_ButtonNumberA">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Not defined</string>
      </property>
@@ -32,6 +35,9 @@
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="label_ButtonNumberB">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Not defined</string>
      </property>
@@ -41,7 +47,11 @@
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="QComboBox" name="comboBox_EncoderType"/>
+    <widget class="QComboBox" name="comboBox_EncoderType">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
    </item>
    <item row="0" column="4">
     <spacer name="horizontalSpacer">
@@ -58,6 +68,9 @@
    </item>
    <item row="0" column="1">
     <widget class="QLabel" name="text_InputA">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Input A</string>
      </property>
@@ -68,6 +81,9 @@
    </item>
    <item row="0" column="2">
     <widget class="QLabel" name="text_InputB">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Input B</string>
      </property>
@@ -78,8 +94,11 @@
    </item>
    <item row="0" column="3">
     <widget class="QLabel" name="text_EncoderType">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>Encoder type</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -88,6 +107,9 @@
    </item>
    <item row="0" column="0" rowspan="2">
     <widget class="QLabel" name="label_EncoderIndex">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>1</string>
      </property>

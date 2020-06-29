@@ -5,7 +5,7 @@
 
 #include <QDebug>
 
-ButtonConfig::ButtonConfig(QWidget *parent) :
+ButtonConfig::ButtonConfig(QWidget *parent) :               // сделать спавн физических при изменении пина
     QWidget(parent),
     ui(new Ui::ButtonConfig)
 {
@@ -20,13 +20,10 @@ ButtonConfig::ButtonConfig(QWidget *parent) :
         LogicButtonAdrList.append(logical_buttons_widget);
     }
 
-//    QList<ButtonLogical*> LogicButtonAdrList;
-//        for (int i = 0; i < ButtonNumber; i++) {
-//            if (LogicButtonAdrList.size() > 0) {
-//                QWidget *widget = LogicButtonAdrList.takeLast();
-//                ui->layoutV_LogicalButton->removeWidget(widget);
-//                widget->deleteLater();
-//            }
+    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {     // можно и наверх закинуть, если без динамик спавна
+        connect(LogicButtonAdrList[i], SIGNAL(functionIndexChanged(int, int, int)),
+                this, SLOT(functionTypeChanged(int, int, int)));
+    }
 }
 
 ButtonConfig::~ButtonConfig()
@@ -34,60 +31,13 @@ ButtonConfig::~ButtonConfig()
     delete ui;
 }
 
-void ButtonConfig::ReadFromConfig()                 // rename to ReadFromConfig
+void ButtonConfig::ReadFromConfig()
 {
-    // inizializate logical buttons
+    // logical buttons
     for (int i = 0; i < LogicButtonAdrList.size(); i++) {
         LogicButtonAdrList[i]->ReadFromConfig();
     }
-    // inizializate physical buttons           // PHYSIC. вынести?
-    //delete
-    while (PhysicButtonAdrList.size() > 0) {
-        QWidget *widget = PhysicButtonAdrList.takeLast();
-        ui->layoutG_PhysicalButton->removeWidget(widget);
-        widget->deleteLater();
-    }
-    // add
-    int row = 0;
-    int column = 0;
-    ui->layoutG_PhysicalButton->setAlignment(Qt::AlignTop);
-    for (int i = 0; gEnv.pDeviceConfig->config.buttons[i].physical_num >= 0; i++) {
-        if(column >= 10)
-        {
-            row++;
-            column = 0;
-        }
-        physical_button_widget = new ButtonPhysical(i, this);
-        ui->layoutG_PhysicalButton->addWidget(physical_button_widget, row, column);
-        PhysicButtonAdrList.append(physical_button_widget);
-        column++;
-    }
-//    int i = 0;
-//    while (gEnv.pDeviceConfig->config.buttons[i].physical_num >= 0)
-//    {
-//        if(column >= 10)
-//        {
-//            row++;
-//            column = 0;
-//        }
-//        physical_button_widget = new ButtonPhysical(i, this);
-//        ui->layoutG_PhysicalButton->addWidget(physical_button_widget, row, column);
-//        PhysicButtonAdrList.append(physical_button_widget);
-//        column++;
-//        i++;
-//    }
-
-//    for (int i = 0; gEnv.pDeviceConfig->config.buttons[i].type >= 0; i++) {
-//        if(column >= 10)
-//        {
-//            row++;
-//            column = 0;
-//        }
-//        ButtonPhysical* physical_button_widget = new ButtonPhysical(i, this);
-//        ui->layoutG_PhysicalButton->addWidget(physical_button_widget, row, column);
-//        column++;
-//    }
-    // inizializate
+    // other
     ui->spinBox_Shift1->setValue(gEnv.pDeviceConfig->config.shift_config[0].button);
     ui->spinBox_Shift2->setValue(gEnv.pDeviceConfig->config.shift_config[1].button);
     ui->spinBox_Shift3->setValue(gEnv.pDeviceConfig->config.shift_config[2].button);
@@ -119,9 +69,49 @@ void ButtonConfig::WriteToConfig()
 
     gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_EncoderPressTimer->value();
 
-    // logical buttons write to config
+    // logical buttons
     for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
         LogicButtonAdrList[i]->WriteToConfig();
+    }
+}
+
+void ButtonConfig::PhysicalButtonsSpawn(int count)
+{
+    // delete all
+    while (PhysicButtonAdrList.size() > 0) {
+        QWidget *widget = PhysicButtonAdrList.takeLast();
+        ui->layoutG_PhysicalButton->removeWidget(widget);
+        widget->deleteLater();
+    }
+    // add
+    int row = 0;
+    int column = 0;
+    ui->layoutG_PhysicalButton->setAlignment(Qt::AlignTop);
+    for (int i = 0; i < count; i++) {
+        if(column >= 10)
+        {
+            row++;
+            column = 0;
+        }
+        physical_button_widget = new ButtonPhysical(i, this);
+        ui->layoutG_PhysicalButton->addWidget(physical_button_widget, row, column);
+        PhysicButtonAdrList.append(physical_button_widget);
+        column++;
+    }
+}
+
+void ButtonConfig::functionTypeChanged(int index, int function_previous_index, int button_number)
+{
+    if (index == ENCODER_INPUT_A){
+        emit encoderInputChanged(button_number + 1, 0);
+    } else if (index == ENCODER_INPUT_B){
+        emit encoderInputChanged(0, button_number + 1);
+    }
+
+    if (function_previous_index == ENCODER_INPUT_A){
+        emit encoderInputChanged((button_number + 1) * -1, 0);
+    } else if (function_previous_index == ENCODER_INPUT_B){
+        emit encoderInputChanged(0, (button_number + 1) * -1);
     }
 }
 
@@ -144,6 +134,8 @@ void ButtonConfig::setUiOnOff(int value)
         LogicButtonAdrList[i]->SetMaxPhysButtons(value);
         LogicButtonAdrList[i]->SetSpinBoxOnOff(value);
     }
+
+    PhysicalButtonsSpawn(value);
 }
 
 void ButtonConfig::ButtonStateChanged()

@@ -1,4 +1,4 @@
-#include <QGridLayout>
+#include <QGridLayout>      //?
 #include <QDebug>
 #include <QThread>
 
@@ -50,8 +50,15 @@ MainWindow::MainWindow(QWidget *parent)
 //    ui->tab_Encoders->setLayout(layout);
 
     // dynamic widgets spawn
-    QScrollBar* scroll = ui->scrollArea_2->verticalScrollBar();
-    connect( scroll , SIGNAL(valueChanged(int)) ,this , SLOT(addvalues(int)) );
+//    QScrollBar* scroll = ui->scrollArea_2->verticalScrollBar();
+//    connect( scroll , SIGNAL(valueChanged(int)) ,this , SLOT(addvalues(int)) );
+
+    //    /// needs to be deleted by you
+    //    m_HeapWidgetWithoutParent = new QWidget();
+    //    //doesn't need to be deleted by you
+    //    m_HeapWidgetWithParent = new QWidget(this);
+    //    // needs to be deleted by you
+    //    m_HeapNoQObj = new NoQObjectDerivedClass();
 
     // add button config
     button_config = new ButtonConfig(this);     // not need delete. this - parent led_config
@@ -62,6 +69,9 @@ MainWindow::MainWindow(QWidget *parent)
     // add led config
     led_config = new LedConfig(this);
     ui->layoutV_tabLedConfig->addWidget(led_config);
+    // add encoders config
+    encoder_config = new EncodersConfig(this);
+    ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
 
 
 
@@ -80,12 +90,6 @@ MainWindow::MainWindow(QWidget *parent)
 //    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
 //            ui->widget_2, &AdvancedSettings::WriteToConfig);
 
-//    /// needs to be deleted by you
-//    m_HeapWidgetWithoutParent = new QWidget();
-//    //doesn't need to be deleted by you
-//    m_HeapWidgetWithParent = new QWidget(this);
-//    // needs to be deleted by you
-//    m_HeapNoQObj = new NoQObjectDerivedClass();
 
     // buttons pin changed
     connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),  // add buttons from axes
@@ -93,6 +97,9 @@ MainWindow::MainWindow(QWidget *parent)
     // LEDs changed
     connect(pin_config, SIGNAL(totalLEDsValueChanged(int)),
                 led_config, SLOT(SpawnLEDs(int)));
+    // encoder changed
+    connect(button_config, SIGNAL(encoderInputChanged(int, int)),
+            encoder_config, SLOT(encoderInputChanged(int, int)));
 
 
     hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!
@@ -150,7 +157,6 @@ MainWindow::MainWindow(QWidget *parent)
 //                          SLOT(sendConfigPacket(uint8_t *)));
 
     thread->start();
-
 }
 
 MainWindow::~MainWindow()   // для ядра сделать выключатель is_finish_
@@ -539,46 +545,46 @@ void MainWindow::on_pushButton_3_clicked()
 QList<ButtonConfig*> LogicButtonAdrList2;
 void MainWindow::on_pushButton_15_clicked()
 {
-    clock_t start = clock();
-    for (int i = 0; i< BUTTON_COUNT_TEST; i++) {
-        ButtonConfig* qwe = new ButtonConfig;
-        ui->verticalLayout_3->addWidget(qwe, i);
-        LogicButtonAdrList2.append(qwe);
-    }
-    clock_t stop = clock();
-    qDebug()<< "layout create ms= " << stop - start;
-    QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
-
-
-//    std::thread thread2([&](){
-//        for (int i = 0; i< allPButtons.size(); i++) {
-//            allPButtons[i]->PinComboBox::GenText();
-//        }
-//        }
-//        );
-//    thread2.detach();
-
-//    for (int i = 0; i< allPButtons.size(); i++) {
-//        allPButtons[i]->PinComboBox::GenText();
+//    clock_t start = clock();
+//    for (int i = 0; i< BUTTON_COUNT_TEST; i++) {
+//        ButtonConfig* qwe = new ButtonConfig;
+//        ui->verticalLayout_3->addWidget(qwe, i);
+//        LogicButtonAdrList2.append(qwe);
 //    }
+//    clock_t stop = clock();
+//    qDebug()<< "layout create ms= " << stop - start;
+//    QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
 
-    stop = clock();
-    qDebug()<< "суммарно все вычисления = " << stop - start;
+
+////    std::thread thread2([&](){
+////        for (int i = 0; i< allPButtons.size(); i++) {
+////            allPButtons[i]->PinComboBox::GenText();
+////        }
+////        }
+////        );
+////    thread2.detach();
+
+////    for (int i = 0; i< allPButtons.size(); i++) {
+////        allPButtons[i]->PinComboBox::GenText();
+////    }
+
+//    stop = clock();
+//    qDebug()<< "суммарно все вычисления = " << stop - start;
 }
 
 // dynamic widgets spawn
 void MainWindow::addvalues(int value)
 {
-    if (value > 90 && LogicButtonAdrList2.size()< 512)
-    {
-        for (int i = 0; i< 5; i++) {
-            ButtonConfig* qwe = new ButtonConfig;
-            ui->verticalLayout_3->addWidget(qwe, i);
-            LogicButtonAdrList2.append(qwe);
-        }
-//        QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
-//        for (int i = 0; i< allPButtons.size(); i++) {
-//            allPButtons[i]->PinComboBox::GenText();
+//    if (value > 90 && LogicButtonAdrList2.size()< 512)
+//    {
+//        for (int i = 0; i< 5; i++) {
+//            ButtonConfig* qwe = new ButtonConfig;
+//            ui->verticalLayout_3->addWidget(qwe, i);
+//            LogicButtonAdrList2.append(qwe);
 //        }
-    }
+////        QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
+////        for (int i = 0; i< allPButtons.size(); i++) {
+////            allPButtons[i]->PinComboBox::GenText();
+////        }
+//    }
 }

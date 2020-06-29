@@ -19,7 +19,7 @@ LedConfig::LedConfig(QWidget *parent) :
     clock_t start = clock();
     for (int i = 0; i < MAX_LEDS_NUM; i++)
     {
-        LED * led = new LED(i, this);
+        LED * led = new LED(i, this);       // мб нах new?
         ui->layoutV_LED->addWidget(led);
         LEDAdrList.append(led);
         led->hide();
@@ -35,7 +35,7 @@ LedConfig::~LedConfig()
 
 void LedConfig::SpawnLEDs(int led_count)
 {
-    for (int i = 0; i < MAX_LEDS_NUM; i++)  // так или проверка на скрытие и break; ?
+    for (int i = 0; i < MAX_LEDS_NUM; i++)  // или проверка на скрытие и break; ?
     {
         LEDAdrList[i]->hide();
     }

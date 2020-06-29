@@ -11,8 +11,9 @@
 #include "reportconverter.h"
 #include "appconfig.h"
 
-// widgets
+// widgets  удалить лишнее
 #include "widgets/encoders.h"
+#include "widgets/encodersconfig.h"
 #include "widgets/buttonconfig.h"
 #include "widgets/buttonlogical.h"
 #include "widgets/pincombobox.h"
@@ -54,6 +55,7 @@ public:
     PinConfig* pin_config;
     ButtonConfig* button_config;
     LedConfig* led_config;
+    EncodersConfig* encoder_config;
 
     signals:
     void test_signal();

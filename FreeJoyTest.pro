@@ -35,6 +35,7 @@ SOURCES += \
     widgets/buttonlogical.cpp \
     widgets/buttonphysical.cpp \
     widgets/encoders.cpp \
+    widgets/encodersconfig.cpp \
     widgets/led.cpp \
     widgets/ledconfig.cpp \
     widgets/pincombobox.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     widgets/buttonlogical.h \
     widgets/buttonphysical.h \
     widgets/encoders.h \
+    widgets/encodersconfig.h \
     widgets/led.h \
     widgets/ledconfig.h \
     widgets/pincombobox.h \
@@ -78,6 +80,7 @@ FORMS += \
     widgets/buttonlogical.ui \
     widgets/buttonphysical.ui \
     widgets/encoders.ui \
+    widgets/encodersconfig.ui \
     widgets/led.ui \
     widgets/ledconfig.ui \
     widgets/pincombobox.ui \

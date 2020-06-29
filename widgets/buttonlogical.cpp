@@ -21,6 +21,8 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
         ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
     }
 
+    connect(ui->comboBox_ButtonFunction, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(functionTypeChanged(int)));
     connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
             this, SLOT(editingOnOff(int)));
 }
@@ -97,6 +99,12 @@ void ButtonLogical::SetSpinBoxOnOff(int max_phys_buttons)
     } else {
         ui->spinBox_PhysicalButtonNumber->setEnabled(false);
     }
+}
+
+void ButtonLogical::functionTypeChanged(int index)
+{
+    emit functionIndexChanged(index, function_previous_index_, button_number_);
+    function_previous_index_ = index;
 }
 
 void ButtonLogical::editingOnOff(int value)

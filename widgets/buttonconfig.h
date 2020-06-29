@@ -33,14 +33,20 @@ public:
     ButtonPhysical* physical_button_widget;     // нужны ли?
     ButtonLogical* logical_buttons_widget;
 
-public slots:
+signals:
+    void encoderInputChanged(int ecoder_A, int ecoder_B);
+
+public slots:   // private?
     void setUiOnOff(int value);
 
+private slots:
+    void functionTypeChanged(int index, int function_previous_index, int button_number);
 
 private:
     QList<ButtonLogical*> LogicButtonAdrList;
     QList<ButtonPhysical*> PhysicButtonAdrList;
     Ui::ButtonConfig *ui;
+    void PhysicalButtonsSpawn(int count);
 
 };
 
