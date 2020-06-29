@@ -23,7 +23,7 @@ AdvancedSettings::~AdvancedSettings()
     delete ui;
 }
 
-void AdvancedSettings::Initialization()
+void AdvancedSettings::ReadFromConfig()
 {
     // PID
     ui->lineEdit_PID->setInputMask("HHHH");

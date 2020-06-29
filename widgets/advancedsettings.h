@@ -19,8 +19,8 @@ public:
 private:
     Ui::AdvancedSettings *ui;
 
-public slots:
-    void Initialization();
+public slots:   // private?
+    void ReadFromConfig();
     void WriteToConfig();
 };
 

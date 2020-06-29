@@ -74,21 +74,38 @@ MainWindow::MainWindow(QWidget *parent)
     ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
 
 
-
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            button_config, &ButtonConfig::ReadFromConfig);
+    // read pin config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             pin_config, &PinConfig::ReadFromConfig);
+    // read button config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            ui->widget_2, &AdvancedSettings::Initialization);
+            button_config, &ButtonConfig::ReadFromConfig);
+    // read LED config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
+            led_config, &LedConfig::ReadFromConfig);
+    // read encoder config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
+            encoder_config, &EncodersConfig::ReadFromConfig);
+    // read adv.settings config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
+            ui->widget_2, &AdvancedSettings::ReadFromConfig);
 
 
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            button_config, &ButtonConfig::WriteToConfig);
+    // write pin config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             pin_config, &PinConfig::WriteToConfig);
-//    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-//            ui->widget_2, &AdvancedSettings::WriteToConfig);
+    // write button config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            button_config, &ButtonConfig::WriteToConfig);
+    // write LED config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            led_config, &LedConfig::WriteToConfig);
+    // write encoder config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            encoder_config, &EncodersConfig::WriteToConfig);
+    // write adv.settings config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            ui->widget_2, &AdvancedSettings::WriteToConfig);
 
 
     // buttons pin changed
@@ -103,6 +120,7 @@ MainWindow::MainWindow(QWidget *parent)
     // fast encoder
     connect(pin_config, SIGNAL(fastEncoderSelected(QString, bool)),
             encoder_config, SLOT(fastEncoderSelected(QString, bool)));
+
 
 
     hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!
