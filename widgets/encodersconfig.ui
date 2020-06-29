@@ -30,11 +30,11 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5">
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="groupBox_FastEncoder">
          <property name="title">
           <string>Fast encoder</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0" columnstretch="3,10,10,10,15">
+         <layout class="QGridLayout" name="layoutG_FastEncoder" rowstretch="0,0" columnstretch="3,10,10,10,15">
           <property name="topMargin">
            <number>0</number>
           </property>

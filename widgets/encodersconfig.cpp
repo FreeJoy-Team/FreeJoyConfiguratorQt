@@ -10,6 +10,8 @@ EncodersConfig::EncodersConfig(QWidget *parent) :
 
     for (int i = 1; i < ENCODER_TYPE_COUNT; ++i) {      // i = 1 - fast encoder without ENCODER_CONF_1x
         ui->comboBox_EncoderType->addItem(fastEncoder_type_list_[i].gui_name);
+        ui->label_ButtonNumberA->setText(not_defined);
+        ui->label_ButtonNumberB->setText(not_defined);
     }
 
     ui->layoutV_Encoders->setAlignment(Qt::AlignTop);
@@ -26,6 +28,41 @@ EncodersConfig::EncodersConfig(QWidget *parent) :
 EncodersConfig::~EncodersConfig()
 {
     delete ui;
+}
+
+void EncodersConfig::fastEncoderSelected(QString pin_gui_name, bool is_selected)
+{
+    if (is_selected == true){
+        if (ui->label_ButtonNumberA->text() == not_defined){        // хз чё будет с другим языком
+            ui->label_ButtonNumberA->setText(pin_gui_name);
+            fast_encoder_input_A_++;
+        } else {
+            ui->label_ButtonNumberB->setText(pin_gui_name);
+            fast_encoder_input_B_++;
+        }
+    } else {
+        if (ui->label_ButtonNumberA->text() == pin_gui_name){
+            ui->label_ButtonNumberA->setText(not_defined);
+            fast_encoder_input_A_--;
+        } else {
+            ui->label_ButtonNumberB->setText(not_defined);
+            fast_encoder_input_B_--;
+        }
+    }
+    SetUiOnOff();
+}
+
+void EncodersConfig::SetUiOnOff()
+{
+    if (fast_encoder_input_A_ > 0 && fast_encoder_input_B_ > 0){
+        for(auto&& child:ui->groupBox_FastEncoder->findChildren<QWidget *>()){
+        child->setEnabled(true);
+        }
+    } else {
+        for(auto&& child:ui->groupBox_FastEncoder->findChildren<QWidget *>()){
+        child->setEnabled(false);
+        }
+    }
 }
 
 // WARNING GOVNOKOD !!!!

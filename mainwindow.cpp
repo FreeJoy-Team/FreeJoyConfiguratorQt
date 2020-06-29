@@ -100,6 +100,9 @@ MainWindow::MainWindow(QWidget *parent)
     // encoder changed
     connect(button_config, SIGNAL(encoderInputChanged(int, int)),
             encoder_config, SLOT(encoderInputChanged(int, int)));
+    // fast encoder
+    connect(pin_config, SIGNAL(fastEncoderSelected(QString, bool)),
+            encoder_config, SLOT(fastEncoderSelected(QString, bool)));
 
 
     hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!

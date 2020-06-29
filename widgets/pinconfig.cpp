@@ -44,12 +44,12 @@ PinConfig::PinConfig(QWidget *parent) :
 
     for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
             connect(PinComboBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),
-                        this, SLOT(PinInteraction(int, int, int)));
-            connect(PinComboBoxPtrList[i], SIGNAL(currentIndexChanged(int, int)),
-                        this, SLOT(SetCurrentConfig(int, int)));
+                        this, SLOT(pinInteraction(int, int, int)));
+            connect(PinComboBoxPtrList[i], SIGNAL(currentIndexChanged(int, int, int)),
+                        this, SLOT(pinIndexChanged(int, int, int)));
     }
     connect(gEnv.pSignalHandler, SIGNAL(a2bCountChanged(int, int)),     // временно
-                this, SLOT(SetCurrentConfig(int, int)));
+                this, SLOT(pinIndexChanged(int, int)));
 //    connect(dynamic_cast<SignalHandler*>(qApp), &SignalHandler::a2bCountChanged,
 //            this, &PinConfig::SetCurrentConfig);
 }
@@ -59,7 +59,7 @@ PinConfig::~PinConfig()
     delete ui;
 }
 
-void PinConfig::PinInteraction(int index, int sender_index, int pin)
+void PinConfig::pinInteraction(int index, int sender_index, int pin)
 {
     if (index != NOT_USED)//current_enum_index
     {
@@ -100,10 +100,18 @@ void PinConfig::PinInteraction(int index, int sender_index, int pin)
 }
 
 // 678 - так се реализация
-void PinConfig::SetCurrentConfig(int current_device_enum, int previous_device_enum) // mutex
+void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex
 {
+    if (current_device_enum == FAST_ENCODER){
+        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz
+    } else if (previous_device_enum == FAST_ENCODER){
+        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, false);    // hz
+    }
+
+
+    // set current config and generate signals for another configs
     qDebug()<< current_device_enum;
-    if (current_device_enum == 678){            // 678 в DeviceConfig
+    if (current_device_enum == 678){            // 678 в DeviceConfig       // временно
         ui->label_ButtonFromAxes->setNum(previous_device_enum);
     } else {
 

@@ -161,7 +161,7 @@ void PinComboBox::IndexChanged(int index)
     // set current config
     //if(enum_index[index] == )
     if(enum_gui_index.size()){
-        emit currentIndexChanged(enum_index[index], previous_index_);
+        emit currentIndexChanged(enum_index[index], previous_index_, pin_number_);
         previous_index_ = enum_index[index];
     }
 }

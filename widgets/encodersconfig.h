@@ -22,14 +22,21 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
-public slots:       // private?
+private slots:       // private?
     void encoderInputChanged(int encoder_A, int encoder_B);
+    void fastEncoderSelected(QString pin_gui_name, bool is_selected);
 
 private:
     Ui::EncodersConfig *ui;
+    void SetUiOnOff();
+
     QList<Encoders*> EncodersAdrList;
     int encoders_input_A_count_ = 0;
     int encoders_input_B_count_ = 0;
+    QString not_defined = tr("Not defined");
+
+    int fast_encoder_input_A_ = 0;
+    int fast_encoder_input_B_ = 0;
 
     deviceEnum_guiName_t const fastEncoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {

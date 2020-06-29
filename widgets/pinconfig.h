@@ -28,11 +28,11 @@ public:
 signals:
     void totalButtonsValueChanged(int total_buttons);
     void totalLEDsValueChanged(int total_led);
-
+    void fastEncoderSelected(QString pin_gui_name, bool is_selected);
 
 private slots:
-    void PinInteraction(int index, int sender_index, int pin);
-    void SetCurrentConfig(int current_device_enum, int previous_device_enum);
+    void pinInteraction(int index, int sender_index, int pin);
+    void pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number);
 
 private:
     Ui::PinConfig *ui;

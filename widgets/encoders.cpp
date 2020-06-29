@@ -37,12 +37,11 @@ void Encoders::SetInputA(int input_A)
         input_A_ = input_A;
         QString name_template("Button № %1");
         ui->label_ButtonNumberA->setText(name_template.arg(input_A_));
-        SetUiOnOff();
     } else {
         input_A_ = 0;
         ui->label_ButtonNumberA->setText(not_defined);
-        SetUiOnOff();
     }
+    SetUiOnOff();
 }
 
 void Encoders::SetInputB(int input_B)
@@ -51,12 +50,11 @@ void Encoders::SetInputB(int input_B)
         input_B_ = input_B;
         QString name_template("Button № %1");
         ui->label_ButtonNumberB->setText(name_template.arg(input_B_));
-        SetUiOnOff();
     } else {
         input_B_ = 0;
         ui->label_ButtonNumberB->setText(not_defined);
-        SetUiOnOff();
     }
+    SetUiOnOff();
 }
 
 void Encoders::SetUiOnOff()
