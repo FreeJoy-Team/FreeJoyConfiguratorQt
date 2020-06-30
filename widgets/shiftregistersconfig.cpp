@@ -30,20 +30,22 @@ bool ShiftRegistersConfig::SortByPinNumber(const ShiftRegData_t& lhs, const Shif
 
 bool ShiftRegistersConfig::SortNullLast(const ShiftRegData_t& lhs, const ShiftRegData_t& rhs)
 {
+    Q_UNUSED(lhs);
     return rhs.pin_number == 0;
 }
 #include <QDebug>
-void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name)
+void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name)      // сделать выключение у пинов при latch/data == 4
 {
     // add shift reg latch pin
     if (latch_pin != 0){
         if (latch_pin > 0){
-            latch_pins_array[latch_pins_array.size() - 1].pin_number = latch_pin;
+            latch_pins_array[latch_pins_array.size() - 1].pin_number = latch_pin;       // latch_pins_array.size() - 1 мб сделать отдельную переменную?
             latch_pins_array[latch_pins_array.size() - 1].gui_name = pin_gui_name;
         }
+        // delete shift reg latch pin
         else if (latch_pin < 0){
             latch_pin = -latch_pin;
-            for (size_t i = 0; i < latch_pins_array.size(); ++i) {
+            for (uint i = 0; i < latch_pins_array.size(); ++i) {
                 if (latch_pin == latch_pins_array[i].pin_number){
 
                     latch_pins_array[i].pin_number = 0;
@@ -51,10 +53,11 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
                 }
             }
         }
-
-        std::sort(latch_pins_array.begin(), latch_pins_array.end(), SortByPinNumber);           // хз как можно ли через 1 сорт
+        // sort ascending
+        std::sort(latch_pins_array.begin(), latch_pins_array.end(), SortByPinNumber);           // хз можно ли через 1 сорт
+        // sort null last
         std::stable_sort(latch_pins_array.begin(), latch_pins_array.end(), SortNullLast);
-
+        //all unused pins = bigger pin
         for (size_t i = latch_pins_array.size() - 1; i >= 0; --i) {
             if (latch_pins_array[i].pin_number > 0){
                 for (size_t j = latch_pins_array.size() - 1; j > i; --j) {
@@ -64,8 +67,8 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
                 break;
             }
         }
-
-        for (size_t i = 0; i < latch_pins_array.size() - 1; ++i) {
+        // update shiftreg ui
+        for (uint i = 0; i < latch_pins_array.size() - 1; ++i) {
             ShiftRegistersAdrList[i]->SetLatchPin(latch_pins_array[i].pin_number, latch_pins_array[i].gui_name);
         }
 
@@ -79,18 +82,18 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
         }
         else if (data_pin < 0){
             data_pin = -data_pin;
-            for (size_t i = 0; i < data_pins_array.size(); ++i) {
-                if (latch_pin == data_pins_array[i].pin_number){
+            for (uint i = 0; i < data_pins_array.size(); ++i) {
+                if (data_pin == data_pins_array[i].pin_number){
                     data_pins_array[i].pin_number = 0;
                     data_pins_array[i].gui_name = ShiftRegistersAdrList[i]->not_defined_;      // hz
                 }
             }
         }
 
-        std::sort(data_pins_array.begin(), data_pins_array.end(), SortByPinNumber);           // хз как можно ли через 1 сорт
+        std::sort(data_pins_array.begin(), data_pins_array.end(), SortByPinNumber);           // хз можно ли через 1 сорт
         std::stable_sort(data_pins_array.begin(), data_pins_array.end(), SortNullLast);
 
-        for (size_t i = 0; i < data_pins_array.size() - 1; ++i) {
+        for (uint i = 0; i < data_pins_array.size() - 1; ++i) {
             ShiftRegistersAdrList[i]->SetDataPin(data_pins_array[i].pin_number, data_pins_array[i].gui_name);
         }
 

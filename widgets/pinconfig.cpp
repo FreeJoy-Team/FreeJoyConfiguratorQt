@@ -64,7 +64,7 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
     if (index != NOT_USED)//current_enum_index
     {
         for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-            for (size_t j = 0; j < PinComboBoxPtrList[i]->enum_gui_index.size(); ++j) {
+            for (uint j = 0; j < PinComboBoxPtrList[i]->enum_gui_index.size(); ++j) {
                 if (PinComboBoxPtrList[i]->enum_gui_index[j] == index)
                 {
                     if(PinComboBoxPtrList[i]->interact_count_ == 0){
