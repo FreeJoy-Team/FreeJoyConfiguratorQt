@@ -11,10 +11,10 @@ GlobalEnvironment gEnv;
 #include "deviceconfig.h"
 #include "signalhandler.h"
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
 
     // set stylesheet
     //QFile f(":qdarkstyle/style.qss");

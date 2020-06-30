@@ -38,7 +38,7 @@ void SignalHandler::ValueChangeEvent()       // задержка в начале
         if (a2b_count != tmp_a2b){
             a2b_count = tmp_a2b;
             emit a2bCountChanged(678, a2b_count);       // 678 в PinConfig
-            qDebug()<<a2b_count;
+            //qDebug()<<a2b_count;
         }
 
         // button count

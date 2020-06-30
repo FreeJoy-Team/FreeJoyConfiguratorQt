@@ -18,7 +18,7 @@ EncodersConfig::EncodersConfig(QWidget *parent) :
     // encoders spawn
     for (int i = 0; i < MAX_ENCODERS_NUM - FAST_ENCODER_COUNT; i++)
     {
-        Encoders * encoder = new Encoders(i, this);       // мб нах new?
+        Encoders * encoder = new Encoders(i, this);
         ui->layoutV_Encoders->addWidget(encoder);
         EncodersAdrList.append(encoder);
         //encoder->hide();
@@ -66,7 +66,7 @@ void EncodersConfig::SetUiOnOff()
 }
 
 // WARNING GOVNOKOD !!!!
-void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)
+void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // ограничитель на макс энкодер или через сортировку
 {
     int tmp_add = 0;
     int tmp_delete = 0;
@@ -77,7 +77,7 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)
         encoders_input_A_count_++;
         for (int i = 0; i < encoders_input_A_count_; ++i)
         {
-            if (encoder_A != 0 && (encoder_A < EncodersAdrList[i]->GetInputA() || EncodersAdrList[i]->GetInputA() == 0))
+            if (encoder_A != 0 && (encoder_A < EncodersAdrList[i]->GetInputA() || EncodersAdrList[i]->GetInputA() == 0))    // encoder_A != 0 legacy
             {
                 if (EncodersAdrList[i]->GetInputA() != 0)
                 {
@@ -154,12 +154,11 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)
         encoders_input_B_count_--;
     }
 }
-#include <QDebug>
+
 void EncodersConfig::ReadFromConfig()
 {
     ui->comboBox_EncoderType->setCurrentIndex(gEnv.pDeviceConfig->config.encoders[0] - 1);      // - 1 - fast encoder without ENCODER_CONF_1x
 
-    qDebug()<< "fast encoder type"<< gEnv.pDeviceConfig->config.encoders[0];
     for (int i = 0; i < MAX_ENCODERS_NUM - FAST_ENCODER_COUNT; i++)
     {
         EncodersAdrList[i]->ReadFromConfig();

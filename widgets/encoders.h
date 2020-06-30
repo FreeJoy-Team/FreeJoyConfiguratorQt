@@ -26,9 +26,7 @@ public:
     int GetInputB();
 
     void SetInputA(int);
-    void SetInputA(QString);
     void SetInputB(int);
-    void SetInputB(QString);
 
 private:
     Ui::Encoders *ui;

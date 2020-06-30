@@ -40,7 +40,8 @@ SOURCES += \
     widgets/ledconfig.cpp \
     widgets/pincombobox.cpp \
     widgets/pinconfig.cpp \
-    widgets/shiftregisters.cpp
+    widgets/shiftregisters.cpp \
+    widgets/shiftregistersconfig.cpp
 
 HEADERS += \
     appconfig.h \
@@ -68,7 +69,8 @@ HEADERS += \
     widgets/ledconfig.h \
     widgets/pincombobox.h \
     widgets/pinconfig.h \
-    widgets/shiftregisters.h
+    widgets/shiftregisters.h \
+    widgets/shiftregistersconfig.h
 
 FORMS += \
     mainwindow.ui \
@@ -85,7 +87,8 @@ FORMS += \
     widgets/ledconfig.ui \
     widgets/pincombobox.ui \
     widgets/pinconfig.ui \
-    widgets/shiftregisters.ui
+    widgets/shiftregisters.ui \
+    widgets/shiftregistersconfig.ui
 
 TRANSLATIONS += \
     FreeJoyTest_ru.ts

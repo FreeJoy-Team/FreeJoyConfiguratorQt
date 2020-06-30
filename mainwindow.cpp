@@ -72,6 +72,9 @@ MainWindow::MainWindow(QWidget *parent)
     // add encoders config
     encoder_config = new EncodersConfig(this);
     ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
+    // add shift registers config
+    shift_reg_config = new ShiftRegistersConfig(this);
+    ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config);
 
 
     // read pin config
@@ -86,6 +89,9 @@ MainWindow::MainWindow(QWidget *parent)
     // read encoder config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             encoder_config, &EncodersConfig::ReadFromConfig);
+    // read encoder config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
+            shift_reg_config, &ShiftRegistersConfig::ReadFromConfig);
     // read adv.settings config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             ui->widget_2, &AdvancedSettings::ReadFromConfig);
@@ -103,6 +109,9 @@ MainWindow::MainWindow(QWidget *parent)
     // write encoder config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             encoder_config, &EncodersConfig::WriteToConfig);
+    // read encoder config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            shift_reg_config, &ShiftRegistersConfig::WriteToConfig);
     // write adv.settings config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             ui->widget_2, &AdvancedSettings::WriteToConfig);
@@ -120,6 +129,9 @@ MainWindow::MainWindow(QWidget *parent)
     // fast encoder
     connect(pin_config, SIGNAL(fastEncoderSelected(QString, bool)),
             encoder_config, SLOT(fastEncoderSelected(QString, bool)));
+    // shift registers
+    connect(pin_config, SIGNAL(shiftRegSelected(int, int, QString)),
+            shift_reg_config, SLOT(shiftRegSelected(int, int, QString)));
 
 
 

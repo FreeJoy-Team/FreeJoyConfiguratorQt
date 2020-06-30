@@ -99,19 +99,47 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
     }
 }
 
+//void ButtonConfig::functionTypeChanged(int index, int function_previous_index, int button_number)
+//{
+//    if (index == ENCODER_INPUT_A){
+//        emit encoderInputChanged(button_number + 1, 0);
+//    } else if (index == ENCODER_INPUT_B){
+//        emit encoderInputChanged(0, button_number + 1);
+//    }
+
+//    if (function_previous_index == ENCODER_INPUT_A){
+//        emit encoderInputChanged((button_number + 1) * -1, 0);  // send negative number
+//    } else if (function_previous_index == ENCODER_INPUT_B){
+//        emit encoderInputChanged(0, (button_number + 1) * -1);
+//    }
+//}
+
 // 678 - так се реализация
-void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex
+void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex     // add else
 {
+    //fast encoder selected
     if (current_device_enum == FAST_ENCODER){
         emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz
     } else if (previous_device_enum == FAST_ENCODER){
         emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, false);    // hz
     }
+    // shift register latch selected
+    else if (current_device_enum == SHIFT_REG_LATCH){
+        emit shiftRegSelected(pin_number, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+    } else if (previous_device_enum == SHIFT_REG_LATCH){
+        emit shiftRegSelected((pin_number)*-1, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+    }
+    // shift register data selected
+    else if (current_device_enum == SHIFT_REG_DATA){
+        emit shiftRegSelected(0, pin_number, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+    } else if (previous_device_enum == SHIFT_REG_DATA){
+        emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+    }
 
 
     // set current config and generate signals for another configs
-    qDebug()<< current_device_enum;
-    if (current_device_enum == 678){            // 678 в DeviceConfig       // временно
+    //qDebug()<< current_device_enum;
+    if (current_device_enum == 678){            // 678 в DeviceConfig       // временно // else
         ui->label_ButtonFromAxes->setNum(previous_device_enum);
     } else {
 

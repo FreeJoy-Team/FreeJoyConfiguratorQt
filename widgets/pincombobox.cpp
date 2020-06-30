@@ -113,7 +113,7 @@ void PinComboBox::IndexChanged(int index)
                                 for (int k = 0; k < PIN_TYPE_COUNT; ++k) {
                                     if(pin_types[k].device_enum_index == pin_types[enum_gui_index[index]].interaction[t]){
                                         emit valueChangedForInteraction(k, enum_gui_index[index], pin_number_);
-                                        qDebug()<<"add";
+                                        //qDebug()<<"add";
                                         break;
                                     }
                                 }
@@ -236,7 +236,7 @@ void PinComboBox::ReadFromConfig(uint pin)          // try?
     for (size_t i = 0; i < enum_index.size(); ++i) {
         if (gEnv.pDeviceConfig->config.pins[pin] == enum_index[i])
         {
-            qDebug()<<i;
+            //qDebug()<<i;
             ui->comboBox_PinsType->setCurrentIndex(int(i));  //вместо i - ui->comboBox_PinsType->findText(pin_list_[i].gui_name)
             break;
         }

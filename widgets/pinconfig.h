@@ -29,6 +29,7 @@ signals:
     void totalButtonsValueChanged(int total_buttons);
     void totalLEDsValueChanged(int total_led);
     void fastEncoderSelected(QString pin_gui_name, bool is_selected);
+    void shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name);
 
 private slots:
     void pinInteraction(int index, int sender_index, int pin);

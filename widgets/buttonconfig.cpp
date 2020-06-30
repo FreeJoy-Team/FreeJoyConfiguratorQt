@@ -31,50 +31,6 @@ ButtonConfig::~ButtonConfig()
     delete ui;
 }
 
-void ButtonConfig::ReadFromConfig()
-{
-    // logical buttons
-    for (int i = 0; i < LogicButtonAdrList.size(); i++) {
-        LogicButtonAdrList[i]->ReadFromConfig();
-    }
-    // other
-    ui->spinBox_Shift1->setValue(gEnv.pDeviceConfig->config.shift_config[0].button);
-    ui->spinBox_Shift2->setValue(gEnv.pDeviceConfig->config.shift_config[1].button);
-    ui->spinBox_Shift3->setValue(gEnv.pDeviceConfig->config.shift_config[2].button);
-    ui->spinBox_Shift4->setValue(gEnv.pDeviceConfig->config.shift_config[3].button);
-    ui->spinBox_Shift5->setValue(gEnv.pDeviceConfig->config.shift_config[4].button);
-
-    ui->spinBox_Timer1->setValue(gEnv.pDeviceConfig->config.button_timer1_ms);
-    ui->spinBox_Timer2->setValue(gEnv.pDeviceConfig->config.button_timer2_ms);
-    ui->spinBox_Timer3->setValue(gEnv.pDeviceConfig->config.button_timer3_ms);
-
-    ui->spinBox_DebounceTimer->setValue(gEnv.pDeviceConfig->config.button_debounce_ms);
-
-    ui->spinBox_EncoderPressTimer->setValue(gEnv.pDeviceConfig->config.exchange_period_ms);
-}
-
-void ButtonConfig::WriteToConfig()
-{
-    gEnv.pDeviceConfig->config.shift_config[0].button = ui->spinBox_Shift1->value();
-    gEnv.pDeviceConfig->config.shift_config[1].button = ui->spinBox_Shift2->value();
-    gEnv.pDeviceConfig->config.shift_config[2].button = ui->spinBox_Shift3->value();
-    gEnv.pDeviceConfig->config.shift_config[3].button = ui->spinBox_Shift4->value();
-    gEnv.pDeviceConfig->config.shift_config[4].button = ui->spinBox_Shift5->value();
-
-    gEnv.pDeviceConfig->config.button_timer1_ms = ui->spinBox_Timer1->value();
-    gEnv.pDeviceConfig->config.button_timer2_ms = ui->spinBox_Timer2->value();
-    gEnv.pDeviceConfig->config.button_timer3_ms = ui->spinBox_Timer3->value();
-
-    gEnv.pDeviceConfig->config.button_debounce_ms = ui->spinBox_DebounceTimer->value();
-
-    gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_EncoderPressTimer->value();
-
-    // logical buttons
-    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
-        LogicButtonAdrList[i]->WriteToConfig();
-    }
-}
-
 void ButtonConfig::PhysicalButtonsSpawn(int count)
 {
     // delete all
@@ -109,7 +65,7 @@ void ButtonConfig::functionTypeChanged(int index, int function_previous_index, i
     }
 
     if (function_previous_index == ENCODER_INPUT_A){
-        emit encoderInputChanged((button_number + 1) * -1, 0);
+        emit encoderInputChanged((button_number + 1) * -1, 0);  // send negative number
     } else if (function_previous_index == ENCODER_INPUT_B){
         emit encoderInputChanged(0, (button_number + 1) * -1);
     }
@@ -194,5 +150,49 @@ void ButtonConfig::ButtonStateChanged()
                     }
                 }
         }
+    }
+}
+
+void ButtonConfig::ReadFromConfig()
+{
+    // logical buttons
+    for (int i = 0; i < LogicButtonAdrList.size(); i++) {
+        LogicButtonAdrList[i]->ReadFromConfig();
+    }
+    // other
+    ui->spinBox_Shift1->setValue(gEnv.pDeviceConfig->config.shift_config[0].button);
+    ui->spinBox_Shift2->setValue(gEnv.pDeviceConfig->config.shift_config[1].button);
+    ui->spinBox_Shift3->setValue(gEnv.pDeviceConfig->config.shift_config[2].button);
+    ui->spinBox_Shift4->setValue(gEnv.pDeviceConfig->config.shift_config[3].button);
+    ui->spinBox_Shift5->setValue(gEnv.pDeviceConfig->config.shift_config[4].button);
+
+    ui->spinBox_Timer1->setValue(gEnv.pDeviceConfig->config.button_timer1_ms);
+    ui->spinBox_Timer2->setValue(gEnv.pDeviceConfig->config.button_timer2_ms);
+    ui->spinBox_Timer3->setValue(gEnv.pDeviceConfig->config.button_timer3_ms);
+
+    ui->spinBox_DebounceTimer->setValue(gEnv.pDeviceConfig->config.button_debounce_ms);
+
+    ui->spinBox_EncoderPressTimer->setValue(gEnv.pDeviceConfig->config.exchange_period_ms);
+}
+
+void ButtonConfig::WriteToConfig()
+{
+    gEnv.pDeviceConfig->config.shift_config[0].button = ui->spinBox_Shift1->value();
+    gEnv.pDeviceConfig->config.shift_config[1].button = ui->spinBox_Shift2->value();
+    gEnv.pDeviceConfig->config.shift_config[2].button = ui->spinBox_Shift3->value();
+    gEnv.pDeviceConfig->config.shift_config[3].button = ui->spinBox_Shift4->value();
+    gEnv.pDeviceConfig->config.shift_config[4].button = ui->spinBox_Shift5->value();
+
+    gEnv.pDeviceConfig->config.button_timer1_ms = ui->spinBox_Timer1->value();
+    gEnv.pDeviceConfig->config.button_timer2_ms = ui->spinBox_Timer2->value();
+    gEnv.pDeviceConfig->config.button_timer3_ms = ui->spinBox_Timer3->value();
+
+    gEnv.pDeviceConfig->config.button_debounce_ms = ui->spinBox_DebounceTimer->value();
+
+    gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_EncoderPressTimer->value();
+
+    // logical buttons
+    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
+        LogicButtonAdrList[i]->WriteToConfig();
     }
 }

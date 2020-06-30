@@ -16,7 +16,7 @@
 #include "widgets/encodersconfig.h"
 #include "widgets/buttonconfig.h"
 #include "widgets/buttonlogical.h"
-#include "widgets/pincombobox.h"
+#include "widgets/pincombobox.h"    // widgets  удалить лишнее
 #include "widgets/pinconfig.h"
 #include "widgets/advancedsettings.h"
 #include "widgets/axesconfig.h"
@@ -25,6 +25,7 @@
 #include "widgets/led.h"
 #include "widgets/ledconfig.h"
 #include "widgets/shiftregisters.h"
+#include "widgets/shiftregistersconfig.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -56,6 +57,7 @@ public:
     ButtonConfig* button_config;
     LedConfig* led_config;
     EncodersConfig* encoder_config;
+    ShiftRegistersConfig* shift_reg_config;
 
     signals:
     void test_signal();
