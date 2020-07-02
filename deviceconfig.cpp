@@ -7,4 +7,5 @@ extern "C" {
 DeviceConfig::DeviceConfig()
 {
     config = InitConfig();
+    gamepad_report = {};        //??
 }

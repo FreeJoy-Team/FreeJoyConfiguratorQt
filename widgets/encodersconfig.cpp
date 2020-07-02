@@ -77,7 +77,7 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
         encoders_input_A_count_++;
         for (int i = 0; i < encoders_input_A_count_; ++i)
         {
-            if (encoder_A != 0 && (encoder_A < EncodersAdrList[i]->GetInputA() || EncodersAdrList[i]->GetInputA() == 0))    // encoder_A != 0 legacy
+            if (encoder_A < EncodersAdrList[i]->GetInputA() || EncodersAdrList[i]->GetInputA() == 0)    // encoder_A != 0 && ( legacy
             {
                 if (EncodersAdrList[i]->GetInputA() != 0)
                 {
@@ -98,7 +98,7 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
         encoder_A = -encoder_A;
         for (int i = 0; i < encoders_input_A_count_; ++i)
         {
-            if (encoder_A != 0 && (EncodersAdrList[i]->GetInputA() == encoder_A))
+            if (EncodersAdrList[i]->GetInputA() == encoder_A)   //encoder_A != 0 && (
             {
                 for (int j = i; j < encoders_input_A_count_; ++j)
                 {
@@ -119,7 +119,7 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
 
         for (int i = 0; i < encoders_input_B_count_; ++i)
         {
-            if (encoder_B != 0 && (encoder_B < EncodersAdrList[i]->GetInputB() || EncodersAdrList[i]->GetInputB() == 0))
+            if (encoder_B < EncodersAdrList[i]->GetInputB() || EncodersAdrList[i]->GetInputB() == 0)        //encoder_B != 0 && (
             {
                 if (EncodersAdrList[i]->GetInputB() != 0)
                 {
@@ -140,7 +140,7 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
         encoder_B = -encoder_B;
         for (int i = 0; i < encoders_input_B_count_; ++i)
         {
-            if (encoder_B != 0 && (EncodersAdrList[i]->GetInputB() == encoder_B))
+            if (EncodersAdrList[i]->GetInputB() == encoder_B)       //encoder_B != 0 &&
             {
                 for (int j = i; j < encoders_input_B_count_; ++j)
                 {

@@ -23,15 +23,18 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
-    int GetLatchPin();
-    int GetDataPin();
-    QString GetLatchString();
-    QString GetDataString();
+//    int GetLatchPin();
+//    int GetDataPin();
+//    QString GetLatchString();
+//    QString GetDataString();
 
     void SetLatchPin(int latch_pin, QString pin_gui_name);
     void SetDataPin(int data_pin, QString pin_gui_name);
 
-    QString not_defined_ = tr("Not defined");       // hz
+    QString not_defined_ = tr("Not defined");       // hz // getter?
+
+signals:
+    void buttonCountChanged(int buttons_count, int shift_reg_number);
 
 private slots:
     void calcRegistersCount(int button_count);

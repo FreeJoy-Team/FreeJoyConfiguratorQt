@@ -99,21 +99,6 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
     }
 }
 
-//void ButtonConfig::functionTypeChanged(int index, int function_previous_index, int button_number)
-//{
-//    if (index == ENCODER_INPUT_A){
-//        emit encoderInputChanged(button_number + 1, 0);
-//    } else if (index == ENCODER_INPUT_B){
-//        emit encoderInputChanged(0, button_number + 1);
-//    }
-
-//    if (function_previous_index == ENCODER_INPUT_A){
-//        emit encoderInputChanged((button_number + 1) * -1, 0);  // send negative number
-//    } else if (function_previous_index == ENCODER_INPUT_B){
-//        emit encoderInputChanged(0, (button_number + 1) * -1);
-//    }
-//}
-
 // 678 - так се реализация
 void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex     // add else
 {

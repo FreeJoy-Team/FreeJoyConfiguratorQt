@@ -47,6 +47,8 @@ public:
         QString gui_name;
     };
 
+    QThread* testThread;
+    void testUpdate();
 //private:
     //QScopedPointer<QThread> thread;
     //QScopedPointer<HidDevice> worker;
@@ -58,6 +60,7 @@ public:
     LedConfig* led_config;
     EncodersConfig* encoder_config;
     ShiftRegistersConfig* shift_reg_config;
+    AxesConfig* axes_config;
 
     signals:
     void test_signal();

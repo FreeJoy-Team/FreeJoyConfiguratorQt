@@ -28,27 +28,28 @@ ShiftRegisters::~ShiftRegisters()
 void ShiftRegisters::calcRegistersCount(int button_count)
 {
     ui->label_RegistersCount->setNum(ceil(button_count/8.0));
+    emit buttonCountChanged(button_count, shift_reg_number_);
 }
 
-int ShiftRegisters::GetLatchPin()
-{
-    return latch_pin_;
-}
+//int ShiftRegisters::GetLatchPin()
+//{
+//    return latch_pin_;
+//}
 
-int ShiftRegisters::GetDataPin()
-{
-    return data_pin_;
-}
+//int ShiftRegisters::GetDataPin()
+//{
+//    return data_pin_;
+//}
 
-QString ShiftRegisters::GetLatchString()
-{
-    return ui->label_LatchPin->text();
-}
+//QString ShiftRegisters::GetLatchString()
+//{
+//    return ui->label_LatchPin->text();
+//}
 
-QString ShiftRegisters::GetDataString()
-{
-    return ui->label_DataPin->text();
-}
+//QString ShiftRegisters::GetDataString()
+//{
+//    return ui->label_DataPin->text();
+//}
 
 void ShiftRegisters::SetLatchPin(int latch_pin, QString pin_gui_name)
 {

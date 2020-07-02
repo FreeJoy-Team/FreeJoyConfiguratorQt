@@ -23,6 +23,13 @@ ShiftRegistersConfig::~ShiftRegistersConfig()
     delete ui;
 }
 
+
+void ShiftRegistersConfig::shiftRegButtonsChanged(int buttons_count, int shift_reg_number)
+{
+
+}
+
+
 bool ShiftRegistersConfig::SortByPinNumber(const ShiftRegData_t& lhs, const ShiftRegData_t& rhs)
 {
     return lhs.pin_number < rhs.pin_number;
@@ -58,7 +65,7 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
         // sort null last
         std::stable_sort(latch_pins_array.begin(), latch_pins_array.end(), SortNullLast);
         //all unused pins = bigger pin
-        for (size_t i = latch_pins_array.size() - 1; i >= 0; --i) {
+        for (size_t i = latch_pins_array.size() - 1; i >= 0; --i) {         // бесконечный цикл, доработать
             if (latch_pins_array[i].pin_number > 0){
                 for (size_t j = latch_pins_array.size() - 1; j > i; --j) {
                     latch_pins_array[j].pin_number = latch_pins_array[i].pin_number;

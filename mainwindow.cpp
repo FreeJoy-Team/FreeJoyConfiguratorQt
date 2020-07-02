@@ -60,63 +60,76 @@ MainWindow::MainWindow(QWidget *parent)
     //    // needs to be deleted by you
     //    m_HeapNoQObj = new NoQObjectDerivedClass();
 
-    // add button config
-    button_config = new ButtonConfig(this);     // not need delete. this - parent led_config
-    ui->layoutV_tabButtonConfig->addWidget(button_config);
+                                            //////////////// ADD WIDGETS ////////////////
     // add pin config
     pin_config = new PinConfig(this);
     ui->layoutV_tabPinConfig->addWidget(pin_config);
-    // add led config
-    led_config = new LedConfig(this);
-    ui->layoutV_tabLedConfig->addWidget(led_config);
-    // add encoders config
-    encoder_config = new EncodersConfig(this);
-    ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
+    // add button config
+    button_config = new ButtonConfig(this);     // not need delete. this - parent
+    ui->layoutV_tabButtonConfig->addWidget(button_config);
+    // add axes config
+    axes_config = new AxesConfig(this);
+    ui->layoutV_tabAxesConfig->addWidget(axes_config);
     // add shift registers config
     shift_reg_config = new ShiftRegistersConfig(this);
     ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config);
+    // add encoders config
+    encoder_config = new EncodersConfig(this);
+    ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
+    // add led config
+    led_config = new LedConfig(this);
+    ui->layoutV_tabLedConfig->addWidget(led_config);      
 
 
+                                            //////////////// READ FROM CONFIG ////////////////
     // read pin config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             pin_config, &PinConfig::ReadFromConfig);
     // read button config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             button_config, &ButtonConfig::ReadFromConfig);
-    // read LED config
+    // read axes config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            led_config, &LedConfig::ReadFromConfig);
+            axes_config, &AxesConfig::ReadFromConfig);
+    // read shift registers config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
+            shift_reg_config, &ShiftRegistersConfig::ReadFromConfig);
     // read encoder config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             encoder_config, &EncodersConfig::ReadFromConfig);
-    // read encoder config
+    // read LED config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            shift_reg_config, &ShiftRegistersConfig::ReadFromConfig);
+            led_config, &LedConfig::ReadFromConfig);
     // read adv.settings config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             ui->widget_2, &AdvancedSettings::ReadFromConfig);
 
 
+                                            //////////////// WRITE TO CONFIG ////////////////
     // write pin config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             pin_config, &PinConfig::WriteToConfig);
     // write button config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             button_config, &ButtonConfig::WriteToConfig);
-    // write LED config
+    // write axes config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            led_config, &LedConfig::WriteToConfig);
+            axes_config, &AxesConfig::WriteToConfig);
+    // write shift registers config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            shift_reg_config, &ShiftRegistersConfig::WriteToConfig);
     // write encoder config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             encoder_config, &EncodersConfig::WriteToConfig);
-    // read encoder config
+    // write LED config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            shift_reg_config, &ShiftRegistersConfig::WriteToConfig);
+            led_config, &LedConfig::WriteToConfig);
     // write adv.settings config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             ui->widget_2, &AdvancedSettings::WriteToConfig);
 
 
+                                            //////////////// SIGNASL-SLOTS ////////////////
     // buttons pin changed
     connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),  // add buttons from axes
                 button_config, SLOT(setUiOnOff(int)));
@@ -171,6 +184,7 @@ MainWindow::MainWindow(QWidget *parent)
 //    thread->start();
 
 
+
     hid_device_worker->moveToThread(thread);    //thread.data()
 
 
@@ -190,6 +204,12 @@ MainWindow::MainWindow(QWidget *parent)
 //                          SLOT(sendConfigPacket(uint8_t *)));
 
     thread->start();
+
+
+//    testThread = new QThread();
+//    moveToThread(testThread);
+//        connect(testThread, SIGNAL(started()), this, SLOT(getGamepadPacket()));
+//        testThread->start();
 }
 
 MainWindow::~MainWindow()   // для ядра сделать выключатель is_finish_
@@ -289,20 +309,25 @@ void MainWindow::on_button_RusLang_clicked()
     ui->retranslateUi(this);
 }
 
+#include <QTimer>
+void MainWindow::testUpdate()
+{
+    //axes_config->AxesValueChanged();
+}
 
 //GetConfigFromDevice
+
+// попробовать вынести в отдельный поток и повесить дилей
 int asd = 0;
-void MainWindow::getGamepadPacket(uint8_t * buff){
-    //ReportConverter report_convert;                                      // НЕ В ЯДРЕ ВОРКЕРА
+void MainWindow::getGamepadPacket(uint8_t * buff){                                    // НЕ В ЯДРЕ ВОРКЕРА
     report_convert.GamepadReport(buff);
-    //memcpy(&(gamepad_report.id), buff, sizeof(joy_report_t));
-    //ui->label_ID->setText(QString::number(config->gamepad_report.id));
-    //ui->label_ID->setText(QString::number(config->config.toggle_press_time_ms));
+
+    //QTimer::singleShot(500, [=]() { testUpdate(); } );
+    //QThread::msleep(100);
     ui->lineEdit->setText(QString::number(asd));
     button_config->ButtonStateChanged();
-    //qDebug() << config->config.toggle_press_time_ms;
-    //qDebug() << init_config.button_delay3_ms;
-    //qDebug() << device_config.config.device_name;
+    axes_config->AxesValueChanged();
+
     asd++;
 }
 

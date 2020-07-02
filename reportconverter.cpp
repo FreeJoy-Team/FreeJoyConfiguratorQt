@@ -12,8 +12,8 @@ void ReportConverter::GamepadReport( uint8_t * gamepad_buf)
     }
 }
 void USB_CUSTOM_HID_SendReport(uint8_t * dummy, uint8_t dummy2){
-    dummy = 0;
-    dummy2 = 0;
+    Q_UNUSED(dummy)
+    Q_UNUSED(dummy2)
 }
 
 //std::vector<uint8_t>

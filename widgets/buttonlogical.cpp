@@ -66,7 +66,7 @@ void ButtonLogical::ReadFromConfig()                // rename to ReadFromConfig
         }
     }
     // toggle timer
-    for (int i = 0; i < SHIFT_COUNT; i++) {
+    for (int i = 0; i < TIMER_COUNT; i++) {
         if (gEnv.pDeviceConfig->config.buttons[button_number_].press_timer == timer_list_[i].device_enum_index )
         {
             ui->comboBox_PressTimerIndex->setCurrentIndex(i);

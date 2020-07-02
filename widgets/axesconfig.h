@@ -2,6 +2,10 @@
 #define AXESCONFIG_H
 
 #include <QWidget>
+#include "axes.h"
+
+#include "global.h"
+#include "deviceconfig.h"
 
 namespace Ui {
 class AxesConfig;
@@ -15,8 +19,22 @@ public:
     explicit AxesConfig(QWidget *parent = nullptr);
     ~AxesConfig();
 
+    void ReadFromConfig();
+    void WriteToConfig();
+
+    void AxesValueChanged();
+
+signals:
+    void axisRawValueChanged(int);
+    void axisOutValueChanged(int);
+
+//private slots:
+//    void axesValueChanged(int value);
+
 private:
     Ui::AxesConfig *ui;
+
+    QList<Axes*> AxesAdrList;
 };
 
 #endif // AXESCONFIG_H

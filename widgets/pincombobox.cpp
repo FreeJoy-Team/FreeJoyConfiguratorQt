@@ -167,7 +167,7 @@ void PinComboBox::IndexChanged(int index)
 }
 
 
-int PinComboBox::GetEnumValue()     //????????
+int PinComboBox::GetEnumValue()     //????????   // old, delete
 {
     for (int i = 0; i < PIN_TYPE_COUNT; ++i) {
         if (ui->comboBox_PinsType->currentText() == pin_types[i].gui_name)
@@ -179,7 +179,7 @@ int PinComboBox::GetEnumValue()     //????????
     //emit valueChanged2(pin_list_index);
 }
 
-//! Returns a string to add to ComboBox
+//! Returns a string to add to ComboBox         // old, delete
 QString PinComboBox::EnumToString(int deviceEnum)               // try catch
 {
     for (int i = 0; i < PIN_TYPE_COUNT; i++){
@@ -190,7 +190,7 @@ QString PinComboBox::EnumToString(int deviceEnum)               // try catch
     return "Not Found";
 }
 
-//! Returns the index to remove from ComboBox
+//! Returns the index to remove from ComboBox   // old, delete
 int PinComboBox::EnumToIndex(int deviceEnum)                    // try catch
 {
     QString string;

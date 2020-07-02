@@ -65,7 +65,7 @@ private:
 
         {SINGLE_LED,         {LED_SINGLE}},
         {ROW_OF_LED,         {LED_ROW}},
-        {COLUMN_OF_LED,         {LED_COLUMN}},
+        {COLUMN_OF_LED,      {LED_COLUMN}},
     };
     enum
     {

@@ -18,6 +18,7 @@ WIN_DESKTOP
 
 SOURCES += \
     appconfig.cpp \
+    converter.cpp \
     deviceconfig.cpp \
     hidapi.c \
     hiddevice.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     stm_main.c \
     test.cpp \
     widgets/advancedsettings.cpp \
+    widgets/axes.cpp \
     widgets/axesconfig.cpp \
     widgets/axescurves.cpp \
     widgets/axestobuttons.cpp \
@@ -47,6 +49,7 @@ HEADERS += \
     appconfig.h \
     common_defines.h \
     common_types.h \
+    converter.h \
     deviceconfig.h \
     global.h \
     hidapi.h \
@@ -57,6 +60,7 @@ HEADERS += \
     stm_main.h \
     test.h \
     widgets/advancedsettings.h \
+    widgets/axes.h \
     widgets/axesconfig.h \
     widgets/axescurves.h \
     widgets/axestobuttons.h \
@@ -75,6 +79,7 @@ HEADERS += \
 FORMS += \
     mainwindow.ui \
     widgets/advancedsettings.ui \
+    widgets/axes.ui \
     widgets/axesconfig.ui \
     widgets/axescurves.ui \
     widgets/axestobuttons.ui \
