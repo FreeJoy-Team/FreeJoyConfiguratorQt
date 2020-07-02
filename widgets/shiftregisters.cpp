@@ -1,5 +1,6 @@
 #include "shiftregisters.h"
 #include "ui_shiftregisters.h"
+#include <math.h>
 
 ShiftRegisters::ShiftRegisters(int shift_reg_number, QWidget *parent) :
     QWidget(parent),

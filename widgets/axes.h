@@ -30,6 +30,8 @@ private slots:
 //    void axisRawValueChanged(int);
 //    void axisOutValueChanged(int);
 
+    void outputValueChanged(bool is_checked);
+
 private:
     Ui::Axes *ui;
     //dev_config_t* pDev_config;
@@ -80,10 +82,10 @@ private:
         ADS1115_11,
     };
 
-    std::vector <deviceEnum_guiName_t> i2c_address_list_ =
+    std::vector <deviceEnum_guiName_t> i2c_address_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {AS5600,          tr("AS 5600")},
-        {ADS1115_00,      tr("ADS 1115_00")},      // check ADS1115 00 01 11 10 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        {ADS1115_00,      tr("ADS 1115_00")},
         {ADS1115_01,      tr("ADS 1115_01")},
         {ADS1115_10,      tr("ADS 1115_10")},
         {ADS1115_11,      tr("ADS 1115_11")},

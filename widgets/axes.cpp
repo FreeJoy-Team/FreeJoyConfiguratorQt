@@ -33,6 +33,8 @@ Axes::Axes(int axis_number, QWidget *parent) :
     ui->comboBox_Button2->setCurrentIndex(AXIS_BUTTON_RESET);
     ui->comboBox_Button3->setCurrentIndex(AXIS_BUTTON_UP);
 
+    connect(ui->checkBox_Output, SIGNAL(toggled(bool)),
+            this, SLOT(outputValueChanged(bool)));
     connect(ui->sliderV_Filter, SIGNAL(valueChanged(int)),
             this, SLOT(filterChanged(int)));
 }
@@ -126,4 +128,17 @@ void Axes::WriteToConfig()                // add source_main
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max = ui->spinBox_CalibMax->value();
     // filter
     gEnv.pDeviceConfig->config.axis_config[axis_number_].filter = ui->sliderV_Filter->value();
+}
+#include <QDebug>
+void Axes::outputValueChanged(bool is_checked)
+{
+    qDebug()<<is_checked <<"state";
+    if (is_checked == true){
+        ui->progressBar_Out->setEnabled(true);
+        ui->progressBar_Raw->setEnabled(true);
+        qDebug()<<is_checked <<"state";
+    } else {
+        ui->progressBar_Out->setEnabled(false);
+        ui->progressBar_Raw->setEnabled(false);
+    }
 }
