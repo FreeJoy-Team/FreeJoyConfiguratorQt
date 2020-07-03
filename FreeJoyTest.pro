@@ -33,6 +33,8 @@ SOURCES += \
     widgets/axesconfig.cpp \
     widgets/axescurves.cpp \
     widgets/axestobuttons.cpp \
+    widgets/axestobuttonsconfig.cpp \
+    widgets/axestobuttonsslider.cpp \
     widgets/buttonconfig.cpp \
     widgets/buttonlogical.cpp \
     widgets/buttonphysical.cpp \
@@ -64,6 +66,8 @@ HEADERS += \
     widgets/axesconfig.h \
     widgets/axescurves.h \
     widgets/axestobuttons.h \
+    widgets/axestobuttonsconfig.h \
+    widgets/axestobuttonsslider.h \
     widgets/buttonconfig.h \
     widgets/buttonlogical.h \
     widgets/buttonphysical.h \
@@ -83,6 +87,8 @@ FORMS += \
     widgets/axesconfig.ui \
     widgets/axescurves.ui \
     widgets/axestobuttons.ui \
+    widgets/axestobuttonsconfig.ui \
+    widgets/axestobuttonsslider.ui \
     widgets/buttonconfig.ui \
     widgets/buttonlogical.ui \
     widgets/buttonphysical.ui \
@@ -108,7 +114,8 @@ RESOURCES += \
     resources.qrc \
     qdarkstyle/style.qrc \
     qss/qss.qrc \
-    darkstyle/darkstyle.qrc
+    darkstyle/darkstyle.qrc \
+    BreezeStyleSheets/breeze.qrc
 
 win32 {
 LIBS += -lhid -lsetupapi

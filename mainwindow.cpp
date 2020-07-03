@@ -70,6 +70,9 @@ MainWindow::MainWindow(QWidget *parent)
     // add axes config
     axes_config = new AxesConfig(this);
     ui->layoutV_tabAxesConfig->addWidget(axes_config);
+    // add axes to buttons config
+    a2b_config = new AxesToButtonsConfig(this);
+    ui->layoutV_tabAxesToButtons->addWidget(a2b_config);
     // add shift registers config
     shift_reg_config = new ShiftRegistersConfig(this);
     ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config);
@@ -529,6 +532,32 @@ void MainWindow::on_pushButton_QssMaterialDark_clicked()
     }
 }
 
+void MainWindow::on_pushButton_QssBreezeDark_clicked()
+{
+    QFile f(":/dark.qss");
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        qApp->setStyleSheet(ts.readAll());
+    }
+}
+
+void MainWindow::on_pushButton_QssBreezeWhite_clicked()
+{
+    QFile f(":/light.qss");
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        qApp->setStyleSheet(ts.readAll());
+    }
+}
+
 
 
 
@@ -646,3 +675,4 @@ void MainWindow::addvalues(int value)
 ////        }
 //    }
 }
+

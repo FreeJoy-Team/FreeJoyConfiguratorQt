@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // set stylesheet
-    //QFile f(":qdarkstyle/style.qss");
-    //QFile f(":/darkstyle/darkstyle.qss");
+//    //QFile f(":qdarkstyle/style.qss");
+//    QFile f(":/BreezeStyleSheets/dark.qss");
 //    if (!f.exists())   {
 //        printf("Unable to set stylesheet, file not found\n");
 //    }

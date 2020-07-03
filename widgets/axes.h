@@ -27,51 +27,59 @@ public:
 
 private slots:
     void filterChanged(int filter_level);
+    void functionIndexChanged(int index);
+    void calibMinMaxValueChanged(int value);
+    void calibrationStarted(int raw_value);
 //    void axisRawValueChanged(int);
 //    void axisOutValueChanged(int);
 
     void outputValueChanged(bool is_checked);
 
+    void on_pushButton_StartCalib_clicked(bool checked);
+
 private:
     Ui::Axes *ui;
+    bool calibration_started_ = false;
+    QString start_calibration = tr("Start calibration");
+    QString stop_calibration = tr("Stop calibration");
     //dev_config_t* pDev_config;
 
-//    public enum AxisSourceType : sbyte
-//    {
-//        Encoder = -3,
-//        I2C = -2,
-//        None = -1,
-//        A0 = 0,
-//        A1,
-//        A2,
-//        A3,
-//        A4,
-//        A5,
-//        A6,
-//        A7,
-//        A8,
-//        A9,
-//        A10,
-//        A15,
-//        B0,
-//        B1,
-//        B3,
-//        B4,
-//        B5,
-//        B6,
-//        B7,
-//        B8,
-//        B9,
-//        B10,
-//        B11,
-//        B12,
-//        B13,
-//        B14,
-//        B15,
-//        C13,
-//        C14,
-//        C15,
-//    };
+    enum
+    {
+        Encoder = -3,
+        I2C = -2,
+        None = -1,
+        A0 = 0,
+        A1,
+        A2,
+        A3,
+        A4,
+        A5,
+        A6,
+        A7,
+        A8,
+        A9,
+        A10,
+        A15,
+        B0,
+        B1,
+        B3,
+        B4,
+        B5,
+        B6,
+        B7,
+        B8,
+        B9,
+        B10,
+        B11,
+        B12,
+        B13,
+        B14,
+        B15,
+        C13,
+        C14,
+        C15,
+    };
 
     enum
     {
@@ -89,6 +97,12 @@ private:
         {ADS1115_01,      tr("ADS 1115_01")},
         {ADS1115_10,      tr("ADS 1115_10")},
         {ADS1115_11,      tr("ADS 1115_11")},
+    }};
+
+    std::vector <deviceEnum_guiName_t> axis_source_main_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    {{
+        {None,          tr("None")},
+        {Encoder,       tr("Encoder")},
     }};
 
     std::vector <deviceEnum_guiName_t> function_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!

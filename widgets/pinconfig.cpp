@@ -98,10 +98,10 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
         }
     }
 }
-
+                                            // GOVNOKOD?
 // 678 - так се реализация
-void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex     // add else
-{
+void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex     // мб сделать сразу запись в конфиг из пинов
+{                                                                                                               // или отдельный класс для их состояний
     //fast encoder selected
     if (current_device_enum == FAST_ENCODER){
         emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz
@@ -120,11 +120,16 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
     } else if (previous_device_enum == SHIFT_REG_DATA){
         emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     }
-
+    // I2C selected
+    else if (current_device_enum == I2C_SCL || current_device_enum == I2C_SDA){
+        //emit i2cSelected(true);
+    } else if (previous_device_enum == I2C_SCL || previous_device_enum == I2C_SDA){
+        //emit i2cSelected(false);
+    }
 
     // set current config and generate signals for another configs
     //qDebug()<< current_device_enum;
-    if (current_device_enum == 678){            // 678 в DeviceConfig       // временно // else
+    else if (current_device_enum == 678){            // 678 в DeviceConfig       // временно // else
         ui->label_ButtonFromAxes->setNum(previous_device_enum);
     } else {
 

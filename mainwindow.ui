@@ -137,7 +137,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -208,6 +208,23 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <attribute name="title">
         <string> Axes to Buttons </string>
        </attribute>
+       <layout class="QVBoxLayout" name="layoutV_tabAxesToButtons">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_ShiftRegisters">
        <attribute name="title">
@@ -675,10 +692,59 @@ background-color: rgb(13, 204, 0);</string>
          <set>Qt::AlignCenter</set>
         </property>
         <layout class="QGridLayout" name="gridLayout_10">
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_QssQDarkStyle">
+           <property name="text">
+            <string>qDarkStyle</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="pushButton_QssConsoleStyle">
+           <property name="text">
+            <string>ConsoleStyle</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QPushButton" name="pushButton_QssMaterialDark">
+           <property name="text">
+            <string>MaterialDark</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0">
           <widget class="QPushButton" name="pushButton_QssDefault">
            <property name="text">
             <string>Default</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QPushButton" name="pushButton_QssUbuntu">
+           <property name="text">
+            <string>Ubuntu</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QPushButton" name="pushButton_QssManjaroMix">
+           <property name="text">
+            <string>ManjaroMix</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="pushButton_QssAMOLED">
+           <property name="text">
+            <string>AMOLED</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QPushButton" name="pushButton_QssElegantDark">
+           <property name="text">
+            <string>ElegantDark</string>
            </property>
           </widget>
          </item>
@@ -696,52 +762,17 @@ background-color: rgb(13, 204, 0);</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_QssUbuntu">
+         <item row="5" column="0">
+          <widget class="QPushButton" name="pushButton_QssBreezeWhite">
            <property name="text">
-            <string>Ubuntu</string>
+            <string>Breeze white</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QPushButton" name="pushButton_QssElegantDark">
+         <item row="5" column="1">
+          <widget class="QPushButton" name="pushButton_QssBreezeDark">
            <property name="text">
-            <string>ElegantDark</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_QssQDarkStyle">
-           <property name="text">
-            <string>qDarkStyle</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_QssAMOLED">
-           <property name="text">
-            <string>AMOLED</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_QssConsoleStyle">
-           <property name="text">
-            <string>ConsoleStyle</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_QssManjaroMix">
-           <property name="text">
-            <string>ManjaroMix</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QPushButton" name="pushButton_QssMaterialDark">
-           <property name="text">
-            <string>MaterialDark</string>
+            <string>Breeze dark</string>
            </property>
           </widget>
          </item>
