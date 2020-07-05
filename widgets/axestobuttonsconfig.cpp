@@ -19,3 +19,17 @@ AxesToButtonsConfig::~AxesToButtonsConfig()
 {
     delete ui;
 }
+
+void AxesToButtonsConfig::ReadFromConfig()
+{
+    for (int i = 0; i < A2bAdrList.size(); ++i) {
+        A2bAdrList[i]->ReadFromConfig();
+    }
+}
+
+void AxesToButtonsConfig::WriteToConfig()
+{
+    for (int i = 0; i < A2bAdrList.size(); ++i) {
+        A2bAdrList[i]->WriteToConfig();
+    }
+}

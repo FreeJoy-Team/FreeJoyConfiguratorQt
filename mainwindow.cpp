@@ -94,6 +94,9 @@ MainWindow::MainWindow(QWidget *parent)
     // read axes config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             axes_config, &AxesConfig::ReadFromConfig);
+    // read axes to buttons config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
+            a2b_config, &AxesToButtonsConfig::ReadFromConfig);
     // read shift registers config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             shift_reg_config, &ShiftRegistersConfig::ReadFromConfig);
@@ -118,6 +121,9 @@ MainWindow::MainWindow(QWidget *parent)
     // write axes config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             axes_config, &AxesConfig::WriteToConfig);
+    // write axes to buttons config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            a2b_config, &AxesToButtonsConfig::WriteToConfig);
     // write shift registers config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             shift_reg_config, &ShiftRegistersConfig::WriteToConfig);
@@ -328,8 +334,14 @@ void MainWindow::getGamepadPacket(uint8_t * buff){                              
     //QTimer::singleShot(500, [=]() { testUpdate(); } );
     //QThread::msleep(100);
     ui->lineEdit->setText(QString::number(asd));
-    button_config->ButtonStateChanged();
-    axes_config->AxesValueChanged();
+    // optimization
+    if(ui->tab_ButtonConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
+        button_config->ButtonStateChanged();
+    }
+    // optimization
+    if(ui->tab_AxesConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
+        axes_config->AxesValueChanged();
+    }
 
     asd++;
 }
@@ -628,40 +640,16 @@ void MainWindow::on_pushButton_3_clicked()
     if (column < 5) row--;
 }
 
-#define BUTTON_COUNT_TEST 40
-QList<ButtonConfig*> LogicButtonAdrList2;
+
 void MainWindow::on_pushButton_15_clicked()
 {
-//    clock_t start = clock();
-//    for (int i = 0; i< BUTTON_COUNT_TEST; i++) {
-//        ButtonConfig* qwe = new ButtonConfig;
-//        ui->verticalLayout_3->addWidget(qwe, i);
-//        LogicButtonAdrList2.append(qwe);
-//    }
-//    clock_t stop = clock();
-//    qDebug()<< "layout create ms= " << stop - start;
-//    QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
-
-
-////    std::thread thread2([&](){
-////        for (int i = 0; i< allPButtons.size(); i++) {
-////            allPButtons[i]->PinComboBox::GenText();
-////        }
-////        }
-////        );
-////    thread2.detach();
-
-////    for (int i = 0; i< allPButtons.size(); i++) {
-////        allPButtons[i]->PinComboBox::GenText();
-////    }
-
-//    stop = clock();
-//    qDebug()<< "суммарно все вычисления = " << stop - start;
+    //qDebug()<<"tab button selected test = "<<ui->tab_AxesConfig->isVisible();
 }
 
 // dynamic widgets spawn
 void MainWindow::addvalues(int value)
 {
+    Q_UNUSED(value)
 //    if (value > 90 && LogicButtonAdrList2.size()< 512)
 //    {
 //        for (int i = 0; i< 5; i++) {

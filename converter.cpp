@@ -13,6 +13,6 @@ int Converter::EnumToIndex(const int device_emun, const std::vector<deviceEnum_g
             return i;
         }
     }
-    throw "EnumToIndex not found device_emun in list, return -1";
+    //throw "EnumToIndex not found device_emun in list, return -1";
     return -1;
 }

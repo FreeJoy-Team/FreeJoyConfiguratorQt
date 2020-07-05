@@ -21,39 +21,56 @@ public:
     explicit AxesToButtonsSlider(QWidget *parent = nullptr);
     ~AxesToButtonsSlider();
 
+    void SetPointsCount(uint count);
+    uint GetPointsCount();
+
+    void SetPointValue(uint value, uint point_number);
+    uint GetPointValue(uint point_number);
+
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
-    //void mousePressEvent(QMouseEvent *event) override;
-    //void mouseReleaseEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 
 private:
     Ui::AxesToButtonsSlider *ui;
     void DrawPoint(QPoint point_pos, uint range_points);
     void MovePointer(uint pos_x, uint point_number);
+    uint CalcPointValue(int current_pos);
+    void PointsPositionReset();
+    void SetLableValue(int point_pos ,uint point_number);
 
+    const int half_pointer_width = 4;
     QPoint pointer[5]={
-        QPoint(5,2),
-        QPoint(5,9),
-        QPoint(8,15),
-        QPoint(11,9),
-        QPoint(11,2),
+        QPoint(-half_pointer_width,2),
+        QPoint(-half_pointer_width,12),
+        QPoint(0,20),
+        QPoint(half_pointer_width,12),
+        QPoint(half_pointer_width,2),
     };
 
     QColor pointer_color_ = QColor(1,119,215);
-    //const uint16_t MaxScaleValue=255;
-    const uint offset_ = 10;
-    uint buttons_count_;
+    const uint max_point_value_ = 255;
+    const int offset_ = 10;
+    const int label_width_ = 20;
+
+    uint points_count_;
 
     QList<QLabel*> LabelAdrList;
 
-    struct A2B_parameters {
-        QPolygon pointer_polygon;
-        QColor pointer_color;
+
+    struct A2B_point
+    {
+        QPolygon polygon;
+        QColor color;
         QLabel* text_label;
-        uint pointer_posX;
-        bool is_pointer_drag;
-    } range_point[MAX_A2B_BUTTONS];
+        uint posX;
+        bool is_drag;
+    };
+     QList<A2B_point*> PointAdrList;
+
+     void resizeEvent(QResizeEvent*) override;
 };
 
 #endif // AXESTOBUTTONSSLIDER_H

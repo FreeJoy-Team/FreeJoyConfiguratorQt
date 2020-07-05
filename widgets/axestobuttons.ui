@@ -22,12 +22,18 @@
     </widget>
    </item>
    <item>
-    <widget class="AxesToButtonsSlider" name="widget" native="true"/>
+    <widget class="AxesToButtonsSlider" name="widget_A2bSlider" native="true"/>
    </item>
    <item>
     <widget class="QSpinBox" name="spinBox_A2bCount">
+     <property name="minimum">
+      <number>2</number>
+     </property>
      <property name="maximum">
       <number>99</number>
+     </property>
+     <property name="value">
+      <number>2</number>
      </property>
     </widget>
    </item>
