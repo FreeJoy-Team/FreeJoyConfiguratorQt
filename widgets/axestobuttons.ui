@@ -22,10 +22,17 @@
     </widget>
    </item>
    <item>
-    <widget class="AxesToButtonsSlider" name="widget_A2bSlider" native="true"/>
+    <widget class="AxesToButtonsSlider" name="widget_A2bSlider" native="true">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QSpinBox" name="spinBox_A2bCount">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="minimum">
       <number>2</number>
      </property>

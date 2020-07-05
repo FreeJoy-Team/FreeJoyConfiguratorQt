@@ -24,6 +24,7 @@ public:
 
 private slots:
     void a2bCountChanged(int count);
+    void a2bCheckBoxValueChanged(bool value);
 
 private:
     Ui::AxesToButtons *ui;

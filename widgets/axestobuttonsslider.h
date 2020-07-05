@@ -32,6 +32,8 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent*) override;
+    bool event(QEvent *event) override;
 
 private:
     Ui::AxesToButtonsSlider *ui;
@@ -70,7 +72,6 @@ private:
     };
      QList<A2B_point*> PointAdrList;
 
-     void resizeEvent(QResizeEvent*) override;
 };
 
 #endif // AXESTOBUTTONSSLIDER_H

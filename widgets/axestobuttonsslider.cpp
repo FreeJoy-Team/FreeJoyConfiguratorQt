@@ -11,6 +11,7 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
     ui(new Ui::AxesToButtonsSlider)
 {
     ui->setupUi(this);
+
     setMouseTracking(true);
     this->setMinimumHeight(40);
 
@@ -69,7 +70,7 @@ void AxesToButtonsSlider::DrawPoint(QPoint point_pos, uint point_number) {
             if (point_number > 0 && point_number < points_count_ - 1)
             {
                 if (uint(point_pos.x()) < PointAdrList[point_number - 1]->posX +6 ||        // 6 - мин расстояние до соседних точек
-                    uint(point_pos.x()) > PointAdrList[point_number + 1]->posX -6)
+                    uint(point_pos.x()) > PointAdrList[point_number + 1]->posX -6)          // убрать хардкод
                 {
                     return;
                 }
@@ -165,8 +166,13 @@ void AxesToButtonsSlider::PointsPositionReset()
 {
     int tmp_distance = round((float(this->width()) - offset_*2) / (points_count_ -1));
     // apply color, position
-    for (uint i = 0; i < points_count_; ++i) {
-        PointAdrList[i]->color = pointer_color_;
+    for (int i = 0; i < PointAdrList.size(); ++i) {
+        if (this->isEnabled() == true){
+            PointAdrList[i]->color = pointer_color_;
+        } else {
+            PointAdrList[i]->color = Qt::lightGray;
+        }
+        //PointAdrList[i]->color = pointer_color_;
         PointAdrList[i]->is_drag = false;
         PointAdrList[i]->posX = i * tmp_distance + offset_;
     }
@@ -243,4 +249,22 @@ void AxesToButtonsSlider::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event)
     PointsPositionReset();
+}
+
+bool AxesToButtonsSlider::event(QEvent *event)
+{
+    if (event->type() == QEvent::EnabledChange) {
+        if (this->isEnabled() == true){
+            for (int i = 0; i < PointAdrList.size(); ++i) {
+                PointAdrList[i]->color = pointer_color_;
+            }
+        } else {
+            for (int i = 0; i < PointAdrList.size(); ++i) {
+                PointAdrList[i]->color = Qt::lightGray;
+            }
+        }
+        update();
+        return true;
+    }
+    return QWidget::event(event);
 }

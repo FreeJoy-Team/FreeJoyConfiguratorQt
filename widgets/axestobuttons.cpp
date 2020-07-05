@@ -14,6 +14,9 @@ AxesToButtons::AxesToButtons(int a2b_number, QWidget *parent) :
 
     connect(ui->spinBox_A2bCount, SIGNAL(valueChanged(int)),
             this, SLOT(a2bCountChanged(int)));
+    // a2b checked
+    connect(ui->checkBox_A2bIndex, SIGNAL(toggled(bool)),
+            this, SLOT(a2bCheckBoxValueChanged(bool)));
 }
 
 AxesToButtons::~AxesToButtons()
@@ -25,6 +28,17 @@ AxesToButtons::~AxesToButtons()
 void AxesToButtons::a2bCountChanged(int count)
 {
         ui->widget_A2bSlider->SetPointsCount(count + 1);
+}
+
+void AxesToButtons::a2bCheckBoxValueChanged(bool value)
+{
+    if (value == true){
+        ui->widget_A2bSlider->setEnabled(true);
+        ui->spinBox_A2bCount->setEnabled(true);
+    } else {
+        ui->widget_A2bSlider->setEnabled(false);
+        ui->spinBox_A2bCount->setEnabled(false);
+    }
 }
 
 void AxesToButtons::ReadFromConfig()
