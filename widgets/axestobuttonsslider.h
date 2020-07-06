@@ -55,6 +55,7 @@ private:
     QColor pointer_color_ = QColor(1,119,215);
     const uint max_point_value_ = 255;
     const int offset_ = 10;
+    const int range_between_ = 13;  // минимальное расстояние между ближайшими указателями
     const int label_width_ = 20;
 
     uint points_count_;

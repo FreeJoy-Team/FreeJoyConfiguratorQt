@@ -13,8 +13,10 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
     ui->setupUi(this);
 
     setMouseTracking(true);
-    this->setMinimumHeight(40);
 
+    this->setMinimumHeight(40);
+    // hz mb 2 min?
+    // call SetPointsCount
     points_count_ = 0;
 
 }
@@ -70,17 +72,17 @@ void AxesToButtonsSlider::DrawPoint(QPoint point_pos, uint point_number) {
         if (points_count_ > 1){
             if (point_number > 0 && point_number < points_count_ - 1)
             {
-                if (uint(point_pos.x()) < PointAdrList[point_number - 1]->posX +6 ||        // 6 - мин расстояние до соседних точек
-                    uint(point_pos.x()) > PointAdrList[point_number + 1]->posX -6)          // убрать хардкод
+                if (uint(point_pos.x()) < PointAdrList[point_number - 1]->posX +range_between_ ||        // баг при загрузке конфига?
+                    uint(point_pos.x()) > PointAdrList[point_number + 1]->posX -range_between_)          // если точки впритык и происходит округление
                 {
                     return;
                 }
             } else if (point_number == 0){
-                if (uint(point_pos.x()) > PointAdrList[point_number + 1]->posX -6){
+                if (uint(point_pos.x()) > PointAdrList[point_number + 1]->posX -range_between_){
                     return;
                 }
             } else {
-                if (uint(point_pos.x()) < PointAdrList[point_number - 1]->posX +6){
+                if (uint(point_pos.x()) < PointAdrList[point_number - 1]->posX +range_between_){
                     return;
                 }
             }
@@ -126,7 +128,6 @@ void AxesToButtonsSlider::SetPointsCount(uint count)        // count = 0 -crash
         }
     }
     points_count_ = count;
-
     PointsPositionReset();
 }
 
@@ -150,6 +151,7 @@ void AxesToButtonsSlider::SetPointValue(uint value, uint point_number)
         pos = offset_;
     }
     MovePointer(pos, point_number);
+    SetLableValue(pos, point_number);
     update();
 }
 
