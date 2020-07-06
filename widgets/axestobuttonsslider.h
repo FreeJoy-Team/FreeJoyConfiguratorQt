@@ -68,6 +68,7 @@ private:
         QColor color;
         QLabel* text_label;
         uint posX;
+        uint current_value;
         bool is_drag;
     };
      QList<A2B_point*> PointAdrList;

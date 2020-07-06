@@ -38,7 +38,6 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)
 
     width = this->width();
     tmp = (width - offset_) / 24;
-    qDebug()<<"width"<<this->width();
 //    QPen pen;
 //    pen.setWidth(1);
 //    pen.setColor(Qt::lightGray);
@@ -87,6 +86,7 @@ void AxesToButtonsSlider::DrawPoint(QPoint point_pos, uint point_number) {
         MovePointer(point_pos.x(), point_number);
         PointAdrList[point_number]->posX = point_pos.x();
         SetLableValue(point_pos.x(), point_number);
+        PointAdrList[point_number]->current_value = CalcPointValue(PointAdrList[point_number]->posX);
         return;
     }
 }
@@ -124,6 +124,7 @@ void AxesToButtonsSlider::SetPointsCount(uint count)        // count = 0 -crash
         }
     }
     points_count_ = count;
+
     PointsPositionReset();
 }
 
@@ -152,7 +153,7 @@ void AxesToButtonsSlider::SetPointValue(uint value, uint point_number)
 
 uint AxesToButtonsSlider::GetPointValue(uint point_number)
 {
-    return CalcPointValue(PointAdrList[point_number]->posX);
+    return PointAdrList[point_number]->current_value;
 }
 
 
@@ -180,16 +181,16 @@ void AxesToButtonsSlider::PointsPositionReset()
     PointAdrList[points_count_ - 1]->posX = this->width() - offset_;
     // move points
     for (uint i = 0; i < points_count_; ++i) {
-
         MovePointer(PointAdrList[i]->posX, i);
         SetLableValue(PointAdrList[i]->posX, i);
+        PointAdrList[i]->current_value = CalcPointValue(PointAdrList[i]->posX);
     }
     update();
 }
 
 void AxesToButtonsSlider::MovePointer(uint pos_x, uint point_number)
 {
-    LabelAdrList[point_number]->move(pos_x - label_width_/2, pointer[2].y());
+    LabelAdrList[point_number]->move(pos_x - label_width_/2, pointer[2].y());       // label move
 
     PointAdrList[point_number]->posX = pos_x;
     PointAdrList[point_number]->polygon.setPoint(0, pos_x - half_pointer_width, pointer[0].y());
@@ -248,7 +249,11 @@ void AxesToButtonsSlider::mouseReleaseEvent(QMouseEvent *event) {
 void AxesToButtonsSlider::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event)
-    PointsPositionReset();
+    float tmp_value = (event->size().width() - offset_*2) / float(max_point_value_);
+    for (int i = 0; i < PointAdrList.size(); ++i) {
+        PointAdrList[i]->posX = (PointAdrList[i]->current_value * tmp_value) + offset_;
+        MovePointer(PointAdrList[i]->posX, i);
+    }
 }
 
 bool AxesToButtonsSlider::event(QEvent *event)
