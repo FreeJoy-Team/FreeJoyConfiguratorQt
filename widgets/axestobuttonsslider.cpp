@@ -34,10 +34,12 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
     QPainter painter;
-    int width,tmp;
+    int width;
+    float tmp;
 
     width = this->width();
-    tmp = (width - offset_) / 24;
+    tmp = (width - offset_*2) / 24.0;
+
 //    QPen pen;
 //    pen.setWidth(1);
 //    pen.setColor(Qt::lightGray);
