@@ -21,6 +21,7 @@
 #include "widgets/advancedsettings.h"
 #include "widgets/axesconfig.h"
 #include "widgets/axescurves.h"
+#include "widgets/axescurvesconfig.h"
 #include "widgets/axestobuttons.h"
 #include "widgets/axestobuttonsconfig.h"
 #include "widgets/led.h"
@@ -62,6 +63,7 @@ public:
     EncodersConfig* encoder_config;
     ShiftRegistersConfig* shift_reg_config;
     AxesConfig* axes_config;
+    AxesCurvesConfig* axes_curves_config;
     AxesToButtonsConfig* a2b_config;
 
     signals:

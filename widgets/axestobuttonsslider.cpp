@@ -5,7 +5,7 @@
 #include <QPolygon>
 #include <cmath>
 
-#include <QDebug>
+//#include <QDebug>
 AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AxesToButtonsSlider)
@@ -52,7 +52,9 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)
     for (uint i = 0; i < 25; ++i){
         painter.drawLine((i * tmp) + offset_, 15, (i * tmp) + offset_, 18);
     }
-
+    // Antialiasing     // спорно, мазня
+    //painter.setRenderHint(QPainter::Antialiasing, true);
+    // paint pointers
     for (uint i = 0; i < points_count_; ++i)
     {
         painter.setBrush(PointAdrList[i]->color);
@@ -209,18 +211,21 @@ void AxesToButtonsSlider::mouseMoveEvent(QMouseEvent *event)
 {
     for (uint i = 0; i < points_count_; ++i)
     {
-        if (PointAdrList[i]->polygon.containsPoint(event->pos(), Qt::WindingFill)) {
-                PointAdrList[i]->color = Qt::black;
-        } else {
-            PointAdrList[i]->color = pointer_color_;
+        if (PointAdrList[i]->is_drag == false){
+            if (PointAdrList[i]->polygon.containsPoint(event->pos(), Qt::WindingFill)) {
+                    PointAdrList[i]->color = Qt::black;
+            } else {
+                PointAdrList[i]->color = pointer_color_;
+            }
         }
-
-        if (event->buttons() & Qt::LeftButton){
-            DrawPoint(event->pos(), i);
-        }
-
-        if (PointAdrList[i]->is_drag) {
-            PointAdrList[i]->color = Qt::lightGray;
+        else if (PointAdrList[i]->is_drag == true){        // много лишнего. потом чекнуть
+            if (event->buttons() & Qt::LeftButton){
+                DrawPoint(event->pos(), i);
+            }
+            if (PointAdrList[i]->is_drag) {
+                PointAdrList[i]->color = Qt::lightGray;
+            }
+            break;      // not tested
         }
     }
     update();
@@ -243,7 +248,7 @@ void AxesToButtonsSlider::mouseReleaseEvent(QMouseEvent *event) {
         if(PointAdrList[i]->is_drag == true)
         {
             PointAdrList[i]->is_drag = false;
-            PointAdrList[i]->color = pointer_color_;
+            PointAdrList[i]->color = pointer_color_;        // ????
             break;
         }
     }

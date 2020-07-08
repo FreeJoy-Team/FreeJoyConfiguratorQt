@@ -70,6 +70,9 @@ MainWindow::MainWindow(QWidget *parent)
     // add axes config
     axes_config = new AxesConfig(this);
     ui->layoutV_tabAxesConfig->addWidget(axes_config);
+    // add axes curves config
+    axes_curves_config = new AxesCurvesConfig(this);
+    ui->layoutV_tabAxesCurvesConfig->addWidget(axes_curves_config);
     // add axes to buttons config
     a2b_config = new AxesToButtonsConfig(this);
     ui->layoutV_tabAxesToButtons->addWidget(a2b_config);

@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::AxesCurves *ui;
+
 };
 
 #endif // AXESCURVES_H

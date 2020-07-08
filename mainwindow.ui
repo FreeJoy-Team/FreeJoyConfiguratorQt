@@ -137,7 +137,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -203,6 +203,23 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <attribute name="title">
         <string> Axes Curves </string>
        </attribute>
+       <layout class="QVBoxLayout" name="layoutV_tabAxesCurvesConfig">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_AxesToButtons">
        <attribute name="title">
