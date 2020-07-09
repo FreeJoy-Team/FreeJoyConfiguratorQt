@@ -11,7 +11,7 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
     // shift registers spawn
     for (int i = 0; i < MAX_AXIS_NUM; i++)
     {
-        AxesCurves * axis_curves = new AxesCurves(this);
+        AxesCurves * axis_curves = new AxesCurves(i, this);
         ui->layoutV_AxesCurves->addWidget(axis_curves);
         AxesCurvAdrList.append(axis_curves);
         //shift_register->hide();
@@ -21,4 +21,18 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
 AxesCurvesConfig::~AxesCurvesConfig()
 {
     delete ui;
+}
+
+void AxesCurvesConfig::ReadFromConfig()
+{
+    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
+        AxesCurvAdrList[i]->ReadFromConfig();
+    }
+}
+
+void AxesCurvesConfig::WriteToConfig()
+{
+    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
+        AxesCurvAdrList[i]->WriteToConfig();
+    }
 }

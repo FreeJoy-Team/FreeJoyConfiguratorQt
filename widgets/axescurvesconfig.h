@@ -19,6 +19,9 @@ public:
     explicit AxesCurvesConfig(QWidget *parent = nullptr);
     ~AxesCurvesConfig();
 
+    void ReadFromConfig();
+    void WriteToConfig();
+
 private:
     Ui::AxesCurvesConfig *ui;
     QList<AxesCurves*> AxesCurvAdrList;

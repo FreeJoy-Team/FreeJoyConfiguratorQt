@@ -32,7 +32,7 @@ AxesToButtonsSlider::~AxesToButtonsSlider()
     delete ui;
 }
 
-void AxesToButtonsSlider::paintEvent(QPaintEvent *event)
+void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптимизхировать
 {
     Q_UNUSED(event)
     QPainter painter;
@@ -47,9 +47,9 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)
 //    pen.setColor(Qt::lightGray);
     painter.begin(this);
     painter.setPen(Qt::lightGray);
-    painter.drawRect(QRect(offset_, 7, width - offset_*2, 5));
+    painter.drawRect(QRect(offset_, 7, width - offset_*2, 5));        // в ресайз
 
-    for (uint i = 0; i < 25; ++i){
+    for (uint i = 0; i < 25; ++i){      // в ресайз
         painter.drawLine((i * tmp) + offset_, 15, (i * tmp) + offset_, 18);
     }
     // Antialiasing     // спорно, мазня

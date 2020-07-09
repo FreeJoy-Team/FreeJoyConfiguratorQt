@@ -97,6 +97,9 @@ MainWindow::MainWindow(QWidget *parent)
     // read axes config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             axes_config, &AxesConfig::ReadFromConfig);
+    // read axes curves config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
+            axes_curves_config, &AxesCurvesConfig::ReadFromConfig);
     // read axes to buttons config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             a2b_config, &AxesToButtonsConfig::ReadFromConfig);
@@ -124,6 +127,9 @@ MainWindow::MainWindow(QWidget *parent)
     // write axes config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             axes_config, &AxesConfig::WriteToConfig);
+    // write axes curves config
+    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
+            axes_curves_config, &AxesCurvesConfig::WriteToConfig);
     // write axes to buttons config
     connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
             a2b_config, &AxesToButtonsConfig::WriteToConfig);

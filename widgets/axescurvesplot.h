@@ -15,6 +15,11 @@ public:
     explicit AxesCurvesPlot(QWidget *parent = nullptr);
     ~AxesCurvesPlot();
 
+    int GetPointValue(int point_number);
+    int GetPointCount();
+
+    void SetPointValue(int value, int point_number);
+
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
@@ -25,23 +30,31 @@ protected:
 
 private:
     Ui::AxesCurvesPlot *ui;
-    void CalcPointValue(int current_pos);
+    int CalcPointValue(int current_pos);
+    int CalcPointPos(int value);
     void MovePoint(int pos_y, int point_number);
 
     int offset_ = 15;
     int columns_count_ = 10;
     int rows_count_ = 10;
-    int max_point_value = 100;
-    int min_point_value = -100;
+    int radius_ = 16;
+
+    int column_width_;
+    int row_height_;
+    int width_, height_;
+    int half_radius_;
+
+    int const max_point_value = 100;
+    int const min_point_value = -100;
 
     int points_count_;
 
     QColor const point_inactive_color_ = QColor(1,119,215);
     QColor const point_active_color_ = Qt::black;
     QColor const point_move_color_ = Qt::lightGray;
-    QColor curve_color_ = QColor(1,119,215);
-    QColor net_odd_color_ = Qt::black;
-    int radius_ = 16;
+    QColor const curve_color_ = QColor(1,119,215);
+
+    bool point_active_;
 
     struct AxesCurve_point
     {
