@@ -30,3 +30,28 @@ void AxesCurves::WriteToConfig()
     }
 }
 
+
+void AxesCurves::on_pushButton_Linear_clicked()
+{
+    ui->widget_AxesCurvesPlot->SetLinear();
+}
+
+void AxesCurves::on_pushButton_LinearInvert_clicked()
+{
+    ui->widget_AxesCurvesPlot->SetLinearInvert();
+}
+
+void AxesCurves::on_pushButton_Exponent_clicked()
+{
+    ui->widget_AxesCurvesPlot->SetExponent();
+}
+
+void AxesCurves::on_pushButton_ExponentInvert_clicked()
+{
+    ui->widget_AxesCurvesPlot->SetExponentInvert();
+}
+
+void AxesCurves::on_pushButton_Shape_clicked()
+{
+    ui->widget_AxesCurvesPlot->SetShape();
+}

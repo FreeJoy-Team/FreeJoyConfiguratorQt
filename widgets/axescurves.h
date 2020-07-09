@@ -20,6 +20,17 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+private slots:
+    void on_pushButton_Linear_clicked();
+
+    void on_pushButton_LinearInvert_clicked();
+
+    void on_pushButton_Exponent_clicked();
+
+    void on_pushButton_ExponentInvert_clicked();
+
+    void on_pushButton_Shape_clicked();
+
 private:
     Ui::AxesCurves *ui;
     int axes_number_;

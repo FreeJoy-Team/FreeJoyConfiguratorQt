@@ -16,5 +16,10 @@
         <file>QSS-master/ManjaroMix.qss</file>
         <file>QSS-master/MaterialDark.qss</file>
         <file>QSS-master/Ubuntu.qss</file>
+        <file>Images/Exponent.png</file>
+        <file>Images/ExponentInvert.png</file>
+        <file>Images/linear.png</file>
+        <file>Images/linearInvert.png</file>
+        <file>Images/Shape.png</file>
     </qresource>
 </RCC>

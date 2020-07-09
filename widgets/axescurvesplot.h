@@ -20,6 +20,12 @@ public:
 
     void SetPointValue(int value, int point_number);
 
+    void SetLinear();
+    void SetLinearInvert();
+    void SetExponent();
+    void SetExponentInvert();
+    void SetShape();
+
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
@@ -39,8 +45,8 @@ private:
     int rows_count_ = 10;
     int radius_ = 16;
 
-    int column_width_;
-    int row_height_;
+    float column_width_;
+    float row_height_;
     int width_, height_;
     int half_radius_;
 
