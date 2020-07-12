@@ -48,8 +48,6 @@ PinConfig::PinConfig(QWidget *parent) :
             connect(PinComboBoxPtrList[i], SIGNAL(currentIndexChanged(int, int, int)),
                         this, SLOT(pinIndexChanged(int, int, int)));
     }
-    connect(gEnv.pSignalHandler, SIGNAL(a2bCountChanged(int, int)),     // временно
-                this, SLOT(pinIndexChanged(int, int)));
 //    connect(dynamic_cast<SignalHandler*>(qApp), &SignalHandler::a2bCountChanged,
 //            this, &PinConfig::SetCurrentConfig);
 }
@@ -99,7 +97,7 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
     }
 }
                                             // GOVNOKOD?
-// 678 - так се реализация
+
 void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex     // мб сделать сразу запись в конфиг из пинов
 {                                                                                                               // или отдельный класс для их состояний
     //fast encoder selected
@@ -129,9 +127,7 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
 
     // set current config and generate signals for another configs
     //qDebug()<< current_device_enum;
-    else if (current_device_enum == 678){            // 678 в DeviceConfig       // временно // else
-        ui->label_ButtonFromAxes->setNum(previous_device_enum);
-    } else {
+    else {
 
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
@@ -153,24 +149,27 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
                     }
 //                    else if (i == BUTTON_FROM_AXES){
 //                        buttons_from_axes_+=tmp;
+                    //single_buttons_ -= buttons_from_axes_;
+                    //single_buttons_ += tmp;
+                    //buttons_from_axes_ = tmp;
 //                    }
                     else if (i == SINGLE_BUTTON){
                         single_buttons_+=tmp;
                         ui->label_SingleButtons->setNum(single_buttons_);
-                        ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
                     }
                     else if (i == ROW_OF_BUTTONS){
                         rows_of_buttons_+=tmp;
                         ui->label_RowsOfButtons->setNum(rows_of_buttons_);
-                        ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
                     }
                     else if (i == COLUMN_OF_BUTTONS){
                         columns_of_buttons_+=tmp;
                         ui->label_ColumnsOfButtons->setNum(columns_of_buttons_);
-                        ui->label_TotalButtons->setNum(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
                     }
                     else if (i == SINGLE_LED){
                         single_LED_+=tmp;
@@ -191,6 +190,14 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
             }
         }
     }
+}
+
+void PinConfig::a2bCountChanged(int count)
+{
+    buttons_from_axes_ = count;
+    ui->label_ButtonFromAxes->setNum(buttons_from_axes_);
+    ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+    emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
 }
 
 

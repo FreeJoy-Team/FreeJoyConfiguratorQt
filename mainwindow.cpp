@@ -91,9 +91,6 @@ MainWindow::MainWindow(QWidget *parent)
     // read pin config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             pin_config, &PinConfig::ReadFromConfig);
-    // read button config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            button_config, &ButtonConfig::ReadFromConfig);
     // read axes config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             axes_config, &AxesConfig::ReadFromConfig);
@@ -115,6 +112,9 @@ MainWindow::MainWindow(QWidget *parent)
     // read adv.settings config
     connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
             ui->widget_2, &AdvancedSettings::ReadFromConfig);
+    // read button config
+    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,     // last
+            button_config, &ButtonConfig::ReadFromConfig);
 
 
                                             //////////////// WRITE TO CONFIG ////////////////
@@ -149,7 +149,7 @@ MainWindow::MainWindow(QWidget *parent)
 
                                             //////////////// SIGNASL-SLOTS ////////////////
     // buttons pin changed
-    connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),  // add buttons from axes
+    connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),
                 button_config, SLOT(setUiOnOff(int)));
     // LEDs changed
     connect(pin_config, SIGNAL(totalLEDsValueChanged(int)),
@@ -163,6 +163,9 @@ MainWindow::MainWindow(QWidget *parent)
     // shift registers
     connect(pin_config, SIGNAL(shiftRegSelected(int, int, QString)),
             shift_reg_config, SLOT(shiftRegSelected(int, int, QString)));
+    // a2b count
+    connect(a2b_config, SIGNAL(a2bCountChanged(int)),
+            pin_config, SLOT(a2bCountChanged(int)));
 
 
 

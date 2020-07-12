@@ -50,7 +50,8 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
             latch_pins_array[latch_pins_array.size() - 1].gui_name = pin_gui_name;
         }
         // delete shift reg latch pin
-        else if (latch_pin < 0){
+        else
+        {
             latch_pin = -latch_pin;
             for (uint i = 0; i < latch_pins_array.size(); ++i) {
                 if (latch_pin == latch_pins_array[i].pin_number){
@@ -87,7 +88,8 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
             data_pins_array[data_pins_array.size() - 1].pin_number = data_pin;
             data_pins_array[data_pins_array.size() - 1].gui_name = pin_gui_name;
         }
-        else if (data_pin < 0){
+        else
+        {
             data_pin = -data_pin;
             for (uint i = 0; i < data_pins_array.size(); ++i) {
                 if (data_pin == data_pins_array[i].pin_number){

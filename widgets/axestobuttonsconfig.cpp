@@ -7,17 +7,28 @@ AxesToButtonsConfig::AxesToButtonsConfig(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    a2b_buttons_count_ = 0;
     ui->layoutV_AxesToButtons->setAlignment(Qt::AlignTop);
     for (int i = 0; i < MAX_AXIS_NUM; ++i) {
         AxesToButtons* a2b = new AxesToButtons(i, this);
         ui->layoutV_AxesToButtons->addWidget(a2b);
         A2bAdrList.append(a2b);
+        connect(a2b, SIGNAL(a2bCountChanged(int, int)),
+                this, SLOT(a2bCountCalc(int, int)));
     }
 }
 
 AxesToButtonsConfig::~AxesToButtonsConfig()
 {
     delete ui;
+}
+#include <QDebug>
+void AxesToButtonsConfig::a2bCountCalc(int count, int previous_count)
+{
+    a2b_buttons_count_ += count - previous_count;
+    qDebug()<<"count"<<count;
+    qDebug()<<"prev count"<<previous_count;
+    emit a2bCountChanged(a2b_buttons_count_);
 }
 
 void AxesToButtonsConfig::ReadFromConfig()

@@ -22,13 +22,17 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+signals:
+    void a2bCountChanged(int count, int previous_count);
+
 private slots:
-    void a2bCountChanged(int count);
+    void a2bSpinBoxChanged(int count);
     void a2bCheckBoxValueChanged(bool value);
 
 private:
     Ui::AxesToButtons *ui;
     int a2b_number_;
+    int buttons_count_;
 
     std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axes.h
     {{

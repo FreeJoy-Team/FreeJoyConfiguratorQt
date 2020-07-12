@@ -31,8 +31,17 @@
       <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5">
        <item>
         <widget class="QGroupBox" name="groupBox_FastEncoder">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>90</height>
+          </size>
+         </property>
          <property name="title">
           <string>Fast encoder</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <layout class="QGridLayout" name="layoutG_FastEncoder" rowstretch="0,0" columnstretch="3,10,10,10,15">
           <property name="topMargin">
@@ -148,9 +157,25 @@
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string/>
+          <string>Slow encoders</string>
          </property>
-         <layout class="QVBoxLayout" name="layoutV_Encoders"/>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <layout class="QVBoxLayout" name="layoutV_Encoders">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
         </widget>
        </item>
       </layout>

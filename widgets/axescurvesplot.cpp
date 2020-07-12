@@ -180,7 +180,7 @@ void AxesCurvesPlot::SetExponent()
     }
 
     for (int i = 0; i < PointAdrList.size(); ++i) {
-        SetPointValue(exp((i * log(tmp_range) / (points_count_ - 1))) + min_point_value, i);
+        SetPointValue(exp(i * log(tmp_range) / (points_count_ - 1)) + min_point_value, i);
     }
 }
 
@@ -195,7 +195,7 @@ void AxesCurvesPlot::SetExponentInvert()
     }
 
     for (int i = 0; i < PointAdrList.size(); ++i) {
-        SetPointValue(exp((i * log(tmp_range) / (points_count_ - 1))) + min_point_value, (points_count_ - 1) - i);
+        SetPointValue(exp(i * log(tmp_range) / (points_count_ - 1)) + min_point_value, (points_count_ - 1) - i);
     }
 }
 

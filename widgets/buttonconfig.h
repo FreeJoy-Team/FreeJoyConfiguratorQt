@@ -30,8 +30,8 @@ public:
     void ButtonStateChanged();
 
     // private:?
-    ButtonPhysical* physical_button_widget;     // нужны ли?
-    ButtonLogical* logical_buttons_widget;
+    //ButtonPhysical* physical_button_widget;     // нужны ли?
+    //ButtonLogical* logical_buttons_widget;
 
 signals:
     void encoderInputChanged(int ecoder_A, int ecoder_B);
@@ -43,10 +43,19 @@ private slots:
     void functionTypeChanged(int index, int function_previous_index, int button_number);
 
 private:
-    QList<ButtonLogical*> LogicButtonAdrList;
-    QList<ButtonPhysical*> PhysicButtonAdrList;
     Ui::ButtonConfig *ui;
     void PhysicalButtonsSpawn(int count);
+    QString default_shift_style_;
+    bool is_shifts_activated_ = false;
+    bool shift1_activated_ = false;
+    bool shift2_activated_ = false;
+    bool shift3_activated_ = false;
+    bool shift4_activated_ = false;
+    bool shift5_activated_ = false;
+
+
+    QList<ButtonLogical*> LogicButtonAdrList;
+    QList<ButtonPhysical*> PhysicButtonAdrList;
 
 };
 

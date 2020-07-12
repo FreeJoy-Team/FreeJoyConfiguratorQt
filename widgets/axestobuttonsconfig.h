@@ -19,8 +19,16 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+signals:
+    void a2bCountChanged(int count);
+
+public slots:
+    void a2bCountCalc(int count, int previous_count);
+
 private:
     Ui::AxesToButtonsConfig *ui;
+
+    int a2b_buttons_count_;
     QList<AxesToButtons*> A2bAdrList;
 };
 

@@ -94,6 +94,7 @@ private slots:
 private:
     Ui::ButtonLogical *ui;
     int function_previous_index_ = 0;
+    QString default_style_;
 
 };
 

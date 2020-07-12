@@ -35,6 +35,7 @@ signals:
 private slots:
     void pinInteraction(int index, int sender_index, int pin);
     void pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number);
+    void a2bCountChanged(int count);
 
 private:
     Ui::PinConfig *ui;
