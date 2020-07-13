@@ -35,6 +35,7 @@ public:
 
 signals:
     void encoderInputChanged(int ecoder_A, int ecoder_B);
+    //void buttonLEDStateChanged(int button_number);            // for future
 
 public slots:   // private?
     void setUiOnOff(int value);

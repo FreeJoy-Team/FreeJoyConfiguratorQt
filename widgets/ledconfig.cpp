@@ -45,6 +45,13 @@ void LedConfig::SpawnLEDs(int led_count)
     }
 }
 
+//void LedConfig::ButtonLEDStateChanged()
+//{
+//    if (LEDAdrList.size() > 0){
+
+//    }
+//}
+
 void LedConfig::ReadFromConfig()
 {
     ui->spinBox_LedPB0->setValue(gEnv.pDeviceConfig->config.led_pwm_config.duty_cycle[0]);

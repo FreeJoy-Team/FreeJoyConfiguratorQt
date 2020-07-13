@@ -19,6 +19,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    //void ButtonLEDStateChanged();     // future
+
 //    signals:
 //    void valueChanged(int led_count);
 
@@ -27,6 +29,8 @@ public slots:
 
 private:
     Ui::LedConfig *ui;
+    //QString default_style_;
+
     QList<LED*> LEDAdrList;
     int current_led_count_;
 };

@@ -131,7 +131,7 @@ void ButtonLogical::ButtonState(bool is_activated)
     is_activated_ = is_activated;
     if (is_activated_){
         default_style_ = this->styleSheet();
-        this->setStyleSheet("background-color: rgb(0, 128, 0);");   // надо сохранять текущий стиль и возвращать обратно
+        this->setStyleSheet("background-color: rgb(0, 128, 0);");
     } else {
         this->setStyleSheet(default_style_);//("background: palette(window)");        // баг тряска если ("") // текущий вариант не пашет с чёрным стилем
     }
