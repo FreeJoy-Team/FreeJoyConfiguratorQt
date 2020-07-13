@@ -7,6 +7,7 @@ AxesCurves::AxesCurves(int axes_number, QWidget *parent) :
 {
     ui->setupUi(this);
     axes_number_ = axes_number;
+    ui->groupBox->setTitle(axes_list_[axes_number_].gui_name);
 }
 
 AxesCurves::~AxesCurves()

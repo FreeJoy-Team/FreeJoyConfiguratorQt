@@ -61,28 +61,28 @@
          <item row="0" column="1">
           <widget class="QPushButton" name="pushButton_11">
            <property name="text">
-            <string>Read Config from Device</string>
+            <string>--</string>
            </property>
           </widget>
          </item>
          <item row="1" column="3" rowspan="3">
           <widget class="QPushButton" name="pushButton_TEST_MAIN_BUTTON">
            <property name="text">
-            <string>READ CONFIG</string>
+            <string>READ FROM INTERNAL CONFIG</string>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
           <widget class="QPushButton" name="pushButton_16">
            <property name="text">
-            <string>Write Config to Device</string>
+            <string>--</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1" rowspan="3">
           <widget class="QPushButton" name="pushButton_13">
            <property name="text">
-            <string>Load Config from File</string>
+            <string>--</string>
            </property>
           </widget>
          </item>
@@ -92,7 +92,7 @@
          <item row="0" column="3">
           <widget class="QPushButton" name="pushButton_TEST_2_BUTTON">
            <property name="text">
-            <string>WRITE CONFIG</string>
+            <string>WRITE TO INTERNAL CONFIG</string>
            </property>
           </widget>
          </item>
@@ -137,7 +137,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>9</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -399,12 +399,12 @@ border-bottom: 1px solid rgb(190, 190, 190);
          <rect>
           <x>580</x>
           <y>160</y>
-          <width>121</width>
+          <width>161</width>
           <height>51</height>
          </rect>
         </property>
         <property name="text">
-         <string>SEND CONFIG</string>
+         <string>SEND CONFIG to device</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_ID">
@@ -463,14 +463,14 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <widget class="QPushButton" name="button_GetConfig">
         <property name="geometry">
          <rect>
-          <x>420</x>
+          <x>400</x>
           <y>160</y>
-          <width>121</width>
+          <width>151</width>
           <height>51</height>
          </rect>
         </property>
         <property name="text">
-         <string>GET CONFIG</string>
+         <string>GET CONFIG from device</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEdit">

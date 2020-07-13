@@ -187,7 +187,7 @@ private:
         {FILTER_LEVEL_7,      tr("Level 7")},
     }};
 
-    std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h
+    std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axescurves.h
     {{
         {0,      tr("X")},
         {1,      tr("Y")},
