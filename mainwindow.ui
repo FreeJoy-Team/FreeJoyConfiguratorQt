@@ -137,7 +137,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>9</number>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -376,9 +376,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <widget class="QLabel" name="label_DeviceName">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>120</x>
           <y>20</y>
-          <width>101</width>
+          <width>171</width>
           <height>21</height>
          </rect>
         </property>
@@ -594,7 +594,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>205</x>
+          <x>170</x>
           <y>0</y>
           <width>71</width>
           <height>16</height>
