@@ -24,11 +24,11 @@ public:
     void WriteToConfig();
 
 signals:
-    void shiftRegsButtonsCount(int buttons_count);
+    void shiftRegButtonsCountChanged(int buttons_count);
 
 private slots:
     void shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name);
-    void shiftRegButtonsChanged(int buttons_count, int shift_reg_number);
+    void shiftRegButtonsCalc(int count, int previous_count);
 
 private:
     Ui::ShiftRegistersConfig *ui;
@@ -38,6 +38,8 @@ private:
         int pin_number;
         QString gui_name;
     };
+
+    int shift_buttons_count_;
 
     static bool SortByPinNumber(const ShiftRegData_t& lhs, const ShiftRegData_t& rhs);
     static bool SortNullLast(const ShiftRegData_t& lhs, const ShiftRegData_t& rhs);

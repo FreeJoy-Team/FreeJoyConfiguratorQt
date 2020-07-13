@@ -36,12 +36,22 @@ private slots:
     void pinInteraction(int index, int sender_index, int pin);
     void pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number);
     void a2bCountChanged(int count);
+    void shiftRegButtonsCountChanged(int count);
+    void totalButtonsChanged(int count);
 
 private:
     Ui::PinConfig *ui;
 
+    QString default_style_;
+    bool max_buttons_warning_ = false;
+
+    int shift_latch_count_ = 0;
+    int shift_data_count_ = 0;
+    void shiftRegOnOff();
+
     int axis_sources_ = 0;
     int buttons_from_axes_ = 0;
+    int buttons_from_shift_regs_ = 0;
     int single_buttons_ = 0;
     int rows_of_buttons_ = 0;
     int columns_of_buttons_ = 0;

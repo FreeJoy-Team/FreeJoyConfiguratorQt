@@ -22,12 +22,10 @@ AxesToButtonsConfig::~AxesToButtonsConfig()
 {
     delete ui;
 }
-#include <QDebug>
+
 void AxesToButtonsConfig::a2bCountCalc(int count, int previous_count)
 {
     a2b_buttons_count_ += count - previous_count;
-    qDebug()<<"count"<<count;
-    qDebug()<<"prev count"<<previous_count;
     emit a2bCountChanged(a2b_buttons_count_);
 }
 

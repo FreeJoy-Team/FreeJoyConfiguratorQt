@@ -43,6 +43,7 @@ private:
     Ui::ShiftRegisters *ui;
     void SetUiOnOff();
 
+    int buttons_count_;
     int shift_reg_number_;
     int latch_pin_ = 0;
     int data_pin_ = 0;

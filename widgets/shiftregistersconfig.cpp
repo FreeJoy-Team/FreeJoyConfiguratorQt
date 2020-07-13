@@ -6,6 +6,7 @@ ShiftRegistersConfig::ShiftRegistersConfig(QWidget *parent) :
     ui(new Ui::ShiftRegistersConfig)
 {
     ui->setupUi(this);
+    shift_buttons_count_ = 0;
 
     ui->layoutV_ShiftRegisters->setAlignment(Qt::AlignTop);
     // shift registers spawn
@@ -15,6 +16,8 @@ ShiftRegistersConfig::ShiftRegistersConfig(QWidget *parent) :
         ui->layoutV_ShiftRegisters->addWidget(shift_register);
         ShiftRegistersAdrList.append(shift_register);
         //shift_register->hide();
+        connect(shift_register, SIGNAL(buttonCountChanged(int, int)),
+                this, SLOT(shiftRegButtonsCalc(int, int)));
     }
 }
 
@@ -24,9 +27,10 @@ ShiftRegistersConfig::~ShiftRegistersConfig()
 }
 
 
-void ShiftRegistersConfig::shiftRegButtonsChanged(int buttons_count, int shift_reg_number)
+void ShiftRegistersConfig::shiftRegButtonsCalc(int count, int previous_count)
 {
-
+    shift_buttons_count_ += count - previous_count;
+    emit shiftRegButtonsCountChanged(shift_buttons_count_);
 }
 
 
@@ -40,13 +44,13 @@ bool ShiftRegistersConfig::SortNullLast(const ShiftRegData_t& lhs, const ShiftRe
     Q_UNUSED(lhs);
     return rhs.pin_number == 0;
 }
-#include <QDebug>
-void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name)      // сделать выключение у пинов при latch/data == 4
+
+void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name)      // сделать выключение у пинов при latch/data count == 4
 {
     // add shift reg latch pin
     if (latch_pin != 0){
         if (latch_pin > 0){
-            latch_pins_array[latch_pins_array.size() - 1].pin_number = latch_pin;       // latch_pins_array.size() - 1 мб сделать отдельную переменную?
+            latch_pins_array[latch_pins_array.size() - 1].pin_number = latch_pin;       // latch_pins_array.size() - 1// мб сделать отдельную переменную?
             latch_pins_array[latch_pins_array.size() - 1].gui_name = pin_gui_name;
         }
         // delete shift reg latch pin

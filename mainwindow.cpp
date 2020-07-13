@@ -166,7 +166,9 @@ MainWindow::MainWindow(QWidget *parent)
     // a2b count
     connect(a2b_config, SIGNAL(a2bCountChanged(int)),
             pin_config, SLOT(a2bCountChanged(int)));
-
+    // shift reg buttons count shiftRegsButtonsCount
+    connect(shift_reg_config, SIGNAL(shiftRegButtonsCountChanged(int)),
+            pin_config, SLOT(shiftRegButtonsCountChanged(int)));
 
 
     hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!

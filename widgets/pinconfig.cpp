@@ -48,8 +48,8 @@ PinConfig::PinConfig(QWidget *parent) :
             connect(PinComboBoxPtrList[i], SIGNAL(currentIndexChanged(int, int, int)),
                         this, SLOT(pinIndexChanged(int, int, int)));
     }
-//    connect(dynamic_cast<SignalHandler*>(qApp), &SignalHandler::a2bCountChanged,
-//            this, &PinConfig::SetCurrentConfig);
+    connect(this, SIGNAL(totalButtonsValueChanged(int)),
+            this, SLOT(totalButtonsChanged(int)));
 }
 
 PinConfig::~PinConfig()
@@ -108,25 +108,28 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
     }
     // shift register latch selected
     else if (current_device_enum == SHIFT_REG_LATCH){
+        shift_latch_count_++;
         emit shiftRegSelected(pin_number, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_LATCH){
+        shift_latch_count_--;
         emit shiftRegSelected((pin_number)*-1, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     }
     // shift register data selected
     else if (current_device_enum == SHIFT_REG_DATA){
+        shift_data_count_++;
         emit shiftRegSelected(0, pin_number, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_DATA){
+        shift_data_count_--;
         emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     }
     // I2C selected
-    else if (current_device_enum == I2C_SCL || current_device_enum == I2C_SDA){
+    else if (current_device_enum == I2C_SCL || current_device_enum == I2C_SDA){     // for axes
         //emit i2cSelected(true);
     } else if (previous_device_enum == I2C_SCL || previous_device_enum == I2C_SDA){
         //emit i2cSelected(false);
     }
 
     // set current config and generate signals for another configs
-    //qDebug()<< current_device_enum;
     else {
 
         for (int i = 0; i < 8; ++i) {
@@ -147,29 +150,23 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
                         axis_sources_+=tmp;
                         ui->label_AxisSources->setNum(axis_sources_);
                     }
-//                    else if (i == BUTTON_FROM_AXES){
-//                        buttons_from_axes_+=tmp;
-                    //single_buttons_ -= buttons_from_axes_;
-                    //single_buttons_ += tmp;
-                    //buttons_from_axes_ = tmp;
-//                    }
                     else if (i == SINGLE_BUTTON){
                         single_buttons_+=tmp;
                         ui->label_SingleButtons->setNum(single_buttons_);
-                        ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
                     }
                     else if (i == ROW_OF_BUTTONS){
                         rows_of_buttons_+=tmp;
                         ui->label_RowsOfButtons->setNum(rows_of_buttons_);
-                        ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
                     }
                     else if (i == COLUMN_OF_BUTTONS){
                         columns_of_buttons_+=tmp;
                         ui->label_ColumnsOfButtons->setNum(columns_of_buttons_);
-                        ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                        emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
                     }
                     else if (i == SINGLE_LED){
                         single_LED_+=tmp;
@@ -192,12 +189,41 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
     }
 }
 
+void PinConfig::shiftRegOnOff()
+{
+    if (shift_latch_count_ >= MAX_SHIFT_REG_NUM){
+
+    }
+}
+
 void PinConfig::a2bCountChanged(int count)
 {
     buttons_from_axes_ = count;
     ui->label_ButtonFromAxes->setNum(buttons_from_axes_);
-    ui->label_TotalButtons->setNum(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-    emit totalButtonsValueChanged(buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+}
+
+void PinConfig::shiftRegButtonsCountChanged(int count)
+{
+    buttons_from_shift_regs_ = count;
+    ui->label_ButtonsFromShiftRegs->setNum(buttons_from_shift_regs_);
+    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+}
+
+void PinConfig::totalButtonsChanged(int count)
+{
+    if (count > MAX_BUTTONS_NUM){
+        default_style_ = ui->label_TotalButtons->styleSheet();
+        //ui->label_TotalButtons->setStyleSheet("background-color: rgb(200, 0, 0);");
+        ui->text_TotalButtons->setStyleSheet("background-color: rgb(200, 0, 0);");
+        max_buttons_warning_ = true;
+    } else if (max_buttons_warning_ == true && count <= MAX_BUTTONS_NUM){
+        //ui->label_TotalButtons->setStyleSheet(default_style_);
+        ui->text_TotalButtons->setStyleSheet(default_style_);
+        max_buttons_warning_ = false;
+    }
 }
 
 

@@ -8,6 +8,7 @@ ShiftRegisters::ShiftRegisters(int shift_reg_number, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    buttons_count_ = 0;
     shift_reg_number_ = shift_reg_number;
     ui->label_ShiftIndex->setNum(shift_reg_number + 1);
 
@@ -26,10 +27,14 @@ ShiftRegisters::~ShiftRegisters()
     delete ui;
 }
 
-void ShiftRegisters::calcRegistersCount(int button_count)
+void ShiftRegisters::calcRegistersCount(int count)
 {
-    ui->label_RegistersCount->setNum(ceil(button_count/8.0));
-    emit buttonCountChanged(button_count, shift_reg_number_);
+    ui->label_RegistersCount->setNum(ceil(count/8.0));
+
+    if(ui->spinBox_ButtonCount->isEnabled() == true){
+        emit buttonCountChanged(count, buttons_count_);
+        buttons_count_ = count;
+    }
 }
 
 //int ShiftRegisters::GetLatchPin()
