@@ -99,7 +99,9 @@ public:
     explicit PinComboBox(QWidget *parent = nullptr);
     ~PinComboBox();
     int GetIndex();                         // удалить?
-    void SetIndex(int index, int sender_index);
+    //void SetIndex();
+    void ResetPin();
+    void SetIndex_Iteraction(int index, int sender_index);
     void InitializationPins(uint pin);
     void ReadFromConfig(uint pin);
     void WriteToConfig(uint pin);
@@ -112,7 +114,7 @@ public:
     int pin_number_ = -1;
     //! номер элемента в pin_types
     std::vector<int> enum_gui_index;            // rename to pin_types_index
-    std::vector<int> enum_index;                // в динамическую память?
+    std::vector<int> enum_index;
     int previous_index_ = 0;
 
     // public private _
@@ -122,7 +124,7 @@ public:
     int call_interaction_;
     QString styleSheet_default_;            // убрать из конструктора, настроить для смены стилей
 
-signals:        // add send current pin if its axis source for axis config
+signals:
     void valueChangedForInteraction(int index, int sender_index, int pin);
     void currentIndexChanged(int current_device_enum, int previous_device_enum, int pin_number);
 private slots:

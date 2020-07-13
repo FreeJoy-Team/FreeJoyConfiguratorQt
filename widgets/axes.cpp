@@ -7,7 +7,7 @@ Axes::Axes(int axis_number, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //pDev_config = &gEnv.pDeviceConfig->config;        // чуть короче но надо?
+    //pDev_config = &gEnv.pDeviceConfig->config;        // чуть короче запись, но надо ли?
 
     axis_number_ = axis_number;
     ui->groupBox_AxixName->setTitle(axes_list_[axis_number_].gui_name);
@@ -29,9 +29,18 @@ Axes::Axes(int axis_number, QWidget *parent) :
         ui->comboBox_AxisSource2->addItem(axes_list_[i].gui_name);
     }
 
+    // add main source
+    for (int i = 0; i < 2; ++i) {
+        ui->comboBox_AxisSource1->addItem(axes_pin_list_[i].gui_name);
+        enum_index_.push_back(axes_pin_list_[i].device_enum_index);
+    }
+
+
     ui->comboBox_Button1->setCurrentIndex(AXIS_BUTTON_DOWN);
     ui->comboBox_Button2->setCurrentIndex(AXIS_BUTTON_RESET);
     ui->comboBox_Button3->setCurrentIndex(AXIS_BUTTON_UP);
+    // set ADS1115_00 selected
+    ui->comboBox_I2cAddress->setCurrentIndex(1);
 
     // output checked
     connect(ui->checkBox_Output, SIGNAL(toggled(bool)),
@@ -47,12 +56,45 @@ Axes::Axes(int axis_number, QWidget *parent) :
             this, SLOT(calibMinMaxValueChanged(int)));
     connect(ui->spinBox_CalibMin, SIGNAL(valueChanged(int)),
             this, SLOT(calibMinMaxValueChanged(int)));
+    // main source changed
+    connect(ui->comboBox_AxisSource1, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(mainSourceIndexChanged(int)));
 
 }
 
 Axes::~Axes()
 {
+    enum_index_.clear();
+    enum_index_.shrink_to_fit();
     delete ui;
+}
+
+void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
+{
+    if (is_add == true){
+        ui->comboBox_AxisSource1->addItem(axes_pin_list_[Converter::EnumToIndex(source_enum, axes_pin_list_)].gui_name);
+        enum_index_.push_back(axes_pin_list_[Converter::EnumToIndex(source_enum, axes_pin_list_)].device_enum_index);
+    } else {
+        for (uint i = 0; i < enum_index_.size(); ++i) {
+            if (enum_index_[i] == source_enum){
+                if(ui->comboBox_AxisSource1->currentIndex() == (int)i){
+                    ui->comboBox_AxisSource1->setCurrentIndex(0);
+                }
+                ui->comboBox_AxisSource1->removeItem(i);
+                enum_index_.erase(enum_index_.begin() + i);
+                break;
+            }
+        }
+    }
+}
+
+void Axes::mainSourceIndexChanged(int index)
+{
+    if (enum_index_[index] == I2C){
+        ui->comboBox_I2cAddress->setEnabled(true);
+    } else {
+        ui->comboBox_I2cAddress->setEnabled(false);
+    }
 }
 
 void Axes::filterChanged(int filter_level)
@@ -76,7 +118,7 @@ void Axes::calibMinMaxValueChanged(int value)
         ui->spinBox_CalibCenter->setValue((ui->spinBox_CalibMax->value() + ui->spinBox_CalibMin->value()) / 2);
     }
 }
-#include <QDebug>
+
 void Axes::calibrationStarted(int raw_value)
 {
     if (ui->spinBox_CalibMax->value() < raw_value){

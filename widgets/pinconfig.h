@@ -25,12 +25,15 @@ public:
     //! PinComboBox widget list
     QList<PinComboBox *> PinComboBoxPtrList;
 
+    void ResetAllPins();
+
 signals:
     void totalButtonsValueChanged(int total_buttons);
     void totalLEDsValueChanged(int total_led);
     void fastEncoderSelected(QString pin_gui_name, bool is_selected);
     void shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name);
     void i2cSelected(bool i2c_selected);
+    void axesSourceChanged(int source_enum, bool is_add);
 
 private slots:
     void pinInteraction(int index, int sender_index, int pin);

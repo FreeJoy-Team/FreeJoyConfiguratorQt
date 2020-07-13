@@ -44,7 +44,7 @@
          <item row="1" column="2" rowspan="3">
           <widget class="QPushButton" name="pushButton_15">
            <property name="text">
-            <string>ADD 500 ENCODERS</string>
+            <string>RESET ALL PINS</string>
            </property>
           </widget>
          </item>

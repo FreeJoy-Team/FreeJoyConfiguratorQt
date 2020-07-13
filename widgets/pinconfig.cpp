@@ -67,7 +67,7 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
                 {
                     if(PinComboBoxPtrList[i]->interact_count_ == 0){
                         PinComboBoxPtrList[i]->interact_count_+= pin;
-                        PinComboBoxPtrList[i]->SetIndex(j, sender_index);
+                        PinComboBoxPtrList[i]->SetIndex_Iteraction(j, sender_index);
                     }
                     else if (PinComboBoxPtrList[i]->is_interacts_ == true){
                         PinComboBoxPtrList[i]->interact_count_+= pin;
@@ -88,7 +88,7 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
                             PinComboBoxPtrList[i]->interact_count_-= pin;
                         }
                         if (PinComboBoxPtrList[i]->interact_count_ <= 0) {
-                            PinComboBoxPtrList[i]->SetIndex(0, sender_index);
+                            PinComboBoxPtrList[i]->SetIndex_Iteraction(0, sender_index);
                         }
                     }
                 }
@@ -102,7 +102,7 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
 {                                                                                                               // или отдельный класс для их состояний
     //fast encoder selected
     if (current_device_enum == FAST_ENCODER){
-        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz
+        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz           // возможен баг? из-за else
     } else if (previous_device_enum == FAST_ENCODER){
         emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, false);    // hz
     }
@@ -112,7 +112,7 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
         emit shiftRegSelected(pin_number, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_LATCH){
         shift_latch_count_--;
-        emit shiftRegSelected((pin_number)*-1, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+        emit shiftRegSelected((pin_number)*-1, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz           // возможен баг? из-за else
     }
     // shift register data selected
     else if (current_device_enum == SHIFT_REG_DATA){
@@ -120,18 +120,17 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
         emit shiftRegSelected(0, pin_number, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_DATA){
         shift_data_count_--;
-        emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+        emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz           // возможен баг? из-за else
     }
     // I2C selected
-    else if (current_device_enum == I2C_SCL || current_device_enum == I2C_SDA){     // for axes
-        //emit i2cSelected(true);
-    } else if (previous_device_enum == I2C_SCL || previous_device_enum == I2C_SDA){
-        //emit i2cSelected(false);
+    else if (current_device_enum == I2C_SCL){// || current_device_enum == I2C_SDA){
+        emit axesSourceChanged(-2, true);                                            // -2 enum I2C в axes.h
+    } else if (previous_device_enum == I2C_SCL){// || previous_device_enum == I2C_SDA){
+        emit axesSourceChanged(-2, false);
     }
 
     // set current config and generate signals for another configs
-    else {
-
+//    else {
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
                 if(source[i].pin_type[j] == 0){
@@ -146,9 +145,14 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
                         tmp = -1;
                     }
 
-                    if (i == AXIS_SOURCE){
+                    if (i == AXIS_SOURCE){      //int source_enum, bool is_add      axesSourceChanged
                         axis_sources_+=tmp;
                         ui->label_AxisSources->setNum(axis_sources_);
+                        if (tmp > 0){
+                            emit axesSourceChanged(pin_number - 1, true);
+                        } else {
+                            emit axesSourceChanged(pin_number - 1, false);
+                        }
                     }
                     else if (i == SINGLE_BUTTON){
                         single_buttons_+=tmp;
@@ -186,13 +190,20 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
                 }
             }
         }
-    }
+    //}
 }
 
-void PinConfig::shiftRegOnOff()
+void PinConfig::shiftRegOnOff()     // todo
 {
     if (shift_latch_count_ >= MAX_SHIFT_REG_NUM){
 
+    }
+}
+
+void PinConfig::ResetAllPins()
+{
+    for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
+        PinComboBoxPtrList[i]->ResetPin();
     }
 }
 

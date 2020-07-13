@@ -28,7 +28,8 @@ signals:
     void axisRawValueChanged(int);
     void axisOutValueChanged(int);
 
-//private slots:
+private slots:
+    void addOrDeleteMainSource(int source_enum, bool is_add);
 //    void axesValueChanged(int value);
 
 private:

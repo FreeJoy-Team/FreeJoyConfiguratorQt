@@ -169,6 +169,9 @@ MainWindow::MainWindow(QWidget *parent)
     // shift reg buttons count shiftRegsButtonsCount
     connect(shift_reg_config, SIGNAL(shiftRegButtonsCountChanged(int)),
             pin_config, SLOT(shiftRegButtonsCountChanged(int)));
+    // axes source changed//axesSourceChanged
+    connect(pin_config, SIGNAL(axesSourceChanged(int, bool)),
+            axes_config, SLOT(addOrDeleteMainSource(int, bool)));
 
 
     hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!
@@ -657,7 +660,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_15_clicked()
 {
-    //qDebug()<<"tab button selected test = "<<ui->tab_AxesConfig->isVisible();
+    pin_config->ResetAllPins();
 }
 
 // dynamic widgets spawn

@@ -209,7 +209,18 @@ int PinComboBox::GetIndex()     // ?
     return ui->comboBox_PinsType->currentIndex();
 }
 
-void PinComboBox::SetIndex(int index, int sender_index)
+void PinComboBox::ResetPin()     // ?
+{
+    ui->comboBox_PinsType->setCurrentIndex(0);
+    if (is_interacts_ == true)
+    {
+        ui->comboBox_PinsType->setEnabled(true);
+        is_interacts_ = false;
+        ui->comboBox_PinsType->setStyleSheet(styleSheet_default_);
+    }
+}
+
+void PinComboBox::SetIndex_Iteraction(int index, int sender_index)
 {
     if(is_interacts_ == false && is_call_interaction_ == false)     // ui->comboBox_PinsType->isEnabled()
     {

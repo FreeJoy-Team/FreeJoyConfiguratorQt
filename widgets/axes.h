@@ -25,11 +25,14 @@ public:
     void UpdateAxisRaw();
     void UpdateAxisOut();
 
+    void AddOrDeleteMainSource(int source_enum, bool is_add);
+
 private slots:
     void filterChanged(int filter_level);
     void functionIndexChanged(int index);
     void calibMinMaxValueChanged(int value);
     void calibrationStarted(int raw_value);
+    void mainSourceIndexChanged(int index);
 //    void axisRawValueChanged(int);
 //    void axisOutValueChanged(int);
 
@@ -43,6 +46,8 @@ private:
     QString start_calibration = tr("Start calibration");
     QString stop_calibration = tr("Stop calibration");
     //dev_config_t* pDev_config;
+
+    std::vector<int> enum_index_;
 
     enum
     {
@@ -81,6 +86,43 @@ private:
         C15,
     };
 
+    std::vector <deviceEnum_guiName_t> axes_pin_list_ =      // любая последовательность, но первые 2 добавляются в конструкторе
+    {{
+        {None,     tr("None")},
+        {Encoder,  tr("Encoder")},
+        {I2C,      tr("I2C")},
+        {A0,       tr("A0")},
+        {A1,       tr("A1")},
+        {A2,       tr("A2")},
+        {A3,       tr("A3")},
+        {A4,       tr("A4")},
+        {A5,       tr("A5")},
+        {A6,       tr("A6")},
+        {A7,       tr("A7")},
+        {A8,       tr("A8")},
+        {A9,       tr("A9")},
+        {A10,      tr("A10")},
+        {A15,      tr("A15")},
+        {B0,       tr("B0")},
+        {B1,       tr("B1")},
+        {B3,       tr("B3")},
+        {B4,       tr("B4")},
+        {B5,       tr("B5")},
+        {B6,       tr("B6")},
+        {B7,       tr("B7")},
+        {B8,       tr("B8")},
+        {B9,       tr("B9")},
+        {B10,      tr("B10")},
+        {B11,      tr("B11")},
+        {B12,      tr("B12")},
+        {B13,      tr("B13")},
+        {B14,      tr("B14")},
+        {B15,      tr("B15")},
+        {C13,      tr("C13")},
+        {C14,      tr("C14")},
+        {C15,      tr("C15")},
+    }};
+
     enum
     {
         AS5600 = 0x36,        //54
@@ -90,7 +132,7 @@ private:
         ADS1115_11,
     };
 
-    std::vector <deviceEnum_guiName_t> i2c_address_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    std::vector <deviceEnum_guiName_t> i2c_address_list_ =      // порядов обязан быть как в enum!!!!!!!!!!!
     {{
         {AS5600,          tr("AS 5600")},
         {ADS1115_00,      tr("ADS 1115_00")},

@@ -23,6 +23,13 @@ AxesConfig::~AxesConfig()
     delete ui;
 }
 
+void AxesConfig::addOrDeleteMainSource(int source_enum, bool is_add)
+{
+    for (int i = 0; i < AxesAdrList.size(); ++i) {
+        AxesAdrList[i]->AddOrDeleteMainSource(source_enum, is_add);
+    }
+}
+
 void AxesConfig::AxesValueChanged()             // жирно, можно оптимизировать
 {
     for (int i = 0; i < AxesAdrList.size(); ++i) {

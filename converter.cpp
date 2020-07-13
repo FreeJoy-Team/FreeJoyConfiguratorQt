@@ -4,7 +4,7 @@ Converter::Converter()
 {
 
 }
-
+#include <QDebug>
 //! Find device enum in list and return its index
 int Converter::EnumToIndex(const int device_emun, const std::vector<deviceEnum_guiName_t>& list)
 {
@@ -14,5 +14,6 @@ int Converter::EnumToIndex(const int device_emun, const std::vector<deviceEnum_g
         }
     }
     //throw "EnumToIndex not found device_emun in list, return -1";
+    qDebug()<<"Converter::EnumToIndex  -  ERROR";
     return -1;
 }
