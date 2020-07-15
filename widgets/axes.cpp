@@ -32,7 +32,7 @@ Axes::Axes(int axis_number, QWidget *parent) :
     // add main source
     for (int i = 0; i < 2; ++i) {
         ui->comboBox_AxisSource1->addItem(axes_pin_list_[i].gui_name);
-        enum_index_.push_back(axes_pin_list_[i].device_enum_index);
+        main_source_enum_index_.push_back(axes_pin_list_[i].device_enum_index);
     }
 
 
@@ -64,8 +64,8 @@ Axes::Axes(int axis_number, QWidget *parent) :
 
 Axes::~Axes()
 {
-    enum_index_.clear();
-    enum_index_.shrink_to_fit();
+    main_source_enum_index_.clear();
+    main_source_enum_index_.shrink_to_fit();
     delete ui;
 }
 
@@ -73,15 +73,15 @@ void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
 {
     if (is_add == true){
         ui->comboBox_AxisSource1->addItem(axes_pin_list_[Converter::EnumToIndex(source_enum, axes_pin_list_)].gui_name);
-        enum_index_.push_back(axes_pin_list_[Converter::EnumToIndex(source_enum, axes_pin_list_)].device_enum_index);
+        main_source_enum_index_.push_back(axes_pin_list_[Converter::EnumToIndex(source_enum, axes_pin_list_)].device_enum_index);
     } else {
-        for (uint i = 0; i < enum_index_.size(); ++i) {
-            if (enum_index_[i] == source_enum){
+        for (uint i = 0; i < main_source_enum_index_.size(); ++i) {
+            if (main_source_enum_index_[i] == source_enum){
                 if(ui->comboBox_AxisSource1->currentIndex() == (int)i){
                     ui->comboBox_AxisSource1->setCurrentIndex(0);
                 }
                 ui->comboBox_AxisSource1->removeItem(i);
-                enum_index_.erase(enum_index_.begin() + i);
+                main_source_enum_index_.erase(main_source_enum_index_.begin() + i);
                 break;
             }
         }
@@ -90,7 +90,7 @@ void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
 
 void Axes::mainSourceIndexChanged(int index)
 {
-    if (enum_index_[index] == I2C){
+    if (main_source_enum_index_[index] == I2C){
         ui->comboBox_I2cAddress->setEnabled(true);
     } else {
         ui->comboBox_I2cAddress->setEnabled(false);
@@ -175,7 +175,13 @@ void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)    
     ui->checkBox_Inverted->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].inverted);
     // I2C, sources, function
     ui->comboBox_I2cAddress->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].i2c_address, i2c_address_list_));
-    //ui->comboBox_AxisSource1->setCurrentIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main);
+    //ui->comboBox_AxisSource1->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main, axes_pin_list_));
+    for (uint i = 0; i < main_source_enum_index_.size(); ++i) {                 // сделать Converter::    ?
+        if (main_source_enum_index_[i] == gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main){
+            ui->comboBox_AxisSource1->setCurrentIndex(i);
+            break;
+        }
+    }
     ui->comboBox_AxisSource2->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].source_secondary, axes_list_));
     ui->comboBox_Function->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].function, function_list_));
     // chanel
@@ -210,8 +216,10 @@ void Axes::WriteToConfig()                // add source_main
     gEnv.pDeviceConfig->config.axis_config[axis_number_].inverted = ui->checkBox_Inverted->isChecked();
     // I2C, sources, function
     gEnv.pDeviceConfig->config.axis_config[axis_number_].i2c_address = i2c_address_list_[ui->comboBox_I2cAddress->currentIndex()].device_enum_index;
-    //gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main =
+
+    gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main = main_source_enum_index_[ui->comboBox_AxisSource1->currentIndex()];
     gEnv.pDeviceConfig->config.axis_config[axis_number_].source_secondary = axes_list_[ui->comboBox_AxisSource2->currentIndex()].device_enum_index;
+
     gEnv.pDeviceConfig->config.axis_config[axis_number_].function = function_list_[ui->comboBox_Function->currentIndex()].device_enum_index;
     // chanel
     gEnv.pDeviceConfig->config.axis_config[axis_number_].channel = ui->spinBox_ChanelEncoder->value();

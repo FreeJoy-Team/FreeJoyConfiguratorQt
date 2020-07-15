@@ -43,14 +43,6 @@ public:
     //DeviceConfig device_config;
     ReportConverter report_convert;     // nah?
 
-    struct pin_list_t       // nah
-    {
-        int device_enum_index;
-        QString gui_name;
-    };
-
-    QThread* testThread;
-    void testUpdate();
 //private:
     //QScopedPointer<QThread> thread;
     //QScopedPointer<HidDevice> worker;
@@ -66,9 +58,6 @@ public:
     AxesCurvesConfig* axes_curves_config;
     AxesToButtonsConfig* a2b_config;
 
-    signals:
-    void test_signal();
-
 protected:
     // Метод получения событий в главном окне приложения
     // В нём будет производиться проверка события смены перевода приложения
@@ -81,50 +70,35 @@ private slots:
 //    void getConfigPacket(uint8_t *);
 //    void sendConfigPacket(uint8_t *);
 
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
-    void on_pushButton_3_clicked();
-    void on_pushButton_4_clicked();
+    void hidDeviceList(QStringList* device_list);
+    void hidDeviceListChanged(int index);
+
     void on_button_GetConfig_clicked();
     void on_button_SendConfig_clicked();
 
 
     void on_button_EngLang_clicked();
-
     void on_button_RusLang_clicked();
 
+
     void on_pushButton_QssDefault_clicked();
-
     void on_pushButton_QssChinaWhite_clicked();
-
-    void on_pushButton_QssAqua_clicked();
-
     void on_pushButton_QssUbuntu_clicked();
-
-    void on_pushButton_QssElegantDark_clicked();
-
     void on_pushButton_QssQDarkStyle_clicked();
-
-    void on_pushButton_QssAMOLED_clicked();
-
-    void on_pushButton_QssConsoleStyle_clicked();
-
-    void on_pushButton_QssManjaroMix_clicked();
-
-    void on_pushButton_QssMaterialDark_clicked();
+    void on_pushButton_QssBreezeDark_clicked();
 
     void on_pushButton_11_clicked();
 
     void on_pushButton_15_clicked();
     void addvalues(int);
 
-    void on_pushButton_QssBreezeDark_clicked();
 
-    void on_pushButton_QssBreezeWhite_clicked();
 
 private:
     Ui::MainWindow *ui;
     QTranslator translator;
+
+    QThread* thread_getSend_config;
 
     void resizeEvent(QResizeEvent*);
 };

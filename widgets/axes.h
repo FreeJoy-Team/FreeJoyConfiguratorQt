@@ -47,7 +47,7 @@ private:
     QString stop_calibration = tr("Stop calibration");
     //dev_config_t* pDev_config;
 
-    std::vector<int> enum_index_;
+    std::vector<int> main_source_enum_index_;
 
     enum
     {

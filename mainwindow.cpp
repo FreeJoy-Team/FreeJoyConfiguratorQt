@@ -13,7 +13,6 @@
 
 #include "global.h"
 //GlobalEnvironment gEnv;
-#include "appconfig.h"
 // отсортировать include
 
 //#include "reportconverter.h"
@@ -22,26 +21,19 @@
 //GLOBAL;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    //, thread(new QThread)           // ???????????????????????
-    //, worker(new HidDevice)         // ??????????????????????????
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-//    connect(this, &Sender::valueChanged,
-//     receiver, &Receiver::updateValue );
-//    connect(sender, &Sender::valueChanged,
-//     receiver, &Receiver::updateValue );
+    hid_device_worker = new HidDevice();
+    thread = new QThread;
+
+    thread_getSend_config = new QThread;
 
 //    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
 //            ui->widget_2, &ButtonLogical::Initialization);
 //    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
 //            ui->widget_2, &AdvancedSettings::WriteToConfig);
-
-//    QList<QWidget*> LogicButtonAdrList;
-//    QWidget *label = new QLabel();
-//    ui->gridLayout->addWidget(label, row, column);
-//    LogicButtonAdrList.append(label);
 
     // add dyn
 //    QGridLayout* layout = new QGridLayout;
@@ -173,56 +165,25 @@ MainWindow::MainWindow(QWidget *parent)
     connect(pin_config, SIGNAL(axesSourceChanged(int, bool)),
             axes_config, SLOT(addOrDeleteMainSource(int, bool)));
 
-
-    hid_device_worker = new HidDevice();     //УТЕЧКА!!!!!!!!
-    thread = new QThread;
-     //thread.reset(new QThread);       //in some arbitrary member function
-//    QScopedPointer<QThread> p(new QThread);
-//    connect(p.data(), SIGNAL(finished()), SLOT(onThreadFinish()));
-    //QScopedPointer<QThread> thread(new QThread);
-    //QScopedPointer<HidDevice> worker(new HidDevice);
-    //std::unique_ptr<QThread> thread(new QThread);
-    //QThread* thread = new QThread;              // delete? //unique_ptr #include <memory>
-    //HidDevice* worker = new HidDevice();                   //std::unique_ptr<Item> item(new Item);      //УТЕЧКА!!!!!!!!
-    //std::unique_ptr<HidDevice> worker(new HidDevice);
-    //connect(ui->button_GetConfig, SIGNAL(clicked()), SLOT(getConfig_Slot()));
-
-    //    worker->moveToThread(thread.data());    //thread.data()
-    //    connect(thread.data(), SIGNAL(started()), worker.data(), SLOT(processData()));      //worker.data()
-    //    connect(worker.data(), SIGNAL(putGamepadPacket(uint8_t *)),
-    //                          SLOT(getGamepadPacket(uint8_t *)));
-    //    connect(worker.data(), SIGNAL(putConnectedDeviceInfo()),
-    //                          SLOT(showConnectDeviceInfo()));
-    //    connect(worker.data(), SIGNAL(putDisconnectedDeviceInfo()),
-    //                          SLOT(hideConnectDeviceInfo()));
-    //    connect(worker.data(), SIGNAL(putConfigPacket(uint8_t *)),
-    //                          SLOT(getConfigPacket(uint8_t *)));
-    //    thread->start();
-
-//    QThread* thread = new QThread;
-//    Worker* worker = new Worker();
-//    worker->moveToThread(thread);
-//    connect(worker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
-//    connect(thread, SIGNAL(started()), worker, SLOT(process()));
-//    connect(worker, SIGNAL(finished()), thread, SLOT(quit()));
-//    connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
-//    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-//    thread->start();
-
+    // set selected hid device
+    connect(ui->comboBox_HidDeviceList, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(hidDeviceListChanged(int)));
 
 
     hid_device_worker->moveToThread(thread);    //thread.data()
 
-
     connect(thread, SIGNAL(started()), hid_device_worker, SLOT(processData()));      //worker.data()
 
-
     connect(hid_device_worker, SIGNAL(putGamepadPacket(uint8_t *)),
-                          SLOT(getGamepadPacket(uint8_t *)));
+                          this, SLOT(getGamepadPacket(uint8_t *)));
     connect(hid_device_worker, SIGNAL(putConnectedDeviceInfo()),
-                          SLOT(showConnectDeviceInfo()));
+                          this, SLOT(showConnectDeviceInfo()));
     connect(hid_device_worker, SIGNAL(putDisconnectedDeviceInfo()),
-                          SLOT(hideConnectDeviceInfo()));
+                          this, SLOT(hideConnectDeviceInfo()));
+    connect(hid_device_worker, SIGNAL(hidDeviceList(QStringList*)),
+                          this, SLOT(hidDeviceList(QStringList*)));
+
+
 
 //    connect(hid_device_worker, SIGNAL(putConfigPacket(uint8_t *)),
 //                          SLOT(getConfigPacket(uint8_t *)));
@@ -230,29 +191,17 @@ MainWindow::MainWindow(QWidget *parent)
 //                          SLOT(sendConfigPacket(uint8_t *)));
 
     thread->start();
-
-
-//    testThread = new QThread();
-//    moveToThread(testThread);
-//        connect(testThread, SIGNAL(started()), this, SLOT(getGamepadPacket()));
-//        testThread->start();
 }
 
-MainWindow::~MainWindow()   // для ядра сделать выключатель is_finish_
+MainWindow::~MainWindow()
 {
-    //thread->quit();
-    //thread->wait();
-    //delete worker;
-    //delete thread;
-//    if (thread)
-//    {
-//        thread->free();
-//        thread = 0;
-//    }
-//    thread->quit();
-//    thread->wait();
-//    thread->deleteLater();
-//    delete thread;
+    hid_device_worker->SetIsFinish(true);
+    thread->quit();
+    thread->deleteLater();
+    thread->wait();
+    delete hid_device_worker;
+    delete thread;
+    delete thread_getSend_config;       //
     delete ui;
 }
 
@@ -260,24 +209,21 @@ MainWindow::~MainWindow()   // для ядра сделать выключате
 void MainWindow::on_button_GetConfig_clicked()              // ХЕРНЯ ПЕРЕДЕЛАТЬ
 {
     qDebug() << "button GET CONFIG clicked";
-    //ui->button_GetConfig->setEnabled(false);
-    QThread thread;
+//    //ui->button_GetConfig->setEnabled(false);
     QEventLoop loop;
     QObject context;
-    context.moveToThread(&thread);
-    connect(&thread, &QThread::started, &context, [&]() {
+    context.moveToThread(thread_getSend_config);
+    connect(thread_getSend_config, &QThread::started, &context, [&]() {
         qDebug() << "waiting... ";
         gEnv.pDeviceConfig->config = hid_device_worker->GetConfig();
-        //device_config.config = hid_device_worker->GetConfig();
-        //QThread::msleep(2000);
         //ui->button_GetConfig->setEnabled(true);
         qDebug() << "done";
         loop.quit();
     });
-    thread.start();
+    thread_getSend_config->start();
     loop.exec();
-    thread.quit();
-    thread.wait();
+    thread_getSend_config->quit();
+    thread_getSend_config->wait();
     ui->label_DeviceName->setText(gEnv.pDeviceConfig->config.device_name);
     ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
 }
@@ -286,23 +232,22 @@ void MainWindow::on_button_GetConfig_clicked()              // ХЕРНЯ ПЕР
 void MainWindow::on_button_SendConfig_clicked()             // !!!!!!!!!!!!!
 {
     qDebug() << "button SEND CONFIG clicked";
-    ui->button_SendConfig->setEnabled(false);
-    QThread thread;
+//    ui->button_SendConfig->setEnabled(false);
     QEventLoop loop;
     QObject context;
-    context.moveToThread(&thread);
-    connect(&thread, &QThread::started, &context, [&]() {
+    context.moveToThread(thread_getSend_config);
+    connect(thread_getSend_config, &QThread::started, &context, [&]() {
         qDebug() << "waiting... ";
         hid_device_worker->SendConfig();
-        QThread::msleep(1100);
-        ui->button_SendConfig->setEnabled(true);
+        //QThread::msleep(1100);
+        //ui->button_SendConfig->setEnabled(true);
         qDebug() << "done";
         loop.quit();
     });
-    thread.start();
+    thread_getSend_config->start();
     loop.exec();
-    thread.quit();
-    thread.wait();
+    thread_getSend_config->quit();
+    thread_getSend_config->wait();
 }
 
 
@@ -335,12 +280,6 @@ void MainWindow::on_button_RusLang_clicked()
     ui->retranslateUi(this);
 }
 
-#include <QTimer>
-void MainWindow::testUpdate()
-{
-    //axes_config->AxesValueChanged();
-}
-
 //GetConfigFromDevice
 
 // попробовать вынести в отдельный поток и повесить дилей
@@ -351,6 +290,8 @@ void MainWindow::getGamepadPacket(uint8_t * buff){                              
     //QTimer::singleShot(500, [=]() { testUpdate(); } );
     //QThread::msleep(100);
     ui->lineEdit->setText(QString::number(asd));
+
+
     // optimization
     if(ui->tab_ButtonConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
         button_config->ButtonStateChanged();
@@ -361,6 +302,30 @@ void MainWindow::getGamepadPacket(uint8_t * buff){                              
     }
 
     asd++;
+}
+
+void MainWindow::hidDeviceList(QStringList* device_list)
+{
+    if (device_list->size() == 0 && ui->comboBox_HidDeviceList->count() > 0)
+    {
+        ui->comboBox_HidDeviceList->clear();
+        qDebug()<<"items count > 0 delete";
+        return;
+    } else if (device_list->size() > 0)
+    {
+        //qDebug()<<"hidDeviceList - changed";
+        ui->comboBox_HidDeviceList->clear();
+        //qDebug()<<"hidDeviceList - clear";
+        ui->comboBox_HidDeviceList->addItems(*device_list);
+        qDebug()<<"hidDeviceList - add";
+    } else {
+        //qDebug()<<"MainWindow::hidDeviceList - ERROR";
+    }
+}
+
+void MainWindow::hidDeviceListChanged(int index)
+{
+    hid_device_worker->SetSelectedDevice(index);
 }
 
 //void MainWindow::getConfigPacket(uint8_t * buff)
@@ -423,11 +388,6 @@ void MainWindow::resizeEvent(QResizeEvent* event)                       // SLOW
 //   }
 }
 
-void MainWindow::on_pushButton_4_clicked()
-{
-    //qDebug() << device_config.config.button_timer3_ms;
-}
-
 
 #include <QFile>
 #include <QTextStream>
@@ -457,35 +417,9 @@ void MainWindow::on_pushButton_QssChinaWhite_clicked()
     }
 }
 
-void MainWindow::on_pushButton_QssAqua_clicked()
-{
-    QFile f(":/QSS-master/Aqua.qss");
-    if (!f.exists())   {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else   {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-}
-
 void MainWindow::on_pushButton_QssUbuntu_clicked()
 {
     QFile f(":/QSS-master/Ubuntu.qss");
-    if (!f.exists())   {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else   {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-}
-
-void MainWindow::on_pushButton_QssElegantDark_clicked()
-{
-    QFile f(":/QSS-master/ElegantDark.qss");
     if (!f.exists())   {
         printf("Unable to set stylesheet, file not found\n");
     }
@@ -509,58 +443,6 @@ void MainWindow::on_pushButton_QssQDarkStyle_clicked()
     }
 }
 
-void MainWindow::on_pushButton_QssAMOLED_clicked()
-{
-    QFile f(":/QSS-master/AMOLED.qss");
-    if (!f.exists())   {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else   {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-}
-
-void MainWindow::on_pushButton_QssConsoleStyle_clicked()
-{
-    QFile f(":/QSS-master/ConsoleStyle.qss");
-    if (!f.exists())   {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else   {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-}
-
-void MainWindow::on_pushButton_QssManjaroMix_clicked()
-{
-    QFile f(":/QSS-master/ManjaroMix.qss");
-    if (!f.exists())   {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else   {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-}
-
-void MainWindow::on_pushButton_QssMaterialDark_clicked()
-{
-    QFile f(":/QSS-master/MaterialDark.qss");
-    if (!f.exists())   {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else   {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-}
-
 void MainWindow::on_pushButton_QssBreezeDark_clicked()
 {
     QFile f(":/dark.qss");
@@ -572,89 +454,6 @@ void MainWindow::on_pushButton_QssBreezeDark_clicked()
         QTextStream ts(&f);
         qApp->setStyleSheet(ts.readAll());
     }
-}
-
-void MainWindow::on_pushButton_QssBreezeWhite_clicked()
-{
-    QFile f(":/light.qss");
-    if (!f.exists())   {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else   {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-}
-
-
-
-
-
-
-///////////////////////////////////
-
-QList<QWidget*> LogicButtonAdrList;
-int column = 0;
-int row = 0;
-int ButtonNumber;
-
-void MainWindow::on_pushButton_clicked()
-{
-    qDebug() << (uint8_t*)REPORT_ID_CONFIG_IN;
-    ButtonNumber = ui->spinBoxButtonNumber->value();
-    for (int i = 0; i < ButtonNumber; i++) {
-        QWidget *label = new QLabel();
-
-        if(column>5)
-        {
-            row++;
-            column = 0;
-        }
-        label->setStyleSheet("background-image: url(:/Images/OFF_small_t.png)");
-        label->setMaximumSize(50, 43);
-        label->setMinimumSize(50, 43);
-        ui->gridLayout->addWidget(label, row, column);  //QWidget *label = new QLabel();
-        column++;
-        LogicButtonAdrList.append(label);       //QList<QWidget*> LogicButtonAdrList;
-
-    }
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    ButtonNumber = LogicButtonAdrList.size();
-    //qDebug() << ButtonNumber;
-
-    while (LogicButtonAdrList.size() > 0) {
-        QWidget *widget = LogicButtonAdrList.takeLast();
-        ui->gridLayout->removeWidget(widget);
-        widget->deleteLater();
-    }
-    row = column = 0;
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    ButtonNumber = ui->spinBoxButtonNumber->value();
-
-    for (int i = 0; i < ButtonNumber; i++) {
-        if (LogicButtonAdrList.size() > 0) {
-            QWidget *widget = LogicButtonAdrList.takeLast();
-            ui->gridLayout->removeWidget(widget);
-            widget->deleteLater();
-        }
-
-//        column--;
-//        if (column == 0)
-//        {
-//            row--;
-//            column = 5;
-//        }
-    }
-    row = ui->gridLayout->rowCount();
-    column = ui->gridLayout->columnCount();
-    if (column < 5) row--;
 }
 
 

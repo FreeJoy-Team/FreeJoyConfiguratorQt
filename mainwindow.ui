@@ -87,7 +87,7 @@
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QComboBox" name="comboBox_2"/>
+          <widget class="QComboBox" name="comboBox_HidDeviceList"/>
          </item>
          <item row="0" column="3">
           <widget class="QPushButton" name="pushButton_TEST_2_BUTTON">
@@ -137,7 +137,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>9</number>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -320,59 +320,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <attribute name="title">
         <string> Debug </string>
        </attribute>
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>10</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-       <widget class="QScrollArea" name="scrollAreaPhysButton">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>70</y>
-          <width>371</width>
-          <height>401</height>
-         </rect>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="lineWidth">
-         <number>1</number>
-        </property>
-        <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="widgetResizable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>369</width>
-           <height>399</height>
-          </rect>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout"/>
-          </item>
-         </layout>
-        </widget>
-       </widget>
        <widget class="QLabel" name="label_DeviceName">
         <property name="geometry">
          <rect>
@@ -405,43 +352,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
         </property>
         <property name="text">
          <string>SEND CONFIG to device</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_ID">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>10</y>
-          <width>91</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>hz</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="button_Prost">
-        <property name="geometry">
-         <rect>
-          <x>390</x>
-          <y>450</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 0, 0);</string>
-        </property>
-        <property name="text">
-         <string>X</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_3">
@@ -489,87 +399,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="geometry">
-         <rect>
-          <x>470</x>
-          <y>260</y>
-          <width>181</width>
-          <height>151</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>GroupBox</string>
-        </property>
-        <widget class="QSpinBox" name="spinBoxButtonNumber">
-         <property name="geometry">
-          <rect>
-           <x>65</x>
-           <y>50</y>
-           <width>51</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="maximum">
-          <number>999</number>
-         </property>
-         <property name="value">
-          <number>12</number>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label">
-         <property name="geometry">
-          <rect>
-           <x>55</x>
-           <y>20</y>
-           <width>71</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Button number</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>90</y>
-           <width>75</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Increase</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="geometry">
-          <rect>
-           <x>50</x>
-           <y>120</y>
-           <width>75</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Remove all</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>90</y>
-           <width>75</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Decrease</string>
-         </property>
-        </widget>
-       </widget>
        <widget class="QLabel" name="label_DeviceStatus">
         <property name="geometry">
          <rect>
@@ -602,50 +431,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
         </property>
         <property name="text">
          <string>Device name:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_6">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>460</y>
-          <width>20</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"> border-radius: 10px;
- min-height: 20px;
- min-width: 20px;
-background-color: rgb(255, 0, 0);</string>
-        </property>
-        <property name="text">
-         <string>1</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_7">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>460</y>
-          <width>20</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">  border-radius: 10px;
-  min-height: 20px;
-  min-width: 20px;
-background-color: rgb(13, 204, 0);</string>
-        </property>
-        <property name="text">
-         <string>1</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -709,24 +494,24 @@ background-color: rgb(13, 204, 0);</string>
          <set>Qt::AlignCenter</set>
         </property>
         <layout class="QGridLayout" name="gridLayout_10">
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pushButton_QssChinaWhite">
+           <property name="text">
+            <string>ChinaWhite</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_QssUbuntu">
+           <property name="text">
+            <string>Ubuntu</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="pushButton_QssQDarkStyle">
            <property name="text">
             <string>qDarkStyle</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_QssConsoleStyle">
-           <property name="text">
-            <string>ConsoleStyle</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QPushButton" name="pushButton_QssMaterialDark">
-           <property name="text">
-            <string>MaterialDark</string>
            </property>
           </widget>
          </item>
@@ -737,56 +522,7 @@ background-color: rgb(13, 204, 0);</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_QssUbuntu">
-           <property name="text">
-            <string>Ubuntu</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_QssManjaroMix">
-           <property name="text">
-            <string>ManjaroMix</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_QssAMOLED">
-           <property name="text">
-            <string>AMOLED</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QPushButton" name="pushButton_QssElegantDark">
-           <property name="text">
-            <string>ElegantDark</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_QssAqua">
-           <property name="text">
-            <string>Aqua</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_QssChinaWhite">
-           <property name="text">
-            <string>ChinaWhite</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QPushButton" name="pushButton_QssBreezeWhite">
-           <property name="text">
-            <string>Breeze white</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
           <widget class="QPushButton" name="pushButton_QssBreezeDark">
            <property name="text">
             <string>Breeze dark</string>
