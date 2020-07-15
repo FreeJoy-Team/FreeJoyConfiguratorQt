@@ -29,6 +29,8 @@ public:
     void SetMaxPhysButtons(int max_phys_buttons);
     void SetSpinBoxOnOff(int max_phys_buttons);
     void ButtonState(bool is_activated);
+    void RetranslateUi();
+
     bool is_activated_ = false;
 //private: ??
     int button_number_;

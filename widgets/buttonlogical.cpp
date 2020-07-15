@@ -32,6 +32,11 @@ ButtonLogical::~ButtonLogical()
     delete ui;
 }
 
+void ButtonLogical::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 void ButtonLogical::ReadFromConfig()                // rename to ReadFromConfig
 {
     // physical

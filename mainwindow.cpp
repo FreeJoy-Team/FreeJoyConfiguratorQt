@@ -278,27 +278,45 @@ void MainWindow::on_button_RusLang_clicked()
     translator.load(":/FreeJoyTest_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
     qApp->installTranslator(&translator);
     ui->retranslateUi(this);
+    button_config->RetranslateUi();
 }
 
 //GetConfigFromDevice
 
 // попробовать вынести в отдельный поток и повесить дилей
 int asd = 0;
-void MainWindow::getGamepadPacket(uint8_t * buff){                                    // НЕ В ЯДРЕ ВОРКЕРА
-    report_convert.GamepadReport(buff);
-
-    //QTimer::singleShot(500, [=]() { testUpdate(); } );
-    //QThread::msleep(100);
+void MainWindow::getGamepadPacket(uint8_t * buff)                                    // НЕ В ЯДРЕ ВОРКЕРА
+{
     ui->lineEdit->setText(QString::number(asd));
+    report_convert.GamepadReport(buff);
+//    // optimization
+//    if(ui->tab_ButtonConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
+//        button_config->ButtonStateChanged();
+//    }
+//    // optimization
+//    if(ui->tab_AxesConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
+//        axes_config->AxesValueChanged();
+//    }
 
+    static clock_t timer;
+    static bool change = false;
 
-    // optimization
-    if(ui->tab_ButtonConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
-        button_config->ButtonStateChanged();
+    if (!change)
+    {
+        timer = clock();
+        change = true;
     }
-    // optimization
-    if(ui->tab_AxesConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
-        axes_config->AxesValueChanged();
+    else if (change && clock() - timer > 17)    // обновление раз в 17мс
+    {
+        // optimization
+        if(ui->tab_ButtonConfig->isVisible() == true){
+            button_config->ButtonStateChanged();
+        }
+        // optimization
+        if(ui->tab_AxesConfig->isVisible() == true){
+            axes_config->AxesValueChanged();
+        }
+        change = false;
     }
 
     asd++;

@@ -9,6 +9,7 @@
 //{
 //};
 
+
 void HidDevice::processData()
 {
     int res = 0;
@@ -19,9 +20,19 @@ void HidDevice::processData()
     hid_device_info* hid_dev_info;
     QStringList str_list;
     uint8_t buffer[BUFFSIZE]={0};
-    while (is_finish_ == false) {
 
+    while (is_finish_ == false)
+    {
+//        //////////////
+//        clock_t start = clock();
+//        for(int i = 0; i < 100; ++i){
+//            hid_dev_info = hid_enumerate(0x0483, NULL);
+//        }
+//        clock_t stop = clock();
+//        qDebug()<<"hid_enumerate time ="<<stop- start;
+//        /////////////
 
+        // check connected devices
         if (!change)
         {
             timer = clock();
@@ -29,9 +40,11 @@ void HidDevice::processData()
         }
         else if (change && clock() - timer > 800)
         {
+            // goto
+            //link:
             hid_dev_info = hid_enumerate(0x0483, NULL);
-
-            if (!hid_dev_info && no_device_sent == false){
+            if (!hid_dev_info && no_device_sent == false)
+            {
                 str_list.clear();
                 HidDevicesAdrList.clear();
                 emit hidDeviceList(&str_list);
@@ -44,12 +57,18 @@ void HidDevice::processData()
                 hid_dev_info = hid_dev_info->next;
                 if (!hid_dev_info && HidDevicesAdrList.size() != tmp_HidDevicesAdrList.size())
                 {
-                    QThread::msleep(200);   // хз
+                    //QThread::msleep(20);   // хз
                     HidDevicesAdrList.clear();
                     str_list.clear();
                     no_device_sent = false;
                     for (int i = 0; i < tmp_HidDevicesAdrList.size(); ++i)
                     {
+                        qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
+//                        if (QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string) == ""){
+//                            qDebug()<<"NULL NULL";
+//                            ////tmp_HidDevicesAdrList.clear();
+//                            ////goto link;
+//                        }
                         HidDevicesAdrList.append(tmp_HidDevicesAdrList[i]);
                         str_list << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
                     }
@@ -62,19 +81,23 @@ void HidDevice::processData()
             change = false;
         }
 
-        if (HidDevicesAdrList.size() && !handle_read) {
-            handle_read = hid_open(0x0483, HidDevicesAdrList[0]->product_id,nullptr);
+        // no device
+        if (!handle_read)
+        {
+            if (HidDevicesAdrList.size()){
+                handle_read = hid_open(0x0483, HidDevicesAdrList[0]->product_id,nullptr);
+            }
             if (!handle_read) {
-                //emit putGamepadPacket(empty_buf_gamepad);
                 emit putDisconnectedDeviceInfo();
                 //hid_free_enumeration(hid_dev_info);
-                QThread::msleep(500);
+                QThread::msleep(300);
             } else {
                 emit putConnectedDeviceInfo();
             }
         }
-
-        if (handle_read) {
+        // device connected
+        if (handle_read)
+        {
 
             res=hid_read_timeout(handle_read, buffer, BUFFSIZE,10000);         // 10000?
             //  res=hid_read(handle_read, buf, BUFFSIZE);
@@ -86,7 +109,7 @@ void HidDevice::processData()
                     memset(device_buffer_, 0, BUFFSIZE);
                     memcpy(device_buffer_, buffer, BUFFSIZE);
                     emit putGamepadPacket(device_buffer_);
-                    //QThread::msleep(5);            // обновление для обычных пакетов
+                    //QThread::msleep(5);            // хз почему даже 5мс тормозит всё на ~100мс
                 }
                 else if (buffer[0] == REPORT_ID_CONFIG_IN) {                         // NOT USED // config from device
                     //qDebug() << "hiddevice buf[0] == 2";
@@ -107,6 +130,7 @@ void HidDevice::processData()
     hid_free_enumeration(hid_dev_info);
 }
 
+
 void HidDevice::SetSelectedDevice(int device_number)
 {
     if (device_number < 0){
@@ -115,14 +139,16 @@ void HidDevice::SetSelectedDevice(int device_number)
     } else if (device_number > HidDevicesAdrList.size() - 1){
         device_number = HidDevicesAdrList.size() - 1;
     }
-    selected_device_ = device_number;
+    selected_device_ = device_number; 
     handle_read = hid_open(0x0483, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
 }
+
 
 void HidDevice::SetIsFinish(bool is_finish)
 {
     is_finish_ = is_finish;
 }
+
 
 dev_config_t HidDevice::GetConfig()     // try catch
 {
@@ -206,8 +232,3 @@ void HidDevice::SendConfig()      // try catch
         //QThread::msleep(20);
     }
 }
-
-
-
-//vid 0x0483
-//pid 0x5750

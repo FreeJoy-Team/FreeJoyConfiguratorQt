@@ -31,6 +31,14 @@ ButtonConfig::~ButtonConfig()
     delete ui;
 }
 
+void ButtonConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
+        LogicButtonAdrList[i]->RetranslateUi();
+    }
+}
+
 void ButtonConfig::PhysicalButtonsSpawn(int count)
 {
     // delete all

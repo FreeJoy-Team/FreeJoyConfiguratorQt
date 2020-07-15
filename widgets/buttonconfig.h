@@ -29,6 +29,8 @@ public:
     void WriteToConfig();
     void ButtonStateChanged();
 
+    void RetranslateUi();
+
     // private:?
     //ButtonPhysical* physical_button_widget;     // нужны ли?
     //ButtonLogical* logical_buttons_widget;

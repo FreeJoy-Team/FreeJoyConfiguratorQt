@@ -15,6 +15,7 @@ class HidDevice : public QObject
     Q_OBJECT
 
 public:
+
     hid_device *handle_read;                // private?
     dev_config_t GetConfig();
     void SendConfig();
@@ -43,7 +44,6 @@ private:
     uint8_t device_buffer_[BUFFSIZE];
     dev_config_t device_config_;                // ????
     QList<hid_device_info*> HidDevicesAdrList;
-    //std::vector<wchar_t*> serial_number_;       // мб нах поинтер
 
     ReportConverter *report_convert;                     // !!!!
 };
