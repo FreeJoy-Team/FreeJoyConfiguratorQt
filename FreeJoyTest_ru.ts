@@ -51,6 +51,30 @@
         <source>Enter Flasher Mode</source>
         <translation type="unfinished">Войти в режим прошивки</translation>
     </message>
+    <message>
+        <source>Application settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Styles</source>
+        <translation type="unfinished">Стили</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Languages</source>
+        <translation type="unfinished">Языки</translation>
+    </message>
 </context>
 <context>
     <name>Axes</name>
@@ -496,10 +520,6 @@
     <message>
         <source>Form</source>
         <translation>Форма</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>X</source>
@@ -961,7 +981,7 @@
     <name>MainWindow</name>
     <message>
         <source>MainWindow</source>
-        <translation>ГлавноеОкно</translation>
+        <translation type="vanished">ГлавноеОкно</translation>
     </message>
     <message>
         <source>Tab 1</source>
@@ -1001,7 +1021,7 @@
     </message>
     <message>
         <source>GroupBox</source>
-        <translation>Груп бокс</translation>
+        <translation type="vanished">Груп бокс</translation>
     </message>
     <message>
         <source>Button number</source>
@@ -1028,24 +1048,12 @@
         <translation>Название девайса:</translation>
     </message>
     <message>
-        <source>English</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Русский</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Disconnected</source>
         <translation>Отключён</translation>
     </message>
     <message>
         <source>RESET ALL PINS</source>
-        <translation>Сбросить все пины</translation>
-    </message>
-    <message>
-        <source>2.34456.67.6</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Сбросить все пины</translation>
     </message>
     <message>
         <source>--</source>
@@ -1053,15 +1061,11 @@
     </message>
     <message>
         <source>READ FROM INTERNAL CONFIG</source>
-        <translation>Чтение из внутреннего конфига</translation>
+        <translation type="vanished">Чтение из внутреннего конфига</translation>
     </message>
     <message>
         <source>WRITE TO INTERNAL CONFIG</source>
-        <translation>Запись в внутренний конфиг</translation>
-    </message>
-    <message>
-        <source>F103Joy</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Запись в внутренний конфиг</translation>
     </message>
     <message>
         <source> Pin Config </source>
@@ -1113,7 +1117,7 @@
     </message>
     <message>
         <source>Languages</source>
-        <translation>Языки</translation>
+        <translation type="vanished">Языки</translation>
     </message>
     <message>
         <source>Styles</source>
@@ -1138,6 +1142,22 @@
     <message>
         <source>Breeze dark</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset All Pins</source>
+        <translation type="unfinished">Сбросить все пины</translation>
+    </message>
+    <message>
+        <source>Write config to Device</source>
+        <translation type="unfinished">Запись конфига в устройство</translation>
+    </message>
+    <message>
+        <source>Read config from Device</source>
+        <translation type="unfinished">Чтение конфига из устройства</translation>
+    </message>
+    <message>
+        <source>Device firmware v</source>
+        <translation>Версия прошивки v</translation>
     </message>
 </context>
 <context>

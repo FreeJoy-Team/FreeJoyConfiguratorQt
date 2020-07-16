@@ -6,6 +6,7 @@
 //#include <QScopedPointer>   //?
 #include <ctime>
 #include <QTimer>
+#include <QSettings>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -26,10 +27,28 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // сделать версию
+    this->setWindowTitle("FreeJoy QtConfigurator");
+//    QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
+
+
     hid_device_worker = new HidDevice();
     thread = new QThread;
 
     thread_getSend_config = new QThread;
+
+
+    // load language settings
+    gEnv.pAppSettings->beginGroup("LanguageSettings");
+    if (gEnv.pAppSettings->value("Language", "english").toString() == "russian")
+    {
+        translator.load(":/FreeJoyTest_ru");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }
+    gEnv.pAppSettings->endGroup();
+
+
 
 
 //    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
@@ -116,6 +135,9 @@ MainWindow::MainWindow(QWidget *parent)
     // axes source changed//axesSourceChanged
     connect(pin_config, SIGNAL(axesSourceChanged(int, bool)),
             axes_config, SLOT(addOrDeleteMainSource(int, bool)));
+    // language changed
+    connect(ui->widget_2, SIGNAL(languageChanged(QString)),
+            this, SLOT(languageChanged(QString)));
 
 
 
@@ -177,7 +199,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::showConnectDeviceInfo() {
     ui->label_DeviceStatus->setText(tr("Connected"));
-    ui->label_DeviceStatus->setStyleSheet("background-color: green");
+    ui->label_DeviceStatus->setStyleSheet("color: white; background-color: green;");
     //ui->label_DeviceStatus->setVisible(true);
 }
 
@@ -185,34 +207,25 @@ void MainWindow::showConnectDeviceInfo() {
 void MainWindow::hideConnectDeviceInfo() {
     //ui->label_DeviceStatus->setVisible(false);
     ui->label_DeviceStatus->setText(tr("Disconnected"));
-    ui->label_DeviceStatus->setStyleSheet("background-color: red");
+    ui->label_DeviceStatus->setStyleSheet("color: white; background-color: red;");
 }
 
-
-void MainWindow::on_button_EngLang_clicked()        // QSignalBlocker blocker(ui->comboBox);
+void MainWindow::languageChanged(QString language)        // QSignalBlocker blocker(ui->comboBox);
 {
-    //QString s = QVariant::fromValue(ModelApple::Big).toString();
-    //qDebug() << s;
-    translator.load(":/FreeJoyTest_en");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
-    qApp->installTranslator(&translator);
-    ui->retranslateUi(this);
-
-    pin_config->RetranslateUi();
-    button_config->RetranslateUi();
-    led_config->RetranslateUi();
-    encoder_config->RetranslateUi();
-    shift_reg_config->RetranslateUi();
-    axes_config->RetranslateUi();
-    axes_curves_config->RetranslateUi();
-    a2b_config->RetranslateUi();
-}
-
-void MainWindow::on_button_RusLang_clicked()
-{
-    translator.load(":/FreeJoyTest_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
-    qApp->installTranslator(&translator);
-    ui->retranslateUi(this);
-
+    if (language == "russian")
+    {
+        translator.load(":/FreeJoyTest_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }
+    else if (language == "english")
+    {
+        translator.load(":/FreeJoyTest_en");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    } else {
+        return;
+    }
     pin_config->RetranslateUi();
     button_config->RetranslateUi();
     led_config->RetranslateUi();
@@ -439,7 +452,7 @@ void MainWindow::on_pushButton_ReadConfig_clicked()        // херня? mb QtC
     loop.exec();
     thread_getSend_config->quit();
     thread_getSend_config->wait();
-    ui->label_DeviceName->setText(gEnv.pDeviceConfig->config.device_name);
+    ui->label_DebDeviceName->setText(gEnv.pDeviceConfig->config.device_name);
     ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
 }
 
@@ -512,8 +525,13 @@ void MainWindow::configReceived(bool success)        // повторное на�
         // read button config
         button_config->ReadFromConfig();
 
+        // set firmware version
+        QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
+        if (str.size() == 4){
+            ui->label_FirmwareVersion->setText(tr("Device firmware v") + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
+        }
 
-        ui->pushButton_ReadConfig->setText("Received");
+        ui->pushButton_ReadConfig->setText(tr("Received"));
         ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
 
         QTimer::singleShot(1000, [&]{
@@ -522,7 +540,7 @@ void MainWindow::configReceived(bool success)        // повторное на�
             ui->pushButton_ReadConfig->setEnabled(true);
         });
     } else {
-        ui->pushButton_ReadConfig->setText("Error");
+        ui->pushButton_ReadConfig->setText(tr("Error"));
         ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
 
         QTimer::singleShot(1000, [&]{
@@ -539,7 +557,7 @@ void MainWindow::configSent(bool success)
     static QString button_default_text = ui->pushButton_WriteConfig->text();
 
     if (success == true){
-        ui->pushButton_WriteConfig->setText("Sent");
+        ui->pushButton_WriteConfig->setText(tr("Sent"));
         ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
 
         QTimer::singleShot(1000, [&]{
@@ -548,7 +566,7 @@ void MainWindow::configSent(bool success)
             ui->pushButton_WriteConfig->setEnabled(true);
         });
     } else {
-        ui->pushButton_WriteConfig->setText("Error");
+        ui->pushButton_WriteConfig->setText(tr("Error"));
         ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
 
         QTimer::singleShot(1000, [&]{

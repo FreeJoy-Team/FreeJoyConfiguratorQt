@@ -5,11 +5,11 @@
 #include <QTranslator>
 #include <QEvent>
 #include <QScrollBar>
+#include <QSettings>
 
 #include "deviceconfig.h"
 #include "hiddevice.h"
 #include "reportconverter.h"
-#include "appconfig.h"
 
 // widgets  удалить лишнее
 #include "widgets/encoders.h"
@@ -28,6 +28,12 @@
 #include "widgets/ledconfig.h"
 #include "widgets/shiftregisters.h"
 #include "widgets/shiftregistersconfig.h"
+
+/* Defining */
+//#define ORGANIZATION_NAME "FreeJoy"
+//#define ORGANIZATION_DOMAIN "https://github.com/FreeJoy-Team"
+//#define APPLICATION_NAME "FreeJoy QtConfigurator"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -80,9 +86,7 @@ private slots:
     void hidDeviceList(QStringList* device_list);
     void hidDeviceListChanged(int index);
 
-    void on_button_EngLang_clicked();
-    void on_button_RusLang_clicked();
-
+    void languageChanged(QString language);
 
     void on_pushButton_QssDefault_clicked();
     void on_pushButton_QssChinaWhite_clicked();

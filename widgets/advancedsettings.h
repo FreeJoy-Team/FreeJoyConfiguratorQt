@@ -16,14 +16,26 @@ public:
     explicit AdvancedSettings(QWidget *parent = nullptr);
     ~AdvancedSettings();
 
+    void ReadFromConfig();
+    void WriteToConfig();
+
     void RetranslateUi();
+
+signals:
+    void languageChanged(QString language);
+
+private slots:
+    void on_pushButton_LangEnglish_clicked();
+    void on_pushButton_LangRussian_clicked();
+
+    void on_pushButton_StyleDefault_clicked();
+
+    void on_pushButton_StyleWhite_clicked();
+
+    void on_pushButton_StyleDark_clicked();
 
 private:
     Ui::AdvancedSettings *ui;
-
-public slots:   // private?
-    void ReadFromConfig();
-    void WriteToConfig();
 };
 
 #endif // ADVANCEDSETTINGS_H

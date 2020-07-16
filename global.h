@@ -1,25 +1,23 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include <QWidget>
+#include <QString>
 
-class AppConfig;
 class DeviceConfig;
-class SignalHandler;
+class QSettings;
 //! CryEngine style global environment
 //!	Global environment. Contains pointers to all global often needed interfaces.
 //!	This is a faster way to get interface pointer then calling ISystem interface to retrieve one.
 struct GlobalEnvironment
 {
-    AppConfig*                 pAppConfig = nullptr;
     DeviceConfig*              pDeviceConfig = nullptr;
-    SignalHandler*             pSignalHandler = nullptr;
+    QSettings*                 pAppSettings = nullptr;
     // thread
 };
 extern GlobalEnvironment gEnv;
 
 
-struct deviceEnum_guiName_t     // снести?
+struct deviceEnum_guiName_t
 {
     int device_enum_index;
     QString gui_name;

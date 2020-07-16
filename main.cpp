@@ -7,34 +7,66 @@
 // CryEngine global environment
 #include "global.h"
 GlobalEnvironment gEnv;
-#include "appconfig.h"
 #include "deviceconfig.h"
 #include "signalhandler.h"
 
 
 int main(int argc, char *argv[])
 {
+//    QCoreApplication::setOrganizationName(ORGANIZATION_NAME);
+//    QCoreApplication::setOrganizationDomain(ORGANIZATION_DOMAIN);
+//    QCoreApplication::setApplicationName(APPLICATION_NAME);
+
     QApplication a(argc, argv);
 
-    // set stylesheet
-//    //QFile f(":qdarkstyle/style.qss");
-//    QFile f(":/BreezeStyleSheets/dark.qss");
-//    if (!f.exists())   {
-//        printf("Unable to set stylesheet, file not found\n");
-//    }
-//    else   {
-//        f.open(QFile::ReadOnly | QFile::Text);
-//        QTextStream ts(&f);
-//        qApp->setStyleSheet(ts.readAll());
-//    }
-
-    // new?
-    AppConfig app_config;
+    // global
+    QSettings app_settings( "settings.conf", QSettings::IniFormat );
     DeviceConfig device_config;
-    SignalHandler signal_handler;   // снести нахер это ненужное говно
-    gEnv.pAppConfig = &app_config;
+    gEnv.pAppSettings = &app_settings;
     gEnv.pDeviceConfig = &device_config;
-    gEnv.pSignalHandler = &signal_handler;
+
+    // set styleSheet
+    gEnv.pAppSettings->beginGroup("StyleSettings");
+    QString style = gEnv.pAppSettings->value("StyleSheet", "default").toString();
+    gEnv.pAppSettings->endGroup();
+
+    if (style == "default")
+    {
+        QFile f(":/QSS-master/default.qss");
+        if (!f.exists())   {
+            printf("Unable to set stylesheet, file not found\n");
+        }
+        else   {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll());
+        }
+    }
+    else if (style == "white")
+    {
+        QFile f(":/qss/css/qss.css");
+        if (!f.exists())   {
+            printf("Unable to set stylesheet, file not found\n");
+        }
+        else   {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll());
+        }
+    }
+    else if (style == "dark")
+    {
+        QFile f(":qdarkstyle/style.qss");
+        if (!f.exists())   {
+            printf("Unable to set stylesheet, file not found\n");
+        }
+        else   {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll());
+        }
+    }
+
 
 
     MainWindow w;

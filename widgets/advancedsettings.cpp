@@ -1,14 +1,14 @@
 #include "advancedsettings.h"
 #include "ui_advancedsettings.h"
 
+#include <QFile>
+#include <QTextStream>
+#include <QSettings>
+
 #include "global.h"
 #include "deviceconfig.h"
-#include <QDebug>
-#include <QString>
 
 
-
-///// NEED INITIALIZATION
 ///// NEED FLASH MODE
 AdvancedSettings::AdvancedSettings(QWidget *parent) :
     QWidget(parent),
@@ -43,7 +43,6 @@ void AdvancedSettings::ReadFromConfig()
 
 void AdvancedSettings::WriteToConfig()
 {
-    qDebug()<<"Go ACTIVATED";
     // PID
     gEnv.pDeviceConfig->config.pid = ui->lineEdit_PID->text().toInt(nullptr,16);
     // dynamic conf.
@@ -55,4 +54,73 @@ void AdvancedSettings::WriteToConfig()
     }
     // usb exchange period
     gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_USBExchangePeriod->value();
+}
+
+void AdvancedSettings::on_pushButton_LangEnglish_clicked()
+{
+    gEnv.pAppSettings->beginGroup("LanguageSettings");
+    gEnv.pAppSettings->setValue( "Language", "english" );
+    gEnv.pAppSettings->endGroup();
+
+    emit languageChanged("english");
+}
+
+void AdvancedSettings::on_pushButton_LangRussian_clicked()
+{
+    gEnv.pAppSettings->beginGroup("LanguageSettings");
+    gEnv.pAppSettings->setValue( "Language", "russian" );
+    gEnv.pAppSettings->endGroup();
+
+    emit languageChanged("russian");
+}
+
+void AdvancedSettings::on_pushButton_StyleDefault_clicked()
+{
+        QFile f(":/QSS-master/default.qss");
+        if (!f.exists())   {
+            printf("Unable to set stylesheet, file not found\n");
+        }
+        else   {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll());
+        }
+
+        gEnv.pAppSettings->beginGroup("StyleSettings");
+        gEnv.pAppSettings->setValue("StyleSheet", "default");
+        gEnv.pAppSettings->endGroup();
+}
+
+void AdvancedSettings::on_pushButton_StyleWhite_clicked()
+{
+        QFile f(":/qss/css/qss.css");
+        if (!f.exists())   {
+            printf("Unable to set stylesheet, file not found\n");
+        }
+        else   {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll());
+        }
+
+        gEnv.pAppSettings->beginGroup("StyleSettings");
+        gEnv.pAppSettings->setValue("StyleSheet", "white");
+        gEnv.pAppSettings->endGroup();
+}
+
+void AdvancedSettings::on_pushButton_StyleDark_clicked()
+{
+        QFile f(":qdarkstyle/style.qss");
+        if (!f.exists())   {
+            printf("Unable to set stylesheet, file not found\n");
+        }
+        else   {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll());
+        }
+
+        gEnv.pAppSettings->beginGroup("StyleSettings");
+        gEnv.pAppSettings->setValue("StyleSheet", "dark");
+        gEnv.pAppSettings->endGroup();
 }

@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string notr="true">FreeJoy QtConfigurator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout" stretch="3,20">
@@ -35,11 +35,11 @@
          </size>
         </property>
         <property name="title">
-         <string>GroupBox</string>
+         <string/>
         </property>
-        <layout class="QGridLayout" name="gridLayout_7">
+        <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0,0">
          <property name="topMargin">
-          <number>0</number>
+          <number>6</number>
          </property>
          <item row="1" column="2" rowspan="3">
           <widget class="QPushButton" name="pushButton_ResetAllPins">
@@ -49,9 +49,9 @@
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="label_60">
+          <widget class="QLabel" name="label_FirmwareVersion">
            <property name="text">
-            <string>firmware version</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -100,9 +100,9 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_59">
+          <widget class="QLabel" name="label_DeviceStatus">
            <property name="text">
-            <string>connected</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -140,7 +140,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>9</number>
+       <number>8</number>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -323,7 +323,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <attribute name="title">
         <string> Debug </string>
        </attribute>
-       <widget class="QLabel" name="label_DeviceName">
+       <widget class="QLabel" name="label_DebDeviceName">
         <property name="geometry">
          <rect>
           <x>120</x>
@@ -345,6 +345,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
         </property>
        </widget>
        <widget class="QPushButton" name="button_SendConfig">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>580</x>
@@ -374,6 +377,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
         </property>
        </widget>
        <widget class="QPushButton" name="button_GetConfig">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>400</x>
@@ -402,7 +408,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_DeviceStatus">
+       <widget class="QLabel" name="label_DebDeviceStatus">
         <property name="geometry">
          <rect>
           <x>480</x>
@@ -452,35 +458,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
          <string>TextLabel</string>
         </property>
        </widget>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="geometry">
-         <rect>
-          <x>830</x>
-          <y>170</y>
-          <width>141</width>
-          <height>141</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Languages</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QPushButton" name="button_EngLang">
-           <property name="text">
-            <string>English</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button_RusLang">
-           <property name="text">
-            <string>Русский</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
        <widget class="QGroupBox" name="groupBox_12">
         <property name="geometry">
          <rect>
@@ -499,6 +476,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
         <layout class="QGridLayout" name="gridLayout_10">
          <item row="1" column="0">
           <widget class="QPushButton" name="pushButton_QssChinaWhite">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>ChinaWhite</string>
            </property>
@@ -506,6 +486,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
          </item>
          <item row="2" column="0">
           <widget class="QPushButton" name="pushButton_QssUbuntu">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Ubuntu</string>
            </property>
@@ -513,6 +496,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
          </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="pushButton_QssQDarkStyle">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>qDarkStyle</string>
            </property>
@@ -520,6 +506,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
          </item>
          <item row="0" column="0">
           <widget class="QPushButton" name="pushButton_QssDefault">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Default</string>
            </property>
@@ -527,6 +516,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
          </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="pushButton_QssBreezeDark">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Breeze dark</string>
            </property>

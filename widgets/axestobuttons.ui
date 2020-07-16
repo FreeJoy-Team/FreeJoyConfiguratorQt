@@ -16,8 +16,14 @@
   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,15,1">
    <item>
     <widget class="QCheckBox" name="checkBox_A2bIndex">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="text">
-      <string>1</string>
+      <string notr="true">1</string>
      </property>
     </widget>
    </item>

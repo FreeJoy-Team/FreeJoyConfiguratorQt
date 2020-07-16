@@ -279,7 +279,7 @@
          <enum>QFrame::NoFrame</enum>
         </property>
         <property name="lineWidth">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="widgetResizable">
          <bool>true</bool>
@@ -341,6 +341,12 @@
        <widget class="QScrollArea" name="scrollArea_2">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
         </property>
         <property name="widgetResizable">
          <bool>true</bool>

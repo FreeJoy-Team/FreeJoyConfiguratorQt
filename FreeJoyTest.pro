@@ -17,7 +17,6 @@ WIN_DESKTOP
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    appconfig.cpp \
     converter.cpp \
     deviceconfig.cpp \
     hidapi.c \
@@ -50,7 +49,6 @@ SOURCES += \
     widgets/shiftregistersconfig.cpp
 
 HEADERS += \
-    appconfig.h \
     common_defines.h \
     common_types.h \
     converter.h \
