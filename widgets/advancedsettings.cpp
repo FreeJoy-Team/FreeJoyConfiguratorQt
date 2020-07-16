@@ -65,7 +65,7 @@ void AdvancedSettings::on_pushButton_LangEnglish_clicked()
     emit languageChanged("english");
 }
 
-void AdvancedSettings::on_pushButton_LangRussian_clicked()
+void AdvancedSettings::on_pushButton_LangRussian_clicked()  // мб в деструкторе сохранять?
 {
     gEnv.pAppSettings->beginGroup("LanguageSettings");
     gEnv.pAppSettings->setValue( "Language", "russian" );

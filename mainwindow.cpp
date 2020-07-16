@@ -48,6 +48,37 @@ MainWindow::MainWindow(QWidget *parent)
     }
     gEnv.pAppSettings->endGroup();
 
+    // load tab index
+    gEnv.pAppSettings->beginGroup("TabIndexSettings");
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_PinConfig),
+                                      gEnv.pAppSettings->value("PinConfig", ui->tabWidget->indexOf(ui->tab_PinConfig)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ButtonConfig),
+                                      gEnv.pAppSettings->value("ButtonConfig", ui->tabWidget->indexOf(ui->tab_ButtonConfig)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesConfig),
+                                      gEnv.pAppSettings->value("AxesConfig", ui->tabWidget->indexOf(ui->tab_AxesConfig)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesCurves),
+                                      gEnv.pAppSettings->value("AxesCurves", ui->tabWidget->indexOf(ui->tab_AxesCurves)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesToButtons),
+                                      gEnv.pAppSettings->value("AxesToButtons", ui->tabWidget->indexOf(ui->tab_AxesToButtons)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ShiftRegisters),
+                                      gEnv.pAppSettings->value("ShiftRegs", ui->tabWidget->indexOf(ui->tab_ShiftRegisters)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_Encoders),
+                                      gEnv.pAppSettings->value("Encoders", ui->tabWidget->indexOf(ui->tab_Encoders)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_LED),
+                                      gEnv.pAppSettings->value("LED", ui->tabWidget->indexOf(ui->tab_LED)).toInt());
+
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AdvancedSettings),
+                                      gEnv.pAppSettings->value("AdvSettings", ui->tabWidget->indexOf(ui->tab_AdvancedSettings)).toInt());
+
+    ui->tabWidget->setCurrentIndex(gEnv.pAppSettings->value("CurrentIndex", 0).toInt());
+    gEnv.pAppSettings->endGroup();
 
 
 
@@ -72,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent)
     //    m_HeapWidgetWithParent = new QWidget(this);
     //    // needs to be deleted by you
     //    m_HeapNoQObj = new NoQObjectDerivedClass();
+
 
 
                                             //////////////// ADD WIDGETS ////////////////
@@ -186,6 +218,19 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    gEnv.pAppSettings->beginGroup("TabIndexSettings");
+    gEnv.pAppSettings->setValue("PinConfig",       ui->tabWidget->indexOf(ui->tab_PinConfig));
+    gEnv.pAppSettings->setValue("ButtonConfig",    ui->tabWidget->indexOf(ui->tab_ButtonConfig));
+    gEnv.pAppSettings->setValue("AxesConfig",      ui->tabWidget->indexOf(ui->tab_AxesConfig));
+    gEnv.pAppSettings->setValue("AxesCurves",      ui->tabWidget->indexOf(ui->tab_AxesCurves));
+    gEnv.pAppSettings->setValue("AxesToButtons",   ui->tabWidget->indexOf(ui->tab_AxesToButtons));
+    gEnv.pAppSettings->setValue("ShiftRegs",       ui->tabWidget->indexOf(ui->tab_ShiftRegisters));
+    gEnv.pAppSettings->setValue("Encoders",        ui->tabWidget->indexOf(ui->tab_Encoders));
+    gEnv.pAppSettings->setValue("LED",             ui->tabWidget->indexOf(ui->tab_LED));
+    gEnv.pAppSettings->setValue("AdvSettings",     ui->tabWidget->indexOf(ui->tab_AdvancedSettings));
+    gEnv.pAppSettings->setValue("CurrentIndex",    ui->tabWidget->currentIndex());
+    gEnv.pAppSettings->endGroup();
+
     hid_device_worker->SetIsFinish(true);
     thread->quit();
     thread->deleteLater();
