@@ -109,7 +109,7 @@ void HidDevice::processData()
                     memset(device_buffer_, 0, BUFFSIZE);
                     memcpy(device_buffer_, buffer, BUFFSIZE);
                     emit putGamepadPacket(device_buffer_);
-                    //QThread::msleep(5);            // хз почему даже 5мс тормозит всё на ~100мс
+                    //QThread::msleep(5);            // хз почему даже 5мс тормозит обновление интерфейса(или отправку сигнала) на ~100мс
                 }
                 else if (buffer[0] == REPORT_ID_CONFIG_IN) {                         // NOT USED // config from device
                     //qDebug() << "hiddevice buf[0] == 2";
@@ -150,15 +150,16 @@ void HidDevice::SetIsFinish(bool is_finish)
 }
 
 
-dev_config_t HidDevice::GetConfig()     // try catch
+bool HidDevice::GetConfigFromDevice()     // try catch
 {
     clock_t millis;
-    millis = clock() + 150;
+    millis = clock();
+    int report_count = 0;
 
     uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
     hid_write(handle_read, config_request_buffer, 2);
 
-    while (1)   // сделать таймаут
+    while (clock() < millis + 2000)   // сделать таймаут 2000ms
     {
         if (device_buffer_[0] == REPORT_ID_CONFIG_IN)
         {
@@ -168,6 +169,7 @@ dev_config_t HidDevice::GetConfig()     // try catch
                 gEnv.pDeviceConfig->config = report_convert->GetConfigFromDevice(device_buffer_);           // slow
                 config_request_buffer[1] += 1;
                 hid_write(handle_read, config_request_buffer, 2);
+                report_count++;
 
                 if (config_request_buffer[1] > CONFIG_COUNT)
                 {
@@ -176,7 +178,7 @@ dev_config_t HidDevice::GetConfig()     // try catch
                 }
             }
         }
-        else if (config_request_buffer[1] < 2 && (millis - clock()) <= 0)
+        else if (config_request_buffer[1] < 2 && ( (millis + 150) - clock()) <= 0)
         {
             //qDebug() << "RESEND ACTIVATED";
             config_request_buffer[1] = 1;
@@ -184,25 +186,33 @@ dev_config_t HidDevice::GetConfig()     // try catch
         }
         //QThread::msleep(5);
     }
+    qDebug()<<"report_count="<<report_count<<"  CONFIG_COUNT = "<<CONFIG_COUNT;
+    if (report_count == CONFIG_COUNT){
+        return true;
+    } else {
+        return false;
+    }
+
     //qDebug() << "return";
     //QThread::msleep(1500);
-    return gEnv.pDeviceConfig->config;          // !!!!!!!!!!!!!!!!!!!!!! nah
+    //return gEnv.pDeviceConfig->config;          // !!!!!!!!!!!!!!!!!!!!!! nah
 }
 
 
-void HidDevice::SendConfig()      // try catch
+bool HidDevice::SendConfigToDevice()      // try catch
 {
 //    //uint8_t config_request_buffer[64] = {REPORT_ID_FIRMWARE,'b','o','o','t','l','o','a','d','e','r',' ','r','u','n'};
 //    uint8_t config_buffer[64] = {REPORT_ID_FIRMWARE, 1};
 //    hid_write(handle_read, config_buffer, 64);
 //    dev_config_t device_config = gEnv.pDeviceConfig->config;
     clock_t millis;
-    millis = clock() + 150;
+    millis = clock();
+    int report_count = 0;
 
     uint8_t config_buffer[64] = {REPORT_ID_CONFIG_OUT, 0};        // check 64 2
     hid_write(handle_read, config_buffer, 64);
 
-    while (1)   // сделать таймаут
+    while (clock() < millis + 2000)   // сделать таймаут
     {
         if (device_buffer_[0] == REPORT_ID_CONFIG_OUT)
         {
@@ -219,16 +229,25 @@ void HidDevice::SendConfig()      // try catch
 
                 hid_write(handle_read, config_buffer, BUFFSIZE);
                 //config_buffer[1] += 1;
+                report_count++;
 
-                if (device_buffer_[1] == CONFIG_COUNT) break;
+                if (device_buffer_[1] == CONFIG_COUNT){
+                    break;
+                }
             }
         }
-        else if (config_buffer[1] == 0 && (millis - clock()) <= 0)
+        else if (config_buffer[1] == 0 && ( (millis + 150) - clock()) <= 0)
         {
             qDebug() << "RESEND ACTIVATED";
             //config_buffer[1] = 0;
             hid_write(handle_read, config_buffer, 64);
         }
         //QThread::msleep(20);
+    }
+
+    if (report_count == CONFIG_COUNT){
+        return true;
+    } else {
+        return false;
     }
 }

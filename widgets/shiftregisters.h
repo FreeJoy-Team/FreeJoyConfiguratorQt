@@ -23,6 +23,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
 //    int GetLatchPin();
 //    int GetDataPin();
 //    QString GetLatchString();

@@ -23,6 +23,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
 signals:
     void shiftRegButtonsCountChanged(int buttons_count);
 

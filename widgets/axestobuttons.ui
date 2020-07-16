@@ -33,6 +33,9 @@
      <property name="enabled">
       <bool>false</bool>
      </property>
+     <property name="correctionMode">
+      <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+     </property>
      <property name="minimum">
       <number>2</number>
      </property>

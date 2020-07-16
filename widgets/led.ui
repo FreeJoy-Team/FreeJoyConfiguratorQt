@@ -28,7 +28,11 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="spinBox_InputNumber"/>
+    <widget class="QSpinBox" name="spinBox_InputNumber">
+     <property name="correctionMode">
+      <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QComboBox" name="comboBox_Function"/>

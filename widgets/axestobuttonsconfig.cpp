@@ -23,6 +23,14 @@ AxesToButtonsConfig::~AxesToButtonsConfig()
     delete ui;
 }
 
+void AxesToButtonsConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < A2bAdrList.size(); ++i) {
+        A2bAdrList[i]->RetranslateUi();
+    }
+}
+
 void AxesToButtonsConfig::a2bCountCalc(int count, int previous_count)
 {
     a2b_buttons_count_ += count - previous_count;

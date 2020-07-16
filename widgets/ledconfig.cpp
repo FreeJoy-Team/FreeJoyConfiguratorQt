@@ -33,6 +33,14 @@ LedConfig::~LedConfig()
     delete ui;
 }
 
+void LedConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < LEDAdrList.size(); ++i) {
+        LEDAdrList[i]->RetranslateUi();
+    }
+}
+
 void LedConfig::SpawnLEDs(int led_count)
 {
     for (int i = 0; i < MAX_LEDS_NUM; i++)  // или проверка на скрытие и break; ?

@@ -20,6 +20,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
 private slots:
     void on_pushButton_Linear_clicked();
 

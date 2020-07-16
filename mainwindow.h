@@ -58,6 +58,10 @@ public:
     AxesCurvesConfig* axes_curves_config;
     AxesToButtonsConfig* a2b_config;
 
+signals:
+    void getConfigDone(bool success);
+    void sendConfigDone(bool success);
+
 protected:
     // Метод получения событий в главном окне приложения
     // В нём будет производиться проверка события смены перевода приложения
@@ -70,12 +74,11 @@ private slots:
 //    void getConfigPacket(uint8_t *);
 //    void sendConfigPacket(uint8_t *);
 
+    void configReceived(bool success);
+    void configSent(bool success);
+
     void hidDeviceList(QStringList* device_list);
     void hidDeviceListChanged(int index);
-
-    void on_button_GetConfig_clicked();
-    void on_button_SendConfig_clicked();
-
 
     void on_button_EngLang_clicked();
     void on_button_RusLang_clicked();
@@ -89,14 +92,20 @@ private slots:
 
     void on_pushButton_11_clicked();
 
-    void on_pushButton_15_clicked();
+
     void addvalues(int);
 
 
+    void on_pushButton_ResetAllPins_clicked();
+
+    void on_pushButton_ReadConfig_clicked();
+
+    void on_pushButton_WriteConfig_clicked();
 
 private:
     Ui::MainWindow *ui;
     QTranslator translator;
+    QString button_default_style_;  // мб статик в функции?
 
     QThread* thread_getSend_config;
 

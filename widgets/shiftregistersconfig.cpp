@@ -26,6 +26,14 @@ ShiftRegistersConfig::~ShiftRegistersConfig()
     delete ui;
 }
 
+void ShiftRegistersConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < ShiftRegistersAdrList.size(); ++i) {
+        ShiftRegistersAdrList[i]->RetranslateUi();
+    }
+}
+
 
 void ShiftRegistersConfig::shiftRegButtonsCalc(int count, int previous_count)
 {

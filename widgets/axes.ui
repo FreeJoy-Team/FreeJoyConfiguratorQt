@@ -100,6 +100,9 @@
       </item>
       <item row="5" column="0">
        <widget class="QSpinBox" name="spinBox_ChanelEncoder">
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
         <property name="maximum">
          <number>15</number>
         </property>
@@ -200,6 +203,9 @@
          </property>
          <item row="0" column="1">
           <widget class="QSpinBox" name="spinBox_Button2">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
            <property name="maximum">
             <number>128</number>
            </property>
@@ -333,6 +339,9 @@ QProgressBar::chunk:disabled {
       </item>
       <item row="5" column="6">
        <widget class="QSpinBox" name="spinBox_Prescaler">
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
         <property name="maximum">
          <number>255</number>
         </property>
@@ -391,6 +400,9 @@ QProgressBar::chunk:disabled {
          </item>
          <item row="1" column="1">
           <widget class="QSpinBox" name="spinBox_Offset">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
            <property name="maximum">
             <number>360</number>
            </property>
@@ -415,6 +427,9 @@ QProgressBar::chunk:disabled {
          </item>
          <item row="3" column="1">
           <widget class="QSpinBox" name="spinBox_Deadband">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
            <property name="maximum">
             <number>127</number>
            </property>
@@ -422,6 +437,9 @@ QProgressBar::chunk:disabled {
          </item>
          <item row="0" column="1">
           <widget class="QSpinBox" name="spinBox_Resolution">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -598,6 +616,9 @@ QProgressBar::chunk:disabled {
          </item>
          <item row="0" column="1">
           <widget class="QSpinBox" name="spinBox_Button3">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
            <property name="maximum">
             <number>128</number>
            </property>
@@ -611,6 +632,9 @@ QProgressBar::chunk:disabled {
       </item>
       <item row="4" column="6">
        <widget class="QSpinBox" name="spinBox_StepDiv">
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
         <property name="maximum">
          <number>255</number>
         </property>
@@ -696,6 +720,9 @@ QProgressBar::chunk:disabled {
          </item>
          <item row="0" column="1">
           <widget class="QSpinBox" name="spinBox_Button1">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
            <property name="maximum">
             <number>128</number>
            </property>

@@ -23,6 +23,14 @@ AxesCurvesConfig::~AxesCurvesConfig()
     delete ui;
 }
 
+void AxesCurvesConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
+        AxesCurvAdrList[i]->RetranslateUi();
+    }
+}
+
 void AxesCurvesConfig::ReadFromConfig()
 {
     for (int i = 0; i < AxesCurvAdrList.size(); ++i) {

@@ -30,6 +30,14 @@ EncodersConfig::~EncodersConfig()
     delete ui;
 }
 
+void EncodersConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < EncodersAdrList.size(); ++i) {
+        EncodersAdrList[i]->RetranslateUi();
+    }
+}
+
 void EncodersConfig::fastEncoderSelected(QString pin_gui_name, bool is_selected)
 {
     if (is_selected == true){

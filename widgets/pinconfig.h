@@ -19,6 +19,8 @@ public:
     void WriteToConfig();
     void ReadFromConfig();
 
+    void RetranslateUi();
+
     //private:?
     //! 0 if no pins
     uint pin_count_ = 0;    // need?

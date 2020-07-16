@@ -22,6 +22,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
 signals:
     void a2bCountChanged(int count, int previous_count);
 

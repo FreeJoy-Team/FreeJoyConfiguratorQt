@@ -69,6 +69,11 @@ Axes::~Axes()
     delete ui;
 }
 
+void Axes::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
 {
     if (is_add == true){

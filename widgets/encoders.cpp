@@ -21,6 +21,11 @@ Encoders::~Encoders()
     delete ui;
 }
 
+void Encoders::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 int Encoders::GetInputA()
 {
     return input_A_;

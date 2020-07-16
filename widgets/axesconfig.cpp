@@ -23,6 +23,14 @@ AxesConfig::~AxesConfig()
     delete ui;
 }
 
+void AxesConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < AxesAdrList.size(); ++i) {
+        AxesAdrList[i]->RetranslateUi();
+    }
+}
+
 void AxesConfig::addOrDeleteMainSource(int source_enum, bool is_add)
 {
     for (int i = 0; i < AxesAdrList.size(); ++i) {
@@ -30,7 +38,7 @@ void AxesConfig::addOrDeleteMainSource(int source_enum, bool is_add)
     }
 }
 
-void AxesConfig::AxesValueChanged()             // жирно, можно оптимизировать
+void AxesConfig::AxesValueChanged()
 {
     for (int i = 0; i < AxesAdrList.size(); ++i) {
         AxesAdrList[i]->UpdateAxisOut();

@@ -14,6 +14,4 @@ public:
 };
 
 
-
-
 #endif // DEVICECONFIG_H

@@ -387,13 +387,13 @@ dev_config_t InitConfig (void)
             - ENCODER_INPUT_A
             - ENCODER_INPUT_B
         */
-        .buttons[0].physical_num = 12,
+        .buttons[0].physical_num = 0,
         .buttons[0].type = BUTTON_NORMAL,
-        .buttons[1].physical_num = 13,
+        .buttons[1].physical_num = 1,
         .buttons[1].type = BUTTON_NORMAL,
-        .buttons[2].physical_num = 14,
+        .buttons[2].physical_num = 2,
         .buttons[2].type = BUTTON_NORMAL,
-        .buttons[3].physical_num = 15,
+        .buttons[3].physical_num = 3,
         .buttons[3].type = BUTTON_NORMAL,
         .buttons[4].physical_num = -1,
         .buttons[4].type = BUTTON_NORMAL,

@@ -22,6 +22,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
 private slots:       // private?
     void encoderInputChanged(int encoder_A, int encoder_B);
     void fastEncoderSelected(QString pin_gui_name, bool is_selected);

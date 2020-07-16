@@ -22,6 +22,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
     void AxesValueChanged();
 
 signals:

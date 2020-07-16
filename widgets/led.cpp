@@ -19,6 +19,11 @@ LED::~LED()
     delete ui;
 }
 
+void LED::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 void LED::ReadFromConfig()
 {
     ui->spinBox_InputNumber->setValue(gEnv.pDeviceConfig->config.leds[led_number_].input_num);

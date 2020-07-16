@@ -22,6 +22,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
 private:
     Ui::LED *ui;
     int led_number_;

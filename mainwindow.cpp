@@ -1,10 +1,11 @@
-#include <QGridLayout>      //?
+//#include <QGridLayout>      //?
 #include <QDebug>
 #include <QThread>
 
-#include <QPixmap>          //?
-#include <QScopedPointer>   //?
-#include <time.h>
+//#include <QPixmap>          //?
+//#include <QScopedPointer>   //?
+#include <ctime>
+#include <QTimer>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -30,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     thread_getSend_config = new QThread;
 
+
 //    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
 //            ui->widget_2, &ButtonLogical::Initialization);
 //    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
@@ -51,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     //    m_HeapWidgetWithParent = new QWidget(this);
     //    // needs to be deleted by you
     //    m_HeapNoQObj = new NoQObjectDerivedClass();
+
 
                                             //////////////// ADD WIDGETS ////////////////
     // add pin config
@@ -79,67 +82,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->layoutV_tabLedConfig->addWidget(led_config);      
 
 
-                                            //////////////// READ FROM CONFIG ////////////////
-    // read pin config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            pin_config, &PinConfig::ReadFromConfig);
-    // read axes config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            axes_config, &AxesConfig::ReadFromConfig);
-    // read axes curves config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            axes_curves_config, &AxesCurvesConfig::ReadFromConfig);
-    // read axes to buttons config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            a2b_config, &AxesToButtonsConfig::ReadFromConfig);
-    // read shift registers config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            shift_reg_config, &ShiftRegistersConfig::ReadFromConfig);
-    // read encoder config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            encoder_config, &EncodersConfig::ReadFromConfig);
-    // read LED config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            led_config, &LedConfig::ReadFromConfig);
-    // read adv.settings config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,
-            ui->widget_2, &AdvancedSettings::ReadFromConfig);
-    // read button config
-    connect(ui->pushButton_TEST_MAIN_BUTTON, &QPushButton::clicked,     // last
-            button_config, &ButtonConfig::ReadFromConfig);
-
-
-                                            //////////////// WRITE TO CONFIG ////////////////
-    // write pin config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            pin_config, &PinConfig::WriteToConfig);
-    // write button config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            button_config, &ButtonConfig::WriteToConfig);
-    // write axes config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            axes_config, &AxesConfig::WriteToConfig);
-    // write axes curves config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            axes_curves_config, &AxesCurvesConfig::WriteToConfig);
-    // write axes to buttons config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            a2b_config, &AxesToButtonsConfig::WriteToConfig);
-    // write shift registers config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            shift_reg_config, &ShiftRegistersConfig::WriteToConfig);
-    // write encoder config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            encoder_config, &EncodersConfig::WriteToConfig);
-    // write LED config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            led_config, &LedConfig::WriteToConfig);
-    // write adv.settings config
-    connect(ui->pushButton_TEST_2_BUTTON, &QPushButton::clicked,
-            ui->widget_2, &AdvancedSettings::WriteToConfig);
-
-
                                             //////////////// SIGNASL-SLOTS ////////////////
+            ///////// GET / SEND     CONFIG ///////
+    connect(this, SIGNAL(getConfigDone(bool)),
+            this, SLOT(configReceived(bool)));
+    connect(this, SIGNAL(sendConfigDone(bool)),
+            this, SLOT(configSent(bool)));
+
+
+
+            /////////      /////////////
     // buttons pin changed
     connect(pin_config, SIGNAL(totalButtonsValueChanged(int)),
                 button_config, SLOT(setUiOnOff(int)));
@@ -165,9 +117,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(pin_config, SIGNAL(axesSourceChanged(int, bool)),
             axes_config, SLOT(addOrDeleteMainSource(int, bool)));
 
+
+
     // set selected hid device
     connect(ui->comboBox_HidDeviceList, SIGNAL(currentIndexChanged(int)),
             this, SLOT(hidDeviceListChanged(int)));
+
 
 
     hid_device_worker->moveToThread(thread);    //thread.data()
@@ -184,11 +139,25 @@ MainWindow::MainWindow(QWidget *parent)
                           this, SLOT(hidDeviceList(QStringList*)));
 
 
+    // read pin config
+    pin_config->ReadFromConfig();
+    // read axes config
+    axes_config->ReadFromConfig();
+    // read axes curves config
+    axes_curves_config->ReadFromConfig();
+    // read axes to buttons config
+    a2b_config->ReadFromConfig();
+    // read shift registers config
+    shift_reg_config->ReadFromConfig();
+    // read encoder config
+    encoder_config->ReadFromConfig();
+    // read LED config
+    led_config->ReadFromConfig();
+    // read adv.settings config
+    ui->widget_2->ReadFromConfig();
+    // read button config
+    button_config->ReadFromConfig();
 
-//    connect(hid_device_worker, SIGNAL(putConfigPacket(uint8_t *)),
-//                          SLOT(getConfigPacket(uint8_t *)));
-//    connect(hid_device_worker, SIGNAL(putConfigRequest(uint8_t *)),
-//                          SLOT(sendConfigPacket(uint8_t *)));
 
     thread->start();
 }
@@ -200,54 +169,9 @@ MainWindow::~MainWindow()
     thread->deleteLater();
     thread->wait();
     delete hid_device_worker;
-    delete thread;
-    delete thread_getSend_config;       //
+    delete thread;              // не уверен в нужности, если есть thread->deleteLater();
+    delete thread_getSend_config;       // hz
     delete ui;
-}
-
-
-void MainWindow::on_button_GetConfig_clicked()              // ХЕРНЯ ПЕРЕДЕЛАТЬ
-{
-    qDebug() << "button GET CONFIG clicked";
-//    //ui->button_GetConfig->setEnabled(false);
-    QEventLoop loop;
-    QObject context;
-    context.moveToThread(thread_getSend_config);
-    connect(thread_getSend_config, &QThread::started, &context, [&]() {
-        qDebug() << "waiting... ";
-        gEnv.pDeviceConfig->config = hid_device_worker->GetConfig();
-        //ui->button_GetConfig->setEnabled(true);
-        qDebug() << "done";
-        loop.quit();
-    });
-    thread_getSend_config->start();
-    loop.exec();
-    thread_getSend_config->quit();
-    thread_getSend_config->wait();
-    ui->label_DeviceName->setText(gEnv.pDeviceConfig->config.device_name);
-    ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
-}
-
-
-void MainWindow::on_button_SendConfig_clicked()             // !!!!!!!!!!!!!
-{
-    qDebug() << "button SEND CONFIG clicked";
-//    ui->button_SendConfig->setEnabled(false);
-    QEventLoop loop;
-    QObject context;
-    context.moveToThread(thread_getSend_config);
-    connect(thread_getSend_config, &QThread::started, &context, [&]() {
-        qDebug() << "waiting... ";
-        hid_device_worker->SendConfig();
-        //QThread::msleep(1100);
-        //ui->button_SendConfig->setEnabled(true);
-        qDebug() << "done";
-        loop.quit();
-    });
-    thread_getSend_config->start();
-    loop.exec();
-    thread_getSend_config->quit();
-    thread_getSend_config->wait();
 }
 
 
@@ -264,13 +188,23 @@ void MainWindow::hideConnectDeviceInfo() {
     ui->label_DeviceStatus->setStyleSheet("background-color: red");
 }
 
-void MainWindow::on_button_EngLang_clicked()
+
+void MainWindow::on_button_EngLang_clicked()        // QSignalBlocker blocker(ui->comboBox);
 {
     //QString s = QVariant::fromValue(ModelApple::Big).toString();
     //qDebug() << s;
     translator.load(":/FreeJoyTest_en");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
     qApp->installTranslator(&translator);
     ui->retranslateUi(this);
+
+    pin_config->RetranslateUi();
+    button_config->RetranslateUi();
+    led_config->RetranslateUi();
+    encoder_config->RetranslateUi();
+    shift_reg_config->RetranslateUi();
+    axes_config->RetranslateUi();
+    axes_curves_config->RetranslateUi();
+    a2b_config->RetranslateUi();
 }
 
 void MainWindow::on_button_RusLang_clicked()
@@ -278,25 +212,24 @@ void MainWindow::on_button_RusLang_clicked()
     translator.load(":/FreeJoyTest_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
     qApp->installTranslator(&translator);
     ui->retranslateUi(this);
+
+    pin_config->RetranslateUi();
     button_config->RetranslateUi();
+    led_config->RetranslateUi();
+    encoder_config->RetranslateUi();
+    shift_reg_config->RetranslateUi();
+    axes_config->RetranslateUi();
+    axes_curves_config->RetranslateUi();
+    a2b_config->RetranslateUi();
 }
 
-//GetConfigFromDevice
 
 // попробовать вынести в отдельный поток и повесить дилей
 int asd = 0;
-void MainWindow::getGamepadPacket(uint8_t * buff)                                    // НЕ В ЯДРЕ ВОРКЕРА
+void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ ВОРКЕРА
 {
     ui->lineEdit->setText(QString::number(asd));
     report_convert.GamepadReport(buff);
-//    // optimization
-//    if(ui->tab_ButtonConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
-//        button_config->ButtonStateChanged();
-//    }
-//    // optimization
-//    if(ui->tab_AxesConfig->isVisible() == true){      // оптимизация. если открыт таб, то выполнять обновление
-//        axes_config->AxesValueChanged();
-//    }
 
     static clock_t timer;
     static bool change = false;
@@ -306,7 +239,7 @@ void MainWindow::getGamepadPacket(uint8_t * buff)                               
         timer = clock();
         change = true;
     }
-    else if (change && clock() - timer > 17)    // обновление раз в 17мс
+    else if (change && clock() - timer > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах
     {
         // optimization
         if(ui->tab_ButtonConfig->isVisible() == true){
@@ -322,22 +255,17 @@ void MainWindow::getGamepadPacket(uint8_t * buff)                               
     asd++;
 }
 
+
 void MainWindow::hidDeviceList(QStringList* device_list)
 {
     if (device_list->size() == 0 && ui->comboBox_HidDeviceList->count() > 0)
     {
         ui->comboBox_HidDeviceList->clear();
-        qDebug()<<"items count > 0 delete";
         return;
     } else if (device_list->size() > 0)
     {
-        //qDebug()<<"hidDeviceList - changed";
         ui->comboBox_HidDeviceList->clear();
-        //qDebug()<<"hidDeviceList - clear";
         ui->comboBox_HidDeviceList->addItems(*device_list);
-        qDebug()<<"hidDeviceList - add";
-    } else {
-        //qDebug()<<"MainWindow::hidDeviceList - ERROR";
     }
 }
 
@@ -346,16 +274,6 @@ void MainWindow::hidDeviceListChanged(int index)
     hid_device_worker->SetSelectedDevice(index);
 }
 
-//void MainWindow::getConfigPacket(uint8_t * buff)
-//{
-
-//}
-
-
-//void MainWindow::sendConfigPacket(uint8_t * buff)
-//{
-
-//}
 
 void MainWindow::on_pushButton_11_clicked()
 {
@@ -475,11 +393,6 @@ void MainWindow::on_pushButton_QssBreezeDark_clicked()
 }
 
 
-void MainWindow::on_pushButton_15_clicked()
-{
-    pin_config->ResetAllPins();
-}
-
 // dynamic widgets spawn
 void MainWindow::addvalues(int value)
 {
@@ -498,3 +411,150 @@ void MainWindow::addvalues(int value)
 //    }
 }
 
+// reset all pins
+void MainWindow::on_pushButton_ResetAllPins_clicked()
+{
+    pin_config->ResetAllPins();
+}
+
+
+// read config from device
+void MainWindow::on_pushButton_ReadConfig_clicked()        // херня? mb QtConcurrent::run()
+{
+    qDebug() << "button GET CONFIG clicked";
+    ui->pushButton_ReadConfig->setEnabled(false);
+//    //ui->button_GetConfig->setEnabled(false);
+    QEventLoop loop;
+    QObject context;
+    context.moveToThread(thread_getSend_config);
+    connect(thread_getSend_config, &QThread::started, &context, [&]() {
+        qDebug() << "waiting... ";
+
+        emit getConfigDone(hid_device_worker->GetConfigFromDevice());
+
+        qDebug() << "done";
+        loop.quit();
+    });
+    thread_getSend_config->start();
+    loop.exec();
+    thread_getSend_config->quit();
+    thread_getSend_config->wait();
+    ui->label_DeviceName->setText(gEnv.pDeviceConfig->config.device_name);
+    ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
+}
+
+// write config to device
+void MainWindow::on_pushButton_WriteConfig_clicked()        // херня? mb QtConcurrent::run()
+{
+    ui->pushButton_WriteConfig->setEnabled(false);
+
+    // read pin config
+    pin_config->WriteToConfig();            // проверить снизу
+    // read axes config
+    axes_config->WriteToConfig();
+    // read axes curves config
+    axes_curves_config->WriteToConfig();
+    // read axes to buttons config
+    a2b_config->WriteToConfig();
+    // read shift registers config
+    shift_reg_config->WriteToConfig();
+    // read encoder config
+    encoder_config->WriteToConfig();
+    // read LED config
+    led_config->WriteToConfig();
+    // read adv.settings config
+    ui->widget_2->WriteToConfig();
+    // read button config
+    button_config->WriteToConfig();
+
+    qDebug() << "button SEND CONFIG clicked";
+//    ui->button_SendConfig->setEnabled(false);
+    QEventLoop loop;
+    QObject context;
+    context.moveToThread(thread_getSend_config);
+    connect(thread_getSend_config, &QThread::started, &context, [&]() {
+        qDebug() << "waiting... ";
+
+        emit sendConfigDone(hid_device_worker->SendConfigToDevice());
+
+        qDebug() << "done";
+        loop.quit();
+    });
+    thread_getSend_config->start();
+    loop.exec();
+    thread_getSend_config->quit();
+    thread_getSend_config->wait();
+}
+
+
+void MainWindow::configReceived(bool success)        // повторное наатие
+{
+    button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
+    static QString button_default_text = ui->pushButton_ReadConfig->text();
+
+    if (success == true){
+        // read pin config
+        pin_config->ReadFromConfig();
+        // read axes config
+        axes_config->ReadFromConfig();
+        // read axes curves config
+        axes_curves_config->ReadFromConfig();
+        // read axes to buttons config
+        a2b_config->ReadFromConfig();
+        // read shift registers config
+        shift_reg_config->ReadFromConfig();
+        // read encoder config
+        encoder_config->ReadFromConfig();
+        // read LED config
+        led_config->ReadFromConfig();
+        // read adv.settings config
+        ui->widget_2->ReadFromConfig();
+        // read button config
+        button_config->ReadFromConfig();
+
+
+        ui->pushButton_ReadConfig->setText("Received");
+        ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+
+        QTimer::singleShot(1000, [&]{
+            ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
+            ui->pushButton_ReadConfig->setText(button_default_text);
+            ui->pushButton_ReadConfig->setEnabled(true);
+        });
+    } else {
+        ui->pushButton_ReadConfig->setText("Error");
+        ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
+
+        QTimer::singleShot(1000, [&]{
+            ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
+            ui->pushButton_ReadConfig->setText(button_default_text);
+            ui->pushButton_ReadConfig->setEnabled(true);
+        });
+    }
+}
+
+void MainWindow::configSent(bool success)
+{
+    button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
+    static QString button_default_text = ui->pushButton_WriteConfig->text();
+
+    if (success == true){
+        ui->pushButton_WriteConfig->setText("Sent");
+        ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+
+        QTimer::singleShot(1000, [&]{
+            ui->pushButton_WriteConfig->setStyleSheet(button_default_style_);
+            ui->pushButton_WriteConfig->setText(button_default_text);
+            ui->pushButton_WriteConfig->setEnabled(true);
+        });
+    } else {
+        ui->pushButton_WriteConfig->setText("Error");
+        ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
+
+        QTimer::singleShot(1000, [&]{
+            ui->pushButton_WriteConfig->setStyleSheet(button_default_style_);
+            ui->pushButton_WriteConfig->setText(button_default_text);
+            ui->pushButton_WriteConfig->setEnabled(true);
+        });
+    }
+}

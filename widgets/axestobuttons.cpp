@@ -25,6 +25,11 @@ AxesToButtons::~AxesToButtons()
     delete ui;
 }
 
+void AxesToButtons::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 void AxesToButtons::a2bSpinBoxChanged(int count)
 {
         ui->widget_A2bSlider->SetPointsCount(count + 1);
@@ -32,6 +37,9 @@ void AxesToButtons::a2bSpinBoxChanged(int count)
         if(ui->spinBox_A2bCount->isEnabled() == true){
             emit a2bCountChanged(count, buttons_count_);
             buttons_count_ = count;
+        } else {    // необязательно?
+            emit a2bCountChanged(0, buttons_count_);
+            buttons_count_ = 0;
         }
 }
 
@@ -45,6 +53,8 @@ void AxesToButtons::a2bCheckBoxValueChanged(bool value)
     } else {
         ui->widget_A2bSlider->setEnabled(false);
         ui->spinBox_A2bCount->setEnabled(false);
+        emit a2bCountChanged(0, buttons_count_);
+        buttons_count_ = 0;
     }
 }
 

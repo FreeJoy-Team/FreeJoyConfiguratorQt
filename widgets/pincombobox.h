@@ -106,6 +106,8 @@ public:
     void ReadFromConfig(uint pin);
     void WriteToConfig(uint pin);
 
+    void RetranslateUi();
+
     int GetEnumValue();                     // удалить?
 
     //private?

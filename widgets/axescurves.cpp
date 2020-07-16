@@ -15,6 +15,11 @@ AxesCurves::~AxesCurves()
     delete ui;
 }
 
+void AxesCurves::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 void AxesCurves::ReadFromConfig()
 {
     for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)

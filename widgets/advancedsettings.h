@@ -16,6 +16,8 @@ public:
     explicit AdvancedSettings(QWidget *parent = nullptr);
     ~AdvancedSettings();
 
+    void RetranslateUi();
+
 private:
     Ui::AdvancedSettings *ui;
 

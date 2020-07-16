@@ -27,6 +27,11 @@ ShiftRegisters::~ShiftRegisters()
     delete ui;
 }
 
+void ShiftRegisters::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 void ShiftRegisters::calcRegistersCount(int count)
 {
     ui->label_RegistersCount->setNum(ceil(count/8.0));

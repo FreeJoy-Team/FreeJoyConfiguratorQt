@@ -17,8 +17,8 @@ class HidDevice : public QObject
 public:
 
     hid_device *handle_read;                // private?
-    dev_config_t GetConfig();
-    void SendConfig();
+    bool GetConfigFromDevice();
+    bool SendConfigToDevice();
     void SetIsFinish(bool is_finish);
     void SetSelectedDevice(int device_number);
 

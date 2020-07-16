@@ -23,6 +23,11 @@ AdvancedSettings::~AdvancedSettings()
     delete ui;
 }
 
+void AdvancedSettings::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 void AdvancedSettings::ReadFromConfig()
 {
     // PID

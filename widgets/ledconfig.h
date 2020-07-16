@@ -19,6 +19,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
     //void ButtonLEDStateChanged();     // future
 
 //    signals:

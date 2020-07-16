@@ -1,9 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>Images/OFF_small.png</file>
-        <file>Images/ON_small.png</file>
-        <file>Images/OFF_small_t.png</file>
-        <file>Images/ON_small_t.png</file>
         <file>FreeJoyTest_ru.qm</file>
         <file>Images/BluePill_pic.jpg</file>
         <file>Images/BluePill_pic2.jpg</file>

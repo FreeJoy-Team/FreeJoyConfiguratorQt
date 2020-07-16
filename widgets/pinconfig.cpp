@@ -57,6 +57,14 @@ PinConfig::~PinConfig()
     delete ui;
 }
 
+void PinConfig::RetranslateUi()
+{
+    ui->retranslateUi(this);
+    for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
+        PinComboBoxPtrList[i]->RetranslateUi();
+    }
+}
+
 void PinConfig::pinInteraction(int index, int sender_index, int pin)
 {
     if (index != NOT_USED)//current_enum_index

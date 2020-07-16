@@ -53,6 +53,9 @@
        <height>25</height>
       </size>
      </property>
+     <property name="correctionMode">
+      <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+     </property>
      <property name="maximum">
       <number>128</number>
      </property>

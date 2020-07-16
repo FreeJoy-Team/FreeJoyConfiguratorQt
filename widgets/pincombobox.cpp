@@ -14,6 +14,20 @@ PinComboBox::PinComboBox(QWidget *parent) :
 
 }
 
+PinComboBox::~PinComboBox()
+{
+    enum_gui_index.clear();         // Fault tolerant heap
+    enum_gui_index.shrink_to_fit(); // Fault tolerant heap
+    enum_index.clear();
+    enum_index.shrink_to_fit();
+    delete ui;
+}
+
+void PinComboBox::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 //! Set pin items
 void PinComboBox::InitializationPins(uint pin)      // pin_number_ - 1 так се
 {
@@ -70,16 +84,6 @@ void PinComboBox::InitializationPins(uint pin)      // pin_number_ - 1 так с
             }
         }
     }
-}
-
-
-PinComboBox::~PinComboBox()
-{
-    enum_gui_index.clear();         // Fault tolerant heap
-    enum_gui_index.shrink_to_fit(); // Fault tolerant heap
-    enum_index.clear();
-    enum_index.shrink_to_fit();
-    delete ui;
 }
 
 void PinComboBox::IndexChanged(int index)
