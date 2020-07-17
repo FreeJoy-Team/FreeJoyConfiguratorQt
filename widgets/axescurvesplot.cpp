@@ -118,11 +118,14 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
                                       radius_, radius_);
     }
     // paint rect
-    painter.setPen(Qt::lightGray);
+    //painter.setPen(Qt::lightGray);
     for (int i = 0; i < PointAdrList.size(); ++i)   // проверка на драг=труе
     {
+        painter.setPen(PointAdrList[i]->color);
         painter.setBrush(PointAdrList[i]->color);
         painter.drawEllipse(PointAdrList[i]->area);
+
+        painter.setPen(point_move_color_);
         painter.setBrush(point_move_color_);
         painter.drawEllipse(PointAdrList[i]->area.x() + half_radius_/2, PointAdrList[i]->area.y() + half_radius_/2,
                             half_radius_, half_radius_);

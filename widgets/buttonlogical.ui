@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>690</width>
+    <width>670</width>
     <height>38</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,3,2,1,2,12,8,8,8">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="4,6,4,3,4,20,12,12,12">
    <property name="spacing">
     <number>0</number>
    </property>

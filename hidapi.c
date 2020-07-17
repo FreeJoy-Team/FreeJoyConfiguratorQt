@@ -452,7 +452,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned shor
 //			if (res) {
 //				cur_dev->serial_number = _wcsdup(wstr);
 //			}
-            for (int kk = 0; kk < 3; ++kk){
+            for (int kk = 0; kk < 10; ++kk){
                 /* Serial Number */
                 wstr[0]= 0x0000;
                 res = HidD_GetSerialNumberString(write_handle, wstr, sizeof(wstr));
@@ -483,7 +483,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned shor
 //				cur_dev->product_string = _wcsdup(wstr);
 //			}
 
-            for (int kk = 0; kk < 3; ++kk){
+            for (int kk = 0; kk < 10; ++kk){
                 /* Product String */
                 wstr[0]= 0x0000;
                 res = HidD_GetProductString(write_handle, wstr, sizeof(wstr));

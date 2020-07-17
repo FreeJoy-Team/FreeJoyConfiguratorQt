@@ -244,6 +244,10 @@ void MainWindow::SaveAppConfig()
     gEnv.pAppSettings->beginGroup("WindowSettings");
     gEnv.pAppSettings->setValue("Geometry",   this->saveGeometry());
     gEnv.pAppSettings->endGroup();
+    // save font settings
+    gEnv.pAppSettings->beginGroup("FontSettings");
+    gEnv.pAppSettings->setValue("FontSize", QApplication::font().pointSize());
+    gEnv.pAppSettings->endGroup();
 }
 
 

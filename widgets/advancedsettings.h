@@ -35,6 +35,8 @@ private slots:
 
     void on_pushButton_StyleDark_clicked();
 
+    void on_spinBox_FontSize_valueChanged(int arg1);
+
 private:
     Ui::AdvancedSettings *ui;
 };

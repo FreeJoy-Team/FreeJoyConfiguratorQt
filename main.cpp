@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
 //    QCoreApplication::setOrganizationName(ORGANIZATION_NAME);
 //    QCoreApplication::setOrganizationDomain(ORGANIZATION_DOMAIN);
-//    QCoreApplication::setApplicationName(APPLICATION_NAME);
+//    QCoreApplication::setApplicationName(APPLICATION_NAME); QFont::Bold
 
     QApplication a(argc, argv);
 
@@ -24,6 +24,11 @@ int main(int argc, char *argv[])
     DeviceConfig device_config;
     gEnv.pAppSettings = &app_settings;
     gEnv.pDeviceConfig = &device_config;
+
+    // set font size
+    gEnv.pAppSettings->beginGroup("FontSettings");
+    QApplication::setFont(QFont("MS Shell Dlg 2", gEnv.pAppSettings->value("FontSize", "8").toInt()));
+    gEnv.pAppSettings->endGroup();
 
     // set styleSheet
     gEnv.pAppSettings->beginGroup("StyleSettings");

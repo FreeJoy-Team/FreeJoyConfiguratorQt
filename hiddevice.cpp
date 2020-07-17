@@ -140,7 +140,10 @@ void HidDevice::SetSelectedDevice(int device_number)
         device_number = HidDevicesAdrList.size() - 1;
     }
     selected_device_ = device_number; 
+    qDebug()<<"HID open start";
     handle_read = hid_open(0x0483, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
+    qDebug()<<"No crash, HID opened";
+    qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
 }
 
 
@@ -159,7 +162,7 @@ bool HidDevice::GetConfigFromDevice()     // try catch
     uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
     hid_write(handle_read, config_request_buffer, 2);
 
-    while (clock() < millis + 2000)   // сделать таймаут 2000ms
+    while (clock() < millis + 1000)   // сделать таймаут 2000ms
     {
         if (device_buffer_[0] == REPORT_ID_CONFIG_IN)
         {
@@ -212,7 +215,7 @@ bool HidDevice::SendConfigToDevice()      // try catch
     uint8_t config_buffer[64] = {REPORT_ID_CONFIG_OUT, 0};        // check 64 2
     hid_write(handle_read, config_buffer, 64);
 
-    while (clock() < millis + 2000)   // сделать таймаут
+    while (clock() < millis + 1000)   // сделать таймаут
     {
         if (device_buffer_[0] == REPORT_ID_CONFIG_OUT)
         {

@@ -187,7 +187,7 @@ QCheckBox QWidget:disabled {
 }
 
 QCheckBox::indicator {
-  margin-left: 4px;
+  margin-left: 0px;
   height: 16px;
   width: 16px;
 }
@@ -240,7 +240,7 @@ QGroupBox {
   border: 1px solid #686868;
   border-radius: 4px;
   padding: 4px;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 QGroupBox::title {
@@ -249,7 +249,7 @@ QGroupBox::title {
   left: 3px;
   padding-left: 3px;
   padding-right: 5px;
-  padding-top: -7px;
+  padding-top: -6px;
   padding-bottom: 0px;
 }
 
@@ -877,7 +877,7 @@ https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
 QLabel {
   background-color: #31363b;
   border: 0px solid #32414B;
-  padding: 2px;
+  padding: 0px;
   margin: 0px;
   color: #F0F0F0;
 }
