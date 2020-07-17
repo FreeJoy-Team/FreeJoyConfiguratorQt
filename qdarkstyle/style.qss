@@ -240,7 +240,7 @@ QGroupBox {
   border: 1px solid #686868;
   border-radius: 4px;
   padding: 4px;
-  margin-top: 16px;
+  margin-top: 5px;
 }
 
 QGroupBox::title {
@@ -249,8 +249,8 @@ QGroupBox::title {
   left: 3px;
   padding-left: 3px;
   padding-right: 5px;
-  padding-top: 8px;
-  padding-bottom: 16px;
+  padding-top: -7px;
+  padding-bottom: 0px;
 }
 
 QGroupBox::indicator {

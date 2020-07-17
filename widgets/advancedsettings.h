@@ -23,6 +23,7 @@ public:
 
 signals:
     void languageChanged(QString language);
+    void interfaceStyleChanged(bool is_dark);
 
 private slots:
     void on_pushButton_LangEnglish_clicked();

@@ -6,11 +6,11 @@ dev_config_t InitConfig (void)
 {
     dev_config_t init_config =
     {
-        .firmware_version = 0x1603,		// do not change
+        .firmware_version = 0x1606,		// do not change
 
         /*
-            Name of device in devices dispatcher
-        */
+                    Name of device in devices dispatcher
+                */
         .device_name[0] = 'F',
         .device_name[1] = 'r',
         .device_name[2] = 'e',
@@ -31,11 +31,17 @@ dev_config_t InitConfig (void)
         .device_name[17] = 0,
         .device_name[18] = 0,
         .device_name[19] = 0,
+        .device_name[20] = 0,
+        .device_name[21] = 0,
+        .device_name[22] = 0,
+        .device_name[23] = 0,
+        .device_name[24] = 0,
+        .device_name[25] = 0,
 
         .button_debounce_ms = 50,					// debounce time for all buttons
 
         .encoder_press_time_ms = 10,			// amount of milliseconds virtual button
-                                                                            // will be pressed at encoder increment/decrement
+        // will be pressed at encoder increment/decrement
 
         .exchange_period_ms = 5,					// amount of millisecond between joystick data sending
 
@@ -44,13 +50,13 @@ dev_config_t InitConfig (void)
         .button_timer3_ms = 300,					// amount of milliseconds of delay3 for a virtual button
 
         /*
-            Device pins configuration. Available values:
-            - AXIS_ANALOG (only for pins 0-7)
-            - BUTTON_GND
-            - BUTTON_VCC
-            - BUTTON_COLUMN
-            - BUTTON_ROW
-        */
+                    Device pins configuration. Available values:
+                    - AXIS_ANALOG (only for pins 0-7)
+                    - BUTTON_GND
+                    - BUTTON_VCC
+                    - BUTTON_COLUMN
+                    - BUTTON_ROW
+                */
         .pins[0] 	= AXIS_ANALOG,					// PA0
         .pins[1] 	= AXIS_ANALOG,					// PA1
         .pins[2] 	= AXIS_ANALOG,					// PA2
@@ -83,8 +89,8 @@ dev_config_t InitConfig (void)
         .pins[29] = NOT_USED,							// PC15
 
         /*
-            Configuration of analog axes
-        */
+                    Configuration of analog axes
+                */
         .axis_config[0].calib_min = AXIS_MIN_VALUE,
         .axis_config[0].calib_center = AXIS_CENTER_VALUE,
         .axis_config[0].calib_max = AXIS_MAX_VALUE,
@@ -359,41 +365,41 @@ dev_config_t InitConfig (void)
 
 
         /*
-            Buttons configuration. Available values:
-            - BUTTON_NORMAL
-            - BUTTON_INVERTED
-            - BUTTON_TOGGLE
-            - TOGGLE_SWITCH
-            - TOGGLE_SWITCH_ON
-            - TOGGLE_SWITCH_OFF
+                    Buttons configuration. Available values:
+                    - BUTTON_NORMAL
+                    - BUTTON_INVERTED
+                    - BUTTON_TOGGLE
+                    - TOGGLE_SWITCH
+                    - TOGGLE_SWITCH_ON
+                    - TOGGLE_SWITCH_OFF
 
-            - POV1_UP
-            - POV1_RIGHT
-            - POV1_DOWN
-            - POV1_LEFT
-            - POV2_UP
-            - POV2_RIGHT
-            - POV2_DOWN
-            - POV2_LEFT
-            - POV3_UP
-            - POV3_RIGHT
-            - POV3_DOWN
-            - POV3_LEFT
-            - POV4_UP
-            - POV4_RIGHT
-            - POV4_DOWN
-            - POV4_LEFT
+                    - POV1_UP
+                    - POV1_RIGHT
+                    - POV1_DOWN
+                    - POV1_LEFT
+                    - POV2_UP
+                    - POV2_RIGHT
+                    - POV2_DOWN
+                    - POV2_LEFT
+                    - POV3_UP
+                    - POV3_RIGHT
+                    - POV3_DOWN
+                    - POV3_LEFT
+                    - POV4_UP
+                    - POV4_RIGHT
+                    - POV4_DOWN
+                    - POV4_LEFT
 
-            - ENCODER_INPUT_A
-            - ENCODER_INPUT_B
-        */
-        .buttons[0].physical_num = 0,
+                    - ENCODER_INPUT_A
+                    - ENCODER_INPUT_B
+                */
+        .buttons[0].physical_num = 12,
         .buttons[0].type = BUTTON_NORMAL,
-        .buttons[1].physical_num = 1,
+        .buttons[1].physical_num = 13,
         .buttons[1].type = BUTTON_NORMAL,
-        .buttons[2].physical_num = 2,
+        .buttons[2].physical_num = 14,
         .buttons[2].type = BUTTON_NORMAL,
-        .buttons[3].physical_num = 3,
+        .buttons[3].physical_num = 15,
         .buttons[3].type = BUTTON_NORMAL,
         .buttons[4].physical_num = -1,
         .buttons[4].type = BUTTON_NORMAL,
@@ -645,13 +651,13 @@ dev_config_t InitConfig (void)
         .buttons[127].type = BUTTON_NORMAL,
 
         /*
-            AxesToButtons configuration
-        */
+                    AxesToButtons configuration
+                */
         .axes_to_buttons[0].points[0] = 0,
         .axes_to_buttons[0].points[1] = 127,
         .axes_to_buttons[0].points[2] = 255,
         .axes_to_buttons[0].buttons_cnt = 2,
-        .axes_to_buttons[0].is_enabled = 1,
+        .axes_to_buttons[0].is_enabled = 0,
 
         .axes_to_buttons[1].points[0] = 0,
         .axes_to_buttons[1].points[1] = 127,

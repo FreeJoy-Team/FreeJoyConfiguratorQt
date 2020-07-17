@@ -36,7 +36,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B15</string>
@@ -57,7 +58,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A8</string>
@@ -78,7 +80,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B3</string>
@@ -99,7 +102,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A9</string>
@@ -120,7 +124,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B6</string>
@@ -141,7 +146,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B7</string>
@@ -162,7 +168,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 140, 0);</string>
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">3.3V</string>
@@ -183,7 +190,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B14</string>
@@ -204,7 +212,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B8</string>
@@ -225,7 +234,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 107, 47);</string>
+        <string notr="true">background-color: rgba(85, 107, 47, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A11</string>
@@ -246,7 +256,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B4</string>
@@ -267,7 +278,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B12</string>
@@ -288,7 +300,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B5</string>
@@ -309,7 +322,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B9</string>
@@ -330,7 +344,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 107, 47);</string>
+        <string notr="true">background-color: rgba(85, 107, 47, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A12</string>
@@ -351,7 +366,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 140, 0);</string>
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">5V</string>
@@ -372,7 +388,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A15</string>
@@ -393,7 +410,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(128, 128, 128);</string>
+        <string notr="true">background-color: rgba(128, 128, 128, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">GND</string>
@@ -414,7 +432,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B13</string>
@@ -444,7 +463,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A10</string>
@@ -584,7 +604,7 @@
       </widget>
      </item>
      <item row="18" column="0">
-      <widget class="QLabel" name="text_GND">
+      <widget class="QLabel" name="label_GND">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -592,6 +612,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -602,7 +627,7 @@
       </widget>
      </item>
      <item row="19" column="0">
-      <widget class="QLabel" name="text_33V">
+      <widget class="QLabel" name="label_33V">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -610,6 +635,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -620,7 +650,7 @@
       </widget>
      </item>
      <item row="17" column="0">
-      <widget class="QLabel" name="text_5V">
+      <widget class="QLabel" name="label_5V">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -628,6 +658,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -638,7 +673,7 @@
       </widget>
      </item>
      <item row="7" column="0">
-      <widget class="QLabel" name="text_A11">
+      <widget class="QLabel" name="label_USBDminus">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -646,6 +681,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -656,7 +696,7 @@
       </widget>
      </item>
      <item row="8" column="0">
-      <widget class="QLabel" name="text_A12">
+      <widget class="QLabel" name="label_USBDplus">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -664,6 +704,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -719,7 +764,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A0</string>
@@ -740,7 +786,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A5</string>
@@ -761,7 +808,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B10</string>
@@ -782,7 +830,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">C13</string>
@@ -803,7 +852,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(128, 128, 128);</string>
+        <string notr="true">background-color: rgba(128, 128, 128, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">GND</string>
@@ -824,7 +874,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 140, 0);</string>
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">3.3V</string>
@@ -866,7 +917,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(128, 128, 128);</string>
+        <string notr="true">background-color: rgba(128, 128, 128, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">GND</string>
@@ -887,7 +939,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A4</string>
@@ -908,7 +961,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 140, 0);</string>
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">VB</string>
@@ -929,7 +983,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A6</string>
@@ -950,7 +1005,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A7</string>
@@ -971,7 +1027,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 107, 47);</string>
+        <string notr="true">background-color: rgba(85, 107, 47, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">RST</string>
@@ -992,7 +1049,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A1</string>
@@ -1013,7 +1071,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">C15</string>
@@ -1034,7 +1093,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B1</string>
@@ -1055,7 +1115,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A3</string>
@@ -1076,7 +1137,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B11</string>
@@ -1097,7 +1159,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">C14</string>
@@ -1118,7 +1181,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(144, 238, 144);</string>
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">A2</string>
@@ -1139,7 +1203,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(173, 216, 230);</string>
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string notr="true">B0</string>
@@ -1288,7 +1353,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="text_GND_6">
+      <widget class="QLabel" name="label_GND_3">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1296,6 +1361,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -1306,7 +1376,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="text_GND_5">
+      <widget class="QLabel" name="label_GND_2">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1314,6 +1384,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -1324,7 +1399,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLabel" name="text_33V_4">
+      <widget class="QLabel" name="label_33V_2">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1332,6 +1407,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -1342,7 +1422,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLabel" name="text_RST_2">
+      <widget class="QLabel" name="label_RST">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1350,6 +1430,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -1360,7 +1445,7 @@
       </widget>
      </item>
      <item row="19" column="1">
-      <widget class="QLabel" name="text_VBUS">
+      <widget class="QLabel" name="label_VBUS">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1368,6 +1453,11 @@
         <font>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 10);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>

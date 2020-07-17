@@ -15,6 +15,23 @@ AxesCurves::~AxesCurves()
     delete ui;
 }
 
+void AxesCurves::SetDarkIcon(bool is_dark)
+{
+    if (is_dark == true){
+        ui->pushButton_Linear->setIcon(QIcon(":/Images/linear_dark.png"));
+        ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert_dark.png"));
+        ui->pushButton_Exponent->setIcon(QIcon(":/Images/Exponent_dark.png"));
+        ui->pushButton_ExponentInvert->setIcon(QIcon(":/Images/ExponentInvert_dark.png"));
+        ui->pushButton_Shape->setIcon(QIcon(":/Images/Shape_dark.png"));
+    } else {
+        ui->pushButton_Linear->setIcon(QIcon(":/Images/linear.png"));
+        ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert.png"));
+        ui->pushButton_Exponent->setIcon(QIcon(":/Images/Exponent.png"));
+        ui->pushButton_ExponentInvert->setIcon(QIcon(":/Images/ExponentInvert.png"));
+        ui->pushButton_Shape->setIcon(QIcon(":/Images/Shape.png"));
+    }
+}
+
 void AxesCurves::RetranslateUi()
 {
     ui->retranslateUi(this);

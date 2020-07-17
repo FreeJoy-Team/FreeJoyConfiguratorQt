@@ -22,6 +22,8 @@ public:
 
     void RetranslateUi();
 
+    void SetDarkIcon(bool is_dark);
+
 private slots:
     void on_pushButton_Linear_clicked();
 

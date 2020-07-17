@@ -46,7 +46,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    //DeviceConfig device_config;
+
     ReportConverter report_convert;     // nah?
 
 //private:
@@ -68,10 +68,6 @@ signals:
     void getConfigDone(bool success);
     void sendConfigDone(bool success);
 
-protected:
-    // Метод получения событий в главном окне приложения
-    // В нём будет производиться проверка события смены перевода приложения
-    //void changeEvent(QEvent * event) override;
 
 private slots:
     void showConnectDeviceInfo();
@@ -88,22 +84,14 @@ private slots:
 
     void languageChanged(QString language);
 
-    void on_pushButton_QssDefault_clicked();
-    void on_pushButton_QssChinaWhite_clicked();
-    void on_pushButton_QssUbuntu_clicked();
-    void on_pushButton_QssQDarkStyle_clicked();
-    void on_pushButton_QssBreezeDark_clicked();
+    void interfaceStyleChanged(bool is_dark);
 
     void on_pushButton_11_clicked();
-
-
     void addvalues(int);
-
 
     void on_pushButton_ResetAllPins_clicked();
 
     void on_pushButton_ReadConfig_clicked();
-
     void on_pushButton_WriteConfig_clicked();
 
 private:

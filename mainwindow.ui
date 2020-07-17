@@ -365,22 +365,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QPushButton" name="button_SendConfig">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>580</x>
-          <y>160</y>
-          <width>161</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>SEND CONFIG to device</string>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_3">
         <property name="geometry">
          <rect>
@@ -395,22 +379,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="button_GetConfig">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>400</x>
-          <y>160</y>
-          <width>151</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>GET CONFIG from device</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEdit">
@@ -478,74 +446,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
         <property name="text">
          <string>TextLabel</string>
         </property>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_12">
-        <property name="geometry">
-         <rect>
-          <x>800</x>
-          <y>340</y>
-          <width>231</width>
-          <height>231</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Styles</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_10">
-         <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_QssChinaWhite">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>ChinaWhite</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_QssUbuntu">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Ubuntu</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_QssQDarkStyle">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>qDarkStyle</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_QssDefault">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Default</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_QssBreezeDark">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Breeze dark</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
       </widget>
      </widget>

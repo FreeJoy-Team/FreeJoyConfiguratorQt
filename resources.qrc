@@ -17,5 +17,10 @@
         <file>Images/linear.png</file>
         <file>Images/linearInvert.png</file>
         <file>Images/Shape.png</file>
+        <file>Images/Exponent_dark.png</file>
+        <file>Images/ExponentInvert_dark.png</file>
+        <file>Images/linear_dark.png</file>
+        <file>Images/linearInvert_dark.png</file>
+        <file>Images/Shape_dark.png</file>
     </qresource>
 </RCC>

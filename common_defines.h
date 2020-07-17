@@ -11,7 +11,7 @@
 
 //#define DEBUG
 
-#define FIRMWARE_VERSION					0x1603			// v1.6.0b3
+#define FIRMWARE_VERSION					0x1606			// v1.6.0b6
 #define USED_PINS_NUM							30					// constant for BluePill and BlackPill boards
 #define MAX_AXIS_NUM							8						// max 8
 #define MAX_BUTTONS_NUM						128					// power of 2, max 128
@@ -36,8 +36,8 @@ enum
     REPORT_ID_FIRMWARE,
 };
 
-
 #define BUFFSIZE                            64
 #define CONFIG_COUNT                        16
+
 
 #endif 	/* __COMMON_DEFINES_H__ */

@@ -23,6 +23,13 @@ AxesCurvesConfig::~AxesCurvesConfig()
     delete ui;
 }
 
+void AxesCurvesConfig::SetDarkInterface(bool is_dark)
+{
+    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
+        AxesCurvAdrList[i]->SetDarkIcon(is_dark);
+    }
+}
+
 void AxesCurvesConfig::RetranslateUi()
 {
     ui->retranslateUi(this);

@@ -89,6 +89,7 @@ void AdvancedSettings::on_pushButton_StyleDefault_clicked()
         gEnv.pAppSettings->beginGroup("StyleSettings");
         gEnv.pAppSettings->setValue("StyleSheet", "default");
         gEnv.pAppSettings->endGroup();
+        emit interfaceStyleChanged(false);
 }
 
 void AdvancedSettings::on_pushButton_StyleWhite_clicked()
@@ -106,6 +107,7 @@ void AdvancedSettings::on_pushButton_StyleWhite_clicked()
         gEnv.pAppSettings->beginGroup("StyleSettings");
         gEnv.pAppSettings->setValue("StyleSheet", "white");
         gEnv.pAppSettings->endGroup();
+        emit interfaceStyleChanged(false);
 }
 
 void AdvancedSettings::on_pushButton_StyleDark_clicked()
@@ -123,4 +125,5 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
         gEnv.pAppSettings->beginGroup("StyleSettings");
         gEnv.pAppSettings->setValue("StyleSheet", "dark");
         gEnv.pAppSettings->endGroup();
+        emit interfaceStyleChanged(true);
 }

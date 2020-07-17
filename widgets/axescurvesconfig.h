@@ -24,6 +24,8 @@ public:
 
     void RetranslateUi();
 
+    void SetDarkInterface(bool is_dark);
+
 private:
     Ui::AxesCurvesConfig *ui;
     QList<AxesCurves*> AxesCurvAdrList;
