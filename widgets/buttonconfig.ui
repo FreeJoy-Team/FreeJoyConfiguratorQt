@@ -20,6 +20,9 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="1,10,1" columnstretch="5,10">
+   <property name="topMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="rightMargin">
@@ -290,7 +293,7 @@
            <x>0</x>
            <y>0</y>
            <width>690</width>
-           <height>477</height>
+           <height>485</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="layoutV_LogicalButton">
@@ -357,7 +360,7 @@
            <x>0</x>
            <y>0</y>
            <width>344</width>
-           <height>490</height>
+           <height>498</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="layoutG_PhysicalButton"/>

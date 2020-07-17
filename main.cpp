@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // global
-    QSettings app_settings( "settings.conf", QSettings::IniFormat );
+    QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     DeviceConfig device_config;
     gEnv.pAppSettings = &app_settings;
     gEnv.pDeviceConfig = &device_config;

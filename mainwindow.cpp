@@ -31,54 +31,13 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("FreeJoy QtConfigurator");
 //    QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
 
+    // load application config
+    LoadAppConfig();
 
     hid_device_worker = new HidDevice();
     thread = new QThread;
 
     thread_getSend_config = new QThread;
-
-
-    // load language settings
-    gEnv.pAppSettings->beginGroup("LanguageSettings");
-    if (gEnv.pAppSettings->value("Language", "english").toString() == "russian")
-    {
-        translator.load(":/FreeJoyTest_ru");
-        qApp->installTranslator(&translator);
-        ui->retranslateUi(this);
-    }
-    gEnv.pAppSettings->endGroup();
-
-    // load tab index
-    gEnv.pAppSettings->beginGroup("TabIndexSettings");
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_PinConfig),
-                                      gEnv.pAppSettings->value("PinConfig", ui->tabWidget->indexOf(ui->tab_PinConfig)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ButtonConfig),
-                                      gEnv.pAppSettings->value("ButtonConfig", ui->tabWidget->indexOf(ui->tab_ButtonConfig)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesConfig),
-                                      gEnv.pAppSettings->value("AxesConfig", ui->tabWidget->indexOf(ui->tab_AxesConfig)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesCurves),
-                                      gEnv.pAppSettings->value("AxesCurves", ui->tabWidget->indexOf(ui->tab_AxesCurves)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesToButtons),
-                                      gEnv.pAppSettings->value("AxesToButtons", ui->tabWidget->indexOf(ui->tab_AxesToButtons)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ShiftRegisters),
-                                      gEnv.pAppSettings->value("ShiftRegs", ui->tabWidget->indexOf(ui->tab_ShiftRegisters)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_Encoders),
-                                      gEnv.pAppSettings->value("Encoders", ui->tabWidget->indexOf(ui->tab_Encoders)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_LED),
-                                      gEnv.pAppSettings->value("LED", ui->tabWidget->indexOf(ui->tab_LED)).toInt());
-
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AdvancedSettings),
-                                      gEnv.pAppSettings->value("AdvSettings", ui->tabWidget->indexOf(ui->tab_AdvancedSettings)).toInt());
-
-    ui->tabWidget->setCurrentIndex(gEnv.pAppSettings->value("CurrentIndex", 0).toInt());
-    gEnv.pAppSettings->endGroup();
 
 
 
@@ -218,6 +177,63 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    SaveAppConfig();
+
+    hid_device_worker->SetIsFinish(true);
+    thread->quit();
+    thread->deleteLater();
+    thread->wait();
+    delete hid_device_worker;
+    delete thread;              // не уверен в нужности, если есть thread->deleteLater();
+    delete thread_getSend_config;       // hz
+    delete ui;
+}
+
+
+void MainWindow::LoadAppConfig()
+{
+    // load language settings
+    gEnv.pAppSettings->beginGroup("LanguageSettings");
+    if (gEnv.pAppSettings->value("Language", "english").toString() == "russian")
+    {
+        translator.load(":/FreeJoyTest_ru");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }
+    gEnv.pAppSettings->endGroup();
+
+    // load window settings
+    gEnv.pAppSettings->beginGroup("WindowSettings");
+    this->restoreGeometry(gEnv.pAppSettings->value("Geometry").toByteArray());
+    gEnv.pAppSettings->endGroup();
+
+    // load tab index
+    gEnv.pAppSettings->beginGroup("TabIndexSettings");
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_PinConfig),
+                                      gEnv.pAppSettings->value("PinConfig", ui->tabWidget->indexOf(ui->tab_PinConfig)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ButtonConfig),
+                                      gEnv.pAppSettings->value("ButtonConfig", ui->tabWidget->indexOf(ui->tab_ButtonConfig)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesConfig),
+                                      gEnv.pAppSettings->value("AxesConfig", ui->tabWidget->indexOf(ui->tab_AxesConfig)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesCurves),
+                                      gEnv.pAppSettings->value("AxesCurves", ui->tabWidget->indexOf(ui->tab_AxesCurves)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesToButtons),
+                                      gEnv.pAppSettings->value("AxesToButtons", ui->tabWidget->indexOf(ui->tab_AxesToButtons)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ShiftRegisters),
+                                      gEnv.pAppSettings->value("ShiftRegs", ui->tabWidget->indexOf(ui->tab_ShiftRegisters)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_Encoders),
+                                      gEnv.pAppSettings->value("Encoders", ui->tabWidget->indexOf(ui->tab_Encoders)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_LED),
+                                      gEnv.pAppSettings->value("LED", ui->tabWidget->indexOf(ui->tab_LED)).toInt());
+    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AdvancedSettings),
+                                      gEnv.pAppSettings->value("AdvSettings", ui->tabWidget->indexOf(ui->tab_AdvancedSettings)).toInt());
+    ui->tabWidget->setCurrentIndex(gEnv.pAppSettings->value("CurrentIndex", 0).toInt());
+    gEnv.pAppSettings->endGroup();
+}
+
+void MainWindow::SaveAppConfig()
+{
+    // save tab index
     gEnv.pAppSettings->beginGroup("TabIndexSettings");
     gEnv.pAppSettings->setValue("PinConfig",       ui->tabWidget->indexOf(ui->tab_PinConfig));
     gEnv.pAppSettings->setValue("ButtonConfig",    ui->tabWidget->indexOf(ui->tab_ButtonConfig));
@@ -230,16 +246,12 @@ MainWindow::~MainWindow()
     gEnv.pAppSettings->setValue("AdvSettings",     ui->tabWidget->indexOf(ui->tab_AdvancedSettings));
     gEnv.pAppSettings->setValue("CurrentIndex",    ui->tabWidget->currentIndex());
     gEnv.pAppSettings->endGroup();
-
-    hid_device_worker->SetIsFinish(true);
-    thread->quit();
-    thread->deleteLater();
-    thread->wait();
-    delete hid_device_worker;
-    delete thread;              // не уверен в нужности, если есть thread->deleteLater();
-    delete thread_getSend_config;       // hz
-    delete ui;
+    // save window settings
+    gEnv.pAppSettings->beginGroup("WindowSettings");
+    gEnv.pAppSettings->setValue("Geometry",   this->saveGeometry());
+    gEnv.pAppSettings->endGroup();
 }
+
 
 
 void MainWindow::showConnectDeviceInfo() {
@@ -254,6 +266,7 @@ void MainWindow::hideConnectDeviceInfo() {
     ui->label_DeviceStatus->setText(tr("Disconnected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: red;");
 }
+
 
 void MainWindow::languageChanged(QString language)        // QSignalBlocker blocker(ui->comboBox);
 {

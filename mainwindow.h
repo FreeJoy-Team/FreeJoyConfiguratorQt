@@ -113,6 +113,9 @@ private:
 
     QThread* thread_getSend_config;
 
+    void LoadAppConfig();
+    void SaveAppConfig();
+
     void resizeEvent(QResizeEvent*);
 };
 #endif // MAINWINDOW_H
