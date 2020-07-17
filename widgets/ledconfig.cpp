@@ -1,7 +1,7 @@
 #include "ledconfig.h"
 #include "ui_ledconfig.h"
 
-#include <time.h>
+//#include <time.h>
 
 #include "common_types.h"
 #include "global.h"
@@ -16,7 +16,7 @@ LedConfig::LedConfig(QWidget *parent) :
     ui->layoutV_LED->setAlignment(Qt::AlignTop);
 
     // LEDs spawn and hide
-    clock_t start = clock();
+    //clock_t start = clock();
     for (int i = 0; i < MAX_LEDS_NUM; i++)
     {
         LED * led = new LED(i, this);       // мб нах new?
@@ -24,8 +24,8 @@ LedConfig::LedConfig(QWidget *parent) :
         LEDAdrList.append(led);
         led->hide();
     }
-    clock_t stop = clock();
-    qDebug()<< "LEDs create ms= " << stop - start;
+    //clock_t stop = clock();
+    //qDebug()<< "LEDs create ms= " << stop - start;
 }
 
 LedConfig::~LedConfig()

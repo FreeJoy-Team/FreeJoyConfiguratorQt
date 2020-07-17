@@ -10,12 +10,13 @@ GlobalEnvironment gEnv;
 #include "deviceconfig.h"
 #include "signalhandler.h"
 
-
+#include <ctime>
 int main(int argc, char *argv[])
 {
 //    QCoreApplication::setOrganizationName(ORGANIZATION_NAME);
 //    QCoreApplication::setOrganizationDomain(ORGANIZATION_DOMAIN);
 //    QCoreApplication::setApplicationName(APPLICATION_NAME); QFont::Bold
+    clock_t app_start = clock();
 
     QApplication a(argc, argv);
 
@@ -24,6 +25,8 @@ int main(int argc, char *argv[])
     DeviceConfig device_config;
     gEnv.pAppSettings = &app_settings;
     gEnv.pDeviceConfig = &device_config;
+
+    gEnv.pApp_start_time = &app_start;
 
     // set font size
     gEnv.pAppSettings->beginGroup("FontSettings");

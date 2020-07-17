@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    clock_t tmp_clock = clock();
+    qDebug()<<"start MainWindow constructor time ms ="<< clock() - *gEnv.pApp_start_time;
     ui->setupUi(this);
 
     // сделать версию
@@ -43,33 +45,50 @@ MainWindow::MainWindow(QWidget *parent)
 //    QScrollBar* scroll = ui->scrollArea_2->verticalScrollBar();
 //    connect( scroll , SIGNAL(valueChanged(int)) ,this , SLOT(addvalues(int)) );
 
-
+    qDebug()<<"befor load widgets time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
 
                                             //////////////// ADD WIDGETS ////////////////
     // add pin config
     pin_config = new PinConfig(this);
     ui->layoutV_tabPinConfig->addWidget(pin_config);
+    qDebug()<<"pin config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
     // add button config
     button_config = new ButtonConfig(this);     // not need delete. this - parent
     ui->layoutV_tabButtonConfig->addWidget(button_config);
+    qDebug()<<"button config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
     // add axes config
     axes_config = new AxesConfig(this);
     ui->layoutV_tabAxesConfig->addWidget(axes_config);
+    qDebug()<<"axes config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
     // add axes curves config
     axes_curves_config = new AxesCurvesConfig(this);
     ui->layoutV_tabAxesCurvesConfig->addWidget(axes_curves_config);
+    qDebug()<<"curves config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
     // add axes to buttons config
     a2b_config = new AxesToButtonsConfig(this);
     ui->layoutV_tabAxesToButtons->addWidget(a2b_config);
+    qDebug()<<"a2b config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
     // add shift registers config
     shift_reg_config = new ShiftRegistersConfig(this);
     ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config);
+    qDebug()<<"shift config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
     // add encoders config
     encoder_config = new EncodersConfig(this);
     ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
+    qDebug()<<"encoder config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
     // add led config
     led_config = new LedConfig(this);
-    ui->layoutV_tabLedConfig->addWidget(led_config);      
+    ui->layoutV_tabLedConfig->addWidget(led_config);
+    qDebug()<<"led config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    tmp_clock = clock();
 
 
                                             //////////////// SIGNASL-SLOTS ////////////////
@@ -166,6 +185,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     thread->start();
+    qDebug()<<"after widgets MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
+    qDebug()<<"start to MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time;
 }
 
 MainWindow::~MainWindow()
@@ -256,6 +277,7 @@ void MainWindow::showConnectDeviceInfo() {
     ui->label_DeviceStatus->setText(tr("Connected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
     //ui->label_DeviceStatus->setVisible(true);
+    qDebug()<<"start time ms ="<< clock() - *gEnv.pApp_start_time;
 }
 
 

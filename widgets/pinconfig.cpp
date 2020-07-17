@@ -2,8 +2,16 @@
 #include "ui_pinconfig.h"
 #include "signalhandler.h"
 
+//#include <QtConcurrent/QtConcurrent>
+//#include <QFuture>
+
 #define PINS_IN_GROUP_RANGE 16          // range A0-A15 = 16
 #include <QDebug>
+
+void qwe(){
+
+}
+
 PinConfig::PinConfig(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PinConfig)
@@ -11,11 +19,12 @@ PinConfig::PinConfig(QWidget *parent) :
     ui->setupUi(this);
 
     int number = 1;
-    QString name_template_pinA("widgetPin_PA%1");
+    QString name_template_pinA("widgetPin_PA%1");//QtConcurrent::run()
     for(uint8_t i = 0; i < 16; i++) {                   // 16 to PINS_IN_GROUP_RANGE
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinA.arg(i));
         if (pinComboBox != nullptr){
             pin_count_++;
+            //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
             pinComboBox->InitializationPins(number++);
             PinComboBoxPtrList.append(pinComboBox);
         }
@@ -26,6 +35,7 @@ PinConfig::PinConfig(QWidget *parent) :
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinB.arg(i));
         if (pinComboBox != nullptr){
             pin_count_++;
+            //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
             pinComboBox->InitializationPins(number++);
             PinComboBoxPtrList.append(pinComboBox);
         }
@@ -36,6 +46,7 @@ PinConfig::PinConfig(QWidget *parent) :
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinC.arg(i));
         if (pinComboBox != nullptr){
             pin_count_++;
+            //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
             pinComboBox->InitializationPins(number++);
             PinComboBoxPtrList.append(pinComboBox);
         }

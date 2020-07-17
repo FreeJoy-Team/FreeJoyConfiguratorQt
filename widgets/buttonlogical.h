@@ -7,7 +7,7 @@
 
 #include "global.h"
 #include "deviceconfig.h"
-
+#include <QThread>
 
 #define TIMER_COUNT 4       // "NO timer" + count
 #define SHIFT_COUNT 6

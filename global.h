@@ -2,6 +2,7 @@
 #define GLOBAL_H
 
 #include <QString>
+#include <ctime>            // временно
 
 class DeviceConfig;
 class QSettings;
@@ -10,6 +11,7 @@ class QSettings;
 //!	This is a faster way to get interface pointer then calling ISystem interface to retrieve one.
 struct GlobalEnvironment
 {
+    clock_t*                   pApp_start_time = nullptr;
     DeviceConfig*              pDeviceConfig = nullptr;
     QSettings*                 pAppSettings = nullptr;
     // thread
