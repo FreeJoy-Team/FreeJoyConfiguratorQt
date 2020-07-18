@@ -6,17 +6,19 @@
 //#include <QFuture>
 
 #define PINS_IN_GROUP_RANGE 16          // range A0-A15 = 16
-#include <QDebug>
-
-void qwe(){
-
-}
 
 PinConfig::PinConfig(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PinConfig)
 {
     ui->setupUi(this);
+
+//    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
+//    // get label dimensions
+//    int w = ui->label_ControllerImage->width();
+//    int h = ui->label_ControllerImage->height();
+//    // set a scaled pixmap to a w x h window keeping its aspect ratio
+//    ui->label_ControllerImage->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
 
     int number = 1;
     QString name_template_pinA("widgetPin_PA%1");//QtConcurrent::run()
@@ -67,6 +69,18 @@ PinConfig::~PinConfig()
 {
     delete ui;
 }
+
+//void PinConfig::resizeEvent(QResizeEvent* event)
+//{
+//    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
+//    // get label dimensions
+//    int w = ui->label_ControllerImage->width();
+//    int h = ui->label_ControllerImage->height();
+//    // set a scaled pixmap to a w x h window keeping its aspect ratio
+//    ui->label_ControllerImage->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatioByExpanding));
+//    QSize size = pix.size();
+//    ui->label_ControllerImage->setMaximumSize(size.width(), size.height());
+//}
 
 void PinConfig::RetranslateUi()
 {

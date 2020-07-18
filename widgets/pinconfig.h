@@ -37,6 +37,9 @@ signals:
     void i2cSelected(bool i2c_selected);
     void axesSourceChanged(int source_enum, bool is_add);
 
+//protected:
+//    void resizeEvent(QResizeEvent*) override;
+
 private slots:
     void pinInteraction(int index, int sender_index, int pin);
     void pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number);

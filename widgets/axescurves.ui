@@ -161,10 +161,6 @@
           <property name="text">
            <string/>
           </property>
-          <property name="icon">
-           <iconset resource="../resources.qrc">
-            <normaloff>:/Images/linear.png</normaloff>:/Images/linear.png</iconset>
-          </property>
           <property name="iconSize">
            <size>
             <width>190</width>
@@ -198,10 +194,6 @@
           </property>
           <property name="text">
            <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources.qrc">
-            <normaloff>:/Images/linearInvert.png</normaloff>:/Images/linearInvert.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -237,10 +229,6 @@
           <property name="text">
            <string/>
           </property>
-          <property name="icon">
-           <iconset resource="../resources.qrc">
-            <normaloff>:/Images/Exponent.png</normaloff>:/Images/Exponent.png</iconset>
-          </property>
           <property name="iconSize">
            <size>
             <width>190</width>
@@ -274,10 +262,6 @@
           </property>
           <property name="text">
            <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources.qrc">
-            <normaloff>:/Images/ExponentInvert.png</normaloff>:/Images/ExponentInvert.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -313,10 +297,6 @@
           <property name="text">
            <string/>
           </property>
-          <property name="icon">
-           <iconset resource="../resources.qrc">
-            <normaloff>:/Images/Shape.png</normaloff>:/Images/Shape.png</iconset>
-          </property>
           <property name="iconSize">
            <size>
             <width>190</width>
@@ -349,8 +329,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

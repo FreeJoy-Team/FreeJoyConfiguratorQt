@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1100</width>
-    <height>772</height>
+    <width>900</width>
+    <height>515</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -152,7 +152,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>8</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>

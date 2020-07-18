@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug()<<"start MainWindow constructor time ms ="<< clock() - *gEnv.pApp_start_time;
     ui->setupUi(this);
 
+    //setWindowFlags( Qt::FramelessWindowHint );
+
     // сделать версию
     this->setWindowTitle("FreeJoy QtConfigurator");
 //    QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
@@ -179,7 +181,7 @@ MainWindow::MainWindow(QWidget *parent)
     if (gEnv.pAppSettings->value("StyleSheet", "default").toString() == "dark"){
         interfaceStyleChanged(true);
     } else {
-        //interfaceStyleChanged(false);
+        interfaceStyleChanged(false);
     }
     gEnv.pAppSettings->endGroup();
 

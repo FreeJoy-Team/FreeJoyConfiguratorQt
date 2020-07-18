@@ -113,7 +113,7 @@ void PinComboBox::IndexChanged(int index)
                             {
                                 //qDebug()<<"add";
                                 //is_call_interaction_ = true;
-                                //ui->comboBox_PinsType->setStyleSheet(pin_types[enum_gui_index[index]].styleSheet);          // ?????
+                                //ui->comboBox_PinsType->setStyleSheet(pin_types[enum_gui_index[index]].styleSheet);          // ?????n
                                 for (int k = 0; k < PIN_TYPE_COUNT; ++k) {
                                     if(pin_types[k].device_enum_index == pin_types[enum_gui_index[index]].interaction[t]){
                                         emit valueChangedForInteraction(k, enum_gui_index[index], pin_number_);
@@ -148,7 +148,7 @@ void PinComboBox::IndexChanged(int index)
             else if (pin_types[enum_gui_index[index]].interaction[i] > 0)
             {
                 is_call_interaction_ = true;
-                ui->comboBox_PinsType->setStyleSheet(pin_types[enum_gui_index[index]].styleSheet);
+                ui->comboBox_PinsType->setStyleSheet(pin_types[enum_gui_index[index]].styleSheet);        // ????
                 for (int k = 0; k < PIN_TYPE_COUNT; ++k) {
                     if(pin_types[k].device_enum_index == pin_types[enum_gui_index[index]].interaction[i]){
                         //is_interacts_++;

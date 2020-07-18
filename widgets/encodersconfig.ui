@@ -14,8 +14,23 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
     <widget class="QScrollArea" name="scrollArea">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -24,8 +39,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1042</width>
-        <height>620</height>
+        <width>1062</width>
+        <height>640</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5">
