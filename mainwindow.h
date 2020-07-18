@@ -104,6 +104,9 @@ private:
     void LoadAppConfig();
     void SaveAppConfig();
 
+    void LoadDeviceConfigFromFile();
+    void SaveDeviceConfigToFile();
+
     void resizeEvent(QResizeEvent*);
 };
 #endif // MAINWINDOW_H
