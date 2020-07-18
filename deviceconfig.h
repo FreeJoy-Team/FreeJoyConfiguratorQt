@@ -9,6 +9,8 @@ class DeviceConfig
 public:
     DeviceConfig();
 
+    void ResetConfig();
+
     dev_config_t config;
     joy_report_t gamepad_report;
 };

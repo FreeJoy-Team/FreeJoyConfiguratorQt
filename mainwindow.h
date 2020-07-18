@@ -86,13 +86,16 @@ private slots:
 
     void interfaceStyleChanged(bool is_dark);
 
-    void on_pushButton_11_clicked();
     void addvalues(int);
 
     void on_pushButton_ResetAllPins_clicked();
 
     void on_pushButton_ReadConfig_clicked();
     void on_pushButton_WriteConfig_clicked();
+
+    void on_pushButton_SaveToFile_clicked();
+
+    void on_pushButton_LoadFromFile_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -104,8 +107,8 @@ private:
     void LoadAppConfig();
     void SaveAppConfig();
 
-    void LoadDeviceConfigFromFile();
-    void SaveDeviceConfigToFile();
+    void LoadDeviceConfigFromFile(QSettings* device_settings);
+    void SaveDeviceConfigToFile(QSettings* device_settings);
 
     void resizeEvent(QResizeEvent*);
 };

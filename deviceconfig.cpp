@@ -9,3 +9,9 @@ DeviceConfig::DeviceConfig()
     config = InitConfig();
     gamepad_report = {};        //??
 }
+
+
+void DeviceConfig::ResetConfig()
+{
+    config = InitConfig();
+}
