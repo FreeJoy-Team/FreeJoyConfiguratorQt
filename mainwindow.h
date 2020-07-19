@@ -97,6 +97,10 @@ private slots:
 
     void on_pushButton_LoadFromFile_clicked();
 
+    void on_pushButton_SetDefaultConfig_clicked();
+
+    void on_pushButton_LoadDefaultConfig_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTranslator translator;

@@ -9,7 +9,6 @@
 //{
 //};
 
-
 void HidDevice::processData()
 {
     int res = 0;
@@ -47,6 +46,7 @@ void HidDevice::processData()
             {
                 str_list.clear();
                 HidDevicesAdrList.clear();
+                //is_app_start = true;    //?
                 emit hidDeviceList(&str_list);
                 no_device_sent = true;
             }
@@ -63,7 +63,7 @@ void HidDevice::processData()
                     no_device_sent = false;
                     for (int i = 0; i < tmp_HidDevicesAdrList.size(); ++i)
                     {
-                        qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
+                        //qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
 //                        if (QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string) == ""){
 //                            qDebug()<<"NULL NULL";
 //                            ////tmp_HidDevicesAdrList.clear();
@@ -72,7 +72,7 @@ void HidDevice::processData()
                         HidDevicesAdrList.append(tmp_HidDevicesAdrList[i]);
                         str_list << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
                     }
-
+                    //is_app_start = true;    //?
                     emit hidDeviceList(&str_list);
                     tmp_HidDevicesAdrList.clear();
                 }
@@ -84,7 +84,7 @@ void HidDevice::processData()
         // no device
         if (!handle_read)
         {
-            if (HidDevicesAdrList.size()){
+            if (HidDevicesAdrList.size()){          // ?
                 handle_read = hid_open(0x0483, HidDevicesAdrList[0]->product_id,nullptr);
             }
             if (!handle_read) {
@@ -92,6 +92,7 @@ void HidDevice::processData()
                 //hid_free_enumeration(hid_dev_info);
                 QThread::msleep(300);
             } else {
+                //is_app_start = true;    //?
                 emit putConnectedDeviceInfo();
             }
         }
@@ -131,8 +132,8 @@ void HidDevice::processData()
 }
 
 
-void HidDevice::SetSelectedDevice(int device_number)
-{
+void HidDevice::SetSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
+{                                                           // нее, пох на мютексы. хз
     if (device_number < 0){
         //device_number = 0;
         return;
@@ -142,6 +143,12 @@ void HidDevice::SetSelectedDevice(int device_number)
     selected_device_ = device_number; 
     qDebug()<<"HID open start";
     handle_read = hid_open(0x0483, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
+//    if (!handle_read) {
+//        emit putDisconnectedDeviceInfo();
+//        //hid_free_enumeration(hid_dev_info);
+//    } else {
+//        emit putConnectedDeviceInfo();
+//    }
     qDebug()<<"No crash, HID opened";
     qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
 }

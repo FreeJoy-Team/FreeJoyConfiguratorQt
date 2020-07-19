@@ -567,8 +567,8 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
     }
     //devc->vid = QString::number(appS->value("Pid", devc->vid).toInt()).toShort(&tmp ,16);
     devc->pid = QString::number(appS->value("Pid", devc->pid).toInt()).toUShort(&tmp ,16);
-    devc->is_dynamic_config = (uint8_t)appS->value("DynamicHID", devc->is_dynamic_config).toInt();
-    devc->exchange_period_ms = (appS->value("USBExchange", devc->exchange_period_ms).toInt());
+    devc->is_dynamic_config = appS->value("DynamicHID", devc->is_dynamic_config).toInt();
+    devc->exchange_period_ms = appS->value("USBExchange", devc->exchange_period_ms).toInt();
     appS->endGroup();
 
     // load Pins config from file
@@ -625,7 +625,7 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
 
     // load Buttons config from file
     for (int i = 0; i < MAX_BUTTONS_NUM; ++i) {
-        appS->beginGroup("ButtonsConfig_" + QString::number(i));
+        appS->beginGroup("BtnConfg_" + QString::number(i));
 
         devc->buttons[i].physical_num = appS->value("ButtonPhysicNumber", devc->buttons[i].physical_num).toInt();
         devc->buttons[i].type = appS->value("ButtonType", devc->buttons[i].type).toInt();
@@ -992,7 +992,7 @@ void MainWindow::addvalues(int value)
 void MainWindow::on_pushButton_LoadFromFile_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open Config"), QDir::currentPath() + "/" + gEnv.pDeviceConfig->config.device_name, tr("Config Files (*.cfg)"));
+        tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
 
     QSettings device_settings( fileName, QSettings::IniFormat );
     LoadDeviceConfigFromFile(&device_settings);
@@ -1008,3 +1008,26 @@ void MainWindow::on_pushButton_SaveToFile_clicked()
     SaveDeviceConfigToFile(&device_settings);
 }
 
+
+void MainWindow::on_pushButton_SetDefaultConfig_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
+
+    gEnv.pAppSettings->beginGroup("DefaultConfig");
+    gEnv.pAppSettings->setValue("FileName", fileName);
+    gEnv.pAppSettings->endGroup();
+}
+
+void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
+{
+    // load default config file LoadDeviceConfigFromFile
+    gEnv.pAppSettings->beginGroup("DefaultConfig");
+
+    if (gEnv.pAppSettings->value("FileName", "none") != "none"){
+        QSettings app_settings( gEnv.pAppSettings->value("FileName", "none").toString(), QSettings::IniFormat );
+        LoadDeviceConfigFromFile(&app_settings);
+    }
+    QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
+    gEnv.pAppSettings->endGroup();
+}

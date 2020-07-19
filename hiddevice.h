@@ -9,7 +9,7 @@
 
 #include <QObject>
 #include <QTime>
-
+//#include <QMutex>
 class HidDevice : public QObject
 {
     Q_OBJECT
@@ -40,11 +40,13 @@ signals:
 private:
     //hid_device *handle_read;
     bool is_finish_ = false;
+    bool is_app_start = false;
     int selected_device_;
     uint8_t device_buffer_[BUFFSIZE];
     dev_config_t device_config_;                // ????
     QList<hid_device_info*> HidDevicesAdrList;
 
+    //QMutex mutex_;
     ReportConverter *report_convert;                     // !!!!
 };
 
