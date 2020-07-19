@@ -123,6 +123,10 @@ RESOURCES += \
     darkstyle/darkstyle.qrc \
     BreezeStyleSheets/breeze.qrc
 
+linux-g++ | linux-g++-64 | linux-g++-32 {
+    LIBS += -ludev
+}
+
 win32 {
-LIBS += -lhid -lsetupapi
+    LIBS += -lhid -lsetupapi
 }
