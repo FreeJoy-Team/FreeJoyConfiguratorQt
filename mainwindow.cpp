@@ -625,7 +625,7 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
 
     // load Buttons config from file
     for (int i = 0; i < MAX_BUTTONS_NUM; ++i) {
-        appS->beginGroup("BtnConfg_" + QString::number(i));
+        appS->beginGroup("ButtonsConfig_" + QString::number(i));
 
         devc->buttons[i].physical_num = appS->value("ButtonPhysicNumber", devc->buttons[i].physical_num).toInt();
         devc->buttons[i].type = appS->value("ButtonType", devc->buttons[i].type).toInt();
