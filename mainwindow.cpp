@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     thread_getSend_config = new QThread;
 
-
     // add dyn
 //    QGridLayout* layout = new QGridLayout;
 //    Encoders* qwe = new Encoders;
@@ -548,19 +547,16 @@ void MainWindow::configSent(bool success)
     }
 }
 
-
-
 void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
 {
     // уменьшение текста
-    //QSettings* appS = gEnv.pAppSettings;
     dev_config_t* devc = &gEnv.pDeviceConfig->config;
     bool tmp;
 
     // load Device USB config from file
     appS->beginGroup("DeviceUsbConfig");
 
-    devc->firmware_version = QString::number(appS->value("FirmwareVersion", devc->firmware_version).toInt()).toShort(&tmp ,16);
+    devc->firmware_version = QString::number(appS->value("FirmwareVersion", devc->firmware_version).toInt()).toUShort(&tmp ,16);
     std::string tmp_string = appS->value("DeviceName", devc->device_name).toString().toStdString();
     for (uint i = 0; i < sizeof(devc->device_name); i++) {
         if (i < tmp_string.size()){
@@ -570,44 +566,61 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
         }
     }
     //devc->vid = QString::number(appS->value("Pid", devc->vid).toInt()).toShort(&tmp ,16);
-    devc->pid = QString::number(appS->value("Pid", devc->pid).toInt()).toShort(&tmp ,16);
-    devc->is_dynamic_config = appS->value("DynamicHID", devc->is_dynamic_config).toInt();
-    devc->exchange_period_ms = appS->value("USBExchange", devc->exchange_period_ms).toInt();
+    devc->pid = QString::number(appS->value("Pid", devc->pid).toInt()).toUShort(&tmp ,16);
+    devc->is_dynamic_config = (uint8_t)appS->value("DynamicHID", devc->is_dynamic_config).toInt();
+    devc->exchange_period_ms = (appS->value("USBExchange", devc->exchange_period_ms).toInt());
     appS->endGroup();
 
     // load Pins config from file
     appS->beginGroup("PinsConfig");
 
-    devc->pins[0] = appS->value("A0", devc->pins[0]).toInt();
-    devc->pins[1] = appS->value("A1", devc->pins[1]).toInt();
-    devc->pins[2] = appS->value("A2", devc->pins[2]).toInt();
-    devc->pins[3] = appS->value("A3", devc->pins[3]).toInt();
-    devc->pins[4] = appS->value("A4", devc->pins[4]).toInt();
-    devc->pins[5] = appS->value("A5", devc->pins[5]).toInt();
-    devc->pins[6] = appS->value("A6", devc->pins[6]).toInt();
-    devc->pins[7] = appS->value("A7", devc->pins[7]).toInt();
-    devc->pins[8] = appS->value("A8", devc->pins[8]).toInt();
-    devc->pins[9] = appS->value("A9", devc->pins[9]).toInt();
-    devc->pins[10] = appS->value("A10", devc->pins[10]).toInt();
-    devc->pins[11] = appS->value("A15", devc->pins[11]).toInt();
-    devc->pins[12] = appS->value("B0", devc->pins[12]).toInt();
-    devc->pins[13] = appS->value("B1", devc->pins[13]).toInt();
-    devc->pins[14] = appS->value("B3", devc->pins[14]).toInt();
-    devc->pins[15] = appS->value("B4", devc->pins[15]).toInt();
-    devc->pins[16] = appS->value("B5", devc->pins[16]).toInt();
-    devc->pins[17] = appS->value("B6", devc->pins[17]).toInt();
-    devc->pins[18] = appS->value("B7", devc->pins[18]).toInt();
-    devc->pins[19] = appS->value("B8", devc->pins[19]).toInt();
-    devc->pins[20] = appS->value("B9", devc->pins[20]).toInt();
-    devc->pins[21] = appS->value("B10", devc->pins[21]).toInt();
-    devc->pins[22] = appS->value("B11", devc->pins[22]).toInt();
-    devc->pins[23] = appS->value("B12", devc->pins[23]).toInt();
-    devc->pins[24] = appS->value("B13", devc->pins[24]).toInt();
-    devc->pins[25] = appS->value("B14", devc->pins[25]).toInt();
-    devc->pins[26] = appS->value("B15", devc->pins[26]).toInt();
-    devc->pins[27] = appS->value("C13", devc->pins[27]).toInt();
-    devc->pins[28] = appS->value("C14", devc->pins[28]).toInt();
-    devc->pins[29] = appS->value("C15", devc->pins[29]).toInt();
+    devc->pins[0] = (int8_t)appS->value("A0", devc->pins[0]).toInt();   // вроде и без (int8_t) работает
+    devc->pins[1] = (int8_t)appS->value("A1", devc->pins[1]).toInt();
+    devc->pins[2] = (int8_t)appS->value("A2", devc->pins[2]).toInt();
+    devc->pins[3] = (int8_t)appS->value("A3", devc->pins[3]).toInt();
+    devc->pins[4] = (int8_t)appS->value("A4", devc->pins[4]).toInt();
+    devc->pins[5] = (int8_t)appS->value("A5", devc->pins[5]).toInt();
+    devc->pins[6] = (int8_t)appS->value("A6", devc->pins[6]).toInt();
+    devc->pins[7] = (int8_t)appS->value("A7", devc->pins[7]).toInt();
+    devc->pins[8] = (int8_t)appS->value("A8", devc->pins[8]).toInt();
+    devc->pins[9] = (int8_t)appS->value("A9", devc->pins[9]).toInt();
+    devc->pins[10] = (int8_t)appS->value("A10", devc->pins[10]).toInt();
+    devc->pins[11] = (int8_t)appS->value("A15", devc->pins[11]).toInt();
+    devc->pins[12] = (int8_t)appS->value("B0", devc->pins[12]).toInt();
+    devc->pins[13] = (int8_t)appS->value("B1", devc->pins[13]).toInt();
+    devc->pins[14] = (int8_t)appS->value("B3", devc->pins[14]).toInt();
+    devc->pins[15] = (int8_t)appS->value("B4", devc->pins[15]).toInt();
+    devc->pins[16] = (int8_t)appS->value("B5", devc->pins[16]).toInt();
+    devc->pins[17] = (int8_t)appS->value("B6", devc->pins[17]).toInt();
+    devc->pins[18] = (int8_t)appS->value("B7", devc->pins[18]).toInt();
+    devc->pins[19] = (int8_t)appS->value("B8", devc->pins[19]).toInt();
+    devc->pins[20] = (int8_t)appS->value("B9", devc->pins[20]).toInt();
+    devc->pins[21] = (int8_t)appS->value("B10", devc->pins[21]).toInt();
+    devc->pins[22] = (int8_t)appS->value("B11", devc->pins[22]).toInt();
+    devc->pins[23] = (int8_t)appS->value("B12", devc->pins[23]).toInt();
+    devc->pins[24] = (int8_t)appS->value("B13", devc->pins[24]).toInt();
+    devc->pins[25] = (int8_t)appS->value("B14", devc->pins[25]).toInt();
+    devc->pins[26] = (int8_t)appS->value("B15", devc->pins[26]).toInt();
+    devc->pins[27] = (int8_t)appS->value("C13", devc->pins[27]).toInt();
+    devc->pins[28] = (int8_t)appS->value("C14", devc->pins[28]).toInt();
+    devc->pins[29] = (int8_t)appS->value("C15", devc->pins[29]).toInt();
+    appS->endGroup();
+
+    // load Shift config from file
+    appS->beginGroup("ShiftConfig");
+    for (int i = 0; i < SHIFT_COUNT - 1; ++i) { // -1 "No shift"    (SHIFT_COUNT = shift_count + "No shift")
+        devc->shift_config[i].button = (int8_t)appS->value("Shift", devc->shift_config[i].button).toInt();
+    }
+    appS->endGroup();
+
+    // load Timer config from file
+    appS->beginGroup("TimersConfig");
+
+    devc->button_timer1_ms = (uint16_t)appS->value("Timer1", devc->button_timer1_ms).toInt();   // вроде и без (int16_t) работает
+    devc->button_timer2_ms = (uint16_t)appS->value("Timer2", devc->button_timer2_ms).toInt();
+    devc->button_timer3_ms = (uint16_t)appS->value("Timer3", devc->button_timer3_ms).toInt();
+    devc->button_debounce_ms = (uint16_t)appS->value("Debounce", devc->button_debounce_ms).toInt();
+    devc->encoder_press_time_ms = (uint8_t)appS->value("EncoderPress", devc->encoder_press_time_ms).toInt();
     appS->endGroup();
 
     // load Buttons config from file
@@ -623,23 +636,6 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
         devc->buttons[i].press_timer = appS->value("PressTimer", devc->buttons[i].press_timer).toInt();
         appS->endGroup();
     }
-
-    // load Shift config from file
-    appS->beginGroup("ShiftConfig");
-    for (int i = 0; i < SHIFT_COUNT - 1; ++i) { // -1 "No shift"    (SHIFT_COUNT = shift_count + "No shift")
-        devc->shift_config[i].button = appS->value("Shift", devc->shift_config[i].button).toInt();
-    }
-    appS->endGroup();
-
-    // load Timer config from file
-    appS->beginGroup("TimersConfig");
-
-    devc->button_timer1_ms = appS->value("Timer1", devc->button_timer1_ms).toInt();
-    devc->button_timer2_ms = appS->value("Timer2", devc->button_timer2_ms).toInt();
-    devc->button_timer3_ms = appS->value("Timer3", devc->button_timer3_ms).toInt();
-    devc->button_debounce_ms = appS->value("Debounce", devc->button_debounce_ms).toInt();
-    devc->encoder_press_time_ms = appS->value("EncoderPress", devc->encoder_press_time_ms).toInt();
-    appS->endGroup();
 
     // load Axes config from file
     for (int i = 0; i < MAX_AXIS_NUM; ++i)
@@ -811,20 +807,6 @@ void MainWindow::SaveDeviceConfigToFile(QSettings* appS)
     appS->setValue("C15", gEnv.pDeviceConfig->config.pins[29]);
     appS->endGroup();
 
-    // save Buttons config to file
-    for (int i = 0; i < MAX_BUTTONS_NUM; ++i) {
-        appS->beginGroup("ButtonsConfig_" + QString::number(i));
-
-        appS->setValue("ButtonPhysicNumber", gEnv.pDeviceConfig->config.buttons[i].physical_num);
-        appS->setValue("ButtonType", gEnv.pDeviceConfig->config.buttons[i].type);
-        appS->setValue("ShiftMod", gEnv.pDeviceConfig->config.buttons[i].shift_modificator);
-        appS->setValue("Inverted", gEnv.pDeviceConfig->config.buttons[i].is_inverted);
-        appS->setValue("Disabled", gEnv.pDeviceConfig->config.buttons[i].is_disabled);
-        appS->setValue("DelayTimer", gEnv.pDeviceConfig->config.buttons[i].delay_timer);
-        appS->setValue("PressTimer", gEnv.pDeviceConfig->config.buttons[i].press_timer);
-        appS->endGroup();
-    }
-
     // save Shift config to file
     appS->beginGroup("ShiftConfig");
     for (int i = 0; i < SHIFT_COUNT - 1; ++i) { // -1 "No shift"    (SHIFT_COUNT = shift_count + "No shift")
@@ -841,6 +823,20 @@ void MainWindow::SaveDeviceConfigToFile(QSettings* appS)
     appS->setValue("Debounce", gEnv.pDeviceConfig->config.button_debounce_ms);
     appS->setValue("EncoderPress", gEnv.pDeviceConfig->config.encoder_press_time_ms);
     appS->endGroup();
+
+    // save Buttons config to file
+    for (int i = 0; i < MAX_BUTTONS_NUM; ++i) {
+        appS->beginGroup("ButtonsConfig_" + QString::number(i));
+
+        appS->setValue("ButtonPhysicNumber", gEnv.pDeviceConfig->config.buttons[i].physical_num);
+        appS->setValue("ButtonType", gEnv.pDeviceConfig->config.buttons[i].type);
+        appS->setValue("ShiftMod", gEnv.pDeviceConfig->config.buttons[i].shift_modificator);
+        appS->setValue("Inverted", gEnv.pDeviceConfig->config.buttons[i].is_inverted);
+        appS->setValue("Disabled", gEnv.pDeviceConfig->config.buttons[i].is_disabled);
+        appS->setValue("DelayTimer", gEnv.pDeviceConfig->config.buttons[i].delay_timer);
+        appS->setValue("PressTimer", gEnv.pDeviceConfig->config.buttons[i].press_timer);
+        appS->endGroup();
+    }
 
     // save Axes config to file
     for (int i = 0; i < MAX_AXIS_NUM; ++i)

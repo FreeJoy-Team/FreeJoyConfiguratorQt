@@ -238,7 +238,7 @@ void ButtonConfig::ReadFromConfig()
 
     ui->spinBox_DebounceTimer->setValue(gEnv.pDeviceConfig->config.button_debounce_ms);
 
-    ui->spinBox_EncoderPressTimer->setValue(gEnv.pDeviceConfig->config.exchange_period_ms);
+    ui->spinBox_EncoderPressTimer->setValue(gEnv.pDeviceConfig->config.encoder_press_time_ms);
 }
 
 void ButtonConfig::WriteToConfig()
@@ -255,7 +255,7 @@ void ButtonConfig::WriteToConfig()
 
     gEnv.pDeviceConfig->config.button_debounce_ms = ui->spinBox_DebounceTimer->value();
 
-    gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_EncoderPressTimer->value();
+    gEnv.pDeviceConfig->config.encoder_press_time_ms = ui->spinBox_EncoderPressTimer->value();
 
     // logical buttons
     for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
