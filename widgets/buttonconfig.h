@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "buttonlogical.h"      // ?
+#include "buttonlogical.h"
 #include "buttonphysical.h"
 
 #include "common_defines.h"

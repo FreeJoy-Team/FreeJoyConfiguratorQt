@@ -3,30 +3,30 @@
 
 #include <QMainWindow>
 #include <QTranslator>
-#include <QEvent>
-#include <QScrollBar>
+//#include <QEvent>
+//#include <QScrollBar>
 #include <QSettings>
 
-#include "deviceconfig.h"
+//#include "deviceconfig.h"
 #include "hiddevice.h"
 #include "reportconverter.h"
 
 // widgets  удалить лишнее
-#include "widgets/encoders.h"
+//#include "widgets/encoders.h"
 #include "widgets/encodersconfig.h"
 #include "widgets/buttonconfig.h"
-#include "widgets/buttonlogical.h"
-#include "widgets/pincombobox.h"    // widgets  удалить лишнее
+//#include "widgets/buttonlogical.h"
+//#include "widgets/pincombobox.h"    // widgets  удалить лишнее
 #include "widgets/pinconfig.h"
 #include "widgets/advancedsettings.h"
 #include "widgets/axesconfig.h"
-#include "widgets/axescurves.h"
+//#include "widgets/axescurves.h"
 #include "widgets/axescurvesconfig.h"
-#include "widgets/axestobuttons.h"
+//#include "widgets/axestobuttons.h"
 #include "widgets/axestobuttonsconfig.h"
-#include "widgets/led.h"
+//#include "widgets/led.h"
 #include "widgets/ledconfig.h"
-#include "widgets/shiftregisters.h"
+//#include "widgets/shiftregisters.h"
 #include "widgets/shiftregistersconfig.h"
 
 /* Defining */

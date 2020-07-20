@@ -2,7 +2,6 @@
 #define ADVANCEDSETTINGS_H
 
 #include <QWidget>
-#include "deviceconfig.h"
 
 namespace Ui {
 class AdvancedSettings;
@@ -25,7 +24,11 @@ signals:
     void languageChanged(QString language);
     void interfaceStyleChanged(bool is_dark);
 
+    //void styleChanged();
+
 private slots:
+    //void styleButtonWaiting();
+
     void on_pushButton_LangEnglish_clicked();
     void on_pushButton_LangRussian_clicked();
 
@@ -39,6 +42,9 @@ private slots:
 
 private:
     Ui::AdvancedSettings *ui;
+
+    QString tmp_text;
+    QString tmp_style;
 };
 
 #endif // ADVANCEDSETTINGS_H

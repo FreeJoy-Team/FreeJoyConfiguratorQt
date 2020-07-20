@@ -56,7 +56,7 @@ PinConfig::PinConfig(QWidget *parent) :
     //qDebug()<<"PIN COUNT = "<<PinComboBoxPtrList.size();    //currentIndexChanged a2bCountChanged
 
     for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-            connect(PinComboBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),
+            connect(PinComboBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),       // valgrind сообщает о утечке, но почему?
                         this, SLOT(pinInteraction(int, int, int)));
             connect(PinComboBoxPtrList[i], SIGNAL(currentIndexChanged(int, int, int)),
                         this, SLOT(pinIndexChanged(int, int, int)));

@@ -2,8 +2,8 @@
 #define PINCOMBOBOX_H
 
 #include <QWidget>
-#include <QTranslator>
-#include <QDebug>
+//#include <QTranslator>
+//#include <QDebug>
 
 #include "global.h"
 #include "deviceconfig.h"

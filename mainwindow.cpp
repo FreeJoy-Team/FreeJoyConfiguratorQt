@@ -1,19 +1,17 @@
-#include <QDebug>
 #include <QThread>
-
-#include <ctime>
 #include <QTimer>
 #include <QSettings>
 #include <QFileDialog>
+#include <ctime>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include "common_types.h"
-
-
 #include "global.h"
+#include "deviceconfig.h"
 
-// отсортировать include
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

@@ -248,7 +248,7 @@ int AxesCurvesPlot::CalcPointPos(int value)     // хз, центр посере
     float half_height = (height_) / 2.0 - offset_;    // отдельной переменной для оптимизации?
 
     if (value < max_point_value - min_point_value){
-        float tmp_min = half_height / min_point_value;
+        float tmp_min = half_height / min_point_value;      // эта функция запускается до инииализации height_, неопределённое поведение
         pos = round(value * tmp_min + half_height);
     } else {
         float tmp_max = half_height / max_point_value;

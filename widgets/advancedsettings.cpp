@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QSettings>
+#include <QTimer>
 
 #include "global.h"
 #include "deviceconfig.h"
@@ -19,6 +20,9 @@ AdvancedSettings::AdvancedSettings(QWidget *parent) :
     gEnv.pAppSettings->beginGroup("FontSettings");
     ui->spinBox_FontSize->setValue(gEnv.pAppSettings->value("FontSize", "8").toInt());
     gEnv.pAppSettings->endGroup();
+
+//    connect(this, SIGNAL(styleChanged()),
+//            this, SLOT(styleButtonWaiting()));
 }
 
 AdvancedSettings::~AdvancedSettings()
@@ -30,6 +34,7 @@ void AdvancedSettings::RetranslateUi()
 {
     ui->retranslateUi(this);
 }
+
 
 void AdvancedSettings::on_pushButton_LangEnglish_clicked()
 {
@@ -49,8 +54,24 @@ void AdvancedSettings::on_pushButton_LangRussian_clicked()  // мб в дест�
     emit languageChanged("russian");
 }
 
+//void AdvancedSettings::styleButtonWaiting() // не успевает отрисоваться, таймер ставить или забить
+//{
+////    ui->pushButton_StyleDefault->setText("WAITING");
+////    ui->pushButton_StyleWhite->setStyleSheet("background-color: yellow;");    //rgb(0, 128, 0)
+////    ui->pushButton_StyleDark->setStyleSheet("background-color: yellow;");    //rgb(0, 128, 0)
+//}
+
 void AdvancedSettings::on_pushButton_StyleDefault_clicked()
 {
+    //emit styleChanged();
+    tmp_text = ui->pushButton_StyleDefault->text();
+    tmp_style = ui->pushButton_StyleDefault->styleSheet();
+    ui->pushButton_StyleDefault->setText("Loading... Please wait");
+    ui->pushButton_StyleDefault->setStyleSheet("background-color: rgb(170, 170, 0);");
+
+    // без таймера не успевает отрисовать изменения текста и стиля, возможно на низкочастотных мониках 10мс не хватит?
+    // или ? мб ещё блочить кнопку
+    QTimer::singleShot(10, [&]{
         QFile f(":/QSS-master/default.qss");
         if (!f.exists())   {
             printf("Unable to set stylesheet, file not found\n");
@@ -65,10 +86,20 @@ void AdvancedSettings::on_pushButton_StyleDefault_clicked()
         gEnv.pAppSettings->setValue("StyleSheet", "default");
         gEnv.pAppSettings->endGroup();
         emit interfaceStyleChanged(false);
+
+        ui->pushButton_StyleDefault->setText(tmp_text);
+        ui->pushButton_StyleDefault->setStyleSheet(tmp_style);
+    });
 }
 
 void AdvancedSettings::on_pushButton_StyleWhite_clicked()
 {
+    tmp_text = ui->pushButton_StyleWhite->text();
+    tmp_style = ui->pushButton_StyleWhite->styleSheet();
+    ui->pushButton_StyleWhite->setText("Loading... Please wait");
+    ui->pushButton_StyleWhite->setStyleSheet("background-color: rgb(170, 170, 0);");
+
+    QTimer::singleShot(10, [&]{
         QFile f(":/qss/css/qss.css");
         if (!f.exists())   {
             printf("Unable to set stylesheet, file not found\n");
@@ -83,10 +114,20 @@ void AdvancedSettings::on_pushButton_StyleWhite_clicked()
         gEnv.pAppSettings->setValue("StyleSheet", "white");
         gEnv.pAppSettings->endGroup();
         emit interfaceStyleChanged(false);
+
+        ui->pushButton_StyleWhite->setText(tmp_text);
+        ui->pushButton_StyleWhite->setStyleSheet(tmp_style);
+    });
 }
 
 void AdvancedSettings::on_pushButton_StyleDark_clicked()
 {
+    tmp_text = ui->pushButton_StyleDark->text();
+    tmp_style = ui->pushButton_StyleDark->styleSheet();
+    ui->pushButton_StyleDark->setText("Loading... Please wait");
+    ui->pushButton_StyleDark->setStyleSheet("background-color: rgb(170, 170, 0);");
+
+    QTimer::singleShot(10, [&]{
         QFile f(":qdarkstyle/style.qss");
         if (!f.exists())   {
             printf("Unable to set stylesheet, file not found\n");
@@ -101,9 +142,13 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
         gEnv.pAppSettings->setValue("StyleSheet", "dark");
         gEnv.pAppSettings->endGroup();
         emit interfaceStyleChanged(true);
+
+        ui->pushButton_StyleDark->setText(tmp_text);
+        ui->pushButton_StyleDark->setStyleSheet(tmp_style);
+    });
 }
 
-#include <QDebug>
+
 void AdvancedSettings::ReadFromConfig()
 {
     // PID

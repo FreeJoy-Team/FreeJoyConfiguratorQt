@@ -21,6 +21,7 @@ WIN_DESKTOP
 SOURCES += \
     converter.cpp \
     deviceconfig.cpp \
+    firmwareupdater.cpp \
     hidapi.c \
     hiddevice.cpp \
     main.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     common_types.h \
     converter.h \
     deviceconfig.h \
+    firmwareupdater.h \
     global.h \
     hidapi.h \
     hiddevice.h \
@@ -119,9 +121,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     resources.qrc \
     qdarkstyle/style.qrc \
-    qss/qss.qrc \
-    darkstyle/darkstyle.qrc \
-    BreezeStyleSheets/breeze.qrc
+    qss/qss.qrc
 
 linux-g++ | linux-g++-64 | linux-g++-32 {
     LIBS += -ludev

@@ -2,12 +2,12 @@
 #define BUTTONLOGICAL_H
 
 #include <QWidget>
-#include <QTranslator>
+//#include <QTranslator>
 #include "common_types.h"
 
 #include "global.h"
 #include "deviceconfig.h"
-#include <QThread>
+//#include <QThread>
 
 #define TIMER_COUNT 4       // "NO timer" + count
 #define SHIFT_COUNT 6
