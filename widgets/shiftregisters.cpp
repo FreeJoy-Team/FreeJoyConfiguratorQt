@@ -9,6 +9,9 @@ ShiftRegisters::ShiftRegisters(int shift_reg_number, QWidget *parent) :
     ui->setupUi(this);
 
     buttons_count_ = 0;
+    latch_pin_ = 0;
+    data_pin_ = 0;
+    not_defined_ = tr("Not defined");
     shift_reg_number_ = shift_reg_number;
     ui->label_ShiftIndex->setNum(shift_reg_number + 1);
 

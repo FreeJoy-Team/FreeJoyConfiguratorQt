@@ -38,6 +38,20 @@ void AxesCurvesConfig::RetranslateUi()
     }
 }
 
+void AxesCurvesConfig::UpdateAxesCurves()       ////////////////////////////////////
+{
+    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
+        AxesCurvAdrList[i]->UpdateAxis();
+    }
+}
+
+void AxesCurvesConfig::DeviceStatus(bool is_connect)
+{
+    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
+        AxesCurvAdrList[i]->DeviceStatus(is_connect);
+    }
+}
+
 void AxesCurvesConfig::ReadFromConfig()
 {
     for (int i = 0; i < AxesCurvAdrList.size(); ++i) {

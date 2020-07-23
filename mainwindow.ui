@@ -70,8 +70,39 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
+         <item row="2" column="2">
+          <widget class="QPushButton" name="pushButton_SaveToFile">
+           <property name="text">
+            <string>Save config to file</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_ResetAllPins">
+           <property name="text">
+            <string>Reset All</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
+           <property name="text">
+            <string>Load default config</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_SetDefaultConfig">
+           <property name="text">
+            <string>Set file to default config</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
           <widget class="QPushButton" name="pushButton_ReadConfig">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="styleSheet">
             <string notr="true"/>
            </property>
@@ -80,54 +111,13 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_FirmwareVersion">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
-           <property name="text">
-            <string>Load default config</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_ResetAllPins">
-           <property name="text">
-            <string>Reset All</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QPushButton" name="pushButton_SaveToFile">
-           <property name="text">
-            <string>Save config to file</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
+         <item row="0" column="4">
           <widget class="QPushButton" name="pushButton_WriteConfig">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Write config to Device</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QPushButton" name="pushButton_SetDefaultConfig">
-           <property name="text">
-            <string>Set file to default config</string>
            </property>
           </widget>
          </item>
@@ -162,7 +152,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>9</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -455,6 +445,19 @@ border-bottom: 1px solid rgb(190, 190, 190);
         </property>
         <property name="text">
          <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_TestButton">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>280</y>
+          <width>171</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Test button</string>
         </property>
        </widget>
       </widget>

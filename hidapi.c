@@ -206,6 +206,19 @@ static void register_error(hid_device *dev, const char *op)
 static int lookup_functions()
 {
 	lib_handle = LoadLibraryA("hid.dll");
+#ifdef __clang__
+    /*code specific to clang compiler*/
+#elif __GNUC__
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wcast-function-type"
+#elif _MSC_VER
+    /*usually has the version number in _MSC_VER*/
+    /*code specific to MSVC compiler*/
+#elif __BORLANDC__
+    /*code specific to borland compilers*/
+#elif __MINGW32__
+    /*code specific to mingw32*/
+#endif
 	if (lib_handle) {
 #define RESOLVE(x) x = (x##_)GetProcAddress(lib_handle, #x); if (!x) return -1;
 		RESOLVE(HidD_GetAttributes);
@@ -224,6 +237,18 @@ static int lookup_functions()
 	}
 	else
 		return -1;
+#ifdef __clang__
+    /*code specific to clang compiler*/
+#elif __GNUC__
+    #pragma GCC diagnostic pop
+#elif _MSC_VER
+    /*usually has the version number in _MSC_VER*/
+    /*code specific to MSVC compiler*/
+#elif __BORLANDC__
+    /*code specific to borland compilers*/
+#elif __MINGW32__
+    /*code specific to mingw32*/
+#endif
 
 	return 0;
 }

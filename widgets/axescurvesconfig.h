@@ -26,6 +26,11 @@ public:
 
     void SetDarkInterface(bool is_dark);
 
+    void UpdateAxesCurves();
+
+    void DeviceStatus(bool is_connect);
+
+
 private:
     Ui::AxesCurvesConfig *ui;
     QList<AxesCurves*> AxesCurvAdrList;

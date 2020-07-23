@@ -79,6 +79,8 @@ private slots:
     void configReceived(bool success);
     void configSent(bool success);
 
+    void deviceFlasherController(bool is_start_flash);
+
     void hidDeviceList(QStringList* device_list);
     void hidDeviceListChanged(int index);
 
@@ -100,6 +102,8 @@ private slots:
     void on_pushButton_SetDefaultConfig_clicked();
 
     void on_pushButton_LoadDefaultConfig_clicked();
+
+    void on_pushButton_TestButton_clicked();
 
 private:
     Ui::MainWindow *ui;

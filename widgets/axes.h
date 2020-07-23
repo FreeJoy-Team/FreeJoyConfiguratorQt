@@ -88,6 +88,7 @@ private:
         C15,
     };
 
+    // const?
     std::vector <deviceEnum_guiName_t> axes_pin_list_ =      // любая последовательность, но первые 2 добавляются в конструкторе
     {{
         {None,     tr("None")},
@@ -201,7 +202,7 @@ private:
         {7,      tr("Slider 2")},
     }};
 
-    int axis_number_ = 0;
+    int axis_number_;
 };
 
 #endif // AXES_H

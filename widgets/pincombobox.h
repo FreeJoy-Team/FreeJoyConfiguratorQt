@@ -108,23 +108,23 @@ public:
 
     void RetranslateUi();
 
-    int GetEnumValue();                     // удалить?
-
+    //int GetEnumValue();                     // удалить?
     //private?
-    QString EnumToString(int deviceEnum);   // удалить?
-    int EnumToIndex(int deviceEnum);        // удалить?
-    int pin_number_ = -1;
+    //QString EnumToString(int deviceEnum);   // удалить?
+    //int EnumToIndex(int deviceEnum);        // удалить?
+
+    int pin_number_;
     //! номер элемента в pin_types
-    std::vector<int> enum_gui_index;            // rename to pin_types_index
+    std::vector<int> pin_types_index;            // rename to pin_types_index
     std::vector<int> enum_index;
-    int previous_index_ = 0;
+    int previous_index_;
 
     // public private _
-    bool is_call_interaction_ = false;
-    bool is_interacts_ = false;
-    uint interact_count_ = 0;
+    bool is_call_interaction_;
+    bool is_interacts_;
+    uint interact_count_;
     int call_interaction_;
-    QString styleSheet_default_;            // убрать из конструктора, настроить для смены стилей
+    QString styleSheet_default_;            // удалить из конструктора
 
 signals:
     void valueChangedForInteraction(int index, int sender_index, int pin);
@@ -298,7 +298,7 @@ public:     // private?
 
 private:
     Ui::PinComboBox *ui;
-    int last_deleted_ = 0;              // удалить?
+    int last_deleted_;              // удалить?
 };
 
 #endif // PINCOMBOBOX_H

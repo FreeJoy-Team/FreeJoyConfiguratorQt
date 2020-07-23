@@ -49,12 +49,12 @@ private:
     Ui::ButtonConfig *ui;
     void PhysicalButtonsSpawn(int count);
     QString default_shift_style_;
-    bool is_shifts_activated_ = false;
-    bool shift1_activated_ = false;
-    bool shift2_activated_ = false;
-    bool shift3_activated_ = false;
-    bool shift4_activated_ = false;
-    bool shift5_activated_ = false;
+    bool is_shifts_activated_;
+    bool shift1_activated_;
+    bool shift2_activated_;
+    bool shift3_activated_;
+    bool shift4_activated_;
+    bool shift5_activated_;
 
 
     QList<ButtonLogical*> LogicButtonAdrList;

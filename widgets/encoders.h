@@ -35,9 +35,9 @@ private:
     void SetUiOnOff();
 
     int encoders_number_;
-    int input_A_ = 0;
-    int input_B_ = 0;
-    QString not_defined = tr("Not defined");
+    int input_A_;
+    int input_B_;
+    QString not_defined_;
 
     deviceEnum_guiName_t const encoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {

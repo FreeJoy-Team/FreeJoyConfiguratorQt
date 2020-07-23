@@ -7,6 +7,7 @@ Axes::Axes(int axis_number, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    axis_number_ = 0;
     //pDev_config = &gEnv.pDeviceConfig->config;        // чуть короче запись, но надо ли?
 
     axis_number_ = axis_number;

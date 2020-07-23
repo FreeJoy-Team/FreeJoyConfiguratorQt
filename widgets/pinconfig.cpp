@@ -12,6 +12,20 @@ PinConfig::PinConfig(QWidget *parent) :
     ui(new Ui::PinConfig)
 {
     ui->setupUi(this);
+    max_buttons_warning_ = false;
+    pin_count_ = 0;
+    shift_latch_count_ = 0;
+    shift_data_count_ = 0;
+
+    axis_sources_ = 0;
+    buttons_from_axes_ = 0;
+    buttons_from_shift_regs_ = 0;
+    single_buttons_ = 0;
+    rows_of_buttons_ = 0;
+    columns_of_buttons_ = 0;
+    single_LED_ = 0;
+    rows_of_LED_ = 0;
+    columns_of_LED_ = 0;
 
 //    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
 //    // get label dimensions
@@ -95,8 +109,8 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
     if (index != NOT_USED)//current_enum_index
     {
         for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-            for (uint j = 0; j < PinComboBoxPtrList[i]->enum_gui_index.size(); ++j) {
-                if (PinComboBoxPtrList[i]->enum_gui_index[j] == index)
+            for (uint j = 0; j < PinComboBoxPtrList[i]->pin_types_index.size(); ++j) {
+                if (PinComboBoxPtrList[i]->pin_types_index[j] == index)
                 {
                     if(PinComboBoxPtrList[i]->interact_count_ == 0){
                         PinComboBoxPtrList[i]->interact_count_+= pin;
@@ -114,8 +128,8 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
         for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
             if (PinComboBoxPtrList[i]->is_interacts_ == true)
             {
-                for (size_t j = 0; j < PinComboBoxPtrList[i]->enum_gui_index.size(); ++j) {
-                    if (PinComboBoxPtrList[i]->enum_gui_index[j] == sender_index)
+                for (size_t j = 0; j < PinComboBoxPtrList[i]->pin_types_index.size(); ++j) {
+                    if (PinComboBoxPtrList[i]->pin_types_index[j] == sender_index)
                     {
                         if(PinComboBoxPtrList[i]->interact_count_ > 0){
                             PinComboBoxPtrList[i]->interact_count_-= pin;

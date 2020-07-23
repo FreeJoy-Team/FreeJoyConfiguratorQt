@@ -40,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent)
 //    Encoders* qwe = new Encoders;
 //    layout->addWidget(qwe);
 //    ui->tab_Encoders->setLayout(layout);
-
     // dynamic widgets spawn
 //    QScrollBar* scroll = ui->scrollArea_2->verticalScrollBar();
 //    connect( scroll , SIGNAL(valueChanged(int)) ,this , SLOT(addvalues(int)) );
@@ -133,7 +132,18 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(interfaceStyleChanged(bool)));
 
 
-
+    // enter flash mode clicked
+    connect(ui->widget_2, SIGNAL(flashModeClicked(bool)),
+            this, SLOT(deviceFlasherController(bool)));
+    // flasher found
+    connect(hid_device_worker, SIGNAL(flasherFound(bool)),
+            ui->widget_2, SLOT(flasherFound(bool)));
+    // start flash
+    connect(ui->widget_2, SIGNAL(startFlash(bool)),              // thread  flashStatus
+            this, SLOT(deviceFlasherController(bool)));
+    // flash status
+    connect(hid_device_worker, SIGNAL(flashStatus(int, int)),              // thread  flashStatus
+            ui->widget_2, SLOT(flashStatus(int, int)));
     // set selected hid device
     connect(ui->comboBox_HidDeviceList, SIGNAL(currentIndexChanged(int)),
             this, SLOT(hidDeviceListChanged(int)));
@@ -243,6 +253,10 @@ void MainWindow::LoadAppConfig()
     ui->tabWidget->setCurrentIndex(gEnv.pAppSettings->value("CurrentIndex", 0).toInt());
     gEnv.pAppSettings->endGroup();
 
+    #ifdef QT_DEBUG
+    #else
+        ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tab_Debug));
+    #endif
 }
 
 void MainWindow::SaveAppConfig()
@@ -276,6 +290,9 @@ void MainWindow::showConnectDeviceInfo() {
     ui->label_DeviceStatus->setText(tr("Connected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
     //ui->label_DeviceStatus->setVisible(true);
+    ui->pushButton_ReadConfig->setEnabled(true);
+    ui->pushButton_WriteConfig->setEnabled(true);
+    ui->widget_2->DeviceConnected(true);
     qDebug()<<"start time ms ="<< clock() - *gEnv.pApp_start_time;
 }
 
@@ -284,6 +301,10 @@ void MainWindow::hideConnectDeviceInfo() {
     //ui->label_DeviceStatus->setVisible(false);
     ui->label_DeviceStatus->setText(tr("Disconnected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(160, 0, 0);");
+    ui->pushButton_ReadConfig->setEnabled(false);
+    ui->pushButton_WriteConfig->setEnabled(false);
+    ui->widget_2->DeviceConnected(false);
+    //axes_curves_config->DeviceStatus(false);
 }
 
 // slot interface style changed
@@ -344,6 +365,10 @@ void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ
         // optimization
         if(ui->tab_AxesConfig->isVisible() == true){
             axes_config->AxesValueChanged();
+        }
+        // optimization
+        if(ui->tab_AxesCurves->isVisible() == true){
+            axes_curves_config->UpdateAxesCurves();
         }
         change = false;
     }
@@ -462,6 +487,27 @@ void MainWindow::on_pushButton_WriteConfig_clicked()        // херня? mb Qt
     thread_getSend_config->wait();
 }
 
+void MainWindow::deviceFlasherController(bool is_start_flash)        // херня? mb QtConcurrent::run()
+{
+    QEventLoop loop;
+    QObject context;
+    context.moveToThread(thread_getSend_config);
+    connect(thread_getSend_config, &QThread::started, &context, [&]() {
+        if (is_start_flash == true){
+            hid_device_worker->FlashFirmware(ui->widget_2->GetFileArray());
+        } else {
+            //ui->widget_2->DeviceConnected(hid_device_worker->EnterToFlashMode());
+            hid_device_worker->EnterToFlashMode();
+        }
+
+        loop.quit();
+    });
+    thread_getSend_config->start();
+    loop.exec();
+    thread_getSend_config->quit();
+    thread_getSend_config->wait();
+}
+
 // slot after receiving the config
 void MainWindow::configReceived(bool success)        // повторное наатие
 {
@@ -488,10 +534,13 @@ void MainWindow::configReceived(bool success)        // повторное на�
         // read button config
         button_config->ReadFromConfig();
 
-        // set firmware version
+        // curves
+        axes_curves_config->DeviceStatus(true);
+
+        // set firmware version     // label_FirmwareVersion
         QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
         if (str.size() == 4){
-            ui->label_FirmwareVersion->setText(tr("Device firmware") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
+            ui->label_DeviceStatus->setText(tr("Device firmware") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
         }
 
         ui->pushButton_ReadConfig->setText(tr("Received"));
@@ -1028,4 +1077,9 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
     }
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     gEnv.pAppSettings->endGroup();
+}
+
+void MainWindow::on_pushButton_TestButton_clicked()
+{
+
 }

@@ -31,7 +31,7 @@ public:
     void ButtonState(bool is_activated);
     void RetranslateUi();
 
-    bool is_activated_ = false;
+    bool is_activated_;
 //private: ??
     int button_number_;
 
@@ -95,7 +95,7 @@ private slots:
 
 private:
     Ui::ButtonLogical *ui;
-    int function_previous_index_ = 0;
+    int function_previous_index_;
     QString default_style_;
 
 };

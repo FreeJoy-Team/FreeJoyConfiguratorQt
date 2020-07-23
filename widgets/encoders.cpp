@@ -6,13 +6,17 @@ Encoders::Encoders(int encoders_number, QWidget *parent) :
     ui(new Ui::Encoders)
 {
     ui->setupUi(this);
+    input_A_ = 0;
+    input_B_ = 0;
+    not_defined_ = tr("Not defined");
+
     encoders_number_ = encoders_number + 1;         // fast encoder index 0
     ui->label_EncoderIndex->setNum(encoders_number_);
 
     for (int i = 0; i < ENCODER_TYPE_COUNT; ++i) {
         ui->comboBox_EncoderType->addItem(encoder_type_list_[i].gui_name);
-        ui->label_ButtonNumberA->setText(not_defined);
-        ui->label_ButtonNumberB->setText(not_defined);
+        ui->label_ButtonNumberA->setText(not_defined_);
+        ui->label_ButtonNumberB->setText(not_defined_);
     }
 }
 
@@ -44,7 +48,7 @@ void Encoders::SetInputA(int input_A)
         ui->label_ButtonNumberA->setText(name_template.arg(input_A_));
     } else {
         input_A_ = 0;
-        ui->label_ButtonNumberA->setText(not_defined);
+        ui->label_ButtonNumberA->setText(not_defined_);
     }
     SetUiOnOff();
 }
@@ -57,7 +61,7 @@ void Encoders::SetInputB(int input_B)
         ui->label_ButtonNumberB->setText(name_template.arg(input_B_));
     } else {
         input_B_ = 0;
-        ui->label_ButtonNumberB->setText(not_defined);
+        ui->label_ButtonNumberB->setText(not_defined_);
     }
     SetUiOnOff();
 }

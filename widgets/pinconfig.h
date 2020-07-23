@@ -23,7 +23,7 @@ public:
 
     //private:?
     //! 0 if no pins
-    uint pin_count_ = 0;    // need?
+    uint pin_count_;    // need?
     //! PinComboBox widget list
     QList<PinComboBox *> PinComboBoxPtrList;
 
@@ -51,21 +51,21 @@ private:
     Ui::PinConfig *ui;
 
     QString default_style_;
-    bool max_buttons_warning_ = false;
+    bool max_buttons_warning_;
 
-    int shift_latch_count_ = 0;
-    int shift_data_count_ = 0;
+    int shift_latch_count_;
+    int shift_data_count_;
     void shiftRegOnOff();
 
-    int axis_sources_ = 0;
-    int buttons_from_axes_ = 0;
-    int buttons_from_shift_regs_ = 0;
-    int single_buttons_ = 0;
-    int rows_of_buttons_ = 0;
-    int columns_of_buttons_ = 0;
-    int single_LED_ = 0;
-    int rows_of_LED_ = 0;
-    int columns_of_LED_ = 0;
+    int axis_sources_;
+    int buttons_from_axes_;
+    int buttons_from_shift_regs_;
+    int single_buttons_;
+    int rows_of_buttons_;
+    int columns_of_buttons_;
+    int single_LED_;
+    int rows_of_LED_;
+    int columns_of_LED_;
 
 
     struct source_t
@@ -73,7 +73,7 @@ private:
         int type;
         int pin_type[PIN_TYPE_COUNT];
     };
-    source_t source[8] =
+    const source_t source[8] =
     {
         {AXIS_SOURCE,        {AXIS_ANALOG, TLE5011_CS, MCP3201_CS, MCP3202_CS, MCP3204_CS, MCP3208_CS, MLX90393_CS}},
 

@@ -22,6 +22,9 @@
      <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0">
       <item row="1" column="0">
        <widget class="QPushButton" name="pushButton_FlashFirmware">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -35,6 +38,9 @@
       </item>
       <item row="0" column="0">
        <widget class="QPushButton" name="pushButton_FlasherMode">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -55,7 +61,7 @@
          </sizepolicy>
         </property>
         <property name="value">
-         <number>24</number>
+         <number>0</number>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -245,7 +251,7 @@
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
-     <layout class="QGridLayout" name="gridLayout_4" columnstretch="3,3,3">
+     <layout class="QGridLayout" name="gridLayout_4" rowstretch="0,1" columnstretch="3,3,3">
       <item row="1" column="1">
        <widget class="QGroupBox" name="groupBox_5">
         <property name="title">
@@ -272,45 +278,6 @@
           <widget class="QPushButton" name="pushButton_LangRussian">
            <property name="text">
             <string notr="true">Русский</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QGroupBox" name="groupBox_4">
-        <property name="title">
-         <string>Styles</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_5">
-         <property name="leftMargin">
-          <number>50</number>
-         </property>
-         <property name="rightMargin">
-          <number>50</number>
-         </property>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_StyleDark">
-           <property name="text">
-            <string>Dark</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_StyleWhite">
-           <property name="text">
-            <string>White</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_StyleDefault">
-           <property name="text">
-            <string>Default</string>
            </property>
           </widget>
          </item>
@@ -368,13 +335,52 @@
            </property>
           </spacer>
          </item>
-         <item row="0" column="0" colspan="3">
-          <widget class="QLabel" name="label">
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Restart app for changes. Work in progress</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="title">
+         <string>Styles</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <property name="leftMargin">
+          <number>50</number>
+         </property>
+         <property name="rightMargin">
+          <number>50</number>
+         </property>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_StyleDark">
            <property name="text">
-            <string>need restert, tmp</string>
+            <string>Dark</string>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pushButton_StyleWhite">
+           <property name="text">
+            <string>White</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton_StyleDefault">
+           <property name="text">
+            <string>Default</string>
            </property>
           </widget>
          </item>

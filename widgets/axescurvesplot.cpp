@@ -11,7 +11,7 @@
 
 
 
-
+#include <QTimer>
 
 
 
@@ -20,7 +20,6 @@
 //////////////// ЭТО НЕ КОД ЭТО ПИЗДЕЦ !!!!!!!!!!
 /// ПЕРЕДАЛАТЬ И УБРАТЬ МУСОР
 /// ///////////////////////////////////////////////////// ПЕРЕД СНОМ НЕ СМОТРЕТЬ /////////////////////////////////////////////////
-
 
 
 
@@ -45,6 +44,8 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
     point_active_ = false;
     half_radius_ = radius_/2;
 
+    cur_axis_pos.color = point_active_color_;
+
     int tmp_range;
     if ((min_point_value < 0 && max_point_value < 0) || (min_point_value >= 0 && max_point_value >= 0)) {
         tmp_range = max_point_value - min_point_value;
@@ -55,12 +56,21 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
 
     for (int i = 0; i < points_count_; ++i){
         AxesCurve_point* point = new AxesCurve_point;
+
+        QLabel* label = new QLabel(this);
+        LabelAdrList.append(label);
+
         PointAdrList.append(point);
         PointAdrList[i]->color = point_inactive_color_;
         PointAdrList[i]->posX = 0;
         PointAdrList[i]->posY = 0;
         PointAdrList[i]->is_drag = false;
         PointAdrList[i]->current_value = ((tmp_range / (points_count_ - 1.0)) * i) + min_point_value;    // hz
+
+        LabelAdrList[i]->setNum(PointAdrList[i]->current_value);
+        LabelAdrList[i]->setMinimumWidth(label_width_);
+        LabelAdrList[i]->setAlignment(Qt::AlignHCenter);
+        LabelAdrList[i]->setVisible(true);
     }
 
 }
@@ -131,7 +141,55 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
                             half_radius_, half_radius_);
     }
 
+    // paint current axix position
+    if (is_device_connect_ == true)
+    {
+        // coordinates for rect
+        for (int i = 0; i < 1; ++i) {
+            cur_axis_pos.area.setRect(cur_axis_pos.posX, cur_axis_pos.posY,
+                                          radius_, radius_);
+        }
+        // paint rect
+        //painter.setPen(Qt::lightGray);
+        for (int i = 0; i < 1; ++i)
+        {
+            painter.setPen(cur_axis_pos.color);
+            painter.setBrush(cur_axis_pos.color);
+            painter.drawEllipse(cur_axis_pos.area);
+        }
+    }
+
     painter.end();
+}
+
+void AxesCurvesPlot::UpdateAxis(int pos_x, int pos_y)
+{
+//    static bool timer_enabled = false;
+//    static int count = 0;
+//    static int tmp;
+//    count++;
+//    time_t start = clock();
+
+//    if (timer_enabled == false){
+//        timer_enabled = true;
+
+//      tmp = count;
+//        QTimer::singleShot(200, [&]{
+//            timer_enabled = false;
+//            if (clock() - start > 20){
+//                is_device_connect_ = false;
+//                qDebug()<<"is_device_connect_ false";
+//                update();
+
+//            } else {
+//                is_device_connect_ = true;
+//            }
+//        });
+//    }
+    is_device_connect_ = true;
+    cur_axis_pos.posX = CalcPointPosX(pos_x);
+    cur_axis_pos.posY = CalcPointPos(pos_y);
+    update();
 }
 
 
@@ -149,6 +207,8 @@ void AxesCurvesPlot::SetPointValue(int value, int point_number)
 {
     PointAdrList[point_number]->posY = CalcPointPos(value);
     PointAdrList[point_number]->current_value = value;
+    LabelAdrList[point_number]->setNum(value);
+    UpdateLabelPos();
     update();
 }
 
@@ -158,7 +218,10 @@ void AxesCurvesPlot::SetLinear()
     for (int i = 0; i < PointAdrList.size(); ++i){
         tmp_y = (i * row_height_) + offset_;
         PointAdrList[(PointAdrList.size() - 1) - i]->posY = tmp_y - half_radius_;
+        PointAdrList[(PointAdrList.size() - 1) - i]->current_value = CalcPointValue(PointAdrList[(PointAdrList.size() - 1) - i]->posY);
+        LabelAdrList[(PointAdrList.size() - 1) - i]->setNum(PointAdrList[(PointAdrList.size() - 1) - i]->current_value);
     }
+    UpdateLabelPos();
     update();
 }
 
@@ -168,7 +231,10 @@ void AxesCurvesPlot::SetLinearInvert()
     for (int i = 0; i < PointAdrList.size(); ++i){
         tmp_y = (i * row_height_) + offset_;
         PointAdrList[i]->posY = tmp_y - half_radius_;
+        PointAdrList[i]->current_value = CalcPointValue(PointAdrList[i]->posY);
+        LabelAdrList[i]->setNum(PointAdrList[i]->current_value);
     }
+    UpdateLabelPos();
     update();
 }
 
@@ -182,9 +248,18 @@ void AxesCurvesPlot::SetExponent()
         tmp_range = abs(min_point_value) + abs(max_point_value);
     }
 
-    for (int i = 0; i < PointAdrList.size(); ++i) {
-        SetPointValue(exp(i * log(tmp_range) / (points_count_ - 1)) + min_point_value, i);
+    int tmp_value;
+    for (int i = 0; i < PointAdrList.size(); ++i)
+    {
+        tmp_value = round(exp(i * log(tmp_range) / (points_count_ - 1)) + min_point_value);
+        if (tmp_value <= min_point_value +1){
+            tmp_value = min_point_value;
+        } else if (tmp_value >= max_point_value -1){
+            tmp_value = max_point_value;
+        }
+        SetPointValue(tmp_value, i);
     }
+    UpdateLabelPos();
 }
 
 void AxesCurvesPlot::SetExponentInvert()
@@ -197,9 +272,18 @@ void AxesCurvesPlot::SetExponentInvert()
         tmp_range = abs(min_point_value) + abs(max_point_value);
     }
 
-    for (int i = 0; i < PointAdrList.size(); ++i) {
-        SetPointValue(exp(i * log(tmp_range) / (points_count_ - 1)) + min_point_value, (points_count_ - 1) - i);
+    int tmp_value;
+    for (int i = 0; i < PointAdrList.size(); ++i)
+    {
+        tmp_value = round(exp(i * log(tmp_range) / (points_count_ - 1)) + min_point_value);
+        if (tmp_value <= min_point_value +1){
+            tmp_value = min_point_value;
+        } else if (tmp_value >= max_point_value -1){
+            tmp_value = max_point_value;
+        }
+        SetPointValue(tmp_value, (points_count_ - 1) - i);
     }
+    UpdateLabelPos();
 }
 
 void AxesCurvesPlot::SetShape()     // руками так се, надо бы автоматом сделать
@@ -218,30 +302,37 @@ void AxesCurvesPlot::SetShape()     // руками так се, надо бы �
         SetPointValue(60, 9);
         SetPointValue(100, 10);
     }
+    UpdateLabelPos();
 }
 
+void AxesCurvesPlot::UpdateLabelPos()
+{
+    for (int i = 0; i < LabelAdrList.size(); ++i) {
+        LabelAdrList[i]->move(PointAdrList[i]->posX, PointAdrList[i]->posY + radius_);
+    }
+}
 
-
-int AxesCurvesPlot::CalcPointValue(int current_pos)
+int AxesCurvesPlot::CalcPointValue(int current_pos)     // ужоснах
 {
     int value = 0;
-    float half_height = (height_) / 2.0 - offset_;    // отдельной переменной для оптимизации?
-    current_pos -= half_radius_;
+    float half_height = (height_) / 2.0 - offset_;
+    //current_pos -= - half_radius_;
+    current_pos = current_pos - 13;     // костыль
 
     if (current_pos > half_height){
         float tmp_min = half_height / min_point_value;
-        value = round((current_pos - half_height) / float(tmp_min));
+        value = floor((current_pos - half_height) / float(tmp_min));
         //qDebug()<<"value ="<<value;
         return value;
     } else {
         float tmp_max = half_height / max_point_value;
-        value = -round((current_pos - half_height) / float(tmp_max));
+        value = -((current_pos - half_height) / float(tmp_max));
         //qDebug()<<"value ="<<value;
         return value;
     }
     return value;
 }
-
+     // ужоснах
 int AxesCurvesPlot::CalcPointPos(int value)     // хз, центр посередине, а дальше скейлится, в зависимости от значений min и max
 {                                               // наверно лучше потом сделать центр в зависимости от значений min и max
     int pos = 0;
@@ -255,7 +346,36 @@ int AxesCurvesPlot::CalcPointPos(int value)     // хз, центр посере
         pos = round(value * tmp_max + half_height);
     }
 
-    return pos + half_radius_;
+    return pos + 12;        // костыль
+}
+
+int AxesCurvesPlot::CalcPointPosX(int value_x)     // хз, центр посередине, а дальше скейлится, в зависимости от значений min и max
+{                                               // наверно лучше потом сделать центр в зависимости от значений min и max
+    int pos = 0;
+    float half_width = (width_) / 2.0 - offset_;    // отдельной переменной для оптимизации?
+
+
+//    if (value_x < 50){
+//        value_x += value_x;
+//    } else {
+//        value_x += value_x;
+//        //value_x = value_x * -1;
+//    }
+        float tmp_max = half_width / 100;
+        pos = round(value_x * tmp_max);
+
+
+
+
+//    if (value_x < max_point_value - min_point_value){
+//        float tmp_min = half_width / min_point_value;      // эта функция запускается до инииализации height_, неопределённое поведение
+//        pos = round(value_x * tmp_min + half_width);
+//    } else {
+//        float tmp_max = half_width / max_point_value;
+//        pos = round(value_x * tmp_max + half_width);
+//    }
+
+    return pos + 12;        // костыль
 }
 
 
@@ -275,11 +395,12 @@ void AxesCurvesPlot::resizeEvent(QResizeEvent* event)
     for (int i = 0; i < PointAdrList.size(); ++i){
         tmp_x = (i * column_width_) + offset_;
         PointAdrList[i]->posX = tmp_x - half_radius_;      // temp
+        PointAdrList[i]->posY = CalcPointPos(PointAdrList[i]->current_value);
+        UpdateLabelPos();
     }
     for (int i = 0; i < PointAdrList.size(); ++i){
-        //tmp_y = (i * row_height_) + offset_;
-        PointAdrList[i]->posY = CalcPointPos(PointAdrList[i]->current_value);//tmp_y - radius_/2;      // temp
-        //qDebug()<<"value"<<i<<PointAdrList[i]->current_value;
+        //////tmp_y = (i * row_height_) + offset_;
+        //PointAdrList[i]->posY = CalcPointPos(PointAdrList[i]->current_value);//tmp_y - radius_/2;      // temp
     }
 //    for (int i = 0; i < rows_count_ + 1; ++i){
 //        tmp_y = (i * row_height_) + offset_;
@@ -317,6 +438,8 @@ void AxesCurvesPlot::mouseMoveEvent(QMouseEvent *event)
                 PointAdrList[i]->color = point_move_color_;
 
                 PointAdrList[i]->current_value = CalcPointValue(PointAdrList[i]->posY);
+                LabelAdrList[i]->setNum(PointAdrList[i]->current_value);
+                UpdateLabelPos();
                 update();
                 qDebug()<<"event->pos().y()"<<event->pos().y();
                 qDebug()<<"value"<<PointAdrList[i]->current_value;
@@ -348,5 +471,10 @@ void AxesCurvesPlot::mouseReleaseEvent(QMouseEvent *event)
         }
     }
     update();
+}
+
+void AxesCurvesPlot::DeviceStatus(bool is_connect)
+{
+    //is_device_connect_ = is_connect;
 }
 

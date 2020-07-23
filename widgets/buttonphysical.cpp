@@ -6,6 +6,7 @@ ButtonPhysical::ButtonPhysical(int button_number, QWidget *parent) :
     ui(new Ui::ButtonPhysical)
 {
     ui->setupUi(this);
+    is_activated_ = false;
     button_number_ = button_number;
     ui->label_PhysicalButton->setNum(button_number_ + 1);
 }

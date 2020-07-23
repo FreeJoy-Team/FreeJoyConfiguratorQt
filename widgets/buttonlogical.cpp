@@ -7,6 +7,8 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
 {
     ui->setupUi(this);
     button_number_ = button_number;
+    function_previous_index_ = 0;
+    is_activated_ = false;
     ui->label_LogicalButtonNumber->setNum(button_number_ + 1);
 
     // add gui text

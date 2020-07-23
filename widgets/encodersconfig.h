@@ -33,12 +33,12 @@ private:
     void SetUiOnOff();
 
     QList<Encoders*> EncodersAdrList;
-    int encoders_input_A_count_ = 0;
-    int encoders_input_B_count_ = 0;
-    QString not_defined = tr("Not defined");
+    int encoders_input_A_count_;
+    int encoders_input_B_count_;
+    QString not_defined_;
 
-    int fast_encoder_input_A_ = 0;
-    int fast_encoder_input_B_ = 0;
+    int fast_encoder_input_A_;
+    int fast_encoder_input_B_;
 
     deviceEnum_guiName_t const fastEncoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {

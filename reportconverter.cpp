@@ -247,6 +247,7 @@ dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
 {
     uint8_t i;
     uint8_t pos = 2;
+    uint8_t tmp_buf_size = 64;
     static dev_config_t tmp_dev_config;
 
     switch (hid_buf[1])
@@ -267,7 +268,7 @@ dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
         case 2:
         {
             i = 0;
-            while(64 - pos > sizeof(axis_config_t))
+            while(uint8_t(tmp_buf_size - pos) > sizeof(axis_config_t))  // antiwarning
             {
                 memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
                 pos += sizeof(axis_config_t);
@@ -278,7 +279,7 @@ dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
         case 3:
         {
             i = 2;
-            while(64 - pos > sizeof(axis_config_t))
+            while(uint8_t(tmp_buf_size - pos) > sizeof(axis_config_t))
             {
                 memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
                 pos += sizeof(axis_config_t);
@@ -289,7 +290,7 @@ dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
         case 4:
         {
             i = 4;
-            while(64 - pos > sizeof(axis_config_t))
+            while(uint8_t(tmp_buf_size - pos) > sizeof(axis_config_t))
             {
                 memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
                 pos += sizeof(axis_config_t);

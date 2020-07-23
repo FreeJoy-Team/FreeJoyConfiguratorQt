@@ -1,13 +1,17 @@
 #include "axescurves.h"
 #include "ui_axescurves.h"
+#include <cmath>
+
+#define CURVES_MIN_VALUE -100
+#define CURVES_MAX_VALUE 100
 
 AxesCurves::AxesCurves(int axes_number, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AxesCurves)
 {
     ui->setupUi(this);
-    axes_number_ = axes_number;
-    ui->groupBox->setTitle(axes_list_[axes_number_].gui_name);
+    axis_number_ = axes_number;
+    ui->groupBox->setTitle(axes_list_[axis_number_].gui_name);
 }
 
 AxesCurves::~AxesCurves()
@@ -37,11 +41,35 @@ void AxesCurves::RetranslateUi()
     ui->retranslateUi(this);
 }
 
+#include <QDebug>
+void AxesCurves::UpdateAxis()
+{
+    if (gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled == 1){     /////////////////////////////////////
+
+        int min = gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min;
+        int max = gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max;
+        int value_x;
+        int value_y;
+
+        if (gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] < AXIS_CENTER_VALUE){
+            value_y = round(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] / (float)AXIS_MIN_VALUE * CURVES_MIN_VALUE);
+        } else {
+            value_y = round(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] / (float)AXIS_MAX_VALUE * CURVES_MAX_VALUE);
+        }
+
+
+        value_x = abs(round((gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]  - min)/ (float)(max - min) * 200));
+
+
+        ui->widget_AxesCurvesPlot->UpdateAxis(value_x, value_y);
+    }
+}
+
 void AxesCurves::ReadFromConfig()
 {
     for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)
     {
-        ui->widget_AxesCurvesPlot->SetPointValue(gEnv.pDeviceConfig->config.axis_config[axes_number_].curve_shape[i], i);
+        ui->widget_AxesCurvesPlot->SetPointValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].curve_shape[i], i);
     }
 }
 
@@ -49,7 +77,7 @@ void AxesCurves::WriteToConfig()
 {
     for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)
     {
-        gEnv.pDeviceConfig->config.axis_config[axes_number_].curve_shape[i] = ui->widget_AxesCurvesPlot->GetPointValue(i);
+        gEnv.pDeviceConfig->config.axis_config[axis_number_].curve_shape[i] = ui->widget_AxesCurvesPlot->GetPointValue(i);
     }
 }
 
@@ -77,4 +105,10 @@ void AxesCurves::on_pushButton_ExponentInvert_clicked()
 void AxesCurves::on_pushButton_Shape_clicked()
 {
     ui->widget_AxesCurvesPlot->SetShape();
+}
+
+void AxesCurves::DeviceStatus(bool is_connect)
+{
+    is_device_connected_ = is_connect;
+    ui->widget_AxesCurvesPlot->DeviceStatus(is_connect);
 }

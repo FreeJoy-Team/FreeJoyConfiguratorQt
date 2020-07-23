@@ -6,7 +6,12 @@ ButtonConfig::ButtonConfig(QWidget *parent) :
     ui(new Ui::ButtonConfig)
 {
     ui->setupUi(this);
-
+    is_shifts_activated_ = false;
+    shift1_activated_ = false;
+    shift2_activated_ = false;
+    shift3_activated_ = false;
+    shift4_activated_ = false;
+    shift5_activated_ = false;
 
     // make dynamic spawn?
 

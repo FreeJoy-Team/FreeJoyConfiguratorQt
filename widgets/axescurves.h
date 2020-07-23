@@ -24,6 +24,12 @@ public:
 
     void SetDarkIcon(bool is_dark);
 
+    void UpdateAxis();
+    void DeviceStatus(bool is_connect);
+
+signals:
+    void deviceStatusChanged(bool is_connect);
+
 private slots:
     void on_pushButton_Linear_clicked();
 
@@ -35,9 +41,11 @@ private slots:
 
     void on_pushButton_Shape_clicked();
 
+
 private:
     Ui::AxesCurves *ui;
-    int axes_number_;
+    int axis_number_;
+    bool is_device_connected_ = false;
 
     std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axes.h
     {{

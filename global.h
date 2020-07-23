@@ -18,6 +18,17 @@ struct GlobalEnvironment
 };
 extern GlobalEnvironment gEnv;
 
+// flasher
+enum
+{
+    FINISHED = 0,
+    SIZE_ERROR,
+    CRC_ERROR,
+    ERASE_ERROR,
+
+    IN_PROCESS = 99,
+};
+
 
 struct deviceEnum_guiName_t
 {

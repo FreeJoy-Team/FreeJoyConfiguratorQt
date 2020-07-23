@@ -1,9 +1,23 @@
 #include "stm_main.h"
+#include "common_types.h"
+#include "common_defines.h"
 
 //dev_config_t init_config;
-
 dev_config_t InitConfig (void)
 {
+#ifdef __clang__
+    /*code specific to clang compiler*/
+#elif __GNUC__
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
+#elif _MSC_VER
+    /*usually has the version number in _MSC_VER*/
+    /*code specific to MSVC compiler*/
+#elif __BORLANDC__
+    /*code specific to borland compilers*/
+#elif __MINGW32__
+    /*code specific to mingw32*/
+#endif
     dev_config_t init_config =
     {
         .firmware_version = 0x1606,		// do not change
@@ -779,9 +793,20 @@ dev_config_t InitConfig (void)
         .leds[23].type = LED_NORMAL,
 
     };
+#ifdef __clang__
+    /*code specific to clang compiler*/
+#elif __GNUC__
+    #pragma GCC diagnostic pop
+#elif _MSC_VER
+    /*usually has the version number in _MSC_VER*/
+    /*code specific to MSVC compiler*/
+#elif __BORLANDC__
+    /*code specific to borland compilers*/
+#elif __MINGW32__
+    /*code specific to mingw32*/
+#endif
     return init_config;
 }
-
 
 //#include <string.h>
 //void InitConfig (dev_config_t * config)
