@@ -304,7 +304,7 @@ void MainWindow::hideConnectDeviceInfo() {
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     ui->widget_2->DeviceConnected(false);
-    //axes_curves_config->DeviceStatus(false);
+    axes_curves_config->DeviceStatus(false);
 }
 
 // slot interface style changed
@@ -570,6 +570,7 @@ void MainWindow::configSent(bool success)
 {
     button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
     static QString button_default_text = ui->pushButton_WriteConfig->text();
+    axes_curves_config->DeviceStatus(true);
 
     if (success == true){
         ui->pushButton_WriteConfig->setText(tr("Sent"));

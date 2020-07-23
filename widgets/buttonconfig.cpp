@@ -242,6 +242,7 @@ void ButtonConfig::ReadFromConfig()
     ui->spinBox_Timer3->setValue(gEnv.pDeviceConfig->config.button_timer3_ms);
 
     ui->spinBox_DebounceTimer->setValue(gEnv.pDeviceConfig->config.button_debounce_ms);
+    ui->spinBox_A2bDebounce->setValue(gEnv.pDeviceConfig->config.a2b_debounce_ms);
 
     ui->spinBox_EncoderPressTimer->setValue(gEnv.pDeviceConfig->config.encoder_press_time_ms);
 }
@@ -259,6 +260,7 @@ void ButtonConfig::WriteToConfig()
     gEnv.pDeviceConfig->config.button_timer3_ms = ui->spinBox_Timer3->value();
 
     gEnv.pDeviceConfig->config.button_debounce_ms = ui->spinBox_DebounceTimer->value();
+    gEnv.pDeviceConfig->config.a2b_debounce_ms = ui->spinBox_A2bDebounce->value();
 
     gEnv.pDeviceConfig->config.encoder_press_time_ms = ui->spinBox_EncoderPressTimer->value();
 

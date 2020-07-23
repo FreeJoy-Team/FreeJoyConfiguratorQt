@@ -52,7 +52,8 @@ dev_config_t InitConfig (void)
         .device_name[24] = 0,
         .device_name[25] = 0,
 
-        .button_debounce_ms = 50,					// debounce time for all buttons
+        .button_debounce_ms = 50,					// debounce time for all buttons without axes to buttons
+        .a2b_debounce_ms = 50,                      // debounce time for axes to buttons
 
         .encoder_press_time_ms = 10,			// amount of milliseconds virtual button
         // will be pressed at encoder increment/decrement

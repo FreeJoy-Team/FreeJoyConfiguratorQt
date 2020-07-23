@@ -111,6 +111,7 @@ void AxesToButtonsSlider::SetPointsCount(uint count)        // count = 0 -crash
         for (uint i = 0; i < count - points_count_; ++i) {
             A2B_point* point = new A2B_point;
             QLabel* label = new QLabel(this);
+            label->setFont(QFont("MS Shell Dlg 2", 8));
             PointAdrList.append(point);
             LabelAdrList.append(label);
             point->polygon << pointer[0] << pointer[1] << pointer[2] << pointer[3] << pointer[4];

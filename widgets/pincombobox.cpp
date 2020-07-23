@@ -106,7 +106,7 @@ void PinComboBox::IndexChanged(int index)
             if (is_call_interaction_ == true && tmp == 0)//pin_types[pin_types_index[index]].interaction[i] <= 0
             {
                 is_call_interaction_ = false;
-                ui->comboBox_PinsType->setStyleSheet(styleSheet_default_);          // ?????
+                //ui->comboBox_PinsType->setStyleSheet(styleSheet_default_);          // ?????
                 // add
                 if (pin_types[pin_types_index[index]].interaction[i] > 0)
                 {

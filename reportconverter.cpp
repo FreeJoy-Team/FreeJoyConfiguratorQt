@@ -7,7 +7,7 @@ static int reportSuccess = 0;
 void ReportConverter::GamepadReport( uint8_t * gamepad_buf)
 {
     if (gamepad_buf != 0)   // nullptr
-    {     
+    {
         memcpy((uint8_t *)&(gEnv.pDeviceConfig->gamepad_report)+1, gamepad_buf, sizeof(joy_report_t)-1);          // +1 ALIGHNING !!!!!!!!!!!!!!!!!!
     }
 }
@@ -37,187 +37,170 @@ std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_
 
     switch(config_in_cnt)
     {
-        case 1:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.firmware_version), sizeof(tmp_dev_config.firmware_version));
-            pos += sizeof(tmp_dev_config.firmware_version);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.device_name), sizeof(tmp_dev_config.device_name));
-            pos += sizeof(tmp_dev_config.device_name);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.button_debounce_ms), 4);
-            pos += 4;
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.pins), sizeof(tmp_dev_config.pins));
-            pos += sizeof(tmp_dev_config.pins);
+    case 1:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.firmware_version), sizeof(tmp_dev_config.firmware_version));
+        pos += sizeof(tmp_dev_config.firmware_version);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.device_name), sizeof(tmp_dev_config.device_name));
+        pos += sizeof(tmp_dev_config.device_name);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.button_debounce_ms), 4);
+        pos += 4;
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.pins), sizeof(tmp_dev_config.pins));
+        pos += sizeof(tmp_dev_config.pins);
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 1";
-            break;
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-        case 2:
-            i = 0;
-            qDebug()<<sizeof(tmp_buf);
-            while(sizeof(tmp_buf) - pos > sizeof(axis_config_t))
-            {
-                memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[i++]), sizeof(axis_config_t));
-                qDebug()<< pos;
-                pos += sizeof(axis_config_t);
-            }
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 2";
-            break;
-
-        case 3:
-            i = 2;
-            while(sizeof(tmp_buf) - pos > sizeof(axis_config_t))
-            {
-                memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[i++]), sizeof(axis_config_t));
-                pos += sizeof(axis_config_t);
-            }
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 3";
-            break;
-
-        case 4:
-            i = 4;
-            while(sizeof(tmp_buf) - pos > sizeof(axis_config_t))
-            {
-                memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[i++]), sizeof(axis_config_t));
-                pos += sizeof(axis_config_t);
-            }
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 4";
-            break;
-
-        case 5:
-
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[6]), sizeof(axis_config_t));
+    case 2:
+        i = 0;
+        while(sizeof(tmp_buf) - pos > sizeof(axis_config_t))
+        {
+            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[i++]), sizeof(axis_config_t));
             pos += sizeof(axis_config_t);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[7]), sizeof(axis_config_t));
+        }
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
+
+    case 3:
+        i = 2;
+        while(sizeof(tmp_buf) - pos > sizeof(axis_config_t))
+        {
+            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[i++]), sizeof(axis_config_t));
             pos += sizeof(axis_config_t);
+        }
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 5";
-            break;
+    case 4:
+        i = 4;
+        while(sizeof(tmp_buf) - pos > sizeof(axis_config_t))
+        {
+            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[i++]), sizeof(axis_config_t));
+            pos += sizeof(axis_config_t);
+        }
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-        case 6:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[0]), 60);
-            memcpy(&tmp_buf[64-sizeof(tmp_dev_config.button_timer1_ms)], (uint8_t *) &(tmp_dev_config.button_timer1_ms), sizeof(tmp_dev_config.button_timer1_ms));
+    case 5:
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 6";
-            break;
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[6]), sizeof(axis_config_t));
+        pos += sizeof(axis_config_t);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axis_config[7]), sizeof(axis_config_t));
+        pos += sizeof(axis_config_t);
 
-        case 7:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[20]), 60);
-            memcpy(&tmp_buf[64-sizeof(tmp_dev_config.button_timer2_ms)], (uint8_t *) &(tmp_dev_config.button_timer2_ms), sizeof(tmp_dev_config.button_timer2_ms));
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 7";
-            break;
+    case 6:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[0]), 60);
+        memcpy(&tmp_buf[64-sizeof(tmp_dev_config.button_timer1_ms)], (uint8_t *) &(tmp_dev_config.button_timer1_ms), sizeof(tmp_dev_config.button_timer1_ms));
 
-        case 8:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[40]), 60);
-            memcpy(&tmp_buf[64-sizeof(tmp_dev_config.button_timer3_ms)], (uint8_t *) &(tmp_dev_config.button_timer3_ms), sizeof(tmp_dev_config.button_timer3_ms));
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 8";
-            break;
+    case 7:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[20]), 60);
+        memcpy(&tmp_buf[64-sizeof(tmp_dev_config.button_timer2_ms)], (uint8_t *) &(tmp_dev_config.button_timer2_ms), sizeof(tmp_dev_config.button_timer2_ms));
 
-        case 9:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[60]), 60);
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 9";
-            break;
+    case 8:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[40]), 60);
+        memcpy(&tmp_buf[64-sizeof(tmp_dev_config.button_timer3_ms)], (uint8_t *) &(tmp_dev_config.button_timer3_ms), sizeof(tmp_dev_config.button_timer3_ms));
 
-        case 10:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[80]), 60);
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 10";
-            break;
+    case 9:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[60]), 60);
+        memcpy(&tmp_buf[64-sizeof(tmp_dev_config.a2b_debounce_ms)], (uint8_t *) &(tmp_dev_config.a2b_debounce_ms), sizeof(tmp_dev_config.a2b_debounce_ms));
 
-        case 11:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[100]), 60);
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 11";
-            break;
+    case 10:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[80]), 60);
 
-        case 12:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[120]), 8*sizeof(button_t));
-            pos += 8*sizeof(button_t);
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[0]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[1]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
+    case 11:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[100]), 60);
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 12";
-            break;
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-        case 13:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[2]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[3]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[4]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[5]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
+    case 12:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.buttons[120]), 8*sizeof(button_t));
+        pos += 8*sizeof(button_t);
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 13";
-            break;
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[0]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[1]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
 
-        case 14:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[6]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[7]), sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            for (i=0; i<4; i++)
-            {
-                memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.shift_registers[i]), sizeof(shift_reg_config_t));
-                pos += sizeof(shift_reg_config_t);
-            }
+    case 13:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[2]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[3]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[4]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[5]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
 
-            for (i=0; i<5; i++)
-            {
-                memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.shift_config[i]), sizeof(shift_modificator_t));
-                pos += sizeof(shift_modificator_t);
-            }
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.vid), sizeof(tmp_dev_config.vid));
-            pos += sizeof(tmp_dev_config.vid);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.pid), sizeof(tmp_dev_config.pid));
-            pos += sizeof(tmp_dev_config.pid);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.is_dynamic_config), sizeof(tmp_dev_config.is_dynamic_config));
-            pos += sizeof(tmp_dev_config.is_dynamic_config);
+    case 14:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[6]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.axes_to_buttons[7]), sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 14";
-            break;
+        for (i=0; i<4; i++)
+        {
+            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.shift_registers[i]), sizeof(shift_reg_config_t));
+            pos += sizeof(shift_reg_config_t);
+        }
 
-        case 15:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.led_pwm_config), sizeof(tmp_dev_config.led_pwm_config));
-            pos += sizeof(tmp_dev_config.led_pwm_config);
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.leds[0]), MAX_LEDS_NUM*sizeof(led_config_t));
-            pos += MAX_LEDS_NUM*sizeof(led_config_t);
+        for (i=0; i<5; i++)
+        {
+            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.shift_config[i]), sizeof(shift_modificator_t));
+            pos += sizeof(shift_modificator_t);
+        }
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 15";
-            break;
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.vid), sizeof(tmp_dev_config.vid));
+        pos += sizeof(tmp_dev_config.vid);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.pid), sizeof(tmp_dev_config.pid));
+        pos += sizeof(tmp_dev_config.pid);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.is_dynamic_config), sizeof(tmp_dev_config.is_dynamic_config));
+        pos += sizeof(tmp_dev_config.is_dynamic_config);
 
-        case 16:
-            memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.encoders[0]), MAX_ENCODERS_NUM*sizeof(encoder_t));
-            pos += MAX_ENCODERS_NUM*sizeof(encoder_t);
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
 
-            USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
-            qDebug()<< "send case 16";
-            break;
+    case 15:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.led_pwm_config), sizeof(tmp_dev_config.led_pwm_config));
+        pos += sizeof(tmp_dev_config.led_pwm_config);
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.leds[0]), MAX_LEDS_NUM*sizeof(led_config_t));
+        pos += MAX_LEDS_NUM*sizeof(led_config_t);
 
-        default:
-            break;
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
+
+    case 16:
+        memcpy(&tmp_buf[pos], (uint8_t *) &(tmp_dev_config.encoders[0]), MAX_ENCODERS_NUM*sizeof(encoder_t));
+        pos += MAX_ENCODERS_NUM*sizeof(encoder_t);
+
+        USB_CUSTOM_HID_SendReport((uint8_t *)&(tmp_buf), 64);
+        break;
+
+    default:
+        break;
 
     }
 
@@ -226,9 +209,9 @@ std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_
     if (config_in_cnt == 16) {
         qDebug() << "All config SENT";
         reportSuccess = 0;
-//    } else if (config_in_cnt == 16) {
-//        qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess SEND= " << reportSuccess;
-//        reportSuccess = 0;
+        //    } else if (config_in_cnt == 16) {
+        //        qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess SEND= " << reportSuccess;
+        //        reportSuccess = 0;
     }
 
     std::vector<uint8_t> vec_buf(64);
@@ -247,194 +230,195 @@ dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
 {
     uint8_t i;
     uint8_t pos = 2;
-    uint8_t tmp_buf_size = 64;
+    //uint8_t tmp_buf_size = 64;
     static dev_config_t tmp_dev_config;
 
     switch (hid_buf[1])
     {
-        case 1:
-            {
-                memcpy((uint8_t *) &(tmp_dev_config.firmware_version), &hid_buf[pos], sizeof(tmp_dev_config.firmware_version));
-                pos += sizeof(tmp_dev_config.firmware_version);
-                memcpy((uint8_t *) &(tmp_dev_config.device_name), &hid_buf[pos], sizeof(tmp_dev_config.device_name));
-                pos += sizeof(tmp_dev_config.device_name);
-                memcpy((uint8_t *) &(tmp_dev_config.button_debounce_ms), &hid_buf[pos], 4);
-                pos += 4;
-                memcpy((uint8_t *) &(tmp_dev_config.pins), &hid_buf[pos], sizeof(tmp_dev_config.pins));
-                pos += sizeof(tmp_dev_config.pins);
-            }
+    case 1:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.firmware_version), &hid_buf[pos], sizeof(tmp_dev_config.firmware_version));
+        pos += sizeof(tmp_dev_config.firmware_version);
+        memcpy((uint8_t *) &(tmp_dev_config.device_name), &hid_buf[pos], sizeof(tmp_dev_config.device_name));
+        pos += sizeof(tmp_dev_config.device_name);
+        memcpy((uint8_t *) &(tmp_dev_config.button_debounce_ms), &hid_buf[pos], 4);
+        pos += 4;
+        memcpy((uint8_t *) &(tmp_dev_config.pins), &hid_buf[pos], sizeof(tmp_dev_config.pins));
+        pos += sizeof(tmp_dev_config.pins);
+    }
         break;
 
-        case 2:
+    case 2:
+    {
+        i = 0;
+        while(uint8_t(64 - pos) > sizeof(axis_config_t))
         {
-            i = 0;
-            while(uint8_t(tmp_buf_size - pos) > sizeof(axis_config_t))  // antiwarning
-            {
-                memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
-                pos += sizeof(axis_config_t);
-            }
-        }
-        break;
-
-        case 3:
-        {
-            i = 2;
-            while(uint8_t(tmp_buf_size - pos) > sizeof(axis_config_t))
-            {
-                memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
-                pos += sizeof(axis_config_t);
-            }
-        }
-        break;
-
-        case 4:
-        {
-            i = 4;
-            while(uint8_t(tmp_buf_size - pos) > sizeof(axis_config_t))
-            {
-                memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
-                pos += sizeof(axis_config_t);
-            }
-        }
-        break;
-
-        case 5:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.axis_config[6]), &hid_buf[pos], sizeof(axis_config_t));
+            memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
             pos += sizeof(axis_config_t);
-            memcpy((uint8_t *) &(tmp_dev_config.axis_config[7]), &hid_buf[pos], sizeof(axis_config_t));
+        }
+    }
+        break;
+
+    case 3:
+    {
+        i = 2;
+        while(uint8_t(64 - pos) > sizeof(axis_config_t))
+        {
+            memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
             pos += sizeof(axis_config_t);
-
         }
+    }
         break;
 
-        case 6:
+    case 4:
+    {
+        i = 4;
+        while(uint8_t(64 - pos) > sizeof(axis_config_t))
         {
-            memcpy((uint8_t *) &(tmp_dev_config.buttons[0]), &hid_buf[pos], 60);
-            memcpy((uint8_t *) &(tmp_dev_config.button_timer1_ms), &hid_buf[64-sizeof(tmp_dev_config.button_timer1_ms)], sizeof(tmp_dev_config.button_timer1_ms));
+            memcpy((uint8_t *) &(tmp_dev_config.axis_config[i++]), &hid_buf[pos], sizeof(axis_config_t));
+            pos += sizeof(axis_config_t);
         }
+    }
         break;
 
-        case 7:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.buttons[20]), &hid_buf[pos], 60);
-            memcpy((uint8_t *) &(tmp_dev_config.button_timer2_ms), &hid_buf[64-sizeof(tmp_dev_config.button_timer2_ms)], sizeof(tmp_dev_config.button_timer2_ms));
-        }
+    case 5:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.axis_config[6]), &hid_buf[pos], sizeof(axis_config_t));
+        pos += sizeof(axis_config_t);
+        memcpy((uint8_t *) &(tmp_dev_config.axis_config[7]), &hid_buf[pos], sizeof(axis_config_t));
+        pos += sizeof(axis_config_t);
+
+    }
         break;
 
-        case 8:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.buttons[40]), &hid_buf[pos], 60);
-            memcpy((uint8_t *) &(tmp_dev_config.button_timer3_ms), &hid_buf[64-sizeof(tmp_dev_config.button_timer3_ms)], sizeof(tmp_dev_config.button_timer3_ms));
-        }
+    case 6:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.buttons[0]), &hid_buf[pos], 60);
+        memcpy((uint8_t *) &(tmp_dev_config.button_timer1_ms), &hid_buf[64-sizeof(tmp_dev_config.button_timer1_ms)], sizeof(tmp_dev_config.button_timer1_ms));
+    }
         break;
 
-        case 9:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.buttons[60]), &hid_buf[pos], 60);
-        }
+    case 7:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.buttons[20]), &hid_buf[pos], 60);
+        memcpy((uint8_t *) &(tmp_dev_config.button_timer2_ms), &hid_buf[64-sizeof(tmp_dev_config.button_timer2_ms)], sizeof(tmp_dev_config.button_timer2_ms));
+    }
         break;
 
-        case 10:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.buttons[80]), &hid_buf[pos], 60);
-        }
+    case 8:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.buttons[40]), &hid_buf[pos], 60);
+        memcpy((uint8_t *) &(tmp_dev_config.button_timer3_ms), &hid_buf[64-sizeof(tmp_dev_config.button_timer3_ms)], sizeof(tmp_dev_config.button_timer3_ms));
+    }
         break;
 
-        case 11:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.buttons[100]), &hid_buf[pos], 60);
-        }
+    case 9:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.buttons[60]), &hid_buf[pos], 60);
+        memcpy((uint8_t *) &(tmp_dev_config.a2b_debounce_ms), &hid_buf[64-sizeof(tmp_dev_config.a2b_debounce_ms)], sizeof(tmp_dev_config.a2b_debounce_ms));
+    }
         break;
 
-        case 12:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.buttons[120]), &hid_buf[pos], 8*sizeof(button_t));
-            pos += 8*sizeof(button_t);
-
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[0]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[1]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[2]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-        }
+    case 10:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.buttons[80]), &hid_buf[pos], 60);
+    }
         break;
 
-        case 13:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[2]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[3]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[4]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[5]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            break;
-        }
-        case 14:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[6]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-            memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[7]), &hid_buf[pos], sizeof(axis_to_buttons_t));
-            pos += sizeof(axis_to_buttons_t);
-
-            for (i=0; i<4; i++)
-            {
-                memcpy((uint8_t *) &(tmp_dev_config.shift_registers[i]), &hid_buf[pos], sizeof(shift_reg_config_t));
-                pos += sizeof(shift_reg_config_t);
-            }
-
-
-            memcpy((uint8_t *) &(tmp_dev_config.shift_config[0]), &hid_buf[pos], sizeof(shift_modificator_t));
-            pos += sizeof(shift_modificator_t);
-            memcpy((uint8_t *) &(tmp_dev_config.shift_config[1]), &hid_buf[pos], sizeof(shift_modificator_t));
-            pos += sizeof(shift_modificator_t);
-            memcpy((uint8_t *) &(tmp_dev_config.shift_config[2]), &hid_buf[pos], sizeof(shift_modificator_t));
-            pos += sizeof(shift_modificator_t);
-            memcpy((uint8_t *) &(tmp_dev_config.shift_config[3]), &hid_buf[pos], sizeof(shift_modificator_t));
-            pos += sizeof(shift_modificator_t);
-            memcpy((uint8_t *) &(tmp_dev_config.shift_config[4]), &hid_buf[pos], sizeof(shift_modificator_t));
-            pos += sizeof(shift_modificator_t);
-
-
-
-            memcpy((uint8_t *) &(tmp_dev_config.vid), &hid_buf[pos], sizeof(tmp_dev_config.vid));
-            pos += sizeof(tmp_dev_config.vid);
-            memcpy((uint8_t *) &(tmp_dev_config.pid), &hid_buf[pos], sizeof(tmp_dev_config.pid));
-            pos += sizeof(tmp_dev_config.pid);
-            memcpy((uint8_t *) &(tmp_dev_config.is_dynamic_config), &hid_buf[pos], sizeof(tmp_dev_config.is_dynamic_config));
-            pos += sizeof(tmp_dev_config.is_dynamic_config);
-
-        }
-            break;
-
-        case 15:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.led_pwm_config), &hid_buf[pos], sizeof(tmp_dev_config.led_pwm_config));
-            pos += sizeof(tmp_dev_config.led_pwm_config);
-            memcpy((uint8_t *) &(tmp_dev_config.leds[0]), &hid_buf[pos], MAX_LEDS_NUM*sizeof(led_config_t));
-            pos += MAX_LEDS_NUM*sizeof(led_config_t);
-        }
+    case 11:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.buttons[100]), &hid_buf[pos], 60);
+    }
         break;
 
-        case 16:
-        {
-            memcpy((uint8_t *) &(tmp_dev_config.encoders[0]), &hid_buf[pos], MAX_ENCODERS_NUM*sizeof(encoder_t));
-            pos += MAX_ENCODERS_NUM*sizeof(encoder_t);
-        }
+    case 12:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.buttons[120]), &hid_buf[pos], 8*sizeof(button_t));
+        pos += 8*sizeof(button_t);
+
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[0]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[1]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[2]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+    }
         break;
 
-        default:
-            break;
+    case 13:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[2]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[3]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[4]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[5]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        break;
+    }
+    case 14:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[6]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+        memcpy((uint8_t *) &(tmp_dev_config.axes_to_buttons[7]), &hid_buf[pos], sizeof(axis_to_buttons_t));
+        pos += sizeof(axis_to_buttons_t);
+
+        for (i=0; i<4; i++)
+        {
+            memcpy((uint8_t *) &(tmp_dev_config.shift_registers[i]), &hid_buf[pos], sizeof(shift_reg_config_t));
+            pos += sizeof(shift_reg_config_t);
+        }
+
+
+        memcpy((uint8_t *) &(tmp_dev_config.shift_config[0]), &hid_buf[pos], sizeof(shift_modificator_t));
+        pos += sizeof(shift_modificator_t);
+        memcpy((uint8_t *) &(tmp_dev_config.shift_config[1]), &hid_buf[pos], sizeof(shift_modificator_t));
+        pos += sizeof(shift_modificator_t);
+        memcpy((uint8_t *) &(tmp_dev_config.shift_config[2]), &hid_buf[pos], sizeof(shift_modificator_t));
+        pos += sizeof(shift_modificator_t);
+        memcpy((uint8_t *) &(tmp_dev_config.shift_config[3]), &hid_buf[pos], sizeof(shift_modificator_t));
+        pos += sizeof(shift_modificator_t);
+        memcpy((uint8_t *) &(tmp_dev_config.shift_config[4]), &hid_buf[pos], sizeof(shift_modificator_t));
+        pos += sizeof(shift_modificator_t);
+
+
+
+        memcpy((uint8_t *) &(tmp_dev_config.vid), &hid_buf[pos], sizeof(tmp_dev_config.vid));
+        pos += sizeof(tmp_dev_config.vid);
+        memcpy((uint8_t *) &(tmp_dev_config.pid), &hid_buf[pos], sizeof(tmp_dev_config.pid));
+        pos += sizeof(tmp_dev_config.pid);
+        memcpy((uint8_t *) &(tmp_dev_config.is_dynamic_config), &hid_buf[pos], sizeof(tmp_dev_config.is_dynamic_config));
+        pos += sizeof(tmp_dev_config.is_dynamic_config);
+
+    }
+        break;
+
+    case 15:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.led_pwm_config), &hid_buf[pos], sizeof(tmp_dev_config.led_pwm_config));
+        pos += sizeof(tmp_dev_config.led_pwm_config);
+        memcpy((uint8_t *) &(tmp_dev_config.leds[0]), &hid_buf[pos], MAX_LEDS_NUM*sizeof(led_config_t));
+        pos += MAX_LEDS_NUM*sizeof(led_config_t);
+    }
+        break;
+
+    case 16:
+    {
+        memcpy((uint8_t *) &(tmp_dev_config.encoders[0]), &hid_buf[pos], MAX_ENCODERS_NUM*sizeof(encoder_t));
+        pos += MAX_ENCODERS_NUM*sizeof(encoder_t);
+    }
+        break;
+
+    default:
+        break;
     }
 
     if (hid_buf[1] == 16)
     {
         //if (reportSuccess != 16) qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess = " << reportSuccess;
         //else
-            qDebug() << "All config recived. copy to app conf";
+        qDebug() << "All config recived. copy to app conf";
         reportSuccess = 0;
     }
     return tmp_dev_config;

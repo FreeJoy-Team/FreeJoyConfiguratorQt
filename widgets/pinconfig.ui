@@ -30,11 +30,6 @@
      </property>
      <item row="3" column="1">
       <widget class="QLabel" name="text_B15">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -52,11 +47,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="4" column="1">
       <widget class="QLabel" name="text_A8">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -74,11 +64,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="10" column="1">
       <widget class="QLabel" name="text_B3">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -96,11 +81,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="5" column="1">
       <widget class="QLabel" name="text_A9">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -118,11 +98,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="13" column="1">
       <widget class="QLabel" name="text_B6">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -140,11 +115,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="14" column="1">
       <widget class="QLabel" name="text_B7">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -162,11 +132,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="19" column="1">
       <widget class="QLabel" name="text_33V_2">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(255, 140, 0, 200);
 color: rgb(0, 0, 0);</string>
@@ -184,11 +149,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="2" column="1">
       <widget class="QLabel" name="text_B14">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -206,11 +166,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="15" column="1">
       <widget class="QLabel" name="text_B8">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -228,11 +183,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="7" column="1">
       <widget class="QLabel" name="text_A11_2">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(85, 107, 47, 170);
 color: rgb(0, 0, 0);</string>
@@ -250,11 +200,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="11" column="1">
       <widget class="QLabel" name="text_B4">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -272,11 +217,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="text_B12">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -294,11 +234,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="12" column="1">
       <widget class="QLabel" name="text_B5">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -316,11 +251,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="16" column="1">
       <widget class="QLabel" name="text_B9">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -338,11 +268,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="8" column="1">
       <widget class="QLabel" name="text_A12_2">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(85, 107, 47, 170);
 color: rgb(0, 0, 0);</string>
@@ -360,11 +285,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="17" column="1">
       <widget class="QLabel" name="text_5V_2">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(255, 140, 0, 200);
 color: rgb(0, 0, 0);</string>
@@ -382,11 +302,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="9" column="1">
       <widget class="QLabel" name="text_A15">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -404,11 +319,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="18" column="1">
       <widget class="QLabel" name="text_GND_2">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(128, 128, 128, 170);
 color: rgb(0, 0, 0);</string>
@@ -426,11 +336,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="1" column="1">
       <widget class="QLabel" name="text_B13">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -447,21 +352,10 @@ color: rgb(0, 0, 0);</string>
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB12" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB12" native="true"/>
      </item>
      <item row="6" column="1">
       <widget class="QLabel" name="text_A10">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -478,140 +372,51 @@ color: rgb(0, 0, 0);</string>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB13" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB13" native="true"/>
      </item>
      <item row="2" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB14" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB14" native="true"/>
      </item>
      <item row="3" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB15" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB15" native="true"/>
      </item>
      <item row="4" column="0">
-      <widget class="PinComboBox" name="widgetPin_PA8" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA8" native="true"/>
      </item>
      <item row="5" column="0">
-      <widget class="PinComboBox" name="widgetPin_PA9" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA9" native="true"/>
      </item>
      <item row="6" column="0">
-      <widget class="PinComboBox" name="widgetPin_PA10" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA10" native="true"/>
      </item>
      <item row="9" column="0">
-      <widget class="PinComboBox" name="widgetPin_PA15" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA15" native="true"/>
      </item>
      <item row="10" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB3" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB3" native="true"/>
      </item>
      <item row="11" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB4" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB4" native="true"/>
      </item>
      <item row="12" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB5" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB5" native="true"/>
      </item>
      <item row="13" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB6" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB6" native="true"/>
      </item>
      <item row="14" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB7" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB7" native="true"/>
      </item>
      <item row="15" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB8" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB8" native="true"/>
      </item>
      <item row="16" column="0">
-      <widget class="PinComboBox" name="widgetPin_PB9" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB9" native="true"/>
      </item>
      <item row="18" column="0">
       <widget class="QLabel" name="label_GND">
        <property name="enabled">
         <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
@@ -631,11 +436,6 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
@@ -653,11 +453,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       <widget class="QLabel" name="label_5V">
        <property name="enabled">
         <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
@@ -677,11 +472,6 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
@@ -699,11 +489,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       <widget class="QLabel" name="label_USBDplus">
        <property name="enabled">
         <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
@@ -727,11 +512,6 @@ background-color: rgba(105, 105, 105, 10);</string>
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>8</pointsize>
-      </font>
      </property>
      <property name="text">
       <string/>
@@ -763,11 +543,6 @@ background-color: rgba(105, 105, 105, 10);</string>
      </property>
      <item row="15" column="0">
       <widget class="QLabel" name="text_A0">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -785,11 +560,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="10" column="0">
       <widget class="QLabel" name="text_A5">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -807,11 +577,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="5" column="0">
       <widget class="QLabel" name="text_B10">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -829,11 +594,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="18" column="0">
       <widget class="QLabel" name="text_C13">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -851,11 +611,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="text_GND_3">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(128, 128, 128, 170);
 color: rgb(0, 0, 0);</string>
@@ -873,11 +628,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="text_33V_3">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(255, 140, 0, 200);
 color: rgb(0, 0, 0);</string>
@@ -916,11 +666,6 @@ color: rgb(0, 0, 0);</string>
          <height>30</height>
         </size>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(128, 128, 128, 170);
 color: rgb(0, 0, 0);</string>
@@ -938,11 +683,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="11" column="0">
       <widget class="QLabel" name="text_A4">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -960,11 +700,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="19" column="0">
       <widget class="QLabel" name="text_VB">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(255, 140, 0, 200);
 color: rgb(0, 0, 0);</string>
@@ -982,11 +717,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="9" column="0">
       <widget class="QLabel" name="text_A6">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -1004,11 +734,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="8" column="0">
       <widget class="QLabel" name="text_A7">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -1026,11 +751,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="text_RST">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(85, 107, 47, 170);
 color: rgb(0, 0, 0);</string>
@@ -1048,11 +768,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="14" column="0">
       <widget class="QLabel" name="text_A1">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -1070,11 +785,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="16" column="0">
       <widget class="QLabel" name="text_C15">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -1092,11 +802,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="text_B1">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -1114,11 +819,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="12" column="0">
       <widget class="QLabel" name="text_A3">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -1136,11 +836,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="text_B11">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -1158,11 +853,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="17" column="0">
       <widget class="QLabel" name="text_C14">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -1180,11 +870,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="13" column="0">
       <widget class="QLabel" name="text_A2">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(144, 238, 144, 200);
 color: rgb(0, 0, 0);</string>
@@ -1202,11 +887,6 @@ color: rgb(0, 0, 0);</string>
      </item>
      <item row="7" column="0">
       <widget class="QLabel" name="text_B0">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(173, 216, 230, 170);
 color: rgb(0, 0, 0);</string>
@@ -1223,149 +903,54 @@ color: rgb(0, 0, 0);</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="PinComboBox" name="widgetPin_PB11" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB11" native="true"/>
      </item>
      <item row="5" column="1">
-      <widget class="PinComboBox" name="widgetPin_PB10" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB10" native="true"/>
      </item>
      <item row="6" column="1">
-      <widget class="PinComboBox" name="widgetPin_PB1" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB1" native="true"/>
      </item>
      <item row="7" column="1">
-      <widget class="PinComboBox" name="widgetPin_PB0" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PB0" native="true"/>
      </item>
      <item row="8" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA7" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA7" native="true"/>
      </item>
      <item row="9" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA6" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA6" native="true"/>
      </item>
      <item row="10" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA5" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA5" native="true"/>
      </item>
      <item row="11" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA4" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA4" native="true"/>
      </item>
      <item row="12" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA3" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA3" native="true"/>
      </item>
      <item row="13" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA2" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA2" native="true"/>
      </item>
      <item row="14" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA1" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA1" native="true"/>
      </item>
      <item row="15" column="1">
-      <widget class="PinComboBox" name="widgetPin_PA0" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PA0" native="true"/>
      </item>
      <item row="16" column="1">
-      <widget class="PinComboBox" name="widgetPin_PC15" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PC15" native="true"/>
      </item>
      <item row="17" column="1">
-      <widget class="PinComboBox" name="widgetPin_PC14" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PC14" native="true"/>
      </item>
      <item row="18" column="1">
-      <widget class="PinComboBox" name="widgetPin_PC13" native="true">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-      </widget>
+      <widget class="PinComboBox" name="widgetPin_PC13" native="true"/>
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="label_GND_3">
        <property name="enabled">
         <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
@@ -1385,11 +970,6 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
@@ -1407,11 +987,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       <widget class="QLabel" name="label_33V_2">
        <property name="enabled">
         <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
@@ -1431,11 +1006,6 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
@@ -1454,11 +1024,6 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
@@ -1476,11 +1041,6 @@ background-color: rgba(105, 105, 105, 10);</string>
    </item>
    <item row="0" column="5">
     <widget class="QGroupBox" name="groupBox_CurrentConfig">
-     <property name="font">
-      <font>
-       <pointsize>8</pointsize>
-      </font>
-     </property>
      <property name="title">
       <string>Current Config</string>
      </property>
@@ -1493,12 +1053,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </property>
       <item row="0" column="0">
        <widget class="QLabel" name="text_AxisSources">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Axis sources:</string>
         </property>
@@ -1515,11 +1069,6 @@ background-color: rgba(105, 105, 105, 10);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>0</string>
         </property>
@@ -1533,11 +1082,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="7" column="0">
        <widget class="QLabel" name="text_TotalLEDs">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Total LEDs:</string>
         </property>
@@ -1548,11 +1092,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="text_ButtonsFromAxes">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Buttons from axes:</string>
         </property>
@@ -1569,11 +1108,6 @@ background-color: rgba(105, 105, 105, 10);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>0</string>
         </property>
@@ -1586,11 +1120,6 @@ background-color: rgba(105, 105, 105, 10);</string>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
         </property>
         <property name="text">
          <string>0</string>
@@ -1605,11 +1134,6 @@ background-color: rgba(105, 105, 105, 10);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>0</string>
         </property>
@@ -1617,11 +1141,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="text_SingleButtons">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Single buttons:</string>
         </property>
@@ -1632,11 +1151,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="text_ColumnsOfButtons">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Columns of buttons:</string>
         </property>
@@ -1647,11 +1161,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="text_RowsOfButtons">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Rows of buttons:</string>
         </property>
@@ -1662,11 +1171,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="text_TotalButtons">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Total buttons:</string>
         </property>
@@ -1683,11 +1187,6 @@ background-color: rgba(105, 105, 105, 10);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>0</string>
         </property>
@@ -1700,11 +1199,6 @@ background-color: rgba(105, 105, 105, 10);</string>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
         </property>
         <property name="text">
          <string>0</string>
@@ -1719,11 +1213,6 @@ background-color: rgba(105, 105, 105, 10);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>0</string>
         </property>
@@ -1731,11 +1220,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="text_buttonsFromShiftRegs">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Buttons from shift regs:</string>
         </property>
@@ -1746,11 +1230,6 @@ background-color: rgba(105, 105, 105, 10);</string>
       </item>
       <item row="2" column="1">
        <widget class="QLabel" name="label_ButtonsFromShiftRegs">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>0</string>
         </property>

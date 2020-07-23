@@ -149,28 +149,28 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
 {                                                                                                               // или отдельный класс для их состояний
     //fast encoder selected
     if (current_device_enum == FAST_ENCODER){
-        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz           // возможен баг? из-за else
+        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz
     } else if (previous_device_enum == FAST_ENCODER){
         emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, false);    // hz
     }
     // shift register latch selected
-    else if (current_device_enum == SHIFT_REG_LATCH){
+    if (current_device_enum == SHIFT_REG_LATCH){
         shift_latch_count_++;
         emit shiftRegSelected(pin_number, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_LATCH){
         shift_latch_count_--;
-        emit shiftRegSelected((pin_number)*-1, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz           // возможен баг? из-за else
+        emit shiftRegSelected((pin_number)*-1, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     }
     // shift register data selected
-    else if (current_device_enum == SHIFT_REG_DATA){
+    if (current_device_enum == SHIFT_REG_DATA){
         shift_data_count_++;
         emit shiftRegSelected(0, pin_number, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_DATA){
         shift_data_count_--;
-        emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz           // возможен баг? из-за else
+        emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
     }
     // I2C selected
-    else if (current_device_enum == I2C_SCL){// || current_device_enum == I2C_SDA){
+    if (current_device_enum == I2C_SCL){// || current_device_enum == I2C_SDA){
         emit axesSourceChanged(-2, true);                                            // -2 enum I2C в axes.h
     } else if (previous_device_enum == I2C_SCL){// || previous_device_enum == I2C_SDA){
         emit axesSourceChanged(-2, false);

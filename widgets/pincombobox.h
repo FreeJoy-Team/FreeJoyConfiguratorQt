@@ -132,6 +132,7 @@ signals:
 private slots:
     void IndexChanged(int index);
 
+                                        ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ 1 НА ВСЕ ПИНЫ!!///////////////////////
 public:     // private?
     pins const pin_list[30] =       // каждый пин хранит по структуре. а жирно не будет?
     {
@@ -176,92 +177,92 @@ public:     // private?
         {BUTTON_GND,     tr("Button Gnd"),      // контроллер enum,  имя в ui   tr(нужен перевод)
          {ALL},                                 // добавление в конкретный пин или пины типа
          {},                                    // исключая пины
-         {}, {"color: rgb(255, 0, 255);"}},     // взаимодействие с другими типами // стиль color, background-color, border-color...
+         {}, {"color: rgb(150, 155, 55);"}},     // взаимодействие с другими типами // стиль color, background-color, border-color...
 
         {BUTTON_VCC,     tr("Button Vcc"),
          {ALL},
          {},
-         {}, {}},
+         {}, {"color: rgb(170, 25, 25);"}},
 
         {BUTTON_ROW,     tr("Button Row"),
          {ALL},
          {},
-         {}, {}},
+         {}, {"color: rgb(25, 130, 220);"}},
 
         {BUTTON_COLUMN,  tr("Button Column"),
          {ALL},
          {},
-         {}, {}},
+         {}, {"color: rgb(120, 130, 250);"}},
 
         {SHIFT_REG_LATCH,tr("ShiftReg LATCH"),
          {ALL},
          {SPI1_SCK},
-         {SPI_SCK}, {"color: rgb(0, 153, 0);"}},
+         {SPI_SCK}, {"color: rgb(0, 155, 0);"}},
 
         {SHIFT_REG_DATA, tr("ShiftReg DATA"),
          {ALL},
          {SPI1_SCK},
-         {SPI_SCK}, {"color: rgb(0, 153, 0);"}},
+         {SPI_SCK}, {"color: rgb(0, 155, 0);"}},
 
         {TLE5011_CS,     tr("TLE5011 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, PB_6},
-         {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 155);"}},
+         {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3201_CS,     tr("MCP3201 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(153, 153, 55);"}},
+         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3202_CS,     tr("MCP3202 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(153, 53, 155);"}},
+         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3204_CS,     tr("MCP3204 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 53, 0);"}},
+         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3208_CS,     tr("MCP3208 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 0, 55);"}},
+         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MLX90393_CS,    tr("MLX90393 CS"),
          {ALL},
          {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(0, 53, 55);"}},
+         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {LED_SINGLE,     tr("LED Single"),
          {ALL},
          {},
-         {}, {}},
+         {}, {"color: rgb(155, 0, 200);"}},
 
         {LED_ROW,        tr("LED Row"),
          {ALL},
          {},
-         {}, {}},
+         {}, {"color: rgb(155, 0, 120);"}},
 
         {LED_COLUMN,     tr("LED Column"),
          {ALL},
          {},
-         {}, {}},
+         {}, {"color: rgb(190, 20, 120);"}},
 
         {LED_PWM,        tr("LED PWM"),
          {PB_0, PB_1, PB_4},
          {},
-         {}, {}},
+         {}, {"color: rgb(200, 0, 180);"}},
 
         {AXIS_ANALOG,    tr("Axis Analog"),
          {ANALOG_IN},
          {},
-         {}, {}},
+         {}, {"color: rgba(144, 238, 144, 200);"}},
 
         {FAST_ENCODER,   tr("Fast Encoder"),
          {PA_8, PA_9},
          {},
-         {}, {}},
+         {}, {"color: rgb(200, 10, 10);"}},
 
         {SPI_SCK,        tr("SPI SCK"),
          {SPI1_SCK},

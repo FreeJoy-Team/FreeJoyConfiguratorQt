@@ -60,7 +60,7 @@
  min-height: 22px;
  min-width: 22px;
 background-color: rgb(190, 0, 0);
-color: rgb(255, 255, 255);</string>
+color: rgb(200, 200, 200);</string>
      </property>
      <property name="text">
       <string notr="true">1</string>

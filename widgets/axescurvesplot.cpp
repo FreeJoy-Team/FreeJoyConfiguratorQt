@@ -42,9 +42,10 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
 
     points_count_ = 11;
     point_active_ = false;
+    is_device_connect_ = false;
     half_radius_ = radius_/2;
 
-    cur_axis_pos.color = point_active_color_;
+    cur_axis_pos.color = point_current_pos_color_;
 
     int tmp_range;
     if ((min_point_value < 0 && max_point_value < 0) || (min_point_value >= 0 && max_point_value >= 0)) {
@@ -67,6 +68,7 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
         PointAdrList[i]->is_drag = false;
         PointAdrList[i]->current_value = ((tmp_range / (points_count_ - 1.0)) * i) + min_point_value;    // hz
 
+        LabelAdrList[i]->setFont(QFont("MS Shell Dlg 2", 8));
         LabelAdrList[i]->setNum(PointAdrList[i]->current_value);
         LabelAdrList[i]->setMinimumWidth(label_width_);
         LabelAdrList[i]->setAlignment(Qt::AlignHCenter);
@@ -186,7 +188,7 @@ void AxesCurvesPlot::UpdateAxis(int pos_x, int pos_y)
 //            }
 //        });
 //    }
-    is_device_connect_ = true;
+    //is_device_connect_ = true;
     cur_axis_pos.posX = CalcPointPosX(pos_x);
     cur_axis_pos.posY = CalcPointPos(pos_y);
     update();
@@ -475,6 +477,6 @@ void AxesCurvesPlot::mouseReleaseEvent(QMouseEvent *event)
 
 void AxesCurvesPlot::DeviceStatus(bool is_connect)
 {
-    //is_device_connect_ = is_connect;
+    is_device_connect_ = is_connect;
 }
 

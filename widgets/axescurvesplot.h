@@ -51,7 +51,7 @@ private:
     const int rows_count_ = 10;
     const int radius_ = 16;
     const int label_width_ = 20;
-    bool is_device_connect_ = false;
+    bool is_device_connect_;
 
     float column_width_;
     float row_height_;
@@ -63,6 +63,7 @@ private:
 
     int points_count_;
 
+    QColor const point_current_pos_color_ = QColor(190,0,0,170);
     QColor const point_inactive_color_ = QColor(1,119,215);
     QColor const point_active_color_ = Qt::black;
     QColor const point_move_color_ = Qt::lightGray;
