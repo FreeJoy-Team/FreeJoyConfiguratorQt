@@ -69,11 +69,14 @@ void AdvancedSettings::on_pushButton_StyleDefault_clicked()
     //emit styleChanged();
     tmp_text = ui->pushButton_StyleDefault->text();
     tmp_style = ui->pushButton_StyleDefault->styleSheet();
+    ui->pushButton_StyleDefault->setEnabled(false);
+    ui->pushButton_StyleWhite->setEnabled(false);
+    ui->pushButton_StyleDark->setEnabled(false);
     ui->pushButton_StyleDefault->setText("Loading... Please wait");
     ui->pushButton_StyleDefault->setStyleSheet("background-color: rgb(170, 170, 0);");
 
     // без таймера не успевает отрисовать изменения текста и стиля, возможно на низкочастотных мониках 10мс не хватит?
-    // отрисовка же не в другом потоке? мб ещё блочить кнопку
+    // отрисовка в другом потоке?
     QTimer::singleShot(10, [&]{
         QFile f(":/QSS-master/default.qss");
         if (!f.exists())   {
@@ -92,6 +95,9 @@ void AdvancedSettings::on_pushButton_StyleDefault_clicked()
 
         ui->pushButton_StyleDefault->setText(tmp_text);
         ui->pushButton_StyleDefault->setStyleSheet(tmp_style);
+        ui->pushButton_StyleDefault->setEnabled(true);
+        ui->pushButton_StyleWhite->setEnabled(true);
+        ui->pushButton_StyleDark->setEnabled(true);
     });
 }
 
@@ -99,6 +105,9 @@ void AdvancedSettings::on_pushButton_StyleWhite_clicked()
 {
     tmp_text = ui->pushButton_StyleWhite->text();
     tmp_style = ui->pushButton_StyleWhite->styleSheet();
+    ui->pushButton_StyleDefault->setEnabled(false);
+    ui->pushButton_StyleWhite->setEnabled(false);
+    ui->pushButton_StyleDark->setEnabled(false);
     ui->pushButton_StyleWhite->setText("Loading... Please wait");
     ui->pushButton_StyleWhite->setStyleSheet("background-color: rgb(170, 170, 0);");
 
@@ -120,6 +129,9 @@ void AdvancedSettings::on_pushButton_StyleWhite_clicked()
 
         ui->pushButton_StyleWhite->setText(tmp_text);
         ui->pushButton_StyleWhite->setStyleSheet(tmp_style);
+        ui->pushButton_StyleDefault->setEnabled(true);
+        ui->pushButton_StyleWhite->setEnabled(true);
+        ui->pushButton_StyleDark->setEnabled(true);
     });
 }
 
@@ -127,6 +139,9 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
 {
     tmp_text = ui->pushButton_StyleDark->text();
     tmp_style = ui->pushButton_StyleDark->styleSheet();
+    ui->pushButton_StyleDefault->setEnabled(false);
+    ui->pushButton_StyleWhite->setEnabled(false);
+    ui->pushButton_StyleDark->setEnabled(false);
     ui->pushButton_StyleDark->setText("Loading... Please wait");
     ui->pushButton_StyleDark->setStyleSheet("background-color: rgb(170, 170, 0);");
 
@@ -148,6 +163,9 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
 
         ui->pushButton_StyleDark->setText(tmp_text);
         ui->pushButton_StyleDark->setStyleSheet(tmp_style);
+        ui->pushButton_StyleDefault->setEnabled(true);
+        ui->pushButton_StyleWhite->setEnabled(true);
+        ui->pushButton_StyleDark->setEnabled(true);
     });
 }
 

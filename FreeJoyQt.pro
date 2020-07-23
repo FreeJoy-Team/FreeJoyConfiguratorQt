@@ -27,9 +27,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     reportconverter.cpp \
-    signalhandler.cpp \
     stm_main.c \
-    test.cpp \
     widgets/advancedsettings.cpp \
     widgets/axes.cpp \
     widgets/axesconfig.cpp \
@@ -62,9 +60,7 @@ HEADERS += \
     hiddevice.h \
     mainwindow.h \
     reportconverter.h \
-    signalhandler.h \
     stm_main.h \
-    test.h \
     widgets/advancedsettings.h \
     widgets/axes.h \
     widgets/axesconfig.h \
@@ -110,7 +106,7 @@ FORMS += \
     widgets/shiftregistersconfig.ui
 
 TRANSLATIONS += \
-    FreeJoyTest_ru.ts
+    FreeJoyQt_ru.ts
 
 
 # Default rules for deployment.

@@ -8,7 +8,6 @@
 #include "global.h"
 GlobalEnvironment gEnv;
 #include "deviceconfig.h"
-#include "signalhandler.h"
 
 #include <ctime>
 int main(int argc, char *argv[])

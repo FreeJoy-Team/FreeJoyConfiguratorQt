@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>FreeJoyTest_ru.qm</file>
+        <file>FreeJoyQt_ru.qm</file>
         <file>Images/BluePill_pic.jpg</file>
         <file>Images/BluePill_pic2.jpg</file>
         <file>Images/BluePill_pic3.jpg</file>

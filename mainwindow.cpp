@@ -219,7 +219,7 @@ void MainWindow::LoadAppConfig()
     gEnv.pAppSettings->beginGroup("LanguageSettings");
     if (gEnv.pAppSettings->value("Language", "english").toString() == "russian")
     {
-        translator.load(":/FreeJoyTest_ru");
+        translator.load(":/FreeJoyQt_ru");
         qApp->installTranslator(&translator);
         ui->retranslateUi(this);
     }
@@ -318,13 +318,13 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
 {
     if (language == "russian")
     {
-        translator.load(":/FreeJoyTest_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
+        translator.load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
         qApp->installTranslator(&translator);
         ui->retranslateUi(this);
     }
     else if (language == "english")
     {
-        translator.load(":/FreeJoyTest_en");
+        translator.load(":/FreeJoyQt_en");
         qApp->installTranslator(&translator);
         ui->retranslateUi(this);
     } else {

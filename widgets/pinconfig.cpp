@@ -1,6 +1,5 @@
 #include "pinconfig.h"
 #include "ui_pinconfig.h"
-#include "signalhandler.h"
 
 //#include <QtConcurrent/QtConcurrent>
 //#include <QFuture>
