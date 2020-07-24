@@ -1307,7 +1307,7 @@ QComboBox QAbstractItemView:alternate {
 }
 
 QComboBox:disabled {
-  background-color: #232629;
+  background-color: #31363b;
   color: #787878;
 }
 

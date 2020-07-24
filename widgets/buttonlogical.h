@@ -35,7 +35,7 @@ public:
 //private: ??
     int button_number_;
 
-    deviceEnum_guiName_t const timer_list_[TIMER_COUNT] =       // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    deviceEnum_guiName_t const timer_list_[TIMER_COUNT] =       // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
     {
         {BUTTON_TIMER_OFF,      tr("No")},
         {BUTTON_TIMER_1,        tr("Timer 1")},
@@ -43,7 +43,7 @@ public:
         {BUTTON_TIMER_3,        tr("Timer 3")},
     };
 
-    deviceEnum_guiName_t const shift_list_[SHIFT_COUNT] =       // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    deviceEnum_guiName_t const shift_list_[SHIFT_COUNT] =       // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
     {
         {0,        tr("No shift")},
         {1,        tr("Shift 1")},
@@ -53,7 +53,7 @@ public:
         {5,        tr("Shift 5")},
     };
 
-    deviceEnum_guiName_t const logical_function_list_[LOGICAL_FUNCTION_COUNT] =     // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    deviceEnum_guiName_t const logical_function_list_[LOGICAL_FUNCTION_COUNT] =     // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
     {
         {BUTTON_NORMAL,        tr("Button normal")},
         {BUTTON_TOGGLE,        tr("Button toggle")},

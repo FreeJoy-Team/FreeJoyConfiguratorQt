@@ -167,7 +167,7 @@ public:     // private?
         {PC_14, {tr("Pin C14")},    {}},
         {PC_15, {tr("Pin C15")},    {}},
     };
-    cBox const pin_types[PIN_TYPE_COUNT] =
+    cBox const pin_types[PIN_TYPE_COUNT] =          // static ?
     {
         {NOT_USED,       tr("Not Used"),
          {ALL},

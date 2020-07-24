@@ -303,5 +303,6 @@ void AdvancedSettings::FlashDone()
         ui->pushButton_FlasherMode->setStyleSheet(default_style_);
         ui->pushButton_FlasherMode->setText(enter_to_flash_btn_text_);
         file_array_.clear();
+        file_array_.shrink_to_fit();
     });
 }

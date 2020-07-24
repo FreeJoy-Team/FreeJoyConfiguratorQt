@@ -1,9 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>FreeJoyQt_ru.qm</file>
-        <file>Images/BluePill_pic.jpg</file>
         <file>Images/BluePill_pic2.jpg</file>
-        <file>Images/BluePill_pic3.jpg</file>
         <file>QSS-master/default.qss</file>
         <file>QSS-master/Ubuntu.qss</file>
         <file>Images/Exponent.png</file>
@@ -16,5 +14,6 @@
         <file>Images/linear_dark.png</file>
         <file>Images/linearInvert_dark.png</file>
         <file>Images/Shape_dark.png</file>
+        <file>Images/BluePill_render.jpg</file>
     </qresource>
 </RCC>

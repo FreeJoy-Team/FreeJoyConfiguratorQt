@@ -517,7 +517,7 @@ background-color: rgba(105, 105, 105, 10);</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../resources.qrc">:/Images/BluePill_pic2.jpg</pixmap>
+      <pixmap resource="../resources.qrc">:/Images/BluePill_render.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>

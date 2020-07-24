@@ -329,13 +329,14 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
 
         int res = 0;
         uint8_t buffer[BUFFSIZE]={0};
-        while (clock() < millis + 20000)
+        while (clock() < millis + 40000)
         {
             if (flasher){
-                res=hid_read_timeout(flasher, buffer, BUFFSIZE,10000);
+                res=hid_read_timeout(flasher, buffer, BUFFSIZE,5000);  // ?
                 if (res < 0) {
                     hid_close(flasher);
                     flasher=nullptr;
+                    break;
                 } else {
                     if (buffer[0] == REPORT_ID_FIRMWARE) {
                         memset(flasher_device_buffer, 0, BUFFSIZE);
