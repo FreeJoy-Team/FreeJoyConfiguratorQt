@@ -20,111 +20,50 @@
    <string notr="true">FreeJoy QtConfigurator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="2,20">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,20,0">
     <item>
-     <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0">
-      <property name="topMargin">
-       <number>0</number>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string/>
       </property>
-      <item row="0" column="0" rowspan="2">
-       <widget class="QGroupBox" name="groupBox_4">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0">
-         <property name="topMargin">
-          <number>6</number>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>100</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
+        <number>4</number>
+       </property>
+       <item>
+        <widget class="QComboBox" name="comboBox_HidDeviceList"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_DeviceStatus">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
          </property>
-         <property name="verticalSpacing">
-          <number>3</number>
+         <property name="text">
+          <string/>
          </property>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton_LoadFromFile">
-           <property name="text">
-            <string>Load config from file</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QComboBox" name="comboBox_HidDeviceList"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_DeviceStatus">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QPushButton" name="pushButton_SaveToFile">
-           <property name="text">
-            <string>Save config to file</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_ResetAllPins">
-           <property name="text">
-            <string>Reset All</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
-           <property name="text">
-            <string>Load default config</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_SetDefaultConfig">
-           <property name="text">
-            <string>Set file to default config</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QPushButton" name="pushButton_ReadConfig">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>Read config from Device</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <widget class="QPushButton" name="pushButton_WriteConfig">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Write config to Device</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_ResetAllPins">
+         <property name="text">
+          <string>Reset All</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <widget class="QTabWidget" name="tabWidget">
@@ -457,6 +396,85 @@ border-bottom: 1px solid rgb(190, 190, 190);
        </widget>
       </widget>
      </widget>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0">
+         <property name="topMargin">
+          <number>6</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>6</number>
+         </property>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="pushButton_LoadFromFile">
+           <property name="text">
+            <string>Load config from file</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QPushButton" name="pushButton_SaveToFile">
+           <property name="text">
+            <string>Save config to file</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
+           <property name="text">
+            <string>Load default config</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_SetDefaultConfig">
+           <property name="text">
+            <string>Set file to default config</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QPushButton" name="pushButton_ReadConfig">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Read config from Device</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QPushButton" name="pushButton_WriteConfig">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Write config to Device</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

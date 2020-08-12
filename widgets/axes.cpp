@@ -174,6 +174,27 @@ void Axes::outputValueChanged(bool is_checked)
     }
 }
 
+void Axes::on_pushButton_SetCenter_clicked()
+{
+    ui->checkBox_Center->setChecked(true);
+
+    if (gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_] > ui->spinBox_CalibMax->value())
+    {
+        ui->spinBox_CalibCenter->setValue(ui->spinBox_CalibMax->value());
+    }
+    else if (gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_] < ui->spinBox_CalibMin->value())
+    {
+        ui->spinBox_CalibCenter->setValue(ui->spinBox_CalibMin->value());
+    }
+    else
+    {
+        ui->spinBox_CalibCenter->setValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]);
+    }
+}
+
+
+
+
 void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)                // add source_main
 {
     // output, inverted

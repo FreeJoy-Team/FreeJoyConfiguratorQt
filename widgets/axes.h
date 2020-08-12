@@ -42,11 +42,13 @@ private slots:
 
     void on_pushButton_StartCalib_clicked(bool checked);
 
+    void on_pushButton_SetCenter_clicked();
+
 private:
     Ui::Axes *ui;
     bool calibration_started_ = false;
-    QString start_calibration = tr("Start calibration");
-    QString stop_calibration = tr("Stop calibration");
+    QString start_calibration = tr("Calibrate");
+    QString stop_calibration = tr("Stop and Save");
     //dev_config_t* pDev_config;
 
     std::vector<int> main_source_enum_index_;

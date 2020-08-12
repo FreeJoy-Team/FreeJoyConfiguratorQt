@@ -181,9 +181,10 @@ bool HidDevice::GetConfigFromDevice()     // try catch
 
         uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
         hid_write(handle_read, config_request_buffer, 2);
-
+        qDebug()<<"start read cycle";
         while (clock() < millis + 1000)   // сделать таймаут 2000ms
         {
+            qDebug()<<"read";
             if (device_buffer_[0] == REPORT_ID_CONFIG_IN)
             {
                 if (device_buffer_[1] == config_request_buffer[1])
@@ -233,9 +234,10 @@ bool HidDevice::SendConfigToDevice()      // try catch
 
         uint8_t config_buffer[64] = {REPORT_ID_CONFIG_OUT, 0};        // check 64 2
         hid_write(handle_read, config_buffer, 64);
-
+        qDebug()<<"start write cycle";
         while (clock() < millis + 1000)   // сделать таймаут
         {
+            qDebug()<<"write";
             if (device_buffer_[0] == REPORT_ID_CONFIG_OUT)
             {
                 if (device_buffer_[1] == config_buffer[1] + 1)

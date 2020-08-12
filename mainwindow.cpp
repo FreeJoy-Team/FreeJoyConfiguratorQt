@@ -437,9 +437,9 @@ void MainWindow::on_pushButton_ReadConfig_clicked()        // херня? mb QtC
     QObject context;
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
-
+        qDebug()<<"read start";
         emit getConfigDone(hid_device_worker->GetConfigFromDevice());
-
+        qDebug()<<"read finish";
         loop.quit();
     });
     thread_getSend_config->start();
@@ -480,9 +480,9 @@ void MainWindow::on_pushButton_WriteConfig_clicked()        // херня? mb Qt
     QObject context;
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
-
+        qDebug()<<"write start";
         emit sendConfigDone(hid_device_worker->SendConfigToDevice());
-
+        qDebug()<<"write finish";
         loop.quit();
     });
     thread_getSend_config->start();

@@ -368,7 +368,7 @@ QProgressBar::chunk:disabled {
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QGridLayout" name="gridLayout" columnstretch="5,4,2,2">
+        <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0" columnminimumwidth="0,5,0,0,0">
          <property name="leftMargin">
           <number>8</number>
          </property>
@@ -384,164 +384,7 @@ QProgressBar::chunk:disabled {
          <property name="spacing">
           <number>0</number>
          </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="text_resolution">
-           <property name="text">
-            <string>Resolution</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="text_offset">
-           <property name="text">
-            <string>Offset</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="spinBox_Offset">
-           <property name="correctionMode">
-            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-           </property>
-           <property name="maximum">
-            <number>360</number>
-           </property>
-           <property name="singleStep">
-            <number>10</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="text_deadband">
-           <property name="text">
-            <string>Deadband</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="text_bits">
-           <property name="text">
-            <string>bits</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QSpinBox" name="spinBox_Deadband">
-           <property name="correctionMode">
-            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-           </property>
-           <property name="maximum">
-            <number>127</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QSpinBox" name="spinBox_Resolution">
-           <property name="correctionMode">
-            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>16</number>
-           </property>
-           <property name="value">
-            <number>16</number>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="text_minimum">
-           <property name="text">
-            <string>Minimum</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QLabel" name="text_filter">
-           <property name="text">
-            <string>Filter</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QSpinBox" name="spinBox_CalibMin">
-           <property name="minimum">
-            <number>-32767</number>
-           </property>
-           <property name="maximum">
-            <number>32767</number>
-           </property>
-           <property name="value">
-            <number>-32767</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="text_angle">
-           <property name="text">
-            <string>°</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QSpinBox" name="spinBox_CalibCenter">
-           <property name="minimum">
-            <number>-32767</number>
-           </property>
-           <property name="maximum">
-            <number>32767</number>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QCheckBox" name="checkBox_Center">
-           <property name="text">
-            <string>Center</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLabel" name="text_maximum">
-           <property name="text">
-            <string>Maximum</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="1">
-          <widget class="QSpinBox" name="spinBox_CalibMax">
-           <property name="minimum">
-            <number>-32767</number>
-           </property>
-           <property name="maximum">
-            <number>32767</number>
-           </property>
-           <property name="value">
-            <number>32767</number>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="3">
-          <widget class="QLabel" name="label_Filter">
-           <property name="minimumSize">
-            <size>
-             <width>35</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Off</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3" rowspan="6">
+         <item row="1" column="4" rowspan="6">
           <widget class="QSlider" name="sliderV_Filter">
            <property name="maximum">
             <number>7</number>
@@ -557,10 +400,90 @@ QProgressBar::chunk:disabled {
            </property>
           </widget>
          </item>
-         <item row="4" column="0" colspan="2">
+         <item row="1" column="2">
+          <widget class="QSpinBox" name="spinBox_Offset">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
+           <property name="singleStep">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QSpinBox" name="spinBox_CalibMin">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimum">
+            <number>-32767</number>
+           </property>
+           <property name="maximum">
+            <number>32767</number>
+           </property>
+           <property name="value">
+            <number>-32767</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="text_resolution">
+           <property name="text">
+            <string>Resolution</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLabel" name="text_bits">
+           <property name="text">
+            <string>bits</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QPushButton" name="pushButton_SetCenter">
+           <property name="text">
+            <string>Set Center</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="text_filter">
+           <property name="text">
+            <string>Filter</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QSpinBox" name="spinBox_CalibCenter">
+           <property name="minimum">
+            <number>-32767</number>
+           </property>
+           <property name="maximum">
+            <number>32767</number>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="text_maximum">
+           <property name="text">
+            <string>Maximum</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
           <widget class="QPushButton" name="pushButton_StartCalib">
            <property name="text">
-            <string>Start calibration</string>
+            <string>Calibrate</string>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -569,6 +492,109 @@ QProgressBar::chunk:disabled {
             <bool>false</bool>
            </property>
           </widget>
+         </item>
+         <item row="7" column="4">
+          <widget class="QLabel" name="label_Filter">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Off</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QSpinBox" name="spinBox_Deadband">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="text_offset">
+           <property name="text">
+            <string>Offset</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QSpinBox" name="spinBox_Resolution">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+           <property name="value">
+            <number>16</number>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="2">
+          <widget class="QSpinBox" name="spinBox_CalibMax">
+           <property name="minimum">
+            <number>-32767</number>
+           </property>
+           <property name="maximum">
+            <number>32767</number>
+           </property>
+           <property name="value">
+            <number>32767</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="text_deadband">
+           <property name="text">
+            <string>Deadband</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLabel" name="text_angle">
+           <property name="text">
+            <string>°</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="checkBox_Center">
+           <property name="text">
+            <string>Center</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="text_minimum">
+           <property name="text">
+            <string>Minimum</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
          <item row="2" column="0" colspan="3">
           <widget class="QCheckBox" name="checkBox_DynDeadband">
