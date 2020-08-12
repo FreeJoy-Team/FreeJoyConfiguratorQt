@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file           : common_defines.h
-  * @brief          : This file contains the common defines for the app.
+  * @brief          : This file contains the common defines for the app.                  
   ******************************************************************************
   */
 
@@ -11,7 +11,7 @@
 
 //#define DEBUG
 
-#define FIRMWARE_VERSION					0x1610			// v1.6.1b0
+#define FIRMWARE_VERSION					0x1621			// v1.6.2b1
 #define USED_PINS_NUM							30					// constant for BluePill and BlackPill boards
 #define MAX_AXIS_NUM							8						// max 8
 #define MAX_BUTTONS_NUM						128					// power of 2, max 128
@@ -30,14 +30,13 @@
 
 enum
 {
-    REPORT_ID_JOY = 1,
-    REPORT_ID_CONFIG_IN,
-    REPORT_ID_CONFIG_OUT,
-    REPORT_ID_FIRMWARE,
+	REPORT_ID_JOY = 1,
+	REPORT_ID_CONFIG_IN,
+	REPORT_ID_CONFIG_OUT,
+	REPORT_ID_FIRMWARE,
 };
 
 #define BUFFSIZE                            64
 #define CONFIG_COUNT                        16
-
 
 #endif 	/* __COMMON_DEFINES_H__ */

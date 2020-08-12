@@ -211,6 +211,7 @@ void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)    
     // calibration
     ui->spinBox_CalibMin->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min);
     ui->spinBox_CalibCenter->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_center);
+    ui->checkBox_Center->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].is_centered);
     ui->spinBox_CalibMax->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max);
     // filter
     ui->sliderV_Filter->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].filter);
@@ -248,6 +249,7 @@ void Axes::WriteToConfig()                // add source_main
     // calibration
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min = ui->spinBox_CalibMin->value();
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_center = ui->spinBox_CalibCenter->value();
+    gEnv.pDeviceConfig->config.axis_config[axis_number_].is_centered = ui->checkBox_Center->isChecked();
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max = ui->spinBox_CalibMax->value();
     // filter
     gEnv.pDeviceConfig->config.axis_config[axis_number_].filter = ui->sliderV_Filter->value();

@@ -153,10 +153,8 @@ private:
     std::vector <deviceEnum_guiName_t> function_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {NO_FUNCTION,            tr("None")},
-        {FUNCTION_PLUS_ABS,      tr("Plus absolute")},
-        {FUNCTION_PLUS_REL,      tr("Plus relativ")},
-        {FUNCTION_MINUS_ABS,     tr("Minus absolute")},
-        {FUNCTION_MINUS_REL,     tr("Minus relativ")},
+        {FUNCTION_PLUS,      tr("Plus")},
+        {FUNCTION_MINUS,     tr("Minus")},
         {FUNCTION_EQUAL,         tr("Equal")},
     }};
 

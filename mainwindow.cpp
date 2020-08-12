@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     //setWindowFlags( Qt::FramelessWindowHint );
 
     // сделать версию
-    this->setWindowTitle("FreeJoy QtConfigurator");
+    this->setWindowTitle("FreeJoy Configurator v1.6.2b0");
 //    QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
 
     // load application config
