@@ -23,8 +23,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     //setWindowFlags( Qt::FramelessWindowHint );
 
-    // сделать версию
-    this->setWindowTitle("FreeJoy Configurator v1.6.2b0");
+    // версия контроллера
+    QString str = QString::number(FIRMWARE_VERSION, 16);
+    if (str.size() == 4){
+        this->setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
+    }
+
 //    QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
 
     // load application config
