@@ -69,7 +69,7 @@ public:
         {POV2_RIGHT,           tr("POV2 Right")},
         {POV2_DOWN,            tr("POV2 Down")},
         {POV2_LEFT,            tr("POV2 Left")},
-        {POV2_CENTER,          tr("POV1 Center")},
+        {POV2_CENTER,          tr("POV2 Center")},
         {POV3_UP,              tr("POV3 Up")},
         {POV3_RIGHT,           tr("POV3 Right")},
         {POV3_DOWN,            tr("POV3 Down")},

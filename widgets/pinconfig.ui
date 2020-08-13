@@ -1070,7 +1070,7 @@ background-color: rgba(105, 105, 105, 10);</string>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1109,7 +1109,7 @@ background-color: rgba(105, 105, 105, 10);</string>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </widget>
       </item>
@@ -1122,7 +1122,7 @@ background-color: rgba(105, 105, 105, 10);</string>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </widget>
       </item>
@@ -1135,7 +1135,7 @@ background-color: rgba(105, 105, 105, 10);</string>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </widget>
       </item>
@@ -1188,7 +1188,7 @@ background-color: rgba(105, 105, 105, 10);</string>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </widget>
       </item>
@@ -1201,7 +1201,7 @@ background-color: rgba(105, 105, 105, 10);</string>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </widget>
       </item>
@@ -1214,7 +1214,7 @@ background-color: rgba(105, 105, 105, 10);</string>
          </sizepolicy>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </widget>
       </item>
@@ -1231,7 +1231,7 @@ background-color: rgba(105, 105, 105, 10);</string>
       <item row="2" column="1">
        <widget class="QLabel" name="label_ButtonsFromShiftRegs">
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
        </widget>
       </item>

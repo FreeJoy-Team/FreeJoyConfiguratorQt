@@ -209,7 +209,7 @@
       <item row="0" column="4">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string> Invert</string>
+         <string>Invert</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>

@@ -226,6 +226,7 @@ void MainWindow::LoadAppConfig()
         translator.load(":/FreeJoyQt_ru");
         qApp->installTranslator(&translator);
         ui->retranslateUi(this);
+        ui->widget_2->RetranslateUi();      // сделать уже нормально
     }
     gEnv.pAppSettings->endGroup();
 
@@ -342,6 +343,7 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
     axes_config->RetranslateUi();
     axes_curves_config->RetranslateUi();
     a2b_config->RetranslateUi();
+    ui->widget_2->RetranslateUi();
 }
 
 

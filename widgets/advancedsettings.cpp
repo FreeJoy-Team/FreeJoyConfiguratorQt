@@ -72,7 +72,7 @@ void AdvancedSettings::on_pushButton_StyleDefault_clicked()
     ui->pushButton_StyleDefault->setEnabled(false);
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
-    ui->pushButton_StyleDefault->setText("Loading... Please wait");
+    ui->pushButton_StyleDefault->setText(tr("Loading... Please wait"));
     ui->pushButton_StyleDefault->setStyleSheet("background-color: rgb(170, 170, 0);");
 
     // без таймера не успевает отрисовать изменения текста и стиля, возможно на низкочастотных мониках 10мс не хватит?
@@ -108,7 +108,7 @@ void AdvancedSettings::on_pushButton_StyleWhite_clicked()
     ui->pushButton_StyleDefault->setEnabled(false);
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
-    ui->pushButton_StyleWhite->setText("Loading... Please wait");
+    ui->pushButton_StyleWhite->setText(tr("Loading... Please wait"));
     ui->pushButton_StyleWhite->setStyleSheet("background-color: rgb(170, 170, 0);");
 
     QTimer::singleShot(10, [&]{
@@ -142,7 +142,7 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
     ui->pushButton_StyleDefault->setEnabled(false);
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
-    ui->pushButton_StyleDark->setText("Loading... Please wait");
+    ui->pushButton_StyleDark->setText(tr("Loading... Please wait"));
     ui->pushButton_StyleDark->setStyleSheet("background-color: rgb(170, 170, 0);");
 
     QTimer::singleShot(10, [&]{

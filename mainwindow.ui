@@ -391,7 +391,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
          </rect>
         </property>
         <property name="text">
-         <string>Test button</string>
+         <string notr="true">Test button</string>
         </property>
        </widget>
       </widget>

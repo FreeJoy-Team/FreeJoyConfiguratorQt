@@ -44,20 +44,21 @@ private:
     void SetLableValue(int point_pos ,uint point_number);
 
     const int half_pointer_width = 4;
-    QPoint pointer[5]={
-        QPoint(-half_pointer_width,2 + padding_top_),
-        QPoint(-half_pointer_width,12 + padding_top_),
-        QPoint(0,20 + padding_top_),
-        QPoint(half_pointer_width,12 + padding_top_),
-        QPoint(half_pointer_width,2 + padding_top_),
-    };
 
     const QColor pointer_color_ = QColor(1,119,215);
     const uint max_point_value_ = 255;
     const int offset_ = 10;
     const int range_between_ = 13;  // минимальное расстояние между ближайшими указателями
     const int label_width_ = 20;
+
     const int padding_top_ = 7;
+    const QPoint pointer[5]={
+        QPoint(-half_pointer_width,2),// + padding_top_
+        QPoint(-half_pointer_width,12),
+        QPoint(0,20),
+        QPoint(half_pointer_width,12),
+        QPoint(half_pointer_width,2),
+    };
 
     uint points_count_;
 

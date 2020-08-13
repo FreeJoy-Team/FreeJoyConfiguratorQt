@@ -99,7 +99,7 @@
       <item row="4" column="2">
        <widget class="QLabel" name="text_PID_0x">
         <property name="text">
-         <string>0x</string>
+         <string notr="true">0x</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -193,7 +193,7 @@
       <item row="2" column="2">
        <widget class="QLabel" name="text_VID_0x">
         <property name="text">
-         <string>0x</string>
+         <string notr="true">0x</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
