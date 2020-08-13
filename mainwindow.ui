@@ -418,10 +418,16 @@ border-bottom: 1px solid rgb(190, 190, 190);
           <number>6</number>
          </property>
          <property name="verticalSpacing">
-          <number>6</number>
+          <number>9</number>
          </property>
          <item row="0" column="2">
           <widget class="QPushButton" name="pushButton_LoadFromFile">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>Load config from file</string>
            </property>
@@ -429,29 +435,43 @@ border-bottom: 1px solid rgb(190, 190, 190);
          </item>
          <item row="2" column="2">
           <widget class="QPushButton" name="pushButton_SaveToFile">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>Save config to file</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
-           <property name="text">
-            <string>Load default config</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_SetDefaultConfig">
-           <property name="text">
-            <string>Set file to default config</string>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="4">
+          <widget class="QPushButton" name="pushButton_WriteConfig">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Write config to Device</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
           <widget class="QPushButton" name="pushButton_ReadConfig">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
            </property>
            <property name="styleSheet">
             <string notr="true"/>
@@ -461,13 +481,29 @@ border-bottom: 1px solid rgb(190, 190, 190);
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
-          <widget class="QPushButton" name="pushButton_WriteConfig">
-           <property name="enabled">
-            <bool>false</bool>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
            </property>
            <property name="text">
-            <string>Write config to Device</string>
+            <string>Load default config</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="pushButton_SetDefaultConfig">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Set file to default config</string>
            </property>
           </widget>
          </item>

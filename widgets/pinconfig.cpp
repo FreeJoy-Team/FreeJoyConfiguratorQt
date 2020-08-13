@@ -175,9 +175,56 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
         emit axesSourceChanged(-2, false);
     }
 
+
+    // pin type limit           // переизбыток функционала(изи менять в структуре), не думаю, что понадобится в будущем, можно было и захардкодить
+    static int limit_count_array[PIN_TYPE_LIMIT_COUNT]{};
+    static bool limit_is_enable[PIN_TYPE_LIMIT_COUNT]{};
+
+    for (int i = 0; i < PIN_TYPE_LIMIT_COUNT; ++i)
+    {
+        if (current_device_enum == pin_type_limit_[i].device_enum_index)
+        {
+            limit_count_array[i]++;
+        }
+        if (previous_device_enum == pin_type_limit_[i].device_enum_index)
+        {
+            limit_count_array[i]--;
+        }
+
+        if (limit_count_array[i] >= pin_type_limit_[i].max_count && limit_is_enable[i] == false)
+        {
+            limit_is_enable[i] = true;
+            for (int j = 0; j < PinComboBoxPtrList.size(); ++j)
+            {
+                for (size_t k = 0; k < PinComboBoxPtrList[j]->enum_index.size(); ++k) {
+                    if (PinComboBoxPtrList[j]->enum_index[k] == pin_type_limit_[i].device_enum_index &&
+                        PinComboBoxPtrList[j]->GetCurrentDevEnum() != current_device_enum)
+                    {
+                        PinComboBoxPtrList[j]->SetIndexStatus(k, false);
+                    }
+                }
+            }
+        }
+
+        if (limit_is_enable[i] == true && limit_count_array[i] < pin_type_limit_[i].max_count)
+        {
+            limit_is_enable[i] = false;
+            for (int j = 0; j < PinComboBoxPtrList.size(); ++j)
+            {
+                for (size_t k = 0; k < PinComboBoxPtrList[j]->enum_index.size(); ++k) {
+                    if (PinComboBoxPtrList[j]->enum_index[k] == pin_type_limit_[i].device_enum_index)
+                    {
+                        PinComboBoxPtrList[j]->SetIndexStatus(k, true);
+                    }
+                }
+            }
+        }
+    }
+
+
     // set current config and generate signals for another configs
 //    else {
-        for (int i = 0; i < 8; ++i) {
+        for (int i = 0; i < SOURCE_COUNT; ++i) {
             for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
                 if(source[i].pin_type[j] == 0){
                     break;

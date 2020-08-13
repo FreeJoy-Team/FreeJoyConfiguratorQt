@@ -9,6 +9,7 @@ PinComboBox::PinComboBox(QWidget *parent) :
     pin_number_ = -1;
     previous_index_ = 0;
     interact_count_ = 0;
+    current_dev_enum_ = 0;
 
     is_call_interaction_ = false;
     is_interacts_ = false;
@@ -99,7 +100,7 @@ void PinComboBox::IndexChanged(int index)
     // pins interaction
     if(pin_types_index.size() && is_interacts_ == false)
     {
-        ui->comboBox_PinsType->setStyleSheet(pin_types[pin_types_index[index]].styleSheet);      // временно
+        ui->comboBox_PinsType->setStyleSheet(pin_types[pin_types_index[index]].styleSheet);      // временно?
 
         int tmp = 0;
         for (size_t i = 0; i < 10; ++i) {
@@ -175,6 +176,7 @@ void PinComboBox::IndexChanged(int index)
     if(pin_types_index.size()){
         emit currentIndexChanged(enum_index[index], previous_index_, pin_number_);
         previous_index_ = enum_index[index];
+        current_dev_enum_ = enum_index[index];
     }
 }
 
@@ -219,6 +221,20 @@ void PinComboBox::IndexChanged(int index)
 int PinComboBox::GetIndex()     // ?
 {
     return ui->comboBox_PinsType->currentIndex();
+}
+
+int PinComboBox::GetCurrentDevEnum()
+{
+    return current_dev_enum_;
+}
+//! Set selected index enable or disable
+void PinComboBox::SetIndexStatus(int index, bool status)
+{
+    if (status == true){
+        ui->comboBox_PinsType->setItemData(index, 1 | 32, Qt::UserRole - 1);
+    } else {
+        ui->comboBox_PinsType->setItemData(index, 0, Qt::UserRole - 1);
+    }
 }
 
 void PinComboBox::ResetPin()     // ?
@@ -266,13 +282,16 @@ void PinComboBox::ReadFromConfig(uint pin)          // try?
     }
 }
 
-void PinComboBox::WriteToConfig(uint pin)           // if pin = 0 try?      // поиск по тексту так се наверно
-{
-    //int tmp_pin = pin;  // anti-warning int and uint
-    for (size_t i = 0; i < PIN_TYPE_COUNT; ++i) {
-        if (ui->comboBox_PinsType->currentText() == pin_types[i].gui_name)      //GetEnumValue()
-        {
-            gEnv.pDeviceConfig->config.pins[pin] = pin_types[i].device_enum_index;
-        }
-    }
+void PinComboBox::WriteToConfig(uint pin)           // if pin = 0 try?
+{   
+    gEnv.pDeviceConfig->config.pins[pin] = current_dev_enum_;
+
+
+//    // МЕДЛЕННО, НАХЕРА Я СДЕЛАЛ ПОИСК ПО ТЕКСТУ?!    пиздец
+//    for (size_t i = 0; i < PIN_TYPE_COUNT; ++i) {
+//        if (ui->comboBox_PinsType->currentText() == pin_types[i].gui_name)      //GetEnumValue()
+//        {
+//            gEnv.pDeviceConfig->config.pins[pin] = pin_types[i].device_enum_index;
+//        }
+//    }
 }

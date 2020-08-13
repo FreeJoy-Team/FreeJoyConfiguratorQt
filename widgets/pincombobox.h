@@ -9,7 +9,7 @@
 #include "deviceconfig.h"
 
 #define PIN_TYPE_COUNT 25
-enum        // разделить и вынести отдельно
+enum        // разделить и вынести отдельно                 // все структуры в global.h?
 {
     PA_0 = 1,
     PA_1,
@@ -68,7 +68,6 @@ enum        // разделить и вынести отдельно
     ALL = 999,
 };
 
-
 struct cBox         // private:
 {
     int device_enum_index;
@@ -99,6 +98,8 @@ public:
     explicit PinComboBox(QWidget *parent = nullptr);
     ~PinComboBox();
     int GetIndex();                         // удалить?
+    int GetCurrentDevEnum();
+    void SetIndexStatus(int index, bool status);
     //void SetIndex();
     void ResetPin();
     void SetIndex_Iteraction(int index, int sender_index);
@@ -112,12 +113,13 @@ public:
     //private?
     //QString EnumToString(int deviceEnum);   // удалить?
     //int EnumToIndex(int deviceEnum);        // удалить?
-
+                                                                /////////// private, public             разобрать кашу
     int pin_number_;
     //! номер элемента в pin_types
-    std::vector<int> pin_types_index;            // rename to pin_types_index
+    std::vector<int> pin_types_index;
+    //! device enum присутствующие в комбобоксе
     std::vector<int> enum_index;
-    int previous_index_;
+    int previous_index_;   
 
     // public private _
     bool is_call_interaction_;
@@ -197,12 +199,12 @@ public:     // private?
         {SHIFT_REG_LATCH,tr("ShiftReg LATCH"),
          {ALL},
          {SPI1_SCK},
-         {SPI_SCK}, {"color: rgb(0, 155, 0);"}},
+         {SPI_SCK}, {"color: rgb(53, 153, 120);"}},
 
         {SHIFT_REG_DATA, tr("ShiftReg DATA"),
          {ALL},
          {SPI1_SCK},
-         {SPI_SCK}, {"color: rgb(0, 155, 0);"}},
+         {SPI_SCK}, {"color: rgb(53, 153, 120);"}},
 
         {TLE5011_CS,     tr("TLE5011 CS"),
          {ALL},
@@ -257,7 +259,7 @@ public:     // private?
         {AXIS_ANALOG,    tr("Axis Analog"),
          {ANALOG_IN},
          {},
-         {}, {"color: rgba(144, 238, 144, 200);"}},
+         {}, {"color: rgb(0, 155, 0);"}},
 
         {FAST_ENCODER,   tr("Fast Encoder"),
          {PA_8, PA_9},
@@ -296,10 +298,10 @@ public:     // private?
 
     };
 
-
 private:
     Ui::PinComboBox *ui;
     int last_deleted_;              // удалить?
+    int current_dev_enum_;
 };
 
 #endif // PINCOMBOBOX_H

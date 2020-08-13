@@ -14,7 +14,7 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
 
     setMouseTracking(true);
 
-    this->setMinimumHeight(40);
+    this->setMinimumHeight(45);
     // hz mb 2 min?
     // call SetPointsCount
     points_count_ = 0;
@@ -40,17 +40,17 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптими�
     float tmp;
 
     width = this->width();
-    tmp = (width - offset_*2) / 24.0;
+    tmp = (width - offset_*2) / 24.0;       // постоянно считается. нах
 
 //    QPen pen;
 //    pen.setWidth(1);
 //    pen.setColor(Qt::lightGray);
     painter.begin(this);
     painter.setPen(Qt::lightGray);
-    painter.drawRect(QRect(offset_, 7, width - offset_*2, 5));        // в ресайз
+    painter.drawRect(QRect(offset_, 7 + padding_top_, width - offset_*2, 5));        // в ресайз
 
     for (uint i = 0; i < 25; ++i){      // в ресайз
-        painter.drawLine((i * tmp) + offset_, 15, (i * tmp) + offset_, 18);
+        painter.drawLine((i * tmp) + offset_, 15 + padding_top_, (i * tmp) + offset_, 18 + padding_top_);
     }
     // Antialiasing     // спорно, мазня
     //painter.setRenderHint(QPainter::Antialiasing, true);
@@ -197,14 +197,14 @@ void AxesToButtonsSlider::PointsPositionReset()
 
 void AxesToButtonsSlider::MovePointer(uint pos_x, uint point_number)
 {
-    LabelAdrList[point_number]->move(pos_x - label_width_/2, pointer[2].y());       // label move
+    LabelAdrList[point_number]->move(pos_x - label_width_/2, pointer[2].y() + padding_top_);       // label move
 
     PointAdrList[point_number]->posX = pos_x;
-    PointAdrList[point_number]->polygon.setPoint(0, pos_x - half_pointer_width, pointer[0].y());
-    PointAdrList[point_number]->polygon.setPoint(1, pos_x - half_pointer_width, pointer[1].y());
-    PointAdrList[point_number]->polygon.setPoint(2, pos_x, pointer[2].y());
-    PointAdrList[point_number]->polygon.setPoint(3, pos_x + half_pointer_width, pointer[3].y());
-    PointAdrList[point_number]->polygon.setPoint(4, pos_x + half_pointer_width, pointer[4].y());
+    PointAdrList[point_number]->polygon.setPoint(0, pos_x - half_pointer_width, pointer[0].y() + padding_top_);
+    PointAdrList[point_number]->polygon.setPoint(1, pos_x - half_pointer_width, pointer[1].y() + padding_top_);
+    PointAdrList[point_number]->polygon.setPoint(2, pos_x, pointer[2].y() + padding_top_);
+    PointAdrList[point_number]->polygon.setPoint(3, pos_x + half_pointer_width, pointer[3].y() + padding_top_);
+    PointAdrList[point_number]->polygon.setPoint(4, pos_x + half_pointer_width, pointer[4].y() + padding_top_);
 }
 
 

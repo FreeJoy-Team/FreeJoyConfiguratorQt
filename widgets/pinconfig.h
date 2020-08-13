@@ -5,6 +5,9 @@
 
 #include "pincombobox.h"
 
+#define SOURCE_COUNT 8
+#define PIN_TYPE_LIMIT_COUNT 2
+
 namespace Ui {
 class PinConfig;
 }
@@ -73,7 +76,14 @@ private:
         int type;
         int pin_type[PIN_TYPE_COUNT];
     };
-    const source_t source[8] =
+
+    struct pinTypeLimit
+    {
+        int device_enum_index;
+        int max_count;
+    };
+
+    const source_t source[SOURCE_COUNT] =
     {
         {AXIS_SOURCE,        {AXIS_ANALOG, TLE5011_CS, MCP3201_CS, MCP3202_CS, MCP3204_CS, MCP3208_CS, MLX90393_CS}},
 
@@ -87,6 +97,15 @@ private:
         {ROW_OF_LED,         {LED_ROW}},
         {COLUMN_OF_LED,      {LED_COLUMN}},
     };
+
+    const pinTypeLimit pin_type_limit_[PIN_TYPE_LIMIT_COUNT] =       // static ?
+    {
+        {SHIFT_REG_LATCH,        4},
+        {SHIFT_REG_DATA,         4},
+    };
+
+
+
     enum
     {
         AXIS_SOURCE = 0,
