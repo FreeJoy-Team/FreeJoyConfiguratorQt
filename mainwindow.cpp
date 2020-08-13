@@ -168,25 +168,8 @@ MainWindow::MainWindow(QWidget *parent)
                           this, SLOT(hidDeviceList(QStringList*)));
 
 
-                            /////  load default config  /////           // вынести отдельной функцией
-    // read pin config
-    pin_config->ReadFromConfig();
-    // read axes config
-    axes_config->ReadFromConfig();
-    // read axes curves config
-    axes_curves_config->ReadFromConfig();          // вынести в отдельную функцию
-    // read axes to buttons config
-    a2b_config->ReadFromConfig();
-    // read shift registers config
-    shift_reg_config->ReadFromConfig();
-    // read encoder config
-    encoder_config->ReadFromConfig();
-    // read LED config
-    led_config->ReadFromConfig();
-    // read adv.settings config
-    ui->widget_2->ReadFromConfig();
-    // read button config
-    button_config->ReadFromConfig();
+    // load default config
+    ReadFromConfig();
 
     // set style
     gEnv.pAppSettings->beginGroup("StyleSettings");
@@ -214,6 +197,51 @@ MainWindow::~MainWindow()
     delete thread;              // не уверен в нужности, если есть thread->deleteLater();
     delete thread_getSend_config;       // hz
     delete ui;
+}
+
+
+void MainWindow::ReadFromConfig()
+{
+    // read pin config
+    pin_config->ReadFromConfig();
+    // read axes config
+    axes_config->ReadFromConfig();
+    // read axes curves config
+    axes_curves_config->ReadFromConfig();          // вынести в отдельную функцию
+    // read axes to buttons config
+    a2b_config->ReadFromConfig();
+    // read shift registers config
+    shift_reg_config->ReadFromConfig();
+    // read encoder config
+    encoder_config->ReadFromConfig();
+    // read LED config
+    led_config->ReadFromConfig();
+    // read adv.settings config
+    ui->widget_2->ReadFromConfig();
+    // read button config
+    button_config->ReadFromConfig();
+}
+
+void MainWindow::WriteToConfig()
+{
+    // write pin config
+    pin_config->WriteToConfig();            // проверить снизу
+    // write axes config
+    axes_config->WriteToConfig();
+    // write axes curves config
+    axes_curves_config->WriteToConfig();
+    // write axes to buttons config
+    a2b_config->WriteToConfig();
+    // write shift registers config
+    shift_reg_config->WriteToConfig();
+    // write encoder config
+    encoder_config->WriteToConfig();
+    // write LED config
+    led_config->WriteToConfig();
+    // write adv.settings config
+    ui->widget_2->WriteToConfig();
+    // write button config
+    button_config->WriteToConfig();
 }
 
 
@@ -406,24 +434,7 @@ void MainWindow::on_pushButton_ResetAllPins_clicked()
 {
     gEnv.pDeviceConfig->ResetConfig();
 
-    // read pin config
-    pin_config->ReadFromConfig();          // вынести в отдельную функцию
-    // read axes config
-    axes_config->ReadFromConfig();
-    // read axes curves config
-    axes_curves_config->ReadFromConfig();
-    // read axes to buttons config
-    a2b_config->ReadFromConfig();
-    // read shift registers config
-    shift_reg_config->ReadFromConfig();
-    // read encoder config
-    encoder_config->ReadFromConfig();
-    // read LED config
-    led_config->ReadFromConfig();
-    // read adv.settings config
-    ui->widget_2->ReadFromConfig();
-    // read button config
-    button_config->ReadFromConfig();
+    ReadFromConfig();
 
     pin_config->ResetAllPins();
 }
@@ -458,24 +469,7 @@ void MainWindow::on_pushButton_WriteConfig_clicked()        // херня? mb Qt
     ui->pushButton_WriteConfig->setEnabled(false);
     ui->pushButton_ReadConfig->setEnabled(false);
 
-    // write pin config
-    pin_config->WriteToConfig();            // проверить снизу
-    // write axes config
-    axes_config->WriteToConfig();
-    // write axes curves config
-    axes_curves_config->WriteToConfig();
-    // write axes to buttons config
-    a2b_config->WriteToConfig();
-    // write shift registers config
-    shift_reg_config->WriteToConfig();
-    // write encoder config
-    encoder_config->WriteToConfig();
-    // write LED config
-    led_config->WriteToConfig();
-    // write adv.settings config
-    ui->widget_2->WriteToConfig();
-    // write button config
-    button_config->WriteToConfig();
+    WriteToConfig();
 
 //    ui->button_SendConfig->setEnabled(false);
     QEventLoop loop;
@@ -521,24 +515,8 @@ void MainWindow::configReceived(bool success)        // повторное на�
     static QString button_default_text = ui->pushButton_ReadConfig->text();
 
     if (success == true){
-        // read pin config
-        pin_config->ReadFromConfig();
-        // read axes config
-        axes_config->ReadFromConfig();
-        // read axes curves config
-        axes_curves_config->ReadFromConfig();
-        // read axes to buttons config
-        a2b_config->ReadFromConfig();
-        // read shift registers config
-        shift_reg_config->ReadFromConfig();
-        // read encoder config
-        encoder_config->ReadFromConfig();
-        // read LED config
-        led_config->ReadFromConfig();
-        // read adv.settings config
-        ui->widget_2->ReadFromConfig();
-        // read button config
-        button_config->ReadFromConfig();
+
+        ReadFromConfig();
 
         // curves
         axes_curves_config->DeviceStatus(true);
@@ -777,46 +755,12 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
         appS->endGroup();
     }
 
-    // read pin config
-    pin_config->ReadFromConfig();
-    // read axes config
-    axes_config->ReadFromConfig();
-    // read axes curves config
-    axes_curves_config->ReadFromConfig();
-    // read axes to buttons config
-    a2b_config->ReadFromConfig();
-    // read shift registers config
-    shift_reg_config->ReadFromConfig();
-    // read encoder config
-    encoder_config->ReadFromConfig();
-    // read LED config
-    led_config->ReadFromConfig();
-    // read adv.settings config
-    ui->widget_2->ReadFromConfig();
-    // read button config
-    button_config->ReadFromConfig();
+    ReadFromConfig();
 }
 
 void MainWindow::SaveDeviceConfigToFile(QSettings* appS)
 {
-    // write pin config
-    pin_config->WriteToConfig();
-    // write axes config
-    axes_config->WriteToConfig();
-    // write axes curves config
-    axes_curves_config->WriteToConfig();
-    // write axes to buttons config
-    a2b_config->WriteToConfig();
-    // write shift registers config
-    shift_reg_config->WriteToConfig();
-    // write encoder config
-    encoder_config->WriteToConfig();
-    // write LED config
-    led_config->WriteToConfig();
-    // write adv.settings config
-    ui->widget_2->WriteToConfig();
-    // write button config
-    button_config->WriteToConfig();
+    WriteToConfig();
 
     // save Device USB config to file
     appS->beginGroup("DeviceUsbConfig");

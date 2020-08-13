@@ -352,7 +352,7 @@ QProgressBar::chunk:disabled {
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0">
+        <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0" columnminimumwidth="0,5,0,0,5,0">
          <property name="leftMargin">
           <number>8</number>
          </property>
@@ -422,24 +422,14 @@ QProgressBar::chunk:disabled {
            </property>
           </widget>
          </item>
-         <item row="7" column="5">
-          <widget class="QLabel" name="label_Filter">
-           <property name="minimumSize">
-            <size>
-             <width>35</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Off</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="5" rowspan="6">
           <widget class="QSlider" name="sliderV_Filter">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="maximum">
             <number>7</number>
            </property>
@@ -477,16 +467,6 @@ QProgressBar::chunk:disabled {
            </property>
            <property name="value">
             <number>32767</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="QLabel" name="text_filter">
-           <property name="text">
-            <string>Filter</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -599,6 +579,32 @@ QProgressBar::chunk:disabled {
             </size>
            </property>
           </spacer>
+         </item>
+         <item row="7" column="5">
+          <widget class="QLabel" name="label_Filter">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Off</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QLabel" name="text_filter">
+           <property name="text">
+            <string>Filter</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

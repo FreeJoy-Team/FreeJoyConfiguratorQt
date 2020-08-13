@@ -112,6 +112,9 @@ private:
 
     QThread* thread_getSend_config;
 
+    void ReadFromConfig();
+    void WriteToConfig();
+
     void LoadAppConfig();
     void SaveAppConfig();
 
