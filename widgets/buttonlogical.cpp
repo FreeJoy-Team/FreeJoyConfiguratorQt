@@ -1,6 +1,7 @@
 #include "buttonlogical.h"
 #include "ui_buttonlogical.h"
 
+
 ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ButtonLogical)

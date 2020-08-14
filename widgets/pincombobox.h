@@ -135,7 +135,7 @@ private slots:
     void IndexChanged(int index);
 
                                         ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ 1 НА ВСЕ ПИНЫ!!///////////////////////
-public:     // private?
+public:
     pins const pin_list[30] =       // каждый пин хранит по структуре. а жирно не будет?
     {
         {PA_0,  {tr("Pin A0")},     {ANALOG_IN}},   // пин // GUI name // его типы
@@ -169,6 +169,7 @@ public:     // private?
         {PC_14, {tr("Pin C14")},    {}},
         {PC_15, {tr("Pin C15")},    {}},
     };
+
     cBox const pin_types[PIN_TYPE_COUNT] =          // static ?
     {
         {NOT_USED,       tr("Not Used"),

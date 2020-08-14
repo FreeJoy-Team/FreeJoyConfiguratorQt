@@ -1,6 +1,7 @@
 #include "pincombobox.h"
 #include "ui_pincombobox.h"
 
+
 PinComboBox::PinComboBox(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PinComboBox)

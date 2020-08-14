@@ -45,6 +45,10 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
     is_device_connect_ = false;
     half_radius_ = radius_/2;
 
+    // если вкладка не открыта, то размер не загружается и высота = 0. т.к. при изменении размера окна у меня не меняется
+    // высота, то захардкодил 450, но это херовое решение
+    height_ = 450;
+
     cur_axis_pos.color = point_current_pos_color_;
 
     int tmp_range;
@@ -207,11 +211,12 @@ int AxesCurvesPlot::GetPointCount()
 
 void AxesCurvesPlot::SetPointValue(int value, int point_number)
 {
-    PointAdrList[point_number]->posY = CalcPointPos(value)+1;   // +1 костыль, если не открыть вкладку курв до заливки конфига(не прогрузить), то происходит какая-то хуета. разобраться
+    PointAdrList[point_number]->posY = CalcPointPos(value);   // +1 костыль, если не открыть вкладку курв до заливки конфига(не прогрузить), то происходит какая-то хуета. разобраться
     PointAdrList[point_number]->current_value = value;          // скорее всего что-то инициализируется позже нужного
     LabelAdrList[point_number]->setNum(value);
     UpdateLabelPos();
     update();
+    //qDebug()<<"posY"<<PointAdrList[point_number]->posY;
 }
 
 void AxesCurvesPlot::SetLinear()
@@ -320,7 +325,7 @@ int AxesCurvesPlot::CalcPointValue(int current_pos)     // ужоснах
     float half_height = (height_) / 2.0 - offset_;
     //current_pos -= - half_radius_;
     current_pos = current_pos - 13;     // костыль
-
+    //qDebug()<<"height"<<height_;
     if (current_pos > half_height){
         float tmp_min = half_height / min_point_value;
         value = floor((current_pos - half_height) / float(tmp_min));
@@ -332,6 +337,7 @@ int AxesCurvesPlot::CalcPointValue(int current_pos)     // ужоснах
         //qDebug()<<"value ="<<value;
         return value;
     }
+    //qDebug()<<"value"<<value;
     return value;
 }
      // ужоснах
