@@ -7,13 +7,13 @@ Axes::Axes(int axis_number, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    axis_number_ = 0;
+    //axis_number_ = 0;
     //pDev_config = &gEnv.pDeviceConfig->config;        // чуть короче запись, но надо ли?
 
     axis_number_ = axis_number;
-    ui->groupBox_AxixName->setTitle(axes_list_[axis_number_].gui_name);
-
-    for (uint i = 0; i < i2c_address_list_.size(); ++i) {
+    ui->groupBox_AxixName->setTitle(axes_list_[axis_number_].gui_name);     // для 64бит в будущем axis_number_ должен быть 64 бита для большого массива
+                                                                            // т.к. 32 бит переменная переполнится и отсчёт пойдёт с 0
+    for (uint i = 0; i < i2c_address_list_.size(); ++i) {                   // так же и для i, надо делать size_t
         ui->comboBox_I2cAddress->addItem(i2c_address_list_[i].gui_name);
     }
     for (uint i = 0; i < function_list_.size(); ++i) {
@@ -119,7 +119,7 @@ void Axes::functionIndexChanged(int index)
 
 void Axes::calibMinMaxValueChanged(int value)
 {
-    Q_UNUSED(value)
+    Q_UNUSED(value) 
     if(ui->checkBox_Center->isChecked() == false){
         ui->spinBox_CalibCenter->setValue((ui->spinBox_CalibMax->value() + ui->spinBox_CalibMin->value()) / 2);
     }
@@ -141,8 +141,8 @@ void Axes::on_pushButton_StartCalib_clicked(bool checked)
     if (checked == true)
     {
         ui->pushButton_StartCalib->setText(stop_calibration);
-        ui->spinBox_CalibMax->setValue(-32767);
-        ui->spinBox_CalibMin->setValue(32767);
+        ui->spinBox_CalibMax->setValue(AXIS_MIN_VALUE);     // не перепутано
+        ui->spinBox_CalibMin->setValue(AXIS_MAX_VALUE);
 
         connect (ui->progressBar_Raw, SIGNAL(valueChanged(int)),
                  this, SLOT(calibrationStarted(int)));
@@ -192,7 +192,22 @@ void Axes::on_pushButton_SetCenter_clicked()
     }
 }
 
+void Axes::on_checkBox_Center_stateChanged(int state)
+{
+    if (state == 2)
+    {
+        ui->spinBox_CalibCenter->setEnabled(true);
+    } else {
+        ui->spinBox_CalibCenter->setEnabled(false);
+        calibMinMaxValueChanged(0);
+    }
+}
 
+void Axes::on_pushButton_clicked()
+{
+    ui->spinBox_CalibMax->setValue(AXIS_MAX_VALUE);
+    ui->spinBox_CalibMin->setValue(AXIS_MIN_VALUE);
+}
 
 
 void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)                // add source_main

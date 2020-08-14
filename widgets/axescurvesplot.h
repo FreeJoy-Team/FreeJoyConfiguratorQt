@@ -46,7 +46,7 @@ private:
     void MovePoint(int pos_y, int point_number);
     void UpdateLabelPos();
 
-    const int offset_ = 20;
+    const int offset_ = 20;//20
     const int columns_count_ = 10;
     const int rows_count_ = 10;
     const int radius_ = 16;

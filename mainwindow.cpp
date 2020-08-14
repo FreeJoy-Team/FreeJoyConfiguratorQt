@@ -390,7 +390,7 @@ void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ
         timer = clock();
         change = true;
     }
-    else if (change && clock() - timer > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах
+    else if (change && clock() - timer > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах    // change?? always true
     {
         // optimization
         if(ui->tab_ButtonConfig->isVisible() == true){
@@ -511,6 +511,7 @@ void MainWindow::deviceFlasherController(bool is_start_flash)        // херн
 // slot after receiving the config
 void MainWindow::configReceived(bool success)        // повторное наатие
 {
+    qDebug()<<"configReceived";
     button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
     static QString button_default_text = ui->pushButton_ReadConfig->text();
 
@@ -529,8 +530,9 @@ void MainWindow::configReceived(bool success)        // повторное на�
 
         ui->pushButton_ReadConfig->setText(tr("Received"));
         ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
-
+        qDebug()<<"configReceived - before QTimer";
         QTimer::singleShot(1000, [&]{
+            qDebug()<<"configReceived - QTimer";
             ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
             ui->pushButton_ReadConfig->setText(button_default_text);
             ui->pushButton_ReadConfig->setEnabled(true);
@@ -539,8 +541,9 @@ void MainWindow::configReceived(bool success)        // повторное на�
     } else {
         ui->pushButton_ReadConfig->setText(tr("Error"));
         ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
-
+        qDebug()<<"configReceived - before QTimer";
         QTimer::singleShot(1000, [&]{
+            qDebug()<<"configReceived - QTimer";
             ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
             ui->pushButton_ReadConfig->setText(button_default_text);
             ui->pushButton_ReadConfig->setEnabled(true);

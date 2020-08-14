@@ -38,7 +38,7 @@ void HidDevice::processData()
             timer = clock();
             change = true;
         }
-        else if (change && clock() - timer > 800)
+        else if (change && clock() - timer > 800)   // change always true
         {
             // goto
             //link:
@@ -389,7 +389,7 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
                     if (cnt * 60 < file_bytes->size())
                     {
                         memcpy(flash_buffer +4, file_bytes->constData() + (cnt - 1) * 60, 60);
-                        update_percent = (((cnt - 1) * 60 * 100 / file_bytes->size()));
+                        update_percent = ((cnt - 1) * 60 * 100 / file_bytes->size());
                         hid_write(flasher, flash_buffer, 64);
                         emit flashStatus(IN_PROCESS, update_percent);
 
@@ -397,7 +397,7 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
                     }
                     else
                     {
-                        memcpy(flash_buffer +4, file_bytes->constData() + (cnt - 1) * 60, file_bytes->size() - (cnt - 1) * 60);
+                        memcpy(flash_buffer +4, file_bytes->constData() + (cnt - 1) * 60, file_bytes->size() - (cnt - 1) * 60);     // file_bytes->size() для 32 и 64 бит одинаков?
                         update_percent = 0;
                         hid_write(flasher, flash_buffer, 64);
                         emit flashStatus(IN_PROCESS, update_percent);

@@ -200,7 +200,7 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
                     if (PinComboBoxPtrList[j]->enum_index[k] == pin_type_limit_[i].device_enum_index &&
                         PinComboBoxPtrList[j]->GetCurrentDevEnum() != current_device_enum)
                     {
-                        PinComboBoxPtrList[j]->SetIndexStatus(k, false);
+                        PinComboBoxPtrList[j]->SetIndexStatus(int(k), false);
                     }
                 }
             }
@@ -214,7 +214,7 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
                 for (size_t k = 0; k < PinComboBoxPtrList[j]->enum_index.size(); ++k) {
                     if (PinComboBoxPtrList[j]->enum_index[k] == pin_type_limit_[i].device_enum_index)
                     {
-                        PinComboBoxPtrList[j]->SetIndexStatus(k, true);
+                        PinComboBoxPtrList[j]->SetIndexStatus(int(k), true);
                     }
                 }
             }
@@ -323,7 +323,7 @@ void PinConfig::totalButtonsChanged(int count)
         //ui->label_TotalButtons->setStyleSheet("background-color: rgb(200, 0, 0);");
         ui->text_TotalButtons->setStyleSheet("background-color: rgb(200, 0, 0);");
         max_buttons_warning_ = true;
-    } else if (max_buttons_warning_ == true && count <= MAX_BUTTONS_NUM){
+    } else if (max_buttons_warning_ == true){   // && count <= MAX_BUTTONS_NUM
         //ui->label_TotalButtons->setStyleSheet(default_style_);
         ui->text_TotalButtons->setStyleSheet(default_style_);
         max_buttons_warning_ = false;

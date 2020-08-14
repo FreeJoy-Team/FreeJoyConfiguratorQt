@@ -54,6 +54,7 @@ private slots:
 
     void on_pushButton_FlashFirmware_clicked();
 
+
 private:
     Ui::AdvancedSettings *ui;
 

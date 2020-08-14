@@ -207,8 +207,8 @@ int AxesCurvesPlot::GetPointCount()
 
 void AxesCurvesPlot::SetPointValue(int value, int point_number)
 {
-    PointAdrList[point_number]->posY = CalcPointPos(value);
-    PointAdrList[point_number]->current_value = value;
+    PointAdrList[point_number]->posY = CalcPointPos(value)+1;   // +1 костыль, если не открыть вкладку курв до заливки конфига(не прогрузить), то происходит какая-то хуета. разобраться
+    PointAdrList[point_number]->current_value = value;          // скорее всего что-то инициализируется позже нужного
     LabelAdrList[point_number]->setNum(value);
     UpdateLabelPos();
     update();
@@ -431,7 +431,7 @@ void AxesCurvesPlot::mouseMoveEvent(QMouseEvent *event)
         }
         else if (PointAdrList[i]->is_drag == true){     // if nah
 
-            if (event->pos().y() < offset_ || event->pos().y() > this->height() - offset_) {
+            if (event->pos().y() < offset_ || event->pos().y() > this->height() - offset_) {        // event->pos().y() сделать переменную для оптимизации?
                 return;
             }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1062</width>
-    <height>200</height>
+    <height>216</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -352,7 +352,7 @@ QProgressBar::chunk:disabled {
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0" columnminimumwidth="0,5,0,0,5,0">
+        <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,0,1,0,1" columnminimumwidth="0,5,0,0,5,0">
          <property name="leftMargin">
           <number>8</number>
          </property>
@@ -368,6 +368,20 @@ QProgressBar::chunk:disabled {
          <property name="spacing">
           <number>0</number>
          </property>
+         <item row="4" column="2" colspan="2">
+          <widget class="QPushButton" name="pushButton_SetCenter">
+           <property name="text">
+            <string>Set Center</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="text_maximum">
+           <property name="text">
+            <string>Maximum</string>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="2">
           <widget class="QSpinBox" name="spinBox_Offset">
            <property name="correctionMode">
@@ -381,71 +395,18 @@ QProgressBar::chunk:disabled {
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QPushButton" name="pushButton_StartCalib">
-           <property name="text">
-            <string>Calibrate</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2" colspan="2">
-          <widget class="QPushButton" name="pushButton_SetCenter">
-           <property name="text">
-            <string>Set Center</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QLabel" name="text_bits">
-           <property name="text">
-            <string>bits</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="text_offset">
-           <property name="text">
-            <string>Offset</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QCheckBox" name="checkBox_Center">
-           <property name="text">
-            <string>Center</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="5" rowspan="6">
-          <widget class="QSlider" name="sliderV_Filter">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+         <item row="3" column="2" colspan="2">
+          <widget class="QSpinBox" name="spinBox_Deadband">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
            </property>
            <property name="maximum">
-            <number>7</number>
-           </property>
-           <property name="pageStep">
-            <number>1</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="tickPosition">
-            <enum>QSlider::TicksBothSides</enum>
+            <number>127</number>
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
-          <spacer name="horizontalSpacer">
+         <item row="1" column="4">
+          <spacer name="horizontalSpacer_2">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -457,80 +418,17 @@ QProgressBar::chunk:disabled {
            </property>
           </spacer>
          </item>
-         <item row="7" column="2" colspan="2">
-          <widget class="QSpinBox" name="spinBox_CalibMax">
-           <property name="minimum">
-            <number>-32767</number>
-           </property>
-           <property name="maximum">
-            <number>32767</number>
-           </property>
-           <property name="value">
-            <number>32767</number>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLabel" name="text_maximum">
+         <item row="5" column="0">
+          <widget class="QLabel" name="text_minimum">
            <property name="text">
-            <string>Maximum</string>
+            <string>Minimum</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" colspan="3">
-          <widget class="QCheckBox" name="checkBox_DynDeadband">
+         <item row="0" column="3">
+          <widget class="QLabel" name="text_bits">
            <property name="text">
-            <string>Dynamic deadband</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="2" colspan="2">
-          <widget class="QSpinBox" name="spinBox_CalibCenter">
-           <property name="minimum">
-            <number>-32767</number>
-           </property>
-           <property name="maximum">
-            <number>32767</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="text_resolution">
-           <property name="text">
-            <string>Resolution</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2" colspan="2">
-          <widget class="QSpinBox" name="spinBox_Deadband">
-           <property name="correctionMode">
-            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-           </property>
-           <property name="maximum">
-            <number>127</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3">
-          <widget class="QLabel" name="text_angle">
-           <property name="text">
-            <string notr="true">°</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QSpinBox" name="spinBox_Resolution">
-           <property name="correctionMode">
-            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>16</number>
-           </property>
-           <property name="value">
-            <number>16</number>
+            <string>bits</string>
            </property>
           </widget>
          </item>
@@ -553,10 +451,29 @@ QProgressBar::chunk:disabled {
            </property>
           </widget>
          </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="text_minimum">
+         <item row="6" column="2" colspan="2">
+          <widget class="QSpinBox" name="spinBox_CalibCenter">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="minimum">
+            <number>-32767</number>
+           </property>
+           <property name="maximum">
+            <number>32767</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QPushButton" name="pushButton_StartCalib">
            <property name="text">
-            <string>Minimum</string>
+            <string>Calibrate</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -567,20 +484,107 @@ QProgressBar::chunk:disabled {
            </property>
           </widget>
          </item>
-         <item row="1" column="4">
-          <spacer name="horizontalSpacer_2">
+         <item row="7" column="2" colspan="2">
+          <widget class="QSpinBox" name="spinBox_CalibMax">
+           <property name="minimum">
+            <number>-32767</number>
+           </property>
+           <property name="maximum">
+            <number>32767</number>
+           </property>
+           <property name="value">
+            <number>32767</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QSpinBox" name="spinBox_Resolution">
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+           <property name="value">
+            <number>16</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="text_resolution">
+           <property name="text">
+            <string>Resolution</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="checkBox_Center">
+           <property name="text">
+            <string>Center</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="text_offset">
+           <property name="text">
+            <string>Offset</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="3">
+          <widget class="QCheckBox" name="checkBox_DynDeadband">
+           <property name="text">
+            <string>Dynamic deadband</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLabel" name="text_angle">
+           <property name="text">
+            <string notr="true">°</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QLabel" name="text_filter">
+           <property name="text">
+            <string>Filter</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>0</width>
              <height>20</height>
             </size>
            </property>
           </spacer>
          </item>
-         <item row="7" column="5">
+         <item row="8" column="0" colspan="4">
+          <widget class="QPushButton" name="pushButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Reset calibration</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="5">
           <widget class="QLabel" name="label_Filter">
            <property name="minimumSize">
             <size>
@@ -596,13 +600,25 @@ QProgressBar::chunk:disabled {
            </property>
           </widget>
          </item>
-         <item row="0" column="5">
-          <widget class="QLabel" name="text_filter">
-           <property name="text">
-            <string>Filter</string>
+         <item row="1" column="5" rowspan="7">
+          <widget class="QSlider" name="sliderV_Filter">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+           <property name="maximum">
+            <number>7</number>
+           </property>
+           <property name="pageStep">
+            <number>1</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::TicksBothSides</enum>
            </property>
           </widget>
          </item>

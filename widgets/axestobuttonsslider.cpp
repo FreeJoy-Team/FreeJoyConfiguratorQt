@@ -194,11 +194,11 @@ void AxesToButtonsSlider::PointsPositionReset()
     }
     update();
 }
-#include <QDebug>
+
 void AxesToButtonsSlider::MovePointer(uint pos_x, uint point_number)
 {
+    //QPolygon* polygon = &PointAdrList[point_number]->polygon;       // не думаю что это даст выигрыш в оптимизации вместо нескольких PointAdrList[point_number]->polygon
     LabelAdrList[point_number]->move(pos_x - label_width_/2, pointer[2].y() + padding_top_);       // label move
-    qDebug()<<"pointer[0].y()"<<pointer[0].y();
     PointAdrList[point_number]->posX = pos_x;
     PointAdrList[point_number]->polygon.setPoint(0, pos_x - half_pointer_width, pointer[0].y() + padding_top_);
     PointAdrList[point_number]->polygon.setPoint(1, pos_x - half_pointer_width, pointer[1].y() + padding_top_);

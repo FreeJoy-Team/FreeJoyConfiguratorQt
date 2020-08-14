@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished">мс</translation>
+        <translation type="obsolete">мс</translation>
     </message>
     <message>
         <source>Device USB name</source>
@@ -118,6 +118,14 @@
     <message>
         <source>Loading... Please wait</source>
         <translation type="unfinished">Загрузка... Подождите</translation>
+    </message>
+    <message>
+        <source>HHHH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> ms</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -340,7 +348,11 @@
     </message>
     <message>
         <source>Function enable</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Функция включена</translation>
+    </message>
+    <message>
+        <source>Reset calibration</source>
+        <translation type="unfinished">Сброс калибровки</translation>
     </message>
 </context>
 <context>

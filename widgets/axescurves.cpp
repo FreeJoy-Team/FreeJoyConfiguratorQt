@@ -41,7 +41,6 @@ void AxesCurves::RetranslateUi()
     ui->retranslateUi(this);
 }
 
-#include <QDebug>
 void AxesCurves::UpdateAxis()
 {
     if (gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled == 1){     /////////////////////////////////////

@@ -44,6 +44,10 @@ private slots:
 
     void on_pushButton_SetCenter_clicked();
 
+    void on_checkBox_Center_stateChanged(int state);
+
+    void on_pushButton_clicked();
+
 private:
     Ui::Axes *ui;
     bool calibration_started_ = false;
@@ -172,7 +176,7 @@ private:
 
     std::vector <deviceEnum_guiName_t> button_2_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
-        {AXIS_BUTTON_FUNC_EN,       tr("Function Enable")},
+        {AXIS_BUTTON_FUNC_EN,       tr("Function enable")},
         {AXIS_BUTTON_PRESCALER_EN,  tr("Prescale enable")},
         {AXIS_BUTTON_CENTER,        tr("Center")},
         {AXIS_BUTTON_RESET,         tr("Reset")},
