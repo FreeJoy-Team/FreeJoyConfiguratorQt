@@ -244,11 +244,11 @@
     </message>
     <message>
         <source>Equal</source>
-        <translation type="unfinished">Равный</translation>
+        <translation type="unfinished">Равно</translation>
     </message>
     <message>
         <source>Function Enable</source>
-        <translation type="unfinished">Функция вкл</translation>
+        <translation type="obsolete">Функция вкл</translation>
     </message>
     <message>
         <source>Prescale enable</source>

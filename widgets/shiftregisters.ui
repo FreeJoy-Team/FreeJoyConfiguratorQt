@@ -34,14 +34,14 @@
      <property name="title">
       <string/>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0" rowspan="2">
-       <widget class="QLabel" name="label_ShiftIndex">
+     <layout class="QGridLayout" name="gridLayout" columnstretch="1,1,1,1,1,0,0,0" columnminimumwidth="0,0,0,0,0,0,0,0">
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_LatchPin">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="text">
-         <string notr="true">1</string>
+         <string>NotDefined</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -61,19 +61,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="text_dataPin">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Data pin</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="3">
        <widget class="QLabel" name="text_shiftRegisterType">
         <property name="enabled">
@@ -81,6 +68,19 @@
         </property>
         <property name="text">
          <string>Shift register type</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="text_dataPin">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Data pin</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -100,42 +100,48 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="5">
-       <widget class="QLabel" name="text_buttonCount">
+      <item row="1" column="5">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QLabel" name="label_ShiftIndex">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>Button count</string>
+         <string notr="true">1</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label_LatchPin">
+      <item row="1" column="6">
+       <widget class="QSpinBox" name="spinBox_ButtonCount">
         <property name="enabled">
          <bool>false</bool>
         </property>
-        <property name="text">
-         <string>NotDefined</string>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_DataPin">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>NotDefined</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+        <property name="maximum">
+         <number>128</number>
         </property>
        </widget>
       </item>
@@ -159,16 +165,42 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="5">
-       <widget class="QSpinBox" name="spinBox_ButtonCount">
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_DataPin">
         <property name="enabled">
          <bool>false</bool>
         </property>
-        <property name="correctionMode">
-         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        <property name="text">
+         <string>NotDefined</string>
         </property>
-        <property name="maximum">
-         <number>128</number>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="7">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="5" colspan="3">
+       <widget class="QLabel" name="text_buttonCount">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Button count</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
