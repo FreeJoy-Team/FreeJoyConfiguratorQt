@@ -171,9 +171,9 @@ void AdvancedSettings::on_spinBox_FontSize_valueChanged(int font_size)
 {
     //gEnv.pAppSettings->beginGroup("FontSettings");
     QApplication::setFont(QFont("MS Shell Dlg 2", font_size));
+    emit fontChanged();
     //gEnv.pAppSettings->endGroup();
 }
-
 
 
 void AdvancedSettings::DeviceConnected(bool is_connect)

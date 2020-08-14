@@ -28,6 +28,8 @@ signals:
     void languageChanged(QString language);
     void interfaceStyleChanged(bool is_dark);
 
+    void fontChanged();
+
     void flashModeClicked(bool is_start_flash);
     //void startFlash(QByteArray* file_array);
     void startFlash(bool is_start_flash);

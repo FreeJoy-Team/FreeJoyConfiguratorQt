@@ -134,6 +134,9 @@ MainWindow::MainWindow(QWidget *parent)
     // interface changed
     connect(ui->widget_2, SIGNAL(interfaceStyleChanged(bool)),
             this, SLOT(interfaceStyleChanged(bool)));
+    // font changed
+    connect(ui->widget_2, SIGNAL(fontChanged()),
+            this, SLOT(setFont()));
 
 
     // enter flash mode clicked
@@ -372,6 +375,14 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
     axes_curves_config->RetranslateUi();
     a2b_config->RetranslateUi();
     ui->widget_2->RetranslateUi();
+}
+
+void MainWindow::setFont()
+{
+    for (QWidget *widget : QApplication::allWidgets()) {
+        widget->setFont(QApplication::font());
+        widget->update();
+    }
 }
 
 

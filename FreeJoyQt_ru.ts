@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Restart app for changes. Work in progress</source>
-        <translation type="unfinished">Требуется перезапуск. Работа в процессе</translation>
+        <translation type="obsolete">Требуется перезапуск. Работа в процессе</translation>
     </message>
     <message>
         <source>Ready to flash</source>
@@ -126,6 +126,10 @@
     <message>
         <source> ms</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart app for full changes</source>
+        <translation type="unfinished">Для полных изменений требуется перезапуск</translation>
     </message>
 </context>
 <context>

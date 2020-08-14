@@ -85,6 +85,7 @@ private slots:
     void hidDeviceListChanged(int index);
 
     void languageChanged(QString language);
+    void setFont();
 
     void interfaceStyleChanged(bool is_dark);
 
