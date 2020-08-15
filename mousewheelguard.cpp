@@ -3,6 +3,25 @@
 #include <QEvent>
 #include <QWidget>
 
+//#include <QResizeEvent>
+//bool FilterObject::eventFilter(QObject *watched, QEvent *event) {
+//    if(watched!=target){//checks for correct target object.
+//        return false;
+//    }
+//    if(event->type()!=QEvent::Resize){//and correct event
+//        return false;
+//    }
+
+//    QResizeEvent *resEvent = static_cast<QResizeEvent*>(event);//then sets correct event type
+
+//    goalHeight = 7*resEvent->size().width()/3;//calculates height, 7/3 of width in my case
+//    if(target->height()!=goalHeight){
+//        target->setFixedHeight(goalHeight);
+//    }
+
+//    return true;
+//};
+
 MouseWheelGuard::MouseWheelGuard(QObject *parent) : QObject(parent)
 {
 }

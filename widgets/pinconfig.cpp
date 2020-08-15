@@ -1,6 +1,8 @@
 #include "pinconfig.h"
 #include "ui_pinconfig.h"
 
+//#include "mousewheelguard.h"
+
 //#include <QtConcurrent/QtConcurrent>
 //#include <QFuture>
 
@@ -25,6 +27,10 @@ PinConfig::PinConfig(QWidget *parent) :
     single_LED_ = 0;
     rows_of_LED_ = 0;
     columns_of_LED_ = 0;
+
+//    FilterObject *filter = new FilterObject();  // delete
+//    filter->target=ui->label_ControllerImage;
+//    ui->label_ControllerImage->installEventFilter(filter);
 
 //    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
 //    // get label dimensions

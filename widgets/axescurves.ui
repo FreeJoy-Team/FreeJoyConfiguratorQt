@@ -56,7 +56,7 @@
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="bottomMargin">
        <number>6</number>
@@ -136,7 +136,7 @@
       <item row="1" column="0" colspan="3">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
-         <number>9</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QPushButton" name="pushButton_Linear">
@@ -148,14 +148,14 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="toolTip">
@@ -182,14 +182,14 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="toolTip">
@@ -216,14 +216,14 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="toolTip">
@@ -250,14 +250,14 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="toolTip">
@@ -284,14 +284,14 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>195</width>
-            <height>120</height>
+            <width>185</width>
+            <height>114</height>
            </size>
           </property>
           <property name="toolTip">

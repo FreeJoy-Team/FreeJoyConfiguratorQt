@@ -200,8 +200,9 @@ MainWindow::MainWindow(QWidget *parent)
     {
         gEnv.pAppSettings->endGroup();
         on_pushButton_LoadDefaultConfig_clicked();
+    } else {
+        gEnv.pAppSettings->endGroup();
     }
-    gEnv.pAppSettings->endGroup();
 
 
     // set style

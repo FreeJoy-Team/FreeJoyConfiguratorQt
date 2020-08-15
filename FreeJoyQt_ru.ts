@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Restart app for full changes</source>
-        <translation type="unfinished">Для полных изменений требуется перезапуск</translation>
+        <translation type="unfinished">Требуется перезапуск</translation>
     </message>
     <message>
         <source>Other settings</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Load default config on startup</source>
-        <translation type="unfinished">Загружать стандартный конфиг при запуске</translation>
+        <translation type="unfinished">Стандартный конфиг при запуске</translation>
     </message>
 </context>
 <context>
@@ -1065,11 +1065,11 @@
     </message>
     <message>
         <source>Write config to Device</source>
-        <translation type="unfinished">Запись конфига в устройство</translation>
+        <translation type="unfinished">Запись конфига</translation>
     </message>
     <message>
         <source>Read config from Device</source>
-        <translation type="unfinished">Чтение конфига из устройства</translation>
+        <translation type="unfinished">Чтение конфига</translation>
     </message>
     <message>
         <source>Device firmware v</source>
@@ -1089,11 +1089,11 @@
     </message>
     <message>
         <source>Load default config</source>
-        <translation type="unfinished">Загрузить стандартный конфиг</translation>
+        <translation type="unfinished">Стандартный конфиг</translation>
     </message>
     <message>
         <source>Set file to default config</source>
-        <translation type="unfinished">Выбрать файл стандартного конфига</translation>
+        <translation type="unfinished">Файл стандартного конфига</translation>
     </message>
     <message>
         <source>FreeJoy Configurator</source>
@@ -1126,6 +1126,10 @@
     <message>
         <source>Save Config</source>
         <translation type="unfinished">Сохранить конфиг</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation type="unfinished">Устройство</translation>
     </message>
 </context>
 <context>
