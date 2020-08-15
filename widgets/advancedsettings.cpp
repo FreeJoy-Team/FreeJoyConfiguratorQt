@@ -21,12 +21,20 @@ AdvancedSettings::AdvancedSettings(QWidget *parent) :
     ui->spinBox_FontSize->setValue(gEnv.pAppSettings->value("FontSize", "8").toInt());
     gEnv.pAppSettings->endGroup();
 
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    ui->checkBox_LoadDefCfg->setChecked(gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool());
+    gEnv.pAppSettings->endGroup();
+
 //    connect(this, SIGNAL(styleChanged()),
 //            this, SLOT(styleButtonWaiting()));
 }
 
 AdvancedSettings::~AdvancedSettings()
 {
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    gEnv.pAppSettings->setValue("LoadDefCfgOnStartUp", ui->checkBox_LoadDefCfg->isChecked());
+    gEnv.pAppSettings->endGroup();
+
     delete ui;
 }
 
@@ -304,3 +312,4 @@ void AdvancedSettings::WriteToConfig()
     // usb exchange period
     gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_USBExchangePeriod->value();
 }
+

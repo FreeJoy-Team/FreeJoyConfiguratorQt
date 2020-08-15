@@ -193,9 +193,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(hid_device_worker, SIGNAL(hidDeviceList(QStringList*)),
                           this, SLOT(hidDeviceList(QStringList*)));
 
-
     // load default config
     ReadFromConfig();
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    if (gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool() == true)
+    {
+        gEnv.pAppSettings->endGroup();
+        on_pushButton_LoadDefaultConfig_clicked();
+    }
+    gEnv.pAppSettings->endGroup();
+
 
     // set style
     gEnv.pAppSettings->beginGroup("StyleSettings");
@@ -617,9 +624,10 @@ void MainWindow::configSent(bool success)
     }
 }
 
+// load device config from file
 void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
 {
-    // уменьшение текста
+    // уменьшение текста в коде
     dev_config_t* devc = &gEnv.pDeviceConfig->config;
     bool tmp;
 
@@ -792,7 +800,7 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
         devc->leds[i].type = appS->value("LedType", devc->leds[i].type).toInt();
         appS->endGroup();
     }
-
+    qDebug()<<"end read";
     ReadFromConfig();
 }
 

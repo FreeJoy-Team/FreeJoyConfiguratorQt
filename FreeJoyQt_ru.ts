@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Шрифт</translation>
+        <translation type="obsolete">Шрифт</translation>
     </message>
     <message>
         <source>Font size</source>
@@ -120,16 +120,20 @@
         <translation type="unfinished">Загрузка... Подождите</translation>
     </message>
     <message>
-        <source>HHHH</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> мс</translation>
     </message>
     <message>
         <source>Restart app for full changes</source>
         <translation type="unfinished">Для полных изменений требуется перезапуск</translation>
+    </message>
+    <message>
+        <source>Other settings</source>
+        <translation type="unfinished">Прочие настройки</translation>
+    </message>
+    <message>
+        <source>Load default config on startup</source>
+        <translation type="unfinished">Загружать стандартный конфиг при запуске</translation>
     </message>
 </context>
 <context>
