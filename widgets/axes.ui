@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1062</width>
-    <height>216</height>
+    <height>217</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -357,7 +357,7 @@ QProgressBar::chunk:disabled {
           <number>8</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>2</number>
          </property>
          <property name="rightMargin">
           <number>6</number>
@@ -428,7 +428,7 @@ QProgressBar::chunk:disabled {
          <item row="0" column="3">
           <widget class="QLabel" name="text_bits">
            <property name="text">
-            <string>bits</string>
+            <string> bits</string>
            </property>
           </widget>
          </item>
@@ -544,7 +544,7 @@ QProgressBar::chunk:disabled {
          <item row="1" column="3">
           <widget class="QLabel" name="text_angle">
            <property name="text">
-            <string notr="true">°</string>
+            <string notr="true"> °</string>
            </property>
           </widget>
          </item>

@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>bits</source>
-        <translation type="unfinished">бит</translation>
+        <translation type="obsolete">бит</translation>
     </message>
     <message>
         <source>Minimum</source>
@@ -357,6 +357,10 @@
     <message>
         <source>Reset calibration</source>
         <translation type="unfinished">Сброс калибровки</translation>
+    </message>
+    <message>
+        <source> bits</source>
+        <translation type="unfinished"> бит</translation>
     </message>
 </context>
 <context>

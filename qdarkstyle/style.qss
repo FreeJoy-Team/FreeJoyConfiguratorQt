@@ -304,6 +304,11 @@ QCheckBox::indicator:indeterminate:focus, QCheckBox::indicator:indeterminate:hov
 #32414B - old
 https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qgroupbox
 #686868 - new
+padding: 4px;
+
+QGroupBox::title {
+  subcontrol-origin: margin;
+  subcontrol-position: top left;
 --------------------------------------------------------------------------- */
 QGroupBox {
   font-weight: bold;

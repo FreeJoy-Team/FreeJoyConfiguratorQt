@@ -23,6 +23,9 @@
    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,20,0">
     <item>
      <widget class="QGroupBox" name="groupBox">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="title">
        <string/>
       </property>
@@ -46,6 +49,9 @@
            <width>0</width>
            <height>20</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string/>
@@ -443,6 +449,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
              <height>30</height>
             </size>
            </property>
+           <property name="styleSheet">
+            <string notr="true">height: 22px;</string>
+           </property>
            <property name="text">
             <string>Load config from file</string>
            </property>
@@ -455,6 +464,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
              <width>0</width>
              <height>30</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">height: 22px;</string>
            </property>
            <property name="text">
             <string>Save config to file</string>
@@ -472,6 +484,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
              <height>30</height>
             </size>
            </property>
+           <property name="styleSheet">
+            <string notr="true">height: 22px;</string>
+           </property>
            <property name="text">
             <string>Write config to Device</string>
            </property>
@@ -485,11 +500,11 @@ border-bottom: 1px solid rgb(190, 190, 190);
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>30</height>
+             <height>0</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true"/>
+            <string notr="true">height: 22px;</string>
            </property>
            <property name="text">
             <string>Read config from Device</string>
@@ -504,6 +519,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
              <height>30</height>
             </size>
            </property>
+           <property name="styleSheet">
+            <string notr="true">height: 22px;</string>
+           </property>
            <property name="text">
             <string>Load default config</string>
            </property>
@@ -516,6 +534,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
              <width>0</width>
              <height>30</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">height: 22px;</string>
            </property>
            <property name="text">
             <string>Set file to default config</string>
