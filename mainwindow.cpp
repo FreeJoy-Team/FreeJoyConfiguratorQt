@@ -6,6 +6,8 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "mousewheelguard.h"
+#include <QSpinBox>
 
 #include "common_types.h"
 #include "global.h"
@@ -93,6 +95,27 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug()<<"led config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
     tmp_clock = clock();
 
+
+    // strong focus for mouse wheel
+    for (auto&& child: this->findChildren<QSpinBox *>())
+    {
+        child->setFocusPolicy(Qt::StrongFocus);
+        child->installEventFilter(new MouseWheelGuard(child));
+    }
+
+    for (auto&& child: this->findChildren<QComboBox *>())
+    {
+        child->setFocusPolicy(Qt::StrongFocus);
+        child->installEventFilter(new MouseWheelGuard(child));
+    }
+    // это наверно неправильно, но я пока не сообразил как сверху исключить, мб через object_cast?
+    for (auto&& child: pin_config->findChildren<PinComboBox *>())
+    {
+        for (auto&& comBox: child->findChildren<QComboBox *>())
+        {
+            comBox->setFocusPolicy(Qt::WheelFocus);
+        }
+    }
 
                                             //////////////// SIGNASL-SLOTS ////////////////
             ///////// GET / SEND     CONFIG ///////
@@ -185,6 +208,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     thread->start();
+
     qDebug()<<"after widgets MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
     qDebug()<<"start to MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time;
 }

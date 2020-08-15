@@ -26,6 +26,7 @@ SOURCES += \
     hiddevice.cpp \
     main.cpp \
     mainwindow.cpp \
+    mousewheelguard.cpp \
     reportconverter.cpp \
     stm_main.c \
     widgets/advancedsettings.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
     hidapi.h \
     hiddevice.h \
     mainwindow.h \
+    mousewheelguard.h \
     reportconverter.h \
     stm_main.h \
     widgets/advancedsettings.h \
