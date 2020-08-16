@@ -314,7 +314,10 @@ QGroupBox {
   font-weight: bold;
   border: 1px solid #686868;
   border-radius: 4px;
-  padding: 4px;
+  padding-left: 4px;
+  padding-right: 4px;  
+  padding-top: 5px;
+  padding-bottom: 0px;  
   margin-top: 4px;
 }
 
@@ -324,7 +327,7 @@ QGroupBox::title {
   left: 3px;
   padding-left: 3px;
   padding-right: 5px;
-  padding-top: -6px;
+  padding-top: -7px;
   padding-bottom: 0px;
 }
 
@@ -1082,7 +1085,7 @@ QPushButton {
   padding: 3px;
   outline: none;
   /* Issue #194 - Special case of QPushButton inside dialogs, for better UI */
-  min-width: 80px;
+  min-width: 40px;
 }
 
 QPushButton:disabled {
@@ -1279,11 +1282,12 @@ QComboBox {
   border-radius: 4px;
   selection-background-color: #1464A0;
   background-color: #232629;
-  padding-left: 4px;
-  padding-right: 36px;
+    padding:2px 0px 2px 4px;
+  /*padding-left: 4px;
+  padding-right: 11px;
   /* 4 + 16*2 See scrollbar size */
   /* Fixes #103, #111 */
-  min-height: 1.5em;
+  /*min-height: 1.5em;
   /* padding-top: 2px;     removed to fix #132 */
   /* padding-bottom: 2px;  removed to fix #132 */
   /* min-width: 75px;      removed to fix #109 */
