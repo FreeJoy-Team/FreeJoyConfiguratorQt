@@ -25,5 +25,8 @@
         <file>icon/ver_scroll_top_arrow.png</file>
         <file>icon/sizegrip.png</file>
         <file>css/qss.css</file>
+        <file>icon/downarrow_disable.png</file>
+        <file>icon/ver_scroll_bottom_arrow_disable.png</file>
+        <file>icon/ver_scroll_top_arrow_disable.png</file>
     </qresource>
 </RCC>
