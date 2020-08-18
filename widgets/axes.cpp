@@ -207,17 +207,24 @@ void Axes::a2bSpinBoxChanged(int count)
         a2b_buttons_count_ = 0;
     }
 }
-
+#include <QTimer>
 void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 {
     if (state == 2){    // 2 = true
-        ui->frame->setMinimumHeight(100);
+        //ui->frame->setMinimumHeight(100);
         axes_extend->setMinimumHeight(100);
-        axes_extend->setVisible(true);
+        QTimer::singleShot(10, [&]{     // я долбоёб или да? как ещё это сраное мигание победить????????
+            axes_extend->setVisible(true);
+        });
+//        axes_extend->setVisible(true);
     } else {
         axes_extend->setVisible(false);
-        axes_extend->setMinimumHeight(0);
-        ui->frame->setMinimumHeight(0);
+        QTimer::singleShot(10, [&]{
+            axes_extend->setMinimumHeight(0);
+            ui->frame->setMinimumHeight(0);
+        });
+//        axes_extend->setMinimumHeight(0);
+//        ui->frame->setMinimumHeight(0);
     }
 }
 
