@@ -520,6 +520,13 @@ QProgressBar::chunk:disabled {
        </widget>
       </item>
       <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Buttons from axes</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2">
        <widget class="QSpinBox" name="spinBox_A2bCount">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -538,13 +545,6 @@ QProgressBar::chunk:disabled {
         </property>
         <property name="maximum">
          <number>12</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Axes to buttons</string>
         </property>
        </widget>
       </item>
