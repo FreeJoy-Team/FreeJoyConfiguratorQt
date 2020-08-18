@@ -46,7 +46,7 @@
      <property name="title">
       <string>GroupBox</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,0,0" columnstretch="0,0,0,6,2,0" columnminimumwidth="0,0,0,0,0,0">
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,0,0" columnstretch="0,0,0,0,6,2" columnminimumwidth="0,0,0,0,0,0">
       <property name="bottomMargin">
        <number>3</number>
       </property>
