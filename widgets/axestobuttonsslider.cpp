@@ -20,6 +20,7 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
     points_count_ = 0;
     axis_raw_value_ = 0;
     axis_raw_width_ = 0;
+    raw_rect_color_ = kRawRectColor_dis;
 
 }
 
@@ -45,19 +46,20 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптими�
     Q_UNUSED(event)
     QPainter painter;
     int rect_height = 5;
+    int rect_y = 7 + padding_top_;
 
     painter.begin(this);
 
     painter.setPen(Qt::lightGray);
-    painter.drawRect(QRect(offset_, 7 + padding_top_, this->width() - offset_*2, rect_height));
+    painter.drawRect(QRect(offset_, rect_y, this->width() - offset_*2, rect_height));
 
-    axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (this->width() - offset_*2) + offset_ - 3;  // -3 hz, так ровнее
-    QPen pen;
-    pen.setWidth(rect_height);
-    pen.setColor(kRawLineColor);
-    painter.setPen(pen);
-    painter.drawLine(offset_, 9 + padding_top_, axis_raw_width_, 9 + padding_top_);
+    // calc and paint raw data on a2b
+    axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (this->width() - offset_*2);
+    QRect rect(offset_, rect_y, axis_raw_width_, rect_height);
+    painter.drawRect(rect);
+    painter.fillRect(rect, raw_rect_color_);
 
+    // paint separators
     painter.setPen(Qt::lightGray);
     for (uint i = 0; i < 25; ++i){
         painter.drawLine((i * line_spacing_) + offset_, 15 + padding_top_, (i * line_spacing_) + offset_, 18 + padding_top_);
@@ -195,8 +197,10 @@ void AxesToButtonsSlider::PointsPositionReset()
     for (int i = 0; i < PointAdrList.size(); ++i) {
         if (this->isEnabled() == true){
             PointAdrList[i]->color = pointer_color_;
+            raw_rect_color_ = kRawRectColor;
         } else {
             PointAdrList[i]->color = Qt::lightGray;
+            raw_rect_color_ = kRawRectColor_dis;
         }
         //PointAdrList[i]->color = pointer_color_;
         PointAdrList[i]->is_drag = false;
@@ -292,10 +296,12 @@ bool AxesToButtonsSlider::event(QEvent *event)
         if (this->isEnabled() == true){
             for (int i = 0; i < PointAdrList.size(); ++i) {
                 PointAdrList[i]->color = pointer_color_;
+                raw_rect_color_ = kRawRectColor;
             }
         } else {
             for (int i = 0; i < PointAdrList.size(); ++i) {
                 PointAdrList[i]->color = Qt::lightGray;
+                raw_rect_color_ = kRawRectColor_dis;
             }
         }
         update();

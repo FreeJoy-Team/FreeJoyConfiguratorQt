@@ -49,8 +49,10 @@ private:
 
     int axis_raw_value_;
     int axis_raw_width_;
-    const QColor kRawLineColor = QColor(85, 147, 47, 150);
+    const QColor kRawRectColor = QColor(85, 147, 47, 150);
+    const QColor kRawRectColor_dis = QColor(85, 107, 47, 80);
     const QColor kPointRawActivColor = QColor(139, 0, 0);
+    QColor raw_rect_color_;
 
     const int half_pointer_width = 4;
 

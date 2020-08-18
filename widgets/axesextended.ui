@@ -167,6 +167,9 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
            <property name="correctionMode">
             <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
            </property>
@@ -195,6 +198,9 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
            <property name="correctionMode">
             <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
@@ -234,6 +240,9 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
            <property name="correctionMode">
             <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
@@ -357,6 +366,9 @@
       </item>
       <item row="0" column="6">
        <widget class="QSpinBox" name="spinBox_Resolution">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
         <property name="correctionMode">
          <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
         </property>
@@ -390,6 +402,9 @@
       </item>
       <item row="1" column="6">
        <widget class="QSpinBox" name="spinBox_Offset">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
         <property name="correctionMode">
          <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
         </property>
@@ -420,6 +435,9 @@
       </item>
       <item row="3" column="6">
        <widget class="QSpinBox" name="spinBox_Deadband">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
         <property name="correctionMode">
          <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
         </property>

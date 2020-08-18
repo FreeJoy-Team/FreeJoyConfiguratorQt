@@ -21,6 +21,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void RetranslateUi();
+
     void SetI2CEnabled(bool is_enable);
 
 

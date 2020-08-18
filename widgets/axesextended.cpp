@@ -50,6 +50,11 @@ AxesExtended::~AxesExtended()
     delete ui;
 }
 
+void AxesExtended::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
 
 void AxesExtended::SetI2CEnabled(bool is_enable)
 {

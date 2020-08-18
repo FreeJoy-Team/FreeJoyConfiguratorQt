@@ -66,6 +66,7 @@ Axes::~Axes()
 void Axes::RetranslateUi()
 {
     ui->retranslateUi(this);
+    axes_extend->RetranslateUi();
 }
 
 void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
