@@ -19,7 +19,7 @@
 
 //////////////// ЭТО НЕ КОД ЭТО ПИЗДЕЦ !!!!!!!!!!
 /// ПЕРЕДАЛАТЬ И УБРАТЬ МУСОР
-/// ///////////////////////////////////////////////////// ПЕРЕД СНОМ НЕ СМОТРЕТЬ /////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////// ПЕРЕД СНОМ НЕ СМОТРЕТЬ УЖОСНАХ /////////////////////////////////////////////////
 
 
 
@@ -45,9 +45,10 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
     is_device_connect_ = false;
     half_radius_ = radius_/2;
 
-    // если вкладка не открыта, то размер не загружается и высота = 0. т.к. при изменении размера окна у меня не меняется
-    // высота, то захардкодил 450, но это херовое решение
+    // если вкладка не открыта, то размер не загружается и высота = 0. т.к. при изменении размера окна у меня не меняется высота,
+    // то захардкодил 450, но это херовое решение
     height_ = 450;
+    this->setMinimumHeight(height_);
 
     cur_axis_pos.color = point_current_pos_color_;
 
@@ -78,7 +79,6 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
         LabelAdrList[i]->setAlignment(Qt::AlignHCenter);
         LabelAdrList[i]->setVisible(true);
     }
-
 }
 
 AxesCurvesPlot::~AxesCurvesPlot()
@@ -211,8 +211,8 @@ int AxesCurvesPlot::GetPointCount()
 
 void AxesCurvesPlot::SetPointValue(int value, int point_number)
 {
-    PointAdrList[point_number]->posY = CalcPointPos(value);   // +1 костыль, если не открыть вкладку курв до заливки конфига(не прогрузить), то происходит какая-то хуета. разобраться
-    PointAdrList[point_number]->current_value = value;          // скорее всего что-то инициализируется позже нужного
+    PointAdrList[point_number]->posY = CalcPointPos(value);
+    PointAdrList[point_number]->current_value = value;
     LabelAdrList[point_number]->setNum(value);
     UpdateLabelPos();
     update();
@@ -387,7 +387,6 @@ int AxesCurvesPlot::CalcPointPosX(int value_x)     // хз, центр посе�
 }
 
 
-
 void AxesCurvesPlot::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event)
@@ -415,6 +414,10 @@ void AxesCurvesPlot::resizeEvent(QResizeEvent* event)
 //        PointAdrList[i]->posY = tmp_y - radius_/2;      // temp
 //    }
 
+    // size for a2b
+    //int x = this->geometry().x();
+    int width = width_-offset_;
+    emit sizeChanged(width);
 }
 
 void AxesCurvesPlot::mouseMoveEvent(QMouseEvent *event)

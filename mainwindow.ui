@@ -21,13 +21,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout" columnstretch="1,5">
-    <item row="2" column="1">
-     <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0">
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-     </layout>
-    </item>
     <item row="1" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="baseSize">
@@ -45,20 +38,11 @@ border-right: 1px solid rgb(190, 190, 190);
 border-bottom: 1px solid rgb(190, 190, 190);
 }</string>
       </property>
-      <property name="tabShape">
-       <enum>QTabWidget::Rounded</enum>
-      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <property name="documentMode">
-       <bool>false</bool>
-      </property>
       <property name="movable">
        <bool>true</bool>
-      </property>
-      <property name="tabBarAutoHide">
-       <bool>false</bool>
       </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
@@ -125,28 +109,6 @@ border-bottom: 1px solid rgb(190, 190, 190);
         <string> Axes Curves </string>
        </attribute>
        <layout class="QVBoxLayout" name="layoutV_tabAxesCurvesConfig">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_AxesToButtons">
-       <attribute name="title">
-        <string> Axes to Buttons </string>
-       </attribute>
-       <layout class="QVBoxLayout" name="layoutV_tabAxesToButtons">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -370,6 +332,16 @@ border-bottom: 1px solid rgb(190, 190, 190);
         </property>
         <property name="text">
          <string notr="true">Test button</string>
+        </property>
+       </widget>
+       <widget class="QTreeView" name="treeView">
+        <property name="geometry">
+         <rect>
+          <x>510</x>
+          <y>260</y>
+          <width>256</width>
+          <height>192</height>
+         </rect>
         </property>
        </widget>
       </widget>

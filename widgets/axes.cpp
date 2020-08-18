@@ -1,5 +1,6 @@
 #include "axes.h"
 #include "ui_axes.h"
+#include "widgets/axesextended.h"
 
 Axes::Axes(int axis_number, QWidget *parent) :
     QWidget(parent),
@@ -7,28 +8,13 @@ Axes::Axes(int axis_number, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //axis_number_ = 0;
-    //pDev_config = &gEnv.pDeviceConfig->config;        // чуть короче запись, но надо ли?
+    a2b_buttons_count_ = 0;
+    calibration_started_ = false;
 
+    //pDev_config = &gEnv.pDeviceConfig->config;        // чуть короче запись, но надо ли?
     axis_number_ = axis_number;
     ui->groupBox_AxixName->setTitle(axes_list_[axis_number_].gui_name);     // для 64бит в будущем axis_number_ должен быть 64 бита для большого массива
-                                                                            // т.к. 32 бит переменная переполнится и отсчёт пойдёт с 0
-    for (uint i = 0; i < i2c_address_list_.size(); ++i) {                   // так же и для i, надо делать size_t
-        ui->comboBox_I2cAddress->addItem(i2c_address_list_[i].gui_name);
-    }
-    for (uint i = 0; i < function_list_.size(); ++i) {
-        ui->comboBox_Function->addItem(function_list_[i].gui_name);
-    }
-    for (uint i = 0; i < button_1_3_list_.size(); ++i) {
-        ui->comboBox_Button1->addItem(button_1_3_list_[i].gui_name);
-        ui->comboBox_Button3->addItem(button_1_3_list_[i].gui_name);
-    }
-    for (uint i = 0; i < button_2_list_.size(); ++i) {
-        ui->comboBox_Button2->addItem(button_2_list_[i].gui_name);
-    }
-    for (uint i = 0; i < axes_list_.size(); ++i) {
-        ui->comboBox_AxisSource2->addItem(axes_list_[i].gui_name);
-    }
+                                                                            // т.к. 32 бит переменная переполнится и отсчёт пойдёт с 0 и .size() return 64 bit
 
     // add main source
     for (int i = 0; i < 2; ++i) {
@@ -36,22 +22,26 @@ Axes::Axes(int axis_number, QWidget *parent) :
         main_source_enum_index_.push_back(axes_pin_list_[i].device_enum_index);
     }
 
+    // set a2b
+    ui->spinBox_A2bCount->setMaximum(MAX_A2B_BUTTONS);
+    if (ui->spinBox_A2bCount->value() < kMinA2bButtons){
+        ui->widget_A2bSlider->setEnabled(false);
+        ui->widget_A2bSlider->SetPointsCount(kMinA2bButtons + 1);
+        //count = kMinA2bButtons;
+    } else {
+        ui->widget_A2bSlider->setEnabled(true);
+        ui->widget_A2bSlider->SetPointsCount(ui->spinBox_A2bCount->value() + 1);
+    }
 
-    ui->comboBox_Button1->setCurrentIndex(AXIS_BUTTON_DOWN);
-    ui->comboBox_Button2->setCurrentIndex(AXIS_BUTTON_RESET);
-    ui->comboBox_Button3->setCurrentIndex(AXIS_BUTTON_UP);
-    // set ADS1115_00 selected
-    ui->comboBox_I2cAddress->setCurrentIndex(1);
+    // add axes extended settings
+    axes_extend = new AxesExtended(axis_number_, this); //check
+    axes_extend->setVisible(false);
+    ui->layoutH_AxesExtend->addWidget(axes_extend);
+    //ui->layoutV_Axes->addWidget(axes_extend);
 
     // output checked
     connect(ui->checkBox_Output, SIGNAL(toggled(bool)),
             this, SLOT(outputValueChanged(bool)));
-    // filter changed
-    connect(ui->sliderV_Filter, SIGNAL(valueChanged(int)),
-            this, SLOT(filterChanged(int)));
-    // function changed
-    connect(ui->comboBox_Function, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(functionIndexChanged(int)));
     // calibration value changed
     connect(ui->spinBox_CalibMax, SIGNAL(valueChanged(int)),
             this, SLOT(calibMinMaxValueChanged(int)));
@@ -60,7 +50,9 @@ Axes::Axes(int axis_number, QWidget *parent) :
     // main source changed
     connect(ui->comboBox_AxisSource1, SIGNAL(currentIndexChanged(int)),
             this, SLOT(mainSourceIndexChanged(int)));
-
+    // a2b count changed
+    connect(ui->spinBox_A2bCount, SIGNAL(valueChanged(int)),
+            this, SLOT(a2bSpinBoxChanged(int)));
 }
 
 Axes::~Axes()
@@ -97,23 +89,9 @@ void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
 void Axes::mainSourceIndexChanged(int index)
 {
     if (main_source_enum_index_[index] == I2C){
-        ui->comboBox_I2cAddress->setEnabled(true);
+        axes_extend->SetI2CEnabled(true);
     } else {
-        ui->comboBox_I2cAddress->setEnabled(false);
-    }
-}
-
-void Axes::filterChanged(int filter_level)
-{
-    ui->label_Filter->setText(filter_list_[filter_level].gui_name);
-}
-
-void Axes::functionIndexChanged(int index)
-{
-    if (index > 0){
-        ui->comboBox_AxisSource2->setEnabled(true);
-    } else {
-        ui->comboBox_AxisSource2->setEnabled(false);
+        axes_extend->SetI2CEnabled(false);
     }
 }
 
@@ -194,7 +172,7 @@ void Axes::on_pushButton_SetCenter_clicked()
 
 void Axes::on_checkBox_Center_stateChanged(int state)
 {
-    if (state == 2)
+    if (state == 2) // 2 = true
     {
         ui->spinBox_CalibCenter->setEnabled(true);
     } else {
@@ -209,14 +187,45 @@ void Axes::on_pushButton_clicked()
     ui->spinBox_CalibMin->setValue(AXIS_MIN_VALUE);
 }
 
+void Axes::a2bSpinBoxChanged(int count)
+{
+    if (count < kMinA2bButtons){
+        ui->widget_A2bSlider->setEnabled(false);
+        //count = kMinA2bButtons;
+    } else {
+        ui->widget_A2bSlider->setEnabled(true);
+        ui->widget_A2bSlider->SetPointsCount(count + 1);
+    }
+
+
+    if(ui->widget_A2bSlider->isEnabled() == true){
+        emit a2bCountChanged(count, a2b_buttons_count_);
+        a2b_buttons_count_ = count;
+    } else {    // необязательно?
+        emit a2bCountChanged(0, a2b_buttons_count_);
+        a2b_buttons_count_ = 0;
+    }
+}
+
+void Axes::on_checkBox_ShowExtend_stateChanged(int state)
+{
+    if (state == 2){    // 2 = true
+        ui->frame->setMinimumHeight(100);
+        axes_extend->setMinimumHeight(100);
+        axes_extend->setVisible(true);
+    } else {
+        axes_extend->setVisible(false);
+        axes_extend->setMinimumHeight(0);
+        ui->frame->setMinimumHeight(0);
+    }
+}
+
 
 void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)                // add source_main
 {
     // output, inverted
     ui->checkBox_Output->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled);
     ui->checkBox_Inverted->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].inverted);
-    // I2C, sources, function
-    ui->comboBox_I2cAddress->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].i2c_address, i2c_address_list_));
     //ui->comboBox_AxisSource1->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main, axes_pin_list_));
     for (uint i = 0; i < main_source_enum_index_.size(); ++i) {                 // сделать Converter::    ?
         if (main_source_enum_index_[i] == gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main){
@@ -224,69 +233,46 @@ void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)    
             break;
         }
     }
-    ui->comboBox_AxisSource2->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].source_secondary, axes_list_));
-    ui->comboBox_Function->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].function, function_list_));
-    // chanel
-    ui->spinBox_ChanelEncoder->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].channel);
-    // buttons
-    ui->comboBox_Button1->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].button1_type, button_1_3_list_));
-    ui->spinBox_Button1->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].button1 + 1);
-    ui->comboBox_Button2->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].button2_type, button_2_list_));
-    ui->spinBox_Button2->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].button2 + 1);
-    ui->comboBox_Button3->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].button3_type, button_1_3_list_));
-    ui->spinBox_Button3->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].button3 + 1);
-    // divider, prescaler
-    ui->spinBox_StepDiv->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].divider);
-    ui->spinBox_Prescaler->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].prescaler);
-    // resolution, offset
-    ui->spinBox_Resolution->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].resolution + 1);
-    ui->spinBox_Offset->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].offset_angle);
-    //deadband
-    ui->checkBox_DynDeadband->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].is_dynamic_deadband);
-    ui->spinBox_Deadband->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].deadband_size);
     // calibration
     ui->spinBox_CalibMin->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min);
     ui->spinBox_CalibCenter->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_center);
     ui->checkBox_Center->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].is_centered);
     ui->spinBox_CalibMax->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max);
-    // filter
-    ui->sliderV_Filter->setValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].filter);
+
+    // axes to buttons
+    ui->spinBox_A2bCount->setValue(gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].buttons_cnt);
+    //ui->widget_A2bSlider->SetPointsCount(gEnv.pDeviceConfig->config.axes_to_buttons[a2b_number_].buttons_cnt + 1);
+    for (int i = 0; i < gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].buttons_cnt + 1; ++i) {
+        ui->widget_A2bSlider->SetPointValue(gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].points[i], i);
+    }
+
+    // axes extended settings
+    axes_extend->ReadFromConfig();
 }
 
-void Axes::WriteToConfig()                // add source_main
+void Axes::WriteToConfig()
 {   // output, inverted
     gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled = ui->checkBox_Output->isChecked();
     gEnv.pDeviceConfig->config.axis_config[axis_number_].inverted = ui->checkBox_Inverted->isChecked();
     // I2C, sources, function
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].i2c_address = i2c_address_list_[ui->comboBox_I2cAddress->currentIndex()].device_enum_index;
-
     gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main = main_source_enum_index_[ui->comboBox_AxisSource1->currentIndex()];
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].source_secondary = axes_list_[ui->comboBox_AxisSource2->currentIndex()].device_enum_index;
-
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].function = function_list_[ui->comboBox_Function->currentIndex()].device_enum_index;
-    // chanel
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].channel = ui->spinBox_ChanelEncoder->value();
-    // buttons
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].button1_type = button_1_3_list_[ui->comboBox_Button1->currentIndex()].device_enum_index;
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].button1 = ui->spinBox_Button1->value() - 1;
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].button2_type = button_2_list_[ui->comboBox_Button2->currentIndex()].device_enum_index;
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].button2 = ui->spinBox_Button2->value() - 1;
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].button3_type = button_1_3_list_[ui->comboBox_Button3->currentIndex()].device_enum_index;
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].button3 = ui->spinBox_Button3->value() - 1;
-    // divider, prescaler
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].divider = ui->spinBox_StepDiv->value();
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].prescaler = ui->spinBox_Prescaler->value();
-    // resolution, offset
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].resolution = ui->spinBox_Resolution->value() - 1;
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].offset_angle = ui->spinBox_Offset->value();
-    // deadband
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].is_dynamic_deadband = ui->checkBox_DynDeadband->isChecked();
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].deadband_size = ui->spinBox_Deadband->value();
     // calibration
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min = ui->spinBox_CalibMin->value();
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_center = ui->spinBox_CalibCenter->value();
     gEnv.pDeviceConfig->config.axis_config[axis_number_].is_centered = ui->checkBox_Center->isChecked();
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max = ui->spinBox_CalibMax->value();
-    // filter
-    gEnv.pDeviceConfig->config.axis_config[axis_number_].filter = ui->sliderV_Filter->value();
+
+    // axes to buttons
+    if (ui->spinBox_A2bCount->value() >= kMinA2bButtons){
+        gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].is_enabled = 1;
+    } else {
+        gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].is_enabled = 0;
+    }
+    gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].buttons_cnt = ui->spinBox_A2bCount->value();
+    for (int i = 0; i < ui->spinBox_A2bCount->value() + 1; ++i) {
+        gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].points[i] = ui->widget_A2bSlider->GetPointValue(i);
+    }
+
+    // axes extended settings
+    axes_extend->WriteToConfig();
 }

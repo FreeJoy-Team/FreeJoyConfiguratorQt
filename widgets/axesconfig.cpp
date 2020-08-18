@@ -6,6 +6,7 @@ AxesConfig::AxesConfig(QWidget *parent) :
     ui(new Ui::AxesConfig)
 {
     ui->setupUi(this);
+    a2b_buttons_count_ = 0;
 
     ui->layoutV_Axes->setAlignment(Qt::AlignTop);
     // shift registers spawn
@@ -15,6 +16,8 @@ AxesConfig::AxesConfig(QWidget *parent) :
         ui->layoutV_Axes->addWidget(axis);
         AxesAdrList.append(axis);
         //shift_register->hide();
+        connect(axis, SIGNAL(a2bCountChanged(int, int)),
+                this, SLOT(a2bCountCalc(int, int)));
     }
 }
 
@@ -29,6 +32,12 @@ void AxesConfig::RetranslateUi()
     for (int i = 0; i < AxesAdrList.size(); ++i) {
         AxesAdrList[i]->RetranslateUi();
     }
+}
+
+void AxesConfig::a2bCountCalc(int count, int previous_count)
+{
+    a2b_buttons_count_ += count - previous_count;
+    emit a2bCountChanged(a2b_buttons_count_);
 }
 
 void AxesConfig::addOrDeleteMainSource(int source_enum, bool is_add)

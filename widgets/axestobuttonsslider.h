@@ -50,6 +50,7 @@ private:
     const int offset_ = 10;
     const int range_between_ = 13;  // минимальное расстояние между ближайшими указателями
     const int label_width_ = 20;
+    const int kMinHeight_ = 40;//45  // переименовать константы в такой стиль
 
     const int padding_top_ = 7;
     const QPoint pointer[5]={

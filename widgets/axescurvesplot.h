@@ -30,6 +30,10 @@ public:
     void SetExponentInvert();
     void SetShape();
 
+signals:
+    //! current x and width for a2b
+    void sizeChanged(int width);
+
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;

@@ -29,13 +29,16 @@ public:
 signals:
     void axisRawValueChanged(int);
     void axisOutValueChanged(int);
+    void a2bCountChanged(int count);
 
 private slots:
     void addOrDeleteMainSource(int source_enum, bool is_add);
+    void a2bCountCalc(int count, int previous_count);
 //    void axesValueChanged(int value);
 
 private:
     Ui::AxesConfig *ui;
+    int a2b_buttons_count_;
 
     QList<Axes*> AxesAdrList;
 };

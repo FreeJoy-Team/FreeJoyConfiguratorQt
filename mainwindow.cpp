@@ -74,11 +74,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->layoutV_tabAxesCurvesConfig->addWidget(axes_curves_config);
     qDebug()<<"curves config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
     tmp_clock = clock();
-    // add axes to buttons config
-    a2b_config = new AxesToButtonsConfig(this);
-    ui->layoutV_tabAxesToButtons->addWidget(a2b_config);
-    qDebug()<<"a2b config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
     // add shift registers config
     shift_reg_config = new ShiftRegistersConfig(this);
     ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config);
@@ -143,7 +138,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(pin_config, SIGNAL(shiftRegSelected(int, int, QString)),
             shift_reg_config, SLOT(shiftRegSelected(int, int, QString)));
     // a2b count
-    connect(a2b_config, SIGNAL(a2bCountChanged(int)),
+    connect(axes_config, SIGNAL(a2bCountChanged(int)),
             pin_config, SLOT(a2bCountChanged(int)));
     // shift reg buttons count shiftRegsButtonsCount
     connect(shift_reg_config, SIGNAL(shiftRegButtonsCountChanged(int)),
@@ -242,9 +237,7 @@ void MainWindow::ReadFromConfig()
     // read axes config
     axes_config->ReadFromConfig();
     // read axes curves config
-    axes_curves_config->ReadFromConfig();          // вынести в отдельную функцию
-    // read axes to buttons config
-    a2b_config->ReadFromConfig();
+    axes_curves_config->ReadFromConfig();
     // read shift registers config
     shift_reg_config->ReadFromConfig();
     // read encoder config
@@ -260,13 +253,11 @@ void MainWindow::ReadFromConfig()
 void MainWindow::WriteToConfig()
 {
     // write pin config
-    pin_config->WriteToConfig();            // проверить снизу
+    pin_config->WriteToConfig();
     // write axes config
     axes_config->WriteToConfig();
     // write axes curves config
     axes_curves_config->WriteToConfig();
-    // write axes to buttons config
-    a2b_config->WriteToConfig();
     // write shift registers config
     shift_reg_config->WriteToConfig();
     // write encoder config
@@ -308,8 +299,6 @@ void MainWindow::LoadAppConfig()
                                       gEnv.pAppSettings->value("AxesConfig", ui->tabWidget->indexOf(ui->tab_AxesConfig)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesCurves),
                                       gEnv.pAppSettings->value("AxesCurves", ui->tabWidget->indexOf(ui->tab_AxesCurves)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesToButtons),
-                                      gEnv.pAppSettings->value("AxesToButtons", ui->tabWidget->indexOf(ui->tab_AxesToButtons)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ShiftRegisters),
                                       gEnv.pAppSettings->value("ShiftRegs", ui->tabWidget->indexOf(ui->tab_ShiftRegisters)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_Encoders),
@@ -335,7 +324,6 @@ void MainWindow::SaveAppConfig()
     gEnv.pAppSettings->setValue("ButtonConfig",    ui->tabWidget->indexOf(ui->tab_ButtonConfig));
     gEnv.pAppSettings->setValue("AxesConfig",      ui->tabWidget->indexOf(ui->tab_AxesConfig));
     gEnv.pAppSettings->setValue("AxesCurves",      ui->tabWidget->indexOf(ui->tab_AxesCurves));
-    gEnv.pAppSettings->setValue("AxesToButtons",   ui->tabWidget->indexOf(ui->tab_AxesToButtons));
     gEnv.pAppSettings->setValue("ShiftRegs",       ui->tabWidget->indexOf(ui->tab_ShiftRegisters));
     gEnv.pAppSettings->setValue("Encoders",        ui->tabWidget->indexOf(ui->tab_Encoders));
     gEnv.pAppSettings->setValue("LED",             ui->tabWidget->indexOf(ui->tab_LED));
@@ -405,7 +393,6 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
     shift_reg_config->RetranslateUi();
     axes_config->RetranslateUi();
     axes_curves_config->RetranslateUi();
-    a2b_config->RetranslateUi();
     ui->widget_2->RetranslateUi();
 }
 

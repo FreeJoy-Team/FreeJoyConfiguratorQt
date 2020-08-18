@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AxesExtended</class>
+ <widget class="QWidget" name="AxesExtended">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1068</width>
+    <height>113</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>9</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="layoutG_AxisExtend" columnstretch="1,2,3,1,1,1,0,0" columnminimumwidth="95,0,0,0,0,0,0,0">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="2" column="0">
+       <widget class="QLabel" name="text_chanelEncoder">
+        <property name="text">
+         <string>Chanel/Encoder</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBox_Function"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="text_axisSource2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Function axis</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QComboBox" name="comboBox_AxisSource2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="text_prescaler">
+        <property name="text">
+         <string>Prescaler %</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLabel" name="text_resolution">
+        <property name="text">
+         <string>Resolution</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QComboBox" name="comboBox_I2cAddress">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="currentText">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QSpinBox" name="spinBox_ChanelEncoder">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="maximum">
+         <number>15</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" rowspan="4">
+       <widget class="QFrame" name="frame_10">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,3,0,0">
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>9</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="spinBox_Button2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
+           <property name="maximum">
+            <number>128</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="text_button3">
+           <property name="text">
+            <string>Button 3</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QComboBox" name="comboBox_Button2"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="spinBox_Button1">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
+           <property name="maximum">
+            <number>128</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="text_button2">
+           <property name="text">
+            <string>Button 2</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QComboBox" name="comboBox_Button3"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="text_button1">
+           <property name="text">
+            <string>Button 1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="spinBox_Button3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="correctionMode">
+            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+           </property>
+           <property name="maximum">
+            <number>128</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QComboBox" name="comboBox_Button1">
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QSpinBox" name="spinBox_Prescaler">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3" colspan="2">
+       <widget class="QLabel" name="label_Filter">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Filter off</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="text_function">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Function</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="text_stepDiv">
+        <property name="text">
+         <string>Step div</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QSpinBox" name="spinBox_StepDiv">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>255</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="text_i2cAddress">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>I2C address</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QSpinBox" name="spinBox_Resolution">
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>16</number>
+        </property>
+        <property name="value">
+         <number>16</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QLabel" name="text_bits">
+        <property name="text">
+         <string> bits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLabel" name="text_offset">
+        <property name="text">
+         <string>Offset</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QSpinBox" name="spinBox_Offset">
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="maximum">
+         <number>360</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="7">
+       <widget class="QLabel" name="text_angle">
+        <property name="text">
+         <string notr="true"> °</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QLabel" name="text_deadband">
+        <property name="text">
+         <string>Deadband</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="6">
+       <widget class="QSpinBox" name="spinBox_Deadband">
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="maximum">
+         <number>127</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3" colspan="2">
+       <widget class="QSlider" name="sliderH_Filter">
+        <property name="maximum">
+         <number>7</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TicksBelow</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5" colspan="3">
+       <widget class="QCheckBox" name="checkBox_DynDeadband">
+        <property name="text">
+         <string>Dynamic deadband</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

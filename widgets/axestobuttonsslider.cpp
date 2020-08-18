@@ -14,9 +14,10 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
 
     setMouseTracking(true);
 
-    this->setMinimumHeight(45);
+    this->setMinimumHeight(kMinHeight_);
+
     // hz mb 2 min?
-    // call SetPointsCount
+    // call SetPointsCount?
     points_count_ = 0;
 
 }
@@ -39,6 +40,7 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптими�
     int width;
     float tmp;
 
+    // убрать в ресайз
     width = this->width();
     tmp = (width - offset_*2) / 24.0;       // постоянно считается. нах
 

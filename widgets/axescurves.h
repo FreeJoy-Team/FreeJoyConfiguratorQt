@@ -2,6 +2,7 @@
 #define AXESCURVES_H
 
 #include <QWidget>
+
 #include "global.h"
 #include "deviceconfig.h"
 
@@ -14,7 +15,7 @@ class AxesCurves : public QWidget
     Q_OBJECT
 
 public:
-    explicit AxesCurves(int axes_number, QWidget *parent = nullptr);
+    explicit AxesCurves(int axis_number, QWidget *parent = nullptr);
     ~AxesCurves();
 
     void ReadFromConfig();
@@ -32,22 +33,17 @@ signals:
 
 private slots:
     void on_pushButton_Linear_clicked();
-
     void on_pushButton_LinearInvert_clicked();
-
     void on_pushButton_Exponent_clicked();
-
     void on_pushButton_ExponentInvert_clicked();
-
     void on_pushButton_Shape_clicked();
-
 
 private:
     Ui::AxesCurves *ui;
     int axis_number_;
     bool is_device_connected_ = false;
 
-    std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axes.h
+    std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axes.h // везде, ВЫНЕСТИ ОТДЕЛЬНО
     {{
         {0,      tr("X")},
         {1,      tr("Y")},
