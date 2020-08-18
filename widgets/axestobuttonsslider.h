@@ -27,6 +27,8 @@ public:
     void SetPointValue(uint value, uint point_number);
     uint GetPointValue(uint point_number);
 
+    void SetAxisRawValue(int value);
+
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
@@ -42,6 +44,14 @@ private:
     uint CalcPointValue(int current_pos);
     void PointsPositionReset();
     void SetLableValue(int point_pos ,uint point_number);
+
+    int width_;
+    int line_spacing_;
+
+    int axis_raw_value_;
+    int axis_raw_width_;
+    const QColor kRawLineColor = QColor(85, 147, 47, 150);
+    const QColor kPointRawActivColor = QColor(139, 0, 0);
 
     const int half_pointer_width = 4;
 
@@ -66,7 +76,7 @@ private:
     QList<QLabel*> LabelAdrList;
 
 
-    struct A2B_point
+    struct A2B_point    // uint нахера гемороя наделал
     {
         QPolygon polygon;
         QColor color;

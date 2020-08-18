@@ -134,6 +134,7 @@ void Axes::on_pushButton_StartCalib_clicked(bool checked)
 void Axes::UpdateAxisRaw()
 {
     ui->progressBar_Raw->setValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]);
+    ui->widget_A2bSlider->SetAxisRawValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]);
 }
 
 void Axes::UpdateAxisOut()
@@ -221,7 +222,7 @@ void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 }
 
 
-void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)                // add source_main
+void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)
 {
     // output, inverted
     ui->checkBox_Output->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled);

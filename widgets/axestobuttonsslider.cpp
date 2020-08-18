@@ -18,7 +18,10 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
 
     // hz mb 2 min?
     // call SetPointsCount?
+    width_ = 0;
     points_count_ = 0;
+    axis_raw_value_ = 0;
+    axis_raw_width_ = 0;
 
 }
 
@@ -33,45 +36,59 @@ AxesToButtonsSlider::~AxesToButtonsSlider()
     delete ui;
 }
 
-void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптимизхировать
+void AxesToButtonsSlider::SetAxisRawValue(int value)
+{
+    axis_raw_value_ = value;
+    update();
+}
+
+void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптимизхировать width_ - offset_*2
 {
     Q_UNUSED(event)
     QPainter painter;
-    int width;
-    float tmp;
+    int rect_height = 5;
 
-    // убрать в ресайз
-    width = this->width();
-    tmp = (width - offset_*2) / 24.0;       // постоянно считается. нах
-
-//    QPen pen;
-//    pen.setWidth(1);
-//    pen.setColor(Qt::lightGray);
     painter.begin(this);
-    painter.setPen(Qt::lightGray);
-    painter.drawRect(QRect(offset_, 7 + padding_top_, width - offset_*2, 5));        // в ресайз
 
-    for (uint i = 0; i < 25; ++i){      // в ресайз
-        painter.drawLine((i * tmp) + offset_, 15 + padding_top_, (i * tmp) + offset_, 18 + padding_top_);
+    painter.setPen(Qt::lightGray);
+    painter.drawRect(QRect(offset_, 7 + padding_top_, width_ - offset_*2, rect_height));
+
+    axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (width_ - offset_*2) + offset_ - 3;  // -3 hz, так ровнее
+    QPen pen;
+    pen.setWidth(rect_height);
+    pen.setColor(kRawLineColor);
+    painter.setPen(pen);
+    painter.drawLine(offset_, 9 + padding_top_, axis_raw_width_, 9 + padding_top_);
+
+    painter.setPen(Qt::lightGray);
+    for (uint i = 0; i < 25; ++i){
+        painter.drawLine((i * line_spacing_) + offset_, 15 + padding_top_, (i * line_spacing_) + offset_, 18 + padding_top_);
     }
     // Antialiasing     // спорно, мазня
     //painter.setRenderHint(QPainter::Antialiasing, true);
+
     // paint pointers
     for (uint i = 0; i < points_count_; ++i)
     {
-        painter.setBrush(PointAdrList[i]->color);
-        painter.setPen(PointAdrList[i]->color);
+//        if (this->isEnabled() == true && PointAdrList[i]->posX - half_pointer_width < (uint)axis_raw_width_){
+//            painter.setBrush(kPointRawActivColor);
+//            painter.setPen(kPointRawActivColor);
+//        } else {
+            painter.setBrush(PointAdrList[i]->color);
+            painter.setPen(PointAdrList[i]->color);
+//        }
         painter.drawPolygon(PointAdrList[i]->polygon, Qt::WindingFill);
     }
+
     painter.end();
 }
 
 void AxesToButtonsSlider::DrawPoint(QPoint point_pos, uint point_number) {
 
-    if (point_pos.x() < offset_ || point_pos.x() > this->width() - offset_) {
+    if (point_pos.x() < offset_ || point_pos.x() > width_ - offset_) {
         return;
     }
-    else if (PointAdrList[point_number]->is_drag && point_pos.x() < this->width() + offset_) {
+    else if (PointAdrList[point_number]->is_drag && point_pos.x() < width_ + offset_) {
 
         if (points_count_ > 1){
             if (point_number > 0 && point_number < points_count_ - 1)
@@ -147,11 +164,11 @@ void AxesToButtonsSlider::SetPointValue(uint value, uint point_number)
     if (point_number > points_count_){
         point_number = points_count_;
     }
-    uint pos = uint(round(value * float(this->width() - offset_*2) / max_point_value_));
+    uint pos = uint(round(value * float(width_ - offset_*2) / max_point_value_));
     // ?
     pos += offset_;
-    if (pos > uint(this->width() - offset_)){
-        pos = this->width() - offset_;
+    if (pos > uint(width_ - offset_)){
+        pos = width_ - offset_;
     } else if (pos < uint(offset_)){
         pos = offset_;
     }
@@ -168,13 +185,13 @@ uint AxesToButtonsSlider::GetPointValue(uint point_number)
 
 uint AxesToButtonsSlider::CalcPointValue(int current_pos)
 {
-    float tmp_value = (this->width() - offset_*2) / float(max_point_value_);    // для красоты
+    float tmp_value = (width_ - offset_*2) / float(max_point_value_);    // для красоты
     return uint(round(  (current_pos - offset_) / tmp_value  ));
 }
 
 void AxesToButtonsSlider::PointsPositionReset()
 {
-    int tmp_distance = round((float(this->width()) - offset_*2) / (points_count_ -1));
+    int tmp_distance = round((float(width_) - offset_*2) / (points_count_ -1));
     // apply color, position
     for (int i = 0; i < PointAdrList.size(); ++i) {
         if (this->isEnabled() == true){
@@ -187,7 +204,7 @@ void AxesToButtonsSlider::PointsPositionReset()
         PointAdrList[i]->posX = i * tmp_distance + offset_;
     }
     // last to last X position
-    PointAdrList[points_count_ - 1]->posX = this->width() - offset_;
+    PointAdrList[points_count_ - 1]->posX = width_ - offset_;
     // move points
     for (uint i = 0; i < points_count_; ++i) {
         MovePointer(PointAdrList[i]->posX, i);
@@ -266,6 +283,8 @@ void AxesToButtonsSlider::resizeEvent(QResizeEvent* event)
         PointAdrList[i]->posX = (PointAdrList[i]->current_value * tmp_value) + offset_;
         MovePointer(PointAdrList[i]->posX, i);
     }
+    width_ = this->width();
+    line_spacing_ = (width_ - offset_*2) / 24.0;
 }
 
 bool AxesToButtonsSlider::event(QEvent *event)
