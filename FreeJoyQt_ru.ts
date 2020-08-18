@@ -340,11 +340,11 @@
     </message>
     <message>
         <source>Calibrate</source>
-        <translation type="unfinished">Калибровка</translation>
+        <translation type="unfinished">Калибр.</translation>
     </message>
     <message>
         <source>Stop and Save</source>
-        <translation>Стоп и сохр.</translation>
+        <translation type="vanished">Стоп и сохр.</translation>
     </message>
     <message>
         <source>Plus</source>
@@ -373,6 +373,14 @@
     <message>
         <source>Axis source</source>
         <translation type="unfinished">Источник оси</translation>
+    </message>
+    <message>
+        <source>Axes to buttons</source>
+        <translation type="unfinished">Оси в кнопки</translation>
+    </message>
+    <message>
+        <source>Stop &amp;&amp; Save</source>
+        <translation type="unfinished">Стоп и сохр</translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,7 @@
 #include "axes.h"
 #include "ui_axes.h"
 #include "widgets/axesextended.h"
+#include <QTimer>
 
 Axes::Axes(int axis_number, QWidget *parent) :
     QWidget(parent),
@@ -207,7 +208,7 @@ void Axes::a2bSpinBoxChanged(int count)
         a2b_buttons_count_ = 0;
     }
 }
-#include <QTimer>
+
 void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 {
     if (state == 2){    // 2 = true
