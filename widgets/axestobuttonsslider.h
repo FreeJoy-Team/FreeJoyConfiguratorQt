@@ -45,7 +45,6 @@ private:
     void PointsPositionReset();
     void SetLableValue(int point_pos ,uint point_number);
 
-    int width_;
     int line_spacing_;
 
     int axis_raw_value_;

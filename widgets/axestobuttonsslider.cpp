@@ -16,9 +16,7 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
 
     this->setMinimumHeight(kMinHeight_);
 
-    // hz mb 2 min?
     // call SetPointsCount?
-    width_ = 0;
     points_count_ = 0;
     axis_raw_value_ = 0;
     axis_raw_width_ = 0;
@@ -51,9 +49,9 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптими�
     painter.begin(this);
 
     painter.setPen(Qt::lightGray);
-    painter.drawRect(QRect(offset_, 7 + padding_top_, width_ - offset_*2, rect_height));
+    painter.drawRect(QRect(offset_, 7 + padding_top_, this->width() - offset_*2, rect_height));
 
-    axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (width_ - offset_*2) + offset_ - 3;  // -3 hz, так ровнее
+    axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (this->width() - offset_*2) + offset_ - 3;  // -3 hz, так ровнее
     QPen pen;
     pen.setWidth(rect_height);
     pen.setColor(kRawLineColor);
@@ -85,10 +83,10 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптими�
 
 void AxesToButtonsSlider::DrawPoint(QPoint point_pos, uint point_number) {
 
-    if (point_pos.x() < offset_ || point_pos.x() > width_ - offset_) {
+    if (point_pos.x() < offset_ || point_pos.x() > this->width() - offset_) {
         return;
     }
-    else if (PointAdrList[point_number]->is_drag && point_pos.x() < width_ + offset_) {
+    else if (PointAdrList[point_number]->is_drag && point_pos.x() < this->width() + offset_) {
 
         if (points_count_ > 1){
             if (point_number > 0 && point_number < points_count_ - 1)
@@ -110,8 +108,9 @@ void AxesToButtonsSlider::DrawPoint(QPoint point_pos, uint point_number) {
         }
         MovePointer(point_pos.x(), point_number);
         PointAdrList[point_number]->posX = point_pos.x();
-        SetLableValue(point_pos.x(), point_number);
         PointAdrList[point_number]->current_value = CalcPointValue(PointAdrList[point_number]->posX);
+        //SetLableValue(point_pos.x(), point_number);
+        LabelAdrList[point_number]->setNum((int)PointAdrList[point_number]->current_value);
         return;
     }
 }
@@ -158,22 +157,22 @@ uint AxesToButtonsSlider::GetPointsCount()
     return points_count_;
 }
 
-
 void AxesToButtonsSlider::SetPointValue(uint value, uint point_number)
 {
     if (point_number > points_count_){
         point_number = points_count_;
     }
-    uint pos = uint(round(value * float(width_ - offset_*2) / max_point_value_));
+    uint pos = uint((value * (this->width() - offset_*2.0f) / max_point_value_));
     // ?
     pos += offset_;
-    if (pos > uint(width_ - offset_)){
-        pos = width_ - offset_;
+    if (pos > uint(this->width() - offset_)){
+        pos = this->width() - offset_;
     } else if (pos < uint(offset_)){
         pos = offset_;
     }
     MovePointer(pos, point_number);
-    SetLableValue(pos, point_number);
+    //SetLableValue(pos, point_number);
+    LabelAdrList[point_number]->setNum(int(value));
     update();
 }
 
@@ -185,13 +184,13 @@ uint AxesToButtonsSlider::GetPointValue(uint point_number)
 
 uint AxesToButtonsSlider::CalcPointValue(int current_pos)
 {
-    float tmp_value = (width_ - offset_*2) / float(max_point_value_);    // для красоты
+    float tmp_value = (this->width() - offset_*2.0f) / max_point_value_;    // для красоты
     return uint(round(  (current_pos - offset_) / tmp_value  ));
 }
 
 void AxesToButtonsSlider::PointsPositionReset()
 {
-    int tmp_distance = round((float(width_) - offset_*2) / (points_count_ -1));
+    double tmp_distance = (this->width() - offset_*2.0f) / (points_count_ -1);
     // apply color, position
     for (int i = 0; i < PointAdrList.size(); ++i) {
         if (this->isEnabled() == true){
@@ -201,15 +200,16 @@ void AxesToButtonsSlider::PointsPositionReset()
         }
         //PointAdrList[i]->color = pointer_color_;
         PointAdrList[i]->is_drag = false;
-        PointAdrList[i]->posX = i * tmp_distance + offset_;
+        PointAdrList[i]->posX = round(i * tmp_distance + offset_);
     }
     // last to last X position
-    PointAdrList[points_count_ - 1]->posX = width_ - offset_;
+    PointAdrList[points_count_ - 1]->posX = this->width() - offset_;
     // move points
     for (uint i = 0; i < points_count_; ++i) {
         MovePointer(PointAdrList[i]->posX, i);
-        SetLableValue(PointAdrList[i]->posX, i);
+        //SetLableValue(PointAdrList[i]->posX, i);
         PointAdrList[i]->current_value = CalcPointValue(PointAdrList[i]->posX);
+        LabelAdrList[i]->setNum((int)PointAdrList[i]->current_value);
     }
     update();
 }
@@ -278,13 +278,12 @@ void AxesToButtonsSlider::mouseReleaseEvent(QMouseEvent *event) {
 void AxesToButtonsSlider::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event)
-    float tmp_value = (event->size().width() - offset_*2) / float(max_point_value_);
+    float tmp_value = (this->width() - offset_*2.0f) / (float)max_point_value_;
     for (int i = 0; i < PointAdrList.size(); ++i) {
         PointAdrList[i]->posX = (PointAdrList[i]->current_value * tmp_value) + offset_;
         MovePointer(PointAdrList[i]->posX, i);
     }
-    width_ = this->width();
-    line_spacing_ = (width_ - offset_*2) / 24.0;
+    line_spacing_ = (this->width() - offset_*2) / 24.0f;
 }
 
 bool AxesToButtonsSlider::event(QEvent *event)

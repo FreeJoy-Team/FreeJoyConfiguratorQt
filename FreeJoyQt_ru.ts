@@ -148,15 +148,15 @@
     </message>
     <message>
         <source>Axis source 1</source>
-        <translation type="unfinished">Источник оси 1</translation>
+        <translation type="obsolete">Источник оси 1</translation>
     </message>
     <message>
         <source>I2C address</source>
-        <translation type="unfinished">I2C аддресс</translation>
+        <translation type="obsolete">I2C аддресс</translation>
     </message>
     <message>
         <source>Prescaler %</source>
-        <translation type="unfinished">Предделитель %</translation>
+        <translation type="obsolete">Предделитель %</translation>
     </message>
     <message>
         <source>Output</source>
@@ -168,35 +168,35 @@
     </message>
     <message>
         <source>Axis source 2</source>
-        <translation type="unfinished">Источник оси 2</translation>
+        <translation type="obsolete">Источник оси 2</translation>
     </message>
     <message>
         <source>Step div</source>
-        <translation type="unfinished">Шаг делителя</translation>
+        <translation type="obsolete">Шаг делителя</translation>
     </message>
     <message>
         <source>Button 2</source>
-        <translation type="unfinished">Кнопка 2</translation>
+        <translation type="obsolete">Кнопка 2</translation>
     </message>
     <message>
         <source>Function</source>
-        <translation type="unfinished">Функция</translation>
+        <translation type="obsolete">Функция</translation>
     </message>
     <message>
         <source>Chanel/Encoder</source>
-        <translation type="unfinished">Канал/Энкодер</translation>
+        <translation type="obsolete">Канал/Энкодер</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished">Разрешение</translation>
+        <translation type="obsolete">Разрешение</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Смещение</translation>
+        <translation type="obsolete">Смещение</translation>
     </message>
     <message>
         <source>Deadband</source>
-        <translation type="unfinished">Мёртвая зона</translation>
+        <translation type="obsolete">Мёртвая зона</translation>
     </message>
     <message>
         <source>bits</source>
@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished">Фильтр</translation>
+        <translation type="obsolete">Фильтр</translation>
     </message>
     <message>
         <source>Center</source>
@@ -220,15 +220,15 @@
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished">Выкл</translation>
+        <translation type="obsolete">Выкл</translation>
     </message>
     <message>
         <source>Dynamic deadband</source>
-        <translation type="unfinished">Динам. мёртвая зона</translation>
+        <translation type="obsolete">Динам. мёртвая зона</translation>
     </message>
     <message>
         <source>Button 3</source>
-        <translation type="unfinished">Кнопка 3</translation>
+        <translation type="obsolete">Кнопка 3</translation>
     </message>
     <message>
         <source>Out</source>
@@ -240,7 +240,7 @@
     </message>
     <message>
         <source>Button 1</source>
-        <translation type="unfinished">Кнопка 1</translation>
+        <translation type="obsolete">Кнопка 1</translation>
     </message>
     <message>
         <source>None</source>
@@ -252,7 +252,7 @@
     </message>
     <message>
         <source>Equal</source>
-        <translation type="unfinished">Равно</translation>
+        <translation type="obsolete">Равно</translation>
     </message>
     <message>
         <source>Function Enable</source>
@@ -260,47 +260,47 @@
     </message>
     <message>
         <source>Prescale enable</source>
-        <translation type="unfinished">Масштабирование вкл</translation>
+        <translation type="obsolete">Масштабирование вкл</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished">Сброс</translation>
+        <translation type="obsolete">Сброс</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Вниз</translation>
+        <translation type="obsolete">Вниз</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Вверх</translation>
+        <translation type="obsolete">Вверх</translation>
     </message>
     <message>
         <source>Level 1</source>
-        <translation type="unfinished">Ур. 1</translation>
+        <translation type="obsolete">Ур. 1</translation>
     </message>
     <message>
         <source>Level 2</source>
-        <translation type="unfinished">Ур. 2</translation>
+        <translation type="obsolete">Ур. 2</translation>
     </message>
     <message>
         <source>Level 3</source>
-        <translation type="unfinished">Ур. 3</translation>
+        <translation type="obsolete">Ур. 3</translation>
     </message>
     <message>
         <source>Level 4</source>
-        <translation type="unfinished">Ур. 4</translation>
+        <translation type="obsolete">Ур. 4</translation>
     </message>
     <message>
         <source>Level 5</source>
-        <translation type="unfinished">Ур. 5</translation>
+        <translation type="obsolete">Ур. 5</translation>
     </message>
     <message>
         <source>Level 6</source>
-        <translation type="unfinished">Ур. 6</translation>
+        <translation type="obsolete">Ур. 6</translation>
     </message>
     <message>
         <source>Level 7</source>
-        <translation type="unfinished">Ур. 7</translation>
+        <translation type="obsolete">Ур. 7</translation>
     </message>
     <message>
         <source>X</source>
@@ -348,15 +348,15 @@
     </message>
     <message>
         <source>Plus</source>
-        <translation type="unfinished">Плюс</translation>
+        <translation type="obsolete">Плюс</translation>
     </message>
     <message>
         <source>Minus</source>
-        <translation type="unfinished">Минус</translation>
+        <translation type="obsolete">Минус</translation>
     </message>
     <message>
         <source>Function enable</source>
-        <translation type="unfinished">Функция включена</translation>
+        <translation type="obsolete">Функция включена</translation>
     </message>
     <message>
         <source>Reset calibration</source>
@@ -364,7 +364,15 @@
     </message>
     <message>
         <source> bits</source>
-        <translation type="unfinished"> бит</translation>
+        <translation type="obsolete"> бит</translation>
+    </message>
+    <message>
+        <source>Show extended settings</source>
+        <translation type="unfinished">Показать расширенные настройки</translation>
+    </message>
+    <message>
+        <source>Axis source</source>
+        <translation type="unfinished">Источник оси</translation>
     </message>
 </context>
 <context>
@@ -452,10 +460,146 @@
     </message>
 </context>
 <context>
-    <name>AxesToButtons</name>
+    <name>AxesExtended</name>
     <message>
         <source>Form</source>
-        <translation>Форма</translation>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>Chanel/Encoder</source>
+        <translation type="unfinished">Канал/Энкодер</translation>
+    </message>
+    <message>
+        <source>Function axis</source>
+        <translation type="unfinished">Ось для функции</translation>
+    </message>
+    <message>
+        <source>Prescaler %</source>
+        <translation type="unfinished">Предделитель %</translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="unfinished">Разрешение</translation>
+    </message>
+    <message>
+        <source>Button 3</source>
+        <translation type="unfinished">Кнопка 3</translation>
+    </message>
+    <message>
+        <source>Button 2</source>
+        <translation type="unfinished">Кнопка 2</translation>
+    </message>
+    <message>
+        <source>Button 1</source>
+        <translation type="unfinished">Кнопка 1</translation>
+    </message>
+    <message>
+        <source>Filter off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function</source>
+        <translation type="unfinished">Функция</translation>
+    </message>
+    <message>
+        <source>Step div</source>
+        <translation type="unfinished">Шаг делителя</translation>
+    </message>
+    <message>
+        <source>I2C address</source>
+        <translation type="unfinished">I2C аддресс</translation>
+    </message>
+    <message>
+        <source> bits</source>
+        <translation type="unfinished"> бит</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Смещение</translation>
+    </message>
+    <message>
+        <source>Deadband</source>
+        <translation type="unfinished">Мёртвая зона</translation>
+    </message>
+    <message>
+        <source>Dynamic deadband</source>
+        <translation type="unfinished">Динам. мёртвая зона</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished">Фильтр</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Нет</translation>
+    </message>
+    <message>
+        <source>Plus</source>
+        <translation type="unfinished">Плюс</translation>
+    </message>
+    <message>
+        <source>Minus</source>
+        <translation type="unfinished">Минус</translation>
+    </message>
+    <message>
+        <source>Equal</source>
+        <translation type="unfinished">Равно</translation>
+    </message>
+    <message>
+        <source>Function enable</source>
+        <translation type="unfinished">Функция включена</translation>
+    </message>
+    <message>
+        <source>Prescale enable</source>
+        <translation type="unfinished">Масштабирование вкл</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation type="unfinished">Центр</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished">Сброс</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">Вниз</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">Вверх</translation>
+    </message>
+    <message>
+        <source>off</source>
+        <translation type="unfinished">выкл</translation>
+    </message>
+    <message>
+        <source>level 1</source>
+        <translation type="unfinished">ур. 1</translation>
+    </message>
+    <message>
+        <source>level 2</source>
+        <translation type="unfinished">ур. 2</translation>
+    </message>
+    <message>
+        <source>level 3</source>
+        <translation type="unfinished">ур. 3</translation>
+    </message>
+    <message>
+        <source>level 4</source>
+        <translation type="unfinished">ур. 4</translation>
+    </message>
+    <message>
+        <source>level 5</source>
+        <translation type="unfinished">ур. 5</translation>
+    </message>
+    <message>
+        <source>level 6</source>
+        <translation type="unfinished">ур. 6</translation>
+    </message>
+    <message>
+        <source>level 7</source>
+        <translation type="unfinished">ур. 7</translation>
     </message>
     <message>
         <source>X</source>
@@ -491,10 +635,29 @@
     </message>
 </context>
 <context>
+    <name>AxesToButtons</name>
+    <message>
+        <source>Form</source>
+        <translation type="vanished">Форма</translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="obsolete">Х</translation>
+    </message>
+    <message>
+        <source>Slider 1</source>
+        <translation type="obsolete">Слайдер 1</translation>
+    </message>
+    <message>
+        <source>Slider 2</source>
+        <translation type="obsolete">Слайдер 2</translation>
+    </message>
+</context>
+<context>
     <name>AxesToButtonsConfig</name>
     <message>
         <source>Form</source>
-        <translation>Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
 </context>
 <context>
@@ -1029,7 +1192,7 @@
     </message>
     <message>
         <source> Axes to Buttons </source>
-        <translation> Оси в кнопки </translation>
+        <translation type="vanished"> Оси в кнопки </translation>
     </message>
     <message>
         <source> Shift Registers </source>

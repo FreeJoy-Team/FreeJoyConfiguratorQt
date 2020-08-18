@@ -225,7 +225,7 @@ MainWindow::~MainWindow()
     thread->wait();
     delete hid_device_worker;
     delete thread;              // не уверен в нужности, если есть thread->deleteLater();
-    delete thread_getSend_config;       // hz
+    //delete thread_getSend_config;       // hz
     delete ui;
 }
 
@@ -481,6 +481,15 @@ void MainWindow::on_pushButton_ReadConfig_clicked()        // херня? mb QtC
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
         qDebug()<<"read start";
+
+        QTimer::singleShot(4000, [&]{
+            qDebug()<<"read config timer act - QTimer";
+            if (loop.isRunning()){
+                loop.quit();
+                emit getConfigDone(false);
+            }
+        });
+
         emit getConfigDone(hid_device_worker->GetConfigFromDevice());
         qDebug()<<"read finish";
         loop.quit();
@@ -507,6 +516,15 @@ void MainWindow::on_pushButton_WriteConfig_clicked()        // херня? mb Qt
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
         qDebug()<<"write start";
+
+        QTimer::singleShot(4000, [&]{
+            qDebug()<<"write config timer act - QTimer";
+            if (loop.isRunning()){
+                loop.quit();
+                emit sendConfigDone(false);
+            }
+        });
+
         emit sendConfigDone(hid_device_worker->SendConfigToDevice());
         qDebug()<<"write finish";
         loop.quit();
@@ -561,7 +579,7 @@ void MainWindow::configReceived(bool success)        // повторное на�
         ui->pushButton_ReadConfig->setText(tr("Received"));
         ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
         qDebug()<<"configReceived - before QTimer";
-        QTimer::singleShot(1000, [&]{
+        QTimer::singleShot(1500, [&]{
             qDebug()<<"configReceived - QTimer";
             ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
             ui->pushButton_ReadConfig->setText(button_default_text);
@@ -572,7 +590,7 @@ void MainWindow::configReceived(bool success)        // повторное на�
         ui->pushButton_ReadConfig->setText(tr("Error"));
         ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
         qDebug()<<"configReceived - before QTimer";
-        QTimer::singleShot(1000, [&]{
+        QTimer::singleShot(1500, [&]{
             qDebug()<<"configReceived - QTimer";
             ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
             ui->pushButton_ReadConfig->setText(button_default_text);
@@ -593,7 +611,7 @@ void MainWindow::configSent(bool success)
         ui->pushButton_WriteConfig->setText(tr("Sent"));
         ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
 
-        QTimer::singleShot(1000, [&]{
+        QTimer::singleShot(1500, [&]{
             ui->pushButton_WriteConfig->setStyleSheet(button_default_style_);
             ui->pushButton_WriteConfig->setText(button_default_text);
             ui->pushButton_WriteConfig->setEnabled(true);
@@ -603,7 +621,7 @@ void MainWindow::configSent(bool success)
         ui->pushButton_WriteConfig->setText(tr("Error"));
         ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
 
-        QTimer::singleShot(1000, [&]{
+        QTimer::singleShot(1500, [&]{
             ui->pushButton_WriteConfig->setStyleSheet(button_default_style_);
             ui->pushButton_WriteConfig->setText(button_default_text);
             ui->pushButton_WriteConfig->setEnabled(true);

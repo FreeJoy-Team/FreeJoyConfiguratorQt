@@ -173,14 +173,17 @@ void HidDevice::SetIsFinish(bool is_finish)
 
 bool HidDevice::GetConfigFromDevice()     // try catch
 {
+    qDebug()<<"before if(handle_read)";
     if(handle_read)
     {
+        qDebug()<<"after if(handle_read)";
         clock_t millis;
         millis = clock();
         int report_count = 0;
 
         uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
-        hid_write(handle_read, config_request_buffer, 2);
+        qDebug()<<"before hid_write";
+        hid_write(handle_read, config_request_buffer, 2);       // тут проблема, редко виснет на этой функции. мб мьютекс хз
         qDebug()<<"start read cycle";
         while (clock() < millis + 1000)   // сделать таймаут 2000ms
         {
