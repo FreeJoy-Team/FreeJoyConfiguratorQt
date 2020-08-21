@@ -169,29 +169,29 @@ void ButtonConfig::ButtonStateChanged()
 
             if (i == 0 && shift1_activated_ == false){
                 default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift1_logicalButton->setStyleSheet("background-color: rgb(0, 128, 0);");
+                ui->text_shift1_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
                 //ui->groupBox_Shift1->setStyleSheet("background-color: rgb(0, 128, 0);");
                 //ui->spinBox_Shift1->setStyleSheet("background-color: rgb(0, 128, 0);");
                 shift1_activated_ = true;
             }
             else if (i == 1 && shift2_activated_ == false){
                 default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift2_logicalButton->setStyleSheet("background-color: rgb(0, 128, 0);");
+                ui->text_shift2_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
                 shift2_activated_ = true;
             }
             else if (i == 2 && shift3_activated_ == false){
                 default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift3_logicalButton->setStyleSheet("background-color: rgb(0, 128, 0);");
+                ui->text_shift3_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
                 shift3_activated_ = true;
             }
             else if (i == 3 && shift4_activated_ == false){
                 default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift4_logicalButton->setStyleSheet("background-color: rgb(0, 128, 0);");
+                ui->text_shift4_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
                 shift4_activated_ = true;
             }
             else if (i == 4 && shift5_activated_ == false){
                 default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift5_logicalButton->setStyleSheet("background-color: rgb(0, 128, 0);");
+                ui->text_shift5_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
                 shift5_activated_ = true;
             }
 

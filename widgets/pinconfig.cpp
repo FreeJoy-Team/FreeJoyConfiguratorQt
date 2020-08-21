@@ -325,13 +325,13 @@ void PinConfig::shiftRegButtonsCountChanged(int count)
 void PinConfig::totalButtonsChanged(int count)
 {
     if (count > MAX_BUTTONS_NUM){
-        default_style_ = ui->label_TotalButtons->styleSheet();
-        //ui->label_TotalButtons->setStyleSheet("background-color: rgb(200, 0, 0);");
-        ui->text_TotalButtons->setStyleSheet("background-color: rgb(200, 0, 0);");
+        default_label_style_ = ui->label_TotalButtons->styleSheet();
+        //ui->label_TotalButtons->setStyleSheet(default_label_style_ + "background-color: rgb(200, 0, 0);");
+        ui->text_TotalButtons->setStyleSheet(default_label_style_ + "background-color: rgb(200, 0, 0);");
         max_buttons_warning_ = true;
     } else if (max_buttons_warning_ == true){   // && count <= MAX_BUTTONS_NUM
-        //ui->label_TotalButtons->setStyleSheet(default_style_);
-        ui->text_TotalButtons->setStyleSheet(default_style_);
+        //ui->label_TotalButtons->setStyleSheet(default_label_style_);
+        ui->text_TotalButtons->setStyleSheet(default_label_style_);
         max_buttons_warning_ = false;
     }
 }

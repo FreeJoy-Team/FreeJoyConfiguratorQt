@@ -53,7 +53,7 @@ private slots:
 private:
     Ui::PinConfig *ui;
 
-    QString default_style_;
+    QString default_label_style_;
     bool max_buttons_warning_;
 
     int shift_latch_count_;

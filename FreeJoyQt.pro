@@ -22,7 +22,6 @@ SOURCES += \
     converter.cpp \
     deviceconfig.cpp \
     firmwareupdater.cpp \
-    hidapi.c \
     hiddevice.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -120,8 +119,12 @@ RESOURCES += \
 
 linux-g++ | linux-g++-64 | linux-g++-32 {
     LIBS += -ludev
+    SOURCES += \
+        linux/hidapi.c
 }
 
 win32 {
     LIBS += -lhid -lsetupapi
+    SOURCES += \
+        windows/hidapi.c
 }

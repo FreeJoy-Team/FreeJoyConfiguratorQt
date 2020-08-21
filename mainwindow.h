@@ -65,6 +65,8 @@ signals:
     void getConfigDone(bool success);
     void sendConfigDone(bool success);
 
+    void test();
+
 
 private slots:
     void showConnectDeviceInfo();
@@ -86,21 +88,18 @@ private slots:
 
     void interfaceStyleChanged(bool is_dark);
 
-    void addvalues(int);
-
     void on_pushButton_ResetAllPins_clicked();
 
     void on_pushButton_ReadConfig_clicked();
     void on_pushButton_WriteConfig_clicked();
 
     void on_pushButton_SaveToFile_clicked();
-
     void on_pushButton_LoadFromFile_clicked();
 
     void on_pushButton_SetDefaultConfig_clicked();
-
     void on_pushButton_LoadDefaultConfig_clicked();
 
+    void addvalues(int);
     void on_pushButton_TestButton_clicked();
 
 private:

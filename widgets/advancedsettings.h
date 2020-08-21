@@ -63,7 +63,7 @@ private:
     QByteArray file_array_;
     QString flash_button_text_;
     QString enter_to_flash_btn_text_;
-    QString default_style_;
+    QString default_button_style_;
     void FlashDone();
 
     QString tmp_text;

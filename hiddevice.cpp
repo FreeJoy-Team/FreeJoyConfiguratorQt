@@ -6,14 +6,21 @@
 #include "common_defines.h"
 #include "firmwareupdater.h"
 
-//struct HidDeviceList
+#define VID 0x0483  //0x0483
+
+//clock_t clock_ms()
 //{
-//};
+//    return time.elapsed() /
+//}
+
+
                                 /////////////////////////// это самое слабое место в программе, переписать при первой возможности //////////////////////////
 void HidDevice::processData()
 {
     int res = 0;
-    clock_t timer;
+    qint64 timer;
+    QElapsedTimer time;
+    time.start();
     bool change = false;
     bool no_device_sent = false;
     QList<hid_device_info*> tmp_HidDevicesAdrList;
@@ -24,25 +31,26 @@ void HidDevice::processData()
     while (is_finish_ == false)
     {
 //        //////////////
-//        clock_t start = clock();
+//        clock_t start = time.elapsed();
 //        for(int i = 0; i < 100; ++i){
 //            hid_dev_info = hid_enumerate(0x0483, NULL);
 //        }
-//        clock_t stop = clock();
+//        clock_t stop = time.elapsed();
 //        qDebug()<<"hid_enumerate time ="<<stop- start;
 //        /////////////
 
         // check connected devices
         if (!change)
         {
-            timer = clock();
+            //timer = time.elapsed();
+            timer = time.elapsed();
             change = true;
         }
-        else if (change && clock() - timer > 800)   // change always true
+        else if (change && time.elapsed() - timer > 800)   // change always true
         {
             // goto
             //link:
-            hid_dev_info = hid_enumerate(0x0483, 0x0); //NULL   FreeJoy Flasher flasher_
+            hid_dev_info = hid_enumerate(VID, 0x0); //NULL   FreeJoy Flasher flasher_
             if (!hid_dev_info && no_device_sent == false)
             {
                 str_list.clear();
@@ -96,7 +104,7 @@ void HidDevice::processData()
         if (!handle_read)
         {
             if (HidDevicesAdrList.size()){          // ?
-                handle_read = hid_open(0x0483, HidDevicesAdrList[0]->product_id,nullptr);
+                handle_read = hid_open(VID, HidDevicesAdrList[0]->product_id,nullptr);
             }
             if (!handle_read) {
                 emit putDisconnectedDeviceInfo();
@@ -110,7 +118,6 @@ void HidDevice::processData()
         // device connected
         if (handle_read)
         {
-
             res=hid_read_timeout(handle_read, buffer, BUFFSIZE,10000);         // 10000?
             //  res=hid_read(handle_read, buf, BUFFSIZE);
             if (res < 0) {
@@ -133,12 +140,12 @@ void HidDevice::processData()
                     memcpy(device_buffer_, buffer, BUFFSIZE);
                     //emit putConfigRequest(device_buffer_);
                 }
-                //QThread::msleep(50);            // ????
+                //QThread::msleep(10);            // ????
             }
         }
 
     }
-    hid_free_enumeration(hid_dev_info);
+    hid_free_enumeration(hid_dev_info);            // ????
 }
 
 
@@ -153,7 +160,7 @@ void HidDevice::SetSelectedDevice(int device_number)        // заблочит�
     selected_device_ = device_number; 
     qDebug()<<"HID open start";
     // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()
-    handle_read = hid_open(0x0483, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
+    handle_read = hid_open(VID, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
 //    if (!handle_read) {
 //        emit putDisconnectedDeviceInfo();
 //        //hid_free_enumeration(hid_dev_info);
@@ -161,7 +168,7 @@ void HidDevice::SetSelectedDevice(int device_number)        // заблочит�
 //        emit putConnectedDeviceInfo();
 //    }
     qDebug()<<"No crash, HID opened";
-    qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
+    //qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
 }
 
 
@@ -170,24 +177,31 @@ void HidDevice::SetIsFinish(bool is_finish)
     is_finish_ = is_finish;
 }
 
-
+//#include <QTimer>
 bool HidDevice::GetConfigFromDevice()     // try catch
 {
     qDebug()<<"before if(handle_read)";
+//    while(true){
+//    }
     if(handle_read)
     {
         qDebug()<<"after if(handle_read)";
-        clock_t millis;
-        millis = clock();
+        qint64 millis;
+        QElapsedTimer time;
+        time.start();
+        millis = time.elapsed();
         int report_count = 0;
-
-        uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
+//        while (time.elapsed() < millis + 2000)
+//        {
+//        }
         qDebug()<<"before hid_write";
+        uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
         hid_write(handle_read, config_request_buffer, 2);       // тут проблема, редко виснет на этой функции. мб мьютекс хз
+
         qDebug()<<"start read cycle";
-        while (clock() < millis + 1000)   // сделать таймаут 2000ms
+        while (time.elapsed() < millis + 1000)   // сделать таймаут 2000ms
         {
-            qDebug()<<"read";
+            //qDebug()<<"read";
             if (device_buffer_[0] == REPORT_ID_CONFIG_IN)
             {
                 if (device_buffer_[1] == config_request_buffer[1])
@@ -205,7 +219,7 @@ bool HidDevice::GetConfigFromDevice()     // try catch
                     }
                 }
             }
-            else if (config_request_buffer[1] < 2 && ( (millis + 150) - clock()) <= 0)
+            else if (config_request_buffer[1] < 2 && ( (millis + 150) - time.elapsed()) <= 0)
             {
                 qDebug() << "RESEND ACTIVATED";
                 config_request_buffer[1] = 1;
@@ -231,14 +245,18 @@ bool HidDevice::SendConfigToDevice()      // try catch
 //    hid_write(handle_read, config_buffer, 64);
     if(handle_read)
     {
-        clock_t millis;
-        millis = clock();
+        qint64 millis;
+        QElapsedTimer time;
+        time.start();
+        millis = time.elapsed();
         int report_count = 0;
 
+        qDebug()<<"before hid_write";
         uint8_t config_buffer[64] = {REPORT_ID_CONFIG_OUT, 0};        // check 64 2
         hid_write(handle_read, config_buffer, 64);
+
         qDebug()<<"start write cycle";
-        while (clock() < millis + 1000)   // сделать таймаут
+        while (time.elapsed() < millis + 1000)   // сделать таймаут
         {
             qDebug()<<"write";
             if (device_buffer_[0] == REPORT_ID_CONFIG_OUT)
@@ -263,7 +281,7 @@ bool HidDevice::SendConfigToDevice()      // try catch
                     }
                 }
             }
-            else if (config_buffer[1] == 0 && ( (millis + 150) - clock()) <= 0)
+            else if (config_buffer[1] == 0 && ( (millis + 150) - time.elapsed()) <= 0)
             {
                 qDebug() << "RESEND ACTIVATED";
                 //config_buffer[1] = 0;
@@ -286,13 +304,15 @@ bool HidDevice::EnterToFlashMode()
 {
     if(handle_read)
     {
-        clock_t millis;
-        millis = clock();
+        qint64 millis;
+        QElapsedTimer time;
+        time.start();
+        millis = time.elapsed();
 
         uint8_t config_buffer[64] = {REPORT_ID_FIRMWARE,'b','o','o','t','l','o','a','d','e','r',' ','r','u','n'};
         hid_write(handle_read, config_buffer, 64);
 
-        while (clock() < millis + 1000)
+        while (time.elapsed() < millis + 1000)
         {
             if (flasher_){
                 return true;
@@ -308,9 +328,11 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
     qDebug()<<"size = "<<file_bytes->size();
     if(flasher_)
     {
-        hid_device* flasher = hid_open(0x0483, flasher_->product_id, flasher_->serial_number);;
-        clock_t millis;
-        millis = clock();
+        hid_device* flasher = hid_open(VID, flasher_->product_id, flasher_->serial_number);;
+        qint64 millis;
+        QElapsedTimer time;
+        time.start();
+        millis = time.elapsed();
         uint8_t flash_buffer[BUFFSIZE]{};
         uint8_t flasher_device_buffer[BUFFSIZE]{};
         uint16_t length = (uint16_t)file_bytes->size();
@@ -334,7 +356,7 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
 
         int res = 0;
         uint8_t buffer[BUFFSIZE]={0};
-        while (clock() < millis + 40000)
+        while (time.elapsed() < millis + 40000)
         {
             if (flasher){
                 res=hid_read_timeout(flasher, buffer, BUFFSIZE,5000);  // ?

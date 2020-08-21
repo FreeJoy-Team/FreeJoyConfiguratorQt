@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     clock_t tmp_clock = clock();
-    qDebug()<<"start MainWindow constructor time ms ="<< clock() - *gEnv.pApp_start_time;
+    qDebug()<<"after main start MainWindow constructor time ms ="<< clock() - *gEnv.pApp_start_time;
     ui->setupUi(this);
 
     //setWindowFlags( Qt::FramelessWindowHint );
@@ -188,6 +188,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(hid_device_worker, SIGNAL(hidDeviceList(QStringList*)),
                           this, SLOT(hidDeviceList(QStringList*)));
 
+
     // load default config
     ReadFromConfig();
     gEnv.pAppSettings->beginGroup("OtherSettings");
@@ -213,7 +214,7 @@ MainWindow::MainWindow(QWidget *parent)
     thread->start();
 
     qDebug()<<"after widgets MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    qDebug()<<"start to MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time;
+    qDebug()<<"from start app to MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time;
 }
 
 MainWindow::~MainWindow()
@@ -412,15 +413,17 @@ void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ
     ui->lineEdit->setText(QString::number(asd));
     report_convert.GamepadReport(buff);
 
-    static clock_t timer;
+    static qint64 timer;
+    static QElapsedTimer time;
+    time.start();
     static bool change = false;
 
     if (!change)
     {
-        timer = clock();
+        timer = time.elapsed();
         change = true;
     }
-    else if (change && clock() - timer > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах    // change?? always true
+    else if (change && time.elapsed() - timer > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах    // change?? always true
     {
         // optimization
         if(ui->tab_ButtonConfig->isVisible() == true){
@@ -473,6 +476,7 @@ void MainWindow::on_pushButton_ResetAllPins_clicked()
 // read config from device
 void MainWindow::on_pushButton_ReadConfig_clicked()        // херня? mb QtConcurrent::run()
 {
+    qDebug()<<"//////////////////////////////////////////////////";
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
 //    //ui->button_GetConfig->setEnabled(false);
@@ -481,15 +485,6 @@ void MainWindow::on_pushButton_ReadConfig_clicked()        // херня? mb QtC
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
         qDebug()<<"read start";
-
-        QTimer::singleShot(4000, [&]{
-            qDebug()<<"read config timer act - QTimer";
-            if (loop.isRunning()){
-                loop.quit();
-                emit getConfigDone(false);
-            }
-        });
-
         emit getConfigDone(hid_device_worker->GetConfigFromDevice());
         qDebug()<<"read finish";
         loop.quit();
@@ -510,21 +505,11 @@ void MainWindow::on_pushButton_WriteConfig_clicked()        // херня? mb Qt
 
     WriteToConfig();
 
-//    ui->button_SendConfig->setEnabled(false);
     QEventLoop loop;
     QObject context;
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
         qDebug()<<"write start";
-
-        QTimer::singleShot(4000, [&]{
-            qDebug()<<"write config timer act - QTimer";
-            if (loop.isRunning()){
-                loop.quit();
-                emit sendConfigDone(false);
-            }
-        });
-
         emit sendConfigDone(hid_device_worker->SendConfigToDevice());
         qDebug()<<"write finish";
         loop.quit();
@@ -563,11 +548,10 @@ void MainWindow::configReceived(bool success)        // повторное на�
     button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
     static QString button_default_text = ui->pushButton_ReadConfig->text();
 
-    if (success == true){
-
+    if (success == true)
+    {
         ReadFromConfig();
-
-        // curves
+        // curves pointer activated
         axes_curves_config->DeviceStatus(true);
 
         // set firmware version     // label_FirmwareVersion
@@ -577,7 +561,7 @@ void MainWindow::configReceived(bool success)        // повторное на�
         }
 
         ui->pushButton_ReadConfig->setText(tr("Received"));
-        ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+        ui->pushButton_ReadConfig->setStyleSheet(button_default_style_ + "color: white; background-color: rgb(0, 128, 0);");
         qDebug()<<"configReceived - before QTimer";
         QTimer::singleShot(1500, [&]{
             qDebug()<<"configReceived - QTimer";
@@ -588,7 +572,7 @@ void MainWindow::configReceived(bool success)        // повторное на�
         });
     } else {
         ui->pushButton_ReadConfig->setText(tr("Error"));
-        ui->pushButton_ReadConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
+        ui->pushButton_ReadConfig->setStyleSheet(button_default_style_ + "color: white; background-color: rgb(200, 0, 0);");
         qDebug()<<"configReceived - before QTimer";
         QTimer::singleShot(1500, [&]{
             qDebug()<<"configReceived - QTimer";
@@ -605,11 +589,13 @@ void MainWindow::configSent(bool success)
 {
     button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
     static QString button_default_text = ui->pushButton_WriteConfig->text();
+    // curves pointer activated
     axes_curves_config->DeviceStatus(true);
 
-    if (success == true){
+    if (success == true)
+    {
         ui->pushButton_WriteConfig->setText(tr("Sent"));
-        ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+        ui->pushButton_WriteConfig->setStyleSheet(button_default_style_ + "color: white; background-color: rgb(0, 128, 0);");
 
         QTimer::singleShot(1500, [&]{
             ui->pushButton_WriteConfig->setStyleSheet(button_default_style_);
@@ -619,7 +605,7 @@ void MainWindow::configSent(bool success)
         });
     } else {
         ui->pushButton_WriteConfig->setText(tr("Error"));
-        ui->pushButton_WriteConfig->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
+        ui->pushButton_WriteConfig->setStyleSheet(button_default_style_ + "color: white; background-color: rgb(200, 0, 0);");
 
         QTimer::singleShot(1500, [&]{
             ui->pushButton_WriteConfig->setStyleSheet(button_default_style_);

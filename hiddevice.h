@@ -9,7 +9,7 @@
 
 #include <QObject>
 #include <QTime>    //?
-//#include <QMutex>
+//#include <QMutex>   // test
 
 class HidDevice : public QObject
 {
@@ -17,7 +17,7 @@ class HidDevice : public QObject
 
 public:
 
-    hid_device *handle_read;                // private?
+    hid_device_ *handle_read;                // private?
     bool GetConfigFromDevice();
     bool SendConfigToDevice();
 
@@ -54,7 +54,8 @@ private:
     QList<hid_device_info*> HidDevicesAdrList;
     hid_device_info* flasher_;
 
-    //QMutex mutex_;
+    // test
+    //QMutex	m_mutex;
     ReportConverter *report_convert;                     // !!!!
 };
 

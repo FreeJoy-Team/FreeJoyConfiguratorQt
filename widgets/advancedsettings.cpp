@@ -78,7 +78,7 @@ void AdvancedSettings::on_pushButton_StyleDefault_clicked()
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
     ui->pushButton_StyleDefault->setText(tr("Loading... Please wait"));
-    ui->pushButton_StyleDefault->setStyleSheet("background-color: rgb(170, 170, 0);");
+    ui->pushButton_StyleDefault->setStyleSheet(tmp_style + "background-color: rgb(170, 170, 0);");
 
     // без таймера не успевает отрисовать изменения текста и стиля, возможно на низкочастотных мониках 10мс не хватит?
     // отрисовка в другом потоке?
@@ -114,7 +114,7 @@ void AdvancedSettings::on_pushButton_StyleWhite_clicked()
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
     ui->pushButton_StyleWhite->setText(tr("Loading... Please wait"));
-    ui->pushButton_StyleWhite->setStyleSheet("background-color: rgb(170, 170, 0);");
+    ui->pushButton_StyleWhite->setStyleSheet(tmp_style + "background-color: rgb(170, 170, 0);");
 
     QTimer::singleShot(10, [&]{
         QFile f(":/qss/css/qss.css");
@@ -148,7 +148,7 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
     ui->pushButton_StyleDark->setText(tr("Loading... Please wait"));
-    ui->pushButton_StyleDark->setStyleSheet("background-color: rgb(170, 170, 0);");
+    ui->pushButton_StyleDark->setStyleSheet(tmp_style + "background-color: rgb(170, 170, 0);");
 
     QTimer::singleShot(10, [&]{
         QFile f(":qdarkstyle/style.qss");
@@ -199,11 +199,11 @@ void AdvancedSettings::flasherFound(bool is_found)
     // disable enter to flash button if flasher connected
     if (is_found == true){
         ui->pushButton_FlasherMode->setEnabled(false);
-        ui->pushButton_FlasherMode->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+        ui->pushButton_FlasherMode->setStyleSheet(default_button_style_ + "color: white; background-color: rgb(0, 128, 0);");
         ui->pushButton_FlasherMode->setText(tr("Ready to flash"));
     } else {
         ui->pushButton_FlasherMode->setEnabled(true);
-        ui->pushButton_FlasherMode->setStyleSheet(default_style_);
+        ui->pushButton_FlasherMode->setStyleSheet(default_button_style_);
         ui->pushButton_FlasherMode->setText(enter_to_flash_btn_text_);
     }
 }
@@ -221,7 +221,7 @@ void AdvancedSettings::on_pushButton_FlashFirmware_clicked()
     if (file.open(QIODevice::ReadWrite)){
         ui->pushButton_FlashFirmware->setEnabled(false);
         flash_button_text_ = ui->pushButton_FlashFirmware->text();
-        default_style_ = ui->pushButton_FlashFirmware->styleSheet();
+        default_button_style_ = ui->pushButton_FlashFirmware->styleSheet();
         file_array_ = file.readAll();
         qDebug()<<"file_array_.size()"<<file_array_.size();
         //emit startFlash(&file_array_);
@@ -246,22 +246,22 @@ void AdvancedSettings::flashStatus(int status, int percent)
 
     if (status == FINISHED){
         ui->pushButton_FlashFirmware->setText(tr("Finished"));
-        ui->pushButton_FlashFirmware->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+        ui->pushButton_FlashFirmware->setStyleSheet(default_button_style_ + "color: white; background-color: rgb(0, 128, 0);");
         FlashDone();
     }
     else if (status == SIZE_ERROR){
         ui->pushButton_FlashFirmware->setText(tr("SIZE ERROR"));
-        ui->pushButton_FlashFirmware->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
+        ui->pushButton_FlashFirmware->setStyleSheet(default_button_style_ + "color: white; background-color: rgb(200, 0, 0);");
         FlashDone();
     }
     else if (status == CRC_ERROR){
         ui->pushButton_FlashFirmware->setText(tr("CRC ERROR"));
-        ui->pushButton_FlashFirmware->setStyleSheet("color: white; background-color: rgb(200, 0, 0);");
+        ui->pushButton_FlashFirmware->setStyleSheet(default_button_style_ + "color: white; background-color: rgb(200, 0, 0);");
         FlashDone();
     }
     else if (status == ERASE_ERROR){
         ui->pushButton_FlashFirmware->setText(tr("ERASE ERROR"));
-        ui->pushButton_FlashFirmware->setStyleSheet("color: white; background-color: rgb(200, 128, 0);");
+        ui->pushButton_FlashFirmware->setStyleSheet(default_button_style_ + "color: white; background-color: rgb(200, 128, 0);");
         FlashDone();
     }
 }
@@ -269,11 +269,11 @@ void AdvancedSettings::flashStatus(int status, int percent)
 void AdvancedSettings::FlashDone()
 {
     QTimer::singleShot(1000, [&]{
-        ui->pushButton_FlashFirmware->setStyleSheet(default_style_);
+        ui->pushButton_FlashFirmware->setStyleSheet(default_button_style_);
         ui->pushButton_FlashFirmware->setEnabled(false);
         ui->pushButton_FlashFirmware->setText(flash_button_text_);
         ui->pushButton_FlasherMode->setEnabled(true);
-        ui->pushButton_FlasherMode->setStyleSheet(default_style_);
+        ui->pushButton_FlasherMode->setStyleSheet(default_button_style_);
         ui->pushButton_FlasherMode->setText(enter_to_flash_btn_text_);
         file_array_.clear();
         file_array_.shrink_to_fit();
