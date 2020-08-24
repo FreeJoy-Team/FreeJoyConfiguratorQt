@@ -93,24 +93,22 @@ void HidDevice::processData()
         // device connected
         if (handle_read)
         {
-            res=hid_read_timeout(handle_read, buffer, BUFFSIZE,10000);         // 10000?
-            if (res < 0) {
-                hid_close(handle_read);
-                handle_read=nullptr;
-            } else {
-                if (buffer[0] == REPORT_ID_JOY) {   // перестраховка
-                    memset(device_buffer_, 0, BUFFSIZE);
-                    memcpy(device_buffer_, buffer, BUFFSIZE);
-                    emit putGamepadPacket(device_buffer_);      // можно и не передавать а тут записывать!!!
-                                        // и сдесь же сделать задержку на обновление
+            if (current_work_ == REPORT_ID_JOY)
+            {
+                res=hid_read_timeout(handle_read, buffer, BUFFSIZE,10000);         // 10000?
+                if (res < 0) {
+                    hid_close(handle_read);
+                    handle_read=nullptr;
+                } else {
+                    if (buffer[0] == REPORT_ID_JOY) {   // перестраховка
+                        memset(device_buffer_, 0, BUFFSIZE);
+                        memcpy(device_buffer_, buffer, BUFFSIZE);
+                        emit putGamepadPacket(device_buffer_);      // можно и не передавать а тут записывать!!!
+                                            // и здесь же сделать задержку на обновление
 
-                    //QThread::msleep(5);            // хз почему даже 5мс тормозит обновление интерфейса(или отправку сигнала?) на ~100мс
+                        //QThread::msleep(5);            // хз почему даже 5мс тормозит обновление интерфейса(или отправку сигнала?) на ~100мс
+                    }
                 }
-            }
-
-
-            if (current_work_ == REPORT_ID_JOY){    // одна проверка вместо двух в режиме чтения REPORT_ID_JOY
-                // nothing// continue
             }
             // read config from device
             else if (current_work_ == REPORT_ID_CONFIG_IN)
@@ -243,7 +241,7 @@ void HidDevice::processData()
     hid_free_enumeration(hid_dev_info);            // ????
 }
 
-// stop while, close app
+// stop processData, close app
 void HidDevice::SetIsFinish(bool is_finish)
 {
     is_finish_ = is_finish;
