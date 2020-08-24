@@ -735,7 +735,7 @@ dev_config_t InitConfig (void)
         .encoders[15] = ENCODER_CONF_2x,
 
         .vid = 0x0483,
-        .pid = 0x5750,
+        .pid = 0x5757,
         .is_dynamic_config = 0,
 
         .led_pwm_config.duty_cycle[0] = 50,

@@ -2,16 +2,17 @@
 #define GLOBAL_H
 
 #include <QString>
-#include <ctime>            // временно
+#include <QElapsedTimer>    //?
 
 class DeviceConfig;
 class QSettings;
+//class QElapsedTimer;    //?
 //! CryEngine style global environment
 //!	Global environment. Contains pointers to all global often needed interfaces.
 //!	This is a faster way to get interface pointer then calling ISystem interface to retrieve one.
 struct GlobalEnvironment
 {
-    clock_t*                   pApp_start_time = nullptr;
+    QElapsedTimer*             pApp_start_time = nullptr;
     DeviceConfig*              pDeviceConfig = nullptr;
     QSettings*                 pAppSettings = nullptr;
     // thread

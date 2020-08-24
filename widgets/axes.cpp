@@ -1,6 +1,5 @@
 #include "axes.h"
 #include "ui_axes.h"
-#include "widgets/axesextended.h"
 #include <QTimer>
 
 Axes::Axes(int axis_number, QWidget *parent) :
@@ -231,6 +230,7 @@ void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 }
 
 
+
 void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)
 {
     // output, inverted
@@ -286,3 +286,4 @@ void Axes::WriteToConfig()
     // axes extended settings
     axes_extend->WriteToConfig();
 }
+

@@ -19,8 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    clock_t tmp_clock = clock();
-    qDebug()<<"after main start MainWindow constructor time ms ="<< clock() - *gEnv.pApp_start_time;
+    QElapsedTimer timer;
+    timer.start();
+
+    qDebug()<<"after main start MainWindow constructor time ms ="<< gEnv.pApp_start_time->elapsed();
     ui->setupUi(this);
 
     //setWindowFlags( Qt::FramelessWindowHint );
@@ -50,45 +52,36 @@ MainWindow::MainWindow(QWidget *parent)
 //    QScrollBar* scroll = ui->scrollArea_2->verticalScrollBar();
 //    connect( scroll , SIGNAL(valueChanged(int)) ,this , SLOT(addvalues(int)) );
 
-    qDebug()<<"befor load widgets time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
-
+    qDebug()<<"befor load widgets time ms ="<< timer.restart();
                                             //////////////// ADD WIDGETS ////////////////
     // add pin config
     pin_config = new PinConfig(this);
     ui->layoutV_tabPinConfig->addWidget(pin_config);
-    qDebug()<<"pin config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
+    qDebug()<<"pin config load time ms ="<< timer.restart();
     // add button config
     button_config = new ButtonConfig(this);     // not need delete. this - parent
     ui->layoutV_tabButtonConfig->addWidget(button_config);
-    qDebug()<<"button config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
+    qDebug()<<"button config load time ms ="<< timer.restart();
     // add axes config
     axes_config = new AxesConfig(this);
     ui->layoutV_tabAxesConfig->addWidget(axes_config);
-    qDebug()<<"axes config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
+    qDebug()<<"axes config load time ms ="<< timer.restart();
     // add axes curves config
     axes_curves_config = new AxesCurvesConfig(this);
     ui->layoutV_tabAxesCurvesConfig->addWidget(axes_curves_config);
-    qDebug()<<"curves config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
+    qDebug()<<"curves config load time ms ="<< timer.restart();
     // add shift registers config
     shift_reg_config = new ShiftRegistersConfig(this);
     ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config);
-    qDebug()<<"shift config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
+    qDebug()<<"shift config load time ms ="<< timer.restart();
     // add encoders config
     encoder_config = new EncodersConfig(this);
     ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
-    qDebug()<<"encoder config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
+    qDebug()<<"encoder config load time ms ="<< timer.restart();
     // add led config
     led_config = new LedConfig(this);
     ui->layoutV_tabLedConfig->addWidget(led_config);
-    qDebug()<<"led config load time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    tmp_clock = clock();
+    qDebug()<<"led config load time ms ="<< timer.restart();
 
 
     // strong focus for mouse wheel
@@ -189,6 +182,14 @@ MainWindow::MainWindow(QWidget *parent)
                           this, SLOT(hidDeviceList(QStringList*)));
 
 
+    // read config from device
+    connect(hid_device_worker, SIGNAL(configReceived(bool)),
+            this, SLOT(configReceived(bool)));
+    // write config to device
+    connect(hid_device_worker, SIGNAL(configSent(bool)),
+            this, SLOT(configSent(bool)));
+
+
     // load default config
     ReadFromConfig();
     gEnv.pAppSettings->beginGroup("OtherSettings");
@@ -213,8 +214,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     thread->start();
 
-    qDebug()<<"after widgets MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time - tmp_clock;
-    qDebug()<<"from start app to MainWindow constructor end time ms ="<< clock() - *gEnv.pApp_start_time;
+    qDebug()<<"after widgets MainWindow constructor end time ms ="<< timer.elapsed();
+    qDebug()<<"from start app to MainWindow constructor end time ms ="<< gEnv.pApp_start_time->elapsed();
 }
 
 MainWindow::~MainWindow()
@@ -350,7 +351,7 @@ void MainWindow::showConnectDeviceInfo() {
     ui->pushButton_ReadConfig->setEnabled(true);
     ui->pushButton_WriteConfig->setEnabled(true);
     ui->widget_2->DeviceConnected(true);
-    qDebug()<<"start time ms ="<< clock() - *gEnv.pApp_start_time;
+    qDebug()<<"start time ms ="<< gEnv.pApp_start_time->elapsed();
 }
 
 
@@ -413,17 +414,17 @@ void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ
     ui->lineEdit->setText(QString::number(asd));
     report_convert.GamepadReport(buff);
 
-    static qint64 timer;
-    static QElapsedTimer time;
-    time.start();
+    //static qint64 timer;
+    static QElapsedTimer timer;
     static bool change = false;
 
     if (!change)
     {
-        timer = time.elapsed();
+        timer.start();
+        //timer = time.elapsed();
         change = true;
     }
-    else if (change && time.elapsed() - timer > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах    // change?? always true
+    else if (change && timer.elapsed() > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах    // change?? always true
     {
         // optimization
         if(ui->tab_ButtonConfig->isVisible() == true){
@@ -474,54 +475,28 @@ void MainWindow::on_pushButton_ResetAllPins_clicked()
 
 
 // read config from device
-void MainWindow::on_pushButton_ReadConfig_clicked()        // херня? mb QtConcurrent::run()
+void MainWindow::on_pushButton_ReadConfig_clicked()
 {
     qDebug()<<"//////////////////////////////////////////////////";
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
-//    //ui->button_GetConfig->setEnabled(false);
-    QEventLoop loop;
-    QObject context;
-    context.moveToThread(thread_getSend_config);
-    connect(thread_getSend_config, &QThread::started, &context, [&]() {
-        qDebug()<<"read start";
-        emit getConfigDone(hid_device_worker->GetConfigFromDevice());
-        qDebug()<<"read finish";
-        loop.quit();
-    });
-    thread_getSend_config->start();
-    loop.exec();
-    thread_getSend_config->quit();
-    thread_getSend_config->wait();
-    ui->label_DebDeviceName->setText(gEnv.pDeviceConfig->config.device_name);
-    ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
+
+    hid_device_worker->GetConfigFromDevice();
 }
 
 // write config to device
-void MainWindow::on_pushButton_WriteConfig_clicked()        // херня? mb QtConcurrent::run()
+void MainWindow::on_pushButton_WriteConfig_clicked()
 {
     ui->pushButton_WriteConfig->setEnabled(false);
     ui->pushButton_ReadConfig->setEnabled(false);
 
     WriteToConfig();
-
-    QEventLoop loop;
-    QObject context;
-    context.moveToThread(thread_getSend_config);
-    connect(thread_getSend_config, &QThread::started, &context, [&]() {
-        qDebug()<<"write start";
-        emit sendConfigDone(hid_device_worker->SendConfigToDevice());
-        qDebug()<<"write finish";
-        loop.quit();
-    });
-    thread_getSend_config->start();
-    loop.exec();
-    thread_getSend_config->quit();
-    thread_getSend_config->wait();
+    hid_device_worker->SendConfigToDevice();
 }
 
 void MainWindow::deviceFlasherController(bool is_start_flash)        // херня? mb QtConcurrent::run()
 {
+    // убрать всё в один поток, как read/write
     QEventLoop loop;
     QObject context;
     context.moveToThread(thread_getSend_config);
@@ -545,6 +520,7 @@ void MainWindow::deviceFlasherController(bool is_start_flash)        // херн
 void MainWindow::configReceived(bool success)        // повторное наатие
 {
     qDebug()<<"configReceived";
+    //ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
     button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
     static QString button_default_text = ui->pushButton_ReadConfig->text();
 

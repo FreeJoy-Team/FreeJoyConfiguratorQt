@@ -701,6 +701,13 @@ err:
 
 int HID_API_EXPORT HID_API_CALL hid_write(hid_device *dev, const unsigned char *data, size_t length)
 {
+//    FILE * fp;
+
+//    fp = fopen ("hidapi_debug.txt", "w+");
+//    fprintf(fp, "1.start\n");
+//    fclose(fp);
+
+
 	DWORD bytes_written;
 	BOOL res;
 
@@ -708,7 +715,11 @@ int HID_API_EXPORT HID_API_CALL hid_write(hid_device *dev, const unsigned char *
 	unsigned char *buf;
 	memset(&ol, 0, sizeof(ol));
 
-	/* Make sure the right number of bytes are passed to WriteFile. Windows
+//    fp = fopen ("hidapi_debug.txt", "w+");
+//    fprintf(fp, "2.after memset\n");///////////////////
+//    fclose(fp);     /////////////
+
+    /* Make sure the right number of bytes are passed to WriteFile. Windows
 	   expects the number of bytes which are in the _longest_ report (plus
 	   one for the report number) bytes even if the data is a report
 	   which is shorter than that. Windows gives us this value in
@@ -717,21 +728,44 @@ int HID_API_EXPORT HID_API_CALL hid_write(hid_device *dev, const unsigned char *
 	if (length >= dev->output_report_length) {
 		/* The user passed the right number of bytes. Use the buffer as-is. */
 		buf = (unsigned char *) data;
-	} else {
+
+//        fp = fopen ("hidapi_debug.txt", "w+");
+//        fprintf(fp, "3.if true\n");///////////////////
+//        fclose(fp);     /////////////
+
+    } else {
 		/* Create a temporary buffer and copy the user's data
 		   into it, padding the rest with zeros. */
 		buf = (unsigned char *) malloc(dev->output_report_length);
 		memcpy(buf, data, length);
 		memset(buf + length, 0, dev->output_report_length - length);
 		length = dev->output_report_length;
-	}
 
-	res = WriteFile(dev->device_handle, buf, length, NULL, &ol);
-	
-	if (!res) {
+//        fp = fopen ("hidapi_debug.txt", "w+");
+//        fprintf(fp, "4.else\n");///////////////////
+//        fclose(fp);     /////////////
+
+    }
+
+//    fp = fopen ("hidapi_debug.txt", "w+");
+//    fprintf(fp, "5.before res\n");///////////////////
+//    fclose(fp);     /////////////
+
+    res = WriteFile(dev->device_handle, buf, length, NULL, &ol);
+
+//    fp = fopen ("hidapi_debug.txt", "w+");
+//    fprintf(fp, "6.if (!res)\n");///////////////////
+//    fclose(fp);     /////////////
+
+    if (!res) {
 		if (GetLastError() != ERROR_IO_PENDING) {
 			/* WriteFile() failed. Return error. */
-			register_error(dev, "WriteFile");
+
+//            fp = fopen ("hidapi_debug.txt", "w+");
+//            fprintf(fp, "7.GetLastError() != ERROR_IO_PENDING\n");///////////////////
+//            fclose(fp);     /////////////
+
+            register_error(dev, "WriteFile");
 			bytes_written = -1;
 			goto end_of_function;
 		}
@@ -739,17 +773,36 @@ int HID_API_EXPORT HID_API_CALL hid_write(hid_device *dev, const unsigned char *
 
 	/* Wait here until the write is done. This makes
 	   hid_write() synchronous. */
+
+//    fp = fopen ("hidapi_debug.txt", "w+");
+//    fprintf(fp, "8.res = GetOverlappedResult\n");///////////////////
+//    fclose(fp);     /////////////
+
 	res = GetOverlappedResult(dev->device_handle, &ol, &bytes_written, TRUE/*wait*/);
 	if (!res) {
+
+//        fp = fopen ("hidapi_debug.txt", "w+");
+//        fprintf(fp, "9.if (!res)\n");///////////////////
+//        fclose(fp);     /////////////
+
 		/* The Write operation failed. */
 		register_error(dev, "WriteFile");
 		bytes_written = -1;
 		goto end_of_function;
 	}
 
+//    fp = fopen ("hidapi_debug.txt", "w+");
+//fprintf(fp, "10.end_of_function:\n");///////////////////
+//fclose(fp);     /////////////
+
 end_of_function:
 	if (buf != data)
 		free(buf);
+
+//    fp = fopen ("hidapi_debug.txt", "w+");
+//    fprintf(fp, "11.return bytes_written;\n");///////////////////
+//    fprintf(fp, "////////////////////////////////////////////////////////////\n\n\n");///////////////////
+//    fclose(fp);     /////////////
 
 	return bytes_written;
 }

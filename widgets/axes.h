@@ -59,7 +59,7 @@ private:
     const int kMinA2bButtons = 2;
     bool calibration_started_;
     int a2b_buttons_count_;
-    QString start_calibration = tr("Calibrate");    // const? а они переименовываются?
+    QString start_calibration = tr("Calibrate");    // const? а они переводятся?
     QString stop_calibration = tr("Stop && Save");
     //dev_config_t* pDev_config;
     AxesExtended * axes_extend;

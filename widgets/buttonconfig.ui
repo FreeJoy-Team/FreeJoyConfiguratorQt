@@ -232,8 +232,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>690</width>
-           <height>477</height>
+           <width>686</width>
+           <height>439</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="layoutV_LogicalButton">
@@ -379,8 +379,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>344</width>
-           <height>493</height>
+           <width>340</width>
+           <height>457</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="layoutG_PhysicalButton"/>
@@ -454,19 +454,6 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="text_ms">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>ms</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
           <widget class="QSpinBox" name="spinBox_Timer1">
            <property name="maximumSize">
@@ -474,6 +461,9 @@
              <width>70</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
            <property name="maximum">
             <number>65535</number>
@@ -487,6 +477,19 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="text_ms">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>ms</string>
            </property>
           </widget>
          </item>
@@ -541,15 +544,11 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
            <property name="maximum">
             <number>65535</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="text_ms_2">
-           <property name="text">
-            <string>ms</string>
            </property>
           </widget>
          </item>
@@ -560,6 +559,13 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="text_ms_2">
+           <property name="text">
+            <string>ms</string>
            </property>
           </widget>
          </item>
@@ -601,6 +607,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
            <property name="maximum">
             <number>65535</number>
            </property>
@@ -619,13 +628,6 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="text_ms_3">
-           <property name="text">
-            <string>ms</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" colspan="3">
           <widget class="QLabel" name="text_timer3">
            <property name="text">
@@ -633,6 +635,13 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="text_ms_3">
+           <property name="text">
+            <string>ms</string>
            </property>
           </widget>
          </item>
@@ -666,13 +675,6 @@
          <property name="verticalSpacing">
           <number>0</number>
          </property>
-         <item row="1" column="2">
-          <widget class="QLabel" name="text_ms_4">
-           <property name="text">
-            <string>ms</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
           <widget class="QSpinBox" name="spinBox_DebounceTimer">
            <property name="maximumSize">
@@ -680,6 +682,9 @@
              <width>70</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
            <property name="maximum">
             <number>65535</number>
@@ -706,6 +711,13 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="text_ms_4">
+           <property name="text">
+            <string>ms</string>
            </property>
           </widget>
          </item>
@@ -739,13 +751,6 @@
          <property name="verticalSpacing">
           <number>0</number>
          </property>
-         <item row="1" column="2">
-          <widget class="QLabel" name="label_12">
-           <property name="text">
-            <string>ms</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="0">
           <spacer name="horizontalSpacer_5">
            <property name="orientation">
@@ -767,6 +772,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
            <property name="maximum">
             <number>65535</number>
            </property>
@@ -779,6 +787,13 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>ms</string>
            </property>
           </widget>
          </item>
@@ -820,6 +835,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
            <property name="maximum">
             <number>255</number>
            </property>
@@ -838,13 +856,6 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="text_ms_5">
-           <property name="text">
-            <string>ms</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" colspan="3">
           <widget class="QLabel" name="text_encoderPressTimer">
            <property name="text">
@@ -852,6 +863,13 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="text_ms_5">
+           <property name="text">
+            <string>ms</string>
            </property>
           </widget>
          </item>

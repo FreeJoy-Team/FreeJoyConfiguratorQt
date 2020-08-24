@@ -8,8 +8,6 @@
 #include "deviceconfig.h"
 
 #include <QObject>
-#include <QTime>    //?
-//#include <QMutex>   // test
 
 class HidDevice : public QObject
 {
@@ -18,8 +16,8 @@ class HidDevice : public QObject
 public:
 
     hid_device_ *handle_read;                // private?
-    bool GetConfigFromDevice();
-    bool SendConfigToDevice();
+    void GetConfigFromDevice();
+    void SendConfigToDevice();
 
     bool EnterToFlashMode();
     void FlashFirmware(const QByteArray* file_bytes);
@@ -36,8 +34,9 @@ signals:
     void putDisconnectedDeviceInfo();
     void putConnectedDeviceInfo();
     void putGamepadPacket(uint8_t *);
-    void putConfigPacket(uint8_t *);        // not used
-    void putConfigRequest(uint8_t *);       // not used
+
+    void configReceived(bool is_success);
+    void configSent(bool is_success);
 
     void hidDeviceList(QStringList* device_list);
 
@@ -47,15 +46,14 @@ signals:
 private:
     //hid_device *handle_read;
     bool is_finish_ = false;
-    bool is_app_start = false;
     int selected_device_;
+    int current_work_;
+
     uint8_t device_buffer_[BUFFSIZE];
     dev_config_t device_config_;                // ????
     QList<hid_device_info*> HidDevicesAdrList;
     hid_device_info* flasher_;
 
-    // test
-    //QMutex	m_mutex;
     ReportConverter *report_convert;                     // !!!!
 };
 
