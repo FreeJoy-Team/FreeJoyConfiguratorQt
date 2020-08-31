@@ -93,6 +93,7 @@ void HidDevice::processData()
         // device connected
         if (handle_read)
         {
+            // read joy report
             if (current_work_ == REPORT_ID_JOY)
             {
                 res=hid_read_timeout(handle_read, buffer, BUFFSIZE,10000);         // 10000?

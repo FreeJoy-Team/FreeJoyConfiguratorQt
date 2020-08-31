@@ -40,7 +40,7 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
     ui->setupUi(this);
     setMouseTracking(true);
 
-    points_count_ = 11;
+    points_count_ = CURVE_PLOT_POINTS_COUNT; // axescurvesconfig
     point_active_ = false;
     is_device_connect_ = false;
     half_radius_ = radius_/2;
@@ -209,7 +209,7 @@ int AxesCurvesPlot::GetPointCount()
     return points_count_;
 }
 
-void AxesCurvesPlot::SetPointValue(int value, int point_number)
+void AxesCurvesPlot::SetPointValue(int point_number, int value)
 {
     PointAdrList[point_number]->posY = CalcPointPos(value);
     PointAdrList[point_number]->current_value = value;
@@ -264,7 +264,7 @@ void AxesCurvesPlot::SetExponent()
         } else if (tmp_value >= max_point_value -1){
             tmp_value = max_point_value;
         }
-        SetPointValue(tmp_value, i);
+        SetPointValue(i, tmp_value);
     }
     UpdateLabelPos();
 }
@@ -288,7 +288,7 @@ void AxesCurvesPlot::SetExponentInvert()
         } else if (tmp_value >= max_point_value -1){
             tmp_value = max_point_value;
         }
-        SetPointValue(tmp_value, (points_count_ - 1) - i);
+        SetPointValue((points_count_ - 1) - i, tmp_value);
     }
     UpdateLabelPos();
 }
@@ -297,17 +297,17 @@ void AxesCurvesPlot::SetShape()     // руками так се, надо бы �
 {
     if (PointAdrList.size() >= 11)
     {
-        SetPointValue(-100, 0);
-        SetPointValue(-60, 1);
-        SetPointValue(-20, 2);
-        SetPointValue(-6, 3);
-        SetPointValue(-2, 4);
-        SetPointValue(0, 5);
-        SetPointValue(2, 6);
-        SetPointValue(6, 7);
-        SetPointValue(20, 8);
-        SetPointValue(60, 9);
-        SetPointValue(100, 10);
+        SetPointValue(0, -100);
+        SetPointValue(1, -60);
+        SetPointValue(2, -20);
+        SetPointValue(3, -6);
+        SetPointValue(4, -2);
+        SetPointValue(5, 0);
+        SetPointValue(6, 2);
+        SetPointValue(7, 6);
+        SetPointValue(8, 20);
+        SetPointValue(9, 60);
+        SetPointValue(10, 100);
     }
     UpdateLabelPos();
 }
@@ -452,6 +452,7 @@ void AxesCurvesPlot::mouseMoveEvent(QMouseEvent *event)
                 LabelAdrList[i]->setNum(PointAdrList[i]->current_value);
                 UpdateLabelPos();
                 update();
+                emit pointValueChanged(&i, &PointAdrList[i]->current_value);
                 qDebug()<<"event->pos().y()"<<event->pos().y();
                 qDebug()<<"value"<<PointAdrList[i]->current_value;
                 //CalcPointValue(event->pos().y());

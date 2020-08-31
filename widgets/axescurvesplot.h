@@ -4,6 +4,11 @@
 #include <QWidget>
 #include <QLabel>
 
+#define CURVE_PLOT_POINTS_COUNT 11
+
+#define CURVES_MIN_VALUE -100
+#define CURVES_MAX_VALUE 100
+
 namespace Ui {
 class AxesCurvesPlot;
 }
@@ -19,7 +24,7 @@ public:
     int GetPointValue(int point_number);
     int GetPointCount();
 
-    void SetPointValue(int value, int point_number);
+    void SetPointValue(int point_number, int value);
 
     void UpdateAxis(int pos_x, int pos_y);
     void DeviceStatus(bool is_connect);
@@ -32,7 +37,8 @@ public:
 
 signals:
     //! current x and width for a2b
-    void sizeChanged(int width);
+    void sizeChanged(int width);    // not used
+    void pointValueChanged(const int *point, const int *value);
 
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -62,10 +68,11 @@ private:
     int width_, height_;
     int half_radius_;
 
-    const int max_point_value = 100;
-    const int min_point_value = -100;
+    const int max_point_value = CURVES_MAX_VALUE;
+    const int min_point_value = CURVES_MIN_VALUE;
 
     int points_count_;
+    //int current_curve_;
 
     QColor const point_current_pos_color_ = QColor(190,0,0,170);
     QColor const point_inactive_color_ = QColor(1,119,215);

@@ -2,8 +2,6 @@
 #include "ui_axescurves.h"
 #include <cmath>
 
-#define CURVES_MIN_VALUE -100
-#define CURVES_MAX_VALUE 100
 
 AxesCurves::AxesCurves(int axis_number, QWidget *parent) :
     QWidget(parent),
@@ -11,7 +9,13 @@ AxesCurves::AxesCurves(int axis_number, QWidget *parent) :
 {
     ui->setupUi(this);
     axis_number_ = axis_number;
+    current_profile_ = 0;
     ui->groupBox->setTitle(axes_list_[axis_number_].gui_name);
+
+    ui->comboBox_CurveProfile->addItems(curves_list_);
+
+    connect(ui->widget_AxesCurvesPlot, SIGNAL(pointValueChanged(const int*, const int*)),
+            this, SLOT(pointValueChanged(const int*, const int*)));
 }
 
 AxesCurves::~AxesCurves()
@@ -39,6 +43,55 @@ void AxesCurves::SetDarkIcon(bool is_dark)
 void AxesCurves::RetranslateUi()
 {
     ui->retranslateUi(this);
+}
+
+
+void AxesCurves::on_comboBox_CurveProfile_currentIndexChanged(int index)
+{
+    current_profile_ = index;
+    if (index > 0){
+        emit axisCurveIndexChanged(axis_number_, index);
+    }
+    else if (index == 0)
+    {
+        for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)
+        {
+            ui->widget_AxesCurvesPlot->SetPointValue(i, curve_points_value_[i]);
+        }
+    }
+}
+
+void AxesCurves::pointValueChanged(const int *point_number, const int *value)
+{
+    if (current_profile_ > 0){
+        emit curvePointValueChanged(axis_number_, *point_number, *value);
+    }
+    else if (current_profile_ == 0)
+    {
+        curve_points_value_[*point_number] = *value;
+    }
+}
+
+void AxesCurves::on_pushButton_ResetCurveProfile_clicked()
+{
+    ui->comboBox_CurveProfile->setCurrentIndex(0);
+    emit resetCurvesProfiles();
+}
+
+int AxesCurves::GetCurrentCurveIndex()
+{
+    return ui->comboBox_CurveProfile->currentIndex();
+}
+
+
+int AxesCurves::GetPointValue(int point_number)
+{
+    return ui->widget_AxesCurvesPlot->GetPointValue(point_number);
+}
+
+void AxesCurves::SetPointValue(int point_number, int value)
+{
+    ui->widget_AxesCurvesPlot->SetPointValue(point_number, value);
 }
 
 void AxesCurves::UpdateAxis()
@@ -97,9 +150,11 @@ void AxesCurves::DeviceStatus(bool is_connect)
 
 void AxesCurves::ReadFromConfig()
 {
+    ui->comboBox_CurveProfile->setCurrentIndex(0);
     for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)
     {
-        ui->widget_AxesCurvesPlot->SetPointValue(gEnv.pDeviceConfig->config.axis_config[axis_number_].curve_shape[i], i);
+        ui->widget_AxesCurvesPlot->SetPointValue(i, gEnv.pDeviceConfig->config.axis_config[axis_number_].curve_shape[i]);
+        curve_points_value_[i] = gEnv.pDeviceConfig->config.axis_config[axis_number_].curve_shape[i];
     }
 }
 

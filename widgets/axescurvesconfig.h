@@ -7,6 +7,7 @@
 #include "global.h"
 #include "deviceconfig.h"
 
+
 namespace Ui {
 class AxesCurvesConfig;
 }
@@ -30,10 +31,16 @@ public:
 
     void DeviceStatus(bool is_connect);
 
+private slots:
+    void axisCurveIndexChanged(int axis_number, int index);
+    void setCurvesValue(int axis_number, int point_number, int value); // может указатели?
+    void resetCurvesProfiles();
 
 private:
     Ui::AxesCurvesConfig *ui;
     QList<AxesCurves*> AxesCurvAdrList;
+
+    int curves_points_value_[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT];
 };
 
 #endif // AXESCURVESCONFIG_H

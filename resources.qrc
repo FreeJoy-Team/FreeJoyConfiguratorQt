@@ -15,5 +15,6 @@
         <file>Images/linearInvert_dark.png</file>
         <file>Images/Shape_dark.png</file>
         <file>Images/BluePill_render.jpg</file>
+        <file>Images/icon.png</file>
     </qresource>
 </RCC>

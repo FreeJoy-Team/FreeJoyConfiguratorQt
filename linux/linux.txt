@@ -5,3 +5,6 @@ sudo apt-get install libxcb-xinerama0
 
 ////////	 Copy		////////
 sudo cp 99-hid-FreeJoy.rules /etc/udev/rules.d
+
+
+echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="dbdb", TAG+="udev-acl", TAG+="uaccess"' | sudo tee -a /etc/udev/rules.d/70-boot2qt.rules
