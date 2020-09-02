@@ -212,8 +212,8 @@ void Axes::a2bSpinBoxChanged(int count)
 void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 {
     if (state == 2){    // 2 = true
-        //ui->frame->setMinimumHeight(100);
-        axes_extend->setMinimumHeight(100);
+        //ui->frame->setMinimumHeight(110);
+        axes_extend->setMinimumHeight(110);
         QTimer::singleShot(10, [&]{     // я долбоёб или да? как ещё это сраное мигание победить????????
             axes_extend->setVisible(true);
         });
