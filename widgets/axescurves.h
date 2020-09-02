@@ -58,7 +58,6 @@ private:
     Ui::AxesCurves *ui;
     int axis_number_;
     int current_profile_;
-    bool is_device_connected_ = false;
     int curve_points_value_[CURVE_PLOT_POINTS_COUNT];
 
     std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axes.h // ОНО ВЕЗДЕ, ВЫНЕСТИ В ГЛОБАЛ

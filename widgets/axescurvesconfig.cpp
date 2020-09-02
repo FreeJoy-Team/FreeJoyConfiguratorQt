@@ -1,6 +1,8 @@
 #include "axescurvesconfig.h"
 #include "ui_axescurvesconfig.h"
 
+//#include "widgets/axes.h"
+
 AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AxesCurvesConfig)
@@ -108,8 +110,14 @@ void AxesCurvesConfig::UpdateAxesCurves()
 
 void AxesCurvesConfig::DeviceStatus(bool is_connect)
 {
-    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
-        AxesCurvAdrList[i]->DeviceStatus(is_connect);
+    for (int i = 0; i < AxesCurvAdrList.size(); ++i)
+    {
+        if (gEnv.pDeviceConfig->config.axis_config[i].source_main != -1 && gEnv.pDeviceConfig->config.axis_config[i].out_enabled == 1){   // -1 = None
+            AxesCurvAdrList[i]->DeviceStatus(is_connect);
+        } else {
+            AxesCurvAdrList[i]->DeviceStatus(false);
+        }
+        //AxesCurvAdrList[i]->DeviceStatus(is_connect);
     }
 }
 

@@ -195,6 +195,7 @@ void AxesCurvesPlot::UpdateAxis(int pos_x, int pos_y)
     //is_device_connect_ = true;
     cur_axis_pos.posX = CalcPointPosX(pos_x);
     cur_axis_pos.posY = CalcPointPos(pos_y);
+    qDebug()<<"cur_axis_pos.posX ="<<cur_axis_pos.posX;
     update();
 }
 
@@ -488,5 +489,6 @@ void AxesCurvesPlot::mouseReleaseEvent(QMouseEvent *event)
 void AxesCurvesPlot::DeviceStatus(bool is_connect)
 {
     is_device_connect_ = is_connect;
+    update();
 }
 

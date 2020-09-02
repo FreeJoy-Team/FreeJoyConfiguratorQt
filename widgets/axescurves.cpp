@@ -96,23 +96,32 @@ void AxesCurves::SetPointValue(int point_number, int value)
 
 void AxesCurves::UpdateAxis()
 {
-    if (gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled == 1){     /////////////////////////////////////
+//    static int tmp_raw_data = 0;      // оптимизация или?
+//    static int tmp_data = 0;
+//    if ((tmp_raw_data != gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_] || tmp_data != gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_]))
+//    {
+//        tmp_raw_data = gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_];
+//        tmp_data = gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_];
+//    }
 
-        int min = gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min;
-        int max = gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max;
-        int value_x;
-        int value_y;
+//    if (gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled == 1)
+//    {
 
-        if (gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] < AXIS_CENTER_VALUE){
-            value_y = round(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] / (float)AXIS_MIN_VALUE * CURVES_MIN_VALUE);
-        } else {
-            value_y = round(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] / (float)AXIS_MAX_VALUE * CURVES_MAX_VALUE);
-        }
+    int min = gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min;
+    int max = gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max;
+    int value_x;
+    int value_y;
 
-        value_x = abs(round((gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]  - min)/ (float)(max - min) * 200));
-
-        ui->widget_AxesCurvesPlot->UpdateAxis(value_x, value_y);
+    if (gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] < AXIS_CENTER_VALUE){
+        value_y = round(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] / (float)AXIS_MIN_VALUE * CURVES_MIN_VALUE);
+    } else {
+        value_y = round(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_] / (float)AXIS_MAX_VALUE * CURVES_MAX_VALUE);
     }
+
+    value_x = abs(round((gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]  - min)/ (float)(max - min) * 200));
+
+    ui->widget_AxesCurvesPlot->UpdateAxis(value_x, value_y);
+//    }
 }
 
 
@@ -143,7 +152,6 @@ void AxesCurves::on_pushButton_Shape_clicked()
 
 void AxesCurves::DeviceStatus(bool is_connect)
 {
-    is_device_connected_ = is_connect;
     ui->widget_AxesCurvesPlot->DeviceStatus(is_connect);
 }
 

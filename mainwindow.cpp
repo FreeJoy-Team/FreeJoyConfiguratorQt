@@ -478,7 +478,6 @@ void MainWindow::on_pushButton_ResetAllPins_clicked()
 // read config from device
 void MainWindow::on_pushButton_ReadConfig_clicked()
 {
-    qDebug()<<"//////////////////////////////////////////////////";
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
 
@@ -518,7 +517,7 @@ void MainWindow::deviceFlasherController(bool is_start_flash)        // херн
 }
 
 // slot after receiving the config
-void MainWindow::configReceived(bool success)        // повторное наатие
+void MainWindow::configReceived(bool success)
 {
     qDebug()<<"configReceived";
     //ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
