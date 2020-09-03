@@ -230,6 +230,9 @@ void AxesCurvesPlot::SetLinear()
         LabelAdrList[(PointAdrList.size() - 1) - i]->setNum(PointAdrList[(PointAdrList.size() - 1) - i]->current_value);
     }
     UpdateLabelPos();
+    for (int i = 0; i < PointAdrList.size(); ++i) {
+        emit pointValueChanged(&i, &PointAdrList[i]->current_value);
+    }
     update();
 }
 
@@ -243,6 +246,9 @@ void AxesCurvesPlot::SetLinearInvert()
         LabelAdrList[i]->setNum(PointAdrList[i]->current_value);
     }
     UpdateLabelPos();
+    for (int i = 0; i < PointAdrList.size(); ++i) {
+        emit pointValueChanged(&i, &PointAdrList[i]->current_value);
+    }
     update();
 }
 
@@ -268,6 +274,9 @@ void AxesCurvesPlot::SetExponent()
         SetPointValue(i, tmp_value);
     }
     UpdateLabelPos();
+    for (int i = 0; i < PointAdrList.size(); ++i) {
+        emit pointValueChanged(&i, &PointAdrList[i]->current_value);
+    }
 }
 
 void AxesCurvesPlot::SetExponentInvert()
@@ -292,9 +301,12 @@ void AxesCurvesPlot::SetExponentInvert()
         SetPointValue((points_count_ - 1) - i, tmp_value);
     }
     UpdateLabelPos();
+    for (int i = 0; i < PointAdrList.size(); ++i) {
+        emit pointValueChanged(&i, &PointAdrList[i]->current_value);
+    }
 }
 
-void AxesCurvesPlot::SetShape()     // руками так се, надо бы автоматом сделать
+void AxesCurvesPlot::SetShape()
 {
     if (PointAdrList.size() >= 11)
     {
@@ -311,6 +323,9 @@ void AxesCurvesPlot::SetShape()     // руками так се, надо бы �
         SetPointValue(10, 100);
     }
     UpdateLabelPos();
+    for (int i = 0; i < PointAdrList.size(); ++i) {
+        emit pointValueChanged(&i, &PointAdrList[i]->current_value);
+    }
 }
 
 void AxesCurvesPlot::UpdateLabelPos()
@@ -454,8 +469,8 @@ void AxesCurvesPlot::mouseMoveEvent(QMouseEvent *event)
                 UpdateLabelPos();
                 update();
                 emit pointValueChanged(&i, &PointAdrList[i]->current_value);
-                qDebug()<<"event->pos().y()"<<event->pos().y();
-                qDebug()<<"value"<<PointAdrList[i]->current_value;
+//                qDebug()<<"event->pos().y()"<<event->pos().y();
+//                qDebug()<<"value"<<PointAdrList[i]->current_value;
                 //CalcPointValue(event->pos().y());
             }
             break;

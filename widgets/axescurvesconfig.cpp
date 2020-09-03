@@ -57,21 +57,11 @@ void AxesCurvesConfig::axisCurveIndexChanged(int axis_number, int index)
     for (int i = 0; i < CURVE_PLOT_POINTS_COUNT; ++i) {
         AxesCurvAdrList[axis_number]->SetPointValue(i, curves_points_value_ [index - 1] [i]);
     }
-//    for (int i = 0; i < AxesCurvAdrList.size(); i++)    // может сразу записывать какой индекс у кривых, чуть быстрее или экономия на спичках?
-//    {
-//        if (AxesCurvAdrList[axis_number]->GetCurrentCurveIndex() == AxesCurvAdrList[i]->GetCurrentCurveIndex())
-//        {
-//            for (int j = 0; j < CURVE_PLOT_POINTS_COUNT; ++j) {
-//                AxesCurvAdrList[axis_number]->SetPointValue(j, AxesCurvAdrList[i]->GetPointValue(j));
-//            }
-//            break;
-//        }
-//    }
 }
 
 void AxesCurvesConfig::setCurvesValue(int axis_number, int point_number, int value)    // дать указатель на AxesCurvAdrList кривым и не придутся туда-сюда гонять?
 {                                                                               // для одного потока норм и быстрее, но хз
-    for (int i = 0; i < AxesCurvAdrList.size(); i++)    // может сразу записывать какой индекс у кривых, чуть быстрее или экономия на спичках?
+    for (int i = 0; i < AxesCurvAdrList.size(); i++)
     {
         if (AxesCurvAdrList[axis_number]->GetCurrentCurveIndex() == AxesCurvAdrList[i]->GetCurrentCurveIndex())
         {
@@ -89,7 +79,7 @@ void AxesCurvesConfig::resetCurvesProfiles()
         }
     }
 
-    for (int i = 0; i < AxesCurvAdrList.size(); i++)    // может сразу записывать какой индекс у кривых, чуть быстрее или экономия на спичках?
+    for (int i = 0; i < AxesCurvAdrList.size(); i++)
     {
         if (AxesCurvAdrList[i]->GetCurrentCurveIndex() > 0)
         {
