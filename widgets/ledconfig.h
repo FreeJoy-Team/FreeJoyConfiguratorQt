@@ -23,15 +23,11 @@ public:
 
     //void ButtonLEDStateChanged();     // future
 
-//    signals:
-//    void valueChanged(int led_count);
-
 public slots:
     void SpawnLEDs(int led_count);
 
 private:
     Ui::LedConfig *ui;
-    //QString default_style_;
 
     QList<LED*> LEDAdrList;
     int current_led_count_;

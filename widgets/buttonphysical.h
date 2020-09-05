@@ -15,10 +15,7 @@ public:
     explicit ButtonPhysical(int button_number, QWidget *parent = nullptr);
     ~ButtonPhysical();
     void ButtonState(bool is_activated);
-    bool is_activated_;
-
-//private: ??
-    int button_number_;     // удалить?
+    bool is_activated_; // private, set?
 
 private:
     Ui::ButtonPhysical *ui;

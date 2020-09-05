@@ -16,16 +16,13 @@ LedConfig::LedConfig(QWidget *parent) :
     ui->layoutV_LED->setAlignment(Qt::AlignTop);
 
     // LEDs spawn and hide
-    //clock_t start = clock();
     for (int i = 0; i < MAX_LEDS_NUM; i++)
     {
-        LED * led = new LED(i, this);       // мб нах new?
+        LED * led = new LED(i, this);
         ui->layoutV_LED->addWidget(led);
         LEDAdrList.append(led);
         led->hide();
     }
-    //clock_t stop = clock();
-    //qDebug()<< "LEDs create ms= " << stop - start;
 }
 
 LedConfig::~LedConfig()

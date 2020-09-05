@@ -25,10 +25,6 @@ ButtonConfig::ButtonConfig(QWidget *parent) :
                 this, SLOT(functionTypeChanged(int, int, int)));
     }
 
-//    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {     // можно и наверх закинуть, если без динамик спавна
-//        connect(LogicButtonAdrList[i], SIGNAL(functionIndexChanged(int, int, int)),
-//                this, SLOT(functionTypeChanged(int, int, int)));
-//    }
 }
 
 ButtonConfig::~ButtonConfig()

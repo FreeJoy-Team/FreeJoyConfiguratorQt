@@ -14,8 +14,6 @@ PinComboBox::PinComboBox(QWidget *parent) :
     is_call_interaction_ = false;
     is_interacts_ = false;
 
-    last_deleted_ = 0;  // ???
-
     styleSheet_default_ = ui->comboBox_PinsType->styleSheet();       // will not work with styles, remove from constructor, вроде пашет
 
     connect(ui->comboBox_PinsType, SIGNAL(currentIndexChanged(int)),

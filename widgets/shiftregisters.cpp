@@ -45,26 +45,6 @@ void ShiftRegisters::calcRegistersCount(int count)
     }
 }
 
-//int ShiftRegisters::GetLatchPin()
-//{
-//    return latch_pin_;
-//}
-
-//int ShiftRegisters::GetDataPin()
-//{
-//    return data_pin_;
-//}
-
-//QString ShiftRegisters::GetLatchString()
-//{
-//    return ui->label_LatchPin->text();
-//}
-
-//QString ShiftRegisters::GetDataString()
-//{
-//    return ui->label_DataPin->text();
-//}
-
 void ShiftRegisters::SetLatchPin(int latch_pin, QString pin_gui_name)
 {
     if (latch_pin != 0){

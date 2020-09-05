@@ -9,13 +9,12 @@ AxesConfig::AxesConfig(QWidget *parent) :
     a2b_buttons_count_ = 0;
 
     ui->layoutV_Axes->setAlignment(Qt::AlignTop);
-    // shift registers spawn
+    // axes spawn
     for (int i = 0; i < MAX_AXIS_NUM; i++)
     {
         Axes * axis = new Axes(i, this);
         ui->layoutV_Axes->addWidget(axis);
         AxesAdrList.append(axis);
-        //shift_register->hide();
         connect(axis, SIGNAL(a2bCountChanged(int, int)),
                 this, SLOT(a2bCountCalc(int, int)));
     }

@@ -15,7 +15,6 @@ class HidDevice : public QObject
 
 public:
 
-    hid_device_ *handle_read;                // private?
     void GetConfigFromDevice();
     void SendConfigToDevice();
 
@@ -44,7 +43,7 @@ signals:
     void flashStatus(int status, int percent);
 
 private:
-    //hid_device *handle_read;
+    hid_device_ *handle_read;                // private?
     bool is_finish_ = false;
     int selected_device_;
     int current_work_;

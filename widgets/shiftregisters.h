@@ -25,11 +25,6 @@ public:
 
     void RetranslateUi();
 
-//    int GetLatchPin();
-//    int GetDataPin();
-//    QString GetLatchString();
-//    QString GetDataString();
-
     void SetLatchPin(int latch_pin, QString pin_gui_name);
     void SetDataPin(int data_pin, QString pin_gui_name);
 

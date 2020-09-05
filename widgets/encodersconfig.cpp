@@ -47,7 +47,7 @@ void EncodersConfig::RetranslateUi()
 void EncodersConfig::fastEncoderSelected(QString pin_gui_name, bool is_selected)
 {
     if (is_selected == true){
-        if (ui->label_ButtonNumberA->text() == not_defined_){        // хз чё будет с другим языком
+        if (ui->label_ButtonNumberA->text() == not_defined_){
             ui->label_ButtonNumberA->setText(pin_gui_name);
             fast_encoder_input_A_++;
         } else {

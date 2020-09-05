@@ -77,7 +77,7 @@ private:
     QList<QLabel*> LabelAdrList;
 
 
-    struct A2B_point    // uint нахера гемороя наделал
+    struct A2B_point    // uint гемороя наделал
     {
         QPolygon polygon;
         QColor color;

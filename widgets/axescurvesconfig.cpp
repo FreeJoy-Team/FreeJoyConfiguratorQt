@@ -15,13 +15,11 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
         AxesCurves * axis_curves = new AxesCurves(i, this);
         ui->layoutV_AxesCurves->addWidget(axis_curves);
         AxesCurvAdrList.append(axis_curves);
-        //shift_register->hide();
 
         connect(AxesCurvAdrList[i], SIGNAL(curvePointValueChanged(int, int, int)),
                 this, SLOT(setCurvesValue(int, int, int)));
 
     }
-
     // profiles
     // тупо сделал, надо было делать отдельный виджет для профилей и спавнить в коде, а не в дизайнере.
     // переделаю, если функционал профилей потребуется изменить
@@ -45,7 +43,7 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
     }
     gEnv.pAppSettings->endGroup();
 }
-//curves_points_value_[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT]
+
 AxesCurvesConfig::~AxesCurvesConfig()
 {
     // save curves profiles to app config file
@@ -147,7 +145,6 @@ void AxesCurvesConfig::DeviceStatus(bool is_connect)
         } else {
             AxesCurvAdrList[i]->DeviceStatus(false);
         }
-        //AxesCurvAdrList[i]->DeviceStatus(is_connect);
     }
 }
 

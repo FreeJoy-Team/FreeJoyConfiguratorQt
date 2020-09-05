@@ -2,8 +2,6 @@
 #define PINCOMBOBOX_H
 
 #include <QWidget>
-//#include <QTranslator>
-//#include <QDebug>
 
 #include "global.h"
 #include "deviceconfig.h"
@@ -120,7 +118,7 @@ public:
     bool is_interacts_;
     uint interact_count_;
     int call_interaction_;
-    QString styleSheet_default_;            // удалить из конструктора
+    QString styleSheet_default_;
 
 signals:
     void valueChangedForInteraction(int index, int sender_index, int pin);
@@ -295,7 +293,6 @@ public:
 
 private:
     Ui::PinComboBox *ui;
-    int last_deleted_;              // удалить?
     int current_dev_enum_;
 
 //    int index2;

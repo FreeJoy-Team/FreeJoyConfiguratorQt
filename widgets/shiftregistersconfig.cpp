@@ -53,7 +53,7 @@ bool ShiftRegistersConfig::SortNullLast(const ShiftRegData_t& lhs, const ShiftRe
     return rhs.pin_number == 0;
 }
 
-void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name)      // сделать выключение у пинов при latch/data count == 4
+void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString pin_gui_name)
 {
     // add shift reg latch pin
     if (latch_pin != 0){

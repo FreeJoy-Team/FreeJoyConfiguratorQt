@@ -10,6 +10,7 @@
 #include "global.h"
 #include "deviceconfig.h"
 
+#include <QDebug>
 
 AdvancedSettings::AdvancedSettings(QWidget *parent) :
     QWidget(parent),
@@ -25,8 +26,6 @@ AdvancedSettings::AdvancedSettings(QWidget *parent) :
     ui->checkBox_LoadDefCfg->setChecked(gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool());
     gEnv.pAppSettings->endGroup();
 
-//    connect(this, SIGNAL(styleChanged()),
-//            this, SLOT(styleButtonWaiting()));
 }
 
 AdvancedSettings::~AdvancedSettings()
@@ -71,7 +70,6 @@ void AdvancedSettings::on_pushButton_LangRussian_clicked()  // мб в дест�
 
 void AdvancedSettings::on_pushButton_StyleDefault_clicked()
 {
-    //emit styleChanged();
     tmp_text = ui->pushButton_StyleDefault->text();
     tmp_style = ui->pushButton_StyleDefault->styleSheet();
     ui->pushButton_StyleDefault->setEnabled(false);
@@ -213,7 +211,7 @@ void AdvancedSettings::on_pushButton_FlasherMode_clicked()
     enter_to_flash_btn_text_ = ui->pushButton_FlasherMode->text();
     emit flashModeClicked(false);
 }
-#include <QDebug>
+
 void AdvancedSettings::on_pushButton_FlashFirmware_clicked()
 {
     QFile file(QFileDialog::getOpenFileName(this, tr("Open Config"), QDir::currentPath() + "/", tr("Binary files (.bin) (*.bin)")));
@@ -224,7 +222,6 @@ void AdvancedSettings::on_pushButton_FlashFirmware_clicked()
         default_button_style_ = ui->pushButton_FlashFirmware->styleSheet();
         file_array_ = file.readAll();
         qDebug()<<"file_array_.size()"<<file_array_.size();
-        //emit startFlash(&file_array_);
         emit startFlash(true);
     } else {
         qDebug()<<"cant open file";

@@ -24,12 +24,6 @@ public:
 
     void RetranslateUi();
 
-    //private:?
-    //! 0 if no pins
-    uint pin_count_;    // need?
-    //! PinComboBox widget list
-    QList<PinComboBox *> PinComboBoxPtrList;
-
     void ResetAllPins();
 
 signals:
@@ -52,6 +46,10 @@ private slots:
 
 private:
     Ui::PinConfig *ui;
+    //! 0 if no pins
+    uint pin_count_;    // пинов всегда 30, бесполезная хрень
+    //! PinComboBox widget list
+    QList<PinComboBox *> PinComboBoxPtrList;
 
     QString default_label_style_;
     bool max_buttons_warning_;

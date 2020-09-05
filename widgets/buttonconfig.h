@@ -31,10 +31,6 @@ public:
 
     void RetranslateUi();
 
-    // private:?
-    //ButtonPhysical* physical_button_widget;     // нужны ли?
-    //ButtonLogical* logical_buttons_widget;
-
 signals:
     void encoderInputChanged(int ecoder_A, int ecoder_B);
     //void buttonLEDStateChanged(int button_number);            // for future

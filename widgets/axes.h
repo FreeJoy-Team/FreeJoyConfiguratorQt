@@ -38,16 +38,13 @@ private slots:
     void calibMinMaxValueChanged(int value);
     void calibrationStarted(int raw_value);
     void mainSourceIndexChanged(int index);
-//    void axisRawValueChanged(int);
-//    void axisOutValueChanged(int);
+
     void a2bSpinBoxChanged(int count);
 
     void outputValueChanged(bool is_checked);
 
     void on_pushButton_StartCalib_clicked(bool checked);
-
     void on_pushButton_SetCenter_clicked();
-
     void on_checkBox_Center_stateChanged(int state);
 
     void on_pushButton_clicked();
@@ -59,9 +56,9 @@ private:
     const int kMinA2bButtons = 2;
     bool calibration_started_;
     int a2b_buttons_count_;
-    QString start_calibration = tr("Calibrate");    // const? а они переводятся?
-    QString stop_calibration = tr("Stop && Save");
-    //dev_config_t* pDev_config;
+    int axis_number_;
+    const QString start_calibration = tr("Calibrate");    // const? а они переводятся?
+    const QString stop_calibration = tr("Stop && Save");
     AxesExtended * axes_extend;
 
 
@@ -104,7 +101,7 @@ private:
         C15,
     };
 
-    // const?
+
     std::vector <deviceEnum_guiName_t> axes_pin_list_ =      // любая последовательность, но первые 2 добавляются в конструкторе
     {{
         {None,     tr("None")},
@@ -159,8 +156,6 @@ private:
         {6,      tr("Slider 1")},
         {7,      tr("Slider 2")},
     }};
-
-    int axis_number_;
 };
 
 #endif // AXES_H

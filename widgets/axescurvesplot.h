@@ -72,7 +72,6 @@ private:
     const int min_point_value = CURVES_MIN_VALUE;
 
     int points_count_;
-    //int current_curve_;
 
     QColor const point_current_pos_color_ = QColor(190,0,0,200);
     QColor const point_inactive_color_ = QColor(1,119,215);

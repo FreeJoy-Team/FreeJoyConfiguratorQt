@@ -105,6 +105,10 @@ MainWindow::MainWindow(QWidget *parent)
             comBox->setFocusPolicy(Qt::WheelFocus);
         }
     }
+    for (auto&& comBox: axes_curves_config->findChildren<QComboBox *>())
+    {
+        comBox->setFocusPolicy(Qt::WheelFocus);
+    }
 
                                             //////////////// SIGNASL-SLOTS ////////////////
             ///////// GET / SEND     CONFIG ///////

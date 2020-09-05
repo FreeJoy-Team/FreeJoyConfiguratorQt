@@ -2,7 +2,6 @@
 #define BUTTONLOGICAL_H
 
 #include <QWidget>
-//#include <QTranslator>
 #include "common_types.h"
 
 #include "global.h"

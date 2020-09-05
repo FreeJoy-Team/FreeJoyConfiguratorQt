@@ -31,13 +31,9 @@ signals:
     void fontChanged();
 
     void flashModeClicked(bool is_start_flash);
-    //void startFlash(QByteArray* file_array);
     void startFlash(bool is_start_flash);
 
-    //void styleChanged();
-
 private slots:
-    //void styleButtonWaiting();
     void flasherFound(bool is_found);
     void flashStatus(int status, int percent);
 

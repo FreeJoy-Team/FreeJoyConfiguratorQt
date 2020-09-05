@@ -214,7 +214,7 @@ void Axes::on_checkBox_ShowExtend_stateChanged(int state)
     if (state == 2){    // 2 = true
         //ui->frame->setMinimumHeight(110);
         axes_extend->setMinimumHeight(110);
-        QTimer::singleShot(10, [&]{     // я долбоёб или да? как ещё это сраное мигание победить????????
+        QTimer::singleShot(10, [&]{     // я долбоёб или да? как ещё это сраное мигание победить????????!"!11112112121
             axes_extend->setVisible(true);
         });
 //        axes_extend->setVisible(true);

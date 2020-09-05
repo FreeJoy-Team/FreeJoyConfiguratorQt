@@ -3,28 +3,18 @@
 
 #include <QMainWindow>
 #include <QTranslator>
-//#include <QEvent>
-//#include <QScrollBar>
 #include <QSettings>
 
-//#include "deviceconfig.h"
 #include "hiddevice.h"
 #include "reportconverter.h"
 
-// widgets  удалить лишнее
-//#include "widgets/encoders.h"
 #include "widgets/encodersconfig.h"
 #include "widgets/buttonconfig.h"
-//#include "widgets/buttonlogical.h"
-//#include "widgets/pincombobox.h"    // widgets  удалить лишнее
 #include "widgets/pinconfig.h"
 #include "widgets/advancedsettings.h"
 #include "widgets/axesconfig.h"
-//#include "widgets/axescurves.h"
 #include "widgets/axescurvesconfig.h"
-//#include "widgets/led.h"
 #include "widgets/ledconfig.h"
-//#include "widgets/shiftregisters.h"
 #include "widgets/shiftregistersconfig.h"
 
 /* Defining */
@@ -45,21 +35,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    ReportConverter report_convert;     // nah?
-
 //private:
     //QScopedPointer<QThread> thread;
     //QScopedPointer<HidDevice> worker;
-    QThread* thread;
-    HidDevice* hid_device_worker;
-
-    PinConfig* pin_config;
-    ButtonConfig* button_config;
-    LedConfig* led_config;
-    EncodersConfig* encoder_config;
-    ShiftRegistersConfig* shift_reg_config;
-    AxesConfig* axes_config;
-    AxesCurvesConfig* axes_curves_config;
 
 signals:
     void getConfigDone(bool success);
@@ -102,9 +80,22 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTranslator translator;
-    QString button_default_style_;  // мб статик в функции?
+
+    QThread* thread;
+    HidDevice* hid_device_worker;
 
     QThread* thread_getSend_config;
+    ReportConverter report_convert;     // nah?
+
+    PinConfig* pin_config;
+    ButtonConfig* button_config;
+    LedConfig* led_config;
+    EncodersConfig* encoder_config;
+    ShiftRegistersConfig* shift_reg_config;
+    AxesConfig* axes_config;
+    AxesCurvesConfig* axes_curves_config;
+
+    QString button_default_style_;  // мб статик в функции?
 
     void ReadFromConfig();
     void WriteToConfig();
