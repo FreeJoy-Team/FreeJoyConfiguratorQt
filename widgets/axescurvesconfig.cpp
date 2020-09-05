@@ -1,5 +1,6 @@
 #include "axescurvesconfig.h"
 #include "ui_axescurvesconfig.h"
+#include <QSettings>
 
 AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
     QWidget(parent),
@@ -31,15 +32,33 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
         connect(ProfilesCombBoxPtrList[i], SIGNAL(currentIndexChanged(int)),
                 this, SLOT(profileIndexChanged(int)));
     }
-    // set default curves_points_value_ to linear
-    on_pushButton_ResetProfiles_clicked();
-//    if (ProfilesCombBoxPtrList.size() != AxesCurvAdrList.size()){
-//        qDebug()<<"ALE";
-//    }
-}
 
+    // load curves profiles from app config file
+    gEnv.pAppSettings->beginGroup("CurvesProfiles");
+    for (int i = 0; i < MAX_AXIS_NUM; ++i) {
+        gEnv.pAppSettings->beginReadArray("Curve_" + QString::number(i + 1));
+        for (int j = 0; j < CURVE_PLOT_POINTS_COUNT; ++j) {
+            gEnv.pAppSettings->setArrayIndex(j);
+            curves_points_value_[i][j] = gEnv.pAppSettings->value("Point_" + QString::number(j), -100 + 20*j).toInt();
+        }
+        gEnv.pAppSettings->endArray();
+    }
+    gEnv.pAppSettings->endGroup();
+}
+//curves_points_value_[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT]
 AxesCurvesConfig::~AxesCurvesConfig()
 {
+    // save curves profiles to app config file
+    gEnv.pAppSettings->beginGroup("CurvesProfiles");
+    for (int i = 0; i < MAX_AXIS_NUM; ++i) {
+        gEnv.pAppSettings->beginWriteArray("Curve_" + QString::number(i + 1));
+        for (int j = 0; j < CURVE_PLOT_POINTS_COUNT; ++j) {
+            gEnv.pAppSettings->setArrayIndex(j);
+            gEnv.pAppSettings->setValue("Point_" + QString::number(j), curves_points_value_[i][j]);
+        }
+        gEnv.pAppSettings->endArray();
+    }
+    gEnv.pAppSettings->endGroup();
     delete ui;
 }
 
