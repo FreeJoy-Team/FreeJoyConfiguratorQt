@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1062</width>
+    <width>755</width>
     <height>600</height>
    </rect>
   </property>
@@ -36,11 +36,17 @@
     <number>6</number>
    </property>
    <item row="0" column="0">
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="groupBox_Curve">
      <property name="font">
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> QGroupBox::title 
+{
+subcontrol-position: top center;
+}</string>
      </property>
      <property name="title">
       <string>GroupBox</string>
@@ -48,7 +54,10 @@
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2" rowstretch="3,1,0,0" columnstretch="1,5,1">
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="3,0,0" columnstretch="1,0,0">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -67,67 +76,7 @@
       <property name="verticalSpacing">
        <number>6</number>
       </property>
-      <item row="0" column="1" rowspan="3">
-       <widget class="QFrame" name="frame">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="AxesCurvesPlot" name="widget_AxesCurvesPlot" native="true">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QComboBox" name="comboBox_CurveProfile">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>148</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="3" column="0" colspan="3">
+      <item row="2" column="0" colspan="3">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
          <number>0</number>
@@ -154,40 +103,6 @@
           </property>
           <property name="toolTip">
            <string>Linear</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>190</width>
-            <height>115</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_LinearInvert">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>185</width>
-            <height>114</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>185</width>
-            <height>114</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Linear inverted</string>
           </property>
           <property name="text">
            <string/>
@@ -313,34 +228,44 @@
         </item>
        </layout>
       </item>
-      <item row="2" column="2">
-       <widget class="QPushButton" name="pushButton_ResetCurveProfile">
-        <property name="text">
-         <string>Reset curves profiles</string>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QFrame" name="frame">
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>148</width>
-          <height>20</height>
-         </size>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
         </property>
-       </spacer>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Curves Profiles</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="AxesCurvesPlot" name="widget_AxesCurvesPlot" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>

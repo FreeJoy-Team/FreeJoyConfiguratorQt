@@ -58,7 +58,6 @@ private:
 
     int shift_latch_count_;
     int shift_data_count_;
-    void shiftRegOnOff();
 
     int axis_sources_;
     int buttons_from_axes_;

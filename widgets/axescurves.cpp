@@ -10,12 +10,11 @@ AxesCurves::AxesCurves(int axis_number, QWidget *parent) :
     ui->setupUi(this);
     axis_number_ = axis_number;
     current_profile_ = 0;
-    ui->groupBox->setTitle(axes_list_[axis_number_].gui_name);
-
-    ui->comboBox_CurveProfile->addItems(curves_list_);
+    ui->groupBox_Curve->setTitle(axes_list_[axis_number_].gui_name);
 
     connect(ui->widget_AxesCurvesPlot, SIGNAL(pointValueChanged(const int*, const int*)),
             this, SLOT(pointValueChanged(const int*, const int*)));
+
 }
 
 AxesCurves::~AxesCurves()
@@ -27,13 +26,13 @@ void AxesCurves::SetDarkIcon(bool is_dark)
 {
     if (is_dark == true){
         ui->pushButton_Linear->setIcon(QIcon(":/Images/linear_dark.png"));
-        ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert_dark.png"));
+       //ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert_dark.png"));
         ui->pushButton_Exponent->setIcon(QIcon(":/Images/Exponent_dark.png"));
         ui->pushButton_ExponentInvert->setIcon(QIcon(":/Images/ExponentInvert_dark.png"));
         ui->pushButton_Shape->setIcon(QIcon(":/Images/Shape_dark.png"));
     } else {
         ui->pushButton_Linear->setIcon(QIcon(":/Images/linear.png"));
-        ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert.png"));
+        //ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert.png"));
         ui->pushButton_Exponent->setIcon(QIcon(":/Images/Exponent.png"));
         ui->pushButton_ExponentInvert->setIcon(QIcon(":/Images/ExponentInvert.png"));
         ui->pushButton_Shape->setIcon(QIcon(":/Images/Shape.png"));
@@ -46,21 +45,6 @@ void AxesCurves::RetranslateUi()
 }
 
 
-void AxesCurves::on_comboBox_CurveProfile_currentIndexChanged(int index)
-{
-    current_profile_ = index;
-    if (index > 0){
-        emit axisCurveIndexChanged(axis_number_, index);
-    }
-    else if (index == 0)
-    {
-        for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)
-        {
-            ui->widget_AxesCurvesPlot->SetPointValue(i, curve_points_value_[i]);
-        }
-    }
-}
-
 void AxesCurves::pointValueChanged(const int *point_number, const int *value)
 {
     if (current_profile_ > 0){
@@ -72,15 +56,16 @@ void AxesCurves::pointValueChanged(const int *point_number, const int *value)
     }
 }
 
-void AxesCurves::on_pushButton_ResetCurveProfile_clicked()
+void AxesCurves::SetCurveProfile(int profile)
 {
-    ui->comboBox_CurveProfile->setCurrentIndex(0);
-    emit resetCurvesProfiles();
-}
-
-int AxesCurves::GetCurrentCurveIndex()
-{
-    return ui->comboBox_CurveProfile->currentIndex();
+    current_profile_ = profile;
+    if (profile <= 0)
+    {
+        for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)
+        {
+            ui->widget_AxesCurvesPlot->SetPointValue(i, curve_points_value_[i]);
+        }
+    }
 }
 
 
@@ -130,10 +115,10 @@ void AxesCurves::on_pushButton_Linear_clicked()
     ui->widget_AxesCurvesPlot->SetLinear();
 }
 
-void AxesCurves::on_pushButton_LinearInvert_clicked()
-{
-    ui->widget_AxesCurvesPlot->SetLinearInvert();
-}
+//void AxesCurves::on_pushButton_LinearInvert_clicked()
+//{
+//    ui->widget_AxesCurvesPlot->SetLinearInvert();
+//}
 
 void AxesCurves::on_pushButton_Exponent_clicked()
 {
@@ -158,7 +143,6 @@ void AxesCurves::DeviceStatus(bool is_connect)
 
 void AxesCurves::ReadFromConfig()
 {
-    ui->comboBox_CurveProfile->setCurrentIndex(0);
     for (int i = 0; i < ui->widget_AxesCurvesPlot->GetPointCount(); ++i)
     {
         ui->widget_AxesCurvesPlot->SetPointValue(i, gEnv.pDeviceConfig->config.axis_config[axis_number_].curve_shape[i]);
@@ -173,4 +157,3 @@ void AxesCurves::WriteToConfig()
         gEnv.pDeviceConfig->config.axis_config[axis_number_].curve_shape[i] = ui->widget_AxesCurvesPlot->GetPointValue(i);
     }
 }
-

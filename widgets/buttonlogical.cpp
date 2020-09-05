@@ -40,7 +40,61 @@ void ButtonLogical::RetranslateUi()
     ui->retranslateUi(this);
 }
 
-void ButtonLogical::ReadFromConfig()                // rename to ReadFromConfig
+void ButtonLogical::SetMaxPhysButtons(int max_phys_buttons)
+{
+    ui->spinBox_PhysicalButtonNumber->setMaximum(max_phys_buttons);
+}
+
+void ButtonLogical::SetSpinBoxOnOff(int max_phys_buttons)
+{
+    if (max_phys_buttons > 0){
+        ui->spinBox_PhysicalButtonNumber->setEnabled(true);
+    } else {
+        ui->spinBox_PhysicalButtonNumber->setEnabled(false);
+    }
+}
+
+void ButtonLogical::functionTypeChanged(int index)
+{
+    emit functionIndexChanged(index, function_previous_index_, button_number_);
+    function_previous_index_ = index;
+}
+
+void ButtonLogical::editingOnOff(int value)
+{
+    if(value > 0){
+        ui->checkBox_IsInvert->setEnabled(true);
+        ui->checkBox_IsDisable->setEnabled(true);
+        ui->comboBox_ButtonFunction->setEnabled(true);
+        ui->comboBox_ShiftIndex->setEnabled(true);
+        ui->comboBox_DelayTimerIndex->setEnabled(true);
+        ui->comboBox_PressTimerIndex->setEnabled(true);
+    } else {
+        ui->checkBox_IsInvert->setEnabled(false);
+        ui->checkBox_IsDisable->setEnabled(false);
+        ui->comboBox_ButtonFunction->setEnabled(false);
+        ui->comboBox_ShiftIndex->setEnabled(false);
+        ui->comboBox_DelayTimerIndex->setEnabled(false);
+        ui->comboBox_PressTimerIndex->setEnabled(false);
+    }
+}
+
+void ButtonLogical::ButtonState(bool is_activated)
+{
+    is_activated_ = is_activated;
+    if (is_activated_){
+        default_style_ = this->styleSheet();
+        this->setStyleSheet(default_style_ + "background-color: rgb(0, 128, 0);");
+    } else {
+        this->setStyleSheet(default_style_);//("background: palette(window)");        // баг тряска если ("") // текущий вариант не пашет с чёрным стилем
+    }
+//    QPalette palette = lbl->palette();            // быстрее?
+//    palette.setColor(QPalette::WindowText, Qt::gray);
+//    lbl->setPalette(palette);
+}
+
+
+void ButtonLogical::ReadFromConfig()
 {
     // physical
     ui->spinBox_PhysicalButtonNumber->setValue(gEnv.pDeviceConfig->config.buttons[button_number_].physical_num + 1);        // !!!!
@@ -93,54 +147,4 @@ void ButtonLogical::WriteToConfig()
     gEnv.pDeviceConfig->config.buttons[button_number_].shift_modificator = shift_list_[ui->comboBox_ShiftIndex->currentIndex()].device_enum_index;
     gEnv.pDeviceConfig->config.buttons[button_number_].delay_timer = timer_list_[ui->comboBox_DelayTimerIndex->currentIndex()].device_enum_index;
     gEnv.pDeviceConfig->config.buttons[button_number_].press_timer = timer_list_[ui->comboBox_PressTimerIndex->currentIndex()].device_enum_index;
-}
-
-void ButtonLogical::SetMaxPhysButtons(int max_phys_buttons)
-{
-    ui->spinBox_PhysicalButtonNumber->setMaximum(max_phys_buttons);
-}
-
-void ButtonLogical::SetSpinBoxOnOff(int max_phys_buttons)
-{
-    if (max_phys_buttons > 0){
-        ui->spinBox_PhysicalButtonNumber->setEnabled(true);
-    } else {
-        ui->spinBox_PhysicalButtonNumber->setEnabled(false);
-    }
-}
-
-void ButtonLogical::functionTypeChanged(int index)
-{
-    emit functionIndexChanged(index, function_previous_index_, button_number_);
-    function_previous_index_ = index;
-}
-
-void ButtonLogical::editingOnOff(int value)
-{
-    if(value > 0){
-        ui->checkBox_IsInvert->setEnabled(true);
-        ui->checkBox_IsDisable->setEnabled(true);
-        ui->comboBox_ButtonFunction->setEnabled(true);
-        ui->comboBox_ShiftIndex->setEnabled(true);
-        ui->comboBox_DelayTimerIndex->setEnabled(true);
-        ui->comboBox_PressTimerIndex->setEnabled(true);
-    } else {
-        ui->checkBox_IsInvert->setEnabled(false);
-        ui->checkBox_IsDisable->setEnabled(false);
-        ui->comboBox_ButtonFunction->setEnabled(false);
-        ui->comboBox_ShiftIndex->setEnabled(false);
-        ui->comboBox_DelayTimerIndex->setEnabled(false);
-        ui->comboBox_PressTimerIndex->setEnabled(false);
-    }
-}
-
-void ButtonLogical::ButtonState(bool is_activated)
-{
-    is_activated_ = is_activated;
-    if (is_activated_){
-        default_style_ = this->styleSheet();
-        this->setStyleSheet(default_style_ + "background-color: rgb(0, 128, 0);");
-    } else {
-        this->setStyleSheet(default_style_);//("background: palette(window)");        // баг тряска если ("") // текущий вариант не пашет с чёрным стилем
-    }
 }

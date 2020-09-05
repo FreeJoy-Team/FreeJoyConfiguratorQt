@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     QString style = gEnv.pAppSettings->value("StyleSheet", "default").toString();
     gEnv.pAppSettings->endGroup();
 
-    if (style == "default")
+    if (style == "default") // ?
     {
         QFile f(":/QSS-master/default.qss");
         if (!f.exists())   {
@@ -75,7 +75,6 @@ int main(int argc, char *argv[])
             qApp->setStyleSheet(ts.readAll());
         }
     }
-
 
     MainWindow w;
     w.show();

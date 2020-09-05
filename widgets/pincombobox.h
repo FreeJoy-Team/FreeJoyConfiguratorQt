@@ -97,7 +97,6 @@ class PinComboBox : public QWidget
 public:
     explicit PinComboBox(QWidget *parent = nullptr);
     ~PinComboBox();
-    int GetIndex();                         // удалить?
     int GetCurrentDevEnum();
     void SetIndexStatus(int index, bool status);
     //void SetIndex();
@@ -108,11 +107,6 @@ public:
     void WriteToConfig(uint pin);
 
     void RetranslateUi();
-
-    //int GetEnumValue();                     // удалить?
-    //private?
-    //QString EnumToString(int deviceEnum);   // удалить?
-    //int EnumToIndex(int deviceEnum);        // удалить?
                                                                 /////////// private, public             разобрать кашу
     int pin_number_;
     //! номер элемента в pin_types
@@ -303,6 +297,11 @@ private:
     Ui::PinComboBox *ui;
     int last_deleted_;              // удалить?
     int current_dev_enum_;
+
+//    int index2;
+//    QString name2;
+//    int width2;
+//    void resizeEvent(QResizeEvent*);
 };
 
 #endif // PINCOMBOBOX_H

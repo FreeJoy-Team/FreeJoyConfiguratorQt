@@ -2,6 +2,7 @@
 #define AXESCURVESCONFIG_H
 
 #include <QWidget>
+#include <QComboBox>
 #include "axescurves.h"
 
 #include "global.h"
@@ -32,15 +33,30 @@ public:
     void DeviceStatus(bool is_connect);
 
 private slots:
-    void axisCurveIndexChanged(int axis_number, int index);
     void setCurvesValue(int axis_number, int point_number, int value); // может указатели?
-    void resetCurvesProfiles();
+    void profileIndexChanged(int index);
+
+    void on_pushButton_ResetProfiles_clicked();
 
 private:
     Ui::AxesCurvesConfig *ui;
     QList<AxesCurves*> AxesCurvAdrList;
+    QList<QComboBox*> ProfilesCombBoxPtrList;
 
     int curves_points_value_[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT];
+
+    const QStringList curves_list_ =    // курве 8 = MAX_AXIS_NUM ! или менять curves_points_value_ в axescurvesconfig
+    {{
+        {tr("Not used")},
+        {tr("Curve 1")},
+        {tr("Curve 2")},
+        {tr("Curve 3")},
+        {tr("Curve 4")},
+        {tr("Curve 5")},
+        {tr("Curve 6")},
+        {tr("Curve 7")},
+        {tr("Curve 8")},
+    }};
 };
 
 #endif // AXESCURVESCONFIG_H

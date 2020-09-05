@@ -1,8 +1,6 @@
 #include "axescurvesconfig.h"
 #include "ui_axescurvesconfig.h"
 
-//#include "widgets/axes.h"
-
 AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AxesCurvesConfig)
@@ -18,18 +16,26 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
         AxesCurvAdrList.append(axis_curves);
         //shift_register->hide();
 
-        connect(AxesCurvAdrList[i], SIGNAL(axisCurveIndexChanged(int, int)),
-                this, SLOT(axisCurveIndexChanged(int, int)));
-
         connect(AxesCurvAdrList[i], SIGNAL(curvePointValueChanged(int, int, int)),
                 this, SLOT(setCurvesValue(int, int, int)));
 
-        connect(AxesCurvAdrList[i], SIGNAL(resetCurvesProfiles()),
-                this, SLOT(resetCurvesProfiles()));
     }
 
-    // set default linear curves_points_value_
-    resetCurvesProfiles();
+    // profiles
+    // тупо сделал, надо было делать отдельный виджет для профилей и спавнить в коде, а не в дизайнере.
+    // переделаю, если функционал профилей потребуется изменить
+    ProfilesCombBoxPtrList = ui->groupBox_Profiles->findChildren<QComboBox *> ();
+    for (int i = 0; i < ProfilesCombBoxPtrList.size(); ++i) {
+        ProfilesCombBoxPtrList[i]->addItems(curves_list_);
+
+        connect(ProfilesCombBoxPtrList[i], SIGNAL(currentIndexChanged(int)),
+                this, SLOT(profileIndexChanged(int)));
+    }
+    // set default curves_points_value_ to linear
+    on_pushButton_ResetProfiles_clicked();
+//    if (ProfilesCombBoxPtrList.size() != AxesCurvAdrList.size()){
+//        qDebug()<<"ALE";
+//    }
 }
 
 AxesCurvesConfig::~AxesCurvesConfig()
@@ -52,26 +58,38 @@ void AxesCurvesConfig::RetranslateUi()
     }
 }
 
-void AxesCurvesConfig::axisCurveIndexChanged(int axis_number, int index)
-{
-    for (int i = 0; i < CURVE_PLOT_POINTS_COUNT; ++i) {
-        AxesCurvAdrList[axis_number]->SetPointValue(i, curves_points_value_ [index - 1] [i]);
-    }
-}
-
 void AxesCurvesConfig::setCurvesValue(int axis_number, int point_number, int value)    // дать указатель на AxesCurvAdrList кривым и не придутся туда-сюда гонять?
 {                                                                               // для одного потока норм и быстрее, но хз
     for (int i = 0; i < AxesCurvAdrList.size(); i++)
     {
-        if (AxesCurvAdrList[axis_number]->GetCurrentCurveIndex() == AxesCurvAdrList[i]->GetCurrentCurveIndex())
+        if (ProfilesCombBoxPtrList[axis_number]->currentIndex() == ProfilesCombBoxPtrList[i]->currentIndex())
         {
-            curves_points_value_ [AxesCurvAdrList[i]->GetCurrentCurveIndex() - 1] [point_number] = value;
+            curves_points_value_ [ProfilesCombBoxPtrList[i]->currentIndex() - 1] [point_number] = value;
             AxesCurvAdrList[i]->SetPointValue(point_number, value);
         }
     }
 }
 
-void AxesCurvesConfig::resetCurvesProfiles()
+void AxesCurvesConfig::profileIndexChanged(int index)
+{
+    int axis_number = 0;
+    while (axis_number < ProfilesCombBoxPtrList.size())
+    {
+        if (sender() == ProfilesCombBoxPtrList[axis_number]){
+            break;
+        }
+        ++axis_number;
+    }
+
+    AxesCurvAdrList[axis_number]->SetCurveProfile(index);
+    if (index > 0){
+        for (int i = 0; i < CURVE_PLOT_POINTS_COUNT; ++i) {
+            AxesCurvAdrList[axis_number]->SetPointValue(i, curves_points_value_ [index - 1] [i]);
+        }
+    }
+}
+
+void AxesCurvesConfig::on_pushButton_ResetProfiles_clicked()
 {
     for (int i = 0; i < MAX_AXIS_NUM; ++i) {            // при изменении дефайнов добавить округление
         for (int j = 0; j < CURVE_PLOT_POINTS_COUNT; ++j) {
@@ -79,14 +97,17 @@ void AxesCurvesConfig::resetCurvesProfiles()
         }
     }
 
-    for (int i = 0; i < AxesCurvAdrList.size(); i++)
+    for (int i = 0; i < ProfilesCombBoxPtrList.size(); i++)
     {
-        if (AxesCurvAdrList[i]->GetCurrentCurveIndex() > 0)
+        if (ProfilesCombBoxPtrList[i]->currentIndex() > 0)
         {
             for (int j = 0; j < CURVE_PLOT_POINTS_COUNT; ++j) {
                 AxesCurvAdrList[i]->SetPointValue(j, curves_points_value_ [0] [j]); // AxesCurvAdrList[i]->GetCurrentCurveIndex() вместо 0 ?
             }
         }
+    }
+    for (int i = 0; i < ProfilesCombBoxPtrList.size(); ++i) {
+        ProfilesCombBoxPtrList[i]->setCurrentIndex(0);
     }
 }
 
@@ -113,6 +134,10 @@ void AxesCurvesConfig::DeviceStatus(bool is_connect)
 
 void AxesCurvesConfig::ReadFromConfig()
 {
+    for (int i = 0; i < ProfilesCombBoxPtrList.size(); ++i) {
+        ProfilesCombBoxPtrList[i]->setCurrentIndex(0);
+    }
+
     for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
         AxesCurvAdrList[i]->ReadFromConfig();
     }

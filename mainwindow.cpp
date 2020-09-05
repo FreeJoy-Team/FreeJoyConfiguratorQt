@@ -169,9 +169,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    hid_device_worker->moveToThread(thread);    //thread.data()
+    hid_device_worker->moveToThread(thread);
 
-    connect(thread, SIGNAL(started()), hid_device_worker, SLOT(processData()));      //worker.data()
+    connect(thread, SIGNAL(started()), hid_device_worker, SLOT(processData()));
 
     connect(hid_device_worker, SIGNAL(putGamepadPacket(uint8_t *)),
                           this, SLOT(getGamepadPacket(uint8_t *)));
@@ -283,7 +283,7 @@ void MainWindow::LoadAppConfig()
         translator.load(":/FreeJoyQt_ru");
         qApp->installTranslator(&translator);
         ui->retranslateUi(this);
-        ui->widget_2->RetranslateUi();      // сделать уже нормально
+        ui->widget_2->RetranslateUi();
     }
     gEnv.pAppSettings->endGroup();
 
@@ -348,16 +348,13 @@ void MainWindow::SaveAppConfig()
 void MainWindow::showConnectDeviceInfo() {
     ui->label_DeviceStatus->setText(tr("Connected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
-    //ui->label_DeviceStatus->setVisible(true);
     ui->pushButton_ReadConfig->setEnabled(true);
     ui->pushButton_WriteConfig->setEnabled(true);
     ui->widget_2->DeviceConnected(true);
-    qDebug()<<"start time ms ="<< gEnv.pApp_start_time->elapsed();
 }
 
 
 void MainWindow::hideConnectDeviceInfo() {
-    //ui->label_DeviceStatus->setVisible(false);
     ui->label_DeviceStatus->setText(tr("Disconnected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(160, 0, 0);");
     ui->pushButton_ReadConfig->setEnabled(false);
@@ -409,23 +406,19 @@ void MainWindow::setFont()
 
 
 // попробовать вынести в отдельный поток и повесить дилей
-int asd = 0;
 void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ ВОРКЕРА
 {
-    ui->lineEdit->setText(QString::number(asd));
     report_convert.GamepadReport(buff);
 
-    //static qint64 timer;
     static QElapsedTimer timer;
     static bool change = false;
 
     if (!change)
     {
         timer.start();
-        //timer = time.elapsed();
         change = true;
     }
-    else if (change && timer.elapsed() > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах    // change?? always true
+    else if (timer.elapsed() > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах
     {
         // optimization
         if(ui->tab_ButtonConfig->isVisible() == true){
@@ -441,8 +434,11 @@ void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ
         }
         change = false;
     }
-
-    asd++;
+    // debug tab
+#ifdef QT_DEBUG
+    static int asd = 0;
+    ui->lineEdit->setText(QString::number(++asd));
+#endif
 }
 
 // add/delete hid devices to combobox
@@ -504,7 +500,6 @@ void MainWindow::deviceFlasherController(bool is_start_flash)        // херн
         if (is_start_flash == true){
             hid_device_worker->FlashFirmware(ui->widget_2->GetFileArray());
         } else {
-            //ui->widget_2->DeviceConnected(hid_device_worker->EnterToFlashMode());
             hid_device_worker->EnterToFlashMode();
         }
 
@@ -519,8 +514,6 @@ void MainWindow::deviceFlasherController(bool is_start_flash)        // херн
 // slot after receiving the config
 void MainWindow::configReceived(bool success)
 {
-    qDebug()<<"configReceived";
-    //ui->label_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid));
     button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
     static QString button_default_text = ui->pushButton_ReadConfig->text();
 
@@ -538,9 +531,7 @@ void MainWindow::configReceived(bool success)
 
         ui->pushButton_ReadConfig->setText(tr("Received"));
         ui->pushButton_ReadConfig->setStyleSheet(button_default_style_ + "color: white; background-color: rgb(0, 128, 0);");
-        qDebug()<<"configReceived - before QTimer";
         QTimer::singleShot(1500, [&]{
-            qDebug()<<"configReceived - QTimer";
             ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
             ui->pushButton_ReadConfig->setText(button_default_text);
             ui->pushButton_ReadConfig->setEnabled(true);
@@ -549,9 +540,7 @@ void MainWindow::configReceived(bool success)
     } else {
         ui->pushButton_ReadConfig->setText(tr("Error"));
         ui->pushButton_ReadConfig->setStyleSheet(button_default_style_ + "color: white; background-color: rgb(200, 0, 0);");
-        qDebug()<<"configReceived - before QTimer";
         QTimer::singleShot(1500, [&]{
-            qDebug()<<"configReceived - QTimer";
             ui->pushButton_ReadConfig->setStyleSheet(button_default_style_);
             ui->pushButton_ReadConfig->setText(button_default_text);
             ui->pushButton_ReadConfig->setEnabled(true);
@@ -936,70 +925,23 @@ void MainWindow::SaveDeviceConfigToFile(QSettings* appS)
     }
 }
 
-
-
-//                                                                       // set text in centr
-//    QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
-//    for (int i = 0; i < allPButtons.size(); i++)
-//    {
-//        int index = allPButtons[i]->PinComboBox::GetIndex();
-//        QString name = gEnv.pAppConfig->pin_list[index].gui_name;
-
-//        int width = allPButtons[i]->width();
-//        width = width/2 - name.length()*3;
-
-//        QString padding = QString::number(width);
-//        QString styleSheet = "QComboBox { padding-left: %1px;}";
-//        allPButtons[i]->setStyleSheet( styleSheet.arg(padding) );
-//    }
-void MainWindow::resizeEvent(QResizeEvent* event)                       // SLOW
-{
-   QMainWindow::resizeEvent(event);
-
-//   static clock_t time2;
-//   static bool change = false;
-//   if (!change)
-//   {
-//       time2 = clock();
-//       change = true;
-//   }
-//   else if (change && clock() - time2 > 50)
-//   {
-//       QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
-//       for (int i = 0; i < allPButtons.size(); i++)
-//       {
-//           int index = allPButtons[i]->PinComboBox::GetIndex();
-//           QString name = gEnv.pAppConfig->pin_list[index].gui_name;
-
-//           int width = allPButtons[i]->width();
-//           width = width/2 - name.length()*3;
-
-//           QString padding = QString::number(width);
-//           QString styleSheet = "QComboBox { padding-left: %1px;}";
-//           allPButtons[i]->setStyleSheet( styleSheet.arg(padding) );
-//       }
-//       change = false;
-//   }
-}
-
-
 // dynamic widgets spawn
-void MainWindow::addvalues(int value)
-{
-    Q_UNUSED(value)
-//    if (value > 90 && LogicButtonAdrList2.size()< 512)
-//    {
-//        for (int i = 0; i< 5; i++) {
-//            ButtonConfig* qwe = new ButtonConfig;
-//            ui->verticalLayout_3->addWidget(qwe, i);
-//            LogicButtonAdrList2.append(qwe);
-//        }
-////        QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
-////        for (int i = 0; i< allPButtons.size(); i++) {
-////            allPButtons[i]->PinComboBox::GenText();
+//void MainWindow::addvalues(int value)
+//{
+//    Q_UNUSED(value)
+////    if (value > 90 && LogicButtonAdrList2.size()< 512)
+////    {
+////        for (int i = 0; i< 5; i++) {
+////            ButtonConfig* qwe = new ButtonConfig;
+////            ui->verticalLayout_3->addWidget(qwe, i);
+////            LogicButtonAdrList2.append(qwe);
 ////        }
-//    }
-}
+//////        QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
+//////        for (int i = 0; i< allPButtons.size(); i++) {
+//////            allPButtons[i]->PinComboBox::GenText();
+//////        }
+////    }
+//}
 
 void MainWindow::on_pushButton_LoadFromFile_clicked()
 {
@@ -1042,9 +984,4 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
     }
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     gEnv.pAppSettings->endGroup();
-}
-
-void MainWindow::on_pushButton_TestButton_clicked()
-{
-
 }

@@ -101,7 +101,6 @@ private:
     Ui::ButtonLogical *ui;
     int function_previous_index_;
     QString default_style_;
-
 };
 
 #endif // BUTTONLOGICAL_H

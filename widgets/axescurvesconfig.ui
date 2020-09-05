@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="5,1">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -21,7 +21,7 @@
     <number>0</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="rightMargin">
     <number>0</number>
@@ -34,6 +34,9 @@
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -42,8 +45,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1062</width>
-        <height>600</height>
+        <width>885</width>
+        <height>597</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="layoutV_AxesCurves">
@@ -64,6 +67,166 @@
        </property>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_Profiles">
+     <property name="title">
+      <string>Curves profiles</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <layout class="QVBoxLayout" name="layoutV_Profiles">
+      <property name="leftMargin">
+       <number>6</number>
+      </property>
+      <property name="topMargin">
+       <number>9</number>
+      </property>
+      <property name="rightMargin">
+       <number>6</number>
+      </property>
+      <property name="bottomMargin">
+       <number>9</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_X">
+        <property name="text">
+         <string>X</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_X"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Y">
+        <property name="text">
+         <string>Y</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_Y"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Z">
+        <property name="text">
+         <string>Z</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_Z"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Rx">
+        <property name="text">
+         <string>Rx</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_Rx"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Ry">
+        <property name="text">
+         <string>Ry</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_Ry"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Rz">
+        <property name="text">
+         <string>Rz</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_Rz"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Slider1">
+        <property name="text">
+         <string>Slider 1</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_Slider1"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Slider2">
+        <property name="text">
+         <string>Slider 2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profile_Slider2"/>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>65</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_ResetProfiles">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">height: 30px;</string>
+        </property>
+        <property name="text">
+         <string>Reset profiles</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>

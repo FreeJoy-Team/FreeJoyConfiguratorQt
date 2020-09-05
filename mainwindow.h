@@ -72,8 +72,6 @@ private slots:
     void showConnectDeviceInfo();
     void hideConnectDeviceInfo();
     void getGamepadPacket(uint8_t *);
-//    void getConfigPacket(uint8_t *);
-//    void sendConfigPacket(uint8_t *);
 
     void configReceived(bool success);
     void configSent(bool success);
@@ -99,8 +97,7 @@ private slots:
     void on_pushButton_SetDefaultConfig_clicked();
     void on_pushButton_LoadDefaultConfig_clicked();
 
-    void addvalues(int);
-    void on_pushButton_TestButton_clicked();
+    //void addvalues(int);
 
 private:
     Ui::MainWindow *ui;
@@ -117,7 +114,5 @@ private:
 
     void LoadDeviceConfigFromFile(QSettings* device_settings);
     void SaveDeviceConfigToFile(QSettings* device_settings);
-
-    void resizeEvent(QResizeEvent*);
 };
 #endif // MAINWINDOW_H

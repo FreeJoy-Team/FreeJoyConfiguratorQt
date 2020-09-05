@@ -1,7 +1,6 @@
 #include "pincombobox.h"
 #include "ui_pincombobox.h"
 
-
 PinComboBox::PinComboBox(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PinComboBox)
@@ -17,7 +16,7 @@ PinComboBox::PinComboBox(QWidget *parent) :
 
     last_deleted_ = 0;  // ???
 
-    styleSheet_default_ = ui->comboBox_PinsType->styleSheet();       // will not work with styles, remove from constructor
+    styleSheet_default_ = ui->comboBox_PinsType->styleSheet();       // will not work with styles, remove from constructor, вроде пашет
 
     connect(ui->comboBox_PinsType, SIGNAL(currentIndexChanged(int)),
                 this, SLOT(IndexChanged(int)));
@@ -182,48 +181,6 @@ void PinComboBox::IndexChanged(int index)
 }
 
 
-//int PinComboBox::GetEnumValue()     //????????   // old, delete
-//{
-//    for (int i = 0; i < PIN_TYPE_COUNT; ++i) {
-//        if (ui->comboBox_PinsType->currentText() == pin_types[i].gui_name)
-//        {
-//            return pin_types[i].device_enum_index;
-//        }
-//    }
-//    return 0;
-//    //emit valueChanged2(pin_list_index);
-//}
-
-////! Returns a string to add to ComboBox         // old, delete
-//QString PinComboBox::EnumToString(int deviceEnum)               // try catch
-//{
-//    for (int i = 0; i < PIN_TYPE_COUNT; i++){
-//        if (pin_types[i].device_enum_index == deviceEnum){
-//            return pin_types[i].gui_name;
-//        }
-//    }
-//    return "Not Found";
-//}
-
-////! Returns the index to remove from ComboBox   // old, delete
-//int PinComboBox::EnumToIndex(int deviceEnum)                    // try catch
-//{
-//    QString string;
-//    for (int i = 0; i < PIN_TYPE_COUNT; i++){
-//        if (pin_types[i].device_enum_index == deviceEnum){
-//            string = pin_types[i].gui_name;
-//            break;
-//        }
-//    }
-//    return ui->comboBox_PinsType->findText(string);
-//}
-
-
-int PinComboBox::GetIndex()     // ?
-{
-    return ui->comboBox_PinsType->currentIndex();
-}
-
 int PinComboBox::GetCurrentDevEnum()
 {
     return current_dev_enum_;
@@ -238,7 +195,7 @@ void PinComboBox::SetIndexStatus(int index, bool status)
     }
 }
 
-void PinComboBox::ResetPin()     // ?
+void PinComboBox::ResetPin()
 {
     ui->comboBox_PinsType->setCurrentIndex(0);
     if (is_interacts_ == true)
@@ -270,14 +227,31 @@ void PinComboBox::SetIndex_Iteraction(int index, int sender_index)
     }
 }
 
+
+//void PinComboBox::resizeEvent(QResizeEvent*)
+//{
+////    static bool tmp = false;
+////    if(tmp == false)
+////    {
+//        index2 = pin_types_index[ui->comboBox_PinsType->currentIndex()];
+//        name2 = pin_types[index2].gui_name;
+//        width2 = ui->comboBox_PinsType->width()/2 - name2.length()*3;
+////        tmp = true;
+////    }
+
+//    QString padding = QString::number(width2);
+//    QString styleSheet = "QComboBox { padding-left: %1px;}";
+//    ui->comboBox_PinsType->setStyleSheet( styleSheet.arg(padding) );
+//    //ui->comboBox_PinsType->setStyleSheet(QLatin1String("QComboBox QListView {padding-left: 20px;}"));
+//}
+
+
 void PinComboBox::ReadFromConfig(uint pin)          // try?
 {
-    //int tmp_pin = pin;  // anti-warning int and uint      // size_t  pin_types_index[i]
     for (size_t i = 0; i < enum_index.size(); ++i) {
         if (gEnv.pDeviceConfig->config.pins[pin] == enum_index[i])
         {
-            //qDebug()<<i;
-            ui->comboBox_PinsType->setCurrentIndex(int(i));  //вместо i - ui->comboBox_PinsType->findText(pin_list_[i].gui_name)
+            ui->comboBox_PinsType->setCurrentIndex(int(i));
             break;
         }
     }

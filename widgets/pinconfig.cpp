@@ -72,7 +72,6 @@ PinConfig::PinConfig(QWidget *parent) :
             PinComboBoxPtrList.append(pinComboBox);
         }
     }
-    //qDebug()<<"PIN COUNT = "<<PinComboBoxPtrList.size();    //currentIndexChanged a2bCountChanged
 
     for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
             connect(PinComboBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),       // valgrind сообщает о утечке, но почему?
@@ -88,18 +87,6 @@ PinConfig::~PinConfig()
 {
     delete ui;
 }
-
-//void PinConfig::resizeEvent(QResizeEvent* event)
-//{
-//    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
-//    // get label dimensions
-//    int w = ui->label_ControllerImage->width();
-//    int h = ui->label_ControllerImage->height();
-//    // set a scaled pixmap to a w x h window keeping its aspect ratio
-//    ui->label_ControllerImage->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatioByExpanding));
-//    QSize size = pix.size();
-//    ui->label_ControllerImage->setMaximumSize(size.width(), size.height());
-//}
 
 void PinConfig::RetranslateUi()
 {
@@ -230,74 +217,68 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
 
     // set current config and generate signals for another configs
 //    else {
-        for (int i = 0; i < SOURCE_COUNT; ++i) {
-            for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
-                if(source[i].pin_type[j] == 0){
-                    break;
+    for (int i = 0; i < SOURCE_COUNT; ++i) {
+        for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
+            if(source[i].pin_type[j] == 0){
+                break;
+            }
+            else if(source[i].pin_type[j] == current_device_enum || source[i].pin_type[j] == previous_device_enum){
+
+                int tmp;
+                if (source[i].pin_type[j] == current_device_enum){
+                    tmp = 1;
+                } else {
+                    tmp = -1;
                 }
-                else if(source[i].pin_type[j] == current_device_enum || source[i].pin_type[j] == previous_device_enum){
 
-                    int tmp;
-                    if (source[i].pin_type[j] == current_device_enum){
-                        tmp = 1;
+                if (i == AXIS_SOURCE){      //int source_enum, bool is_add      axesSourceChanged
+                    axis_sources_+=tmp;
+                    ui->label_AxisSources->setNum(axis_sources_);
+                    if (tmp > 0){
+                        emit axesSourceChanged(pin_number - 1, true);
                     } else {
-                        tmp = -1;
+                        emit axesSourceChanged(pin_number - 1, false);
                     }
-
-                    if (i == AXIS_SOURCE){      //int source_enum, bool is_add      axesSourceChanged
-                        axis_sources_+=tmp;
-                        ui->label_AxisSources->setNum(axis_sources_);
-                        if (tmp > 0){
-                            emit axesSourceChanged(pin_number - 1, true);
-                        } else {
-                            emit axesSourceChanged(pin_number - 1, false);
-                        }
-                    }
-                    else if (i == SINGLE_BUTTON){
-                        single_buttons_+=tmp;
-                        ui->label_SingleButtons->setNum(single_buttons_);
-                        ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                    }
-                    else if (i == ROW_OF_BUTTONS){
-                        rows_of_buttons_+=tmp;
-                        ui->label_RowsOfButtons->setNum(rows_of_buttons_);
-                        ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                    }
-                    else if (i == COLUMN_OF_BUTTONS){
-                        columns_of_buttons_+=tmp;
-                        ui->label_ColumnsOfButtons->setNum(columns_of_buttons_);
-                        ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                        emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                    }
-                    else if (i == SINGLE_LED){
-                        single_LED_+=tmp;
-                        ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                        emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                    }
-                    else if (i == ROW_OF_LED){
-                        rows_of_LED_+=tmp;
-                        ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                        emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                    }
-                    else if (i == COLUMN_OF_LED){
-                        columns_of_LED_+=tmp;
-                        ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                        emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                    }
+                }
+                else if (i == SINGLE_BUTTON){
+                    single_buttons_+=tmp;
+                    ui->label_SingleButtons->setNum(single_buttons_);
+                    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                }
+                else if (i == ROW_OF_BUTTONS){
+                    rows_of_buttons_+=tmp;
+                    ui->label_RowsOfButtons->setNum(rows_of_buttons_);
+                    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                }
+                else if (i == COLUMN_OF_BUTTONS){
+                    columns_of_buttons_+=tmp;
+                    ui->label_ColumnsOfButtons->setNum(columns_of_buttons_);
+                    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                }
+                else if (i == SINGLE_LED){
+                    single_LED_+=tmp;
+                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                }
+                else if (i == ROW_OF_LED){
+                    rows_of_LED_+=tmp;
+                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                }
+                else if (i == COLUMN_OF_LED){
+                    columns_of_LED_+=tmp;
+                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
                 }
             }
         }
+    }
     //}
 }
 
-void PinConfig::shiftRegOnOff()     // todo
-{
-    if (shift_latch_count_ >= MAX_SHIFT_REG_NUM){
-
-    }
-}
 
 void PinConfig::ResetAllPins()
 {
@@ -335,6 +316,19 @@ void PinConfig::totalButtonsChanged(int count)
         max_buttons_warning_ = false;
     }
 }
+
+
+//void PinConfig::resizeEvent(QResizeEvent* event)
+//{
+//    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
+//    // get label dimensions
+//    int w = ui->label_ControllerImage->width();
+//    int h = ui->label_ControllerImage->height();
+//    // set a scaled pixmap to a w x h window keeping its aspect ratio
+//    ui->label_ControllerImage->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatioByExpanding));
+//    QSize size = pix.size();
+//    ui->label_ControllerImage->setMaximumSize(size.width(), size.height());
+//}
 
 
 void PinConfig::ReadFromConfig(){
