@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>Linear inverted</source>
-        <translation>Линейно перевёрнуто</translation>
+        <translation type="vanished">Линейно перевёрнуто</translation>
     </message>
     <message>
         <source>Exponent</source>
@@ -302,11 +302,94 @@
     </message>
     <message>
         <source>Reset curves profiles</source>
-        <translation>Сброс профилей</translation>
+        <translation type="vanished">Сброс профилей</translation>
     </message>
     <message>
         <source>Curves Profiles</source>
+        <translation type="vanished">Профили кривых</translation>
+    </message>
+    <message>
+        <source>Not used</source>
+        <translation type="vanished">Не используется</translation>
+    </message>
+    <message>
+        <source>Curve 1</source>
+        <translation type="vanished">Кривая 1</translation>
+    </message>
+    <message>
+        <source>Curve 2</source>
+        <translation type="vanished">Кривая 2</translation>
+    </message>
+    <message>
+        <source>Curve 3</source>
+        <translation type="vanished">Кривая 3</translation>
+    </message>
+    <message>
+        <source>Curve 4</source>
+        <translation type="vanished">Кривая 4</translation>
+    </message>
+    <message>
+        <source>Curve 5</source>
+        <translation type="vanished">Кривая 5</translation>
+    </message>
+    <message>
+        <source>Curve 6</source>
+        <translation type="vanished">Кривая 6</translation>
+    </message>
+    <message>
+        <source>Curve 7</source>
+        <translation type="vanished">Кривая 7</translation>
+    </message>
+    <message>
+        <source>Curve 8</source>
+        <translation type="vanished">Кривая 8</translation>
+    </message>
+</context>
+<context>
+    <name>AxesCurvesConfig</name>
+    <message>
+        <source>Form</source>
+        <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Curves profiles</source>
         <translation>Профили кривых</translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="unfinished">Х</translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slider 1</source>
+        <translation>Слайдер 1</translation>
+    </message>
+    <message>
+        <source>Slider 2</source>
+        <translation>Слайдер 2</translation>
+    </message>
+    <message>
+        <source>Reset profiles</source>
+        <translation>Сброс профилей</translation>
     </message>
     <message>
         <source>Not used</source>
@@ -343,13 +426,6 @@
     <message>
         <source>Curve 8</source>
         <translation>Кривая 8</translation>
-    </message>
-</context>
-<context>
-    <name>AxesCurvesConfig</name>
-    <message>
-        <source>Form</source>
-        <translation>Форма</translation>
     </message>
 </context>
 <context>
