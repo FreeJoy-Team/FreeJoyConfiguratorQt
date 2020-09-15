@@ -21,6 +21,37 @@ AxesCurves::~AxesCurves()
 {
     delete ui;
 }
+#include <QTimer>
+void AxesCurves::on_groupBox_Curve_clicked(bool checked)
+{
+    if (checked == false){
+        for (auto&& widget: this->findChildren<QWidget *>())
+        {
+            if (widget != ui->groupBox_Curve){
+                widget->setVisible(false);
+            }
+        }
+        QTimer::singleShot(10, [&]{
+//            ui->frame->setMinimumHeight(0);
+//            ui->groupBox_Curve->setMinimumHeight(0);
+            this->setMinimumHeight(0);
+//            ui->frame->setMaximumHeight(0);
+//            ui->groupBox_Curve->setMaximumHeight(0);
+        });
+    } else {
+        for (auto&& widget: this->findChildren<QWidget *>())
+        {
+            widget->setVisible(true);
+        }
+        QTimer::singleShot(10, [&]{
+//            ui->frame->setMinimumHeight(0);
+//            ui->groupBox_Curve->setMinimumHeight(0);
+            this->setMinimumHeight(600);
+//            ui->frame->setMaximumHeight(0);
+//            ui->groupBox_Curve->setMaximumHeight(0);
+        });
+    }
+}
 
 void AxesCurves::SetDarkIcon(bool is_dark)
 {

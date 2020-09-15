@@ -77,6 +77,7 @@ AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
         LabelAdrList[i]->setNum(PointAdrList[i]->current_value);
         LabelAdrList[i]->setMinimumWidth(label_width_);
         LabelAdrList[i]->setAlignment(Qt::AlignHCenter);
+        LabelAdrList[i]->setStyleSheet("background:transparent;");
         LabelAdrList[i]->setVisible(true);
     }
 }
@@ -151,18 +152,12 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
     if (is_device_connect_ == true)
     {
         // coordinates for rect
-        for (int i = 0; i < 1; ++i) {
-            cur_axis_pos.area.setRect(cur_axis_pos.posX, cur_axis_pos.posY,
-                                          radius_, radius_);
-        }
+        cur_axis_pos.area.setRect(cur_axis_pos.posX, cur_axis_pos.posY,
+                                  radius_, radius_);
         // paint rect
-        //painter.setPen(Qt::lightGray);
-        for (int i = 0; i < 1; ++i)
-        {
-            painter.setPen(cur_axis_pos.color);
-            painter.setBrush(cur_axis_pos.color);
-            painter.drawEllipse(cur_axis_pos.area);
-        }
+        painter.setPen(cur_axis_pos.color);
+        painter.setBrush(cur_axis_pos.color);
+        painter.drawEllipse(cur_axis_pos.area);
     }
 
     painter.end();
@@ -170,32 +165,8 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
 
 void AxesCurvesPlot::UpdateAxis(int pos_x, int pos_y)
 {
-//    static bool timer_enabled = false;
-//    static int count = 0;
-//    static int tmp;
-//    count++;
-//    time_t start = clock();
-
-//    if (timer_enabled == false){
-//        timer_enabled = true;
-
-//      tmp = count;
-//        QTimer::singleShot(200, [&]{
-//            timer_enabled = false;
-//            if (clock() - start > 20){
-//                is_device_connect_ = false;
-//                qDebug()<<"is_device_connect_ false";
-//                update();
-
-//            } else {
-//                is_device_connect_ = true;
-//            }
-//        });
-//    }
-    //is_device_connect_ = true;
-    cur_axis_pos.posX = CalcPointPosX(pos_x);
+    cur_axis_pos.posX = CalcPointPosX(pos_x);   // увеличить Х
     cur_axis_pos.posY = CalcPointPos(pos_y);
-    qDebug()<<"cur_axis_pos.posX ="<<cur_axis_pos.posX;
     update();
 }
 
@@ -217,7 +188,6 @@ void AxesCurvesPlot::SetPointValue(int point_number, int value)
     LabelAdrList[point_number]->setNum(value);
     UpdateLabelPos();
     update();
-    //qDebug()<<"posY"<<PointAdrList[point_number]->posY;
 }
 
 void AxesCurvesPlot::SetLinear()

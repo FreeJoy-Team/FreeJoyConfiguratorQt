@@ -49,6 +49,8 @@ private slots:
 
     void pointValueChanged(const int *point_number, const int *value);
 
+    void on_groupBox_Curve_clicked(bool checked);
+
 private:
     Ui::AxesCurves *ui;
     int axis_number_;

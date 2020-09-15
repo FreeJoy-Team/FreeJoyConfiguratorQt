@@ -33,7 +33,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2" columnstretch="5,0">
       <property name="leftMargin">
-       <number>18</number>
+       <number>9</number>
       </property>
       <property name="rightMargin">
        <number>6</number>
@@ -56,14 +56,17 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
         </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-        <property name="margin">
-         <number>0</number>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -95,8 +98,17 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -108,8 +120,17 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -121,8 +142,17 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -174,8 +204,17 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -187,8 +226,17 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -200,8 +248,17 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -217,8 +274,17 @@
       </item>
       <item row="2" column="1">
        <widget class="QLabel" name="label_ButtonsFromShiftRegs">
+        <property name="minimumSize">
+         <size>
+          <width>18</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string notr="true">0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>

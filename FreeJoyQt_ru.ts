@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>GroupBox</source>
-        <translation>Груп бокс</translation>
+        <translation type="vanished">Груп бокс</translation>
     </message>
     <message>
         <source>X</source>
@@ -343,6 +343,10 @@
     <message>
         <source>Curve 8</source>
         <translation type="vanished">Кривая 8</translation>
+    </message>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

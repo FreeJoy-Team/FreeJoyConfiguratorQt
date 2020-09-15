@@ -37,6 +37,9 @@
      <property name="lineWidth">
       <number>0</number>
      </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -45,13 +48,13 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>885</width>
+        <width>868</width>
         <height>597</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="layoutV_AxesCurves">
        <property name="spacing">
-        <number>0</number>
+        <number>10</number>
        </property>
        <property name="leftMargin">
         <number>0</number>

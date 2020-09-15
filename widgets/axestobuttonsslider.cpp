@@ -136,6 +136,7 @@ void AxesToButtonsSlider::SetPointsCount(uint count)        // count = 0 -crash
             point->polygon << pointer[0] << pointer[1] << pointer[2] << pointer[3] << pointer[4];
             label->setMinimumWidth(label_width_);
             label->setAlignment(Qt::AlignHCenter);
+            label->setStyleSheet("background:transparent;");
             label->setVisible(true);
         }
     }

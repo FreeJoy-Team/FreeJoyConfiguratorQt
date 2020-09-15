@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="0" columnstretch="0">
+  <layout class="QGridLayout" name="layoutG_AxisCurve" rowstretch="0" columnstretch="0">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -49,7 +49,7 @@ subcontrol-position: top center;
 }</string>
      </property>
      <property name="title">
-      <string>GroupBox</string>
+      <string>Curve</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -77,7 +77,7 @@ subcontrol-position: top center;
        <number>6</number>
       </property>
       <item row="2" column="0" colspan="3">
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="layoutH_CurveButton">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -239,7 +239,7 @@ subcontrol-position: top center;
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QVBoxLayout" name="layoutV_Curve">
          <property name="spacing">
           <number>0</number>
          </property>

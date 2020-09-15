@@ -105,7 +105,8 @@ FORMS += \
     widgets/shiftregistersconfig.ui
 
 TRANSLATIONS += \
-    FreeJoyQt_ru.ts
+    FreeJoyQt_ru.ts \
+    FreeJoyQt_zh_CN.ts
 
 
 # Default rules for deployment.
