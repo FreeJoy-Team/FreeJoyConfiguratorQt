@@ -6,6 +6,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include "global.h"
 #include "deviceconfig.h"
@@ -277,6 +278,13 @@ void AdvancedSettings::FlashDone()
     });
 }
 
+// about
+void AdvancedSettings::on_pushButton_About_clicked()
+{
+    QString source("<br> Source code available on <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt\">GutHub</A>");
+    QMessageBox::about(this, "About FreeJoyQt", "<p align=\"center\">Build with " + QString(QT_VERSION_STR) + source);
+}
+
 
 void AdvancedSettings::ReadFromConfig()
 {
@@ -309,4 +317,3 @@ void AdvancedSettings::WriteToConfig()
     // usb exchange period
     gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_USBExchangePeriod->value();
 }
-

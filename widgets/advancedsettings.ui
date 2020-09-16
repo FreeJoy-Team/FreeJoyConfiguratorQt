@@ -394,6 +394,26 @@
          <property name="rightMargin">
           <number>9</number>
          </property>
+         <item row="1" column="2">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="0" colspan="3">
+          <widget class="QCheckBox" name="checkBox_LoadDefCfg">
+           <property name="text">
+            <string>Load default config on startup</string>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="1">
           <widget class="QSpinBox" name="spinBox_FontSize">
            <property name="sizePolicy">
@@ -429,8 +449,8 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
-          <spacer name="horizontalSpacer">
+         <item row="1" column="3">
+          <spacer name="horizontalSpacer_7">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -442,10 +462,10 @@
            </property>
           </spacer>
          </item>
-         <item row="2" column="0" colspan="3">
-          <widget class="QCheckBox" name="checkBox_LoadDefCfg">
+         <item row="3" column="3">
+          <widget class="QPushButton" name="pushButton_About">
            <property name="text">
-            <string>Load default config on startup</string>
+            <string>About</string>
            </property>
           </widget>
          </item>
