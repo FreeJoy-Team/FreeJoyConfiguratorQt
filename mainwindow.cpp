@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug()<<"after main start MainWindow constructor time ms ="<< gEnv.pApp_start_time->elapsed();
     ui->setupUi(this);
 
-    QMainWindow::setWindowIcon(QIcon(":/Images/icon.png"));
+    QMainWindow::setWindowIcon(QIcon(":/Images/icon-32.png"));
     //setWindowFlags( Qt::FramelessWindowHint );
 
     // версия контроллера

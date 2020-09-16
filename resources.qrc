@@ -16,5 +16,6 @@
         <file>Images/Shape_dark.png</file>
         <file>Images/BluePill_render.jpg</file>
         <file>Images/icon.png</file>
+        <file>Images/icon-32.png</file>
     </qresource>
 </RCC>
