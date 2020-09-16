@@ -77,6 +77,8 @@ private slots:
 
     //void addvalues(int);
 
+    void on_pushButton_TestButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTranslator translator;

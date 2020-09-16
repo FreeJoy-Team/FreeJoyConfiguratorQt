@@ -989,3 +989,19 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     gEnv.pAppSettings->endGroup();
 }
+
+//#include <QDesktopServices>
+void MainWindow::on_pushButton_TestButton_clicked()
+{
+//    QEventLoop loop;
+//    QObject context;
+//    context.moveToThread(thread_getSend_config);
+//    connect(thread_getSend_config, &QThread::started, &context, [&]() {
+//        QDesktopServices::openUrl(QUrl("https://github.com/FreeJoy-Team/FreeJoyWiki"));
+//        loop.quit();
+//    });
+//    thread_getSend_config->start();
+//    loop.exec();
+//    thread_getSend_config->quit();
+//    thread_getSend_config->wait();
+}

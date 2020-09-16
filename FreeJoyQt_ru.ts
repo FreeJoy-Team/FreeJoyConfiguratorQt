@@ -123,6 +123,14 @@
         <source>Load default config on startup</source>
         <translation>Стандартный конфиг при запуске</translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wiki</source>
+        <translation>Вики</translation>
+    </message>
 </context>
 <context>
     <name>Axes</name>
@@ -346,7 +354,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая</translation>
     </message>
 </context>
 <context>
@@ -361,27 +369,27 @@
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished">Х</translation>
+        <translation>Х</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Z</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Rx</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ry</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Rz</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Slider 1</source>

@@ -69,89 +69,99 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="425"/>
+        <location filename="widgets/advancedsettings.ui" line="445"/>
         <source>Font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="448"/>
+        <location filename="widgets/advancedsettings.ui" line="413"/>
         <source>Load default config on startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="458"/>
+        <location filename="widgets/advancedsettings.ui" line="468"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/advancedsettings.ui" line="475"/>
+        <source>Wiki</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/advancedsettings.ui" line="485"/>
         <source>Languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="493"/>
+        <location filename="widgets/advancedsettings.ui" line="520"/>
         <source>Restart app for full changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="506"/>
+        <location filename="widgets/advancedsettings.ui" line="533"/>
         <source>Styles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="521"/>
+        <location filename="widgets/advancedsettings.ui" line="548"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="528"/>
+        <location filename="widgets/advancedsettings.ui" line="555"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="535"/>
+        <location filename="widgets/advancedsettings.ui" line="562"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="78"/>
-        <location filename="widgets/advancedsettings.cpp" line="114"/>
-        <location filename="widgets/advancedsettings.cpp" line="148"/>
+        <location filename="widgets/advancedsettings.cpp" line="80"/>
+        <location filename="widgets/advancedsettings.cpp" line="116"/>
+        <location filename="widgets/advancedsettings.cpp" line="150"/>
         <source>Loading... Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="201"/>
+        <location filename="widgets/advancedsettings.cpp" line="203"/>
         <source>Ready to flash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="217"/>
+        <location filename="widgets/advancedsettings.cpp" line="219"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="217"/>
+        <location filename="widgets/advancedsettings.cpp" line="219"/>
         <source>Binary files (.bin) (*.bin)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="241"/>
+        <location filename="widgets/advancedsettings.cpp" line="243"/>
         <source>Firmware flashing..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="245"/>
+        <location filename="widgets/advancedsettings.cpp" line="247"/>
         <source>Finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="250"/>
+        <location filename="widgets/advancedsettings.cpp" line="252"/>
         <source>SIZE ERROR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="255"/>
+        <location filename="widgets/advancedsettings.cpp" line="257"/>
         <source>CRC ERROR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="260"/>
+        <location filename="widgets/advancedsettings.cpp" line="262"/>
         <source>ERASE ERROR</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1717,37 +1727,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pinconfig.ui" line="73"/>
+        <location filename="widgets/pinconfig.ui" line="76"/>
         <source>Total LEDs:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pinconfig.ui" line="83"/>
+        <location filename="widgets/pinconfig.ui" line="86"/>
         <source>Buttons from axes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pinconfig.ui" line="132"/>
+        <location filename="widgets/pinconfig.ui" line="162"/>
         <source>Single buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pinconfig.ui" line="142"/>
+        <location filename="widgets/pinconfig.ui" line="172"/>
         <source>Columns of buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pinconfig.ui" line="152"/>
+        <location filename="widgets/pinconfig.ui" line="182"/>
         <source>Rows of buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pinconfig.ui" line="162"/>
+        <location filename="widgets/pinconfig.ui" line="192"/>
         <source>Total buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pinconfig.ui" line="211"/>
+        <location filename="widgets/pinconfig.ui" line="268"/>
         <source>Buttons from shift regs:</source>
         <translation type="unfinished"></translation>
     </message>

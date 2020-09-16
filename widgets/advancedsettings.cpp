@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDesktopServices> // wiki
 
 #include "global.h"
 #include "deviceconfig.h"
@@ -276,6 +277,12 @@ void AdvancedSettings::FlashDone()
         file_array_.clear();
         file_array_.shrink_to_fit();
     });
+}
+
+//wiki
+void AdvancedSettings::on_pushButton_Wiki_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/FreeJoy-Team/FreeJoyWiki"));
 }
 
 // about
