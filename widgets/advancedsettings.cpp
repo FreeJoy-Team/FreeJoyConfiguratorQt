@@ -282,7 +282,8 @@ void AdvancedSettings::FlashDone()
 void AdvancedSettings::on_pushButton_About_clicked()
 {
     QString source("<br> Source code available on <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt\">GutHub</A>");
-    QMessageBox::about(this, "About FreeJoyQt", "<p align=\"center\">Build with " + QString(QT_VERSION_STR) + source);
+    QString wiki("<br> Check <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyWiki\">our wiki</A> for detailed instructions.");
+    QMessageBox::about(this, "About FreeJoyQt", wiki + "<p align=\"center\">Build with " + QString(QT_VERSION_STR) + source);
 }
 
 
