@@ -21,6 +21,18 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout" columnstretch="1,5">
+    <property name="leftMargin">
+     <number>6</number>
+    </property>
+    <property name="topMargin">
+     <number>6</number>
+    </property>
+    <property name="rightMargin">
+     <number>6</number>
+    </property>
+    <property name="bottomMargin">
+     <number>6</number>
+    </property>
     <item row="1" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="baseSize">
@@ -39,7 +51,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <property name="movable">
        <bool>true</bool>
@@ -366,6 +378,9 @@ border-bottom: 1px solid rgb(190, 190, 190);
         <number>6</number>
        </property>
        <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <property name="verticalSpacing">

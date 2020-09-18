@@ -46,7 +46,20 @@
         <height>603</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="layoutV_ShiftRegisters"/>
+      <layout class="QVBoxLayout" name="layoutV_ShiftRegisters">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
+      </layout>
      </widget>
     </widget>
    </item>

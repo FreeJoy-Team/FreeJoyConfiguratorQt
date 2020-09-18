@@ -81,16 +81,22 @@ void ButtonLogical::editingOnOff(int value)
 
 void ButtonLogical::ButtonState(bool is_activated)
 {
+    static QPalette default_palette;
+    static QString default_style;
+
+    this->setAutoFillBackground(true);
     is_activated_ = is_activated;
+
     if (is_activated_){
-        default_style_ = this->styleSheet();
-        this->setStyleSheet(default_style_ + "background-color: rgb(0, 128, 0);");
+        default_palette = this->palette();
+        default_style = ui->label_LogicalButtonNumber->styleSheet();
+
+        this->setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
+        ui->label_LogicalButtonNumber->setStyleSheet(default_style + "background-color: rgb(0, 128, 0);");
     } else {
-        this->setStyleSheet(default_style_);//("background: palette(window)");        // баг тряска если ("") // текущий вариант не пашет с чёрным стилем
+        this->setPalette(default_palette);
+        ui->label_LogicalButtonNumber->setStyleSheet(default_style);
     }
-//    QPalette palette = lbl->palette();            // быстрее?
-//    palette.setColor(QPalette::WindowText, Qt::gray);
-//    lbl->setPalette(palette);
 }
 
 

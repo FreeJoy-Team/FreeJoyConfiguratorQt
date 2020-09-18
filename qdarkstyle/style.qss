@@ -197,7 +197,6 @@ QCheckBox {
   outline: none;
   padding-top: 4px;
   padding-bottom: 4px;
-
 }
 
 QCheckBox:focus {
@@ -579,7 +578,7 @@ QAbstractScrollArea {
   background-color: #31363b;
   border: solid #32414B;
   border-radius: 4px;
-  padding: 2px;
+  padding: 0px;
   /* fix #159 */
   min-height: 1.25em;
   /* fix #159 */
@@ -804,7 +803,7 @@ QSizeGrip {
 
 --------------------------------------------------------------------------- */
 QStackedWidget {
-  padding: 2px;
+  padding: 0px;
   border: 1px solid #32414B;
   border: 1px solid #31363b;
 }
@@ -1513,7 +1512,7 @@ QTabWidget {
 }
 
 QTabWidget QWidget {
-  /* Fixes #189 */
+  /* Fixes #189, checkbox */
   border-radius: 4px;
 }
 

@@ -415,7 +415,7 @@ void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ
 
     // update button state without delay. fix gamepad_report.raw_button_data[0]
     // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся. Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
-    // и не видеть оставшиеся физические 64 кнопки.
+    // и не видеть оставшиеся физические 64 кнопки. ленивый и неоптимизированный фикс
     if(ui->tab_ButtonConfig->isVisible() == true){
         button_config->ButtonStateChanged();
     }
