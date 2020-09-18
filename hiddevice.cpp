@@ -196,7 +196,6 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
     }
 }
 
-
 // write config
 void HidDevice::WriteConfigToDevice(uint8_t *buffer)
 {

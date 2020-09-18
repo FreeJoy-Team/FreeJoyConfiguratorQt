@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     }
     else if (style == "white")
     {
-        QFile f(":qss/css/qss.css");
+        QFile f(":qss/qss.qss");
         if (!f.exists())   {
             printf("Unable to set stylesheet, file not found\n");
         }

@@ -71,7 +71,7 @@ void AdvancedSettings::on_pushButton_StyleDefault_clicked()
 // white style
 void AdvancedSettings::on_pushButton_StyleWhite_clicked()
 {
-    SetStyle(ui->pushButton_StyleWhite, ":qss/css/qss.css", "white", false);
+    SetStyle(ui->pushButton_StyleWhite, ":qss/qss.qss", "white", false);
 }
 // dark style
 void AdvancedSettings::on_pushButton_StyleDark_clicked()
