@@ -14,11 +14,11 @@ class ButtonPhysical : public QWidget
 public:
     explicit ButtonPhysical(int button_number, QWidget *parent = nullptr);
     ~ButtonPhysical();
-    void ButtonState(bool is_activated);
-    bool is_activated_; // private, set?
+    void SetButtonState(bool set_state);
 
 private:
     Ui::ButtonPhysical *ui;
+    bool current_state_; // private, set?
 };
 
 #endif // BUTTONPHYSICAL_H

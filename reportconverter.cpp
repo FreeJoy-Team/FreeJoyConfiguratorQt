@@ -6,11 +6,13 @@ static int reportSuccess = 0;
 
 void ReportConverter::GamepadReport( uint8_t * gamepad_buf)
 {
-    if (gamepad_buf != 0)   // nullptr
+    if (gamepad_buf != nullptr)   // nullptr
     {
         memcpy((uint8_t *)&(gEnv.pDeviceConfig->gamepad_report)+1, gamepad_buf, sizeof(joy_report_t)-1);          // +1 ALIGHNING !!!!!!!!!!!!!!!!!!
     }
 }
+
+// temp dummy
 void USB_CUSTOM_HID_SendReport(uint8_t * dummy, uint8_t dummy2){
     Q_UNUSED(dummy)
     Q_UNUSED(dummy2)

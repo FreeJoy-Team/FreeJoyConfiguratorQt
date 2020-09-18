@@ -6,7 +6,7 @@ ButtonPhysical::ButtonPhysical(int button_number, QWidget *parent) :
     ui(new Ui::ButtonPhysical)
 {
     ui->setupUi(this);
-    is_activated_ = false;
+    current_state_ = false;
     ui->label_PhysicalButton->setNum(button_number + 1);
 }
 
@@ -15,14 +15,17 @@ ButtonPhysical::~ButtonPhysical()
     delete ui;
 }
 
-void ButtonPhysical::ButtonState(bool is_activated)
-{
-    is_activated_ = is_activated;
-    if (is_activated_){
-        ui->label_PhysicalButton->setStyleSheet("QLabel {  border-radius: 11px; min-height: 22px; min-width: 22px; "
-                                                "background-color: rgb(0, 128, 0); color: rgb(255, 255, 255);}");
-    } else {
-        ui->label_PhysicalButton->setStyleSheet("QLabel {  border-radius: 11px; min-height: 22px; min-width: 22px; "
-                                                "background-color: rgb(190, 0, 0); color: rgb(255, 255, 255);}");
+void ButtonPhysical::SetButtonState(bool set_state)
+{   
+    if (set_state != current_state_)
+    {
+        if (set_state){
+            ui->label_PhysicalButton->setStyleSheet("QLabel {  border-radius: 14px; min-height: 28px; min-width: 28px; "
+                                                    "background-color: rgb(0, 128, 0); color: rgb(230, 230, 230);}");
+        } else {
+            ui->label_PhysicalButton->setStyleSheet("QLabel {  border-radius: 14px; min-height: 28px; min-width: 28px; "
+                                                    "background-color: rgb(170, 0, 0); color: rgb(230, 230, 230);}");
+        }
+        current_state_ = set_state;
     }
 }

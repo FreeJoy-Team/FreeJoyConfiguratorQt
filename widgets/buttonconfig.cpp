@@ -53,7 +53,7 @@ void ButtonConfig::PhysicalButtonsSpawn(int count)
     int column = 0;
     ui->layoutG_PhysicalButton->setAlignment(Qt::AlignTop);
     for (int i = 0; i < count; i++) {
-        if(column >= 10)
+        if(column >= 8)     // phys buttons column
         {
             row++;
             column = 0;
@@ -107,11 +107,11 @@ void ButtonConfig::ButtonStateChanged()
 {
     int number = 0;
 
+    // logical buttons state
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 8; j++)
         {
-            // logical buttons state
             number = j + (i)*8;
             if ((gEnv.pDeviceConfig->gamepad_report.button_data[i] & (1 << (j & 0x07))))
             {
@@ -127,32 +127,31 @@ void ButtonConfig::ButtonStateChanged()
                     LogicButtonAdrList[number]->ButtonState(false);
                 }
             }
+        }
+    }
 
-            // physical buttons state
-            if (i < 9 && i > 0){
-                if (gEnv.pDeviceConfig->gamepad_report.raw_button_data[0] == 0){
-                    number = j + (i-1)*8;
-                } else {            // ДЛЯ 64+
-                    number = 64 + j + (i-1)*8;
-                }
+    // physical button state
+    for (int i = 1; i < 9; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+                number = gEnv.pDeviceConfig->gamepad_report.raw_button_data[0] + j + (i-1)*8;  //number = 64 + j + (i-1)*8;
 
-                if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))))
+            if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))))
+            {
+                if (number < PhysicButtonAdrList.size())
                 {
-                    if (number < PhysicButtonAdrList.size() && PhysicButtonAdrList[number]->is_activated_ == false)
-                    {
-                        PhysicButtonAdrList[number]->ButtonState(true);
-                    }
-                }
-                else if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))) == false)
-                {
-
-                    if ( number < PhysicButtonAdrList.size() && PhysicButtonAdrList[number]->is_activated_ == true)
-                    {
-                        PhysicButtonAdrList[number]->ButtonState(false);
-                    }
+                    PhysicButtonAdrList[number]->SetButtonState(true);
                 }
             }
+            else if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))) == false)
+            {
 
+                if ( number < PhysicButtonAdrList.size())
+                {
+                    PhysicButtonAdrList[number]->SetButtonState(false);
+                }
+            }
         }
     }
 

@@ -408,11 +408,17 @@ void MainWindow::setFont()
     }
 }
 
-
-// попробовать вынести в отдельный поток и повесить дилей
+// попробовать вынести в отдельный поток и повесить дилей?
 void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ ВОРКЕРА
 {
     report_convert.GamepadReport(buff);
+
+    // update button state without delay. fix gamepad_report.raw_button_data[0]
+    // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся. Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
+    // и не видеть оставшиеся физические 64 кнопки.
+    if(ui->tab_ButtonConfig->isVisible() == true){
+        button_config->ButtonStateChanged();
+    }
 
     static QElapsedTimer timer;
     static bool change = false;
@@ -425,9 +431,9 @@ void MainWindow::getGamepadPacket(uint8_t * buff)            // НЕ В ЯДРЕ
     else if (timer.elapsed() > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах
     {
         // optimization
-        if(ui->tab_ButtonConfig->isVisible() == true){
-            button_config->ButtonStateChanged();
-        }
+//        if(ui->tab_ButtonConfig->isVisible() == true){
+//            button_config->ButtonStateChanged();
+//        }
         // optimization
         if(ui->tab_AxesConfig->isVisible() == true){
             axes_config->AxesValueChanged();
