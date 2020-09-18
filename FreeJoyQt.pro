@@ -26,6 +26,7 @@ SOURCES += \
     hiddevice.cpp \
     main.cpp \
     mainwindow.cpp \
+    mainwindow_conf.cpp \
     mousewheelguard.cpp \
     reportconverter.cpp \
     stm_main.c \
@@ -116,8 +117,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc \
-    qdarkstyle/style.qrc \
-    qss/qss.qrc
+    styles/qdarkstyle/style.qrc \
+    styles/white/qss.qrc
 
 linux-g++ | linux-g++-64 | linux-g++-32 {
     LIBS += -ludev

@@ -9,7 +9,7 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
     ui->setupUi(this);
     button_number_ = button_number;
     function_previous_index_ = 0;
-    is_activated_ = false;
+    current_state_ = false;
     ui->label_LogicalButtonNumber->setNum(button_number_ + 1);
 
     // add gui text
@@ -79,23 +79,26 @@ void ButtonLogical::editingOnOff(int value)
     }
 }
 
-void ButtonLogical::ButtonState(bool is_activated)
+void ButtonLogical::SetButtonState(bool set_state)
 {
     static QPalette default_palette;
     static QString default_style;
 
-    this->setAutoFillBackground(true);
-    is_activated_ = is_activated;
+    if (set_state != current_state_)
+    {
+        this->setAutoFillBackground(true);
 
-    if (is_activated_){
-        default_palette = this->palette();
-        default_style = ui->label_LogicalButtonNumber->styleSheet();
+        if (set_state){
+            default_palette = this->palette();
+            default_style = ui->label_LogicalButtonNumber->styleSheet();
 
-        this->setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
-        ui->label_LogicalButtonNumber->setStyleSheet(default_style + "background-color: rgb(0, 128, 0);");
-    } else {
-        this->setPalette(default_palette);
-        ui->label_LogicalButtonNumber->setStyleSheet(default_style);
+            this->setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
+            ui->label_LogicalButtonNumber->setStyleSheet(default_style + "background-color: rgb(0, 128, 0);");
+        } else {
+            this->setPalette(default_palette);
+            ui->label_LogicalButtonNumber->setStyleSheet(default_style);
+        }
+        current_state_ = set_state;
     }
 }
 

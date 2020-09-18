@@ -113,128 +113,12 @@ void HidDevice::processData()
             // read config from device
             else if (current_work_ == REPORT_ID_CONFIG_IN)
             {
-                qint64 start_time = 0;
-                qint64 resend_time = 0;
-                int report_count = 0;
-                uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
-
-                start_time = timer.elapsed();
-                resend_time = timer.elapsed();
-                hid_write(handle_read, config_request_buffer, 2);
-
-                while (timer.elapsed() < start_time + 2000)
-                {
-                    if (handle_read)    // перестаховка
-                    {
-                        res=hid_read_timeout(handle_read, buffer, BUFFSIZE,100);
-                        if (res < 0) {
-                            hid_close(handle_read);
-                            handle_read=nullptr;
-                        }
-                        else
-                        {
-                            if (buffer[0] == REPORT_ID_CONFIG_IN)
-                            {
-                                if (buffer[1] == config_request_buffer[1])
-                                {
-                                    gEnv.pDeviceConfig->config = report_convert->GetConfigFromDevice(buffer);
-                                    config_request_buffer[1] += 1;
-                                    hid_write(handle_read, config_request_buffer, 2);
-                                    report_count++;
-
-                                    if (config_request_buffer[1] > CONFIG_COUNT)
-                                    {
-                                        break;
-                                    }
-                                }
-                            }
-                            else if (config_request_buffer[1] < 2 && (resend_time + 250 - timer.elapsed()) <= 0) // for first packet
-                            {
-                                qDebug() << "RESEND ACTIVATED";
-                                config_request_buffer[1] = 1;
-                                resend_time = timer.elapsed();
-                                hid_write(handle_read, config_request_buffer, 2);
-                            }
-                        }
-                    } else {    // перестаховка
-                        current_work_ = REPORT_ID_JOY;
-                        emit configReceived(false);
-                        break;
-                    }
-                }
-                qDebug()<<"report_count ="<<report_count<<"  CONFIG_COUNT ="<<CONFIG_COUNT;
-                if (report_count == CONFIG_COUNT) {
-                    current_work_ = REPORT_ID_JOY;
-                    emit configReceived(true);
-                } else {
-                    current_work_ = REPORT_ID_JOY;
-                    emit configReceived(false);
-                }
+                ReadConfigFromDevice(buffer);
             }
             // write config to device
             else if (current_work_ == REPORT_ID_CONFIG_OUT)
             {
-                qint64 start_time = 0;
-                qint64 resend_time = 0;
-                int report_count = 0;
-                uint8_t config_out_buffer[BUFFSIZE] = {REPORT_ID_CONFIG_OUT, 0};
-
-                start_time = timer.elapsed();
-                resend_time = timer.elapsed();
-                hid_write(handle_read, config_out_buffer, BUFFSIZE);
-
-                while (timer.elapsed() < start_time + 2000)
-                {
-                    if (handle_read)    // перестаховка
-                    {
-                        res=hid_read_timeout(handle_read, buffer, BUFFSIZE,100);
-                        if (res < 0) {
-                            hid_close(handle_read);
-                            handle_read=nullptr;
-                        }
-                        else
-                        {
-                            if (buffer[0] == REPORT_ID_CONFIG_OUT)
-                            {
-                                if (buffer[1] == config_out_buffer[1] + 1)
-                                {
-                                    config_out_buffer[1] += 1;
-                                    std::vector<uint8_t> tmp_buf = report_convert->SendConfigToDevice(config_out_buffer[1]);
-                                    //memcpy((uint8_t*)(config_buffer), tmp, BUFFSIZE);
-                                    for (int i = 2; i < 64; i++)
-                                    {                                       // какой пиздец
-                                        config_out_buffer[i] = tmp_buf[i];
-                                    }
-
-                                    hid_write(handle_read, config_out_buffer, BUFFSIZE);
-                                    report_count++;
-
-                                    if (buffer[1] == CONFIG_COUNT){
-                                        break;
-                                    }
-                                }
-                            }
-                            else if (config_out_buffer[1] == 0 && (resend_time + 250 - timer.elapsed()) <= 0) // for first packet
-                            {
-                                qDebug() << "RESEND ACTIVATED";
-                                resend_time = timer.elapsed();
-                                hid_write(handle_read, config_out_buffer, BUFFSIZE);
-                            }
-                        }
-                    } else {    // перестаховка
-                        current_work_ = REPORT_ID_JOY;
-                        emit configSent(false);
-                        break;
-                    }
-                }
-                qDebug()<<"report_count ="<<report_count<<"  CONFIG_COUNT ="<<CONFIG_COUNT;
-                if (report_count == CONFIG_COUNT) {
-                    current_work_ = REPORT_ID_JOY;
-                    emit configSent(true);
-                } else {
-                    current_work_ = REPORT_ID_JOY;
-                    emit configSent(false);
-                }
+                WriteConfigToDevice(buffer);
             }
         }
     }
@@ -247,7 +131,154 @@ void HidDevice::SetIsFinish(bool is_finish)
     is_finish_ = is_finish;
 }
 
+// read config
+void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
+{
+    QElapsedTimer timer;
+    timer.start();
+    int res = 0;
+    qint64 start_time = 0;
+    qint64 resend_time = 0;
+    int report_count = 0;
+    uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
 
+    start_time = timer.elapsed();
+    resend_time = timer.elapsed();
+    hid_write(handle_read, config_request_buffer, 2);
+
+    while (timer.elapsed() < start_time + 2000)
+    {
+        if (handle_read)    // перестаховка
+        {
+            res=hid_read_timeout(handle_read, buffer, BUFFSIZE,100);
+            if (res < 0) {
+                hid_close(handle_read);
+                handle_read=nullptr;
+            }
+            else
+            {
+                if (buffer[0] == REPORT_ID_CONFIG_IN)
+                {
+                    if (buffer[1] == config_request_buffer[1])
+                    {
+                        gEnv.pDeviceConfig->config = report_convert->GetConfigFromDevice(buffer);
+                        config_request_buffer[1] += 1;
+                        hid_write(handle_read, config_request_buffer, 2);
+                        report_count++;
+
+                        if (config_request_buffer[1] > CONFIG_COUNT)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else if (config_request_buffer[1] < 2 && (resend_time + 250 - timer.elapsed()) <= 0) // for first packet
+                {
+                    qDebug() << "RESEND ACTIVATED";
+                    config_request_buffer[1] = 1;
+                    resend_time = timer.elapsed();
+                    hid_write(handle_read, config_request_buffer, 2);
+                }
+            }
+        } else {    // перестаховка
+            current_work_ = REPORT_ID_JOY;
+            emit configReceived(false);
+            break;
+        }
+    }
+    qDebug()<<"report_count ="<<report_count<<"  CONFIG_COUNT ="<<CONFIG_COUNT;
+    if (report_count == CONFIG_COUNT) {
+        current_work_ = REPORT_ID_JOY;
+        emit configReceived(true);
+    } else {
+        current_work_ = REPORT_ID_JOY;
+        emit configReceived(false);
+    }
+}
+
+
+// write config
+void HidDevice::WriteConfigToDevice(uint8_t *buffer)
+{
+    QElapsedTimer timer;
+    timer.start();
+    int res = 0;
+    qint64 start_time = 0;
+    qint64 resend_time = 0;
+    int report_count = 0;
+    uint8_t config_out_buffer[BUFFSIZE] = {REPORT_ID_CONFIG_OUT, 0};
+
+    start_time = timer.elapsed();
+    resend_time = timer.elapsed();
+    hid_write(handle_read, config_out_buffer, BUFFSIZE);
+
+    while (timer.elapsed() < start_time + 2000)
+    {
+        if (handle_read)    // перестаховка
+        {
+            res=hid_read_timeout(handle_read, buffer, BUFFSIZE,100);
+            if (res < 0) {
+                hid_close(handle_read);
+                handle_read=nullptr;
+            }
+            else
+            {
+                if (buffer[0] == REPORT_ID_CONFIG_OUT)
+                {
+                    if (buffer[1] == config_out_buffer[1] + 1)
+                    {
+                        config_out_buffer[1] += 1;
+                        std::vector<uint8_t> tmp_buf = report_convert->SendConfigToDevice(config_out_buffer[1]);
+                        //memcpy((uint8_t*)(config_buffer), tmp, BUFFSIZE);
+                        for (int i = 2; i < 64; i++)
+                        {                                       // какой пиздец
+                            config_out_buffer[i] = tmp_buf[i];
+                        }
+
+                        hid_write(handle_read, config_out_buffer, BUFFSIZE);
+                        report_count++;
+
+                        if (buffer[1] == CONFIG_COUNT){
+                            break;
+                        }
+                    }
+                }
+                else if (config_out_buffer[1] == 0 && (resend_time + 250 - timer.elapsed()) <= 0) // for first packet
+                {
+                    qDebug() << "RESEND ACTIVATED";
+                    resend_time = timer.elapsed();
+                    hid_write(handle_read, config_out_buffer, BUFFSIZE);
+                }
+            }
+        } else {    // перестаховка
+            current_work_ = REPORT_ID_JOY;
+            emit configSent(false);
+            break;
+        }
+    }
+    qDebug()<<"report_count ="<<report_count<<"  CONFIG_COUNT ="<<CONFIG_COUNT;
+    if (report_count == CONFIG_COUNT) {
+        current_work_ = REPORT_ID_JOY;
+        emit configSent(true);
+    } else {
+        current_work_ = REPORT_ID_JOY;
+        emit configSent(false);
+    }
+}
+
+// button "get config" clicked
+void HidDevice::GetConfigFromDevice()
+{
+    current_work_ = REPORT_ID_CONFIG_IN;
+}
+// button "send config" clicked
+void HidDevice::SendConfigToDevice()
+{
+    current_work_ = REPORT_ID_CONFIG_OUT;
+}
+
+
+// another device selected in comboBox
 void HidDevice::SetSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
 {                                                           // нее, нет эффекта от мьютекса. хз // только в винде. решил костылём в hidapi.c Qwe();
     if (device_number < 0){
@@ -271,18 +302,10 @@ void HidDevice::SetSelectedDevice(int device_number)        // заблочит�
 }
 
 
-void HidDevice::GetConfigFromDevice()     // try catch
-{
-    current_work_ = REPORT_ID_CONFIG_IN;
-}
 
 
-void HidDevice::SendConfigToDevice()      // try catch
-{
-    current_work_ = REPORT_ID_CONFIG_OUT;
-}
 
-
+                                                //////////////////////////// FLASHER ////////////////////////////
 bool HidDevice::EnterToFlashMode()
 {
     if(handle_read)

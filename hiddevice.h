@@ -43,10 +43,13 @@ signals:
     void flashStatus(int status, int percent);
 
 private:
-    hid_device_ *handle_read;                // private?
+    hid_device_ *handle_read;
     bool is_finish_ = false;
     int selected_device_;
     int current_work_;
+
+    void ReadConfigFromDevice(uint8_t *buffer);
+    void WriteConfigToDevice(uint8_t *buffer);
 
     uint8_t device_buffer_[BUFFSIZE];
     dev_config_t device_config_;                // ????

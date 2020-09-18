@@ -115,16 +115,16 @@ void ButtonConfig::ButtonStateChanged()
             number = j + (i)*8;
             if ((gEnv.pDeviceConfig->gamepad_report.button_data[i] & (1 << (j & 0x07))))
             {
-                if (LogicButtonAdrList[number]->is_activated_ == false && number < LogicButtonAdrList.size())   // поменять местами при динамик спавне
+                if (number < LogicButtonAdrList.size())
                 {
-                    LogicButtonAdrList[number]->ButtonState(true);
+                    LogicButtonAdrList[number]->SetButtonState(true);
                 }
             }
             else if ((gEnv.pDeviceConfig->gamepad_report.button_data[i] & (1 << (j & 0x07))) == false)
             {
-                if (LogicButtonAdrList[number]->is_activated_ == true && number < LogicButtonAdrList.size())   // поменять местами при динамик спавне
+                if (number < LogicButtonAdrList.size())
                 {
-                    LogicButtonAdrList[number]->ButtonState(false);
+                    LogicButtonAdrList[number]->SetButtonState(false);
                 }
             }
         }

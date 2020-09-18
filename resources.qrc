@@ -2,8 +2,6 @@
     <qresource prefix="/">
         <file>FreeJoyQt_ru.qm</file>
         <file>Images/BluePill_pic2.jpg</file>
-        <file>QSS-master/default.qss</file>
-        <file>QSS-master/Ubuntu.qss</file>
         <file>Images/Exponent.png</file>
         <file>Images/ExponentInvert.png</file>
         <file>Images/linear.png</file>
@@ -17,5 +15,6 @@
         <file>Images/BluePill_render.jpg</file>
         <file>Images/icon.png</file>
         <file>Images/icon-32.png</file>
+        <file>styles/default.qss</file>
     </qresource>
 </RCC>

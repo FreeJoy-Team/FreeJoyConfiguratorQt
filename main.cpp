@@ -11,6 +11,7 @@ GlobalEnvironment gEnv;
 #include "deviceconfig.h"
 
 #include <ctime>
+#include <QDebug>
 int main(int argc, char *argv[])
 {
 //    QCoreApplication::setOrganizationName(ORGANIZATION_NAME);
@@ -41,7 +42,7 @@ int main(int argc, char *argv[])
 
     if (style == "default") // ?
     {
-        QFile f(":/QSS-master/default.qss");
+        QFile f(":/styles/default.qss");
         if (!f.exists())   {
             printf("Unable to set stylesheet, file not found\n");
         }
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
     }
     else if (style == "white")
     {
-        QFile f(":/qss/css/qss.css");
+        QFile f(":qss/css/qss.css");
         if (!f.exists())   {
             printf("Unable to set stylesheet, file not found\n");
         }

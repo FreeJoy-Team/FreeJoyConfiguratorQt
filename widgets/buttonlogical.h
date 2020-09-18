@@ -25,12 +25,14 @@ public:
     ~ButtonLogical();
     void ReadFromConfig();
     void WriteToConfig();
+
     void SetMaxPhysButtons(int max_phys_buttons);
     void SetSpinBoxOnOff(int max_phys_buttons);
-    void ButtonState(bool is_activated);
+
+    void SetButtonState(bool set_state);
+
     void RetranslateUi();
 
-    bool is_activated_;
 //private: ??
     int button_number_;
 
@@ -99,6 +101,7 @@ private slots:
 private:
     Ui::ButtonLogical *ui;
     int function_previous_index_;
+    bool current_state_;
 };
 
 #endif // BUTTONLOGICAL_H

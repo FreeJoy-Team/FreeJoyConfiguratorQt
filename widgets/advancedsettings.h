@@ -2,6 +2,8 @@
 #define ADVANCEDSETTINGS_H
 
 #include <QWidget>
+#include <QFile>
+#include <QPushButton>
 
 namespace Ui {
 class AdvancedSettings;
@@ -59,6 +61,8 @@ private slots:
 
 private:
     Ui::AdvancedSettings *ui;
+
+    void SetStyle(QPushButton* pressed_button, QString file_name, QString style_name, bool is_dark); //hz
 
     QByteArray file_array_;
     QString flash_button_text_;
