@@ -55,6 +55,7 @@ private:
     Ui::Axes *ui;
     const int kMinA2bButtons = 2;
     bool calibration_started_;
+    bool output_enabled_;
     int a2b_buttons_count_;
     int axis_number_;
     const QString start_calibration = tr("Calibrate");    // const? а они переводятся?

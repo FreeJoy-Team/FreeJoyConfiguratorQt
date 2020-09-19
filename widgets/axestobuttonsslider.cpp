@@ -18,9 +18,9 @@ AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
 
     // call SetPointsCount?
     points_count_ = 0;
-    axis_raw_value_ = 0;
-    axis_raw_width_ = 0;
-    raw_rect_color_ = kRawRectColor_dis;
+    axis_output_value_ = 0;
+    axis_output_width_ = 0;
+    axis_rect_color_ = kAxisRectColor_dis;
 
 }
 
@@ -35,12 +35,17 @@ AxesToButtonsSlider::~AxesToButtonsSlider()
     delete ui;
 }
 
-void AxesToButtonsSlider::SetAxisRawValue(int value, int min, int max)
+void AxesToButtonsSlider::SetAxisOutputValue(int out_value, bool is_enable)
 {
-    axis_raw_value_ = abs((value  - min)/ (float)(max - min));
+    axis_output_value_ = (out_value + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE;//abs((value  - min)/ (float)(max - min));
+    if (is_enable && this->isEnabled() == true){
+        axis_rect_color_ = kAxisRectColor;
+    } else {
+        axis_rect_color_ = kAxisRectColor_dis;
+    }
     update();
 }
-// gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min
+
 void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптимизхировать width_ - offset_*2
 {
     Q_UNUSED(event)
@@ -54,16 +59,11 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптими�
     painter.drawRect(QRect(offset_, rect_y, this->width() - offset_*2, rect_height));
 
     // calc and paint raw data on a2b
+    axis_output_width_ = axis_output_value_ * (this->width() - offset_*2);
 
-    //axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (this->width() - offset_*2);
-    //abs(round((gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]  - min)/ (float)(max - min) * 200));
-    axis_raw_width_ = axis_raw_value_ * (this->width() - offset_*2);
-
-
-
-    QRect rect(offset_, rect_y, axis_raw_width_, rect_height);
+    QRect rect(offset_, rect_y, axis_output_width_, rect_height);
     painter.drawRect(rect);
-    painter.fillRect(rect, raw_rect_color_);
+    painter.fillRect(rect, axis_rect_color_);
 
     // paint separators
     painter.setPen(Qt::lightGray);
@@ -203,10 +203,10 @@ void AxesToButtonsSlider::PointsPositionReset()
     for (int i = 0; i < PointAdrList.size(); ++i) {
         if (this->isEnabled() == true){
             PointAdrList[i]->color = pointer_color_;
-            raw_rect_color_ = kRawRectColor;
+            axis_rect_color_ = kAxisRectColor;
         } else {
             PointAdrList[i]->color = Qt::lightGray;
-            raw_rect_color_ = kRawRectColor_dis;
+            axis_rect_color_ = kAxisRectColor_dis;
         }
         //PointAdrList[i]->color = pointer_color_;
         PointAdrList[i]->is_drag = false;
@@ -302,12 +302,12 @@ bool AxesToButtonsSlider::event(QEvent *event)
         if (this->isEnabled() == true){
             for (int i = 0; i < PointAdrList.size(); ++i) {
                 PointAdrList[i]->color = pointer_color_;
-                raw_rect_color_ = kRawRectColor;
+                axis_rect_color_ = kAxisRectColor;
             }
         } else {
             for (int i = 0; i < PointAdrList.size(); ++i) {
                 PointAdrList[i]->color = Qt::lightGray;
-                raw_rect_color_ = kRawRectColor_dis;
+                axis_rect_color_ = kAxisRectColor_dis;
             }
         }
         update();
