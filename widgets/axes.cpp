@@ -137,7 +137,7 @@ void Axes::UpdateAxisRaw()
 {
     ui->progressBar_Raw->setValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]);
 }
-#include <QDebug>
+
 void Axes::UpdateAxisOut()
 {
     ui->progressBar_Out->setValue(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_]);
@@ -145,12 +145,12 @@ void Axes::UpdateAxisOut()
     // a2b  axis_number_
     ui->widget_A2bSlider->SetAxisOutputValue(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_],
                                              output_enabled_);
-    qDebug()<<"output_enabled_ ="<<output_enabled_;
 }
 
 void Axes::outputValueChanged(bool is_checked)
 {
     output_enabled_ = is_checked;
+    UpdateAxisOut();
     if (is_checked == true){
         ui->progressBar_Out->setEnabled(true);
         ui->progressBar_Raw->setEnabled(true);

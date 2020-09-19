@@ -49,6 +49,7 @@ private:
 
     float axis_output_value_;
     int axis_output_width_;
+    bool is_out_enabled_;
 
     const QColor kAxisRectColor = QColor(160, 0, 0);
     const QColor kAxisRectColor_dis = QColor(160, 0, 0, 80);
