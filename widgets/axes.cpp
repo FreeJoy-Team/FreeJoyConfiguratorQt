@@ -10,6 +10,7 @@ Axes::Axes(int axis_number, QWidget *parent) :
 
     a2b_buttons_count_ = 0;
     calibration_started_ = false;
+    output_enabled_ = ui->checkBox_Output->isChecked();
 
     //pDev_config = &gEnv.pDeviceConfig->config;        // чуть короче запись, но надо ли?
     axis_number_ = axis_number;
@@ -136,7 +137,7 @@ void Axes::UpdateAxisRaw()
 {
     ui->progressBar_Raw->setValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]);
 }
-
+#include <QDebug>
 void Axes::UpdateAxisOut()
 {
     ui->progressBar_Out->setValue(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_]);
@@ -144,6 +145,7 @@ void Axes::UpdateAxisOut()
     // a2b  axis_number_
     ui->widget_A2bSlider->SetAxisOutputValue(gEnv.pDeviceConfig->gamepad_report.axis_data[axis_number_],
                                              output_enabled_);
+    qDebug()<<"output_enabled_ ="<<output_enabled_;
 }
 
 void Axes::outputValueChanged(bool is_checked)

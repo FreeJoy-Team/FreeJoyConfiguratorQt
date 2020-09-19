@@ -50,9 +50,9 @@ private:
     float axis_output_value_;
     int axis_output_width_;
 
-    const QColor kAxisRectColor = QColor(85, 147, 47, 150);
-    const QColor kAxisRectColor_dis = QColor(85, 107, 47, 80);
-    const QColor kPointRawActivColor = QColor(139, 0, 0);
+    const QColor kAxisRectColor = QColor(160, 0, 0);
+    const QColor kAxisRectColor_dis = QColor(160, 0, 0, 80);
+    const QColor kPointRawActivColor = QColor(0, 170, 0);
     QColor axis_rect_color_;
 
     const int half_pointer_width = 4;
