@@ -27,7 +27,7 @@ public:
     void SetPointValue(uint value, uint point_number);
     uint GetPointValue(uint point_number);
 
-    void SetAxisRawValue(int value);
+    void SetAxisRawValue(int value, int min, int max);
 
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -47,8 +47,9 @@ private:
 
     float line_spacing_;
 
-    int axis_raw_value_;
+    float axis_raw_value_;
     int axis_raw_width_;
+
     const QColor kRawRectColor = QColor(85, 147, 47, 150);
     const QColor kRawRectColor_dis = QColor(85, 107, 47, 80);
     const QColor kPointRawActivColor = QColor(139, 0, 0);

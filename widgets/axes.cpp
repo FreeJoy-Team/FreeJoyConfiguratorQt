@@ -131,11 +131,23 @@ void Axes::on_pushButton_StartCalib_clicked(bool checked)
         ui->pushButton_StartCalib->setText(start_calibration);
     }
 }
-
+#include <QDebug>
 void Axes::UpdateAxisRaw()
 {
     ui->progressBar_Raw->setValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]);
-    ui->widget_A2bSlider->SetAxisRawValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]);
+
+    // a2b  axis_number_
+
+    if (!gEnv.pDeviceConfig->config.axis_config[axis_number_].inverted) // in not inverted min = min. MAX = MAX
+    {
+        ui->widget_A2bSlider->SetAxisRawValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_],
+                                              gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min,
+                                              gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max);
+    } else {                                                            // if inverted min = MAX. MAX = min
+        ui->widget_A2bSlider->SetAxisRawValue(gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_],
+                                              gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max,
+                                              gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min);
+    }
 }
 
 void Axes::UpdateAxisOut()

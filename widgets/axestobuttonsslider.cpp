@@ -35,12 +35,12 @@ AxesToButtonsSlider::~AxesToButtonsSlider()
     delete ui;
 }
 
-void AxesToButtonsSlider::SetAxisRawValue(int value)
+void AxesToButtonsSlider::SetAxisRawValue(int value, int min, int max)
 {
-    axis_raw_value_ = value;
+    axis_raw_value_ = abs((value  - min)/ (float)(max - min));
     update();
 }
-
+// gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_min
 void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптимизхировать width_ - offset_*2
 {
     Q_UNUSED(event)
@@ -54,7 +54,13 @@ void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптими�
     painter.drawRect(QRect(offset_, rect_y, this->width() - offset_*2, rect_height));
 
     // calc and paint raw data on a2b
-    axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (this->width() - offset_*2);
+
+    //axis_raw_width_ = (axis_raw_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (this->width() - offset_*2);
+    //abs(round((gEnv.pDeviceConfig->gamepad_report.raw_axis_data[axis_number_]  - min)/ (float)(max - min) * 200));
+    axis_raw_width_ = axis_raw_value_ * (this->width() - offset_*2);
+
+
+
     QRect rect(offset_, rect_y, axis_raw_width_, rect_height);
     painter.drawRect(rect);
     painter.fillRect(rect, raw_rect_color_);

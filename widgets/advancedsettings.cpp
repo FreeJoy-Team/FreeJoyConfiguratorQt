@@ -229,9 +229,10 @@ void AdvancedSettings::on_pushButton_Wiki_clicked()
 // about
 void AdvancedSettings::on_pushButton_About_clicked()
 {
+    QString version("<p align=\"center\">FreeJoyConfiguratorQt v" + *gEnv.pAppVersion);    // тупо, надо в дефайне
     QString source("<br> Source code available on <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt\">GutHub</A>");
     QString wiki("<br> Check <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyWiki\">our wiki</A> for detailed instructions.");
-    QMessageBox::about(this, "About FreeJoyQt", wiki + "<p align=\"center\">Build with " + QString(QT_VERSION_STR) + source);
+    QMessageBox::about(this, "About FreeJoyQt", version + wiki + "<p align=\"center\">Build with " + QString(QT_VERSION_STR) + source);
 }
 
 

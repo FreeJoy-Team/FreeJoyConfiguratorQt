@@ -15,6 +15,7 @@ struct GlobalEnvironment
     QElapsedTimer*             pApp_start_time = nullptr;
     DeviceConfig*              pDeviceConfig = nullptr;
     QSettings*                 pAppSettings = nullptr;
+    QString*                   pAppVersion = nullptr;   // тупо, надо в дефайне
     // thread
 };
 extern GlobalEnvironment gEnv;

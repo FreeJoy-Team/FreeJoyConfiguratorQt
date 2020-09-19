@@ -10,21 +10,18 @@
 GlobalEnvironment gEnv;
 #include "deviceconfig.h"
 
-#include <ctime>
-#include <QDebug>
 int main(int argc, char *argv[])
 {
-//    QCoreApplication::setOrganizationName(ORGANIZATION_NAME);
-//    QCoreApplication::setOrganizationDomain(ORGANIZATION_DOMAIN);
-//    QCoreApplication::setApplicationName(APPLICATION_NAME); QFont::Bold
     QElapsedTimer time;
     time.start();
 
     QApplication a(argc, argv);
 
     // global
+    QString app_version = "0.4.6";     // тупо, надо в дефайне
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     DeviceConfig device_config;
+    gEnv.pAppVersion = &app_version;
     gEnv.pAppSettings = &app_settings;
     gEnv.pDeviceConfig = &device_config;
 
