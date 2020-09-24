@@ -6,7 +6,7 @@ static int reportSuccess = 0;
 
 void ReportConverter::GamepadReport( uint8_t * gamepad_buf)
 {
-    if (gamepad_buf != nullptr)   // nullptr
+    if (gamepad_buf != nullptr)   // !
     {
         memcpy((uint8_t *)&(gEnv.pDeviceConfig->gamepad_report)+1, gamepad_buf, sizeof(joy_report_t)-1);          // +1 ALIGHNING !!!!!!!!!!!!!!!!!!
     }

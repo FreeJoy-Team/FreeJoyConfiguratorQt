@@ -2,6 +2,7 @@
 #include "ui_axescurvesplot.h"
 #include <QPainter>
 #include <QMouseEvent>
+#include <QLabel>
 #include <cmath>
 
 #include <QDebug>

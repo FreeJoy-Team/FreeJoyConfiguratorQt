@@ -3,6 +3,10 @@
 
 #include <QString>
 #include <QElapsedTimer>    //?
+//QT_BEGIN_NAMESPACE
+//class QString;
+//class QElapsedTimer;
+//QT_END_NAMESPACE
 
 class DeviceConfig;
 class QSettings;

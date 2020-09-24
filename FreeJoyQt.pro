@@ -41,6 +41,7 @@ SOURCES += \
     widgets/buttonconfig.cpp \
     widgets/buttonlogical.cpp \
     widgets/buttonphysical.cpp \
+    widgets/debugwindow.cpp \
     widgets/encoders.cpp \
     widgets/encodersconfig.cpp \
     widgets/led.cpp \
@@ -74,6 +75,7 @@ HEADERS += \
     widgets/buttonconfig.h \
     widgets/buttonlogical.h \
     widgets/buttonphysical.h \
+    widgets/debugwindow.h \
     widgets/encoders.h \
     widgets/encodersconfig.h \
     widgets/led.h \
@@ -96,6 +98,7 @@ FORMS += \
     widgets/buttonconfig.ui \
     widgets/buttonlogical.ui \
     widgets/buttonphysical.ui \
+    widgets/debugwindow.ui \
     widgets/encoders.ui \
     widgets/encodersconfig.ui \
     widgets/led.ui \

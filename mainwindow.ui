@@ -51,7 +51,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
 }</string>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="movable">
        <bool>true</bool>
@@ -162,7 +162,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
       </widget>
       <widget class="QWidget" name="tab_Encoders">
        <attribute name="title">
-        <string>Encoders</string>
+        <string> Encoders</string>
        </attribute>
        <layout class="QVBoxLayout" name="layoutV_tabEncodersConfig">
         <property name="spacing">
@@ -286,8 +286,8 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <widget class="QLabel" name="label_DebDeviceStatus">
         <property name="geometry">
          <rect>
-          <x>480</x>
-          <y>70</y>
+          <x>600</x>
+          <y>30</y>
           <width>161</width>
           <height>51</height>
          </rect>
@@ -336,8 +336,8 @@ border-bottom: 1px solid rgb(190, 190, 190);
        <widget class="QPushButton" name="pushButton_TestButton">
         <property name="geometry">
          <rect>
-          <x>190</x>
-          <y>280</y>
+          <x>30</x>
+          <y>50</y>
           <width>171</width>
           <height>61</height>
          </rect>
@@ -346,14 +346,22 @@ border-bottom: 1px solid rgb(190, 190, 190);
          <string notr="true">Test button</string>
         </property>
        </widget>
-       <widget class="QTreeView" name="treeView">
+       <widget class="QPushButton" name="pushButton">
         <property name="geometry">
          <rect>
-          <x>510</x>
-          <y>260</y>
-          <width>256</width>
-          <height>192</height>
+          <x>230</x>
+          <y>190</y>
+          <width>16</width>
+          <height>281</height>
          </rect>
+        </property>
+        <property name="text">
+         <string>D
+e
+t
+a
+c
+h</string>
         </property>
        </widget>
       </widget>

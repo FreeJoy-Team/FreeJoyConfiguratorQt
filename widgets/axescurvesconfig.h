@@ -2,7 +2,12 @@
 #define AXESCURVESCONFIG_H
 
 #include <QWidget>
-#include <QComboBox>
+
+QT_BEGIN_NAMESPACE
+class QComboBox;
+QT_END_NAMESPACE
+//#include <QComboBox>
+
 #include "axescurves.h"
 
 #include "global.h"

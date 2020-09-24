@@ -2,8 +2,13 @@
 #define ADVANCEDSETTINGS_H
 
 #include <QWidget>
-#include <QFile>
-#include <QPushButton>
+
+QT_BEGIN_NAMESPACE
+class QFile;
+class QPushButton;
+QT_END_NAMESPACE
+//#include <QFile>
+//#include <QPushButton>
 
 namespace Ui {
 class AdvancedSettings;

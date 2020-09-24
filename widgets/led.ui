@@ -13,29 +13,56 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1,3">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
    <property name="spacing">
-    <number>77</number>
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="label_LEDNumber">
-     <property name="text">
-      <string notr="true">1</string>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,1,3">
+      <property name="spacing">
+       <number>77</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_LEDNumber">
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBox_InputNumber">
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Function"/>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item>
-    <widget class="QSpinBox" name="spinBox_InputNumber">
-     <property name="correctionMode">
-      <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="comboBox_Function"/>
    </item>
   </layout>
  </widget>

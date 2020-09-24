@@ -17,6 +17,8 @@
 #include "widgets/ledconfig.h"
 #include "widgets/shiftregistersconfig.h"
 
+#include "widgets/debugwindow.h"    //////////////////////
+
 /* Defining */
 //#define ORGANIZATION_NAME "FreeJoy"
 //#define ORGANIZATION_DOMAIN "https://github.com/FreeJoy-Team"
@@ -97,6 +99,8 @@ private:
     AxesConfig* axes_config;
     AxesCurvesConfig* axes_curves_config;
 
+//    DebugWindow* debug_window;///////////
+
     QString button_default_style_;  // мб статик в функции?
 
     void ReadFromConfig();
@@ -107,5 +111,7 @@ private:
 
     void LoadDeviceConfigFromFile(QSettings* device_settings);
     void SaveDeviceConfigToFile(QSettings* device_settings);
+
+//    void moveEvent(QMoveEvent *event);
 };
 #endif // MAINWINDOW_H

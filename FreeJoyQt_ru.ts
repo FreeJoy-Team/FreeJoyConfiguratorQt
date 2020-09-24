@@ -1090,7 +1090,7 @@
     </message>
     <message>
         <source>Encoders</source>
-        <translation>Энкодеры</translation>
+        <translation type="vanished">Энкодеры</translation>
     </message>
     <message>
         <source> LED </source>
@@ -1167,6 +1167,19 @@
     <message>
         <source>Device</source>
         <translation>Устройство</translation>
+    </message>
+    <message>
+        <source> Encoders</source>
+        <translation> Энкодеры</translation>
+    </message>
+    <message>
+        <source>D
+e
+t
+a
+c
+h</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

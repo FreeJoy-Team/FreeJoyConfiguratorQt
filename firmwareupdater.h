@@ -3,6 +3,7 @@
 
 #include <QByteArray>
 
+
 class FirmwareUpdater
 {
 public:

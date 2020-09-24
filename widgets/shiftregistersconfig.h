@@ -2,7 +2,7 @@
 #define SHIFTREGISTERSCONFIG_H
 
 #include <QWidget>
-#include <array>
+#include <array>        // ??
 #include "shiftregisters.h"
 
 #include "global.h"

@@ -2,11 +2,15 @@
 #define AXESCURVESPLOT_H
 
 #include <QWidget>
-#include <QLabel>
 
-#define CURVE_PLOT_POINTS_COUNT 11
+QT_BEGIN_NAMESPACE
+class QLabel;
+QT_END_NAMESPACE
+//#include <QLabel>
 
-#define CURVES_MIN_VALUE -100
+#define CURVE_PLOT_POINTS_COUNT 11  //?
+
+#define CURVES_MIN_VALUE -100   //?
 #define CURVES_MAX_VALUE 100
 
 namespace Ui {

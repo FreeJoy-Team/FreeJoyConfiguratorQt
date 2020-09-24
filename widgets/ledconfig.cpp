@@ -50,12 +50,30 @@ void LedConfig::SpawnLEDs(int led_count)
     }
 }
 
-//void LedConfig::ButtonLEDStateChanged()
-//{
-//    if (LEDAdrList.size() > 0){
+void LedConfig::LedStateChanged()
+{
 
-//    }
-//}
+    for (int i = 0; gEnv.pDeviceConfig->config.leds[i].input_num > -1; ++i) // нахуевертил побыстрому, позже допилю
+    {
+        if (i >= LEDAdrList.size()){
+            break;
+        }
+        if (LEDAdrList[i]->CurrentButtonSelected() == gEnv.pDeviceConfig->config.leds[i].input_num) {
+            // logical buttons state
+            int index = gEnv.pDeviceConfig->config.leds[i].input_num / 8;
+            int bit = gEnv.pDeviceConfig->config.leds[i].input_num - index * 8;
+
+            if ((gEnv.pDeviceConfig->gamepad_report.button_data[index] & (1 << (bit & 0x07))))
+            {
+                LEDAdrList[i]->LEDStateChanged(true);
+            }
+            else if ((gEnv.pDeviceConfig->gamepad_report.button_data[index] & (1 << (bit & 0x07))) == false)
+            {
+                LEDAdrList[i]->LEDStateChanged(false);
+            }
+        }
+    }
+}
 
 void LedConfig::ReadFromConfig()
 {

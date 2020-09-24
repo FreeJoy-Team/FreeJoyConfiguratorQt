@@ -2,7 +2,11 @@
 #define AXESTOBUTTONSSLIDER_H
 
 #include <QWidget>
-#include <QLabel>
+
+QT_BEGIN_NAMESPACE
+class QLabel;
+QT_END_NAMESPACE
+//#include <QLabel>
 
 #include "global.h"
 #include "deviceconfig.h"

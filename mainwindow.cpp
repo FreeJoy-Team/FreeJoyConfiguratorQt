@@ -18,6 +18,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+//    , debug_window()    // debug window
 {
     QElapsedTimer timer;
     timer.start();
@@ -245,8 +246,16 @@ void MainWindow::hideConnectDeviceInfo() {
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     ui->widget_2->DeviceConnected(false);
-    axes_curves_config->DeviceStatus(false);
+
+    // disable curve point
+    QTimer::singleShot(3000, [&]{   // не лучший способ
+        if (ui->pushButton_ReadConfig->isEnabled() == false){
+            axes_curves_config->DeviceStatus(false);
+        }
+    });
+    //axes_curves_config->DeviceStatus(false);
 }
+
 // add/delete hid devices to combobox
 void MainWindow::hidDeviceList(QStringList* device_list)
 {
@@ -260,6 +269,7 @@ void MainWindow::hidDeviceList(QStringList* device_list)
         ui->comboBox_HidDeviceList->addItems(*device_list);
     }
 }
+
 // received device report
 void MainWindow::getGamepadPacket(uint8_t * buff)
 {
@@ -283,9 +293,9 @@ void MainWindow::getGamepadPacket(uint8_t * buff)
     else if (timer.elapsed() > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах
     {
         // optimization
-//        if(ui->tab_ButtonConfig->isVisible() == true){
-//            button_config->ButtonStateChanged();
-//        }
+        if(ui->tab_LED->isVisible() == true){
+            led_config->LedStateChanged();
+        }
         // optimization
         if(ui->tab_AxesConfig->isVisible() == true){
             axes_config->AxesValueChanged();
@@ -515,13 +525,41 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     gEnv.pAppSettings->endGroup();
 }
+
 // debug button
 void MainWindow::on_pushButton_TestButton_clicked()
 {
+//    if (debug_window == nullptr)
+//    {
+//        debug_window = new DebugWindow(this);
+//        Qt::WindowFlags flags = Qt::Tool;
+//        flags |= Qt::FramelessWindowHint;
+//        debug_window->setWindowFlags(flags);
+//    }
 
+//    QPoint debug_pos;
+//    debug_pos.setX(this->x() + this->width() + 1);
+//    debug_pos.setY(this->y());
+//    debug_window->MainWindowPos(this->x() + this->width() + 1,  this->y()); // ?
+
+//    debug_window->move(debug_pos);
+//    debug_window->show();
 }
 
 
+//void MainWindow::moveEvent(QMoveEvent *event)
+//{
+//    if (debug_window)
+//    {
+//        QPoint debug_pos;
+//        debug_pos.setX(this->x() + this->width() + 1);
+//        debug_pos.setY(this->y());
+//        debug_window->MainWindowPos(this->x() + this->width() + 1,  this->y()); // ?
+
+//        debug_window->move(debug_pos);
+//    }
+
+//}
 
 
 // add dyn // constructor

@@ -16,6 +16,8 @@ public:
     explicit LedConfig(QWidget *parent = nullptr);
     ~LedConfig();
 
+    void LedStateChanged();
+
     void ReadFromConfig();
     void WriteToConfig();
 

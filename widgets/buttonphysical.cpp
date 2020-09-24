@@ -19,7 +19,7 @@ void ButtonPhysical::SetButtonState(bool set_state)
 {   
     if (set_state != current_state_)
     {
-        if (set_state){
+        if (set_state){ // QStringLiteral // QLatin1String
             ui->label_PhysicalButton->setStyleSheet("QLabel {  border-radius: 14px; min-height: 28px; min-width: 28px; "
                                                     "background-color: rgb(0, 128, 0); color: rgb(230, 230, 230);}");
         } else {
