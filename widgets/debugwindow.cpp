@@ -27,6 +27,7 @@ void DebugWindow::MainWindowPos(int x, int y)
 //bool temp = false;
 void DebugWindow::moveEvent(QMoveEvent *event)
 {
+    Q_UNUSED(event)
 //    if (is_magneted_ == false && this->x() - main_window_x_ <= 50 && this->x() - main_window_x_ >= -50)
 //    {
 //        this->move(main_window_x_, this->y());  // WARNING!!!!!!!!!!!!!!!!!!!!

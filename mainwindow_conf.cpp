@@ -232,6 +232,7 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
         devc->axis_config[i].calib_min = appS->value("CalibMin", devc->axis_config[i].calib_min).toInt();
         devc->axis_config[i].calib_center = appS->value("CalibCenter", devc->axis_config[i].calib_center).toInt();
         devc->axis_config[i].calib_max = appS->value("CalibMax", devc->axis_config[i].calib_max).toInt();
+        devc->axis_config[i].is_centered = appS->value("IsCentered", devc->axis_config[i].is_centered).toInt();
 
         devc->axis_config[i].out_enabled = appS->value("OutEnabled", devc->axis_config[i].out_enabled).toInt();
         devc->axis_config[i].inverted = appS->value("Inverted", devc->axis_config[i].inverted).toInt();
@@ -401,6 +402,7 @@ void MainWindow::SaveDeviceConfigToFile(QSettings* appS)
         appS->setValue("CalibMin", gEnv.pDeviceConfig->config.axis_config[i].calib_min);
         appS->setValue("CalibCenter", gEnv.pDeviceConfig->config.axis_config[i].calib_center);
         appS->setValue("CalibMax", gEnv.pDeviceConfig->config.axis_config[i].calib_max);
+        appS->setValue("IsCentered", gEnv.pDeviceConfig->config.axis_config[i].is_centered);
 
         appS->setValue("OutEnabled", gEnv.pDeviceConfig->config.axis_config[i].out_enabled);
         appS->setValue("Inverted", gEnv.pDeviceConfig->config.axis_config[i].inverted);

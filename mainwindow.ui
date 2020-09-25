@@ -409,6 +409,12 @@ h</string>
        </item>
        <item row="7" column="2">
         <widget class="QPushButton" name="pushButton_SetDefaultConfig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>165</width>
@@ -438,6 +444,12 @@ h</string>
        </item>
        <item row="11" column="2">
         <widget class="QPushButton" name="pushButton_SaveToFile">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>165</width>
@@ -470,6 +482,12 @@ h</string>
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>165</width>
@@ -486,6 +504,12 @@ h</string>
        </item>
        <item row="13" column="2">
         <widget class="QPushButton" name="pushButton_ResetAllPins">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>165</width>
@@ -521,6 +545,12 @@ h</string>
        </item>
        <item row="6" column="2">
         <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>165</width>
@@ -537,6 +567,12 @@ h</string>
        </item>
        <item row="9" column="2">
         <widget class="QPushButton" name="pushButton_LoadFromFile">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>165</width>
@@ -555,6 +591,12 @@ h</string>
         <widget class="QPushButton" name="pushButton_WriteConfig">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
