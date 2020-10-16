@@ -16,8 +16,7 @@
 #include "widgets/axescurvesconfig.h"
 #include "widgets/ledconfig.h"
 #include "widgets/shiftregistersconfig.h"
-
-#include "widgets/debugwindow.h"    //////////////////////
+#include "widgets/debugwindow.h"
 
 /* Defining */
 //#define ORGANIZATION_NAME "FreeJoy"
@@ -81,6 +80,8 @@ private slots:
 
     void on_pushButton_TestButton_clicked();
 
+    void on_pushButton_ShowDebug_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTranslator translator;
@@ -99,7 +100,9 @@ private:
     AxesConfig* axes_config;
     AxesCurvesConfig* axes_curves_config;
 
-//    DebugWindow* debug_window;///////////
+    DebugWindow* debug_window;
+    bool debug_is_enable;
+
 
     QString button_default_style_;  // мб статик в функции?
 
@@ -112,6 +115,6 @@ private:
     void LoadDeviceConfigFromFile(QSettings* device_settings);
     void SaveDeviceConfigToFile(QSettings* device_settings);
 
-//    void moveEvent(QMoveEvent *event);
+    //void moveEvent(QMoveEvent *event);
 };
 #endif // MAINWINDOW_H

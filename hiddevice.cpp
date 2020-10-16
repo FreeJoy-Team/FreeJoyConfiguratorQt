@@ -174,7 +174,7 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
                 }
                 else if (config_request_buffer[1] < 2 && (resend_time + 250 - timer.elapsed()) <= 0) // for first packet
                 {
-                    qDebug() << "RESEND ACTIVATED";
+                    qDebug() << "Resend activated";
                     config_request_buffer[1] = 1;
                     resend_time = timer.elapsed();
                     hid_write(handle_read, config_request_buffer, 2);
@@ -186,7 +186,7 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
             break;
         }
     }
-    qDebug()<<"report_count ="<<report_count<<"  CONFIG_COUNT ="<<CONFIG_COUNT;
+    qDebug()<<"read report_count ="<<report_count<<"/"<<CONFIG_COUNT;
     if (report_count == CONFIG_COUNT) {
         current_work_ = REPORT_ID_JOY;
         emit configReceived(true);
@@ -244,7 +244,7 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
                 }
                 else if (config_out_buffer[1] == 0 && (resend_time + 250 - timer.elapsed()) <= 0) // for first packet
                 {
-                    qDebug() << "RESEND ACTIVATED";
+                    qDebug() << "Resend activated";
                     resend_time = timer.elapsed();
                     hid_write(handle_read, config_out_buffer, BUFFSIZE);
                 }
@@ -255,7 +255,7 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
             break;
         }
     }
-    qDebug()<<"report_count ="<<report_count<<"  CONFIG_COUNT ="<<CONFIG_COUNT;
+    qDebug()<<"write report_count ="<<report_count<<"/"<<CONFIG_COUNT;
     if (report_count == CONFIG_COUNT) {
         current_work_ = REPORT_ID_JOY;
         emit configSent(true);
@@ -296,7 +296,7 @@ void HidDevice::SetSelectedDevice(int device_number)        // заблочит�
 //    } else {
 //        emit putConnectedDeviceInfo();
 //    }
-    qDebug()<<"No crash, HID opened";
+    qDebug()<<"HID opened";
     //qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
 }
 
@@ -330,7 +330,7 @@ bool HidDevice::EnterToFlashMode()
 
 void HidDevice::FlashFirmware(const QByteArray* file_bytes)
 {
-    qDebug()<<"size = "<<file_bytes->size();
+    qDebug()<<"flash size = "<<file_bytes->size();
     if(flasher_)
     {
         hid_device* flasher = hid_open(VID, flasher_->product_id, flasher_->serial_number);;
@@ -344,9 +344,9 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
         uint16_t crc16 = FirmwareUpdater::ComputeChecksum(file_bytes);
         int update_percent = 0;
 
-        if (flasher){
-            qDebug()<<"flasher true ";
-        }
+//        if (flasher){
+//            qDebug()<<"flasher detected ";
+//        }
 
         flash_buffer[0] = REPORT_ID_FIRMWARE;
         flash_buffer[1] = 0;

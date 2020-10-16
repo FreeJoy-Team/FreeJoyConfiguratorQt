@@ -18,24 +18,25 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-//    , debug_window()    // debug window
 {
+    qDebug()<<"main start ="<< gEnv.pApp_start_time->elapsed() << "ms";
     QElapsedTimer timer;
     timer.start();
 
-    qDebug()<<"after main start MainWindow constructor time ms ="<< gEnv.pApp_start_time->elapsed();
     ui->setupUi(this);
 
     QMainWindow::setWindowIcon(QIcon(":/Images/icon-32.png"));
     //setWindowFlags( Qt::FramelessWindowHint );
 
-    // версия контроллера
+    // firmware version
     QString str = QString::number(FIRMWARE_VERSION, 16);
     if (str.size() == 4){
         this->setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2]);// + "b" + str[3]);
     }
 
     // load application config
+    // debug window // ну так се - дебаг=нуллптр до конфига, но не жрёт ресурсов если дебаг выкл
+    debug_window = nullptr;
     LoadAppConfig();
 
     hid_device_worker = new HidDevice();
@@ -44,36 +45,36 @@ MainWindow::MainWindow(QWidget *parent)
     thread_getSend_config = new QThread;
 
 
-    qDebug()<<"befor load widgets time ms ="<< timer.restart();
+    qDebug()<<"before load widgets ="<< timer.restart() << "ms";
                                             //////////////// ADD WIDGETS ////////////////
     // add pin config
     pin_config = new PinConfig(this);
     ui->layoutV_tabPinConfig->addWidget(pin_config);
-    qDebug()<<"pin config load time ms ="<< timer.restart();
+    qDebug()<<"pin config load time ="<< timer.restart() << "ms";
     // add button config
     button_config = new ButtonConfig(this);     // not need delete. this - parent
     ui->layoutV_tabButtonConfig->addWidget(button_config);
-    qDebug()<<"button config load time ms ="<< timer.restart();
+    qDebug()<<"button config load time ="<< timer.restart() << "ms";
     // add axes config
     axes_config = new AxesConfig(this);
     ui->layoutV_tabAxesConfig->addWidget(axes_config);
-    qDebug()<<"axes config load time ms ="<< timer.restart();
+    qDebug()<<"axes config load time ="<< timer.restart() << "ms";
     // add axes curves config
     axes_curves_config = new AxesCurvesConfig(this);
     ui->layoutV_tabAxesCurvesConfig->addWidget(axes_curves_config);
-    qDebug()<<"curves config load time ms ="<< timer.restart();
+    qDebug()<<"curves config load time ="<< timer.restart() << "ms";
     // add shift registers config
     shift_reg_config = new ShiftRegistersConfig(this);
     ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config);
-    qDebug()<<"shift config load time ms ="<< timer.restart();
+    qDebug()<<"shift config load time ="<< timer.restart() << "ms";
     // add encoders config
     encoder_config = new EncodersConfig(this);
     ui->layoutV_tabEncodersConfig->addWidget(encoder_config);
-    qDebug()<<"encoder config load time ms ="<< timer.restart();
+    qDebug()<<"encoder config load time ="<< timer.restart() << "ms";
     // add led config
     led_config = new LedConfig(this);
     ui->layoutV_tabLedConfig->addWidget(led_config);
-    qDebug()<<"led config load time ms ="<< timer.restart();
+    qDebug()<<"led config load time ="<< timer.restart() << "ms";
 
 
     // strong focus for mouse wheel
@@ -210,8 +211,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     thread->start();
 
-    qDebug()<<"after widgets MainWindow constructor end time ms ="<< timer.elapsed();
-    qDebug()<<"from start app to MainWindow constructor end time ms ="<< gEnv.pApp_start_time->elapsed();
+    qDebug()<<"after widgets load time ="<< timer.elapsed() << "ms";
+    qDebug()<<"Application Start Time ="<< gEnv.pApp_start_time->elapsed() << "ms";
 }
 
 MainWindow::~MainWindow()
@@ -246,6 +247,9 @@ void MainWindow::hideConnectDeviceInfo() {
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     ui->widget_2->DeviceConnected(false);
+    if (debug_window){
+        debug_window->ResetPacketsCount();
+    }
 
     // disable curve point
     QTimer::singleShot(3000, [&]{   // не лучший способ
@@ -278,7 +282,7 @@ void MainWindow::getGamepadPacket(uint8_t * buff)
     // update button state without delay. fix gamepad_report.raw_button_data[0]
     // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся. Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
     // и не видеть оставшиеся физические 64 кнопки. ленивый и неоптимизированный фикс
-    if(ui->tab_ButtonConfig->isVisible() == true){
+    if(ui->tab_ButtonConfig->isVisible() == true || debug_window){
         button_config->ButtonStateChanged();
     }
 
@@ -296,16 +300,19 @@ void MainWindow::getGamepadPacket(uint8_t * buff)
         if(ui->tab_LED->isVisible() == true){
             led_config->LedStateChanged();
         }
-        // optimization
         if(ui->tab_AxesConfig->isVisible() == true){
             axes_config->AxesValueChanged();
         }
-        // optimization
         if(ui->tab_AxesCurves->isVisible() == true){
             axes_curves_config->UpdateAxesCurves();
         }
         change = false;
     }
+    // debug info
+    if (debug_window){
+        debug_window->DevicePacketReceived();
+    }
+
     // debug tab
 #ifdef QT_DEBUG
     static int asd = 0;
@@ -371,6 +378,9 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
     axes_config->RetranslateUi();
     axes_curves_config->RetranslateUi();
     ui->widget_2->RetranslateUi();
+    if(debug_window){
+        debug_window->RetranslateUi();
+    }
 }
 // set font
 void MainWindow::setFont()
@@ -421,13 +431,23 @@ void MainWindow::LoadAppConfig()
     ui->tabWidget->setCurrentIndex(gEnv.pAppSettings->value("CurrentIndex", 0).toInt());
     gEnv.pAppSettings->endGroup();
 
+    // load debug window
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    debug_is_enable = gEnv.pAppSettings->value("DebugEnable", "false").toBool();
+    if (debug_is_enable){
+        on_pushButton_ShowDebug_clicked();
+        resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());
+    }
+    gEnv.pAppSettings->endGroup();
+
+    //debug tab, only for debug build
     #ifdef QT_DEBUG
     #else
         ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tab_Debug));
     #endif
 }
 // save app config
-void MainWindow::SaveAppConfig()
+void MainWindow::SaveAppConfig()    // перенести сюда сохранение профилей кривых
 {
     // save tab index
     gEnv.pAppSettings->beginGroup("TabIndexSettings");
@@ -448,6 +468,10 @@ void MainWindow::SaveAppConfig()
     // save font settings
     gEnv.pAppSettings->beginGroup("FontSettings");
     gEnv.pAppSettings->setValue("FontSize", QApplication::font().pointSize());
+    gEnv.pAppSettings->endGroup();
+    // save debug
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    gEnv.pAppSettings->setValue("DebugEnable", debug_is_enable);
     gEnv.pAppSettings->endGroup();
 }
 
@@ -529,36 +553,37 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
 // debug button
 void MainWindow::on_pushButton_TestButton_clicked()
 {
-//    if (debug_window == nullptr)
-//    {
-//        debug_window = new DebugWindow(this);
-//        Qt::WindowFlags flags = Qt::Tool;
-//        flags |= Qt::FramelessWindowHint;
-//        debug_window->setWindowFlags(flags);
-//    }
 
-//    QPoint debug_pos;
-//    debug_pos.setX(this->x() + this->width() + 1);
-//    debug_pos.setY(this->y());
-//    debug_window->MainWindowPos(this->x() + this->width() + 1,  this->y()); // ?
+}
 
-//    debug_window->move(debug_pos);
-//    debug_window->show();
+void MainWindow::on_pushButton_ShowDebug_clicked()
+{
+    if (debug_window == nullptr)
+    {
+        debug_window = new DebugWindow(this);       // хз мб всё же стоит создать дебаг в конструкторе и оставить скрытым и не экономить пару кб
+        gEnv.pDebugWindow = debug_window;
+        ui->layoutV_DebugWindow->addWidget(debug_window);
+        debug_window->hide();
+    }
+
+    if (debug_window->isVisible() == false)
+    {
+        debug_window->setMinimumHeight(120);
+        resize(width(), height() + 120 + ui->layoutG_MainLayout->verticalSpacing());
+        debug_window->setVisible(true);
+        debug_is_enable = true;
+    } else {
+        debug_window->setMinimumHeight(0);
+        debug_window->setVisible(false);
+        resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());    // и в LoadAppConfig()
+        debug_is_enable = false;
+    }
 }
 
 
 //void MainWindow::moveEvent(QMoveEvent *event)
 //{
-//    if (debug_window)
-//    {
-//        QPoint debug_pos;
-//        debug_pos.setX(this->x() + this->width() + 1);
-//        debug_pos.setY(this->y());
-//        debug_window->MainWindowPos(this->x() + this->width() + 1,  this->y()); // ?
-
-//        debug_window->move(debug_pos);
-//    }
-
+//    Q_UNUSED(event)
 //}
 
 

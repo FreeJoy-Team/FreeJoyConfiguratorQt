@@ -209,7 +209,7 @@ std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_
 
 
     if (config_in_cnt == 16) {
-        qDebug() << "All config SENT";
+        qDebug() << "All config sent";
         reportSuccess = 0;
         //    } else if (config_in_cnt == 16) {
         //        qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess SEND= " << reportSuccess;
@@ -420,7 +420,7 @@ dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
     {
         //if (reportSuccess != 16) qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess = " << reportSuccess;
         //else
-        qDebug() << "All config recived. copy to app conf";
+        qDebug() << "All config received";
         reportSuccess = 0;
     }
     return tmp_dev_config;

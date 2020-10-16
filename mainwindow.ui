@@ -20,7 +20,7 @@
    <string notr="true">FreeJoy QtConfigurator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout" columnstretch="1,5">
+   <layout class="QGridLayout" name="layoutG_MainLayout" rowstretch="10,1" columnstretch="1,5,0">
     <property name="leftMargin">
      <number>6</number>
     </property>
@@ -33,7 +33,7 @@
     <property name="bottomMargin">
      <number>6</number>
     </property>
-    <item row="1" column="1">
+    <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="baseSize">
        <size>
@@ -346,28 +346,32 @@ border-bottom: 1px solid rgb(190, 190, 190);
          <string notr="true">Test button</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>190</y>
-          <width>16</width>
-          <height>281</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>D
-e
-t
-a
-c
-h</string>
-        </property>
-       </widget>
       </widget>
      </widget>
     </item>
-    <item row="0" column="0" rowspan="2">
+    <item row="0" column="2">
+     <widget class="QPushButton" name="pushButton_ShowDebug">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">min-width: 13px;
+max-width: 13px;
+padding: 0px;</string>
+      </property>
+      <property name="text">
+       <string>D
+e
+b
+u
+g</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox_4">
       <property name="minimumSize">
        <size>
@@ -640,6 +644,13 @@ h</string>
        </item>
       </layout>
      </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <layout class="QVBoxLayout" name="layoutV_DebugWindow">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+     </layout>
     </item>
    </layout>
   </widget>

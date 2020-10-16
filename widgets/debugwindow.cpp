@@ -1,15 +1,16 @@
 #include "debugwindow.h"
 #include "ui_debugwindow.h"
 
+#include <QElapsedTimer>
+#include <QTime>
+
 DebugWindow::DebugWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DebugWindow)
 {
     ui->setupUi(this);
-    main_window_x_ = 0;
-    main_window_y_ = 0;
-    is_drag_ = false;
-    is_magneted_ = true;
+
+    packets_count = 0;
 }
 
 DebugWindow::~DebugWindow()
@@ -17,52 +18,68 @@ DebugWindow::~DebugWindow()
     delete ui;
 }
 
-
-void DebugWindow::MainWindowPos(int x, int y)
+void DebugWindow::RetranslateUi()
 {
-    main_window_x_ = x;
-    main_window_y_ = y;
+    ui->retranslateUi(this);
 }
 
-//bool temp = false;
-void DebugWindow::moveEvent(QMoveEvent *event)
+
+void DebugWindow::DevicePacketReceived()
 {
-    Q_UNUSED(event)
-//    if (is_magneted_ == false && this->x() - main_window_x_ <= 50 && this->x() - main_window_x_ >= -50)
-//    {
-//        this->move(main_window_x_, this->y());  // WARNING!!!!!!!!!!!!!!!!!!!!
-//        is_magneted_ = true;
+//    if (isVisible()){
 //    }
-//    else if (is_drag_ == true)
-//    {
-//        is_magneted_ = false;
-//    }
+    static int count = 0;
+    static QElapsedTimer packet_timer;
 
-//    if (true)
-//    {
+    packets_count++;
+    //ui->label_PacketsCount->setNum(packets_count);
+    if (packet_timer.hasExpired(100)){
+        ui->label_PacketsCount->setNum(packets_count);
+        packet_timer.start();
+    }
 
-//    }
+    if (timer.hasExpired(5000) && timer.isValid()){
+        ui->label_PacketsSpeed->setText(QString::number(((double)timer.restart() / (double)count), 'f', 3) + tr(" ms"));
+        count = 0;
+    }
+    else if (timer.isValid() == false){     // валид-инвалид для правильного отображения при подключении-отключении девайса
+        timer.start();
+    }
+
+    count++;
 }
 
-void DebugWindow::mouseMoveEvent(QMouseEvent *event)
+void DebugWindow::ResetPacketsCount()
 {
-//    if (is_drag_ == false && event->buttons() & Qt::LeftButton){
-//        drag_click_pos_ = event->pos();
-//        is_drag_ = true;
-//    }
-//    if (is_magneted_ == true && is_drag_ == true && event->pos().x() - drag_click_pos_.x() <= -25 && event->pos().x() - drag_click_pos_.x() >= 25){
+    packets_count = 0;
+    ui->label_PacketsCount->setNum(packets_count);
 
-//    }
+    timer.invalidate();
+    ui->label_PacketsSpeed->setText(tr("0 ms"));
 }
 
-void DebugWindow::mousePressEvent(QMouseEvent *event)
+
+void DebugWindow::PrintMsg(const QString &msg)
 {
-    Q_UNUSED(event)
-    //is_drag_ = true;
+//    ui->plainTextEdit_DebugMsg->insertPlainText(QTime::currentTime().toString() + ':' + ' ' + msg + '\n');
+//    ui->plainTextEdit_DebugMsg->verticalScrollBar()->setValue(ui->plainTextEdit_DebugMsg->verticalScrollBar()->maximum());
+    //ui->plainTextEdit_DebugMsg->appendPlainText(QTime::currentTime().toString() + ':' + ' ' + msg);
+    //ui->plainTextEdit_DebugMsg->append(QTime::currentTime().toString() + ':' + ' ' + msg);
+
+    //ui->plainTextEdit_DebugMsg->verticalScrollBar()->setValue(ui->plainTextEdit_DebugMsg->verticalScrollBar()->maximum());
+
+    ui->textBrowser_DebugMsg->append(QTime::currentTime().toString() + ": " + msg);
+    ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);     // бля, с plainTextEdit криво пашет
 }
 
-void DebugWindow::mouseReleaseEvent(QMouseEvent *event)
+
+void DebugWindow::LogicalButtonState(int button_number, bool state)
 {
-    Q_UNUSED(event)
-    is_drag_ = false;
+    if (state){
+        ui->textBrowser_ButtonsPressLog->append(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" pressed"));
+        ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
+    } else {
+        ui->textBrowser_ButtonsUnpressLog->append(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" unpressed"));
+        ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
+    }
 }

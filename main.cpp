@@ -5,10 +5,24 @@
 #include <QTextStream>
 #include <QElapsedTimer>
 
-// CryEngine global environment
+// global environment
 #include "global.h"
 GlobalEnvironment gEnv;
 #include "deviceconfig.h"
+
+// Get the default Qt message handler.
+static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
+
+void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    if (gEnv.pDebugWindow != nullptr) {
+        gEnv.pDebugWindow->PrintMsg(msg);
+    }
+
+    // Call the default handler.
+    (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -22,12 +36,15 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // global
-    QString app_version = "0.4.9";     // тупо, надо в дефайне
+    QString app_version = "0.5.0";     // тупо, надо в дефайне?
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     DeviceConfig device_config;
+
     gEnv.pAppVersion = &app_version;
     gEnv.pAppSettings = &app_settings;
     gEnv.pDeviceConfig = &device_config;
+
+    qInstallMessageHandler(CustomMessageHandler);
 
     gEnv.pApp_start_time = &time;
 
@@ -80,5 +97,6 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.show();
+
     return a.exec();
 }

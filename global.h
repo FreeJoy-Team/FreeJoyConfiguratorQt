@@ -10,6 +10,7 @@
 
 class DeviceConfig;
 class QSettings;
+class DebugWindow; /////////////////////
 //class QElapsedTimer;    //?
 //! CryEngine style global environment
 //!	Global environment. Contains pointers to all global often needed interfaces.
@@ -19,7 +20,9 @@ struct GlobalEnvironment
     QElapsedTimer*             pApp_start_time = nullptr;
     DeviceConfig*              pDeviceConfig = nullptr;
     QSettings*                 pAppSettings = nullptr;
-    QString*                   pAppVersion = nullptr;   // тупо, надо в дефайне
+    QString*                   pAppVersion = nullptr;   // тупо, надо в дефайне?
+    DebugWindow*               pDebugWindow = nullptr;
+
     // thread
 };
 extern GlobalEnvironment gEnv;

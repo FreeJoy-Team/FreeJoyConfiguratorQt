@@ -439,47 +439,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="50"/>
+        <location filename="widgets/axescurvesconfig.h" line="55"/>
         <source>Not used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="51"/>
+        <location filename="widgets/axescurvesconfig.h" line="56"/>
         <source>Curve 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="52"/>
+        <location filename="widgets/axescurvesconfig.h" line="57"/>
         <source>Curve 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="53"/>
+        <location filename="widgets/axescurvesconfig.h" line="58"/>
         <source>Curve 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="54"/>
+        <location filename="widgets/axescurvesconfig.h" line="59"/>
         <source>Curve 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="55"/>
+        <location filename="widgets/axescurvesconfig.h" line="60"/>
         <source>Curve 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="56"/>
+        <location filename="widgets/axescurvesconfig.h" line="61"/>
         <source>Curve 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="57"/>
+        <location filename="widgets/axescurvesconfig.h" line="62"/>
         <source>Curve 7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axescurvesconfig.h" line="58"/>
+        <location filename="widgets/axescurvesconfig.h" line="63"/>
         <source>Curve 8</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1093,6 +1093,72 @@
     </message>
 </context>
 <context>
+    <name>DebugWindow</name>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="14"/>
+        <source>Debug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="32"/>
+        <source>Buttons log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="63"/>
+        <location filename="widgets/debugwindow.ui" line="96"/>
+        <source>within 5 seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="66"/>
+        <location filename="widgets/debugwindow.cpp" line="58"/>
+        <source>0 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="76"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="86"/>
+        <source>Packets received:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="99"/>
+        <source>Packets speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.ui" line="109"/>
+        <source>Application log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.cpp" line="42"/>
+        <source> ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.cpp" line="79"/>
+        <location filename="widgets/debugwindow.cpp" line="82"/>
+        <source>Logical button </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.cpp" line="79"/>
+        <source> pressed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/debugwindow.cpp" line="82"/>
+        <source> unpressed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Encoders</name>
     <message>
         <location filename="widgets/encoders.ui" line="20"/>
@@ -1193,6 +1259,24 @@
     </message>
 </context>
 <context>
+    <name>Flasher</name>
+    <message>
+        <location filename="widgets/flasher.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/flasher.ui" line="54"/>
+        <source>Enter Flasher Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/flasher.ui" line="83"/>
+        <source>Flash Firmware</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LED</name>
     <message>
         <location filename="widgets/led.ui" line="14"/>
@@ -1200,12 +1284,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/led.h" line="33"/>
+        <location filename="widgets/led.h" line="39"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/led.h" line="34"/>
+        <location filename="widgets/led.h" line="40"/>
         <source>Inverted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1325,7 +1409,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="301"/>
-        <location filename="mainwindow.cpp" line="235"/>
+        <location filename="mainwindow.cpp" line="237"/>
         <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1335,52 +1419,51 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="359"/>
+        <location filename="mainwindow.ui" line="366"/>
         <source>D
 e
-t
-a
-c
-h</source>
+b
+u
+g</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="379"/>
+        <location filename="mainwindow.ui" line="383"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="422"/>
+        <location filename="mainwindow.ui" line="432"/>
         <source>Set file to default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="451"/>
+        <location filename="mainwindow.ui" line="467"/>
         <source>Save config to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="483"/>
+        <location filename="mainwindow.ui" line="505"/>
         <source>Read config from Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="499"/>
+        <location filename="mainwindow.ui" line="527"/>
         <source>Reset All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="534"/>
+        <location filename="mainwindow.ui" line="568"/>
         <source>Load default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="550"/>
+        <location filename="mainwindow.ui" line="590"/>
         <source>Load config from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="569"/>
+        <location filename="mainwindow.ui" line="615"/>
         <source>Write config to Device</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1390,7 +1473,7 @@ h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="243"/>
+        <location filename="mainwindow.cpp" line="245"/>
         <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1416,20 +1499,20 @@ h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="488"/>
-        <location filename="mainwindow.cpp" line="507"/>
+        <location filename="mainwindow.cpp" line="515"/>
+        <location filename="mainwindow.cpp" line="534"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="488"/>
-        <location filename="mainwindow.cpp" line="497"/>
-        <location filename="mainwindow.cpp" line="507"/>
+        <location filename="mainwindow.cpp" line="515"/>
+        <location filename="mainwindow.cpp" line="524"/>
+        <location filename="mainwindow.cpp" line="534"/>
         <source>Config Files (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="497"/>
+        <location filename="mainwindow.cpp" line="524"/>
         <source>Save Config</source>
         <translation type="unfinished"></translation>
     </message>

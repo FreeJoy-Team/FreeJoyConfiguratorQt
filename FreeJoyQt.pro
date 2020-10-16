@@ -44,6 +44,7 @@ SOURCES += \
     widgets/debugwindow.cpp \
     widgets/encoders.cpp \
     widgets/encodersconfig.cpp \
+    widgets/flasher.cpp \
     widgets/led.cpp \
     widgets/ledconfig.cpp \
     widgets/pincombobox.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
     widgets/debugwindow.h \
     widgets/encoders.h \
     widgets/encodersconfig.h \
+    widgets/flasher.h \
     widgets/led.h \
     widgets/ledconfig.h \
     widgets/pincombobox.h \
@@ -101,6 +103,7 @@ FORMS += \
     widgets/debugwindow.ui \
     widgets/encoders.ui \
     widgets/encodersconfig.ui \
+    widgets/flasher.ui \
     widgets/led.ui \
     widgets/ledconfig.ui \
     widgets/pincombobox.ui \

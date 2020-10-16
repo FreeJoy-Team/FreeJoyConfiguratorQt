@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Wiki</source>
@@ -911,6 +911,57 @@
     </message>
 </context>
 <context>
+    <name>DebugWindow</name>
+    <message>
+        <source>Debug</source>
+        <translation>Отладка</translation>
+    </message>
+    <message>
+        <source>Buttons log</source>
+        <translation>Лог кнопок</translation>
+    </message>
+    <message>
+        <source>within 5 seconds</source>
+        <translation>В течении 5 секунд</translation>
+    </message>
+    <message>
+        <source>0 ms</source>
+        <translation>0 мс</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Packets received:</source>
+        <translation>Пакетов получено:</translation>
+    </message>
+    <message>
+        <source>Packets speed:</source>
+        <translation>Скорость пакетов:</translation>
+    </message>
+    <message>
+        <source>Application log</source>
+        <translation>Лог приложения</translation>
+    </message>
+    <message>
+        <source> ms</source>
+        <translation> мс</translation>
+    </message>
+    <message>
+        <source>Logical button </source>
+        <translation>Логическая кнопка </translation>
+    </message>
+    <message>
+        <source> pressed</source>
+        <translation> нажата</translation>
+    </message>
+    <message>
+        <source> unpressed</source>
+        <translation> отжата</translation>
+    </message>
+</context>
+<context>
     <name>Encoders</name>
     <message>
         <source>Form</source>
@@ -986,6 +1037,21 @@
     <message>
         <source>Encoder 4x</source>
         <translation>Энкодер 4x</translation>
+    </message>
+</context>
+<context>
+    <name>Flasher</name>
+    <message>
+        <source>Form</source>
+        <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Enter Flasher Mode</source>
+        <translation>Войти в режим прошивки</translation>
+    </message>
+    <message>
+        <source>Flash Firmware</source>
+        <translation>Прошить</translation>
     </message>
 </context>
 <context>
@@ -1175,11 +1241,16 @@
     <message>
         <source>D
 e
-t
-a
-c
-h</source>
-        <translation type="unfinished"></translation>
+b
+u
+g</source>
+        <translation>О
+т
+л
+а
+д
+к
+а</translation>
     </message>
 </context>
 <context>
