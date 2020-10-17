@@ -279,7 +279,7 @@ void HidDevice::SendConfigToDevice()
 
 // another device selected in comboBox
 void HidDevice::SetSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
-{                                                           // нее, нет эффекта от мьютекса. хз // только в винде. решил костылём в hidapi.c Qwe();
+{                                                           // только в винде. решил костылём в hidapi.c Qwe();
     if (device_number < 0){
         //device_number = 0;
         return;
@@ -288,7 +288,8 @@ void HidDevice::SetSelectedDevice(int device_number)        // заблочит�
     }
     selected_device_ = device_number; 
     qDebug()<<"HID open start";
-    // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()
+    qDebug()<<device_number<<"devices connected";
+        // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()
     handle_read = hid_open(VID, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
 //    if (!handle_read) {
 //        emit putDisconnectedDeviceInfo();
@@ -296,10 +297,11 @@ void HidDevice::SetSelectedDevice(int device_number)        // заблочит�
 //    } else {
 //        emit putConnectedDeviceInfo();
 //    }
+#ifdef _WIN32
+    qDebug()<<"Unsuccessful attempts ="<<Qwe();
+#endif
     qDebug()<<"HID opened";
-    //qDebug()<<"!!!!!!!!!!QWE = "<<Qwe();
 }
-
 
 
 

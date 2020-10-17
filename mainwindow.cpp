@@ -30,12 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     // firmware version
     QString str = QString::number(FIRMWARE_VERSION, 16);
-    if (str.size() == 4){
+    if (str.size() >= 4){
         this->setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2]);// + "b" + str[3]);
     }
 
     // load application config
-    // debug window // ну так се - дебаг=нуллптр до конфига, но не жрёт ресурсов если дебаг выкл
+    // debug window // ну так се - дебаг=нуллптр до LoadAppConfig конфига, но не жрёт ресурсов если дебаг выкл
     debug_window = nullptr;
     LoadAppConfig();
 
@@ -234,6 +234,7 @@ MainWindow::~MainWindow()
                                                         ///////////////////// device reports /////////////////////
 // device connected
 void MainWindow::showConnectDeviceInfo() {
+    //qDebug()<<"Device connected";
     ui->label_DeviceStatus->setText(tr("Connected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
     ui->pushButton_ReadConfig->setEnabled(true);
@@ -242,6 +243,7 @@ void MainWindow::showConnectDeviceInfo() {
 }
 // device disconnected
 void MainWindow::hideConnectDeviceInfo() {
+    //qDebug()<<"Device disconected";
     ui->label_DeviceStatus->setText(tr("Disconnected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(160, 0, 0);");
     ui->pushButton_ReadConfig->setEnabled(false);
@@ -328,12 +330,13 @@ void MainWindow::deviceFlasherController(bool is_start_flash)
     QObject context;
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
+        qDebug()<<"Start flasher controller";
         if (is_start_flash == true){
             hid_device_worker->FlashFirmware(ui->widget_2->GetFileArray());
         } else {
             hid_device_worker->EnterToFlashMode();
         }
-
+        qDebug()<<"Flasher controller finished";
         loop.quit();
     });
     thread_getSend_config->start();
@@ -356,6 +359,7 @@ void MainWindow::interfaceStyleChanged(bool is_dark)
 // slot language change
 void MainWindow::languageChanged(QString language)        // QSignalBlocker blocker(ui->comboBox);
 {
+    qDebug()<<"Retranslate UI";
     if (language == "russian")
     {
         translator.load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
@@ -381,6 +385,7 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
     if(debug_window){
         debug_window->RetranslateUi();
     }
+    qDebug()<<"done";
 }
 // set font
 void MainWindow::setFont()
@@ -394,6 +399,7 @@ void MainWindow::setFont()
 // load app config
 void MainWindow::LoadAppConfig()
 {
+    qDebug()<<"Loading application config";
     // load language settings
     gEnv.pAppSettings->beginGroup("LanguageSettings");
     if (gEnv.pAppSettings->value("Language", "english").toString() == "russian")
@@ -436,7 +442,9 @@ void MainWindow::LoadAppConfig()
     debug_is_enable = gEnv.pAppSettings->value("DebugEnable", "false").toBool();
     if (debug_is_enable){
         on_pushButton_ShowDebug_clicked();
-        resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());
+        if (this->isMaximized() == false){
+            resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());
+        }
     }
     gEnv.pAppSettings->endGroup();
 
@@ -445,10 +453,12 @@ void MainWindow::LoadAppConfig()
     #else
         ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tab_Debug));
     #endif
+    qDebug()<<"done";
 }
 // save app config
 void MainWindow::SaveAppConfig()    // перенести сюда сохранение профилей кривых
 {
+    qDebug()<<"Saving application config";
     // save tab index
     gEnv.pAppSettings->beginGroup("TabIndexSettings");
     gEnv.pAppSettings->setValue("PinConfig",       ui->tabWidget->indexOf(ui->tab_PinConfig));
@@ -473,6 +483,7 @@ void MainWindow::SaveAppConfig()    // перенести сюда сохран�
     gEnv.pAppSettings->beginGroup("OtherSettings");
     gEnv.pAppSettings->setValue("DebugEnable", debug_is_enable);
     gEnv.pAppSettings->endGroup();
+    qDebug()<<"done";
 }
 
 
@@ -485,61 +496,74 @@ void MainWindow::hidDeviceListChanged(int index)
 // reset all pins
 void MainWindow::on_pushButton_ResetAllPins_clicked()
 {
+    qDebug()<<"Reset all clicked";
     gEnv.pDeviceConfig->ResetConfig();
 
     ReadFromConfig();
 
     pin_config->ResetAllPins();
+    qDebug()<<"done";
 }
 // read config from device
 void MainWindow::on_pushButton_ReadConfig_clicked()
 {
+    qDebug()<<"Read config clicked";
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
 
     hid_device_worker->GetConfigFromDevice();
+    //qDebug()<<"done";
 }
 // write config to device
 void MainWindow::on_pushButton_WriteConfig_clicked()
 {
+    qDebug()<<"Write config clicked";
     ui->pushButton_WriteConfig->setEnabled(false);
     ui->pushButton_ReadConfig->setEnabled(false);
 
     WriteToConfig();
     hid_device_worker->SendConfigToDevice();
+    //qDebug()<<"done";
 }
 // load from file
 void MainWindow::on_pushButton_LoadFromFile_clicked()
 {
+    qDebug()<<"Load from file clicked";
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
 
     QSettings device_settings( fileName, QSettings::IniFormat );
     LoadDeviceConfigFromFile(&device_settings);
+    qDebug()<<"done";
 }
 // save to file
 void MainWindow::on_pushButton_SaveToFile_clicked()
 {
+    qDebug()<<"Save to file clicked";
     QString fileName = QFileDialog::getSaveFileName(this,
         tr("Save Config"), QDir::currentPath() + "/" + gEnv.pDeviceConfig->config.device_name, tr("Config Files (*.cfg)"));
 
 
     QSettings device_settings( fileName, QSettings::IniFormat );
     SaveDeviceConfigToFile(&device_settings);
+    qDebug()<<"done";
 }
 //set default config
 void MainWindow::on_pushButton_SetDefaultConfig_clicked()
 {
+    qDebug()<<"Set default config clicked";
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
 
     gEnv.pAppSettings->beginGroup("DefaultConfig");
     gEnv.pAppSettings->setValue("FileName", fileName);
     gEnv.pAppSettings->endGroup();
+    qDebug()<<"done";
 }
 // load default config file
 void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
 {
+    qDebug()<<"Load default config clicked";
     gEnv.pAppSettings->beginGroup("DefaultConfig");
 
     if (gEnv.pAppSettings->value("FileName", "none") != "none"){
@@ -548,6 +572,7 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
     }
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     gEnv.pAppSettings->endGroup();
+    qDebug()<<"done";
 }
 
 // debug button
@@ -558,6 +583,7 @@ void MainWindow::on_pushButton_TestButton_clicked()
 
 void MainWindow::on_pushButton_ShowDebug_clicked()
 {
+    //qDebug()<<"Show debug widged clicked";
     if (debug_window == nullptr)
     {
         debug_window = new DebugWindow(this);       // хз мб всё же стоит создать дебаг в конструкторе и оставить скрытым и не экономить пару кб
@@ -569,14 +595,20 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
     if (debug_window->isVisible() == false)
     {
         debug_window->setMinimumHeight(120);
-        resize(width(), height() + 120 + ui->layoutG_MainLayout->verticalSpacing());
+        if (this->isMaximized() == false){
+            resize(width(), height() + 120 + ui->layoutG_MainLayout->verticalSpacing());
+        }
         debug_window->setVisible(true);
         debug_is_enable = true;
+        ui->pushButton_ShowDebug->setText(tr("Hide debug"));
     } else {
-        debug_window->setMinimumHeight(0);
         debug_window->setVisible(false);
-        resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());    // и в LoadAppConfig()
+        debug_window->setMinimumHeight(0);
+        if (this->isMaximized() == false){
+            resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());    // и в LoadAppConfig()
+        }
         debug_is_enable = false;
+        ui->pushButton_ShowDebug->setText(tr("Show debug"));
     }
 }
 

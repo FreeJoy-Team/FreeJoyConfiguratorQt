@@ -13,6 +13,7 @@ GlobalEnvironment gEnv;
 // Get the default Qt message handler.
 static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
 
+// define QT_NO_DEBUG_OUTPUT - no debug info
 void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     if (gEnv.pDebugWindow != nullptr) {
