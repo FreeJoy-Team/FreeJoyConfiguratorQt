@@ -19,7 +19,7 @@ public:
     void SendConfigToDevice();
 
     bool EnterToFlashMode();
-    void FlashFirmware(const QByteArray* file_bytes);
+    void FlashFirmware(const QByteArray* firmware);
 
     void SetIsFinish(bool is_finish);
     void SetSelectedDevice(int device_number);
@@ -50,11 +50,13 @@ private:
 
     void ReadConfigFromDevice(uint8_t *buffer);
     void WriteConfigToDevice(uint8_t *buffer);
+    void FlashFirmwareToDevice();
 
     uint8_t device_buffer_[BUFFSIZE];
     dev_config_t device_config_;                // ????
     QList<hid_device_info*> HidDevicesAdrList;
     hid_device_info* flasher_;
+    const QByteArray* firmware_;
 
     ReportConverter *report_convert;                     // !!!!
 };

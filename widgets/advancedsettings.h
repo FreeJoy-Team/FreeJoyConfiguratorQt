@@ -2,6 +2,7 @@
 #define ADVANCEDSETTINGS_H
 
 #include <QWidget>
+#include "widgets/flasher.h"
 
 QT_BEGIN_NAMESPACE
 class QFile;
@@ -26,10 +27,8 @@ public:
     void WriteToConfig();
 
     void RetranslateUi();
-
-    void DeviceConnected(bool is_connect);
-
-    const QByteArray* GetFileArray();
+    
+    Flasher* GetFlasher();
 
 signals:
     void languageChanged(QString language);
@@ -37,13 +36,7 @@ signals:
 
     void fontChanged();
 
-    void flashModeClicked(bool is_start_flash);
-    void startFlash(bool is_start_flash);
-
 private slots:
-    void flasherFound(bool is_found);
-    void flashStatus(int status, int percent);
-
     void on_pushButton_LangEnglish_clicked();
     void on_pushButton_LangRussian_clicked();
 
@@ -55,11 +48,6 @@ private slots:
 
     void on_spinBox_FontSize_valueChanged(int font_size);
 
-    void on_pushButton_FlasherMode_clicked();
-
-    void on_pushButton_FlashFirmware_clicked();
-
-
     void on_pushButton_About_clicked();
 
     void on_pushButton_Wiki_clicked();
@@ -68,12 +56,8 @@ private:
     Ui::AdvancedSettings *ui;
 
     void SetStyle(QPushButton* pressed_button, QString file_name, QString style_name, bool is_dark); //hz
-
-    QByteArray file_array_;
-    QString flash_button_text_;
-    QString enter_to_flash_btn_text_;
-    QString default_button_style_;
-    void FlashDone();
+    
+    Flasher* flasher;
 
     QString tmp_text;
     QString tmp_style;

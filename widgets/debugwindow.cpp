@@ -68,7 +68,7 @@ void DebugWindow::PrintMsg(const QString &msg)
 
     //ui->plainTextEdit_DebugMsg->verticalScrollBar()->setValue(ui->plainTextEdit_DebugMsg->verticalScrollBar()->maximum());
 
-    ui->textBrowser_DebugMsg->append(QTime::currentTime().toString() + ": " + msg);
+    ui->textBrowser_DebugMsg->insertPlainText(QTime::currentTime().toString() + ": " + msg + '\n'); // append?
     ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);     // бля, с plainTextEdit криво пашет
 }
 
@@ -76,10 +76,10 @@ void DebugWindow::PrintMsg(const QString &msg)
 void DebugWindow::LogicalButtonState(int button_number, bool state)
 {
     if (state){
-        ui->textBrowser_ButtonsPressLog->append(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" pressed"));
+        ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" pressed") + '\n');
         ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
     } else {
-        ui->textBrowser_ButtonsUnpressLog->append(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" unpressed"));
+        ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" unpressed") + '\n');
         ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
     }
 }

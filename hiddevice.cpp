@@ -16,6 +16,7 @@ void HidDevice::processData()
     int res = 0;
     bool change = false;
     bool no_device_sent = false;
+    flasher_ = nullptr;
     QList<hid_device_info*> tmp_HidDevicesAdrList;
     hid_device_info* hid_dev_info;
     QStringList str_list;
@@ -46,11 +47,17 @@ void HidDevice::processData()
             {
                 if(QString::fromWCharArray(hid_dev_info->product_string) == "FreeJoy Flasher"){
                     if (!flasher_){
+                        qDebug()<<"processData - Flasher found";
                         flasher_ = hid_dev_info;
                         emit flasherFound(true);
                     }
                     flasher_ = hid_dev_info;
                     hid_dev_info = hid_dev_info->next;
+                    if (current_work_ == REPORT_ID_FIRMWARE)    // опаять дерьма накодил
+                    {
+                        FlashFirmwareToDevice();
+                        current_work_ = REPORT_ID_JOY;
+                    }
                     continue;
                 }
 
@@ -120,6 +127,10 @@ void HidDevice::processData()
             {
                 WriteConfigToDevice(buffer);
             }
+//            else if (current_work_ == REPORT_ID_FIRMWARE)
+//            {
+//                EnterToFlashMode();
+//            }
         }
     }
     hid_free_enumeration(hid_dev_info);            // ????
@@ -265,74 +276,10 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
     }
 }
 
-// button "get config" clicked
-void HidDevice::GetConfigFromDevice()
+// flash firmware
+void HidDevice::FlashFirmwareToDevice()
 {
-    current_work_ = REPORT_ID_CONFIG_IN;
-}
-// button "send config" clicked
-void HidDevice::SendConfigToDevice()
-{
-    current_work_ = REPORT_ID_CONFIG_OUT;
-}
-
-
-// another device selected in comboBox
-void HidDevice::SetSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
-{                                                           // только в винде. решил костылём в hidapi.c Qwe();
-    if (device_number < 0){
-        //device_number = 0;
-        return;
-    } else if (device_number > HidDevicesAdrList.size() - 1){
-        device_number = HidDevicesAdrList.size() - 1;
-    }
-    selected_device_ = device_number; 
-    qDebug()<<"HID open start";
-    qDebug()<<device_number<<"devices connected";
-        // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()
-    handle_read = hid_open(VID, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
-//    if (!handle_read) {
-//        emit putDisconnectedDeviceInfo();
-//        //hid_free_enumeration(hid_dev_info);
-//    } else {
-//        emit putConnectedDeviceInfo();
-//    }
-#ifdef _WIN32
-    qDebug()<<"Unsuccessful attempts ="<<Qwe();
-#endif
-    qDebug()<<"HID opened";
-}
-
-
-
-
-                                                //////////////////////////// FLASHER ////////////////////////////
-bool HidDevice::EnterToFlashMode()
-{
-    if(handle_read)
-    {
-        qint64 millis;
-        QElapsedTimer time;
-        time.start();
-        millis = time.elapsed();
-
-        uint8_t config_buffer[64] = {REPORT_ID_FIRMWARE,'b','o','o','t','l','o','a','d','e','r',' ','r','u','n'};
-        hid_write(handle_read, config_buffer, 64);
-
-        while (time.elapsed() < millis + 1000)
-        {
-            if (flasher_){
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-
-void HidDevice::FlashFirmware(const QByteArray* file_bytes)
-{
-    qDebug()<<"flash size = "<<file_bytes->size();
+    qDebug()<<"flash size = "<<firmware_->size();
     if(flasher_)
     {
         hid_device* flasher = hid_open(VID, flasher_->product_id, flasher_->serial_number);;
@@ -342,13 +289,9 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
         millis = time.elapsed();
         uint8_t flash_buffer[BUFFSIZE]{};
         uint8_t flasher_device_buffer[BUFFSIZE]{};
-        uint16_t length = (uint16_t)file_bytes->size();
-        uint16_t crc16 = FirmwareUpdater::ComputeChecksum(file_bytes);
+        uint16_t length = (uint16_t)firmware_->size();
+        uint16_t crc16 = FirmwareUpdater::ComputeChecksum(firmware_);
         int update_percent = 0;
-
-//        if (flasher){
-//            qDebug()<<"flasher detected ";
-//        }
 
         flash_buffer[0] = REPORT_ID_FIRMWARE;
         flash_buffer[1] = 0;
@@ -363,13 +306,14 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
 
         int res = 0;
         uint8_t buffer[BUFFSIZE]={0};
-        while (time.elapsed() < millis + 40000) // 40 сек на прошивку
+        while (time.elapsed() < millis + 30000) // 30 сек на прошивку
         {
             if (flasher){
                 res=hid_read_timeout(flasher, buffer, BUFFSIZE,5000);  // ?
                 if (res < 0) {
                     hid_close(flasher);
                     flasher=nullptr;
+                    //flasher_ = nullptr;
                     break;
                 } else {
                     if (buffer[0] == REPORT_ID_FIRMWARE) {
@@ -384,27 +328,32 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
                 uint16_t cnt = (uint16_t)(flasher_device_buffer[1] << 8 | flasher_device_buffer[2]);
                 if ((cnt & 0xF000) == 0xF000)  // status packet
                 {
+                    //qDebug()<<"ERROR";
                     if (cnt == 0xF001)  // firmware size error
                     {
                         hid_close(flasher);
+                        //flasher_ = nullptr;
                         emit flashStatus(SIZE_ERROR, update_percent);
                         break;
                     }
                     else if (cnt == 0xF002) // CRC error
                     {
                         hid_close(flasher);
+                        //flasher_ = nullptr;
                         emit flashStatus(CRC_ERROR, update_percent);
                         break;
                     }
                     else if (cnt == 0xF003) // flash erase error
                     {
                         hid_close(flasher);
+                        //flasher_ = nullptr;
                         emit flashStatus(ERASE_ERROR, update_percent);
                         break;
                     }
                     else if (cnt == 0xF000) // OK
                     {
                         hid_close(flasher);
+                        //flasher_ = nullptr;
                         emit flashStatus(FINISHED, update_percent);
                         break;
                     }
@@ -418,10 +367,10 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
                     flash_buffer[2] = (uint8_t)(cnt & 0xFF);
                     flash_buffer[3] = 0;
 
-                    if (cnt * 60 < file_bytes->size())
+                    if (cnt * 60 < firmware_->size())
                     {
-                        memcpy(flash_buffer +4, file_bytes->constData() + (cnt - 1) * 60, 60);
-                        update_percent = ((cnt - 1) * 60 * 100 / file_bytes->size());
+                        memcpy(flash_buffer +4, firmware_->constData() + (cnt - 1) * 60, 60);
+                        update_percent = ((cnt - 1) * 60 * 100 / firmware_->size());
                         hid_write(flasher, flash_buffer, 64);
                         emit flashStatus(IN_PROCESS, update_percent);
 
@@ -429,7 +378,7 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
                     }
                     else
                     {
-                        memcpy(flash_buffer +4, file_bytes->constData() + (cnt - 1) * 60, file_bytes->size() - (cnt - 1) * 60);     // file_bytes->size() для 32 и 64 бит одинаков?
+                        memcpy(flash_buffer +4, firmware_->constData() + (cnt - 1) * 60, firmware_->size() - (cnt - 1) * 60);     // file_bytes->size() для 32 и 64 бит одинаков?
                         update_percent = 0;
                         hid_write(flasher, flash_buffer, 64);
                         emit flashStatus(IN_PROCESS, update_percent);
@@ -440,4 +389,71 @@ void HidDevice::FlashFirmware(const QByteArray* file_bytes)
             }
         }
     }
+}
+
+// button "get config" clicked
+void HidDevice::GetConfigFromDevice()
+{
+    current_work_ = REPORT_ID_CONFIG_IN;
+}
+// button "send config" clicked
+void HidDevice::SendConfigToDevice()
+{
+    current_work_ = REPORT_ID_CONFIG_OUT;
+}
+// button "flash firmware" clicked
+void HidDevice::FlashFirmware(const QByteArray* firmware)
+{
+    firmware_ = firmware;
+    current_work_ = REPORT_ID_FIRMWARE;
+}
+
+bool HidDevice::EnterToFlashMode()
+{
+    if(handle_read)
+    {
+        flasher_ = nullptr;
+        qint64 millis;
+        QElapsedTimer time;
+        time.start();
+        millis = time.elapsed();
+        qDebug()<<"before hid_write";
+        uint8_t config_buffer[64] = {REPORT_ID_FIRMWARE,'b','o','o','t','l','o','a','d','e','r',' ','r','u','n'};
+        hid_write(handle_read, config_buffer, 64);
+        qDebug()<<"after hid_write";
+        while (time.elapsed() < millis + 1000)
+        {
+            if (flasher_){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+// another device selected in comboBox
+void HidDevice::SetSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
+{                                                           // только в винде. решил костылём в hidapi.c Qwe();
+    if (device_number < 0){
+        //device_number = 0;
+        return;
+    } else if (device_number > HidDevicesAdrList.size() - 1){
+        device_number = HidDevicesAdrList.size() - 1;
+    }
+    selected_device_ = device_number; 
+    qDebug()<<"HID open start";
+    qDebug()<<device_number + 1<<"devices connected";
+        // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()
+    handle_read = hid_open(VID, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
+//    if (!handle_read) {
+//        emit putDisconnectedDeviceInfo();
+//        //hid_free_enumeration(hid_dev_info);
+//    } else {
+//        emit putConnectedDeviceInfo();
+//    }
+#ifdef _WIN32
+    qDebug()<<"Unsuccessful attempts ="<<Qwe();
+#endif
+    qDebug()<<"HID opened";
 }

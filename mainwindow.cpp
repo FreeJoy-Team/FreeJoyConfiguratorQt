@@ -148,17 +148,17 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // enter flash mode clicked
-    connect(ui->widget_2, SIGNAL(flashModeClicked(bool)),
+    connect(ui->widget_2->GetFlasher(), SIGNAL(flashModeClicked(bool)),
             this, SLOT(deviceFlasherController(bool)));
     // flasher found
     connect(hid_device_worker, SIGNAL(flasherFound(bool)),
-            ui->widget_2, SLOT(flasherFound(bool)));
+            ui->widget_2->GetFlasher(), SLOT(flasherFound(bool)));
     // start flash
-    connect(ui->widget_2, SIGNAL(startFlash(bool)),              // thread  flashStatus
+    connect(ui->widget_2->GetFlasher(), SIGNAL(startFlash(bool)),              // thread  flashStatus
             this, SLOT(deviceFlasherController(bool)));
     // flash status
     connect(hid_device_worker, SIGNAL(flashStatus(int, int)),              // thread  flashStatus
-            ui->widget_2, SLOT(flashStatus(int, int)));
+            ui->widget_2->GetFlasher(), SLOT(flashStatus(int, int)));
     // set selected hid device
     connect(ui->comboBox_HidDeviceList, SIGNAL(currentIndexChanged(int)),
             this, SLOT(hidDeviceListChanged(int)));
@@ -239,7 +239,7 @@ void MainWindow::showConnectDeviceInfo() {
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
     ui->pushButton_ReadConfig->setEnabled(true);
     ui->pushButton_WriteConfig->setEnabled(true);
-    ui->widget_2->DeviceConnected(true);
+    ui->widget_2->GetFlasher()->DeviceConnected(true);
 }
 // device disconnected
 void MainWindow::hideConnectDeviceInfo() {
@@ -248,7 +248,7 @@ void MainWindow::hideConnectDeviceInfo() {
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(160, 0, 0);");
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
-    ui->widget_2->DeviceConnected(false);
+    ui->widget_2->GetFlasher()->DeviceConnected(false);
     if (debug_window){
         debug_window->ResetPacketsCount();
     }
@@ -325,15 +325,17 @@ void MainWindow::getGamepadPacket(uint8_t * buff)
 // Flasher controller
 void MainWindow::deviceFlasherController(bool is_start_flash)
 {        // херня? mb QtConcurrent::run()
-    // убрать всё в один поток, как read/write
+    // так оставить или как read/write а bool через сигнал?
     QEventLoop loop;
     QObject context;
     context.moveToThread(thread_getSend_config);
     connect(thread_getSend_config, &QThread::started, &context, [&]() {
         qDebug()<<"Start flasher controller";
         if (is_start_flash == true){
-            hid_device_worker->FlashFirmware(ui->widget_2->GetFileArray());
+            qDebug()<<"Start flash";
+            hid_device_worker->FlashFirmware(ui->widget_2->GetFlasher()->GetFileArray());
         } else {
+            qDebug()<<"Enter to flash mode";
             hid_device_worker->EnterToFlashMode();
         }
         qDebug()<<"Flasher controller finished";
