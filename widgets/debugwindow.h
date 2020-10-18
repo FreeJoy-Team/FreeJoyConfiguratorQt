@@ -21,15 +21,16 @@ public:
     void DevicePacketReceived();
     void ResetPacketsCount();
 
-    void PrintMsg(const QString &msg);
-
     void LogicalButtonState(int button_number, bool state);
+
+    Q_INVOKABLE // для мультипотока, хз правильно ли, но работает. CustomMessageHandler in main
+    void PrintMsg(const QString &msg); // не уверен насчёт ссылки, мб надо копию получать с мультипотоком
 
 private:
     Ui::DebugWindow *ui;
 
-    int packets_count;
-    QElapsedTimer timer;
+    int packets_count_;
+    QElapsedTimer timer_;
 };
 
 #endif // DEBUGWINDOW_H

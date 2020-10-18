@@ -20,8 +20,8 @@ AdvancedSettings::AdvancedSettings(QWidget *parent) :
 {
     ui->setupUi(this);
     
-    flasher = new Flasher(this);
-    ui->layoutH_Flasher->addWidget(flasher);
+    flasher_ = new Flasher(this);
+    ui->layoutH_Flasher->addWidget(flasher_);
 
     gEnv.pAppSettings->beginGroup("FontSettings");
     ui->spinBox_FontSize->setValue(gEnv.pAppSettings->value("FontSize", "8").toInt());
@@ -45,12 +45,12 @@ AdvancedSettings::~AdvancedSettings()
 void AdvancedSettings::RetranslateUi()
 {
     ui->retranslateUi(this);
-    flasher->RetranslateUi();
+    flasher_->RetranslateUi();
 }
 
 Flasher* AdvancedSettings::GetFlasher()
 {
-    return flasher;
+    return flasher_;
 }
 
 
@@ -90,13 +90,13 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
 
 void AdvancedSettings::SetStyle(QPushButton* pressed_button, QString file_name, QString style_name,  bool is_dark)
 {
-    tmp_text = pressed_button->text();
-    tmp_style = pressed_button->styleSheet();
+    tmp_text_ = pressed_button->text();
+    tmp_style_ = pressed_button->styleSheet();
     ui->pushButton_StyleDefault->setEnabled(false);
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
     pressed_button->setText(tr("Loading... Please wait"));
-    pressed_button->setStyleSheet(tmp_style + "color: rgb(230, 230, 230); background-color: rgb(170, 170, 0);");
+    pressed_button->setStyleSheet(tmp_style_ + "color: rgb(230, 230, 230); background-color: rgb(170, 170, 0);");
 
     // без таймера не успевает отрисовать изменения текста и стиля кнопки, возможно на низкочастотных мониках 10мс не хватит?
     // отрисовка в другом потоке?
@@ -116,8 +116,8 @@ void AdvancedSettings::SetStyle(QPushButton* pressed_button, QString file_name, 
         gEnv.pAppSettings->endGroup();
         emit interfaceStyleChanged(is_dark);
 
-        pressed_button->setText(tmp_text);
-        pressed_button->setStyleSheet(tmp_style);
+        pressed_button->setText(tmp_text_);
+        pressed_button->setStyleSheet(tmp_style_);
         ui->pushButton_StyleDefault->setEnabled(true);
         ui->pushButton_StyleWhite->setEnabled(true);
         ui->pushButton_StyleDark->setEnabled(true);

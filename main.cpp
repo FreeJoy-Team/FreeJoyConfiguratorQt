@@ -16,8 +16,10 @@ static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandle
 // define QT_NO_DEBUG_OUTPUT - no debug info
 void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    // mutex?
     if (gEnv.pDebugWindow != nullptr) {
-        gEnv.pDebugWindow->PrintMsg(msg);
+        // для мультипотока, хз правильно ли, но работает // не уверен насчёт ссылки, мб надо копию передавать с мультипотоком
+        QMetaObject::invokeMethod(gEnv.pDebugWindow, "PrintMsg", Qt::QueuedConnection, Q_ARG(const QString, msg));
     }
 
     // Call the default handler.
