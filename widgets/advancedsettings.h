@@ -57,10 +57,10 @@ private:
 
     void SetStyle(QPushButton* pressed_button, QString file_name, QString style_name, bool is_dark); //hz
     
-    Flasher* flasher;
+    Flasher* flasher_;
 
-    QString tmp_text;
-    QString tmp_style;
+    QString tmp_text_;
+    QString tmp_style_;
 };
 
 #endif // ADVANCEDSETTINGS_H

@@ -53,7 +53,7 @@ void HidDevice::processData()
                     }
                     flasher_ = hid_dev_info;
                     hid_dev_info = hid_dev_info->next;
-                    if (current_work_ == REPORT_ID_FIRMWARE)    // опаять дерьма накодил
+                    if (current_work_ == REPORT_ID_FIRMWARE)    // дерьма накодил?
                     {
                         FlashFirmwareToDevice();
                         current_work_ = REPORT_ID_JOY;

@@ -10,7 +10,7 @@ DebugWindow::DebugWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    packets_count = 0;
+    packets_count_ = 0;
 }
 
 DebugWindow::~DebugWindow()
@@ -31,19 +31,19 @@ void DebugWindow::DevicePacketReceived()
     static int count = 0;
     static QElapsedTimer packet_timer;
 
-    packets_count++;
+    packets_count_++;
     //ui->label_PacketsCount->setNum(packets_count);
     if (packet_timer.hasExpired(100)){
-        ui->label_PacketsCount->setNum(packets_count);
+        ui->label_PacketsCount->setNum(packets_count_);
         packet_timer.start();
     }
 
-    if (timer.hasExpired(5000) && timer.isValid()){
-        ui->label_PacketsSpeed->setText(QString::number(((double)timer.restart() / (double)count), 'f', 3) + tr(" ms"));
+    if (timer_.hasExpired(5000) && timer_.isValid()){
+        ui->label_PacketsSpeed->setText(QString::number(((double)timer_.restart() / (double)count), 'f', 3) + tr(" ms"));
         count = 0;
     }
-    else if (timer.isValid() == false){     // валид-инвалид для правильного отображения при подключении-отключении девайса
-        timer.start();
+    else if (timer_.isValid() == false){     // валид-инвалид для правильного отображения при подключении-отключении девайса
+        timer_.start();
     }
 
     count++;
@@ -51,10 +51,10 @@ void DebugWindow::DevicePacketReceived()
 
 void DebugWindow::ResetPacketsCount()
 {
-    packets_count = 0;
-    ui->label_PacketsCount->setNum(packets_count);
+    packets_count_ = 0;
+    ui->label_PacketsCount->setNum(packets_count_);
 
-    timer.invalidate();
+    timer_.invalidate();
     ui->label_PacketsSpeed->setText(tr("0 ms"));
 }
 
@@ -68,6 +68,7 @@ void DebugWindow::PrintMsg(const QString &msg)
 
     //ui->plainTextEdit_DebugMsg->verticalScrollBar()->setValue(ui->plainTextEdit_DebugMsg->verticalScrollBar()->maximum());
 
+    //scrollToBottom();
     ui->textBrowser_DebugMsg->insertPlainText(QTime::currentTime().toString() + ": " + msg + '\n'); // append?
     ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);     // бля, с plainTextEdit криво пашет
 }
