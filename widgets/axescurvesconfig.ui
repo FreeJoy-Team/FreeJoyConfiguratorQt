@@ -104,7 +104,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_X"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_X"/>
       </item>
       <item>
        <widget class="QLabel" name="label_Y">
@@ -117,7 +117,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_Y"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_Y"/>
       </item>
       <item>
        <widget class="QLabel" name="label_Z">
@@ -130,7 +130,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_Z"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_Z"/>
       </item>
       <item>
        <widget class="QLabel" name="label_Rx">
@@ -143,7 +143,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_Rx"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_Rx"/>
       </item>
       <item>
        <widget class="QLabel" name="label_Ry">
@@ -156,7 +156,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_Ry"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_Ry"/>
       </item>
       <item>
        <widget class="QLabel" name="label_Rz">
@@ -169,7 +169,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_Rz"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_Rz"/>
       </item>
       <item>
        <widget class="QLabel" name="label_Slider1">
@@ -182,7 +182,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_Slider1"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_Slider1"/>
       </item>
       <item>
        <widget class="QLabel" name="label_Slider2">
@@ -195,7 +195,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Profile_Slider2"/>
+       <widget class="CenteredCBox" name="comboBox_Profile_Slider2"/>
       </item>
       <item>
        <spacer name="verticalSpacer">
@@ -234,6 +234,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

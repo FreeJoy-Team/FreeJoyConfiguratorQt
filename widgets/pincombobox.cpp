@@ -18,7 +18,6 @@ PinComboBox::PinComboBox(QWidget *parent) :
 
     connect(ui->comboBox_PinsType, SIGNAL(currentIndexChanged(int)),
                 this, SLOT(IndexChanged(int)));
-
 }
 
 PinComboBox::~PinComboBox()

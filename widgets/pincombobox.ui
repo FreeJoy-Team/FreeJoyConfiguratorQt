@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QComboBox" name="comboBox_PinsType">
+    <widget class="CenteredCBox" name="comboBox_PinsType">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -44,6 +44,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

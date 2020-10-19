@@ -64,6 +64,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
           <property name="maximum">
            <number>128</number>
           </property>
@@ -98,6 +101,9 @@
          <widget class="QSpinBox" name="spinBox_Shift2">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
           <property name="maximum">
            <number>128</number>
@@ -134,6 +140,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
           <property name="maximum">
            <number>128</number>
           </property>
@@ -169,6 +178,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
           <property name="maximum">
            <number>128</number>
           </property>
@@ -203,6 +215,9 @@
          <widget class="QSpinBox" name="spinBox_Shift5">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
           <property name="maximum">
            <number>128</number>

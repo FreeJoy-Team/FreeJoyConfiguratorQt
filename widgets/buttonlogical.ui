@@ -74,6 +74,9 @@
        <height>25</height>
       </size>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
      <property name="correctionMode">
       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
      </property>
@@ -143,7 +146,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox_ButtonFunction">
+    <widget class="CenteredCBox" name="comboBox_ButtonFunction">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -162,7 +165,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox_ShiftIndex">
+    <widget class="CenteredCBox" name="comboBox_ShiftIndex">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -181,7 +184,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox_DelayTimerIndex">
+    <widget class="CenteredCBox" name="comboBox_DelayTimerIndex">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -200,7 +203,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox_PressTimerIndex">
+    <widget class="CenteredCBox" name="comboBox_PressTimerIndex">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -220,6 +223,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

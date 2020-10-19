@@ -104,5 +104,16 @@ void DebugWindow::LogicalButtonState(int button_number, bool state)
 
 void DebugWindow::on_checkBox_WriteLog_clicked(bool checked)
 {
+    QString text = ui->textBrowser_DebugMsg->toPlainText();
+    QFile file(QDir::currentPath() + '/' + "FreeJoyConfigurator_Log.txt");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Append)){
+        qDebug()<<"cant open file";
+        return;
+    } else {
+        file.resize(0);
+    }
+    QTextStream out(&file);
+    out << "########## START WRITE LOG ##########\n" <<text;
+
     write_to_file_ = checked;
 }

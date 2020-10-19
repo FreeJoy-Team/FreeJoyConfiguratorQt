@@ -74,7 +74,7 @@
         </spacer>
        </item>
        <item row="0" column="2">
-        <widget class="QComboBox" name="comboBox_HidDeviceList">
+        <widget class="CenteredCBox" name="comboBox_HidDeviceList">
          <property name="minimumSize">
           <size>
            <width>165</width>
@@ -684,6 +684,11 @@ g</string>
   </widget>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
   <customwidget>
    <class>AdvancedSettings</class>
    <extends>QWidget</extends>

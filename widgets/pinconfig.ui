@@ -707,7 +707,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> GND</string>
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -725,7 +728,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> 3.3V</string>
+        <string notr="true">3.3V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -743,7 +749,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> 5V</string>
+        <string notr="true">5V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -761,7 +770,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> USBD-</string>
+        <string notr="true">USBD-</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -779,7 +791,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> USBD+</string>
+        <string notr="true">USBD+</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -1213,7 +1228,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> GND</string>
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -1231,7 +1249,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> GND</string>
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -1249,7 +1270,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> 3.3V</string>
+        <string notr="true">3.3V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -1267,7 +1291,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> RESET</string>
+        <string notr="true">RESET</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -1285,7 +1312,10 @@ background-color: rgba(105, 105, 105, 10);</string>
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="text">
-        <string notr="true"> VBUS</string>
+        <string notr="true">VBUS</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>580</width>
-    <height>38</height>
+    <height>42</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,13 +59,20 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_Function"/>
+       <widget class="CenteredCBox" name="comboBox_Function"/>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

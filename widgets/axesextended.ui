@@ -61,7 +61,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QComboBox" name="comboBox_Function"/>
+       <widget class="CenteredCBox" name="comboBox_Function"/>
       </item>
       <item row="2" column="1">
        <widget class="QLabel" name="text_axisSource2">
@@ -80,7 +80,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QComboBox" name="comboBox_AxisSource2">
+       <widget class="CenteredCBox" name="comboBox_AxisSource2">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -107,7 +107,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QComboBox" name="comboBox_I2cAddress">
+       <widget class="CenteredCBox" name="comboBox_I2cAddress">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -189,7 +189,7 @@
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QComboBox" name="comboBox_Button2"/>
+          <widget class="CenteredCBox" name="comboBox_Button2"/>
          </item>
          <item row="0" column="1">
           <widget class="QSpinBox" name="spinBox_Button1">
@@ -221,7 +221,7 @@
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QComboBox" name="comboBox_Button3"/>
+          <widget class="CenteredCBox" name="comboBox_Button3"/>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="text_button1">
@@ -253,7 +253,7 @@
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QComboBox" name="comboBox_Button1">
+          <widget class="CenteredCBox" name="comboBox_Button1">
            <property name="currentIndex">
             <number>-1</number>
            </property>
@@ -474,6 +474,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -526,7 +526,7 @@ QProgressBar::chunk:disabled {
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QComboBox" name="comboBox_AxisSource1">
+       <widget class="CenteredCBox" name="comboBox_AxisSource1">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -590,6 +590,11 @@ QProgressBar::chunk:disabled {
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
   <customwidget>
    <class>AxesToButtonsSlider</class>
    <extends>QWidget</extends>

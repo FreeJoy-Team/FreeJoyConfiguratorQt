@@ -146,7 +146,7 @@
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QComboBox" name="comboBox_ShiftRegType">
+       <widget class="CenteredCBox" name="comboBox_ShiftRegType">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -209,6 +209,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CenteredCBox</class>
+   <extends>QComboBox</extends>
+   <header>centered_cbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
