@@ -3,6 +3,10 @@
 
 #include <QElapsedTimer>
 #include <QTime>
+#include <QFile>
+#include <QTextStream>
+#include <QDir>
+#include <QDebug>
 
 DebugWindow::DebugWindow(QWidget *parent) :
     QWidget(parent),
@@ -11,6 +15,7 @@ DebugWindow::DebugWindow(QWidget *parent) :
     ui->setupUi(this);
 
     packets_count_ = 0;
+    write_to_file_ = false;
 }
 
 DebugWindow::~DebugWindow()
@@ -69,8 +74,20 @@ void DebugWindow::PrintMsg(const QString &msg)
     //ui->plainTextEdit_DebugMsg->verticalScrollBar()->setValue(ui->plainTextEdit_DebugMsg->verticalScrollBar()->maximum());
 
     //scrollToBottom();
-    ui->textBrowser_DebugMsg->insertPlainText(QTime::currentTime().toString() + ": " + msg + '\n'); // append?
+
+    QString log(QTime::currentTime().toString() + ": " + msg + '\n');
+    ui->textBrowser_DebugMsg->insertPlainText(log); // append?
     ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);     // бля, с plainTextEdit криво пашет
+
+    if (write_to_file_){
+        QFile file(QDir::currentPath() + '/' + "FreeJoyConfigurator_Log.txt");
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Append)){
+            qDebug()<<"cant open file";
+            return;
+        }
+        QTextStream out(&file);
+        out << log;
+    }
 }
 
 
@@ -83,4 +100,9 @@ void DebugWindow::LogicalButtonState(int button_number, bool state)
         ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" unpressed") + '\n');
         ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
     }
+}
+
+void DebugWindow::on_checkBox_WriteLog_clicked(bool checked)
+{
+    write_to_file_ = checked;
 }

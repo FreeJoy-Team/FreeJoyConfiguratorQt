@@ -26,11 +26,15 @@ public:
     Q_INVOKABLE // для мультипотока, хз правильно ли, но работает. CustomMessageHandler in main
     void PrintMsg(const QString &msg); // не уверен насчёт ссылки, мб надо копию получать с мультипотоком
 
+private slots:
+    void on_checkBox_WriteLog_clicked(bool checked);
+
 private:
     Ui::DebugWindow *ui;
 
     int packets_count_;
     QElapsedTimer timer_;
+    bool write_to_file_;
 };
 
 #endif // DEBUGWINDOW_H

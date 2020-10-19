@@ -37,11 +37,11 @@
     </message>
     <message>
         <source>Flash Firmware</source>
-        <translation>Прошить</translation>
+        <translation type="vanished">Прошить</translation>
     </message>
     <message>
         <source>Enter Flasher Mode</source>
-        <translation>Войти в режим прошивки</translation>
+        <translation type="vanished">Войти в режим прошивки</translation>
     </message>
     <message>
         <source>Application settings</source>
@@ -73,35 +73,23 @@
     </message>
     <message>
         <source>Ready to flash</source>
-        <translation>Готов к прошивке</translation>
+        <translation type="vanished">Готов к прошивке</translation>
     </message>
     <message>
         <source>Open Config</source>
-        <translation>Открыть конфиг</translation>
+        <translation type="vanished">Открыть конфиг</translation>
     </message>
     <message>
         <source>Binary files (.bin) (*.bin)</source>
-        <translation>Бинарный файл  (.bin) (*.bin)</translation>
+        <translation type="vanished">Бинарный файл  (.bin) (*.bin)</translation>
     </message>
     <message>
         <source>Firmware flashing..</source>
-        <translation>Идёт прошивка..</translation>
+        <translation type="vanished">Идёт прошивка..</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation>Готово</translation>
-    </message>
-    <message>
-        <source>SIZE ERROR</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>CRC ERROR</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ERASE ERROR</source>
-        <translation></translation>
+        <translation type="vanished">Готово</translation>
     </message>
     <message>
         <source>Loading... Please wait</source>
@@ -960,6 +948,10 @@
         <source> unpressed</source>
         <translation> отжата</translation>
     </message>
+    <message>
+        <source>Write log to file</source>
+        <translation>Запись лога в файл</translation>
+    </message>
 </context>
 <context>
     <name>Encoders</name>
@@ -1052,6 +1044,38 @@
     <message>
         <source>Flash Firmware</source>
         <translation>Прошить</translation>
+    </message>
+    <message>
+        <source>Ready to flash</source>
+        <translation>Готов к прошивке</translation>
+    </message>
+    <message>
+        <source>Open Config</source>
+        <translation>Открыть конфиг</translation>
+    </message>
+    <message>
+        <source>Binary files (.bin) (*.bin)</source>
+        <translation>Бинарный файл  (.bin) (*.bin)</translation>
+    </message>
+    <message>
+        <source>Firmware flashing..</source>
+        <translation>Идёт прошивка..</translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation>Готово</translation>
+    </message>
+    <message>
+        <source>SIZE ERROR</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>CRC ERROR</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>ERASE ERROR</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1251,6 +1275,14 @@ g</source>
 д
 к
 а</translation>
+    </message>
+    <message>
+        <source>Show debug</source>
+        <translation>Показать отладку</translation>
+    </message>
+    <message>
+        <source>Hide debug</source>
+        <translation>Скрыть отладку</translation>
     </message>
 </context>
 <context>

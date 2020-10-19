@@ -386,6 +386,7 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
     ui->widget_2->RetranslateUi();
     if(debug_window){
         debug_window->RetranslateUi();
+        ui->pushButton_ShowDebug->setText(tr("Hide debug"));
     }
     qDebug()<<"done";
 }
@@ -602,7 +603,7 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
         }
         debug_window->setVisible(true);
         debug_is_enable = true;
-        ui->pushButton_ShowDebug->setText(tr("Hide debug"));
+        ui->pushButton_ShowDebug->setText(tr("Hide debug"));    // in retranslate
     } else {
         debug_window->setVisible(false);
         debug_window->setMinimumHeight(0);

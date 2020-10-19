@@ -44,7 +44,7 @@
       <property name="title">
        <string>Device</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+      <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
        <property name="leftMargin">
         <number>6</number>
        </property>
@@ -347,7 +347,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
 }</string>
       </property>
       <property name="currentIndex">
-       <number>8</number>
+       <number>0</number>
       </property>
       <property name="movable">
        <bool>true</bool>
