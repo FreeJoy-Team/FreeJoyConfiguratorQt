@@ -96,12 +96,16 @@ void ButtonLogical::SetButtonState(bool set_state)
             this->setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
             ui->label_LogicalButtonNumber->setStyleSheet(default_style + "background-color: rgb(0, 128, 0);");
 
-            gEnv.pDebugWindow->LogicalButtonState(button_number_ + 1, true);
+            if (gEnv.pDebugWindow){
+                gEnv.pDebugWindow->LogicalButtonState(button_number_ + 1, true);
+            }
         } else {
             this->setPalette(default_palette);
             ui->label_LogicalButtonNumber->setStyleSheet(default_style);
 
-            gEnv.pDebugWindow->LogicalButtonState(button_number_ + 1, false);
+            if (gEnv.pDebugWindow){
+                gEnv.pDebugWindow->LogicalButtonState(button_number_ + 1, false);
+            }
         }
         current_state_ = set_state;
     }

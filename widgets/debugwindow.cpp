@@ -6,6 +6,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDir>
+
+#include "global.h"
 #include <QDebug>
 
 DebugWindow::DebugWindow(QWidget *parent) :
@@ -93,12 +95,14 @@ void DebugWindow::PrintMsg(const QString &msg)
 
 void DebugWindow::LogicalButtonState(int button_number, bool state)
 {
-    if (state){
-        ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" pressed") + '\n');
-        ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
-    } else {
-        ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" unpressed") + '\n');
-        ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
+    if (gEnv.pDebugWindow){
+        if (state){
+            ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" pressed") + '\n');
+            ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
+        } else {
+            ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ") + QString::number(button_number) + tr(" unpressed") + '\n');
+            ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
+        }
     }
 }
 
