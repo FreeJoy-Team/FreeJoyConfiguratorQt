@@ -137,8 +137,23 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
 }
                                             // GOVNOKOD?
 
-void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number) // mutex     // мб сделать сразу запись в конфиг из пинов
+void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number)              // мб сделать сразу запись в конфиг из пинов
 {                                                                                                               // или отдельный класс для их состояний
+    // signals for another widgets
+    SignalsForWidgets(current_device_enum, previous_device_enum, pin_number);
+
+    // pin type limit           // переизбыток функционала(изи менять в структуре), не думаю, что понадобится в будущем, можно было и захардкодить
+    PinTypeLimit(current_device_enum, previous_device_enum);
+
+    // set current config and generate signals for another widgets
+//    else {
+    SetCurrentConfig(current_device_enum, previous_device_enum, pin_number);
+    //}
+}
+
+
+void PinConfig::SignalsForWidgets(int current_device_enum, int previous_device_enum, int pin_number)
+{
     //fast encoder selected
     if (current_device_enum == FAST_ENCODER){
         emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz
@@ -167,9 +182,10 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
     } else if (previous_device_enum == I2C_SCL){// || previous_device_enum == I2C_SDA){
         emit axesSourceChanged(-2, false);
     }
+}
 
-
-    // pin type limit           // переизбыток функционала(изи менять в структуре), не думаю, что понадобится в будущем, можно было и захардкодить
+void PinConfig::PinTypeLimit(int current_device_enum, int previous_device_enum)
+{
     static int limit_count_array[PIN_TYPE_LIMIT_COUNT]{};
     static bool limit_is_enable[PIN_TYPE_LIMIT_COUNT]{};
 
@@ -213,10 +229,10 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
             }
         }
     }
+}
 
-
-    // set current config and generate signals for another configs
-//    else {
+void PinConfig::SetCurrentConfig(int current_device_enum, int previous_device_enum, int pin_number)
+{
     for (int i = 0; i < SOURCE_COUNT; ++i) {
         for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
             if(source[i].pin_type[j] == 0){
@@ -276,8 +292,8 @@ void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enu
             }
         }
     }
-    //}
 }
+
 
 
 void PinConfig::ResetAllPins()

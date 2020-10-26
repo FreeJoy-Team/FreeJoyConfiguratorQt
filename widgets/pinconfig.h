@@ -57,6 +57,9 @@ private:
     int shift_latch_count_;
     int shift_data_count_;
 
+    void SignalsForWidgets(int current_device_enum, int previous_device_enum, int pin_number);
+    void PinTypeLimit(int current_device_enum, int previous_device_enum);
+    void SetCurrentConfig(int current_device_enum, int previous_device_enum, int pin_number); 
     int axis_sources_;
     int buttons_from_axes_;
     int buttons_from_shift_regs_;
