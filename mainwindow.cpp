@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     // firmware version
     QString str = QString::number(FIRMWARE_VERSION, 16);
     if (str.size() >= 4){
-        this->setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2]);// + "b" + str[3]);
+        this->setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2] + " ("+gEnv.pAppVersion+")");// + "b" + str[3]);
     }
 
     // load application config
