@@ -126,6 +126,10 @@ void HidDevice::processData()
             else if (current_work_ == REPORT_ID_CONFIG_OUT)
             {
                 WriteConfigToDevice(buffer);
+                HidDevicesAdrList.clear();      // очистка спика устройств после записи конфига
+                str_list.clear();               // чтобы небыло бага в имени при выборе устройства
+                no_device_sent = false;         // говнокод
+                hid_free_enumeration(hid_dev_info);
             }
 //            else if (current_work_ == REPORT_ID_FIRMWARE)
 //            {
