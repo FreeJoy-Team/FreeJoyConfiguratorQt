@@ -179,6 +179,11 @@ void AdvancedSettings::WriteToConfig()
             gEnv.pDeviceConfig->config.device_name[i] = '\0';
         }
     }
+#ifdef Q_OS_WIN
+    // remove device name in registry
+    QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
+    QSettings(path.arg(ui->lineEdit_PID->text()), QSettings::NativeFormat).remove("OEMName");
+#endif
     // usb exchange period
     gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_USBExchangePeriod->value();
 }

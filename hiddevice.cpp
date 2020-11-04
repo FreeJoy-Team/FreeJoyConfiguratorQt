@@ -176,7 +176,7 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
                         config_request_buffer[1] += 1;
                         hid_write(handle_read, config_request_buffer, 2);
                         report_count++;
-
+                        qDebug()<<"Config"<<report_count<<"received";
                         if (config_request_buffer[1] > CONFIG_COUNT)
                         {
                             break;
@@ -198,6 +198,12 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
         }
     }
     qDebug()<<"read report_count ="<<report_count<<"/"<<CONFIG_COUNT;
+    if (report_count == CONFIG_COUNT){
+        qDebug() << "All config received";
+    } else {
+        qDebug() << "ERROR, not all config received";
+    }
+
     if (report_count == CONFIG_COUNT) {
         current_work_ = REPORT_ID_JOY;
         emit configReceived(true);
@@ -247,6 +253,7 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
 
                         hid_write(handle_read, config_out_buffer, BUFFSIZE);
                         report_count++;
+                        qDebug()<<"Config"<<report_count<<"sent";
 
                         if (buffer[1] == CONFIG_COUNT){
                             break;
@@ -267,6 +274,12 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
         }
     }
     qDebug()<<"write report_count ="<<report_count<<"/"<<CONFIG_COUNT;
+    if (report_count == CONFIG_COUNT){
+        qDebug() << "All config sent";
+    } else {
+        qDebug() << "ERROR, not all config sent";
+    }
+
     if (report_count == CONFIG_COUNT) {
         current_work_ = REPORT_ID_JOY;
         emit configSent(true);

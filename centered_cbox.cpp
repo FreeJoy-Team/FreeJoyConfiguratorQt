@@ -30,6 +30,6 @@ void CenteredCBox::paintEvent (QPaintEvent * event)
    }
 
    QFontMetricsF font_metric(property("font").value<QFont>());
-   option.rect.setLeft(option.rect.center().x() - arrow_width/2.5 - font_metric.width(option.currentText)/2);
+   option.rect.setLeft(option.rect.center().x() - arrow_width/2.5f - font_metric.width(option.currentText)/2);
    painter.drawControl(QStyle::CE_ComboBoxLabel, option);
 }

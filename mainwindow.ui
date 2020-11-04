@@ -567,7 +567,7 @@ border-bottom: 1px solid rgb(190, 190, 190);
         <property name="geometry">
          <rect>
           <x>410</x>
-          <y>20</y>
+          <y>30</y>
           <width>101</width>
           <height>31</height>
          </rect>
@@ -668,6 +668,16 @@ e
 b
 u
 g</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>200</y>
+          <width>113</width>
+          <height>20</height>
+         </rect>
         </property>
        </widget>
       </widget>

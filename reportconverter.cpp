@@ -2,7 +2,7 @@
 #include <cstring>
 #include "reportconverter.h"
 
-static int reportSuccess = 0;
+//static int reportSuccess = 0;
 
 void ReportConverter::GamepadReport( uint8_t * gamepad_buf)
 {
@@ -208,13 +208,13 @@ std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_
 
 
 
-    if (config_in_cnt == 16) {
-        qDebug() << "All config sent";
-        reportSuccess = 0;
-        //    } else if (config_in_cnt == 16) {
-        //        qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess SEND= " << reportSuccess;
-        //        reportSuccess = 0;
-    }
+//    if (config_in_cnt == 16) {
+//        qDebug() << "All config sent";
+//        reportSuccess = 0;
+//        //    } else if (config_in_cnt == 16) {
+//        //        qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess SEND= " << reportSuccess;
+//        //        reportSuccess = 0;
+//    }
 
     std::vector<uint8_t> vec_buf(64);
     for(int i = 0; i < 64; ++i){
@@ -416,13 +416,13 @@ dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
         break;
     }
 
-    if (hid_buf[1] == 16)
-    {
-        //if (reportSuccess != 16) qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess = " << reportSuccess;
-        //else
-        qDebug() << "All config received";
-        reportSuccess = 0;
-    }
+//    if (hid_buf[1] == 16)
+//    {
+//        //if (reportSuccess != 16) qDebug() << "ERRRROORRR!!!!!!!!!!!!! \nERRRROORRR!!!!!!!!!!!!!\n" << "reportSuccess = " << reportSuccess;
+//        //else
+//        qDebug() << "All config received";
+//        reportSuccess = 0;
+//    }
     return tmp_dev_config;
 }
 
