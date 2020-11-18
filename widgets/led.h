@@ -19,7 +19,7 @@ public:
     explicit LED(int led_number, QWidget *parent = nullptr);
     ~LED();
 
-    int CurrentButtonSelected();
+    int CurrentButtonSelected() const;
 
     void LEDStateChanged(bool set_state);
 
@@ -34,7 +34,7 @@ private:
 
     bool current_state_;
 
-    deviceEnum_guiName_t const led_list_[LED_FUNCTION_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    const deviceEnum_guiName_t led_list_[LED_FUNCTION_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {
         {LED_NORMAL,          tr("Normal")},
         {LED_INVERTED,        tr("Inverted")},

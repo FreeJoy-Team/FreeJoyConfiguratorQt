@@ -14,7 +14,7 @@ AxesConfig::AxesConfig(QWidget *parent) :
     {
         Axes * axis = new Axes(i, this);
         ui->layoutV_Axes->addWidget(axis);
-        AxesAdrList.append(axis);
+        AxesPtrList_.append(axis);
         connect(axis, SIGNAL(a2bCountChanged(int, int)),
                 this, SLOT(a2bCountCalc(int, int)));
     }
@@ -28,8 +28,8 @@ AxesConfig::~AxesConfig()
 void AxesConfig::RetranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < AxesAdrList.size(); ++i) {
-        AxesAdrList[i]->RetranslateUi();
+    for (int i = 0; i < AxesPtrList_.size(); ++i) {
+        AxesPtrList_[i]->RetranslateUi();
     }
 }
 
@@ -41,16 +41,16 @@ void AxesConfig::a2bCountCalc(int count, int previous_count)
 
 void AxesConfig::addOrDeleteMainSource(int source_enum, bool is_add)
 {
-    for (int i = 0; i < AxesAdrList.size(); ++i) {
-        AxesAdrList[i]->AddOrDeleteMainSource(source_enum, is_add);
+    for (int i = 0; i < AxesPtrList_.size(); ++i) {
+        AxesPtrList_[i]->AddOrDeleteMainSource(source_enum, is_add);
     }
 }
 
 void AxesConfig::AxesValueChanged()
 {
-    for (int i = 0; i < AxesAdrList.size(); ++i) {
-        AxesAdrList[i]->UpdateAxisOut();
-        AxesAdrList[i]->UpdateAxisRaw();
+    for (int i = 0; i < AxesPtrList_.size(); ++i) {
+        AxesPtrList_[i]->UpdateAxisOut();
+        AxesPtrList_[i]->UpdateAxisRaw();
     }
 }
 
@@ -58,7 +58,7 @@ void AxesConfig::ReadFromConfig()
 {
     for (int i = 0; i < MAX_AXIS_NUM; i++)
     {
-        AxesAdrList[i]->ReadFromConfig();
+        AxesPtrList_[i]->ReadFromConfig();
     }
 }
 
@@ -66,6 +66,6 @@ void AxesConfig::WriteToConfig()
 {
     for (int i = 0; i < MAX_AXIS_NUM; i++)
     {
-        AxesAdrList[i]->WriteToConfig();
+        AxesPtrList_[i]->WriteToConfig();
     }
 }

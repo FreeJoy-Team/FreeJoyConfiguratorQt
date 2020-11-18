@@ -53,17 +53,17 @@ private slots:
 
 private:
     Ui::Axes *ui;
-    const int kMinA2bButtons = 2;
+    const int kMinA2bButtons_ = 2;
     bool calibration_started_;
     bool output_enabled_;
     int a2b_buttons_count_;
     int axis_number_;
-    const QString start_calibration = tr("Calibrate");    // const? а они переводятся?
-    const QString stop_calibration = tr("Stop && Save");
-    AxesExtended * axes_extend;
+    const QString start_calibration_ = tr("Calibrate");    // const? а они переводятся?
+    const QString stop_calibration_ = tr("Stop && Save");
+    AxesExtended * axes_extend_;
 
 
-    std::vector<int> main_source_enum_index_;
+    QVector<int> main_source_enum_index_;
 
     enum
     {
@@ -103,7 +103,7 @@ private:
     };
 
 
-    std::vector <deviceEnum_guiName_t> axes_pin_list_ =      // любая последовательность, но первые 2 добавляются в конструкторе
+    QVector <deviceEnum_guiName_t> axes_pin_list_ =      // любая последовательность, но первые 2 добавляются в конструкторе
     {{
         {None,     tr("None")},
         {Encoder,  tr("Encoder")},
@@ -140,13 +140,13 @@ private:
         {C15,      "C15"},
     }};
 
-    std::vector <deviceEnum_guiName_t> axis_source_main_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    QVector <deviceEnum_guiName_t> axis_source_main_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {None,          tr("None")},
         {Encoder,       tr("Encoder")},
     }};
 
-    std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h // да бля вынести его уже в глобал
+    QVector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h // да бля вынести его уже в глобал
     {{
         {0,      tr("X")},
         {1,      tr("Y")},

@@ -4,6 +4,8 @@
 *	@author: 	chenwen(chenwen1126@tom.com)
 *	@datetime:  2017-7-25
 *	@history:   V1.0 first edition
+*	@history:  slightly modified by reksotiv https://github.com/Reksotiv 
+*	for https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt
 */
 /*/////////////////////////////////////////////////QDialog///////////////////////////////////////////*/
 QWidget, QFrame,QDialog
@@ -29,203 +31,12 @@ QStatusBar
 	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0.2 #f4f4f4, stop:1 #e4e4e4);/*?????*/
 }
 
-/*/////////////////////////////////////////////////????????///////////////////////////////////////////*/ 
-/*??????*/
-QFrame#window
-{
-	padding:0px;
-	border-width:2px;/*????*/
-	border-style:solid;/*????*/
-	/*??????????????*/
-	border-color:qlineargradient(x1:0, y1:1, x2:0, y2:0, stop:0 #999999, stop:1 #ffffff)/*??????*/
-	  qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #999999, stop:1 #ffffff)/*??????*/
-	  qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #999999, stop:1 #ffffff)/*??????*/
-	  qlineargradient(x1:1, y1:0, x2:0, y2:0, stop:0 #999999, stop:1 #ffffff);/*??????*/
-}
-
-QFrame#dialog,QFrame#messagebox
-{
-	padding:12px;/*?????????padding????????????? ????????QSSDIALOG_SHADOW_WIDTH?12*/
-	border:0px solid #ff0000;/*?????0??????????????de????????????????*/
-}
-
-/*???*/
-QWidget#titlebar
-{
-	min-height:25px;/*?min-height???????*/
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0.2 #e4e4e4, stop:1 #d4d4d4);/*?????*/
-	border-bottom:1px solid #aaaaaa;
-}
-
-QWidget:active#titlebar
-{
-	min-height:25px;/*?min-height???????*/
-	
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0.2 #f4f4f4, stop:1 #e4e4e4);/*?????*/
-	border-bottom:1px solid #aaaaaa;
-}
-
-/*?????*/
-QPushButton#titlebaricon
-{
-	min-width:24px;/*??QPushButton???*/
-	min-height:24px;/*??QPushButton???*/
-	width:24px;/*??*/
-	height:24px;
-	padding:0px;
-	padding-left:2px;
-	padding-right:-2px;
-	background:transparent;/*??????*/
-	border:none;
-}
-
-/*?????*/
-QLabel#titlebartitle
-{
-	padding-left:2px;
-	font-weight:bold;
-	font-size:10pt;
-	color:#222222;
-	background:transparent;
-}
-
-/*???????*/
-QPushButton#titlebarclosebtn
-{
-	padding:0px;
-	padding-right:3px;
-	min-width:39px;
-	min-height:19px;
-	width:39px;
-	height:19px;
-	outline:none;
-	border: none;
-	background:transparent;/*??????*/
-	image:url(:/qss/icon/btn_close_highlight.png);/*btn_close_normal*/
-}
-
-QPushButton#titlebarclosebtn:hover
-{
-	min-width:39px;
-	min-height:19px;
-	width:39px;
-	height:19px;
-	image:url(:/qss/icon/btn_close_highlight.png);
-}
-
-QPushButton#titlebarclosebtn:pressed
-{
-	min-width:39px;
-	min-height:19px;
-	width:39px;
-	height:19px;
-	image:url(:/qss/icon/btn_close_down.png);
-}
-
-/*????????*/
-QPushButton#titlebarminbtn
-{
-	padding:0px;
-	min-width:28px;
-	min-height:19px;
-	width:28px;
-	height:19px;
-	outline:none;
-	border: none;
-	background:transparent;
-	image:url(:/qss/icon/btn_mini_normal.png);
-}
-
-QPushButton#titlebarminbtn:hover
-{
-	min-width:28px;
-	min-height:19px;
-	width:28px;
-	height:19px;
-	image:url(:/qss/icon/btn_mini_highlight.png);
-}
-
-QPushButton#titlebarminbtn:pressed
-{
-	min-width:28px;
-	min-height:19px;
-	width:28px;
-	height:19px;
-	image:url(:/qss/icon/btn_mini_down.png);
-}
-
-/*????????*/
-QPushButton#titlebarmaxbtn
-{
-	padding:0px;
-	padding-bottom:3px;/*???????????????*/
-	border: none;	
-	min-width:25px;
-	min-height:18px;
-	width:25px;
-	height:18px;
-	outline:none;
-	background:transparent;
-	image:url(:/qss/icon/btn_max_normal.png);
-}
-
-QPushButton#titlebarmaxbtn:hover
-{
-	min-width:28px;
-	min-height:19px;
-	width:28px;
-	height:19px;
-	image:url(:/qss/icon/btn_max_highlight.png);
-}
-
-QPushButton#titlebarmaxbtn:pressed
-{
-	min-width:28px;
-	min-height:19px;
-	width:28px;
-	height:19px;
-	image:url(:/qss/icon/btn_max_down.png);
-}
-
-/*???????*/
-QPushButton#titlebarrestorebtn
-{
-	padding:0px;
-	padding-bottom:3px;/*???????????????*/
-	border: none;
-	min-width:25px;
-	min-height:18px;
-	width:25px;
-	height:18px;
-	outline:none;
-	background:transparent;
-	image:url(:/qss/icon/btn_restore_normal.png);
-}
-
-QPushButton#titlebarrestorebtn:hover
-{
-	min-width:28px;
-	min-height:20px;
-	width:28px;
-	height:20px;
-	image:url(:/qss/icon/btn_restore_highlight.png);
-}
-
-QPushButton#titlebarrestorebtn:pressed
-{
-	min-width:28px;
-	min-height:20px;
-	width:28px;
-	height:20px;
-	image:url(:/qss/icon/btn_restore_down.png);
-}
-
 /*/////////////////////////////////////////////////QPushButton///////////////////////////////////////////*/
 /*?QPushButton??????*/
 QPushButton
 {
 	padding:0px 0px;/*??padding?0px ???6px {1,4}?????*/
-	width:40;
+	width:75;
 	height:20;
 	border: 1px solid #aaaaaa;/*??*/
 	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:0.8 #eeeeee);/*?????*/

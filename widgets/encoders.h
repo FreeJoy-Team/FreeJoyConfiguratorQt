@@ -24,8 +24,8 @@ public:
 
     void RetranslateUi();
 
-    int GetInputA();
-    int GetInputB();
+    int GetInputA() const;
+    int GetInputB() const;
 
     void SetInputA(int);
     void SetInputB(int);
@@ -39,7 +39,7 @@ private:
     int input_B_;
     QString not_defined_;
 
-    deviceEnum_guiName_t const encoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    const deviceEnum_guiName_t encoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {
         {ENCODER_CONF_1x,        tr("Encoder 1x")},
         {ENCODER_CONF_2x,        tr("Encoder 2x")},

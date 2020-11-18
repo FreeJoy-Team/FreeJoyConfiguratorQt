@@ -14,7 +14,7 @@ ShiftRegistersConfig::ShiftRegistersConfig(QWidget *parent) :
     {
         ShiftRegisters * shift_register = new ShiftRegisters(i, this);
         ui->layoutV_ShiftRegisters->addWidget(shift_register);
-        ShiftRegistersAdrList.append(shift_register);
+        ShiftRegsPtrList_.append(shift_register);
         //shift_register->hide();
         connect(shift_register, SIGNAL(buttonCountChanged(int, int)),
                 this, SLOT(shiftRegButtonsCalc(int, int)));
@@ -29,8 +29,8 @@ ShiftRegistersConfig::~ShiftRegistersConfig()
 void ShiftRegistersConfig::RetranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < ShiftRegistersAdrList.size(); ++i) {
-        ShiftRegistersAdrList[i]->RetranslateUi();
+    for (int i = 0; i < ShiftRegsPtrList_.size(); ++i) {
+        ShiftRegsPtrList_[i]->RetranslateUi();
     }
 }
 
@@ -69,7 +69,7 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
                 if (latch_pin == latch_pins_array[i].pin_number){
 
                     latch_pins_array[i].pin_number = 0;
-                    latch_pins_array[i].gui_name = ShiftRegistersAdrList[0]->not_defined_;      // hz
+                    latch_pins_array[i].gui_name = ShiftRegsPtrList_[0]->not_defined_;      // hz
                 }
             }
         }
@@ -91,7 +91,7 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
         }
         // update shiftreg ui
         for (uint i = 0; i < latch_pins_array.size() - 1; ++i) {
-            ShiftRegistersAdrList[i]->SetLatchPin(latch_pins_array[i].pin_number, latch_pins_array[i].gui_name);
+            ShiftRegsPtrList_[i]->SetLatchPin(latch_pins_array[i].pin_number, latch_pins_array[i].gui_name);
         }
 
     }
@@ -108,7 +108,7 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
             for (uint i = 0; i < data_pins_array.size(); ++i) {
                 if (data_pin == data_pins_array[i].pin_number){
                     data_pins_array[i].pin_number = 0;
-                    data_pins_array[i].gui_name = ShiftRegistersAdrList[i]->not_defined_;      // hz
+                    data_pins_array[i].gui_name = ShiftRegsPtrList_[i]->not_defined_;      // hz
                 }
             }
         }
@@ -117,7 +117,7 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
         std::stable_sort(data_pins_array.begin(), data_pins_array.end(), SortNullLast);
 
         for (uint i = 0; i < data_pins_array.size() - 1; ++i) {
-            ShiftRegistersAdrList[i]->SetDataPin(data_pins_array[i].pin_number, data_pins_array[i].gui_name);
+            ShiftRegsPtrList_[i]->SetDataPin(data_pins_array[i].pin_number, data_pins_array[i].gui_name);
         }
 
     }
@@ -230,14 +230,14 @@ void ShiftRegistersConfig::shiftRegSelected(int latch_pin, int data_pin, QString
 
 void ShiftRegistersConfig::ReadFromConfig()
 {
-    for (int i = 0; i < ShiftRegistersAdrList.size(); ++i) {
-        ShiftRegistersAdrList[i]->ReadFromConfig();
+    for (int i = 0; i < ShiftRegsPtrList_.size(); ++i) {
+        ShiftRegsPtrList_[i]->ReadFromConfig();
     }
 }
 
 void ShiftRegistersConfig::WriteToConfig()
 {
-    for (int i = 0; i < ShiftRegistersAdrList.size(); ++i) {
-        ShiftRegistersAdrList[i]->WriteToConfig();
+    for (int i = 0; i < ShiftRegsPtrList_.size(); ++i) {
+        ShiftRegsPtrList_[i]->WriteToConfig();
     }
 }

@@ -36,7 +36,5 @@ enum
 	REPORT_ID_FIRMWARE,
 };
 
-#define BUFFSIZE                            64
-#define CONFIG_COUNT                        16
 
 #endif 	/* __COMMON_DEFINES_H__ */

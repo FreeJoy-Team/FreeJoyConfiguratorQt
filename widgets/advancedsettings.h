@@ -28,7 +28,7 @@ public:
 
     void RetranslateUi();
     
-    Flasher* GetFlasher();
+    Flasher* GetFlasher() const;
 
 signals:
     void languageChanged(QString language);
@@ -55,7 +55,7 @@ private slots:
 private:
     Ui::AdvancedSettings *ui;
 
-    void SetStyle(QPushButton* pressed_button, QString file_name, QString style_name, bool is_dark); //hz
+    void SetStyle(QPushButton* pressed_button, QString file_path, QString style_name, bool is_dark); //hz
     
     Flasher* flasher_;
 

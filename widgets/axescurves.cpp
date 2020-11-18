@@ -100,7 +100,7 @@ void AxesCurves::SetCurveProfile(int profile)
 }
 
 
-int AxesCurves::GetPointValue(int point_number)
+int AxesCurves::GetPointValue(int point_number) const
 {
     return ui->widget_AxesCurvesPlot->GetPointValue(point_number);
 }

@@ -32,7 +32,7 @@ private:
     Ui::EncodersConfig *ui;
     void SetUiOnOff();
 
-    QList<Encoders*> EncodersAdrList;
+    QList<Encoders*> EncodersPtrList_;
     int encoders_input_A_count_;
     int encoders_input_B_count_;
     QString not_defined_;
@@ -40,7 +40,7 @@ private:
     int fast_encoder_input_A_;
     int fast_encoder_input_B_;
 
-    deviceEnum_guiName_t const fastEncoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    const deviceEnum_guiName_t fastEncoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {
         {ENCODER_CONF_1x,        tr("Encoder 1x")},
         {ENCODER_CONF_2x,        tr("Encoder 2x")},

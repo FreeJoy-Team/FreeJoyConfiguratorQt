@@ -1,16 +1,14 @@
 #include "pinconfig.h"
 #include "ui_pinconfig.h"
 
-//#include "mousewheelguard.h"
-
 //#include <QtConcurrent/QtConcurrent>
 //#include <QFuture>
 
 #define PINS_IN_GROUP_RANGE 16          // range A0-A15 = 16
-
-PinConfig::PinConfig(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::PinConfig)
+#include <QDebug>
+PinConfig::PinConfig(QWidget *parent) :         // пины - первое, что я начал кодить в конфигураторе и спустя время
+    QWidget(parent),                            // заявляю - это говнокод!1 который даже мне тяжело понять
+    ui(new Ui::PinConfig)                       // мои соболезнования тем кто будет разбираться)
 {
     ui->setupUi(this);
     max_buttons_warning_ = false;
@@ -40,47 +38,51 @@ PinConfig::PinConfig(QWidget *parent) :
 //    ui->label_ControllerImage->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
 
     int number = 1;
-    QString name_template_pinA("widgetPin_PA%1");//QtConcurrent::run()
+    QString name_template_pinA(QStringLiteral("widgetPin_PA%1"));//QtConcurrent::run()
     for(uint8_t i = 0; i < 16; i++) {                   // 16 to PINS_IN_GROUP_RANGE
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinA.arg(i));
         if (pinComboBox != nullptr){
             pin_count_++;
             //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
             pinComboBox->InitializationPins(number++);
-            PinComboBoxPtrList.append(pinComboBox);
+            PinCBoxPtrList_.append(pinComboBox);
         }
     }
     // search and initializate pins PB
-    QString name_template_pinB("widgetPin_PB%1");
+    QString name_template_pinB(QStringLiteral("widgetPin_PB%1"));
     for(uint8_t i = 0; i < 16; i++) {
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinB.arg(i));
         if (pinComboBox != nullptr){
             pin_count_++;
             //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
             pinComboBox->InitializationPins(number++);
-            PinComboBoxPtrList.append(pinComboBox);
+            PinCBoxPtrList_.append(pinComboBox);
         }
     }
     // search and initializate pins PC
-    QString name_template_pinC("widgetPin_PC%1");
+    QString name_template_pinC(QStringLiteral("widgetPin_PC%1"));
     for(uint8_t i = 0; i < 16; i++) {
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinC.arg(i));
         if (pinComboBox != nullptr){
             pin_count_++;
             //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
             pinComboBox->InitializationPins(number++);
-            PinComboBoxPtrList.append(pinComboBox);
+            PinCBoxPtrList_.append(pinComboBox);
         }
     }
 
-    for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-            connect(PinComboBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),       // valgrind сообщает о утечке, но почему?
+    for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
+            connect(PinCBoxPtrList_[i], SIGNAL(valueChangedForInteraction(int, int, int)),       // valgrind сообщает о утечке, но почему?
                         this, SLOT(pinInteraction(int, int, int)));
-            connect(PinComboBoxPtrList[i], SIGNAL(currentIndexChanged(int, int, int)),
+            connect(PinCBoxPtrList_[i], SIGNAL(currentIndexChanged(int, int, int)),
                         this, SLOT(pinIndexChanged(int, int, int)));
     }
     connect(this, SIGNAL(totalButtonsValueChanged(int)),
             this, SLOT(totalButtonsChanged(int)));
+
+    if (pin_count_ != PINS_COUNT){
+        qCritical()<<"pinconfig.cpp pin_count_ != PINS_COUNT";
+    }
 }
 
 PinConfig::~PinConfig()
@@ -91,8 +93,8 @@ PinConfig::~PinConfig()
 void PinConfig::RetranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-        PinComboBoxPtrList[i]->RetranslateUi();
+    for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
+        PinCBoxPtrList_[i]->RetranslateUi();
     }
 }
 
@@ -100,16 +102,17 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
 {
     if (index != NOT_USED)//current_enum_index
     {
-        for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-            for (uint j = 0; j < PinComboBoxPtrList[i]->pin_types_index.size(); ++j) {
-                if (PinComboBoxPtrList[i]->pin_types_index[j] == index)
+        for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
+            for (int j = 0; j < PinCBoxPtrList_[i]->PinTypeIndex().size(); ++j) {
+                if (PinCBoxPtrList_[i]->PinTypeIndex()[j] == index)
                 {
-                    if(PinComboBoxPtrList[i]->interact_count_ == 0){
-                        PinComboBoxPtrList[i]->interact_count_+= pin;
-                        PinComboBoxPtrList[i]->SetIndex_Iteraction(j, sender_index);
+                    if(PinCBoxPtrList_[i]->InteractCount() == 0){
+                        // как-то некрасиво
+                        PinCBoxPtrList_[i]->SetInteractCount(PinCBoxPtrList_[i]->InteractCount() + pin);
+                        PinCBoxPtrList_[i]->SetIndex_Iteraction(j, sender_index);
                     }
-                    else if (PinComboBoxPtrList[i]->is_interacts_ == true){
-                        PinComboBoxPtrList[i]->interact_count_+= pin;
+                    else if (PinCBoxPtrList_[i]->IsInteracts() == true){
+                        PinCBoxPtrList_[i]->SetInteractCount(PinCBoxPtrList_[i]->InteractCount() + pin);
                     }
                 }
             }
@@ -117,17 +120,17 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
     }
     else
     {
-        for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-            if (PinComboBoxPtrList[i]->is_interacts_ == true)
+        for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
+            if (PinCBoxPtrList_[i]->IsInteracts() == true)
             {
-                for (size_t j = 0; j < PinComboBoxPtrList[i]->pin_types_index.size(); ++j) {
-                    if (PinComboBoxPtrList[i]->pin_types_index[j] == sender_index)
+                for (int j = 0; j < PinCBoxPtrList_[i]->PinTypeIndex().size(); ++j) {
+                    if (PinCBoxPtrList_[i]->PinTypeIndex()[j] == sender_index)
                     {
-                        if(PinComboBoxPtrList[i]->interact_count_ > 0){
-                            PinComboBoxPtrList[i]->interact_count_-= pin;
+                        if(PinCBoxPtrList_[i]->InteractCount() > 0){
+                            PinCBoxPtrList_[i]->SetInteractCount(PinCBoxPtrList_[i]->InteractCount() - pin);
                         }
-                        if (PinComboBoxPtrList[i]->interact_count_ <= 0) {
-                            PinComboBoxPtrList[i]->SetIndex_Iteraction(0, sender_index);
+                        if (PinCBoxPtrList_[i]->InteractCount() <= 0) {
+                            PinCBoxPtrList_[i]->SetIndex_Iteraction(0, sender_index);
                         }
                     }
                 }
@@ -135,7 +138,7 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
         }
     }
 }
-                                            // GOVNOKOD?
+
 
 void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number)              // мб сделать сразу запись в конфиг из пинов
 {                                                                                                               // или отдельный класс для их состояний
@@ -156,25 +159,25 @@ void PinConfig::SignalsForWidgets(int current_device_enum, int previous_device_e
 {
     //fast encoder selected
     if (current_device_enum == FAST_ENCODER){
-        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, true);    // hz
+        emit fastEncoderSelected(PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name, true);    // hz
     } else if (previous_device_enum == FAST_ENCODER){
-        emit fastEncoderSelected(PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name, false);    // hz
+        emit fastEncoderSelected(PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name, false);    // hz
     }
     // shift register latch selected
     if (current_device_enum == SHIFT_REG_LATCH){
         shift_latch_count_++;
-        emit shiftRegSelected(pin_number, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+        emit shiftRegSelected(pin_number, 0, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_LATCH){
         shift_latch_count_--;
-        emit shiftRegSelected((pin_number)*-1, 0, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+        emit shiftRegSelected((pin_number)*-1, 0, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
     }
     // shift register data selected
     if (current_device_enum == SHIFT_REG_DATA){
         shift_data_count_++;
-        emit shiftRegSelected(0, pin_number, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+        emit shiftRegSelected(0, pin_number, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
     } else if (previous_device_enum == SHIFT_REG_DATA){
         shift_data_count_--;
-        emit shiftRegSelected(0, (pin_number)*-1, PinComboBoxPtrList[0]->pin_list[pin_number - PA_0].gui_name);    // hz
+        emit shiftRegSelected(0, (pin_number)*-1, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
     }
     // I2C selected
     if (current_device_enum == I2C_SCL){// || current_device_enum == I2C_SDA){
@@ -203,13 +206,13 @@ void PinConfig::PinTypeLimit(int current_device_enum, int previous_device_enum)
         if (limit_count_array[i] >= pin_type_limit_[i].max_count && limit_is_enable[i] == false)
         {
             limit_is_enable[i] = true;
-            for (int j = 0; j < PinComboBoxPtrList.size(); ++j)
+            for (int j = 0; j < PinCBoxPtrList_.size(); ++j)
             {
-                for (size_t k = 0; k < PinComboBoxPtrList[j]->enum_index.size(); ++k) {
-                    if (PinComboBoxPtrList[j]->enum_index[k] == pin_type_limit_[i].device_enum_index &&
-                        PinComboBoxPtrList[j]->GetCurrentDevEnum() != current_device_enum)
+                for (int k = 0; k < PinCBoxPtrList_[j]->EnumIndex().size(); ++k) {
+                    if (PinCBoxPtrList_[j]->EnumIndex()[k] == pin_type_limit_[i].device_enum_index &&
+                        PinCBoxPtrList_[j]->CurrentDevEnum() != current_device_enum)
                     {
-                        PinComboBoxPtrList[j]->SetIndexStatus(int(k), false);
+                        PinCBoxPtrList_[j]->SetIndexStatus(int(k), false);
                     }
                 }
             }
@@ -218,12 +221,12 @@ void PinConfig::PinTypeLimit(int current_device_enum, int previous_device_enum)
         if (limit_is_enable[i] == true && limit_count_array[i] < pin_type_limit_[i].max_count)
         {
             limit_is_enable[i] = false;
-            for (int j = 0; j < PinComboBoxPtrList.size(); ++j)
+            for (int j = 0; j < PinCBoxPtrList_.size(); ++j)
             {
-                for (size_t k = 0; k < PinComboBoxPtrList[j]->enum_index.size(); ++k) {
-                    if (PinComboBoxPtrList[j]->enum_index[k] == pin_type_limit_[i].device_enum_index)
+                for (int k = 0; k < PinCBoxPtrList_[j]->EnumIndex().size(); ++k) {
+                    if (PinCBoxPtrList_[j]->EnumIndex()[k] == pin_type_limit_[i].device_enum_index)
                     {
-                        PinComboBoxPtrList[j]->SetIndexStatus(int(k), true);
+                        PinCBoxPtrList_[j]->SetIndexStatus(int(k), true);
                     }
                 }
             }
@@ -298,8 +301,8 @@ void PinConfig::SetCurrentConfig(int current_device_enum, int previous_device_en
 
 void PinConfig::ResetAllPins()
 {
-    for (int i = 0; i < PinComboBoxPtrList.size(); ++i) {
-        PinComboBoxPtrList[i]->ResetPin();
+    for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
+        PinCBoxPtrList_[i]->ResetPin();
     }
 }
 
@@ -324,7 +327,7 @@ void PinConfig::totalButtonsChanged(int count)
     if (count > MAX_BUTTONS_NUM){
         default_label_style_ = ui->label_TotalButtons->styleSheet();
         //ui->label_TotalButtons->setStyleSheet(default_label_style_ + "background-color: rgb(200, 0, 0);");
-        ui->text_TotalButtons->setStyleSheet(default_label_style_ + "background-color: rgb(200, 0, 0);");
+        ui->text_TotalButtons->setStyleSheet(default_label_style_ + QStringLiteral("background-color: rgb(200, 0, 0);"));
         max_buttons_warning_ = true;
     } else if (max_buttons_warning_ == true){   // && count <= MAX_BUTTONS_NUM
         //ui->label_TotalButtons->setStyleSheet(default_label_style_);
@@ -349,13 +352,13 @@ void PinConfig::totalButtonsChanged(int count)
 
 void PinConfig::ReadFromConfig(){
     for (uint i = 0; i < pin_count_; ++i) {
-        PinComboBoxPtrList[i]->ReadFromConfig(i);
+        PinCBoxPtrList_[i]->ReadFromConfig(i);
     }
 }
 
 void PinConfig::WriteToConfig(){
     for (uint i = 0; i < pin_count_; ++i) {
-        PinComboBoxPtrList[i]->WriteToConfig(i);
+        PinCBoxPtrList_[i]->WriteToConfig(i);
     }
 }
 

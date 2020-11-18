@@ -1082,6 +1082,7 @@ QPushButton {
   color: #F0F0F0;
   border-radius: 4px;
   padding: 3px;
+  width:75;
   outline: none;
   /* Issue #194 - Special case of QPushButton inside dialogs, for better UI */
   min-width: 40px;

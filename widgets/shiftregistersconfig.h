@@ -49,7 +49,7 @@ private:
     std::array <ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> latch_pins_array{};
     std::array <ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> data_pins_array{};
 
-    QList<ShiftRegisters*> ShiftRegistersAdrList;
+    QList<ShiftRegisters*> ShiftRegsPtrList_;
 
 
 };

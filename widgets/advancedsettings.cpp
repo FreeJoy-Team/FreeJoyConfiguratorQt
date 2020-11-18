@@ -48,7 +48,7 @@ void AdvancedSettings::RetranslateUi()
     flasher_->RetranslateUi();
 }
 
-Flasher* AdvancedSettings::GetFlasher()
+Flasher* AdvancedSettings::GetFlasher() const
 {
     return flasher_;
 }
@@ -88,7 +88,7 @@ void AdvancedSettings::on_pushButton_StyleDark_clicked()
     SetStyle(ui->pushButton_StyleDark, ":qdarkstyle/style.qss", "dark", true);
 }
 
-void AdvancedSettings::SetStyle(QPushButton* pressed_button, QString file_name, QString style_name,  bool is_dark)
+void AdvancedSettings::SetStyle(QPushButton* pressed_button, QString file_path, QString style_name,  bool is_dark)
 {
     tmp_text_ = pressed_button->text();
     tmp_style_ = pressed_button->styleSheet();
@@ -98,17 +98,21 @@ void AdvancedSettings::SetStyle(QPushButton* pressed_button, QString file_name, 
     pressed_button->setText(tr("Loading... Please wait"));
     pressed_button->setStyleSheet(tmp_style_ + "color: rgb(230, 230, 230); background-color: rgb(170, 170, 0);");
 
-    // без таймера не успевает отрисовать изменения текста и стиля кнопки, возможно на низкочастотных мониках 10мс не хватит?
-    // отрисовка в другом потоке?
-    QTimer::singleShot(10, [&, pressed_button, file_name, style_name]{
-        QFile f(file_name);
-        if (!f.exists())   {
+    // без таймера не успевает отрисовать изменения текста и стиля кнопки
+    QTimer::singleShot(10, [&, pressed_button, file_path, style_name]{
+        QFile f(file_path);
+        if (!f.open(QFile::ReadOnly | QFile::Text))   {
             qDebug()<<"Unable to set stylesheet, file not found\n";
         }
         else   {
-            f.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&f);
-            qApp->setStyleSheet(ts.readAll());
+            //f.open(QFile::ReadOnly | QFile::Text);
+            //QTextStream ts(&f);
+            //QElapsedTimer timer;
+            //timer.start();
+            //qApp->setStyleSheet(QString::fromLatin1(f.readAll()));
+            qApp->setStyleSheet(QLatin1String(f.readAll()));    // очень долго применяются стили
+            //qDebug()<<timer.restart();                        // и я не знаю как ускорить
+            f.close();
         }
 
         gEnv.pAppSettings->beginGroup("StyleSettings");
@@ -144,6 +148,7 @@ void AdvancedSettings::on_pushButton_Wiki_clicked()
 // about
 void AdvancedSettings::on_pushButton_About_clicked()
 {
+    qDebug()<<ui->pushButton_About->width();
     QString version("<p align=\"center\">FreeJoyConfiguratorQt v" + *gEnv.pAppVersion);    // тупо, надо в дефайне
     QString source("<br> Source code available on <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt\">GutHub</A>");
     QString wiki("<br> Check <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyWiki\">our wiki</A> for detailed instructions.");
@@ -179,11 +184,11 @@ void AdvancedSettings::WriteToConfig()
             gEnv.pDeviceConfig->config.device_name[i] = '\0';
         }
     }
-#ifdef Q_OS_WIN
-    // remove device name in registry
-    QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
-    QSettings(path.arg(ui->lineEdit_PID->text()), QSettings::NativeFormat).remove("OEMName");
-#endif
+//#ifdef Q_OS_WIN
+//    // remove device name in registry
+//    QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
+//    QSettings(path.arg(ui->lineEdit_PID->text()), QSettings::NativeFormat).remove("OEMName");
+//#endif
     // usb exchange period
     gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_USBExchangePeriod->value();
 }

@@ -16,6 +16,7 @@ void HidDevice::processData()
     int res = 0;
     bool change = false;
     bool no_device_sent = false;
+    //bool name_checked = false;
     flasher_ = nullptr;
     QList<hid_device_info*> tmp_HidDevicesAdrList;
     hid_device_info* hid_dev_info;
@@ -41,6 +42,7 @@ void HidDevice::processData()
                 HidDevicesAdrList.clear();
                 emit hidDeviceList(&str_list);
                 no_device_sent = true;
+                //name_checked = false;
             }
 
             while(hid_dev_info)
@@ -89,6 +91,7 @@ void HidDevice::processData()
                 handle_read = hid_open(VID, HidDevicesAdrList[0]->product_id,nullptr);
             }
             if (!handle_read) {
+                //name_checked = false;
                 emit putDisconnectedDeviceInfo();
                 //hid_free_enumeration(hid_dev_info);
                 QThread::msleep(300);
@@ -99,6 +102,20 @@ void HidDevice::processData()
         // device connected
         if (handle_read)
         {
+
+//            if (name_checked == false)
+//            {
+//                for (int i = 0; i < str_list.size(); ++i){
+//                    if (str_list[i] == ""){
+//                        qDebug()<<"No product string, repeat";
+//                        str_list[i] =QString::fromWCharArray(HidDevicesAdrList[i]->product_string);
+//                        emit hidDeviceList(&str_list);
+//                        //qDebug()<<QString::fromWCharArray(str);
+//                    }
+//                }
+//                name_checked = true;
+//            }
+
             // read joy report
             if (current_work_ == REPORT_ID_JOY)
             {
@@ -110,10 +127,7 @@ void HidDevice::processData()
                     if (buffer[0] == REPORT_ID_JOY) {   // перестраховка
                         memset(device_buffer_, 0, BUFFSIZE);
                         memcpy(device_buffer_, buffer, BUFFSIZE);
-                        emit putGamepadPacket(device_buffer_);      // можно и не передавать а тут записывать!!!
-                                            // и здесь же сделать задержку на обновление
-
-                        //QThread::msleep(5);            // хз почему даже 5мс тормозит обновление интерфейса(или отправку сигнала?) на ~100мс
+                        emit putGamepadPacket(device_buffer_);
                     }
                 }
             }
@@ -126,10 +140,10 @@ void HidDevice::processData()
             else if (current_work_ == REPORT_ID_CONFIG_OUT)
             {
                 WriteConfigToDevice(buffer);
-                HidDevicesAdrList.clear();      // очистка спика устройств после записи конфига
-                str_list.clear();               // чтобы небыло бага в имени при выборе устройства
-                no_device_sent = false;         // говнокод
-                hid_free_enumeration(hid_dev_info);
+//                HidDevicesAdrList.clear();      // очистка спика устройств после записи конфига
+//                str_list.clear();               // чтобы небыло бага в имени при выборе устройства
+//                no_device_sent = false;         // говнокод
+//                hid_free_enumeration(hid_dev_info);
             }
 //            else if (current_work_ == REPORT_ID_FIRMWARE)
 //            {
@@ -451,7 +465,7 @@ bool HidDevice::EnterToFlashMode()
 
 // another device selected in comboBox
 void HidDevice::SetSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
-{                                                           // только в винде. решил костылём в hidapi.c Qwe();
+{                                                           // только в винде. решил костылём в hidapi.c
     if (device_number < 0){
         //device_number = 0;
         return;
@@ -470,7 +484,8 @@ void HidDevice::SetSelectedDevice(int device_number)        // заблочит�
 //        emit putConnectedDeviceInfo();
 //    }
 #ifdef _WIN32
-    qDebug()<<"Unsuccessful attempts ="<<Qwe();
+    qDebug()<<"Unsuccessful serial number attempts ="<<GetSerialNumberAttemption()<<"(not a error)";
+    qDebug()<<"Unsuccessful product string attempts ="<<GetProductStrAttemption()<<"(not a error)";
 #endif
     qDebug()<<"HID opened";
 }

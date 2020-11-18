@@ -30,12 +30,12 @@ void Encoders::RetranslateUi()
     ui->retranslateUi(this);
 }
 
-int Encoders::GetInputA()
+int Encoders::GetInputA() const
 {
     return input_A_;
 }
 
-int Encoders::GetInputB()
+int Encoders::GetInputB() const
 {
     return input_B_;
 }

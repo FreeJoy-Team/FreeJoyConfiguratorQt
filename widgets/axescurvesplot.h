@@ -26,7 +26,7 @@ public:
     ~AxesCurvesPlot();
 
     int GetPointValue(int point_number);
-    int GetPointCount();
+    int GetPointCount() const;
 
     void SetPointValue(int point_number, int value);
 
@@ -54,17 +54,17 @@ protected:
 
 private:
     Ui::AxesCurvesPlot *ui;
-    int CalcPointValue(int current_pos);
-    int CalcPointPos(int value);
-    int CalcPointPosX(int value_x);
+    int CalcPointValue(int current_pos) const;
+    int CalcPointPos(int value) const;
+    int CalcPointPosX(int value_x) const;
     void MovePoint(int pos_y, int point_number);
     void UpdateLabelPos();
 
-    const int offset_ = 20;//20
-    const int columns_count_ = 10;
-    const int rows_count_ = 10;
-    const int radius_ = 16;
-    const int label_width_ = 20;
+    const int kOffset_ = 20;//20
+    const int kColumnsCount_ = 10;
+    const int kRowsCount_ = 10;
+    const int kRadius_ = 16;
+    const int kLabelWidth_ = 20;
     bool is_device_connect_;
 
     float column_width_;
@@ -72,16 +72,16 @@ private:
     int width_, height_;
     int half_radius_;
 
-    const int max_point_value = CURVES_MAX_VALUE;
-    const int min_point_value = CURVES_MIN_VALUE;
+    const int kMaxPointValue_ = CURVES_MAX_VALUE;
+    const int kMinPointValue_ = CURVES_MIN_VALUE;
 
     int points_count_;
 
-    QColor const point_current_pos_color_ = QColor(190,0,0,200);
-    QColor const point_inactive_color_ = QColor(1,119,215);
-    QColor const point_active_color_ = Qt::black;
-    QColor const point_move_color_ = Qt::lightGray;
-    QColor const curve_color_ = QColor(1,119,215);
+    const QColor kPointCurrentPosColor_ = QColor(190,0,0,200);
+    const QColor kPointInactiveColor_ = QColor(1,119,215);
+    const QColor kPointActiveColor_ = Qt::black;
+    const QColor kPointMoveColor_ = Qt::lightGray;
+    const QColor kCurveColor_ = QColor(1,119,215);
 
     bool point_active_;
 
@@ -92,7 +92,7 @@ private:
         int posX;
         int posY;
     };
-    AxesCurve_currentPos cur_axis_pos;
+    AxesCurve_currentPos cur_axis_pos_;
 
     struct AxesCurve_point
     {
@@ -104,8 +104,8 @@ private:
         bool is_drag;
         //QLabel text_label;
     };
-     QList<AxesCurve_point*> PointAdrList;
-     QList<QLabel*> LabelAdrList;
+     QList<AxesCurve_point*> PointPtrList_;
+     QList<QLabel*> LabelPtrList_;
 };
 
 #endif // AXESCURVESPLOT_H

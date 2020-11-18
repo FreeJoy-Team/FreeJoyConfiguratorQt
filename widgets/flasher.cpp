@@ -75,7 +75,7 @@ void Flasher::on_pushButton_FlashFirmware_clicked()
 }
 
 
-const QByteArray* Flasher::GetFileArray()
+const QByteArray* Flasher::GetFileArray() const
 {
     return &file_array_;
 }

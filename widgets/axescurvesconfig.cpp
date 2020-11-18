@@ -14,20 +14,20 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
     {
         AxesCurves * axis_curves = new AxesCurves(i, this);
         ui->layoutV_AxesCurves->addWidget(axis_curves);
-        AxesCurvAdrList.append(axis_curves);
+        AxesCurvPtrList_.append(axis_curves);
 
-        connect(AxesCurvAdrList[i], SIGNAL(curvePointValueChanged(int, int, int)),
+        connect(AxesCurvPtrList_[i], SIGNAL(curvePointValueChanged(int, int, int)),
                 this, SLOT(setCurvesValue(int, int, int)));
 
     }
     // profiles
     // тупо сделал, надо было делать отдельный виджет для профилей и спавнить в коде, а не в дизайнере.
     // переделаю, если функционал профилей потребуется изменить
-    ProfilesCombBoxPtrList = ui->groupBox_Profiles->findChildren<QComboBox *> ();
-    for (int i = 0; i < ProfilesCombBoxPtrList.size(); ++i) {
-        ProfilesCombBoxPtrList[i]->addItems(curves_list_);
+    ProfilesCBoxPtrList_ = ui->groupBox_Profiles->findChildren<QComboBox *> ();
+    for (int i = 0; i < ProfilesCBoxPtrList_.size(); ++i) {
+        ProfilesCBoxPtrList_[i]->addItems(curves_list_);
 
-        connect(ProfilesCombBoxPtrList[i], SIGNAL(currentIndexChanged(int)),
+        connect(ProfilesCBoxPtrList_[i], SIGNAL(currentIndexChanged(int)),
                 this, SLOT(profileIndexChanged(int)));
     }
 
@@ -62,27 +62,27 @@ AxesCurvesConfig::~AxesCurvesConfig()
 
 void AxesCurvesConfig::SetDarkInterface(bool is_dark)
 {
-    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
-        AxesCurvAdrList[i]->SetDarkIcon(is_dark);
+    for (int i = 0; i < AxesCurvPtrList_.size(); ++i) {
+        AxesCurvPtrList_[i]->SetDarkIcon(is_dark);
     }
 }
 
 void AxesCurvesConfig::RetranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
-        AxesCurvAdrList[i]->RetranslateUi();
+    for (int i = 0; i < AxesCurvPtrList_.size(); ++i) {
+        AxesCurvPtrList_[i]->RetranslateUi();
     }
 }
 
 void AxesCurvesConfig::setCurvesValue(int axis_number, int point_number, int value)    // дать указатель на AxesCurvAdrList кривым и не придутся туда-сюда гонять?
 {                                                                               // для одного потока норм и быстрее, но хз
-    for (int i = 0; i < AxesCurvAdrList.size(); i++)
+    for (int i = 0; i < AxesCurvPtrList_.size(); i++)
     {
-        if (ProfilesCombBoxPtrList[axis_number]->currentIndex() == ProfilesCombBoxPtrList[i]->currentIndex())
+        if (ProfilesCBoxPtrList_[axis_number]->currentIndex() == ProfilesCBoxPtrList_[i]->currentIndex())
         {
-            curves_points_value_ [ProfilesCombBoxPtrList[i]->currentIndex() - 1] [point_number] = value;
-            AxesCurvAdrList[i]->SetPointValue(point_number, value);
+            curves_points_value_ [ProfilesCBoxPtrList_[i]->currentIndex() - 1] [point_number] = value;
+            AxesCurvPtrList_[i]->SetPointValue(point_number, value);
         }
     }
 }
@@ -90,18 +90,18 @@ void AxesCurvesConfig::setCurvesValue(int axis_number, int point_number, int val
 void AxesCurvesConfig::profileIndexChanged(int index)
 {
     int axis_number = 0;
-    while (axis_number < ProfilesCombBoxPtrList.size())
+    while (axis_number < ProfilesCBoxPtrList_.size())
     {
-        if (sender() == ProfilesCombBoxPtrList[axis_number]){
+        if (sender() == ProfilesCBoxPtrList_[axis_number]){
             break;
         }
         ++axis_number;
     }
 
-    AxesCurvAdrList[axis_number]->SetCurveProfile(index);
+    AxesCurvPtrList_[axis_number]->SetCurveProfile(index);
     if (index > 0){
         for (int i = 0; i < CURVE_PLOT_POINTS_COUNT; ++i) {
-            AxesCurvAdrList[axis_number]->SetPointValue(i, curves_points_value_ [index - 1] [i]);
+            AxesCurvPtrList_[axis_number]->SetPointValue(i, curves_points_value_ [index - 1] [i]);
         }
     }
 }
@@ -114,54 +114,54 @@ void AxesCurvesConfig::on_pushButton_ResetProfiles_clicked()
         }
     }
 
-    for (int i = 0; i < ProfilesCombBoxPtrList.size(); i++)
+    for (int i = 0; i < ProfilesCBoxPtrList_.size(); i++)
     {
-        if (ProfilesCombBoxPtrList[i]->currentIndex() > 0)
+        if (ProfilesCBoxPtrList_[i]->currentIndex() > 0)
         {
             for (int j = 0; j < CURVE_PLOT_POINTS_COUNT; ++j) {
-                AxesCurvAdrList[i]->SetPointValue(j, curves_points_value_ [0] [j]); // AxesCurvAdrList[i]->GetCurrentCurveIndex() вместо 0 ?
+                AxesCurvPtrList_[i]->SetPointValue(j, curves_points_value_ [0] [j]); // AxesCurvAdrList[i]->GetCurrentCurveIndex() вместо 0 ?
             }
         }
     }
-    for (int i = 0; i < ProfilesCombBoxPtrList.size(); ++i) {
-        ProfilesCombBoxPtrList[i]->setCurrentIndex(0);
+    for (int i = 0; i < ProfilesCBoxPtrList_.size(); ++i) {
+        ProfilesCBoxPtrList_[i]->setCurrentIndex(0);
     }
 }
 
 
 void AxesCurvesConfig::UpdateAxesCurves()
 {
-    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
-        AxesCurvAdrList[i]->UpdateAxis();
+    for (int i = 0; i < AxesCurvPtrList_.size(); ++i) {
+        AxesCurvPtrList_[i]->UpdateAxis();
     }
 }
 
 void AxesCurvesConfig::DeviceStatus(bool is_connect)
 {
-    for (int i = 0; i < AxesCurvAdrList.size(); ++i)
+    for (int i = 0; i < AxesCurvPtrList_.size(); ++i)
     {
         if (gEnv.pDeviceConfig->config.axis_config[i].source_main != -1 && gEnv.pDeviceConfig->config.axis_config[i].out_enabled == 1){   // -1 = None
-            AxesCurvAdrList[i]->DeviceStatus(is_connect);
+            AxesCurvPtrList_[i]->DeviceStatus(is_connect);
         } else {
-            AxesCurvAdrList[i]->DeviceStatus(false);
+            AxesCurvPtrList_[i]->DeviceStatus(false);
         }
     }
 }
 
 void AxesCurvesConfig::ReadFromConfig()
 {
-    for (int i = 0; i < ProfilesCombBoxPtrList.size(); ++i) {
-        ProfilesCombBoxPtrList[i]->setCurrentIndex(0);
+    for (int i = 0; i < ProfilesCBoxPtrList_.size(); ++i) {
+        ProfilesCBoxPtrList_[i]->setCurrentIndex(0);
     }
 
-    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
-        AxesCurvAdrList[i]->ReadFromConfig();
+    for (int i = 0; i < AxesCurvPtrList_.size(); ++i) {
+        AxesCurvPtrList_[i]->ReadFromConfig();
     }
 }
 
 void AxesCurvesConfig::WriteToConfig()
 {
-    for (int i = 0; i < AxesCurvAdrList.size(); ++i) {
-        AxesCurvAdrList[i]->WriteToConfig();
+    for (int i = 0; i < AxesCurvPtrList_.size(); ++i) {
+        AxesCurvPtrList_[i]->WriteToConfig();
     }
 }

@@ -3,7 +3,7 @@
 # ATTRS{idProduct}=="5757" - if none = all PID
 
 # HIDAPI/hidraw
-KERNEL=="hidraw*", ATTRS{idVendor}=="0483", MODE="0666"
+KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5757", MODE="0666"
 
 # Once done, optionally rename this file for your device, and drop it into
 # /etc/udev/rules.d and unplug and re-plug your device. This is all that is

@@ -42,7 +42,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-int Qwe();
+int GetSerialNumberAttemption();
+int GetProductStrAttemption();
 		struct hid_device_;
 		typedef struct hid_device_ hid_device; /**< opaque hidapi structure */
 

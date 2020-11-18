@@ -19,7 +19,7 @@ public:
 
     void DeviceConnected(bool is_connect);
 
-    const QByteArray* GetFileArray();
+    const QByteArray* GetFileArray() const;
     
 signals:
     void flashModeClicked(bool is_start_flash);

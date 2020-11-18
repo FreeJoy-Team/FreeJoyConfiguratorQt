@@ -2,6 +2,7 @@
 #include <cstring>
 #include "reportconverter.h"
 
+
 //static int reportSuccess = 0;
 
 void ReportConverter::GamepadReport( uint8_t * gamepad_buf)
@@ -18,7 +19,7 @@ void USB_CUSTOM_HID_SendReport(uint8_t * dummy, uint8_t dummy2){
     Q_UNUSED(dummy2)
 }
 
-//std::vector<uint8_t>
+/////////////////////////  temporarily, for combining with the old configurator  ////////////////////////////
 std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_number)      // СНЕСТИ И ЗАБЫТЬ// ***1111111*
 {
     dev_config_t tmp_dev_config{};                                         // !!!!!!!!!!
@@ -225,7 +226,7 @@ std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_
 }
 
 
-///////////////////////////////////////////////           !!!!!!!!!!!!!!!!           ///////////////////////////////
+///////////////////////////////////////////////  temporarily, for combining with the old configurator  ///////////////////////////////
 
 uint16_t pos_test = 0;
 dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)

@@ -9,6 +9,9 @@
 
 #include <QObject>
 
+#define BUFFSIZE                            64
+#define CONFIG_COUNT                        16
+
 class HidDevice : public QObject
 {
     Q_OBJECT
@@ -43,7 +46,7 @@ signals:
     void flashStatus(int status, int percent);
 
 private:
-    hid_device_ *handle_read;
+    hid_device *handle_read;
     bool is_finish_ = false;
     int selected_device_;
     int current_work_;

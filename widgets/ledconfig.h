@@ -31,7 +31,7 @@ public slots:
 private:
     Ui::LedConfig *ui;
 
-    QList<LED*> LEDAdrList;
+    QList<LED*> LEDPtrList_;
     int current_led_count_;
 };
 

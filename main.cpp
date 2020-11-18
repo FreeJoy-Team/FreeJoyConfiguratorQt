@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QElapsedTimer>
+#include <QDebug>
 
 // global environment
 #include "global.h"
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // global
-    QString app_version = "0.5.2";     // тупо, надо в дефайне?
+    QString app_version = "0.5.4";     // тупо, надо в дефайне?
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     DeviceConfig device_config;
 
@@ -65,7 +66,7 @@ int main(int argc, char *argv[])
     {
         QFile f(":/styles/default.qss");
         if (!f.exists())   {
-            printf("Unable to set stylesheet, file not found\n");
+            qDebug()<<"Unable to set stylesheet, file not found\n";
         }
         else   {
             f.open(QFile::ReadOnly | QFile::Text);
@@ -77,7 +78,7 @@ int main(int argc, char *argv[])
     {
         QFile f(":qss/qss.qss");
         if (!f.exists())   {
-            printf("Unable to set stylesheet, file not found\n");
+            qDebug()<<"Unable to set stylesheet, file not found\n";
         }
         else   {
             f.open(QFile::ReadOnly | QFile::Text);
@@ -89,7 +90,7 @@ int main(int argc, char *argv[])
     {
         QFile f(":qdarkstyle/style.qss");
         if (!f.exists())   {
-            printf("Unable to set stylesheet, file not found\n");
+            qDebug()<<"Unable to set stylesheet, file not found\n";
         }
         else   {
             f.open(QFile::ReadOnly | QFile::Text);
@@ -97,7 +98,7 @@ int main(int argc, char *argv[])
             qApp->setStyleSheet(ts.readAll());
         }
     }
-
+    qDebug()<<"main start ="<< gEnv.pApp_start_time->elapsed() << "ms";
     MainWindow w;
     w.show();
 

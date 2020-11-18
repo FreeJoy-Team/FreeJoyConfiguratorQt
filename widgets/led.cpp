@@ -24,7 +24,7 @@ void LED::RetranslateUi()
     ui->retranslateUi(this);
 }
 
-int LED::CurrentButtonSelected()
+int LED::CurrentButtonSelected() const
 {
     return ui->spinBox_InputNumber->value() - 1;
 }

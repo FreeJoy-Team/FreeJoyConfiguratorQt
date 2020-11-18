@@ -137,6 +137,9 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
         <property name="correctionMode">
          <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
         </property>

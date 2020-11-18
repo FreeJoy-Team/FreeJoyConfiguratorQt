@@ -26,7 +26,7 @@ EncodersConfig::EncodersConfig(QWidget *parent) :
     {
         Encoders * encoder = new Encoders(i, this);
         ui->layoutV_Encoders->addWidget(encoder);
-        EncodersAdrList.append(encoder);
+        EncodersPtrList_.append(encoder);
         //encoder->hide();
     }
 }
@@ -39,8 +39,8 @@ EncodersConfig::~EncodersConfig()
 void EncodersConfig::RetranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < EncodersAdrList.size(); ++i) {
-        EncodersAdrList[i]->RetranslateUi();
+    for (int i = 0; i < EncodersPtrList_.size(); ++i) {
+        EncodersPtrList_[i]->RetranslateUi();
     }
 }
 
@@ -91,17 +91,17 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
         encoders_input_A_count_++;
         for (int i = 0; i < encoders_input_A_count_; ++i)
         {
-            if (encoder_A < EncodersAdrList[i]->GetInputA() || EncodersAdrList[i]->GetInputA() == 0)    // encoder_A != 0 && ( legacy
+            if (encoder_A < EncodersPtrList_[i]->GetInputA() || EncodersPtrList_[i]->GetInputA() == 0)    // encoder_A != 0 && ( legacy
             {
-                if (EncodersAdrList[i]->GetInputA() != 0)
+                if (EncodersPtrList_[i]->GetInputA() != 0)
                 {
-                    tmp_add = EncodersAdrList[i]->GetInputA();
-                    EncodersAdrList[i]->SetInputA(encoder_A);
+                    tmp_add = EncodersPtrList_[i]->GetInputA();
+                    EncodersPtrList_[i]->SetInputA(encoder_A);
                     encoder_A = tmp_add;
                 }
-                else if (EncodersAdrList[i]->GetInputA() == 0)
+                else if (EncodersPtrList_[i]->GetInputA() == 0)
                 {
-                    EncodersAdrList[i]->SetInputA(encoder_A);
+                    EncodersPtrList_[i]->SetInputA(encoder_A);
                 }
             }
         }
@@ -112,12 +112,12 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
         encoder_A = -encoder_A;
         for (int i = 0; i < encoders_input_A_count_; ++i)
         {
-            if (EncodersAdrList[i]->GetInputA() == encoder_A)   //encoder_A != 0 && (
+            if (EncodersPtrList_[i]->GetInputA() == encoder_A)   //encoder_A != 0 && (
             {
                 for (int j = i; j < encoders_input_A_count_; ++j)
                 {
-                    tmp_delete = EncodersAdrList[j+1]->GetInputA();
-                    EncodersAdrList[j]->SetInputA(EncodersAdrList[j+1]->GetInputA());
+                    tmp_delete = EncodersPtrList_[j+1]->GetInputA();
+                    EncodersPtrList_[j]->SetInputA(EncodersPtrList_[j+1]->GetInputA());
                     encoder_A = tmp_delete;
                 }
                 break;
@@ -133,17 +133,17 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
 
         for (int i = 0; i < encoders_input_B_count_; ++i)
         {
-            if (encoder_B < EncodersAdrList[i]->GetInputB() || EncodersAdrList[i]->GetInputB() == 0)        //encoder_B != 0 && (
+            if (encoder_B < EncodersPtrList_[i]->GetInputB() || EncodersPtrList_[i]->GetInputB() == 0)        //encoder_B != 0 && (
             {
-                if (EncodersAdrList[i]->GetInputB() != 0)
+                if (EncodersPtrList_[i]->GetInputB() != 0)
                 {
-                    tmp_add = EncodersAdrList[i]->GetInputB();
-                    EncodersAdrList[i]->SetInputB(encoder_B);
+                    tmp_add = EncodersPtrList_[i]->GetInputB();
+                    EncodersPtrList_[i]->SetInputB(encoder_B);
                     encoder_B = tmp_add;
                 }
-                else if (EncodersAdrList[i]->GetInputB() == 0)
+                else if (EncodersPtrList_[i]->GetInputB() == 0)
                 {
-                    EncodersAdrList[i]->SetInputB(encoder_B);
+                    EncodersPtrList_[i]->SetInputB(encoder_B);
                 }
             }
         }
@@ -154,12 +154,12 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // Ð
         encoder_B = -encoder_B;
         for (int i = 0; i < encoders_input_B_count_; ++i)
         {
-            if (EncodersAdrList[i]->GetInputB() == encoder_B)       //encoder_B != 0 &&
+            if (EncodersPtrList_[i]->GetInputB() == encoder_B)       //encoder_B != 0 &&
             {
                 for (int j = i; j < encoders_input_B_count_; ++j)
                 {
-                    tmp_delete = EncodersAdrList[j+1]->GetInputB();
-                    EncodersAdrList[j]->SetInputB(EncodersAdrList[j+1]->GetInputB());
+                    tmp_delete = EncodersPtrList_[j+1]->GetInputB();
+                    EncodersPtrList_[j]->SetInputB(EncodersPtrList_[j+1]->GetInputB());
                     encoder_B = tmp_delete;
                 }
                 break;
@@ -175,7 +175,7 @@ void EncodersConfig::ReadFromConfig()
 
     for (int i = 0; i < MAX_ENCODERS_NUM - FAST_ENCODER_COUNT; i++)
     {
-        EncodersAdrList[i]->ReadFromConfig();
+        EncodersPtrList_[i]->ReadFromConfig();
     }
 }
 
@@ -184,6 +184,6 @@ void EncodersConfig::WriteToConfig()
     gEnv.pDeviceConfig->config.encoders[0] = ui->comboBox_EncoderType->currentIndex() + 1;      // + 1 - fast encoder without ENCODER_CONF_1x
     for (int i = 0; i < MAX_ENCODERS_NUM - FAST_ENCODER_COUNT; i++)
     {
-        EncodersAdrList[i]->WriteToConfig();
+        EncodersPtrList_[i]->WriteToConfig();
     }
 }

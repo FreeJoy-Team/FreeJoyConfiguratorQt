@@ -3,29 +3,14 @@
 #include <QEvent>
 #include <QWidget>
 
-//#include <QResizeEvent>
-//bool FilterObject::eventFilter(QObject *watched, QEvent *event) {
-//    if(watched!=target){//checks for correct target object.
-//        return false;
-//    }
-//    if(event->type()!=QEvent::Resize){//and correct event
-//        return false;
-//    }
-
-//    QResizeEvent *resEvent = static_cast<QResizeEvent*>(event);//then sets correct event type
-
-//    goalHeight = 7*resEvent->size().width()/3;//calculates height, 7/3 of width in my case
-//    if(target->height()!=goalHeight){
-//        target->setFixedHeight(goalHeight);
-//    }
-
-//    return true;
-//};
 
 MouseWheelGuard::MouseWheelGuard(QObject *parent) : QObject(parent)
 {
 }
 
+// protection against the mouse wheel if the widget is not setFocusPolicy(Qt::WheelFocus)
+// без протекта можно при прокручивании страницы случайно навести на комбобокс и изменить его колесом мыши
+// при установке setFocusPolicy(Qt::StrongFocus) и протекта на комбобокс придётся нажать, для прокручивания колесом
 bool MouseWheelGuard::eventFilter(QObject *o, QEvent *e)
 {
     const QWidget* widget = static_cast<QWidget*>(o);

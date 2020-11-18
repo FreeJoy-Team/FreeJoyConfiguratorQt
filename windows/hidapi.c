@@ -296,9 +296,13 @@ int HID_API_EXPORT hid_exit(void)
 	return 0;
 }
 
-int qwe = 0;
-int Qwe(){
-    return qwe;
+static int serial_number_attemption = 0;
+static int product_str_attemption = 0;
+int GetSerialNumberAttemption(){
+    return serial_number_attemption;
+}
+int GetProductStrAttemption(){
+    return product_str_attemption;
 }
 
 struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned short vendor_id, unsigned short product_id)
@@ -486,7 +490,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned shor
                     cur_dev->serial_number = _wcsdup(wstr);
                 }
                 if (cur_dev->serial_number == NULL){
-                    qwe++;
+                    serial_number_attemption++;
                 } else {
                     break;
                 }
@@ -508,7 +512,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned shor
 //				cur_dev->product_string = _wcsdup(wstr);
 //			}
 
-            for (int kk = 0; kk < 10; ++kk){
+            for (int kk = 0; kk < 10; ++kk){ //10
                 /* Product String */
                 wstr[0]= 0x0000;
                 res = HidD_GetProductString(write_handle, wstr, sizeof(wstr));
@@ -517,7 +521,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned shor
                     cur_dev->product_string = _wcsdup(wstr);
                 }
                 if (cur_dev->product_string == NULL){
-                    qwe++;
+                    product_str_attemption++;
                 } else {
                     break;
                 }

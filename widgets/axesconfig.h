@@ -40,7 +40,7 @@ private:
     Ui::AxesConfig *ui;
     int a2b_buttons_count_;
 
-    QList<Axes*> AxesAdrList;
+    QList<Axes*> AxesPtrList_;
 };
 
 #endif // AXESCONFIG_H

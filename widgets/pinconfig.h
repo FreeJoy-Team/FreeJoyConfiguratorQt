@@ -49,7 +49,7 @@ private:
     //! 0 if no pins
     uint pin_count_;    // пинов всегда 30, бесполезная хрень
     //! PinComboBox widget list
-    QList<PinComboBox *> PinComboBoxPtrList;
+    QList<PinComboBox *> PinCBoxPtrList_;
 
     QString default_label_style_;
     bool max_buttons_warning_;

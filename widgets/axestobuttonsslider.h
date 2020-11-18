@@ -26,10 +26,10 @@ public:
     ~AxesToButtonsSlider();
 
     void SetPointsCount(uint count);
-    uint GetPointsCount();
+    uint GetPointsCount() const;
 
     void SetPointValue(uint value, uint point_number);
-    uint GetPointValue(uint point_number);
+    uint GetPointValue(uint point_number) const;
 
     void SetAxisOutputValue(int out_value, bool is_enable);
 
@@ -45,7 +45,7 @@ private:
     Ui::AxesToButtonsSlider *ui;
     void DrawPoint(QPoint point_pos, uint range_points);
     void MovePointer(uint pos_x, uint point_number);
-    uint CalcPointValue(int current_pos);
+    uint CalcPointValue(int current_pos) const;
     void PointsPositionReset();
     void SetLableValue(int point_pos ,uint point_number);
 
@@ -55,32 +55,32 @@ private:
     int axis_output_width_;
     bool is_out_enabled_;
 
-    const QColor kAxisRectColor = QColor(160, 0, 0);
-    const QColor kAxisRectColor_dis = QColor(160, 0, 0, 80);
-    const QColor kPointRawActivColor = QColor(0, 170, 0);
+    const QColor kAxisRectColor_ = QColor(160, 0, 0);
+    const QColor kAxisRectColor_dis_ = QColor(160, 0, 0, 80);
+    const QColor kPointRawActivColor_ = QColor(0, 170, 0);
     QColor axis_rect_color_;
 
-    const int half_pointer_width = 4;
+    const int kHalfPointerWidth_ = 4;
 
-    const QColor pointer_color_ = QColor(1,119,215);
-    const uint max_point_value_ = 255;
-    const int offset_ = 10;
-    const int range_between_ = 13;  // минимальное расстояние между ближайшими указателями
-    const int label_width_ = 20;
-    const int kMinHeight_ = 40;//45  // переименовать константы в такой стиль
+    const QColor kPointerColor_ = QColor(1,119,215);
+    const uint kMaxPointValue_ = 255;
+    const int kOffset_ = 10;
+    const int kRangeBetween_ = 13;  // минимальное расстояние между ближайшими указателями
+    const int kLabelWidth_ = 20;
+    const int kMinHeight_ = 40;//45
 
-    const int padding_top_ = 7;
-    const QPoint pointer[5]={
-        QPoint(-half_pointer_width,2),// + padding_top_
-        QPoint(-half_pointer_width,12),
+    const int kPaddingTop_ = 7;
+    const QPoint kPointer_[5]={
+        QPoint(-kHalfPointerWidth_,2),// + padding_top_
+        QPoint(-kHalfPointerWidth_,12),
         QPoint(0,20),
-        QPoint(half_pointer_width,12),
-        QPoint(half_pointer_width,2),
+        QPoint(kHalfPointerWidth_,12),
+        QPoint(kHalfPointerWidth_,2),
     };
 
     uint points_count_;
 
-    QList<QLabel*> LabelAdrList;
+    QList<QLabel*> LabelPtrList_;
 
 
     struct A2B_point    // uint гемороя наделал
@@ -92,7 +92,7 @@ private:
         uint current_value;
         bool is_drag;
     };
-     QList<A2B_point*> PointAdrList;
+     QList<A2B_point*> PointPtrList_;
 
 };
 

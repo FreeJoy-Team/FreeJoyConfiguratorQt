@@ -11,20 +11,20 @@ AxesExtended::AxesExtended(int axis_number, QWidget *parent) :
 
     axis_number_ = axis_number;
 
-    for (uint i = 0; i < i2c_address_list_.size(); ++i) {
+    for (int i = 0; i < i2c_address_list_.size(); ++i) {
         ui->comboBox_I2cAddress->addItem(i2c_address_list_[i].gui_name);
     }
-    for (uint i = 0; i < function_list_.size(); ++i) {
+    for (int i = 0; i < function_list_.size(); ++i) {
         ui->comboBox_Function->addItem(function_list_[i].gui_name);
     }
-    for (uint i = 0; i < button_1_3_list_.size(); ++i) {
+    for (int i = 0; i < button_1_3_list_.size(); ++i) {
         ui->comboBox_Button1->addItem(button_1_3_list_[i].gui_name);
         ui->comboBox_Button3->addItem(button_1_3_list_[i].gui_name);
     }
-    for (uint i = 0; i < button_2_list_.size(); ++i) {
+    for (int i = 0; i < button_2_list_.size(); ++i) {
         ui->comboBox_Button2->addItem(button_2_list_[i].gui_name);
     }
-    for (uint i = 0; i < axes_list_.size(); ++i) {
+    for (int i = 0; i < axes_list_.size(); ++i) {
         ui->comboBox_AxisSource2->addItem(axes_list_[i].gui_name);
     }
 

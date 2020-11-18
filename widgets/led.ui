@@ -53,6 +53,9 @@
       </item>
       <item>
        <widget class="QSpinBox" name="spinBox_InputNumber">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
         <property name="correctionMode">
          <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
         </property>

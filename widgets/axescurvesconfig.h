@@ -45,8 +45,8 @@ private slots:
 
 private:
     Ui::AxesCurvesConfig *ui;
-    QList<AxesCurves*> AxesCurvAdrList;
-    QList<QComboBox*> ProfilesCombBoxPtrList;
+    QList<AxesCurves*> AxesCurvPtrList_;
+    QList<QComboBox*> ProfilesCBoxPtrList_;
 
     int curves_points_value_[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT];
 

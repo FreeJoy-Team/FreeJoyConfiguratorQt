@@ -45,7 +45,7 @@ private:
         ADS1115_11,
     };
 
-    std::vector <deviceEnum_guiName_t> i2c_address_list_ =      // порядов обязан быть как в enum!!!!!!!!!!!
+    QVector <deviceEnum_guiName_t> i2c_address_list_ =      // порядов обязан быть как в enum!!!!!!!!!!!
     {{
         {AS5600,          "AS 5600"},
         {ADS1115_00,      "ADS 1115_00"},
@@ -54,7 +54,7 @@ private:
         {ADS1115_11,      "ADS 1115_11"},
     }};
 
-    std::vector <deviceEnum_guiName_t> function_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    QVector <deviceEnum_guiName_t> function_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {NO_FUNCTION,            tr("None")},
         {FUNCTION_PLUS,          tr("Plus")},
@@ -62,7 +62,7 @@ private:
         {FUNCTION_EQUAL,         tr("Equal")},
     }};
 
-    std::vector <deviceEnum_guiName_t> button_1_3_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    QVector <deviceEnum_guiName_t> button_1_3_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {AXIS_BUTTON_FUNC_EN,       tr("Function enable")},
         {AXIS_BUTTON_PRESCALER_EN,  tr("Prescale enable")},
@@ -72,7 +72,7 @@ private:
         {AXIS_BUTTON_UP,            tr("Up")},
     }};
 
-    std::vector <deviceEnum_guiName_t> button_2_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    QVector <deviceEnum_guiName_t> button_2_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {AXIS_BUTTON_FUNC_EN,       tr("Function enable")},
         {AXIS_BUTTON_PRESCALER_EN,  tr("Prescale enable")},
@@ -80,7 +80,7 @@ private:
         {AXIS_BUTTON_RESET,         tr("Reset")},
     }};
 
-    std::vector <deviceEnum_guiName_t> filter_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    QVector <deviceEnum_guiName_t> filter_list_ =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {FILTER_NO,           tr("off")},
         {FILTER_LEVEL_1,      tr("level 1")},
@@ -92,7 +92,7 @@ private:
         {FILTER_LEVEL_7,      tr("level 7")},
     }};
 
-    std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h
+    QVector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h
     {{
         {0,      tr("X")},
         {1,      tr("Y")},

@@ -13,7 +13,7 @@ protected:
     void paintEvent (QPaintEvent * event) override;
 
 private:
-    int arrow_width;
+    int arrow_width_;
 };
 
 #endif // CENTEREDCBOX_H

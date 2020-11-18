@@ -28,7 +28,7 @@ public:
     void SetLatchPin(int latch_pin, QString pin_gui_name);
     void SetDataPin(int data_pin, QString pin_gui_name);
 
-    QString not_defined_;       // hz // getter?
+    QString not_defined_;       // hz // getter?    В ПРИВАТ!!!
 
 signals:
     void buttonCountChanged(int buttons_count, int shift_reg_number);
@@ -45,7 +45,7 @@ private:
     int latch_pin_;
     int data_pin_;
 
-    deviceEnum_guiName_t const shift_registers_list_[SHIFT_REG_TYPES] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    const deviceEnum_guiName_t shift_registers_list_[SHIFT_REG_TYPES] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {
         {HC165_PULL_DOWN,      tr("HC165 Pull Down")},
         {CD4021_PULL_DOWN,     tr("CD4021 Pull Down")},

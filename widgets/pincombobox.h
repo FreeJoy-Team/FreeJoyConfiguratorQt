@@ -6,8 +6,9 @@
 #include "global.h"
 #include "deviceconfig.h"
 
+#define PINS_COUNT 30
 #define PIN_TYPE_COUNT 25
-enum        // разделить и вынести отдельно                 // все структуры в global.h?
+enum        // разделить и вынести отдельно?                 // все структуры в global.h?
 {
     PA_0 = 1,
     PA_1,
@@ -66,7 +67,7 @@ enum        // разделить и вынести отдельно            
     ALL = 999,
 };
 
-struct cBox         // private:
+struct cBox
 {
     int device_enum_index;
     QString gui_name;
@@ -76,7 +77,7 @@ struct cBox         // private:
     QString styleSheet;         // стиль взаимодействия
 };
 
-struct pins         // private:
+struct pins
 {
     int pin;
     QString gui_name;
@@ -95,7 +96,19 @@ class PinComboBox : public QWidget
 public:
     explicit PinComboBox(QWidget *parent = nullptr);
     ~PinComboBox();
-    int GetCurrentDevEnum();
+
+    //! return pointer to the first element, size=PINS_COUNT
+    const pins *PinList() const;
+    int CurrentDevEnum() const;
+    //! номер элемента в pin_types
+    const QVector<int> & PinTypeIndex() const;
+    //! device enum присутствующие в комбобоксе
+    const QVector<int> & EnumIndex() const;
+
+    uint InteractCount() const;
+    void SetInteractCount(const uint &count);
+    bool IsInteracts() const;
+
     void SetIndexStatus(int index, bool status);
     //void SetIndex();
     void ResetPin();
@@ -105,20 +118,6 @@ public:
     void WriteToConfig(uint pin);
 
     void RetranslateUi();
-                                                                /////////// private, public             разобрать кашу
-    int pin_number_;
-    //! номер элемента в pin_types
-    std::vector<int> pin_types_index;
-    //! device enum присутствующие в комбобоксе
-    std::vector<int> enum_index;
-    int previous_index_;   
-
-    // public private _
-    bool is_call_interaction_;
-    bool is_interacts_;
-    uint interact_count_;
-    int call_interaction_;
-    QString styleSheet_default_;
 
 signals:
     void valueChangedForInteraction(int index, int sender_index, int pin);
@@ -126,9 +125,26 @@ signals:
 private slots:
     void IndexChanged(int index);
 
-                                        ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ 1 НА ВСЕ ПИНЫ!!///////////////////////
-public:
-    pins const pin_list[30] =       // каждый пин хранит по структуре. а жирно не будет?
+
+private:
+    Ui::PinComboBox *ui;
+
+    int current_dev_enum_;
+    int pin_number_;
+    //! номер элемента в pin_types
+    QVector<int> pin_types_index_;
+    //! device enum присутствующие в комбобоксе
+    QVector<int> enum_index_;
+    int previous_index_;
+
+    bool is_call_interaction_;
+    bool is_interacts_;
+    uint interact_count_;
+    int call_interaction_;
+    QString styleSheet_default_;
+
+    ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ static!!///////////////////////
+    const pins pin_list_[PINS_COUNT] =       // каждый пин хранит по структуре. а жирно не будет?
     {
         {PA_0,  {tr("Pin A0")},     {ANALOG_IN}},   // пин // GUI name // его типы
         {PA_1,  {tr("Pin A1")},     {ANALOG_IN}},   // добавить SERIAL, PWM...
@@ -162,7 +178,7 @@ public:
         {PC_15, {tr("Pin C15")},    {}},
     };
 
-    cBox const pin_types[PIN_TYPE_COUNT] =          // static ?
+    const cBox pin_types_[PIN_TYPE_COUNT] =          // static ?
     {
         {NOT_USED,       tr("Not Used"),
          {ALL},
@@ -290,15 +306,6 @@ public:
          {I2C_SCL}, {"color: rgb(53, 53, 255);"}},
 
     };
-
-private:
-    Ui::PinComboBox *ui;
-    int current_dev_enum_;
-
-//    int index2;
-//    QString name2;
-//    int width2;
-//    void resizeEvent(QResizeEvent*);
 };
 
 #endif // PINCOMBOBOX_H

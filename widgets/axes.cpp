@@ -25,9 +25,9 @@ Axes::Axes(int axis_number, QWidget *parent) :
 
     // set a2b
     ui->spinBox_A2bCount->setMaximum(MAX_A2B_BUTTONS);
-    if (ui->spinBox_A2bCount->value() < kMinA2bButtons){
+    if (ui->spinBox_A2bCount->value() < kMinA2bButtons_){
         ui->widget_A2bSlider->setEnabled(false);
-        ui->widget_A2bSlider->SetPointsCount(kMinA2bButtons + 1);
+        ui->widget_A2bSlider->SetPointsCount(kMinA2bButtons_ + 1);
         //count = kMinA2bButtons;
     } else {
         ui->widget_A2bSlider->setEnabled(true);
@@ -35,9 +35,9 @@ Axes::Axes(int axis_number, QWidget *parent) :
     }
 
     // add axes extended settings
-    axes_extend = new AxesExtended(axis_number_, this); //check
-    axes_extend->setVisible(false);
-    ui->layoutH_AxesExtend->addWidget(axes_extend);
+    axes_extend_ = new AxesExtended(axis_number_, this); //check
+    axes_extend_->setVisible(false);
+    ui->layoutH_AxesExtend->addWidget(axes_extend_);
     //ui->layoutV_Axes->addWidget(axes_extend);
 
     // output checked
@@ -66,7 +66,7 @@ Axes::~Axes()
 void Axes::RetranslateUi()
 {
     ui->retranslateUi(this);
-    axes_extend->RetranslateUi();
+    axes_extend_->RetranslateUi();
 }
 
 void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
@@ -75,7 +75,7 @@ void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
         ui->comboBox_AxisSource1->addItem(axes_pin_list_[Converter::EnumToIndex(source_enum, axes_pin_list_)].gui_name);
         main_source_enum_index_.push_back(axes_pin_list_[Converter::EnumToIndex(source_enum, axes_pin_list_)].device_enum_index);
     } else {
-        for (uint i = 0; i < main_source_enum_index_.size(); ++i) {
+        for (int i = 0; i < main_source_enum_index_.size(); ++i) {
             if (main_source_enum_index_[i] == source_enum){
                 if(ui->comboBox_AxisSource1->currentIndex() == (int)i){
                     ui->comboBox_AxisSource1->setCurrentIndex(0);
@@ -91,9 +91,9 @@ void Axes::AddOrDeleteMainSource(int source_enum, bool is_add)
 void Axes::mainSourceIndexChanged(int index)
 {
     if (main_source_enum_index_[index] == I2C){
-        axes_extend->SetI2CEnabled(true);
+        axes_extend_->SetI2CEnabled(true);
     } else {
-        axes_extend->SetI2CEnabled(false);
+        axes_extend_->SetI2CEnabled(false);
     }
 }
 
@@ -120,7 +120,7 @@ void Axes::on_pushButton_StartCalib_clicked(bool checked)
     calibration_started_ = checked;
     if (checked == true)
     {
-        ui->pushButton_StartCalib->setText(stop_calibration);
+        ui->pushButton_StartCalib->setText(stop_calibration_);
         ui->spinBox_CalibMax->setValue(AXIS_MIN_VALUE);     // не перепутано
         ui->spinBox_CalibMin->setValue(AXIS_MAX_VALUE);
 
@@ -129,7 +129,7 @@ void Axes::on_pushButton_StartCalib_clicked(bool checked)
 
     } else {
         disconnect(ui->progressBar_Raw, SIGNAL(valueChanged(int)), nullptr, nullptr);
-        ui->pushButton_StartCalib->setText(start_calibration);
+        ui->pushButton_StartCalib->setText(start_calibration_);
     }
 }
 
@@ -197,7 +197,7 @@ void Axes::on_pushButton_clicked()
 
 void Axes::a2bSpinBoxChanged(int count)
 {
-    if (count < kMinA2bButtons){
+    if (count < kMinA2bButtons_){
         ui->widget_A2bSlider->setEnabled(false);
         ui->widget_A2bSlider->SetPointsCount(0);
         //count = kMinA2bButtons;
@@ -220,15 +220,15 @@ void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 {
     if (state == 2){    // 2 = true
         //ui->frame->setMinimumHeight(110);
-        axes_extend->setMinimumHeight(110);
+        axes_extend_->setMinimumHeight(110);
         QTimer::singleShot(10, [&]{     // я долбоёб или да? как ещё это сраное мигание победить????????!"!11112112121
-            axes_extend->setVisible(true);
+            axes_extend_->setVisible(true);
         });
 //        axes_extend->setVisible(true);
     } else {
-        axes_extend->setVisible(false);
+        axes_extend_->setVisible(false);
         QTimer::singleShot(10, [&]{
-            axes_extend->setMinimumHeight(0);
+            axes_extend_->setMinimumHeight(0);
             ui->frame->setMinimumHeight(0);
         });
 //        axes_extend->setMinimumHeight(0);
@@ -244,7 +244,7 @@ void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)
     ui->checkBox_Output->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled);
     ui->checkBox_Inverted->setChecked(gEnv.pDeviceConfig->config.axis_config[axis_number_].inverted);
     //ui->comboBox_AxisSource1->setCurrentIndex(Converter::EnumToIndex(gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main, axes_pin_list_));
-    for (uint i = 0; i < main_source_enum_index_.size(); ++i) {                 // сделать Converter::    ?
+    for (int i = 0; i < main_source_enum_index_.size(); ++i) {                 // сделать Converter::    ?
         if (main_source_enum_index_[i] == gEnv.pDeviceConfig->config.axis_config[axis_number_].source_main){
             ui->comboBox_AxisSource1->setCurrentIndex(i);
             break;
@@ -264,7 +264,7 @@ void Axes::ReadFromConfig()     // Converter::EnumToIndex(device_enum, list)
     }
 
     // axes extended settings
-    axes_extend->ReadFromConfig();
+    axes_extend_->ReadFromConfig();
 }
 
 void Axes::WriteToConfig()
@@ -280,7 +280,7 @@ void Axes::WriteToConfig()
     gEnv.pDeviceConfig->config.axis_config[axis_number_].calib_max = ui->spinBox_CalibMax->value();
 
     // axes to buttons
-    if (ui->spinBox_A2bCount->value() >= kMinA2bButtons){
+    if (ui->spinBox_A2bCount->value() >= kMinA2bButtons_){
         gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].is_enabled = 1;
     } else {
         gEnv.pDeviceConfig->config.axes_to_buttons[axis_number_].is_enabled = 0;
@@ -291,6 +291,6 @@ void Axes::WriteToConfig()
     }
 
     // axes extended settings
-    axes_extend->WriteToConfig();
+    axes_extend_->WriteToConfig();
 }
 

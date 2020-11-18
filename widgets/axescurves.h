@@ -26,7 +26,7 @@ public:
 
     void SetDarkIcon(bool is_dark);
 
-    int GetPointValue(int point_number);
+    int GetPointValue(int point_number) const;
     void SetPointValue(int point_number, int value);
 
     void SetCurveProfile(int profile);
@@ -57,7 +57,7 @@ private:
     int current_profile_;
     int curve_points_value_[CURVE_PLOT_POINTS_COUNT];
 
-    std::vector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axes.h // ОНО ВЕЗДЕ, ВЫНЕСТИ В ГЛОБАЛ
+    QVector <deviceEnum_guiName_t> axes_list_ =     // дублируется в axestobuttons.h , axes.h // ОНО ВЕЗДЕ, ВЫНЕСТИ В ГЛОБАЛ
     {{
         {0,      tr("X")},
         {1,      tr("Y")},
