@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // global
-    QString app_version = "0.5.4";     // тупо, надо в дефайне?
+    QString app_version = "0.5.3";     // тупо, надо в дефайне?
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     DeviceConfig device_config;
 
