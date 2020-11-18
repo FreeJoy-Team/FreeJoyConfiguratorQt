@@ -13,6 +13,36 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
     current_state_ = false;
     ui->label_LogicalButtonNumber->setNum(button_number_ + 1);
 
+//    // add gui text
+//    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
+//        ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
+//    }
+//    for (int i = 0; i < SHIFT_COUNT; i++) {
+//        ui->comboBox_ShiftIndex->addItem(shift_list_[i].gui_name);
+//    }
+//    for (int i = 0; i < TIMER_COUNT; i++) {
+//        ui->comboBox_DelayTimerIndex->addItem(timer_list_[i].gui_name);
+//        ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
+//    }
+
+//    connect(ui->comboBox_ButtonFunction, SIGNAL(currentIndexChanged(int)),
+//            this, SLOT(functionTypeChanged(int)));
+//    connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
+//            this, SLOT(editingOnOff(int)));
+}
+
+ButtonLogical::~ButtonLogical()
+{
+    delete ui;
+}
+
+void ButtonLogical::RetranslateUi()
+{
+    ui->retranslateUi(this);
+}
+
+void ButtonLogical::Initialization()
+{
     // add gui text
     for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
         ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
@@ -29,16 +59,6 @@ ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
             this, SLOT(functionTypeChanged(int)));
     connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
             this, SLOT(editingOnOff(int)));
-}
-
-ButtonLogical::~ButtonLogical()
-{
-    delete ui;
-}
-
-void ButtonLogical::RetranslateUi()
-{
-    ui->retranslateUi(this);
 }
 
 void ButtonLogical::SetMaxPhysButtons(int max_phys_buttons)

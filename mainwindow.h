@@ -63,6 +63,8 @@ private slots:
     void languageChanged(QString language);
     void setFont();
 
+    void loadDefaultConfig();
+
     void interfaceStyleChanged(bool is_dark);
 
     void on_pushButton_ResetAllPins_clicked();
@@ -84,27 +86,29 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QTranslator translator;
+    QTranslator translator_;
 
-    QThread* thread;
-    HidDevice* hid_device_worker;
+    QThread* thread_;
+    HidDevice* hid_device_worker_;
 
-    QThread* thread_getSend_config;
-    ReportConverter report_convert;     // nah?
+    QThread* thread_getSend_config_;
+    ReportConverter report_convert_;     // nah?
 
-    PinConfig* pin_config;
-    ButtonConfig* button_config;
-    LedConfig* led_config;
-    EncodersConfig* encoder_config;
-    ShiftRegistersConfig* shift_reg_config;
-    AxesConfig* axes_config;
-    AxesCurvesConfig* axes_curves_config;
+    PinConfig* pin_config_;
+    ButtonConfig* button_config_;
+    LedConfig* led_config_;
+    EncodersConfig* encoder_config_;
+    ShiftRegistersConfig* shift_reg_config_;
+    AxesConfig* axes_config_;
+    AxesCurvesConfig* axes_curves_config_;
+    AdvancedSettings* adv_settings_;
 
-    DebugWindow* debug_window;
-    bool debug_is_enable;
+    DebugWindow* debug_window_ = nullptr;
+    bool debug_is_enable_;
 
 
     QString button_default_style_;  // мб статик в функции?
+//    int index_device_before_write_;
 
     void ReadFromConfig();
     void WriteToConfig();

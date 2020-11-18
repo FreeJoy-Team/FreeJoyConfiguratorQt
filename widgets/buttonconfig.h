@@ -33,6 +33,7 @@ public:
 
 signals:
     void encoderInputChanged(int ecoder_A, int ecoder_B);
+    void logicalButtonsCreated();
     //void buttonLEDStateChanged(int button_number);            // for future
 
 public slots:   // private?
@@ -52,9 +53,10 @@ private:
     bool shift4_activated_;
     bool shift5_activated_;
 
+    void LogicaButtonslCreator();
 
-    QList<ButtonLogical*> LogicButtonAdrList;
-    QList<ButtonPhysical*> PhysicButtonAdrList;
+    QList<ButtonLogical*> LogicButtonPtrList_;
+    QList<ButtonPhysical*> PhysicButtonPtrList_;
 
 };
 

@@ -1,6 +1,8 @@
 #include "buttonconfig.h"
 #include "ui_buttonconfig.h"
+#include <QTimer>
 
+#include <QDebug>
 ButtonConfig::ButtonConfig(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ButtonConfig)
@@ -14,17 +16,17 @@ ButtonConfig::ButtonConfig(QWidget *parent) :
     shift5_activated_ = false;
 
     // make dynamic spawn?
-
     for (int i = 0; i < MAX_BUTTONS_NUM; i++)
     {
         ButtonLogical* logical_buttons_widget = new ButtonLogical(i, this);
         ui->layoutV_LogicalButton->addWidget(logical_buttons_widget);
-        LogicButtonAdrList.append(logical_buttons_widget);
+        LogicButtonPtrList_.append(logical_buttons_widget);
 
-        connect(LogicButtonAdrList[i], SIGNAL(functionIndexChanged(int, int, int)),
+        connect(LogicButtonPtrList_[i], SIGNAL(functionIndexChanged(int, int, int)),
                 this, SLOT(functionTypeChanged(int, int, int)));
     }
 
+    LogicaButtonslCreator();
 }
 
 ButtonConfig::~ButtonConfig()
@@ -35,16 +37,42 @@ ButtonConfig::~ButtonConfig()
 void ButtonConfig::RetranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
-        LogicButtonAdrList[i]->RetranslateUi();
+    for (int i = 0; i < LogicButtonPtrList_.size(); ++i) {
+        LogicButtonPtrList_[i]->RetranslateUi();
     }
+}
+
+// dynamic initialization of widgets. its decrease app startup time
+// в идеале надо и создавать виджеты здесь, но возникает проблема - долго открывается вкладка
+// и пока не знаю как это решить
+void ButtonConfig::LogicaButtonslCreator()
+{
+    static int tmp = 0;
+    if (tmp >= MAX_BUTTONS_NUM){
+        if (MAX_BUTTONS_NUM != 128){
+            qCritical()<<"buttonconfig.cpp MAX_BUTTONS_NUM != 128";
+        }
+        qDebug()<<"LogicaButtonslCreator() finished";
+        emit logicalButtonsCreated();
+        return;
+    }
+    // как я понял таймер срабатывает после полной загрузки приложения(оно отобразится)
+    // т.к. сюда заходит при инициализации, но загрузка происходит после запуска приложения
+    QTimer::singleShot(10, [&]{
+        for (int i = 0; i < 8; i++) // MAX_BUTTONS_NUM(128)/8 = 16 ДОЛЖНО ДЕЛИТЬСЯ БЕЗ ОСТАТКА
+        {
+            LogicButtonPtrList_[tmp]->Initialization();
+            tmp++;
+        }
+        LogicaButtonslCreator();
+    });
 }
 
 void ButtonConfig::PhysicalButtonsSpawn(int count)
 {
     // delete all
-    while (PhysicButtonAdrList.size() > 0) {
-        QWidget *widget = PhysicButtonAdrList.takeLast();
+    while (!PhysicButtonPtrList_.empty()) {
+        QWidget *widget = PhysicButtonPtrList_.takeLast();
         ui->layoutG_PhysicalButton->removeWidget(widget);
         widget->deleteLater();
     }
@@ -60,7 +88,7 @@ void ButtonConfig::PhysicalButtonsSpawn(int count)
         }
         ButtonPhysical* physical_button_widget = new ButtonPhysical(i, this);
         ui->layoutG_PhysicalButton->addWidget(physical_button_widget, row, column);
-        PhysicButtonAdrList.append(physical_button_widget);
+        PhysicButtonPtrList_.append(physical_button_widget);
         column++;
     }
 }
@@ -95,9 +123,9 @@ void ButtonConfig::setUiOnOff(int value)
         ui->spinBox_Shift4->setEnabled(false);
         ui->spinBox_Shift5->setEnabled(false);
     }
-    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
-        LogicButtonAdrList[i]->SetMaxPhysButtons(value);
-        LogicButtonAdrList[i]->SetSpinBoxOnOff(value);
+    for (int i = 0; i < LogicButtonPtrList_.size(); ++i) {
+        LogicButtonPtrList_[i]->SetMaxPhysButtons(value);
+        LogicButtonPtrList_[i]->SetSpinBoxOnOff(value);
     }
 
     PhysicalButtonsSpawn(value);
@@ -115,16 +143,16 @@ void ButtonConfig::ButtonStateChanged()
             number = j + (i)*8;
             if ((gEnv.pDeviceConfig->gamepad_report.button_data[i] & (1 << (j & 0x07))))
             {
-                if (number < LogicButtonAdrList.size())
+                if (number < LogicButtonPtrList_.size())
                 {
-                    LogicButtonAdrList[number]->SetButtonState(true);
+                    LogicButtonPtrList_[number]->SetButtonState(true);
                 }
             }
             else if ((gEnv.pDeviceConfig->gamepad_report.button_data[i] & (1 << (j & 0x07))) == false)
             {
-                if (number < LogicButtonAdrList.size())
+                if (number < LogicButtonPtrList_.size())
                 {
-                    LogicButtonAdrList[number]->SetButtonState(false);
+                    LogicButtonPtrList_[number]->SetButtonState(false);
                 }
             }
         }
@@ -139,17 +167,17 @@ void ButtonConfig::ButtonStateChanged()
 
             if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))))
             {
-                if (number < PhysicButtonAdrList.size())
+                if (number < PhysicButtonPtrList_.size())
                 {
-                    PhysicButtonAdrList[number]->SetButtonState(true);
+                    PhysicButtonPtrList_[number]->SetButtonState(true);
                 }
             }
             else if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))) == false)
             {
 
-                if ( number < PhysicButtonAdrList.size())
+                if ( number < PhysicButtonPtrList_.size())
                 {
-                    PhysicButtonAdrList[number]->SetButtonState(false);
+                    PhysicButtonPtrList_[number]->SetButtonState(false);
                 }
             }
         }
@@ -222,8 +250,8 @@ void ButtonConfig::ButtonStateChanged()
 void ButtonConfig::ReadFromConfig()
 {
     // logical buttons
-    for (int i = 0; i < LogicButtonAdrList.size(); i++) {
-        LogicButtonAdrList[i]->ReadFromConfig();
+    for (int i = 0; i < LogicButtonPtrList_.size(); i++) {
+        LogicButtonPtrList_[i]->ReadFromConfig();
     }
     // other
     ui->spinBox_Shift1->setValue(gEnv.pDeviceConfig->config.shift_config[0].button + 1);
@@ -260,7 +288,7 @@ void ButtonConfig::WriteToConfig()
     gEnv.pDeviceConfig->config.encoder_press_time_ms = ui->spinBox_EncoderPressTimer->value();
 
     // logical buttons
-    for (int i = 0; i < LogicButtonAdrList.size(); ++i) {
-        LogicButtonAdrList[i]->WriteToConfig();
+    for (int i = 0; i < LogicButtonPtrList_.size(); ++i) {
+        LogicButtonPtrList_[i]->WriteToConfig();
     }
 }

@@ -26,6 +26,8 @@ public:
     void ReadFromConfig();
     void WriteToConfig();
 
+    void Initialization();
+
     void SetMaxPhysButtons(int max_phys_buttons);
     void SetSpinBoxOnOff(int max_phys_buttons);
 

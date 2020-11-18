@@ -18,41 +18,67 @@
 void MainWindow::ReadFromConfig()
 {
     // read pin config
-    pin_config->ReadFromConfig();
+    pin_config_->ReadFromConfig();
     // read axes config
-    axes_config->ReadFromConfig();
+    axes_config_->ReadFromConfig();
     // read axes curves config
-    axes_curves_config->ReadFromConfig();
+    axes_curves_config_->ReadFromConfig();
     // read shift registers config
-    shift_reg_config->ReadFromConfig();
+    shift_reg_config_->ReadFromConfig();
     // read encoder config
-    encoder_config->ReadFromConfig();
+    encoder_config_->ReadFromConfig();
     // read LED config
-    led_config->ReadFromConfig();
+    led_config_->ReadFromConfig();
     // read adv.settings config
-    ui->widget_2->ReadFromConfig();
+    adv_settings_->ReadFromConfig();
     // read button config
-    button_config->ReadFromConfig();
+    button_config_->ReadFromConfig();
 }
 
 void MainWindow::WriteToConfig()
 {
     // write pin config
-    pin_config->WriteToConfig();
+    pin_config_->WriteToConfig();
     // write axes config
-    axes_config->WriteToConfig();
+    axes_config_->WriteToConfig();
     // write axes curves config
-    axes_curves_config->WriteToConfig();
+    axes_curves_config_->WriteToConfig();
     // write shift registers config
-    shift_reg_config->WriteToConfig();
+    shift_reg_config_->WriteToConfig();
     // write encoder config
-    encoder_config->WriteToConfig();
+    encoder_config_->WriteToConfig();
     // write LED config
-    led_config->WriteToConfig();
+    led_config_->WriteToConfig();
     // write adv.settings config
-    ui->widget_2->WriteToConfig();
+    adv_settings_->WriteToConfig();
     // write button config
-    button_config->WriteToConfig();
+    button_config_->WriteToConfig();
+
+    // remove device name from registry. This should be after write adv.settings config
+    if (ui->comboBox_HidDeviceList->currentText() != gEnv.pDeviceConfig->config.device_name){
+#ifdef Q_OS_WIN
+        qDebug()<<"Remove device OEMName from registry";
+        QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
+        QSettings(path.arg(QString::number(gEnv.pDeviceConfig->config.pid, 16)), QSettings::NativeFormat).remove("OEMName");
+#endif
+    }
+}
+
+// load default config
+void MainWindow::loadDefaultConfig()
+{
+    // load default config // called after all widgets have been created
+    ReadFromConfig();
+
+    // load default config from file if its set
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    if (gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool() == true)
+    {
+        gEnv.pAppSettings->endGroup();
+        on_pushButton_LoadDefaultConfig_clicked();
+    } else {
+        gEnv.pAppSettings->endGroup();
+    }
 }
 
 
@@ -66,7 +92,7 @@ void MainWindow::configReceived(bool success)
     {
         ReadFromConfig();
         // curves pointer activated
-        axes_curves_config->DeviceStatus(true);
+        axes_curves_config_->DeviceStatus(true);
 
         // set firmware version     // label_FirmwareVersion
         QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
@@ -100,7 +126,7 @@ void MainWindow::configSent(bool success)
     button_default_style_ = ui->pushButton_ReadConfig->styleSheet();
     static QString button_default_text = ui->pushButton_WriteConfig->text();
     // curves pointer activated
-    axes_curves_config->DeviceStatus(true);
+    axes_curves_config_->DeviceStatus(true);
 
     if (success == true)
     {
@@ -112,6 +138,9 @@ void MainWindow::configSent(bool success)
             ui->pushButton_WriteConfig->setText(button_default_text);
             ui->pushButton_WriteConfig->setEnabled(true);
             ui->pushButton_ReadConfig->setEnabled(true);
+//            static int count = 0;
+//            qDebug()<<"writes count ="<<++count;
+//            on_pushButton_WriteConfig_clicked();
         });
     } else {
         ui->pushButton_WriteConfig->setText(tr("Error"));
@@ -132,10 +161,11 @@ void MainWindow::configSent(bool success)
 
 
 
-                                            /////////////////////////////////// Load config from file ///////////////////////////////////
+                               /////////////////////////////////// Load config from file ///////////////////////////////////
 // load device config from file
 void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
 {
+    qDebug()<<"LoadDeviceConfigFromFile() started";
     // уменьшение текста в коде
     dev_config_t* devc = &gEnv.pDeviceConfig->config;
     bool tmp;
@@ -310,7 +340,7 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
         devc->leds[i].type = appS->value("LedType", devc->leds[i].type).toInt();
         appS->endGroup();
     }
-    qDebug()<<"end read";
+    qDebug()<<"LoadDeviceConfigFromFile() finished";
     ReadFromConfig();
 }
 
@@ -318,6 +348,7 @@ void MainWindow::LoadDeviceConfigFromFile(QSettings* appS)
                                             /////////////////////////////////// SAVE config to file ///////////////////////////////////
 void MainWindow::SaveDeviceConfigToFile(QSettings* appS)
 {
+    qDebug()<<"SaveDeviceConfigToFile() started";
     WriteToConfig();
 
     // save Device USB config to file
@@ -479,4 +510,5 @@ void MainWindow::SaveDeviceConfigToFile(QSettings* appS)
         appS->setValue("LedType", gEnv.pDeviceConfig->config.leds[i].type);
         appS->endGroup();
     }
+    qDebug()<<"SaveDeviceConfigToFile() finished";
 }
