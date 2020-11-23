@@ -62,6 +62,10 @@ int main(int argc, char *argv[])
     QString style = gEnv.pAppSettings->value("StyleSheet", "default").toString();
     gEnv.pAppSettings->endGroup();
 
+    MainWindow w;
+
+    // slightly increased startup(+30-50ms) but
+    // w.setStyleSheet(ts.readAll());  --  x7 faster style switch. details in advancedsettings.cpp AdvancedSettings::SetStyle()
     if (style == "default") // ?
     {
         QFile f(":/styles/default.qss");
@@ -71,7 +75,7 @@ int main(int argc, char *argv[])
         else   {
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
-            qApp->setStyleSheet(ts.readAll());
+            w.setStyleSheet(ts.readAll());
         }
     }
     else if (style == "white")
@@ -83,7 +87,7 @@ int main(int argc, char *argv[])
         else   {
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
-            qApp->setStyleSheet(ts.readAll());
+            w.setStyleSheet(ts.readAll());
         }
     }
     else if (style == "dark")
@@ -95,11 +99,11 @@ int main(int argc, char *argv[])
         else   {
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
-            qApp->setStyleSheet(ts.readAll());
+            w.setStyleSheet(ts.readAll());
         }
     }
-    qDebug()<<"main start ="<< gEnv.pApp_start_time->elapsed() << "ms";
-    MainWindow w;
+
+    qDebug()<<"Application startup time ="<< gEnv.pApp_start_time->elapsed() << "ms";
     w.show();
 
     return a.exec();
