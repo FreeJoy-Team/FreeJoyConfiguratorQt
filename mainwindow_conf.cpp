@@ -105,7 +105,7 @@ void MainWindow::configReceived(bool success)
         QTimer::singleShot(1500, [&]{
             ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_ReadConfig->setText(button_default_text);
-            if (ui->comboBox_HidDeviceList->currentIndex() > 0){
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
                 ui->pushButton_ReadConfig->setEnabled(true);
                 ui->pushButton_WriteConfig->setEnabled(true);
             }
@@ -116,7 +116,7 @@ void MainWindow::configReceived(bool success)
         QTimer::singleShot(1500, [&]{
             ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_ReadConfig->setText(button_default_text);
-            if (ui->comboBox_HidDeviceList->currentIndex() > 0){
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
                 ui->pushButton_ReadConfig->setEnabled(true);
                 ui->pushButton_WriteConfig->setEnabled(true);
             }
@@ -140,7 +140,7 @@ void MainWindow::configSent(bool success)
         QTimer::singleShot(1500, [&]{
             ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_WriteConfig->setText(button_default_text);
-            if (ui->comboBox_HidDeviceList->currentIndex() > 0){
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
                 ui->pushButton_ReadConfig->setEnabled(true);
                 ui->pushButton_WriteConfig->setEnabled(true);
             }
@@ -155,7 +155,7 @@ void MainWindow::configSent(bool success)
         QTimer::singleShot(1500, [&]{
             ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_WriteConfig->setText(button_default_text);
-            if (ui->comboBox_HidDeviceList->currentIndex() > 0){
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
                 ui->pushButton_ReadConfig->setEnabled(true);
                 ui->pushButton_WriteConfig->setEnabled(true);
             }
@@ -175,90 +175,90 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
 {
     qDebug()<<"LoadDeviceConfigFromFile() started";
     // уменьшение текста в коде
-    dev_config_t* devc = &gEnv.pDeviceConfig->config;
+    dev_config_t* devC = &gEnv.pDeviceConfig->config;
     bool tmp;
 
     // load Device USB config from file
     deviceSettings->beginGroup("DeviceUsbConfig");
 
-    devc->firmware_version = QString::number(deviceSettings->value("FirmwareVersion", devc->firmware_version).toInt()).toUShort(&tmp ,16);
-    std::string tmp_string = deviceSettings->value("DeviceName", devc->device_name).toString().toStdString();
-    for (uint i = 0; i < sizeof(devc->device_name); i++) {
+    devC->firmware_version = QString::number(deviceSettings->value("FirmwareVersion", devC->firmware_version).toInt()).toUShort(&tmp ,16);
+    std::string tmp_string = deviceSettings->value("DeviceName", devC->device_name).toString().toStdString();
+    for (uint i = 0; i < sizeof(devC->device_name); i++) {
         if (i < tmp_string.size()){
-            devc->device_name[i] = tmp_string[i];
+            devC->device_name[i] = tmp_string[i];
         } else {
-            devc->device_name[i] = '\0';
+            devC->device_name[i] = '\0';
         }
     }
     //devc->vid = QString::number(appS->value("Pid", devc->vid).toInt()).toShort(&tmp ,16);
-    devc->pid = QString::number(deviceSettings->value("Pid", devc->pid).toInt()).toUShort(&tmp ,16);
-    devc->is_dynamic_config = deviceSettings->value("DynamicHID", devc->is_dynamic_config).toInt();
-    devc->exchange_period_ms = deviceSettings->value("USBExchange", devc->exchange_period_ms).toInt();
+    devC->pid = QString::number(deviceSettings->value("Pid", devC->pid).toInt()).toUShort(&tmp ,16);
+    devC->is_dynamic_config = deviceSettings->value("DynamicHID", devC->is_dynamic_config).toInt();
+    devC->exchange_period_ms = deviceSettings->value("USBExchange", devC->exchange_period_ms).toInt();
     deviceSettings->endGroup();
 
     // load Pins config from file
     deviceSettings->beginGroup("PinsConfig");
 
-    devc->pins[0] = (int8_t)deviceSettings->value("A0", devc->pins[0]).toInt();   // вроде и без (int8_t) работает
-    devc->pins[1] = (int8_t)deviceSettings->value("A1", devc->pins[1]).toInt();   // reinterpret_cast<int8_t>
-    devc->pins[2] = (int8_t)deviceSettings->value("A2", devc->pins[2]).toInt();   // use constructor int8_t(......)!!
-    devc->pins[3] = (int8_t)deviceSettings->value("A3", devc->pins[3]).toInt();
-    devc->pins[4] = (int8_t)deviceSettings->value("A4", devc->pins[4]).toInt();
-    devc->pins[5] = (int8_t)deviceSettings->value("A5", devc->pins[5]).toInt();
-    devc->pins[6] = (int8_t)deviceSettings->value("A6", devc->pins[6]).toInt();
-    devc->pins[7] = (int8_t)deviceSettings->value("A7", devc->pins[7]).toInt();
-    devc->pins[8] = (int8_t)deviceSettings->value("A8", devc->pins[8]).toInt();
-    devc->pins[9] = (int8_t)deviceSettings->value("A9", devc->pins[9]).toInt();
-    devc->pins[10] = (int8_t)deviceSettings->value("A10", devc->pins[10]).toInt();
-    devc->pins[11] = (int8_t)deviceSettings->value("A15", devc->pins[11]).toInt();
-    devc->pins[12] = (int8_t)deviceSettings->value("B0", devc->pins[12]).toInt();
-    devc->pins[13] = (int8_t)deviceSettings->value("B1", devc->pins[13]).toInt();
-    devc->pins[14] = (int8_t)deviceSettings->value("B3", devc->pins[14]).toInt();
-    devc->pins[15] = (int8_t)deviceSettings->value("B4", devc->pins[15]).toInt();
-    devc->pins[16] = (int8_t)deviceSettings->value("B5", devc->pins[16]).toInt();
-    devc->pins[17] = (int8_t)deviceSettings->value("B6", devc->pins[17]).toInt();
-    devc->pins[18] = (int8_t)deviceSettings->value("B7", devc->pins[18]).toInt();
-    devc->pins[19] = (int8_t)deviceSettings->value("B8", devc->pins[19]).toInt();
-    devc->pins[20] = (int8_t)deviceSettings->value("B9", devc->pins[20]).toInt();
-    devc->pins[21] = (int8_t)deviceSettings->value("B10", devc->pins[21]).toInt();
-    devc->pins[22] = (int8_t)deviceSettings->value("B11", devc->pins[22]).toInt();
-    devc->pins[23] = (int8_t)deviceSettings->value("B12", devc->pins[23]).toInt();
-    devc->pins[24] = (int8_t)deviceSettings->value("B13", devc->pins[24]).toInt();
-    devc->pins[25] = (int8_t)deviceSettings->value("B14", devc->pins[25]).toInt();
-    devc->pins[26] = (int8_t)deviceSettings->value("B15", devc->pins[26]).toInt();
-    devc->pins[27] = (int8_t)deviceSettings->value("C13", devc->pins[27]).toInt();
-    devc->pins[28] = (int8_t)deviceSettings->value("C14", devc->pins[28]).toInt();
-    devc->pins[29] = (int8_t)deviceSettings->value("C15", devc->pins[29]).toInt();
+    devC->pins[0] = (int8_t)deviceSettings->value("A0", devC->pins[0]).toInt();   // вроде и без (int8_t) работает
+    devC->pins[1] = (int8_t)deviceSettings->value("A1", devC->pins[1]).toInt();   // reinterpret_cast<int8_t>
+    devC->pins[2] = (int8_t)deviceSettings->value("A2", devC->pins[2]).toInt();   // use constructor int8_t(......)!!
+    devC->pins[3] = (int8_t)deviceSettings->value("A3", devC->pins[3]).toInt();
+    devC->pins[4] = (int8_t)deviceSettings->value("A4", devC->pins[4]).toInt();
+    devC->pins[5] = (int8_t)deviceSettings->value("A5", devC->pins[5]).toInt();
+    devC->pins[6] = (int8_t)deviceSettings->value("A6", devC->pins[6]).toInt();
+    devC->pins[7] = (int8_t)deviceSettings->value("A7", devC->pins[7]).toInt();
+    devC->pins[8] = (int8_t)deviceSettings->value("A8", devC->pins[8]).toInt();
+    devC->pins[9] = (int8_t)deviceSettings->value("A9", devC->pins[9]).toInt();
+    devC->pins[10] = (int8_t)deviceSettings->value("A10", devC->pins[10]).toInt();
+    devC->pins[11] = (int8_t)deviceSettings->value("A15", devC->pins[11]).toInt();
+    devC->pins[12] = (int8_t)deviceSettings->value("B0", devC->pins[12]).toInt();
+    devC->pins[13] = (int8_t)deviceSettings->value("B1", devC->pins[13]).toInt();
+    devC->pins[14] = (int8_t)deviceSettings->value("B3", devC->pins[14]).toInt();
+    devC->pins[15] = (int8_t)deviceSettings->value("B4", devC->pins[15]).toInt();
+    devC->pins[16] = (int8_t)deviceSettings->value("B5", devC->pins[16]).toInt();
+    devC->pins[17] = (int8_t)deviceSettings->value("B6", devC->pins[17]).toInt();
+    devC->pins[18] = (int8_t)deviceSettings->value("B7", devC->pins[18]).toInt();
+    devC->pins[19] = (int8_t)deviceSettings->value("B8", devC->pins[19]).toInt();
+    devC->pins[20] = (int8_t)deviceSettings->value("B9", devC->pins[20]).toInt();
+    devC->pins[21] = (int8_t)deviceSettings->value("B10", devC->pins[21]).toInt();
+    devC->pins[22] = (int8_t)deviceSettings->value("B11", devC->pins[22]).toInt();
+    devC->pins[23] = (int8_t)deviceSettings->value("B12", devC->pins[23]).toInt();
+    devC->pins[24] = (int8_t)deviceSettings->value("B13", devC->pins[24]).toInt();
+    devC->pins[25] = (int8_t)deviceSettings->value("B14", devC->pins[25]).toInt();
+    devC->pins[26] = (int8_t)deviceSettings->value("B15", devC->pins[26]).toInt();
+    devC->pins[27] = (int8_t)deviceSettings->value("C13", devC->pins[27]).toInt();
+    devC->pins[28] = (int8_t)deviceSettings->value("C14", devC->pins[28]).toInt();
+    devC->pins[29] = (int8_t)deviceSettings->value("C15", devC->pins[29]).toInt();
     deviceSettings->endGroup();
 
     // load Shift config from file
     deviceSettings->beginGroup("ShiftConfig");
     for (int i = 0; i < SHIFT_COUNT - 1; ++i) { // -1 "No shift"    (SHIFT_COUNT = shift_count + "No shift")
-        devc->shift_config[i].button = (int8_t)deviceSettings->value("Shift", devc->shift_config[i].button).toInt();
+        devC->shift_config[i].button = (int8_t)deviceSettings->value("Shift", devC->shift_config[i].button).toInt();
     }
     deviceSettings->endGroup();
 
     // load Timer config from file
     deviceSettings->beginGroup("TimersConfig");
 
-    devc->button_timer1_ms = (uint16_t)deviceSettings->value("Timer1", devc->button_timer1_ms).toInt();   // вроде и без (int16_t) работает
-    devc->button_timer2_ms = (uint16_t)deviceSettings->value("Timer2", devc->button_timer2_ms).toInt();
-    devc->button_timer3_ms = (uint16_t)deviceSettings->value("Timer3", devc->button_timer3_ms).toInt();
-    devc->button_debounce_ms = (uint16_t)deviceSettings->value("Debounce", devc->button_debounce_ms).toInt();
-    devc->encoder_press_time_ms = (uint8_t)deviceSettings->value("EncoderPress", devc->encoder_press_time_ms).toInt();
+    devC->button_timer1_ms = (uint16_t)deviceSettings->value("Timer1", devC->button_timer1_ms).toInt();   // вроде и без (int16_t) работает
+    devC->button_timer2_ms = (uint16_t)deviceSettings->value("Timer2", devC->button_timer2_ms).toInt();
+    devC->button_timer3_ms = (uint16_t)deviceSettings->value("Timer3", devC->button_timer3_ms).toInt();
+    devC->button_debounce_ms = (uint16_t)deviceSettings->value("Debounce", devC->button_debounce_ms).toInt();
+    devC->encoder_press_time_ms = (uint8_t)deviceSettings->value("EncoderPress", devC->encoder_press_time_ms).toInt();
     deviceSettings->endGroup();
 
     // load Buttons config from file
     for (int i = 0; i < MAX_BUTTONS_NUM; ++i) {
         deviceSettings->beginGroup("ButtonsConfig_" + QString::number(i));
 
-        devc->buttons[i].physical_num = deviceSettings->value("ButtonPhysicNumber", devc->buttons[i].physical_num).toInt();
-        devc->buttons[i].type = deviceSettings->value("ButtonType", devc->buttons[i].type).toInt();
-        devc->buttons[i].shift_modificator = deviceSettings->value("ShiftMod", devc->buttons[i].shift_modificator).toInt();
-        devc->buttons[i].is_inverted = deviceSettings->value("Inverted", devc->buttons[i].is_inverted).toInt();
-        devc->buttons[i].is_disabled = deviceSettings->value("Disabled", devc->buttons[i].is_disabled).toInt();
-        devc->buttons[i].delay_timer = deviceSettings->value("DelayTimer", devc->buttons[i].delay_timer).toInt();
-        devc->buttons[i].press_timer = deviceSettings->value("PressTimer", devc->buttons[i].press_timer).toInt();
+        devC->buttons[i].physical_num = deviceSettings->value("ButtonPhysicNumber", devC->buttons[i].physical_num).toInt();
+        devC->buttons[i].type = deviceSettings->value("ButtonType", devC->buttons[i].type).toInt();
+        devC->buttons[i].shift_modificator = deviceSettings->value("ShiftMod", devC->buttons[i].shift_modificator).toInt();
+        devC->buttons[i].is_inverted = deviceSettings->value("Inverted", devC->buttons[i].is_inverted).toInt();
+        devC->buttons[i].is_disabled = deviceSettings->value("Disabled", devC->buttons[i].is_disabled).toInt();
+        devC->buttons[i].delay_timer = deviceSettings->value("DelayTimer", devC->buttons[i].delay_timer).toInt();
+        devC->buttons[i].press_timer = deviceSettings->value("PressTimer", devC->buttons[i].press_timer).toInt();
         deviceSettings->endGroup();
     }
 
@@ -267,39 +267,39 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     {
         deviceSettings->beginGroup("AxesConfig_" + QString::number(i));
 
-        devc->axis_config[i].calib_min = deviceSettings->value("CalibMin", devc->axis_config[i].calib_min).toInt();
-        devc->axis_config[i].calib_center = deviceSettings->value("CalibCenter", devc->axis_config[i].calib_center).toInt();
-        devc->axis_config[i].calib_max = deviceSettings->value("CalibMax", devc->axis_config[i].calib_max).toInt();
-        devc->axis_config[i].is_centered = deviceSettings->value("IsCentered", devc->axis_config[i].is_centered).toInt();
+        devC->axis_config[i].calib_min = deviceSettings->value("CalibMin", devC->axis_config[i].calib_min).toInt();
+        devC->axis_config[i].calib_center = deviceSettings->value("CalibCenter", devC->axis_config[i].calib_center).toInt();
+        devC->axis_config[i].calib_max = deviceSettings->value("CalibMax", devC->axis_config[i].calib_max).toInt();
+        devC->axis_config[i].is_centered = deviceSettings->value("IsCentered", devC->axis_config[i].is_centered).toInt();
 
-        devc->axis_config[i].out_enabled = deviceSettings->value("OutEnabled", devc->axis_config[i].out_enabled).toInt();
-        devc->axis_config[i].inverted = deviceSettings->value("Inverted", devc->axis_config[i].inverted).toInt();
-        devc->axis_config[i].function = deviceSettings->value("Function", devc->axis_config[i].function).toInt();
-        devc->axis_config[i].filter = deviceSettings->value("Filter", devc->axis_config[i].filter).toInt();
+        devC->axis_config[i].out_enabled = deviceSettings->value("OutEnabled", devC->axis_config[i].out_enabled).toInt();
+        devC->axis_config[i].inverted = deviceSettings->value("Inverted", devC->axis_config[i].inverted).toInt();
+        devC->axis_config[i].function = deviceSettings->value("Function", devC->axis_config[i].function).toInt();
+        devC->axis_config[i].filter = deviceSettings->value("Filter", devC->axis_config[i].filter).toInt();
 
-        devc->axis_config[i].resolution = deviceSettings->value("Resolution", devc->axis_config[i].resolution).toInt();
-        devc->axis_config[i].channel = deviceSettings->value("Channel", devc->axis_config[i].channel).toInt();
-        devc->axis_config[i].deadband_size = deviceSettings->value("DeadbandSize", devc->axis_config[i].deadband_size).toInt();
-        devc->axis_config[i].is_dynamic_deadband = deviceSettings->value("DynDeadbandEnabled", devc->axis_config[i].is_dynamic_deadband).toInt();
+        devC->axis_config[i].resolution = deviceSettings->value("Resolution", devC->axis_config[i].resolution).toInt();
+        devC->axis_config[i].channel = deviceSettings->value("Channel", devC->axis_config[i].channel).toInt();
+        devC->axis_config[i].deadband_size = deviceSettings->value("DeadbandSize", devC->axis_config[i].deadband_size).toInt();
+        devC->axis_config[i].is_dynamic_deadband = deviceSettings->value("DynDeadbandEnabled", devC->axis_config[i].is_dynamic_deadband).toInt();
 
-        devc->axis_config[i].source_main = deviceSettings->value("SourceMain", devc->axis_config[i].source_main).toInt();
-        devc->axis_config[i].source_secondary = deviceSettings->value("SourceSecond", devc->axis_config[i].source_secondary).toInt();
-        devc->axis_config[i].offset_angle = deviceSettings->value("OffsetAngle", devc->axis_config[i].offset_angle).toInt();
+        devC->axis_config[i].source_main = deviceSettings->value("SourceMain", devC->axis_config[i].source_main).toInt();
+        devC->axis_config[i].source_secondary = deviceSettings->value("SourceSecond", devC->axis_config[i].source_secondary).toInt();
+        devC->axis_config[i].offset_angle = deviceSettings->value("OffsetAngle", devC->axis_config[i].offset_angle).toInt();
 
-        devc->axis_config[i].button1 = deviceSettings->value("Button1", devc->axis_config[i].button1).toInt();
-        devc->axis_config[i].button2 = deviceSettings->value("Button2", devc->axis_config[i].button2).toInt();
-        devc->axis_config[i].button3 = deviceSettings->value("Button3", devc->axis_config[i].button3).toInt();
-        devc->axis_config[i].divider = deviceSettings->value("Divider", devc->axis_config[i].divider).toInt();
-        devc->axis_config[i].i2c_address = deviceSettings->value("I2cAddress", devc->axis_config[i].i2c_address).toInt();
-        devc->axis_config[i].button1_type = deviceSettings->value("Button1Type", devc->axis_config[i].button1_type).toInt();
-        devc->axis_config[i].button2_type = deviceSettings->value("Button2Type", devc->axis_config[i].button2_type).toInt();
-        devc->axis_config[i].button3_type = deviceSettings->value("Button3Type", devc->axis_config[i].button3_type).toInt();
-        devc->axis_config[i].prescaler = deviceSettings->value("Prescaler", devc->axis_config[i].prescaler).toInt();
+        devC->axis_config[i].button1 = deviceSettings->value("Button1", devC->axis_config[i].button1).toInt();
+        devC->axis_config[i].button2 = deviceSettings->value("Button2", devC->axis_config[i].button2).toInt();
+        devC->axis_config[i].button3 = deviceSettings->value("Button3", devC->axis_config[i].button3).toInt();
+        devC->axis_config[i].divider = deviceSettings->value("Divider", devC->axis_config[i].divider).toInt();
+        devC->axis_config[i].i2c_address = deviceSettings->value("I2cAddress", devC->axis_config[i].i2c_address).toInt();
+        devC->axis_config[i].button1_type = deviceSettings->value("Button1Type", devC->axis_config[i].button1_type).toInt();
+        devC->axis_config[i].button2_type = deviceSettings->value("Button2Type", devC->axis_config[i].button2_type).toInt();
+        devC->axis_config[i].button3_type = deviceSettings->value("Button3Type", devC->axis_config[i].button3_type).toInt();
+        devC->axis_config[i].prescaler = deviceSettings->value("Prescaler", devC->axis_config[i].prescaler).toInt();
         deviceSettings->endGroup();
         // axes curves
         deviceSettings->beginGroup("AxesCurvesConfig_" + QString::number(i));
         for (int j = 0; j < 11; ++j) {      // 11 - axis curve points count
-            devc->axis_config[i].curve_shape[j] = deviceSettings->value("Point_" + QString::number(j), devc->axis_config[i].curve_shape[j]).toInt();
+            devC->axis_config[i].curve_shape[j] = deviceSettings->value("Point_" + QString::number(j), devC->axis_config[i].curve_shape[j]).toInt();
         }
         deviceSettings->endGroup();
     }
@@ -308,10 +308,10 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     for (int i = 0; i < MAX_AXIS_NUM; ++i) {
         deviceSettings->beginGroup("Axes2bConfig_" + QString::number(i));
 
-        devc->axes_to_buttons[i].buttons_cnt = deviceSettings->value("ButtonsCount", devc->axes_to_buttons[i].buttons_cnt).toInt();
-        devc->axes_to_buttons[i].is_enabled = deviceSettings->value("Enabled", devc->axes_to_buttons[i].is_enabled).toInt();
+        devC->axes_to_buttons[i].buttons_cnt = deviceSettings->value("ButtonsCount", devC->axes_to_buttons[i].buttons_cnt).toInt();
+        devC->axes_to_buttons[i].is_enabled = deviceSettings->value("Enabled", devC->axes_to_buttons[i].is_enabled).toInt();
         for (int j = 0; j < MAX_A2B_BUTTONS + 1; ++j) {
-            devc->axes_to_buttons[i].points[j] = deviceSettings->value("Point_" + QString::number(j), devc->axes_to_buttons[i].points[j]).toInt();
+            devC->axes_to_buttons[i].points[j] = deviceSettings->value("Point_" + QString::number(j), devC->axes_to_buttons[i].points[j]).toInt();
         }
         deviceSettings->endGroup();
     }
@@ -320,8 +320,8 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     for (int i = 0; i < MAX_SHIFT_REG_NUM; ++i) {
         deviceSettings->beginGroup("ShiftRegsConfig_" + QString::number(i));
 
-        devc->shift_registers[i].type = deviceSettings->value("ShiftType", devc->shift_registers[i].type).toInt();
-        devc->shift_registers[i].button_cnt = deviceSettings->value("ButtonCnt", devc->shift_registers[i].button_cnt).toInt();
+        devC->shift_registers[i].type = deviceSettings->value("ShiftType", devC->shift_registers[i].type).toInt();
+        devC->shift_registers[i].button_cnt = deviceSettings->value("ButtonCnt", devC->shift_registers[i].button_cnt).toInt();
         deviceSettings->endGroup();
     }
 
@@ -329,23 +329,23 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     for (int i = 0; i < MAX_ENCODERS_NUM; ++i) {
         deviceSettings->beginGroup("EncodersConfig_" + QString::number(i));
 
-        devc->encoders[i] = deviceSettings->value("EncType", devc->encoders[i]).toInt();
+        devC->encoders[i] = deviceSettings->value("EncType", devC->encoders[i]).toInt();
         deviceSettings->endGroup();
     }
 
     // load LEDs config from file
     deviceSettings->beginGroup("LedsPWMConfig");
 
-    devc->led_pwm_config.duty_cycle[0] = deviceSettings->value("PinPB0", devc->led_pwm_config.duty_cycle[0]).toInt();
-    devc->led_pwm_config.duty_cycle[1] = deviceSettings->value("PinPB1", devc->led_pwm_config.duty_cycle[1]).toInt();
-    devc->led_pwm_config.duty_cycle[2] = deviceSettings->value("PinPB4", devc->led_pwm_config.duty_cycle[2]).toInt();
+    devC->led_pwm_config.duty_cycle[0] = deviceSettings->value("PinPB0", devC->led_pwm_config.duty_cycle[0]).toInt();
+    devC->led_pwm_config.duty_cycle[1] = deviceSettings->value("PinPB1", devC->led_pwm_config.duty_cycle[1]).toInt();
+    devC->led_pwm_config.duty_cycle[2] = deviceSettings->value("PinPB4", devC->led_pwm_config.duty_cycle[2]).toInt();
     deviceSettings->endGroup();
 
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         deviceSettings->beginGroup("LedsConfig_" + QString::number(i));
 
-        devc->leds[i].input_num = deviceSettings->value("InputNum", devc->leds[i].input_num).toInt();
-        devc->leds[i].type = deviceSettings->value("LedType", devc->leds[i].type).toInt();
+        devC->leds[i].input_num = deviceSettings->value("InputNum", devC->leds[i].input_num).toInt();
+        devC->leds[i].type = deviceSettings->value("LedType", devC->leds[i].type).toInt();
         deviceSettings->endGroup();
     }
     qDebug()<<"LoadDeviceConfigFromFile() finished";
@@ -356,80 +356,81 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
                                             /////////////////////////////////// SAVE config to file ///////////////////////////////////
 void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
 {
+    dev_config_t* devC = &gEnv.pDeviceConfig->config;
     qDebug()<<"SaveDeviceConfigToFile() started";
     writeToConfig();
 
     // save Device USB config to file
     deviceSettings->beginGroup("DeviceUsbConfig");
-    deviceSettings->setValue("FirmwareVersion", QString::number(gEnv.pDeviceConfig->config.firmware_version, 16));
-    deviceSettings->setValue("DeviceName", gEnv.pDeviceConfig->config.device_name);
-    //appS->setValue("Vid", QString::number(gEnv.pDeviceConfig->config.vid, 16));
-    deviceSettings->setValue("Pid", QString::number(gEnv.pDeviceConfig->config.pid, 16));
-    deviceSettings->setValue("DynamicHID", gEnv.pDeviceConfig->config.is_dynamic_config);
-    deviceSettings->setValue("USBExchange", gEnv.pDeviceConfig->config.exchange_period_ms);
+    deviceSettings->setValue("FirmwareVersion", QString::number(devC->firmware_version, 16));
+    deviceSettings->setValue("DeviceName", devC->device_name);
+    //appS->setValue("Vid", QString::number(devC->vid, 16));
+    deviceSettings->setValue("Pid", QString::number(devC->pid, 16));
+    deviceSettings->setValue("DynamicHID", devC->is_dynamic_config);
+    deviceSettings->setValue("USBExchange", devC->exchange_period_ms);
     deviceSettings->endGroup();
     // save Pins config to file
     deviceSettings->beginGroup("PinsConfig");        // can for x3
-    deviceSettings->setValue("A0", gEnv.pDeviceConfig->config.pins[0]);
-    deviceSettings->setValue("A1", gEnv.pDeviceConfig->config.pins[1]);
-    deviceSettings->setValue("A2", gEnv.pDeviceConfig->config.pins[2]);
-    deviceSettings->setValue("A3", gEnv.pDeviceConfig->config.pins[3]);
-    deviceSettings->setValue("A4", gEnv.pDeviceConfig->config.pins[4]);
-    deviceSettings->setValue("A5", gEnv.pDeviceConfig->config.pins[5]);
-    deviceSettings->setValue("A6", gEnv.pDeviceConfig->config.pins[6]);
-    deviceSettings->setValue("A7", gEnv.pDeviceConfig->config.pins[7]);
-    deviceSettings->setValue("A8", gEnv.pDeviceConfig->config.pins[8]);
-    deviceSettings->setValue("A9", gEnv.pDeviceConfig->config.pins[9]);
-    deviceSettings->setValue("A10", gEnv.pDeviceConfig->config.pins[10]);
-    deviceSettings->setValue("A15", gEnv.pDeviceConfig->config.pins[11]);
-    deviceSettings->setValue("B0", gEnv.pDeviceConfig->config.pins[12]);
-    deviceSettings->setValue("B1", gEnv.pDeviceConfig->config.pins[13]);
-    deviceSettings->setValue("B3", gEnv.pDeviceConfig->config.pins[14]);
-    deviceSettings->setValue("B4", gEnv.pDeviceConfig->config.pins[15]);
-    deviceSettings->setValue("B5", gEnv.pDeviceConfig->config.pins[16]);
-    deviceSettings->setValue("B6", gEnv.pDeviceConfig->config.pins[17]);
-    deviceSettings->setValue("B7", gEnv.pDeviceConfig->config.pins[18]);
-    deviceSettings->setValue("B8", gEnv.pDeviceConfig->config.pins[19]);
-    deviceSettings->setValue("B9", gEnv.pDeviceConfig->config.pins[20]);
-    deviceSettings->setValue("B10", gEnv.pDeviceConfig->config.pins[21]);
-    deviceSettings->setValue("B11", gEnv.pDeviceConfig->config.pins[22]);
-    deviceSettings->setValue("B12", gEnv.pDeviceConfig->config.pins[23]);
-    deviceSettings->setValue("B13", gEnv.pDeviceConfig->config.pins[24]);
-    deviceSettings->setValue("B14", gEnv.pDeviceConfig->config.pins[25]);
-    deviceSettings->setValue("B15", gEnv.pDeviceConfig->config.pins[26]);
-    deviceSettings->setValue("C13", gEnv.pDeviceConfig->config.pins[27]);
-    deviceSettings->setValue("C14", gEnv.pDeviceConfig->config.pins[28]);
-    deviceSettings->setValue("C15", gEnv.pDeviceConfig->config.pins[29]);
+    deviceSettings->setValue("A0", devC->pins[0]);
+    deviceSettings->setValue("A1", devC->pins[1]);
+    deviceSettings->setValue("A2", devC->pins[2]);
+    deviceSettings->setValue("A3", devC->pins[3]);
+    deviceSettings->setValue("A4", devC->pins[4]);
+    deviceSettings->setValue("A5", devC->pins[5]);
+    deviceSettings->setValue("A6", devC->pins[6]);
+    deviceSettings->setValue("A7", devC->pins[7]);
+    deviceSettings->setValue("A8", devC->pins[8]);
+    deviceSettings->setValue("A9", devC->pins[9]);
+    deviceSettings->setValue("A10", devC->pins[10]);
+    deviceSettings->setValue("A15", devC->pins[11]);
+    deviceSettings->setValue("B0", devC->pins[12]);
+    deviceSettings->setValue("B1", devC->pins[13]);
+    deviceSettings->setValue("B3", devC->pins[14]);
+    deviceSettings->setValue("B4", devC->pins[15]);
+    deviceSettings->setValue("B5", devC->pins[16]);
+    deviceSettings->setValue("B6", devC->pins[17]);
+    deviceSettings->setValue("B7", devC->pins[18]);
+    deviceSettings->setValue("B8", devC->pins[19]);
+    deviceSettings->setValue("B9", devC->pins[20]);
+    deviceSettings->setValue("B10", devC->pins[21]);
+    deviceSettings->setValue("B11", devC->pins[22]);
+    deviceSettings->setValue("B12", devC->pins[23]);
+    deviceSettings->setValue("B13", devC->pins[24]);
+    deviceSettings->setValue("B14", devC->pins[25]);
+    deviceSettings->setValue("B15", devC->pins[26]);
+    deviceSettings->setValue("C13", devC->pins[27]);
+    deviceSettings->setValue("C14", devC->pins[28]);
+    deviceSettings->setValue("C15", devC->pins[29]);
     deviceSettings->endGroup();
 
     // save Shift config to file
     deviceSettings->beginGroup("ShiftConfig");
     for (int i = 0; i < SHIFT_COUNT - 1; ++i) { // -1 "No shift"    (SHIFT_COUNT = shift_count + "No shift")
-        deviceSettings->setValue("Shift" + QString::number(i), gEnv.pDeviceConfig->config.shift_config[i].button);
+        deviceSettings->setValue("Shift" + QString::number(i), devC->shift_config[i].button);
     }
     deviceSettings->endGroup();
 
     // save Timer config to file
     deviceSettings->beginGroup("TimersConfig");
 
-    deviceSettings->setValue("Timer1", gEnv.pDeviceConfig->config.button_timer1_ms);
-    deviceSettings->setValue("Timer2", gEnv.pDeviceConfig->config.button_timer2_ms);
-    deviceSettings->setValue("Timer3", gEnv.pDeviceConfig->config.button_timer3_ms);
-    deviceSettings->setValue("Debounce", gEnv.pDeviceConfig->config.button_debounce_ms);
-    deviceSettings->setValue("EncoderPress", gEnv.pDeviceConfig->config.encoder_press_time_ms);
+    deviceSettings->setValue("Timer1", devC->button_timer1_ms);
+    deviceSettings->setValue("Timer2", devC->button_timer2_ms);
+    deviceSettings->setValue("Timer3", devC->button_timer3_ms);
+    deviceSettings->setValue("Debounce", devC->button_debounce_ms);
+    deviceSettings->setValue("EncoderPress", devC->encoder_press_time_ms);
     deviceSettings->endGroup();
 
     // save Buttons config to file
     for (int i = 0; i < MAX_BUTTONS_NUM; ++i) {
         deviceSettings->beginGroup("ButtonsConfig_" + QString::number(i));
 
-        deviceSettings->setValue("ButtonPhysicNumber", gEnv.pDeviceConfig->config.buttons[i].physical_num);
-        deviceSettings->setValue("ButtonType", gEnv.pDeviceConfig->config.buttons[i].type);
-        deviceSettings->setValue("ShiftMod", gEnv.pDeviceConfig->config.buttons[i].shift_modificator);
-        deviceSettings->setValue("Inverted", gEnv.pDeviceConfig->config.buttons[i].is_inverted);
-        deviceSettings->setValue("Disabled", gEnv.pDeviceConfig->config.buttons[i].is_disabled);
-        deviceSettings->setValue("DelayTimer", gEnv.pDeviceConfig->config.buttons[i].delay_timer);
-        deviceSettings->setValue("PressTimer", gEnv.pDeviceConfig->config.buttons[i].press_timer);
+        deviceSettings->setValue("ButtonPhysicNumber", devC->buttons[i].physical_num);
+        deviceSettings->setValue("ButtonType", devC->buttons[i].type);
+        deviceSettings->setValue("ShiftMod", devC->buttons[i].shift_modificator);
+        deviceSettings->setValue("Inverted", devC->buttons[i].is_inverted);
+        deviceSettings->setValue("Disabled", devC->buttons[i].is_disabled);
+        deviceSettings->setValue("DelayTimer", devC->buttons[i].delay_timer);
+        deviceSettings->setValue("PressTimer", devC->buttons[i].press_timer);
         deviceSettings->endGroup();
     }
 
@@ -438,39 +439,39 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
     {
         deviceSettings->beginGroup("AxesConfig_" + QString::number(i));
 
-        deviceSettings->setValue("CalibMin", gEnv.pDeviceConfig->config.axis_config[i].calib_min);
-        deviceSettings->setValue("CalibCenter", gEnv.pDeviceConfig->config.axis_config[i].calib_center);
-        deviceSettings->setValue("CalibMax", gEnv.pDeviceConfig->config.axis_config[i].calib_max);
-        deviceSettings->setValue("IsCentered", gEnv.pDeviceConfig->config.axis_config[i].is_centered);
+        deviceSettings->setValue("CalibMin", devC->axis_config[i].calib_min);
+        deviceSettings->setValue("CalibCenter", devC->axis_config[i].calib_center);
+        deviceSettings->setValue("CalibMax", devC->axis_config[i].calib_max);
+        deviceSettings->setValue("IsCentered", devC->axis_config[i].is_centered);
 
-        deviceSettings->setValue("OutEnabled", gEnv.pDeviceConfig->config.axis_config[i].out_enabled);
-        deviceSettings->setValue("Inverted", gEnv.pDeviceConfig->config.axis_config[i].inverted);
-        deviceSettings->setValue("Function", gEnv.pDeviceConfig->config.axis_config[i].function);
-        deviceSettings->setValue("Filter", gEnv.pDeviceConfig->config.axis_config[i].filter);
+        deviceSettings->setValue("OutEnabled", devC->axis_config[i].out_enabled);
+        deviceSettings->setValue("Inverted", devC->axis_config[i].inverted);
+        deviceSettings->setValue("Function", devC->axis_config[i].function);
+        deviceSettings->setValue("Filter", devC->axis_config[i].filter);
 
-        deviceSettings->setValue("Resolution", gEnv.pDeviceConfig->config.axis_config[i].resolution);
-        deviceSettings->setValue("Channel", gEnv.pDeviceConfig->config.axis_config[i].channel);
-        deviceSettings->setValue("DeadbandSize", gEnv.pDeviceConfig->config.axis_config[i].deadband_size);
-        deviceSettings->setValue("DynDeadbandEnabled", gEnv.pDeviceConfig->config.axis_config[i].is_dynamic_deadband);
+        deviceSettings->setValue("Resolution", devC->axis_config[i].resolution);
+        deviceSettings->setValue("Channel", devC->axis_config[i].channel);
+        deviceSettings->setValue("DeadbandSize", devC->axis_config[i].deadband_size);
+        deviceSettings->setValue("DynDeadbandEnabled", devC->axis_config[i].is_dynamic_deadband);
 
-        deviceSettings->setValue("SourceMain", gEnv.pDeviceConfig->config.axis_config[i].source_main);
-        deviceSettings->setValue("SourceSecond", gEnv.pDeviceConfig->config.axis_config[i].source_secondary);
-        deviceSettings->setValue("OffsetAngle", gEnv.pDeviceConfig->config.axis_config[i].offset_angle);
+        deviceSettings->setValue("SourceMain", devC->axis_config[i].source_main);
+        deviceSettings->setValue("SourceSecond", devC->axis_config[i].source_secondary);
+        deviceSettings->setValue("OffsetAngle", devC->axis_config[i].offset_angle);
 
-        deviceSettings->setValue("Button1", gEnv.pDeviceConfig->config.axis_config[i].button1);
-        deviceSettings->setValue("Button2", gEnv.pDeviceConfig->config.axis_config[i].button2);
-        deviceSettings->setValue("Button3", gEnv.pDeviceConfig->config.axis_config[i].button3);
-        deviceSettings->setValue("Divider", gEnv.pDeviceConfig->config.axis_config[i].divider);
-        deviceSettings->setValue("I2cAddress", gEnv.pDeviceConfig->config.axis_config[i].i2c_address);
-        deviceSettings->setValue("Button1Type", gEnv.pDeviceConfig->config.axis_config[i].button1_type);
-        deviceSettings->setValue("Button2Type", gEnv.pDeviceConfig->config.axis_config[i].button2_type);
-        deviceSettings->setValue("Button3Type", gEnv.pDeviceConfig->config.axis_config[i].button3_type);
-        deviceSettings->setValue("Prescaler", gEnv.pDeviceConfig->config.axis_config[i].prescaler);
+        deviceSettings->setValue("Button1", devC->axis_config[i].button1);
+        deviceSettings->setValue("Button2", devC->axis_config[i].button2);
+        deviceSettings->setValue("Button3", devC->axis_config[i].button3);
+        deviceSettings->setValue("Divider", devC->axis_config[i].divider);
+        deviceSettings->setValue("I2cAddress", devC->axis_config[i].i2c_address);
+        deviceSettings->setValue("Button1Type", devC->axis_config[i].button1_type);
+        deviceSettings->setValue("Button2Type", devC->axis_config[i].button2_type);
+        deviceSettings->setValue("Button3Type", devC->axis_config[i].button3_type);
+        deviceSettings->setValue("Prescaler", devC->axis_config[i].prescaler);
         deviceSettings->endGroup();
         // axes curves
         deviceSettings->beginGroup("AxesCurvesConfig_" + QString::number(i));
         for (int j = 0; j < 11; ++j) {      // 11 - axis curve points count
-            deviceSettings->setValue("Point_" + QString::number(j), gEnv.pDeviceConfig->config.axis_config[i].curve_shape[j]);
+            deviceSettings->setValue("Point_" + QString::number(j), devC->axis_config[i].curve_shape[j]);
         }
         deviceSettings->endGroup();
     }
@@ -479,10 +480,10 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
     for (int i = 0; i < MAX_AXIS_NUM; ++i) {
         deviceSettings->beginGroup("Axes2bConfig_" + QString::number(i));
 
-        deviceSettings->setValue("ButtonsCount", gEnv.pDeviceConfig->config.axes_to_buttons[i].buttons_cnt);
-        deviceSettings->setValue("Enabled", gEnv.pDeviceConfig->config.axes_to_buttons[i].is_enabled);
+        deviceSettings->setValue("ButtonsCount", devC->axes_to_buttons[i].buttons_cnt);
+        deviceSettings->setValue("Enabled", devC->axes_to_buttons[i].is_enabled);
         for (int j = 0; j < MAX_A2B_BUTTONS + 1; ++j) {
-            deviceSettings->setValue("Point_" + QString::number(j), gEnv.pDeviceConfig->config.axes_to_buttons[i].points[j]);
+            deviceSettings->setValue("Point_" + QString::number(j), devC->axes_to_buttons[i].points[j]);
         }
         deviceSettings->endGroup();
     }
@@ -491,8 +492,8 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
     for (int i = 0; i < MAX_SHIFT_REG_NUM; ++i) {
         deviceSettings->beginGroup("ShiftRegsConfig_" + QString::number(i));
 
-        deviceSettings->setValue("ShiftType", gEnv.pDeviceConfig->config.shift_registers[i].type);
-        deviceSettings->setValue("ButtonCnt", gEnv.pDeviceConfig->config.shift_registers[i].button_cnt);
+        deviceSettings->setValue("ShiftType", devC->shift_registers[i].type);
+        deviceSettings->setValue("ButtonCnt", devC->shift_registers[i].button_cnt);
         deviceSettings->endGroup();
     }
 
@@ -500,22 +501,22 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
     for (int i = 0; i < MAX_ENCODERS_NUM; ++i) {
         deviceSettings->beginGroup("EncodersConfig_" + QString::number(i));
 
-        deviceSettings->setValue("EncType", gEnv.pDeviceConfig->config.encoders[i]);
+        deviceSettings->setValue("EncType", devC->encoders[i]);
         deviceSettings->endGroup();
     }
 
     // save LEDs config to file
     deviceSettings->beginGroup("LedsPWMConfig");
-    deviceSettings->setValue("PinPB0", gEnv.pDeviceConfig->config.led_pwm_config.duty_cycle[0]);
-    deviceSettings->setValue("PinPB1", gEnv.pDeviceConfig->config.led_pwm_config.duty_cycle[1]);
-    deviceSettings->setValue("PinPB4", gEnv.pDeviceConfig->config.led_pwm_config.duty_cycle[2]);
+    deviceSettings->setValue("PinPB0", devC->led_pwm_config.duty_cycle[0]);
+    deviceSettings->setValue("PinPB1", devC->led_pwm_config.duty_cycle[1]);
+    deviceSettings->setValue("PinPB4", devC->led_pwm_config.duty_cycle[2]);
     deviceSettings->endGroup();
 
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         deviceSettings->beginGroup("LedsConfig_" + QString::number(i));
 
-        deviceSettings->setValue("InputNum", gEnv.pDeviceConfig->config.leds[i].input_num);
-        deviceSettings->setValue("LedType", gEnv.pDeviceConfig->config.leds[i].type);
+        deviceSettings->setValue("InputNum", devC->leds[i].input_num);
+        deviceSettings->setValue("LedType", devC->leds[i].type);
         deviceSettings->endGroup();
     }
     qDebug()<<"SaveDeviceConfigToFile() finished";

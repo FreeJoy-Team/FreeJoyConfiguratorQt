@@ -10,7 +10,7 @@
 
 
 AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :   // в коде много мусора, костыля для выравнивания TODO
-    QWidget(parent),
+    QWidget(parent),                                // при смене стиля менять цвет сетки в эвенте
     ui(new Ui::AxesCurvesPlot)
 {
     ui->setupUi(this);
@@ -73,6 +73,7 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
 
     painter.begin(this);
     painter.setPen(Qt::lightGray);
+    //painter.setPen(QColor(120,120,120));
 
 //    if (resize_activated_ == true){
 //        qDebug()<<"resize";
@@ -168,12 +169,13 @@ void AxesCurvesPlot::setPointValue(int pointNumber, int value)
 
 void AxesCurvesPlot::setLinear()
 {
-    int tmp_y;
+    int tmpY, tmpVal;
     for (int i = 0; i < m_pointPtrList.size(); ++i){
-        tmp_y = (i * m_rowHeight) + m_kOffset;
-        m_pointPtrList[(m_pointPtrList.size() - 1) - i]->posY = tmp_y - m_halfRadius;
-        m_pointPtrList[(m_pointPtrList.size() - 1) - i]->current_value = calcPointValue(m_pointPtrList[(m_pointPtrList.size() - 1) - i]->posY);
-        m_labelPtrList[(m_pointPtrList.size() - 1) - i]->setNum(m_pointPtrList[(m_pointPtrList.size() - 1) - i]->current_value);
+        tmpY = (i * m_rowHeight) + m_kOffset;
+        tmpVal = calcPointValue(m_pointPtrList[(m_pointPtrList.size() - 1) - i]->posY);
+        m_pointPtrList[(m_pointPtrList.size() -1) -i]->posY = tmpY - m_halfRadius;
+        m_pointPtrList[(m_pointPtrList.size() -1) -i]->current_value = tmpVal;
+        m_labelPtrList[(m_pointPtrList.size() -1) -i]->setNum(tmpVal);
     }
     updateLabelPos();
     for (int i = 0; i < m_pointPtrList.size(); ++i) {
