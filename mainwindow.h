@@ -54,7 +54,7 @@ private slots:
     void hidDeviceList(QStringList *deviceList);
     void hidDeviceListChanged(int index);
 
-    void languageChanged(QString language);
+    void languageChanged(const QString &language);
     void setFont();
 
     void loadDefaultConfig();

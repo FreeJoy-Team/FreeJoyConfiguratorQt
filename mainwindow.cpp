@@ -18,17 +18,17 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , m_thread{new QThread}
-    , m_hidDeviceWorker{new HidDevice()}
-    , m_threadGetSendConfig{new QThread}
-    , m_pinConfig{new PinConfig(this)}// not need delete. this - parent
-    , m_buttonConfig{new ButtonConfig(this)}
-    , m_ledConfig{new LedConfig(this)}
-    , m_encoderConfig{new EncodersConfig(this)}
-    , m_shiftRegConfig{new ShiftRegistersConfig(this)}
-    , m_axesConfig{new AxesConfig(this)}
-    , m_axesCurvesConfig{new AxesCurvesConfig(this)}
-    , m_advSettings{new AdvancedSettings(this)}
+//    , m_thread{new QThread}
+//    , m_hidDeviceWorker{new HidDevice()}
+//    , m_threadGetSendConfig{new QThread}
+//    , m_pinConfig{new PinConfig(this)}// not need delete. this - parent
+//    , m_buttonConfig{new ButtonConfig(this)}
+//    , m_ledConfig{new LedConfig(this)}
+//    , m_encoderConfig{new EncodersConfig(this)}
+//    , m_shiftRegConfig{new ShiftRegistersConfig(this)}
+//    , m_axesConfig{new AxesConfig(this)}
+//    , m_axesCurvesConfig{new AxesCurvesConfig(this)}
+//    , m_advSettings{new AdvancedSettings(this)}
 {
     qDebug()<<"main + member initialize time ="<< gEnv.pApp_start_time->elapsed() << "ms";
     QElapsedTimer timer;
@@ -48,32 +48,42 @@ MainWindow::MainWindow(QWidget *parent)
     // load application config
     loadAppConfig();
 
-//    index_device_before_write_ = 0;
+    m_thread = new QThread;
+    m_hidDeviceWorker = new HidDevice();
+    m_threadGetSendConfig = new QThread;
 
     qDebug()<<"before add widgets ="<< timer.restart() << "ms";
                                             //////////////// ADD WIDGETS ////////////////
     // add pin widget
+    m_pinConfig = new PinConfig(this);
     ui->layoutV_tabPinConfig->addWidget(m_pinConfig);
     qDebug()<<"pin config load time ="<< timer.restart() << "ms";
     // add button widget
+    m_buttonConfig = new ButtonConfig(this);
     ui->layoutV_tabButtonConfig->addWidget(m_buttonConfig);
     qDebug()<<"button config load time ="<< timer.restart() << "ms";
     // add axes widget
+    m_axesConfig = new AxesConfig(this);
     ui->layoutV_tabAxesConfig->addWidget(m_axesConfig);
     qDebug()<<"axes config load time ="<< timer.restart() << "ms";
     // add axes curves widget
+    m_axesCurvesConfig = new AxesCurvesConfig(this);
     ui->layoutV_tabAxesCurvesConfig->addWidget(m_axesCurvesConfig);
     qDebug()<<"curves config load time ="<< timer.restart() << "ms";
     // add shift registers widget
+    m_shiftRegConfig = new ShiftRegistersConfig(this);
     ui->layoutV_tabShiftRegistersConfig->addWidget(m_shiftRegConfig);
     qDebug()<<"shift config load time ="<< timer.restart() << "ms";
     // add encoders widget
+    m_encoderConfig = new EncodersConfig(this);
     ui->layoutV_tabEncodersConfig->addWidget(m_encoderConfig);
     qDebug()<<"encoder config load time ="<< timer.restart() << "ms";
     // add led widget
+    m_ledConfig = new LedConfig(this);
     ui->layoutV_tabLedConfig->addWidget(m_ledConfig);
     qDebug()<<"led config load time ="<< timer.restart() << "ms";
     // add advanced settings widget
+    m_advSettings = new AdvancedSettings(this);
     ui->layoutV_tabAdvSettings->addWidget(m_advSettings);
     qDebug()<<"advanced settings load time ="<< timer.restart() << "ms";
 
@@ -141,8 +151,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_pinConfig, SIGNAL(axesSourceChanged(int, bool)),
             m_axesConfig, SLOT(addOrDeleteMainSource(int, bool)));
     // language changed
-    connect(m_advSettings, SIGNAL(languageChanged(QString)),
-            this, SLOT(languageChanged(QString)));
+    connect(m_advSettings, SIGNAL(languageChanged(const QString &)),
+            this, SLOT(languageChanged(const QString &)));
     // interface changed
     connect(m_advSettings, SIGNAL(interfaceStyleChanged(bool)),
             this, SLOT(interfaceStyleChanged(bool)));
@@ -198,7 +208,7 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(loadDefaultConfig()));
 
 
-    // set style
+    // set style for some widgets
     gEnv.pAppSettings->beginGroup("StyleSettings");
     if (gEnv.pAppSettings->value("StyleSheet", "default").toString() == "dark"){
         interfaceStyleChanged(true);
@@ -364,7 +374,7 @@ void MainWindow::interfaceStyleChanged(bool isDark)
 }
 
 // slot language change
-void MainWindow::languageChanged(QString language)        // QSignalBlocker blocker(ui->comboBox);
+void MainWindow::languageChanged(const QString &language)        // QSignalBlocker blocker(ui->comboBox);
 {
     qDebug()<<"Retranslate UI";
     if (language == "russian")
@@ -407,53 +417,54 @@ void MainWindow::setFont()
 // load app config
 void MainWindow::loadAppConfig()
 {
+    QSettings *appS = gEnv.pAppSettings;
     qDebug()<<"Loading application config";
     // load language settings
-    gEnv.pAppSettings->beginGroup("LanguageSettings");
-    if (gEnv.pAppSettings->value("Language", "english").toString() == "russian")
+    appS->beginGroup("LanguageSettings");
+    if (appS->value("Language", "english").toString() == "russian")
     {
         m_translator.load(":/FreeJoyQt_ru");
         qApp->installTranslator(&m_translator);
         ui->retranslateUi(this);
     }
-    gEnv.pAppSettings->endGroup();
+    appS->endGroup();
 
     // load window settings
-    gEnv.pAppSettings->beginGroup("WindowSettings");
-    this->restoreGeometry(gEnv.pAppSettings->value("Geometry").toByteArray());
-    gEnv.pAppSettings->endGroup();
+    appS->beginGroup("WindowSettings");
+    this->restoreGeometry(appS->value("Geometry").toByteArray());
+    appS->endGroup();
 
     // load tab index
-    gEnv.pAppSettings->beginGroup("TabIndexSettings");
+    appS->beginGroup("TabIndexSettings");
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_PinConfig),
-                                      gEnv.pAppSettings->value("PinConfig", ui->tabWidget->indexOf(ui->tab_PinConfig)).toInt());
+                                      appS->value("PinConfig", ui->tabWidget->indexOf(ui->tab_PinConfig)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ButtonConfig),
-                                      gEnv.pAppSettings->value("ButtonConfig", ui->tabWidget->indexOf(ui->tab_ButtonConfig)).toInt());
+                                      appS->value("ButtonConfig", ui->tabWidget->indexOf(ui->tab_ButtonConfig)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesConfig),
-                                      gEnv.pAppSettings->value("AxesConfig", ui->tabWidget->indexOf(ui->tab_AxesConfig)).toInt());
+                                      appS->value("AxesConfig", ui->tabWidget->indexOf(ui->tab_AxesConfig)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesCurves),
-                                      gEnv.pAppSettings->value("AxesCurves", ui->tabWidget->indexOf(ui->tab_AxesCurves)).toInt());
+                                      appS->value("AxesCurves", ui->tabWidget->indexOf(ui->tab_AxesCurves)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ShiftRegisters),
-                                      gEnv.pAppSettings->value("ShiftRegs", ui->tabWidget->indexOf(ui->tab_ShiftRegisters)).toInt());
+                                      appS->value("ShiftRegs", ui->tabWidget->indexOf(ui->tab_ShiftRegisters)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_Encoders),
-                                      gEnv.pAppSettings->value("Encoders", ui->tabWidget->indexOf(ui->tab_Encoders)).toInt());
+                                      appS->value("Encoders", ui->tabWidget->indexOf(ui->tab_Encoders)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_LED),
-                                      gEnv.pAppSettings->value("LED", ui->tabWidget->indexOf(ui->tab_LED)).toInt());
+                                      appS->value("LED", ui->tabWidget->indexOf(ui->tab_LED)).toInt());
     ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AdvancedSettings),
-                                      gEnv.pAppSettings->value("AdvSettings", ui->tabWidget->indexOf(ui->tab_AdvancedSettings)).toInt());
-    ui->tabWidget->setCurrentIndex(gEnv.pAppSettings->value("CurrentIndex", 0).toInt());
-    gEnv.pAppSettings->endGroup();
+                                      appS->value("AdvSettings", ui->tabWidget->indexOf(ui->tab_AdvancedSettings)).toInt());
+    ui->tabWidget->setCurrentIndex(appS->value("CurrentIndex", 0).toInt());
+    appS->endGroup();
 
     // load debug window
-    gEnv.pAppSettings->beginGroup("OtherSettings");
-    m_debugIsEnable = gEnv.pAppSettings->value("DebugEnable", "false").toBool();
+    appS->beginGroup("OtherSettings");
+    m_debugIsEnable = appS->value("DebugEnable", "false").toBool();
     if (m_debugIsEnable){
         on_pushButton_ShowDebug_clicked();
         if (this->isMaximized() == false){
             resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());
         }
     }
-    gEnv.pAppSettings->endGroup();
+    appS->endGroup();
 
     //debug tab, only for debug build
     #ifdef QT_DEBUG
@@ -465,31 +476,32 @@ void MainWindow::loadAppConfig()
 // save app config
 void MainWindow::saveAppConfig()    // перенести сюда сохранение профилей кривых
 {
+    QSettings *appS = gEnv.pAppSettings;
     qDebug()<<"Saving application config";
     // save tab index
-    gEnv.pAppSettings->beginGroup("TabIndexSettings");
-    gEnv.pAppSettings->setValue("PinConfig",       ui->tabWidget->indexOf(ui->tab_PinConfig));
-    gEnv.pAppSettings->setValue("ButtonConfig",    ui->tabWidget->indexOf(ui->tab_ButtonConfig));
-    gEnv.pAppSettings->setValue("AxesConfig",      ui->tabWidget->indexOf(ui->tab_AxesConfig));
-    gEnv.pAppSettings->setValue("AxesCurves",      ui->tabWidget->indexOf(ui->tab_AxesCurves));
-    gEnv.pAppSettings->setValue("ShiftRegs",       ui->tabWidget->indexOf(ui->tab_ShiftRegisters));
-    gEnv.pAppSettings->setValue("Encoders",        ui->tabWidget->indexOf(ui->tab_Encoders));
-    gEnv.pAppSettings->setValue("LED",             ui->tabWidget->indexOf(ui->tab_LED));
-    gEnv.pAppSettings->setValue("AdvSettings",     ui->tabWidget->indexOf(ui->tab_AdvancedSettings));
-    gEnv.pAppSettings->setValue("CurrentIndex",    ui->tabWidget->currentIndex());
-    gEnv.pAppSettings->endGroup();
+    appS->beginGroup("TabIndexSettings");
+    appS->setValue("PinConfig",       ui->tabWidget->indexOf(ui->tab_PinConfig));
+    appS->setValue("ButtonConfig",    ui->tabWidget->indexOf(ui->tab_ButtonConfig));
+    appS->setValue("AxesConfig",      ui->tabWidget->indexOf(ui->tab_AxesConfig));
+    appS->setValue("AxesCurves",      ui->tabWidget->indexOf(ui->tab_AxesCurves));
+    appS->setValue("ShiftRegs",       ui->tabWidget->indexOf(ui->tab_ShiftRegisters));
+    appS->setValue("Encoders",        ui->tabWidget->indexOf(ui->tab_Encoders));
+    appS->setValue("LED",             ui->tabWidget->indexOf(ui->tab_LED));
+    appS->setValue("AdvSettings",     ui->tabWidget->indexOf(ui->tab_AdvancedSettings));
+    appS->setValue("CurrentIndex",    ui->tabWidget->currentIndex());
+    appS->endGroup();
     // save window settings
-    gEnv.pAppSettings->beginGroup("WindowSettings");
-    gEnv.pAppSettings->setValue("Geometry",   this->saveGeometry());
-    gEnv.pAppSettings->endGroup();
+    appS->beginGroup("WindowSettings");
+    appS->setValue("Geometry",   this->saveGeometry());
+    appS->endGroup();
     // save font settings
-    gEnv.pAppSettings->beginGroup("FontSettings");
-    gEnv.pAppSettings->setValue("FontSize", QApplication::font().pointSize());
-    gEnv.pAppSettings->endGroup();
+    appS->beginGroup("FontSettings");
+    appS->setValue("FontSize", QApplication::font().pointSize());
+    appS->endGroup();
     // save debug
-    gEnv.pAppSettings->beginGroup("OtherSettings");
-    gEnv.pAppSettings->setValue("DebugEnable", m_debugIsEnable);
-    gEnv.pAppSettings->endGroup();
+    appS->beginGroup("OtherSettings");
+    appS->setValue("DebugEnable", m_debugIsEnable);
+    appS->endGroup();
     qDebug()<<"done";
 }
 
@@ -519,7 +531,6 @@ void MainWindow::on_pushButton_ReadConfig_clicked()
     ui->pushButton_WriteConfig->setEnabled(false);
 
     m_hidDeviceWorker->getConfigFromDevice();
-    //qDebug()<<"done";
 }
 // write config to device
 void MainWindow::on_pushButton_WriteConfig_clicked()
@@ -527,11 +538,9 @@ void MainWindow::on_pushButton_WriteConfig_clicked()
     qDebug()<<"Write config started";
     ui->pushButton_WriteConfig->setEnabled(false);  // не успевает блокироваться? таймер
     ui->pushButton_ReadConfig->setEnabled(false);
-//    index_device_before_write_ = ui->comboBox_HidDeviceList->currentIndex();
 
     writeToConfig();
     m_hidDeviceWorker->sendConfigToDevice();
-    //qDebug()<<"done";
 }
 // load from file
 void MainWindow::on_pushButton_LoadFromFile_clicked()
