@@ -1,10 +1,10 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include <QDebug>
+#include <QElapsedTimer>
 #include <QFile>
 #include <QTextStream>
-#include <QElapsedTimer>
-#include <QDebug>
 
 // global environment
 #include "global.h"
@@ -20,13 +20,12 @@ void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, con
     // mutex?
     if (gEnv.pDebugWindow != nullptr) {
         // для мультипотока, хз правильно ли, но работает // не уверен насчёт ссылки, мб надо копию передавать с мультипотоком
-        QMetaObject::invokeMethod(gEnv.pDebugWindow, "PrintMsg", Qt::QueuedConnection, Q_ARG(const QString, msg));
+        QMetaObject::invokeMethod(gEnv.pDebugWindow, "printMsg", Qt::QueuedConnection, Q_ARG(const QString, msg));
     }
 
     // Call the default handler.
     (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -40,8 +39,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // global
-    QString app_version = "0.5.3";     // тупо, надо в дефайне?
-    QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
+    QString app_version = "0.5.4"; // тупо, надо в дефайне?
+    QSettings app_settings("FreeJoySettings.conf", QSettings::IniFormat);
     DeviceConfig device_config;
 
     gEnv.pAppVersion = &app_version;
@@ -69,41 +68,34 @@ int main(int argc, char *argv[])
     if (style == "default") // ?
     {
         QFile f(":/styles/default.qss");
-        if (!f.exists())   {
-            qDebug()<<"Unable to set stylesheet, file not found\n";
-        }
-        else   {
+        if (!f.exists()) {
+            qDebug() << "Unable to set stylesheet, file not found\n";
+        } else {
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
             w.setStyleSheet(ts.readAll());
         }
-    }
-    else if (style == "white")
-    {
+    } else if (style == "white") {
         QFile f(":qss/qss.qss");
-        if (!f.exists())   {
-            qDebug()<<"Unable to set stylesheet, file not found\n";
-        }
-        else   {
+        if (!f.exists()) {
+            qDebug() << "Unable to set stylesheet, file not found\n";
+        } else {
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
             w.setStyleSheet(ts.readAll());
         }
-    }
-    else if (style == "dark")
-    {
+    } else if (style == "dark") {
         QFile f(":qdarkstyle/style.qss");
-        if (!f.exists())   {
-            qDebug()<<"Unable to set stylesheet, file not found\n";
-        }
-        else   {
+        if (!f.exists()) {
+            qDebug() << "Unable to set stylesheet, file not found\n";
+        } else {
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
             w.setStyleSheet(ts.readAll());
         }
     }
 
-    qDebug()<<"Application startup time ="<< gEnv.pApp_start_time->elapsed() << "ms";
+    qDebug() << "Application startup time =" << gEnv.pApp_start_time->elapsed() << "ms";
     w.show();
 
     return a.exec();
