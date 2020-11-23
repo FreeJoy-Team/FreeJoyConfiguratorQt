@@ -31,7 +31,7 @@ public:
     Flasher *flasher() const; // const?
 
 signals:
-    void languageChanged(QString language);
+    void languageChanged(const QString &language);
     void interfaceStyleChanged(bool is_dark);
 
     void fontChanged();

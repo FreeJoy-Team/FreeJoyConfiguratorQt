@@ -29,8 +29,7 @@ AdvancedSettings::AdvancedSettings(QWidget *parent)
     gEnv.pAppSettings->endGroup();
 
     gEnv.pAppSettings->beginGroup("OtherSettings");
-    ui->checkBox_LoadDefCfg->setChecked(
-        gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool());
+    ui->checkBox_LoadDefCfg->setChecked(gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool());
     gEnv.pAppSettings->endGroup();
 }
 
@@ -101,8 +100,8 @@ void AdvancedSettings::setStyle(QPushButton *pressedButton, QString filePath, QS
     ui->pushButton_StyleWhite->setEnabled(false);
     ui->pushButton_StyleDark->setEnabled(false);
     pressedButton->setText(tr("Loading... Please wait"));
-    pressedButton->setStyleSheet(
-        m_default_style + "color: rgb(230, 230, 230); background-color: rgb(170, 170, 0);");
+    pressedButton->setStyleSheet(m_default_style
+                                 + QStringLiteral("color: rgb(230, 230, 230); background-color: rgb(170, 170, 0);"));
 
     // без таймера не успевает отрисовать изменения текста и стиля кнопки
     QTimer::singleShot(10, [&, pressedButton, filePath, styleName, isDark] {
@@ -157,8 +156,7 @@ void AdvancedSettings::setStyle(QPushButton *pressedButton, QString filePath, QS
                 child->hide();
             }
 
-            window()->setStyleSheet(
-                QLatin1String(f.readAll())); // повторный вызовQLatin1String(f.readAll()) == ""
+            window()->setStyleSheet(QLatin1String(f.readAll())); // повторный вызовQLatin1String(f.readAll()) == ""
             // очень медленно, не знаю как ускорить
             // хз чё делать
             qApp->setStyleSheet(QLatin1String(f.readAll())); // а тут QLatin1String(f.readAll()) = "" пустота
@@ -211,12 +209,14 @@ void AdvancedSettings::on_pushButton_Wiki_clicked()
 // about
 void AdvancedSettings::on_pushButton_About_clicked()
 {
-    QString version("<p align=\"center\">FreeJoyConfiguratorQt v" + *gEnv.pAppVersion); // тупо, надо в дефайне
-    QString source("<br> Source code available on <A "
-                   "HREF=\"https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt\">GutHub</A>");
-    QString wiki("<br> Check <A HREF=\"https://github.com/FreeJoy-Team/FreeJoyWiki\">our wiki</A> "
-                 "for detailed instructions.");
-    QMessageBox::about(this, "About FreeJoyQt", version + wiki + "<p align=\"center\">Build with Qt " + QString(QT_VERSION_STR) + source);
+    const QString version("<p align=\"center\">FreeJoyConfiguratorQt v" + *gEnv.pAppVersion + " "); // тупо, надо в дефайне?
+    const QString source = tr("<br>Built with Qt %1 (%2)<br>"
+                              R"(Source code available under GPLv3 on <a style="color: #03A9F4; text-decoration:none;" href="https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt">Github</a><br>)")
+                               .arg(QT_VERSION_STR, QSysInfo::buildCpuArchitecture()); //"Copyright © %3 Reksotiv and contributors"//, "2020"
+
+    const QString wiki(tr(R"(<br>Check <a style="color: #03A9F4; text-decoration:none;" href="https://github.com/FreeJoy-Team/FreeJoyWiki">our wiki </a>)"
+        "for detailed instructions."));
+    QMessageBox::about(this, tr("About FreeJoyQt"), version + source + wiki);
 }
 
 void AdvancedSettings::readFromConfig()
