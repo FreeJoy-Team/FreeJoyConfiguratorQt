@@ -10,9 +10,8 @@ QT_END_NAMESPACE
 
 #include "axescurves.h"
 
-#include "global.h"
 #include "deviceconfig.h"
-
+#include "global.h"
 
 namespace Ui {
 class AxesCurvesConfig;
@@ -26,42 +25,42 @@ public:
     explicit AxesCurvesConfig(QWidget *parent = nullptr);
     ~AxesCurvesConfig();
 
-    void ReadFromConfig();
-    void WriteToConfig();
+    void readFromConfig();
+    void writeToConfig();
 
-    void RetranslateUi();
+    void retranslateUi();
 
-    void SetDarkInterface(bool is_dark);
+    void setDarkInterface(bool isDark);
 
-    void UpdateAxesCurves();
+    void updateAxesCurves();
 
-    void DeviceStatus(bool is_connect);
+    void deviceStatus(bool isConnect);
 
 private slots:
-    void setCurvesValue(int axis_number, int point_number, int value); // может указатели?
+    void setCurvesValue(int axisNumber, int pointNumber, int value); // может указатели?
     void profileIndexChanged(int index);
 
     void on_pushButton_ResetProfiles_clicked();
 
 private:
     Ui::AxesCurvesConfig *ui;
-    QList<AxesCurves*> AxesCurvPtrList_;
-    QList<QComboBox*> ProfilesCBoxPtrList_;
+    QList<AxesCurves *> m_axesCurvPtrList;
+    QList<QComboBox *> m_profilesCBoxPtrList;
 
-    int curves_points_value_[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT];
+    int m_curvesPointsValue[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT];
 
-    const QStringList curves_list_ =    // курве 8 = MAX_AXIS_NUM ! или менять curves_points_value_ в axescurvesconfig
-    {{
-        {tr("Not used")},
-        {tr("Curve 1")},
-        {tr("Curve 2")},
-        {tr("Curve 3")},
-        {tr("Curve 4")},
-        {tr("Curve 5")},
-        {tr("Curve 6")},
-        {tr("Curve 7")},
-        {tr("Curve 8")},
-    }};
+    const QStringList m_curvesList = // курве 8 = MAX_AXIS_NUM ! или менять curves_points_value_ в axescurvesconfig
+        {{
+            {tr("Not used")},
+            {tr("Curve 1")},
+            {tr("Curve 2")},
+            {tr("Curve 3")},
+            {tr("Curve 4")},
+            {tr("Curve 5")},
+            {tr("Curve 6")},
+            {tr("Curve 7")},
+            {tr("Curve 8")},
+        }};
 };
 
 #endif // AXESCURVESCONFIG_H

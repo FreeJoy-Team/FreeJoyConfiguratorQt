@@ -4,17 +4,16 @@
 #include "deviceconfig.h"
 #include <vector>
 
-#include "global.h"
 #include "deviceconfig.h"
-
+#include "global.h"
 
 class ReportConverter
 {
 public:
-    void GamepadReport(uint8_t * hid_buffer);
+    void gamepadReport(uint8_t *hid_buffer);
 
-    dev_config_t GetConfigFromDevice(uint8_t * hid_buffer);
-    std::vector<uint8_t> SendConfigToDevice(uint8_t request_config_number);        // ****
+    dev_config_t getConfigFromDevice(uint8_t *hid_buffer);
+    std::vector<uint8_t> sendConfigToDevice(uint8_t request_config_number); // ****
 };
 
 #endif // REPORTCONVERTER_H

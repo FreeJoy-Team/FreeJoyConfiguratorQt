@@ -1,8 +1,8 @@
 #ifndef LEDCONFIG_H
 #define LEDCONFIG_H
 
-#include <QWidget>
 #include "led.h"
+#include <QWidget>
 
 namespace Ui {
 class LedConfig;
@@ -16,23 +16,23 @@ public:
     explicit LedConfig(QWidget *parent = nullptr);
     ~LedConfig();
 
-    void LedStateChanged();
+    void setLedsState();
 
-    void ReadFromConfig();
-    void WriteToConfig();
+    void readFromConfig();
+    void writeToConfig();
 
-    void RetranslateUi();
+    void retranslateUi();
 
     //void ButtonLEDStateChanged();     // future
 
-public slots:
-    void SpawnLEDs(int led_count);
+private slots:
+    void spawnLeds(int ledCount);
 
 private:
     Ui::LedConfig *ui;
 
-    QList<LED*> LEDPtrList_;
-    int current_led_count_;
+    QList<LED *> m_ledPtrList;
+    int m_currentLedCount;
 };
 
 #endif // LEDCONFIG_H

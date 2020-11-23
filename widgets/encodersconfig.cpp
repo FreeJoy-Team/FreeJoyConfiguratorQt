@@ -7,17 +7,17 @@ EncodersConfig::EncodersConfig(QWidget *parent) :
     ui(new Ui::EncodersConfig)
 {
     ui->setupUi(this);
-    encoders_input_A_count_ = 0;
-    encoders_input_B_count_ = 0;
-    not_defined_ = tr("Not defined");
+    m_encodersInput_A_count = 0;
+    m_encodersInput_B_count = 0;
+    m_notDefined = tr("Not defined");
 
-    fast_encoder_input_A_ = 0;
-    fast_encoder_input_B_ = 0;
+    m_fastEncoderInput_A = 0;
+    m_fastEncoderInput_B = 0;
 
     for (int i = 1; i < ENCODER_TYPE_COUNT; ++i) {      // i = 1 - fast encoder without ENCODER_CONF_1x
-        ui->comboBox_EncoderType->addItem(fastEncoder_type_list_[i].gui_name);
-        ui->label_ButtonNumberA->setText(not_defined_);
-        ui->label_ButtonNumberB->setText(not_defined_);
+        ui->comboBox_EncoderType->addItem(m_fastEncoderTypeList[i].guiName);
+        ui->label_ButtonNumberA->setText(m_notDefined);
+        ui->label_ButtonNumberB->setText(m_notDefined);
     }
 
     ui->layoutV_Encoders->setAlignment(Qt::AlignTop);
@@ -26,7 +26,7 @@ EncodersConfig::EncodersConfig(QWidget *parent) :
     {
         Encoders * encoder = new Encoders(i, this);
         ui->layoutV_Encoders->addWidget(encoder);
-        EncodersPtrList_.append(encoder);
+        m_encodersPtrList.append(encoder);
         //encoder->hide();
     }
 }
@@ -36,39 +36,39 @@ EncodersConfig::~EncodersConfig()
     delete ui;
 }
 
-void EncodersConfig::RetranslateUi()
+void EncodersConfig::retranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < EncodersPtrList_.size(); ++i) {
-        EncodersPtrList_[i]->RetranslateUi();
+    for (int i = 0; i < m_encodersPtrList.size(); ++i) {
+        m_encodersPtrList[i]->retranslateUi();
     }
 }
 
-void EncodersConfig::fastEncoderSelected(QString pin_gui_name, bool is_selected)
+void EncodersConfig::fastEncoderSelected(QString pinGuiName, bool isSelected)
 {
-    if (is_selected == true){
-        if (ui->label_ButtonNumberA->text() == not_defined_){
-            ui->label_ButtonNumberA->setText(pin_gui_name);
-            fast_encoder_input_A_++;
+    if (isSelected == true){
+        if (ui->label_ButtonNumberA->text() == m_notDefined){
+            ui->label_ButtonNumberA->setText(pinGuiName);
+            m_fastEncoderInput_A++;
         } else {
-            ui->label_ButtonNumberB->setText(pin_gui_name);
-            fast_encoder_input_B_++;
+            ui->label_ButtonNumberB->setText(pinGuiName);
+            m_fastEncoderInput_B++;
         }
     } else {
-        if (ui->label_ButtonNumberA->text() == pin_gui_name){
-            ui->label_ButtonNumberA->setText(not_defined_);
-            fast_encoder_input_A_--;
+        if (ui->label_ButtonNumberA->text() == pinGuiName){
+            ui->label_ButtonNumberA->setText(m_notDefined);
+            m_fastEncoderInput_A--;
         } else {
-            ui->label_ButtonNumberB->setText(not_defined_);
-            fast_encoder_input_B_--;
+            ui->label_ButtonNumberB->setText(m_notDefined);
+            m_fastEncoderInput_B--;
         }
     }
-    SetUiOnOff();
+    setUiOnOff();
 }
 
-void EncodersConfig::SetUiOnOff()
+void EncodersConfig::setUiOnOff()
 {
-    if (fast_encoder_input_A_ > 0 && fast_encoder_input_B_ > 0){
+    if (m_fastEncoderInput_A > 0 && m_fastEncoderInput_B > 0){
         for(auto&& child:ui->groupBox_FastEncoder->findChildren<QWidget *>()){
         child->setEnabled(true);
         }
@@ -79,7 +79,7 @@ void EncodersConfig::SetUiOnOff()
     }
 }
 
-// WARNING GOVNOKOD !!!!
+
 void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // ограничитель на макс энкодер или через сортировку
 {
     int tmp_add = 0;
@@ -88,20 +88,20 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // �
     // add encoder A input
     if (encoder_A > 0)
     {
-        encoders_input_A_count_++;
-        for (int i = 0; i < encoders_input_A_count_; ++i)
+        m_encodersInput_A_count++;
+        for (int i = 0; i < m_encodersInput_A_count; ++i)
         {
-            if (encoder_A < EncodersPtrList_[i]->GetInputA() || EncodersPtrList_[i]->GetInputA() == 0)    // encoder_A != 0 && ( legacy
+            if (encoder_A < m_encodersPtrList[i]->inputA() || m_encodersPtrList[i]->inputA() == 0)    // encoder_A != 0 && ( legacy
             {
-                if (EncodersPtrList_[i]->GetInputA() != 0)
+                if (m_encodersPtrList[i]->inputA() != 0)
                 {
-                    tmp_add = EncodersPtrList_[i]->GetInputA();
-                    EncodersPtrList_[i]->SetInputA(encoder_A);
+                    tmp_add = m_encodersPtrList[i]->inputA();
+                    m_encodersPtrList[i]->setInputA(encoder_A);
                     encoder_A = tmp_add;
                 }
-                else if (EncodersPtrList_[i]->GetInputA() == 0)
+                else if (m_encodersPtrList[i]->inputA() == 0)
                 {
-                    EncodersPtrList_[i]->SetInputA(encoder_A);
+                    m_encodersPtrList[i]->setInputA(encoder_A);
                 }
             }
         }
@@ -110,40 +110,40 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // �
     else if (encoder_A < 0)
     {
         encoder_A = -encoder_A;
-        for (int i = 0; i < encoders_input_A_count_; ++i)
+        for (int i = 0; i < m_encodersInput_A_count; ++i)
         {
-            if (EncodersPtrList_[i]->GetInputA() == encoder_A)   //encoder_A != 0 && (
+            if (m_encodersPtrList[i]->inputA() == encoder_A)   //encoder_A != 0 && (
             {
-                for (int j = i; j < encoders_input_A_count_; ++j)
+                for (int j = i; j < m_encodersInput_A_count; ++j)
                 {
-                    tmp_delete = EncodersPtrList_[j+1]->GetInputA();
-                    EncodersPtrList_[j]->SetInputA(EncodersPtrList_[j+1]->GetInputA());
+                    tmp_delete = m_encodersPtrList[j+1]->inputA();
+                    m_encodersPtrList[j]->setInputA(m_encodersPtrList[j+1]->inputA());
                     encoder_A = tmp_delete;
                 }
                 break;
             }
         }
-        encoders_input_A_count_--;
+        m_encodersInput_A_count--;
     }
 
     // add encoder B input
     if (encoder_B > 0)              // else?
     {
-        encoders_input_B_count_++;
+        m_encodersInput_B_count++;
 
-        for (int i = 0; i < encoders_input_B_count_; ++i)
+        for (int i = 0; i < m_encodersInput_B_count; ++i)
         {
-            if (encoder_B < EncodersPtrList_[i]->GetInputB() || EncodersPtrList_[i]->GetInputB() == 0)        //encoder_B != 0 && (
+            if (encoder_B < m_encodersPtrList[i]->inputB() || m_encodersPtrList[i]->inputB() == 0)        //encoder_B != 0 && (
             {
-                if (EncodersPtrList_[i]->GetInputB() != 0)
+                if (m_encodersPtrList[i]->inputB() != 0)
                 {
-                    tmp_add = EncodersPtrList_[i]->GetInputB();
-                    EncodersPtrList_[i]->SetInputB(encoder_B);
+                    tmp_add = m_encodersPtrList[i]->inputB();
+                    m_encodersPtrList[i]->setInputB(encoder_B);
                     encoder_B = tmp_add;
                 }
-                else if (EncodersPtrList_[i]->GetInputB() == 0)
+                else if (m_encodersPtrList[i]->inputB() == 0)
                 {
-                    EncodersPtrList_[i]->SetInputB(encoder_B);
+                    m_encodersPtrList[i]->setInputB(encoder_B);
                 }
             }
         }
@@ -152,38 +152,38 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // �
     else if (encoder_B < 0)
     {
         encoder_B = -encoder_B;
-        for (int i = 0; i < encoders_input_B_count_; ++i)
+        for (int i = 0; i < m_encodersInput_B_count; ++i)
         {
-            if (EncodersPtrList_[i]->GetInputB() == encoder_B)       //encoder_B != 0 &&
+            if (m_encodersPtrList[i]->inputB() == encoder_B)       //encoder_B != 0 &&
             {
-                for (int j = i; j < encoders_input_B_count_; ++j)
+                for (int j = i; j < m_encodersInput_B_count; ++j)
                 {
-                    tmp_delete = EncodersPtrList_[j+1]->GetInputB();
-                    EncodersPtrList_[j]->SetInputB(EncodersPtrList_[j+1]->GetInputB());
+                    tmp_delete = m_encodersPtrList[j+1]->inputB();
+                    m_encodersPtrList[j]->setInputB(m_encodersPtrList[j+1]->inputB());
                     encoder_B = tmp_delete;
                 }
                 break;
             }
         }
-        encoders_input_B_count_--;
+        m_encodersInput_B_count--;
     }
 }
 
-void EncodersConfig::ReadFromConfig()
+void EncodersConfig::readFromConfig()
 {
     ui->comboBox_EncoderType->setCurrentIndex(gEnv.pDeviceConfig->config.encoders[0] - 1);      // - 1 - fast encoder without ENCODER_CONF_1x
 
     for (int i = 0; i < MAX_ENCODERS_NUM - FAST_ENCODER_COUNT; i++)
     {
-        EncodersPtrList_[i]->ReadFromConfig();
+        m_encodersPtrList[i]->readFromConfig();
     }
 }
 
-void EncodersConfig::WriteToConfig()
+void EncodersConfig::writeToConfig()
 {
     gEnv.pDeviceConfig->config.encoders[0] = ui->comboBox_EncoderType->currentIndex() + 1;      // + 1 - fast encoder without ENCODER_CONF_1x
     for (int i = 0; i < MAX_ENCODERS_NUM - FAST_ENCODER_COUNT; i++)
     {
-        EncodersPtrList_[i]->WriteToConfig();
+        m_encodersPtrList[i]->writeToConfig();
     }
 }

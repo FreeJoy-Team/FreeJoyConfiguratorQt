@@ -15,17 +15,17 @@ void HidDevice::processData()
 
     int res = 0;
     bool change = false;
-    bool no_device_sent = false;
+    bool noDeviceSent = false;
     //bool name_checked = false;
-    flasher_ = nullptr;
+    m_flasher = nullptr;
     QList<hid_device_info*> tmp_HidDevicesAdrList;
-    hid_device_info* hid_dev_info;
-    QStringList str_list;
+    hid_device_info* hidDevInfo;
+    QStringList strList;
     uint8_t buffer[BUFFSIZE]={0};
 
-    current_work_ = REPORT_ID_JOY;
+    m_currentWork = REPORT_ID_JOY;
 
-    while (is_finish_ == false)
+    while (m_isFinish == false)
     {
         // check connected devices
         if (!change)
@@ -35,48 +35,48 @@ void HidDevice::processData()
         }
         else if (change && timer.elapsed() > 800)   // change is always true
         {
-            hid_dev_info = hid_enumerate(VID, 0x0);
-            if (!hid_dev_info && no_device_sent == false)
+            hidDevInfo = hid_enumerate(VID, 0x0);
+            if (!hidDevInfo && noDeviceSent == false)
             {
-                str_list.clear();
-                HidDevicesAdrList.clear();
-                emit hidDeviceList(&str_list);
-                no_device_sent = true;
+                strList.clear();
+                m_HidDevicesAdrList.clear();
+                emit hidDeviceList(&strList);
+                noDeviceSent = true;
                 //name_checked = false;
             }
 
-            while(hid_dev_info)
+            while(hidDevInfo)
             {
-                if(QString::fromWCharArray(hid_dev_info->product_string) == "FreeJoy Flasher"){
-                    if (!flasher_){
+                if(QString::fromWCharArray(hidDevInfo->product_string) == "FreeJoy Flasher"){
+                    if (!m_flasher){
                         qDebug()<<"processData - Flasher found";
-                        flasher_ = hid_dev_info;
+                        m_flasher = hidDevInfo;    // первый
                         emit flasherFound(true);
                     }
-                    flasher_ = hid_dev_info;
-                    hid_dev_info = hid_dev_info->next;
-                    if (current_work_ == REPORT_ID_FIRMWARE)    // дерьма накодил?
+                    m_flasher = hidDevInfo;    // второй раз?
+                    hidDevInfo = hidDevInfo->next;
+                    if (m_currentWork == REPORT_ID_FIRMWARE)    // дерьма накодил?
                     {
-                        FlashFirmwareToDevice();
-                        current_work_ = REPORT_ID_JOY;
+                        flashFirmwareToDevice();
+                        m_currentWork = REPORT_ID_JOY;
                     }
                     continue;
                 }
 
-                tmp_HidDevicesAdrList.append(hid_dev_info);
-                hid_dev_info = hid_dev_info->next;
-                if (!hid_dev_info && HidDevicesAdrList.size() != tmp_HidDevicesAdrList.size())
+                tmp_HidDevicesAdrList.append(hidDevInfo);
+                hidDevInfo = hidDevInfo->next;
+                if (!hidDevInfo && m_HidDevicesAdrList.size() != tmp_HidDevicesAdrList.size())
                 {
                     //QThread::msleep(20);   // хз
-                    HidDevicesAdrList.clear();
-                    str_list.clear();
-                    no_device_sent = false;
+                    m_HidDevicesAdrList.clear();
+                    strList.clear();
+                    noDeviceSent = false;
                     for (int i = 0; i < tmp_HidDevicesAdrList.size(); ++i)
                     {
-                        HidDevicesAdrList.append(tmp_HidDevicesAdrList[i]);
-                        str_list << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
+                        m_HidDevicesAdrList.append(tmp_HidDevicesAdrList[i]);
+                        strList << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
                     }
-                    emit hidDeviceList(&str_list);
+                    emit hidDeviceList(&strList);
                     tmp_HidDevicesAdrList.clear();
                 }
             }
@@ -85,22 +85,22 @@ void HidDevice::processData()
         }
 
         // no device
-        if (!handle_read)
+        if (!m_handleRead)
         {
-            if (HidDevicesAdrList.size()){          // ?
-                handle_read = hid_open(VID, HidDevicesAdrList[0]->product_id,nullptr);
+            if (m_HidDevicesAdrList.size()){          // ?
+                m_handleRead = hid_open(VID, m_HidDevicesAdrList[0]->product_id,nullptr);
             }
-            if (!handle_read) {
+            if (!m_handleRead) {
                 //name_checked = false;
                 emit putDisconnectedDeviceInfo();
                 //hid_free_enumeration(hid_dev_info);
-                QThread::msleep(300);
+                QThread::msleep(500);
             } else {
                 emit putConnectedDeviceInfo();
             }
         }
         // device connected
-        if (handle_read)
+        if (m_handleRead)
         {
 
 //            if (name_checked == false)
@@ -117,29 +117,29 @@ void HidDevice::processData()
 //            }
 
             // read joy report
-            if (current_work_ == REPORT_ID_JOY)
+            if (m_currentWork == REPORT_ID_JOY)
             {
-                res=hid_read_timeout(handle_read, buffer, BUFFSIZE,10000);         // 10000?
+                res=hid_read_timeout(m_handleRead, buffer, BUFFSIZE,10000);         // 10000?
                 if (res < 0) {
-                    hid_close(handle_read);
-                    handle_read=nullptr;
+                    hid_close(m_handleRead);
+                    m_handleRead=nullptr;
                 } else {
                     if (buffer[0] == REPORT_ID_JOY) {   // перестраховка
-                        memset(device_buffer_, 0, BUFFSIZE);
-                        memcpy(device_buffer_, buffer, BUFFSIZE);
-                        emit putGamepadPacket(device_buffer_);
+                        memset(m_deviceBuffer, 0, BUFFSIZE);
+                        memcpy(m_deviceBuffer, buffer, BUFFSIZE);
+                        emit putGamepadPacket(m_deviceBuffer);
                     }
                 }
             }
             // read config from device
-            else if (current_work_ == REPORT_ID_CONFIG_IN)
+            else if (m_currentWork == REPORT_ID_CONFIG_IN)
             {
-                ReadConfigFromDevice(buffer);
+                readConfigFromDevice(buffer);
             }
             // write config to device
-            else if (current_work_ == REPORT_ID_CONFIG_OUT)
+            else if (m_currentWork == REPORT_ID_CONFIG_OUT)
             {
-                WriteConfigToDevice(buffer);
+                writeConfigToDevice(buffer);
 //                HidDevicesAdrList.clear();      // очистка спика устройств после записи конфига
 //                str_list.clear();               // чтобы небыло бага в имени при выборе устройства
 //                no_device_sent = false;         // говнокод
@@ -151,17 +151,17 @@ void HidDevice::processData()
 //            }
         }
     }
-    hid_free_enumeration(hid_dev_info);            // ????
+    hid_free_enumeration(hidDevInfo);            // ????
 }
 
 // stop processData, close app
-void HidDevice::SetIsFinish(bool is_finish)
+void HidDevice::setIsFinish(bool is_finish)
 {
-    is_finish_ = is_finish;
+    m_isFinish = is_finish;
 }
 
 // read config
-void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
+void HidDevice::readConfigFromDevice(uint8_t *buffer)
 {
     QElapsedTimer timer;
     timer.start();
@@ -172,17 +172,17 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
     uint8_t config_request_buffer[2] = {REPORT_ID_CONFIG_IN, 1};
 
     start_time = timer.elapsed();
-    resend_time = timer.elapsed();
-    hid_write(handle_read, config_request_buffer, 2);
+    resend_time = start_time;
+    hid_write(m_handleRead, config_request_buffer, 2);
 
     while (timer.elapsed() < start_time + 2000)
     {
-        if (handle_read)    // перестаховка
+        if (m_handleRead)    // перестаховка
         {
-            res=hid_read_timeout(handle_read, buffer, BUFFSIZE,100);
+            res=hid_read_timeout(m_handleRead, buffer, BUFFSIZE,100);
             if (res < 0) {
-                hid_close(handle_read);
-                handle_read=nullptr;
+                hid_close(m_handleRead);
+                m_handleRead=nullptr;
             }
             else
             {
@@ -190,9 +190,9 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
                 {
                     if (buffer[1] == config_request_buffer[1])
                     {
-                        gEnv.pDeviceConfig->config = report_convert->GetConfigFromDevice(buffer);
+                        gEnv.pDeviceConfig->config = m_reportConvert->getConfigFromDevice(buffer);
                         config_request_buffer[1] += 1;
-                        hid_write(handle_read, config_request_buffer, 2);
+                        hid_write(m_handleRead, config_request_buffer, 2);
                         report_count++;
                         qDebug()<<"Config"<<report_count<<"received";
                         if (config_request_buffer[1] > CONFIG_COUNT)
@@ -206,11 +206,11 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
                     qDebug() << "Resend activated";
                     config_request_buffer[1] = 1;
                     resend_time = timer.elapsed();
-                    hid_write(handle_read, config_request_buffer, 2);
+                    hid_write(m_handleRead, config_request_buffer, 2);
                 }
             }
         } else {    // перестаховка
-            current_work_ = REPORT_ID_JOY;
+            m_currentWork = REPORT_ID_JOY;
             emit configReceived(false);
             break;
         }
@@ -223,16 +223,16 @@ void HidDevice::ReadConfigFromDevice(uint8_t *buffer)
     }
 
     if (report_count == CONFIG_COUNT) {
-        current_work_ = REPORT_ID_JOY;
+        m_currentWork = REPORT_ID_JOY;
         emit configReceived(true);
     } else {
-        current_work_ = REPORT_ID_JOY;
+        m_currentWork = REPORT_ID_JOY;
         emit configReceived(false);
     }
 }
 
 // write config
-void HidDevice::WriteConfigToDevice(uint8_t *buffer)
+void HidDevice::writeConfigToDevice(uint8_t *buffer)
 {
     QElapsedTimer timer;
     timer.start();
@@ -243,17 +243,17 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
     uint8_t config_out_buffer[BUFFSIZE] = {REPORT_ID_CONFIG_OUT, 0};
 
     start_time = timer.elapsed();
-    resend_time = timer.elapsed();
-    hid_write(handle_read, config_out_buffer, BUFFSIZE);
+    resend_time = start_time;
+    hid_write(m_handleRead, config_out_buffer, BUFFSIZE);
 
     while (timer.elapsed() < start_time + 2000)
     {
-        if (handle_read)    // перестаховка
+        if (m_handleRead)    // перестаховка
         {
-            res=hid_read_timeout(handle_read, buffer, BUFFSIZE,100);
+            res=hid_read_timeout(m_handleRead, buffer, BUFFSIZE,100);
             if (res < 0) {
-                hid_close(handle_read);
-                handle_read=nullptr;
+                hid_close(m_handleRead);
+                m_handleRead=nullptr;
             }
             else
             {
@@ -262,14 +262,14 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
                     if (buffer[1] == config_out_buffer[1] + 1)
                     {
                         config_out_buffer[1] += 1;
-                        std::vector<uint8_t> tmp_buf = report_convert->SendConfigToDevice(config_out_buffer[1]);
+                        std::vector<uint8_t> tmp_buf = m_reportConvert->sendConfigToDevice(config_out_buffer[1]);
                         //memcpy((uint8_t*)(config_buffer), tmp, BUFFSIZE);
                         for (int i = 2; i < 64; i++)
                         {                                       // какой пиздец
                             config_out_buffer[i] = tmp_buf[i];
                         }
 
-                        hid_write(handle_read, config_out_buffer, BUFFSIZE);
+                        hid_write(m_handleRead, config_out_buffer, BUFFSIZE);
                         report_count++;
                         qDebug()<<"Config"<<report_count<<"sent";
 
@@ -282,11 +282,11 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
                 {
                     qDebug() << "Resend activated";
                     resend_time = timer.elapsed();
-                    hid_write(handle_read, config_out_buffer, BUFFSIZE);
+                    hid_write(m_handleRead, config_out_buffer, BUFFSIZE);
                 }
             }
         } else {    // перестаховка
-            current_work_ = REPORT_ID_JOY;
+            m_currentWork = REPORT_ID_JOY;
             emit configSent(false);
             break;
         }
@@ -299,29 +299,29 @@ void HidDevice::WriteConfigToDevice(uint8_t *buffer)
     }
 
     if (report_count == CONFIG_COUNT) {
-        current_work_ = REPORT_ID_JOY;
+        m_currentWork = REPORT_ID_JOY;
         emit configSent(true);
     } else {
-        current_work_ = REPORT_ID_JOY;
+        m_currentWork = REPORT_ID_JOY;
         emit configSent(false);
     }
 }
 
 // flash firmware
-void HidDevice::FlashFirmwareToDevice()
+void HidDevice::flashFirmwareToDevice()
 {
-    qDebug()<<"flash size = "<<firmware_->size();
-    if(flasher_)
+    qDebug()<<"flash size = "<<m_firmware->size();
+    if(m_flasher)
     {
-        hid_device* flasher = hid_open(VID, flasher_->product_id, flasher_->serial_number);;
+        hid_device* flasher = hid_open(VID, m_flasher->product_id, m_flasher->serial_number);;
         qint64 millis;
         QElapsedTimer time;
         time.start();
         millis = time.elapsed();
         uint8_t flash_buffer[BUFFSIZE]{};
         uint8_t flasher_device_buffer[BUFFSIZE]{};
-        uint16_t length = (uint16_t)firmware_->size();
-        uint16_t crc16 = FirmwareUpdater::ComputeChecksum(firmware_);
+        uint16_t length = (uint16_t)m_firmware->size();
+        uint16_t crc16 = FirmwareUpdater::computeChecksum(m_firmware);
         int update_percent = 0;
 
         flash_buffer[0] = REPORT_ID_FIRMWARE;
@@ -398,10 +398,10 @@ void HidDevice::FlashFirmwareToDevice()
                     flash_buffer[2] = (uint8_t)(cnt & 0xFF);
                     flash_buffer[3] = 0;
 
-                    if (cnt * 60 < firmware_->size())
+                    if (cnt * 60 < m_firmware->size())
                     {
-                        memcpy(flash_buffer +4, firmware_->constData() + (cnt - 1) * 60, 60);
-                        update_percent = ((cnt - 1) * 60 * 100 / firmware_->size());
+                        memcpy(flash_buffer +4, m_firmware->constData() + (cnt - 1) * 60, 60);
+                        update_percent = ((cnt - 1) * 60 * 100 / m_firmware->size());
                         hid_write(flasher, flash_buffer, 64);
                         emit flashStatus(IN_PROCESS, update_percent);
 
@@ -409,7 +409,7 @@ void HidDevice::FlashFirmwareToDevice()
                     }
                     else
                     {
-                        memcpy(flash_buffer +4, firmware_->constData() + (cnt - 1) * 60, firmware_->size() - (cnt - 1) * 60);     // file_bytes->size() для 32 и 64 бит одинаков?
+                        memcpy(flash_buffer +4, m_firmware->constData() + (cnt - 1) * 60, m_firmware->size() - (cnt - 1) * 60);     // file_bytes->size() для 32 и 64 бит одинаков?
                         update_percent = 0;
                         hid_write(flasher, flash_buffer, 64);
                         emit flashStatus(IN_PROCESS, update_percent);
@@ -423,38 +423,38 @@ void HidDevice::FlashFirmwareToDevice()
 }
 
 // button "get config" clicked
-void HidDevice::GetConfigFromDevice()
+void HidDevice::getConfigFromDevice()
 {
-    current_work_ = REPORT_ID_CONFIG_IN;
+    m_currentWork = REPORT_ID_CONFIG_IN;
 }
 // button "send config" clicked
-void HidDevice::SendConfigToDevice()
+void HidDevice::sendConfigToDevice()
 {
-    current_work_ = REPORT_ID_CONFIG_OUT;
+    m_currentWork = REPORT_ID_CONFIG_OUT;
 }
 // button "flash firmware" clicked
-void HidDevice::FlashFirmware(const QByteArray* firmware)
+void HidDevice::flashFirmware(const QByteArray* firmware)
 {
-    firmware_ = firmware;
-    current_work_ = REPORT_ID_FIRMWARE;
+    m_firmware = firmware;
+    m_currentWork = REPORT_ID_FIRMWARE;
 }
 
-bool HidDevice::EnterToFlashMode()
+bool HidDevice::enterToFlashMode()
 {
-    if(handle_read)
+    if(m_handleRead)
     {
-        flasher_ = nullptr;
+        m_flasher = nullptr;
         qint64 millis;
         QElapsedTimer time;
         time.start();
         millis = time.elapsed();
         qDebug()<<"before hid_write";
         uint8_t config_buffer[64] = {REPORT_ID_FIRMWARE,'b','o','o','t','l','o','a','d','e','r',' ','r','u','n'};
-        hid_write(handle_read, config_buffer, 64);
+        hid_write(m_handleRead, config_buffer, 64);
         qDebug()<<"after hid_write";
         while (time.elapsed() < millis + 1000)
         {
-            if (flasher_){
+            if (m_flasher){
                 return true;
             }
         }
@@ -464,25 +464,26 @@ bool HidDevice::EnterToFlashMode()
 
 
 // another device selected in comboBox
-void HidDevice::SetSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
+void HidDevice::setSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
 {                                                           // только в винде. решил костылём в hidapi.c
     if (device_number < 0){
         //device_number = 0;
         return;
-    } else if (device_number > HidDevicesAdrList.size() - 1){
-        device_number = HidDevicesAdrList.size() - 1;
+    } else if (device_number > m_HidDevicesAdrList.size() - 1){
+        device_number = m_HidDevicesAdrList.size() - 1;
     }
-    selected_device_ = device_number; 
+    m_selectedDevice = device_number; 
     qDebug()<<"HID open start";
     qDebug()<<device_number + 1<<"devices connected";
         // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()
-    handle_read = hid_open(VID, HidDevicesAdrList[selected_device_]->product_id, HidDevicesAdrList[selected_device_]->serial_number);
-//    if (!handle_read) {
-//        emit putDisconnectedDeviceInfo();
-//        //hid_free_enumeration(hid_dev_info);
-//    } else {
+    m_handleRead = hid_open(VID, m_HidDevicesAdrList[m_selectedDevice]->product_id, m_HidDevicesAdrList[m_selectedDevice]->serial_number);
+
+//    if (m_handleRead) {
 //        emit putConnectedDeviceInfo();
+//    } else {
+//        emit putDisconnectedDeviceInfo();
 //    }
+
 #ifdef _WIN32
     qDebug()<<"Unsuccessful serial number attempts ="<<GetSerialNumberAttemption()<<"(not a error)";
     qDebug()<<"Unsuccessful product string attempts ="<<GetProductStrAttemption()<<"(not a error)";

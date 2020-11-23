@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-#include "global.h"
 #include "deviceconfig.h"
+#include "global.h"
 
 #define SHIFT_REG_TYPES 4
 
@@ -17,41 +17,42 @@ class ShiftRegisters : public QWidget
     Q_OBJECT
 
 public:
-    explicit ShiftRegisters(int shift_reg_number, QWidget *parent = nullptr);
+    explicit ShiftRegisters(int shiftRegNumber, QWidget *parent = nullptr);
     ~ShiftRegisters();
 
-    void ReadFromConfig();
-    void WriteToConfig();
+    void readFromConfig();
+    void writeToConfig();
 
-    void RetranslateUi();
+    void retranslateUi();
 
-    void SetLatchPin(int latch_pin, QString pin_gui_name);
-    void SetDataPin(int data_pin, QString pin_gui_name);
+    void setLatchPin(int latchPin, QString pinGuiName);
+    void setDataPin(int dataPin, QString pinGuiName);
 
-    QString not_defined_;       // hz // getter?    В ПРИВАТ!!!
+    const QString &defaultText() const;
 
 signals:
-    void buttonCountChanged(int buttons_count, int shift_reg_number);
+    void buttonCountChanged(int buttonsCount, int shiftRegNumber);
 
 private slots:
-    void calcRegistersCount(int button_count);
+    void calcRegistersCount(int buttonCount);
 
 private:
     Ui::ShiftRegisters *ui;
-    void SetUiOnOff();
+    void setUiOnOff();
 
-    int buttons_count_;
-    int shift_reg_number_;
-    int latch_pin_;
-    int data_pin_;
+    static QString m_notDefined;
+    int m_buttonsCount;
+    int m_shiftRegNumber;
+    int m_latchPin;
+    int m_dataPin;
 
-    const deviceEnum_guiName_t shift_registers_list_[SHIFT_REG_TYPES] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
-    {
-        {HC165_PULL_DOWN,      tr("HC165 Pull Down")},
-        {CD4021_PULL_DOWN,     tr("CD4021 Pull Down")},
-        {HC165_PULL_UP,        tr("HC165 Pull Up")},
-        {CD4021_PULL_UP,       tr("CD4021 Pull Up")},
-    };
+    const deviceEnum_guiName_t m_shiftRegistersList[SHIFT_REG_TYPES] = // порядов обязан быть как в common_types.h!!!!!!!!!!!
+        {
+            {HC165_PULL_DOWN, tr("HC165 Pull Down")},
+            {CD4021_PULL_DOWN, tr("CD4021 Pull Down")},
+            {HC165_PULL_UP, tr("HC165 Pull Up")},
+            {CD4021_PULL_UP, tr("CD4021 Pull Up")},
+        };
 };
 
 #endif // SHIFTREGISTERS_H

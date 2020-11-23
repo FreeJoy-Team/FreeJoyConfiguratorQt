@@ -18,17 +18,17 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , thread_{new QThread}
-    , hid_device_worker_{new HidDevice()}
-    , thread_getSend_config_{new QThread}
-    , pin_config_{new PinConfig(this)}// not need delete. this - parent
-    , button_config_{new ButtonConfig(this)}
-    , led_config_{new LedConfig(this)}
-    , encoder_config_{new EncodersConfig(this)}
-    , shift_reg_config_{new ShiftRegistersConfig(this)}
-    , axes_config_{new AxesConfig(this)}
-    , axes_curves_config_{new AxesCurvesConfig(this)}
-    , adv_settings_{new AdvancedSettings(this)}
+    , m_thread{new QThread}
+    , m_hidDeviceWorker{new HidDevice()}
+    , m_threadGetSendConfig{new QThread}
+    , m_pinConfig{new PinConfig(this)}// not need delete. this - parent
+    , m_buttonConfig{new ButtonConfig(this)}
+    , m_ledConfig{new LedConfig(this)}
+    , m_encoderConfig{new EncodersConfig(this)}
+    , m_shiftRegConfig{new ShiftRegistersConfig(this)}
+    , m_axesConfig{new AxesConfig(this)}
+    , m_axesCurvesConfig{new AxesCurvesConfig(this)}
+    , m_advSettings{new AdvancedSettings(this)}
 {
     qDebug()<<"main + member initialize time ="<< gEnv.pApp_start_time->elapsed() << "ms";
     QElapsedTimer timer;
@@ -46,41 +46,35 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     // load application config
-    // debug window // ну так се - дебаг=нуллптр до LoadAppConfig конфига, но не жрёт ресурсов если дебаг выкл
-    //debug_window_ = nullptr;
-    LoadAppConfig();
-
-//    hid_device_worker_ = new HidDevice();
-//    thread_ = new QThread;
-//    thread_getSend_config_ = new QThread;
+    loadAppConfig();
 
 //    index_device_before_write_ = 0;
 
     qDebug()<<"before add widgets ="<< timer.restart() << "ms";
                                             //////////////// ADD WIDGETS ////////////////
     // add pin widget
-    ui->layoutV_tabPinConfig->addWidget(pin_config_);
+    ui->layoutV_tabPinConfig->addWidget(m_pinConfig);
     qDebug()<<"pin config load time ="<< timer.restart() << "ms";
     // add button widget
-    ui->layoutV_tabButtonConfig->addWidget(button_config_);
+    ui->layoutV_tabButtonConfig->addWidget(m_buttonConfig);
     qDebug()<<"button config load time ="<< timer.restart() << "ms";
     // add axes widget
-    ui->layoutV_tabAxesConfig->addWidget(axes_config_);
+    ui->layoutV_tabAxesConfig->addWidget(m_axesConfig);
     qDebug()<<"axes config load time ="<< timer.restart() << "ms";
     // add axes curves widget
-    ui->layoutV_tabAxesCurvesConfig->addWidget(axes_curves_config_);
+    ui->layoutV_tabAxesCurvesConfig->addWidget(m_axesCurvesConfig);
     qDebug()<<"curves config load time ="<< timer.restart() << "ms";
     // add shift registers widget
-    ui->layoutV_tabShiftRegistersConfig->addWidget(shift_reg_config_);
+    ui->layoutV_tabShiftRegistersConfig->addWidget(m_shiftRegConfig);
     qDebug()<<"shift config load time ="<< timer.restart() << "ms";
     // add encoders widget
-    ui->layoutV_tabEncodersConfig->addWidget(encoder_config_);
+    ui->layoutV_tabEncodersConfig->addWidget(m_encoderConfig);
     qDebug()<<"encoder config load time ="<< timer.restart() << "ms";
     // add led widget
-    ui->layoutV_tabLedConfig->addWidget(led_config_);
+    ui->layoutV_tabLedConfig->addWidget(m_ledConfig);
     qDebug()<<"led config load time ="<< timer.restart() << "ms";
     // add advanced settings widget
-    ui->layoutV_tabAdvSettings->addWidget(adv_settings_);
+    ui->layoutV_tabAdvSettings->addWidget(m_advSettings);
     qDebug()<<"advanced settings load time ="<< timer.restart() << "ms";
 
 
@@ -100,14 +94,14 @@ MainWindow::MainWindow(QWidget *parent)
         child->installEventFilter(new MouseWheelGuard(child));
     }
     // хз так или сверху исключать?
-    for (auto&& child: pin_config_->findChildren<PinComboBox *>())
+    for (auto&& child: m_pinConfig->findChildren<PinComboBox *>())
     {
         for (auto&& comBox: child->findChildren<QComboBox *>())
         {
             comBox->setFocusPolicy(Qt::WheelFocus);
         }
     }
-    for (auto&& comBox: axes_curves_config_->findChildren<QComboBox *>())
+    for (auto&& comBox: m_axesCurvesConfig->findChildren<QComboBox *>())
     {
         comBox->setFocusPolicy(Qt::WheelFocus);
     }
@@ -123,84 +117,84 @@ MainWindow::MainWindow(QWidget *parent)
 
             /////////      /////////////
     // buttons pin changed
-    connect(pin_config_, SIGNAL(totalButtonsValueChanged(int)),
-                button_config_, SLOT(setUiOnOff(int)));
+    connect(m_pinConfig, SIGNAL(totalButtonsValueChanged(int)),
+                m_buttonConfig, SLOT(setUiOnOff(int)));
     // LEDs changed
-    connect(pin_config_, SIGNAL(totalLEDsValueChanged(int)),
-                led_config_, SLOT(SpawnLEDs(int)));
+    connect(m_pinConfig, SIGNAL(totalLEDsValueChanged(int)),
+                m_ledConfig, SLOT(spawnLeds(int)));
     // encoder changed
-    connect(button_config_, SIGNAL(encoderInputChanged(int, int)),
-            encoder_config_, SLOT(encoderInputChanged(int, int)));
+    connect(m_buttonConfig, SIGNAL(encoderInputChanged(int, int)),
+            m_encoderConfig, SLOT(encoderInputChanged(int, int)));
     // fast encoder
-    connect(pin_config_, SIGNAL(fastEncoderSelected(QString, bool)),
-            encoder_config_, SLOT(fastEncoderSelected(QString, bool)));
+    connect(m_pinConfig, SIGNAL(fastEncoderSelected(QString, bool)),
+            m_encoderConfig, SLOT(fastEncoderSelected(QString, bool)));
     // shift registers
-    connect(pin_config_, SIGNAL(shiftRegSelected(int, int, QString)),
-            shift_reg_config_, SLOT(shiftRegSelected(int, int, QString)));
+    connect(m_pinConfig, SIGNAL(shiftRegSelected(int, int, QString)),
+            m_shiftRegConfig, SLOT(shiftRegSelected(int, int, QString)));
     // a2b count
-    connect(axes_config_, SIGNAL(a2bCountChanged(int)),
-            pin_config_, SLOT(a2bCountChanged(int)));
+    connect(m_axesConfig, SIGNAL(a2bCountChanged(int)),
+            m_pinConfig, SLOT(a2bCountChanged(int)));
     // shift reg buttons count shiftRegsButtonsCount
-    connect(shift_reg_config_, SIGNAL(shiftRegButtonsCountChanged(int)),
-            pin_config_, SLOT(shiftRegButtonsCountChanged(int)));
+    connect(m_shiftRegConfig, SIGNAL(shiftRegButtonsCountChanged(int)),
+            m_pinConfig, SLOT(shiftRegButtonsCountChanged(int)));
     // axes source changed//axesSourceChanged
-    connect(pin_config_, SIGNAL(axesSourceChanged(int, bool)),
-            axes_config_, SLOT(addOrDeleteMainSource(int, bool)));
+    connect(m_pinConfig, SIGNAL(axesSourceChanged(int, bool)),
+            m_axesConfig, SLOT(addOrDeleteMainSource(int, bool)));
     // language changed
-    connect(adv_settings_, SIGNAL(languageChanged(QString)),
+    connect(m_advSettings, SIGNAL(languageChanged(QString)),
             this, SLOT(languageChanged(QString)));
     // interface changed
-    connect(adv_settings_, SIGNAL(interfaceStyleChanged(bool)),
+    connect(m_advSettings, SIGNAL(interfaceStyleChanged(bool)),
             this, SLOT(interfaceStyleChanged(bool)));
     // font changed
-    connect(adv_settings_, SIGNAL(fontChanged()),
+    connect(m_advSettings, SIGNAL(fontChanged()),
             this, SLOT(setFont()));
 
 
     // enter flash mode clicked
-    connect(adv_settings_->GetFlasher(), SIGNAL(flashModeClicked(bool)),
+    connect(m_advSettings->flasher(), SIGNAL(flashModeClicked(bool)),
             this, SLOT(deviceFlasherController(bool)));
     // flasher found
-    connect(hid_device_worker_, SIGNAL(flasherFound(bool)),
-            adv_settings_->GetFlasher(), SLOT(flasherFound(bool)));
+    connect(m_hidDeviceWorker, SIGNAL(flasherFound(bool)),
+            m_advSettings->flasher(), SLOT(flasherFound(bool)));
     // start flash
-    connect(adv_settings_->GetFlasher(), SIGNAL(startFlash(bool)),              // thread  flashStatus
+    connect(m_advSettings->flasher(), SIGNAL(startFlash(bool)),              // thread  flashStatus
             this, SLOT(deviceFlasherController(bool)));
     // flash status
-    connect(hid_device_worker_, SIGNAL(flashStatus(int, int)),              // thread  flashStatus
-            adv_settings_->GetFlasher(), SLOT(flashStatus(int, int)));
+    connect(m_hidDeviceWorker, SIGNAL(flashStatus(int, int)),              // thread  flashStatus
+            m_advSettings->flasher(), SLOT(flashStatus(int, int)));
     // set selected hid device
     connect(ui->comboBox_HidDeviceList, SIGNAL(currentIndexChanged(int)),
             this, SLOT(hidDeviceListChanged(int)));
 
 
     // HID worker
-    hid_device_worker_->moveToThread(thread_);
+    m_hidDeviceWorker->moveToThread(m_thread);
 
-    connect(thread_, SIGNAL(started()), hid_device_worker_, SLOT(processData()));
+    connect(m_thread, SIGNAL(started()), m_hidDeviceWorker, SLOT(processData()));
 
-    connect(hid_device_worker_, SIGNAL(putGamepadPacket(uint8_t *)),
+    connect(m_hidDeviceWorker, SIGNAL(putGamepadPacket(uint8_t *)),
                           this, SLOT(getGamepadPacket(uint8_t *)));
-    connect(hid_device_worker_, SIGNAL(putConnectedDeviceInfo()),
+    connect(m_hidDeviceWorker, SIGNAL(putConnectedDeviceInfo()),
                           this, SLOT(showConnectDeviceInfo()));
-    connect(hid_device_worker_, SIGNAL(putDisconnectedDeviceInfo()),
+    connect(m_hidDeviceWorker, SIGNAL(putDisconnectedDeviceInfo()),
                           this, SLOT(hideConnectDeviceInfo()));
-    connect(hid_device_worker_, SIGNAL(hidDeviceList(QStringList*)),
+    connect(m_hidDeviceWorker, SIGNAL(hidDeviceList(QStringList*)),
                           this, SLOT(hidDeviceList(QStringList*)));
 
 
     // read config from device
-    connect(hid_device_worker_, SIGNAL(configReceived(bool)),
+    connect(m_hidDeviceWorker, SIGNAL(configReceived(bool)),
             this, SLOT(configReceived(bool)));
     // write config to device
-    connect(hid_device_worker_, SIGNAL(configSent(bool)),
+    connect(m_hidDeviceWorker, SIGNAL(configSent(bool)),
             this, SLOT(configSent(bool)));
 
 
     // load default config // loading will occur after loading buttons config
     // комбобоксы у кнопок заполняются после старта приложения и конфиг должен
     // запускаться сигналом от кнопок
-    connect(button_config_, SIGNAL(logicalButtonsCreated()),
+    connect(m_buttonConfig, SIGNAL(logicalButtonsCreated()),
             this, SLOT(loadDefaultConfig()));
 
 
@@ -214,25 +208,25 @@ MainWindow::MainWindow(QWidget *parent)
     gEnv.pAppSettings->endGroup();
 
 
-    thread_->start();
+    m_thread->start();
 
     qDebug()<<"after widgets load time ="<< timer.elapsed() << "ms";
-    qDebug()<<"Application Start Time ="<< gEnv.pApp_start_time->elapsed() << "ms";
+    qDebug()<<"without style startup time ="<< gEnv.pApp_start_time->elapsed() << "ms";
 }
 
 MainWindow::~MainWindow()
 {
-    SaveAppConfig();
-    hid_device_worker_->SetIsFinish(true);
-    thread_->quit();
-    thread_->deleteLater();
-    thread_->wait();
-    thread_getSend_config_->quit();
-    thread_getSend_config_->deleteLater();
-    thread_getSend_config_->wait();
-    delete hid_device_worker_;
-    delete thread_;              // не уверен в нужности, если есть thread->deleteLater();
-    delete thread_getSend_config_;
+    saveAppConfig();
+    m_hidDeviceWorker->setIsFinish(true);
+    m_thread->quit();
+    m_thread->deleteLater();
+    m_thread->wait();
+    m_threadGetSendConfig->quit();
+    m_threadGetSendConfig->deleteLater();
+    m_threadGetSendConfig->wait();
+    delete m_hidDeviceWorker;
+    delete m_thread;              // не уверен в нужности, если есть thread->deleteLater();
+    delete m_threadGetSendConfig;
     //delete thread_getSend_config;       // hz
     delete ui;
 }
@@ -248,7 +242,7 @@ void MainWindow::showConnectDeviceInfo() {
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
     ui->pushButton_ReadConfig->setEnabled(true);
     ui->pushButton_WriteConfig->setEnabled(true);
-    adv_settings_->GetFlasher()->DeviceConnected(true);
+    m_advSettings->flasher()->deviceConnected(true);
 }
 // device disconnected
 void MainWindow::hideConnectDeviceInfo() {
@@ -257,31 +251,30 @@ void MainWindow::hideConnectDeviceInfo() {
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(160, 0, 0);");
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
-    adv_settings_->GetFlasher()->DeviceConnected(false);
-    if (debug_window_){
-        debug_window_->ResetPacketsCount();
+    m_advSettings->flasher()->deviceConnected(false);
+    if (m_debugWindow){
+        m_debugWindow->resetPacketsCount();
     }
 
     // disable curve point
     QTimer::singleShot(3000, [&]{   // не лучший способ
         if (ui->pushButton_ReadConfig->isEnabled() == false){
-            axes_curves_config_->DeviceStatus(false);
+            m_axesCurvesConfig->deviceStatus(false);
         }
     });
-    //axes_curves_config->DeviceStatus(false);
 }
 
-// add/delete hid devices to combobox
-void MainWindow::hidDeviceList(QStringList* device_list)
+// add/delete hid devices to/from combobox
+void MainWindow::hidDeviceList(QStringList *deviceList)
 {
-    if (device_list->size() == 0 && ui->comboBox_HidDeviceList->count() > 0)
+    if (deviceList->size() == 0 && ui->comboBox_HidDeviceList->count() > 0)
     {
         ui->comboBox_HidDeviceList->clear();
         return;
-    } else if (device_list->size() > 0)
+    } else if (deviceList->size() > 0)
     {
         ui->comboBox_HidDeviceList->clear();
-        ui->comboBox_HidDeviceList->addItems(*device_list);
+        ui->comboBox_HidDeviceList->addItems(*deviceList);
 //        if (ui->comboBox_HidDeviceList->count() >= index_device_before_write_){
 //            ui->comboBox_HidDeviceList->setCurrentIndex(index_device_before_write_);
 //        }
@@ -289,15 +282,15 @@ void MainWindow::hidDeviceList(QStringList* device_list)
 }
 
 // received device report
-void MainWindow::getGamepadPacket(uint8_t * buff)
+void MainWindow::getGamepadPacket(uint8_t *buff)
 {
-    report_convert_.GamepadReport(buff);
+    reportConvert.gamepadReport(buff);
 
     // update button state without delay. fix gamepad_report.raw_button_data[0]
     // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся. Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
     // и не видеть оставшиеся физические 64 кнопки. ленивый и неоптимизированный фикс
-    if(ui->tab_ButtonConfig->isVisible() == true || debug_window_){
-        button_config_->ButtonStateChanged();
+    if(ui->tab_ButtonConfig->isVisible() == true || m_debugWindow){
+        m_buttonConfig->buttonStateChanged();
     }
 
     static QElapsedTimer timer;
@@ -308,23 +301,23 @@ void MainWindow::getGamepadPacket(uint8_t * buff)
         timer.start();
         change = true;
     }
-    else if (timer.elapsed() > 17)    // обновление раз в 17мс, мб сделать дефайн в герцах
+    else if (timer.elapsed() > 17)    // обновление раз в 17мс(~60fps), мб сделать дефайн в герцах
     {
         // optimization
         if(ui->tab_LED->isVisible() == true){
-            led_config_->LedStateChanged();
+            m_ledConfig->setLedsState();
         }
         if(ui->tab_AxesConfig->isVisible() == true){
-            axes_config_->AxesValueChanged();
+            m_axesConfig->axesValueChanged();
         }
         if(ui->tab_AxesCurves->isVisible() == true){
-            axes_curves_config_->UpdateAxesCurves();
+            m_axesCurvesConfig->updateAxesCurves();
         }
         change = false;
     }
     // debug info
-    if (debug_window_){
-        debug_window_->DevicePacketReceived();
+    if (m_debugWindow){
+        m_debugWindow->devicePacketReceived();
     }
 
     // debug tab
@@ -335,28 +328,28 @@ void MainWindow::getGamepadPacket(uint8_t * buff)
 }
 
 // Flasher controller
-void MainWindow::deviceFlasherController(bool is_start_flash)
+void MainWindow::deviceFlasherController(bool isStartFlash)
 {        // херня? mb QtConcurrent::run()
     // так оставить или как read/write а bool через сигнал?
     QEventLoop loop;
     QObject context;
-    context.moveToThread(thread_getSend_config_);
-    connect(thread_getSend_config_, &QThread::started, &context, [&]() {
+    context.moveToThread(m_threadGetSendConfig);
+    connect(m_threadGetSendConfig, &QThread::started, &context, [&]() {
         qDebug()<<"Start flasher controller";
-        if (is_start_flash == true){
+        if (isStartFlash == true){
             qDebug()<<"Start flash";
-            hid_device_worker_->FlashFirmware(adv_settings_->GetFlasher()->GetFileArray());
+            m_hidDeviceWorker->flashFirmware(m_advSettings->flasher()->fileArray());
         } else {
             qDebug()<<"Enter to flash mode";
-            hid_device_worker_->EnterToFlashMode();
+            m_hidDeviceWorker->enterToFlashMode();
         }
         qDebug()<<"Flasher controller finished";
         loop.quit();
     });
-    thread_getSend_config_->start();
+    m_threadGetSendConfig->start();
     loop.exec();
-    thread_getSend_config_->quit();
-    thread_getSend_config_->wait();
+    m_threadGetSendConfig->quit();
+    m_threadGetSendConfig->wait();
 }
 
 
@@ -365,9 +358,9 @@ void MainWindow::deviceFlasherController(bool is_start_flash)
                                             /////////////////////                 /////////////////////
 
 // slot interface style changed
-void MainWindow::interfaceStyleChanged(bool is_dark)
+void MainWindow::interfaceStyleChanged(bool isDark)
 {
-    axes_curves_config_->SetDarkInterface(is_dark);
+    m_axesCurvesConfig->setDarkInterface(isDark);
 }
 
 // slot language change
@@ -376,28 +369,28 @@ void MainWindow::languageChanged(QString language)        // QSignalBlocker bloc
     qDebug()<<"Retranslate UI";
     if (language == "russian")
     {
-        translator_.load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
-        qApp->installTranslator(&translator_);
+        m_translator.load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
+        qApp->installTranslator(&m_translator);
         ui->retranslateUi(this);
     }
     else if (language == "english")
     {
-        translator_.load(":/FreeJoyQt_en");
-        qApp->installTranslator(&translator_);
+        m_translator.load(":/FreeJoyQt_en");
+        qApp->installTranslator(&m_translator);
         ui->retranslateUi(this);
     } else {
         return;
     }
-    pin_config_->RetranslateUi();
-    button_config_->RetranslateUi();
-    led_config_->RetranslateUi();
-    encoder_config_->RetranslateUi();
-    shift_reg_config_->RetranslateUi();
-    axes_config_->RetranslateUi();
-    axes_curves_config_->RetranslateUi();
-    adv_settings_->RetranslateUi();
-    if(debug_window_){
-        debug_window_->RetranslateUi();
+    m_pinConfig->retranslateUi();
+    m_buttonConfig->retranslateUi();
+    m_ledConfig->retranslateUi();
+    m_encoderConfig->retranslateUi();
+    m_shiftRegConfig->retranslateUi();
+    m_axesConfig->retranslateUi();
+    m_axesCurvesConfig->retranslateUi();
+    m_advSettings->retranslateUi();
+    if(m_debugWindow){
+        m_debugWindow->retranslateUi();
         ui->pushButton_ShowDebug->setText(tr("Hide debug"));
     }
     qDebug()<<"done";
@@ -412,15 +405,15 @@ void MainWindow::setFont()
 }
 
 // load app config
-void MainWindow::LoadAppConfig()
+void MainWindow::loadAppConfig()
 {
     qDebug()<<"Loading application config";
     // load language settings
     gEnv.pAppSettings->beginGroup("LanguageSettings");
     if (gEnv.pAppSettings->value("Language", "english").toString() == "russian")
     {
-        translator_.load(":/FreeJoyQt_ru");
-        qApp->installTranslator(&translator_);
+        m_translator.load(":/FreeJoyQt_ru");
+        qApp->installTranslator(&m_translator);
         ui->retranslateUi(this);
     }
     gEnv.pAppSettings->endGroup();
@@ -453,8 +446,8 @@ void MainWindow::LoadAppConfig()
 
     // load debug window
     gEnv.pAppSettings->beginGroup("OtherSettings");
-    debug_is_enable_ = gEnv.pAppSettings->value("DebugEnable", "false").toBool();
-    if (debug_is_enable_){
+    m_debugIsEnable = gEnv.pAppSettings->value("DebugEnable", "false").toBool();
+    if (m_debugIsEnable){
         on_pushButton_ShowDebug_clicked();
         if (this->isMaximized() == false){
             resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());
@@ -470,7 +463,7 @@ void MainWindow::LoadAppConfig()
     qDebug()<<"Finished loading application config";
 }
 // save app config
-void MainWindow::SaveAppConfig()    // перенести сюда сохранение профилей кривых
+void MainWindow::saveAppConfig()    // перенести сюда сохранение профилей кривых
 {
     qDebug()<<"Saving application config";
     // save tab index
@@ -495,7 +488,7 @@ void MainWindow::SaveAppConfig()    // перенести сюда сохран�
     gEnv.pAppSettings->endGroup();
     // save debug
     gEnv.pAppSettings->beginGroup("OtherSettings");
-    gEnv.pAppSettings->setValue("DebugEnable", debug_is_enable_);
+    gEnv.pAppSettings->setValue("DebugEnable", m_debugIsEnable);
     gEnv.pAppSettings->endGroup();
     qDebug()<<"done";
 }
@@ -505,17 +498,17 @@ void MainWindow::SaveAppConfig()    // перенести сюда сохран�
 // comboBox selected device
 void MainWindow::hidDeviceListChanged(int index)
 {
-    hid_device_worker_->SetSelectedDevice(index);
+    m_hidDeviceWorker->setSelectedDevice(index);
 }
 // reset all pins
 void MainWindow::on_pushButton_ResetAllPins_clicked()
 {
     qDebug()<<"Reset all started";
-    gEnv.pDeviceConfig->ResetConfig();
+    gEnv.pDeviceConfig->resetConfig();
 
-    ReadFromConfig();
+    readFromConfig();
 
-    pin_config_->ResetAllPins();
+    m_pinConfig->resetAllPins();
     qDebug()<<"done";
 }
 // read config from device
@@ -525,19 +518,19 @@ void MainWindow::on_pushButton_ReadConfig_clicked()
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
 
-    hid_device_worker_->GetConfigFromDevice();
+    m_hidDeviceWorker->getConfigFromDevice();
     //qDebug()<<"done";
 }
 // write config to device
 void MainWindow::on_pushButton_WriteConfig_clicked()
 {
     qDebug()<<"Write config started";
-    ui->pushButton_WriteConfig->setEnabled(false);
+    ui->pushButton_WriteConfig->setEnabled(false);  // не успевает блокироваться? таймер
     ui->pushButton_ReadConfig->setEnabled(false);
 //    index_device_before_write_ = ui->comboBox_HidDeviceList->currentIndex();
 
-    WriteToConfig();
-    hid_device_worker_->SendConfigToDevice();
+    writeToConfig();
+    m_hidDeviceWorker->sendConfigToDevice();
     //qDebug()<<"done";
 }
 // load from file
@@ -548,7 +541,7 @@ void MainWindow::on_pushButton_LoadFromFile_clicked()
         tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
 
     QSettings device_settings( fileName, QSettings::IniFormat );
-    LoadDeviceConfigFromFile(&device_settings);
+    loadDeviceConfigFromFile(&device_settings);
     qDebug()<<"done";
 }
 // save to file
@@ -560,7 +553,7 @@ void MainWindow::on_pushButton_SaveToFile_clicked()
 
 
     QSettings device_settings( fileName, QSettings::IniFormat );
-    SaveDeviceConfigToFile(&device_settings);
+    saveDeviceConfigToFile(&device_settings);
     qDebug()<<"done";
 }
 //set default config
@@ -583,7 +576,7 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
 
     if (gEnv.pAppSettings->value("FileName", "none") != "none"){
         QSettings app_settings( gEnv.pAppSettings->value("FileName", "none").toString(), QSettings::IniFormat );
-        LoadDeviceConfigFromFile(&app_settings);
+        loadDeviceConfigFromFile(&app_settings);
     }
     QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
     gEnv.pAppSettings->endGroup();
@@ -592,34 +585,33 @@ void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
 // Show debug widget
 void MainWindow::on_pushButton_ShowDebug_clicked()
 {
-    if (debug_window_ == nullptr)
+    if (m_debugWindow == nullptr)
     {
-        debug_window_ = new DebugWindow(this);       // хз мб всё же стоит создать дебаг в конструкторе и оставить скрытым и не экономить пару кб
-        gEnv.pDebugWindow = debug_window_;
-        ui->layoutV_DebugWindow->addWidget(debug_window_);
-        debug_window_->hide();
+        m_debugWindow = new DebugWindow(this);       // хз мб всё же стоит создать дебаг в конструкторе и оставить скрытым и не экономить пару кб
+        gEnv.pDebugWindow = m_debugWindow;
+        ui->layoutV_DebugWindow->addWidget(m_debugWindow);
+        m_debugWindow->hide();
     }
 
-    if (debug_window_->isVisible() == false)
+    if (m_debugWindow->isVisible() == false)
     {
-        debug_window_->setMinimumHeight(120);
+        m_debugWindow->setMinimumHeight(120);
         if (this->isMaximized() == false){
             resize(width(), height() + 120 + ui->layoutG_MainLayout->verticalSpacing());
         }
-        debug_window_->setVisible(true);
-        debug_is_enable_ = true;
-        ui->pushButton_ShowDebug->setText(tr("Hide debug"));    // in retranslate
+        m_debugWindow->setVisible(true);
+        m_debugIsEnable = true;
+        ui->pushButton_ShowDebug->setText(tr("Hide debug"));    // in MainWindow::languageChanged
     } else {
-        debug_window_->setVisible(false);
-        debug_window_->setMinimumHeight(0);
+        m_debugWindow->setVisible(false);
+        m_debugWindow->setMinimumHeight(0);
         if (this->isMaximized() == false){
-            resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());    // и в LoadAppConfig()
+            resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());    // and in LoadAppConfig()
         }
-        debug_is_enable_ = false;
+        m_debugIsEnable = false;
         ui->pushButton_ShowDebug->setText(tr("Show debug"));
     }
 }
-
 
 // test button in debug tab
 void MainWindow::on_pushButton_TestButton_clicked()

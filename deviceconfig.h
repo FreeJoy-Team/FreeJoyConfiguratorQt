@@ -1,19 +1,18 @@
 #ifndef DEVICECONFIG_H
 #define DEVICECONFIG_H
 
-#include "common_types.h"
 #include "common_defines.h"
+#include "common_types.h"
 
 class DeviceConfig
 {
 public:
     DeviceConfig();
 
-    void ResetConfig();
+    void resetConfig();
 
     dev_config_t config;
-    joy_report_t gamepad_report;
+    joy_report_t gamepadReport;
 };
-
 
 #endif // DEVICECONFIG_H

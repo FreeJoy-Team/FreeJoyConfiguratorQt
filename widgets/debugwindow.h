@@ -1,8 +1,8 @@
 #ifndef DEBUGWINDOW_H
 #define DEBUGWINDOW_H
 
-#include <QWidget>
 #include <QElapsedTimer>
+#include <QWidget>
 
 namespace Ui {
 class DebugWindow;
@@ -16,15 +16,16 @@ public:
     explicit DebugWindow(QWidget *parent = nullptr);
     ~DebugWindow();
 
-    void RetranslateUi();
+    void retranslateUi();
 
-    void DevicePacketReceived();
-    void ResetPacketsCount();
+    void devicePacketReceived();
+    void resetPacketsCount();
 
-    void LogicalButtonState(int button_number, bool state);
+    void logicalButtonState(int buttonNumber, bool state);
 
     Q_INVOKABLE // для мультипотока, хз правильно ли, но работает. CustomMessageHandler in main
-    void PrintMsg(const QString &msg); // не уверен насчёт ссылки, мб надо копию получать с мультипотоком
+        void
+        printMsg(const QString &msg); // не уверен насчёт ссылки, мб надо копию получать с мультипотоком
 
 private slots:
     void on_checkBox_WriteLog_clicked(bool checked);
@@ -32,9 +33,9 @@ private slots:
 private:
     Ui::DebugWindow *ui;
 
-    int packets_count_;
-    QElapsedTimer timer_;
-    bool write_to_file_;
+    int m_packetsCount;
+    QElapsedTimer m_timer;
+    bool m_writeToFile;
 };
 
 #endif // DEBUGWINDOW_H

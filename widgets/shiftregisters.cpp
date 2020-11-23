@@ -2,27 +2,27 @@
 #include "ui_shiftregisters.h"
 #include <cmath>
 
-ShiftRegisters::ShiftRegisters(int shift_reg_number, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ShiftRegisters)
+QString ShiftRegisters::m_notDefined = tr("Not defined");
+
+ShiftRegisters::ShiftRegisters(int shiftRegNumber, QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::ShiftRegisters)
 {
     ui->setupUi(this);
 
-    buttons_count_ = 0;
-    latch_pin_ = 0;
-    data_pin_ = 0;
-    not_defined_ = tr("Not defined");
-    shift_reg_number_ = shift_reg_number;
-    ui->label_ShiftIndex->setNum(shift_reg_number + 1);
+    m_buttonsCount = 0;
+    m_latchPin = 0;
+    m_dataPin = 0;
+    m_shiftRegNumber = shiftRegNumber;
+    ui->label_ShiftIndex->setNum(shiftRegNumber + 1);
 
     for (int i = 0; i < SHIFT_REG_TYPES; ++i) {
-        ui->comboBox_ShiftRegType->addItem(shift_registers_list_[i].gui_name);
-        ui->label_DataPin->setText(not_defined_);
-        ui->label_LatchPin->setText(not_defined_);
+        ui->comboBox_ShiftRegType->addItem(m_shiftRegistersList[i].guiName);
+        ui->label_DataPin->setText(m_notDefined);
+        ui->label_LatchPin->setText(m_notDefined);
     }
 
-    connect(ui->spinBox_ButtonCount, SIGNAL(valueChanged(int)),
-            this, SLOT(calcRegistersCount(int)));
+    connect(ui->spinBox_ButtonCount, SIGNAL(valueChanged(int)), this, SLOT(calcRegistersCount(int)));
 }
 
 ShiftRegisters::~ShiftRegisters()
@@ -30,66 +30,71 @@ ShiftRegisters::~ShiftRegisters()
     delete ui;
 }
 
-void ShiftRegisters::RetranslateUi()
+void ShiftRegisters::retranslateUi()
 {
     ui->retranslateUi(this);
 }
 
 void ShiftRegisters::calcRegistersCount(int count)
 {
-    ui->label_RegistersCount->setNum(ceil(count/8.0));
+    ui->label_RegistersCount->setNum(ceil(count / 8.0));
 
-    if(ui->spinBox_ButtonCount->isEnabled() == true){
-        emit buttonCountChanged(count, buttons_count_);
-        buttons_count_ = count;
+    if (ui->spinBox_ButtonCount->isEnabled() == true) {
+        emit buttonCountChanged(count, m_buttonsCount);
+        m_buttonsCount = count;
     }
 }
 
-void ShiftRegisters::SetLatchPin(int latch_pin, QString pin_gui_name)
+void ShiftRegisters::setLatchPin(int latchPin, QString pinGuiName)
 {
-    if (latch_pin != 0){
-        latch_pin_ = latch_pin;
-        ui->label_LatchPin->setText(pin_gui_name);
+    if (latchPin != 0) {
+        m_latchPin = latchPin;
+        ui->label_LatchPin->setText(pinGuiName);
     } else {
-        latch_pin_ = 0;
-        ui->label_LatchPin->setText(not_defined_);
+        m_latchPin = 0;
+        ui->label_LatchPin->setText(m_notDefined);
     }
-    SetUiOnOff();
+    setUiOnOff();
 }
 
-void ShiftRegisters::SetDataPin(int data_pin, QString pin_gui_name)
+void ShiftRegisters::setDataPin(int dataPin, QString pinGuiName)
 {
-    if (data_pin != 0){
-        data_pin_ = data_pin;
-        ui->label_DataPin->setText(pin_gui_name);
+    if (dataPin != 0) {
+        m_dataPin = dataPin;
+        ui->label_DataPin->setText(pinGuiName);
     } else {
-        data_pin_ = 0;
-        ui->label_DataPin->setText(not_defined_);
+        m_dataPin = 0;
+        ui->label_DataPin->setText(m_notDefined);
     }
-    SetUiOnOff();
+    setUiOnOff();
 }
 
-void ShiftRegisters::SetUiOnOff()
+void ShiftRegisters::setUiOnOff()
 {
-    if (latch_pin_ > 0 && data_pin_ > 0){
-        for(auto&& child:this->findChildren<QWidget *>()){
-        child->setEnabled(true);
+    if (m_latchPin > 0 && m_dataPin > 0) {
+        for (auto &&child : this->findChildren<QWidget *>()) {
+            child->setEnabled(true);
         }
     } else {
-        for(auto&& child:this->findChildren<QWidget *>()){
-        child->setEnabled(false);
+        for (auto &&child : this->findChildren<QWidget *>()) {
+            child->setEnabled(false);
         }
     }
 }
 
-void ShiftRegisters::ReadFromConfig()
+const QString &ShiftRegisters::defaultText() const
 {
-    ui->comboBox_ShiftRegType->setCurrentIndex(gEnv.pDeviceConfig->config.shift_registers[shift_reg_number_].type);
-    ui->spinBox_ButtonCount->setValue(gEnv.pDeviceConfig->config.shift_registers[shift_reg_number_].button_cnt);
+    return m_notDefined;
 }
 
-void ShiftRegisters::WriteToConfig()
+void ShiftRegisters::readFromConfig()
 {
-    gEnv.pDeviceConfig->config.shift_registers[shift_reg_number_].type = ui->comboBox_ShiftRegType->currentIndex();
-    gEnv.pDeviceConfig->config.shift_registers[shift_reg_number_].button_cnt = ui->spinBox_ButtonCount->value();
+    ui->comboBox_ShiftRegType->setCurrentIndex(gEnv.pDeviceConfig->config.shift_registers[m_shiftRegNumber].type);
+    ui->spinBox_ButtonCount->setValue(gEnv.pDeviceConfig->config.shift_registers[m_shiftRegNumber].button_cnt);
+}
+
+void ShiftRegisters::writeToConfig()
+{
+    gEnv.pDeviceConfig->config.shift_registers[m_shiftRegNumber].type = ui->comboBox_ShiftRegType->currentIndex();
+    gEnv.pDeviceConfig->config.shift_registers[m_shiftRegNumber].button_cnt = ui->spinBox_ButtonCount->value();
 }

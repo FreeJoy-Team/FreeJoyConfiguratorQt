@@ -17,7 +17,7 @@ public:
     explicit MouseWheelGuard(QObject *parent);
 
 protected:
-    bool eventFilter(QObject* o, QEvent* e) override;
+    bool eventFilter(QObject *o, QEvent *e) override;
 };
 
 #endif // MOUSEWHEELGUARD_H

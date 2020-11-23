@@ -8,9 +8,9 @@ class QLabel;
 QT_END_NAMESPACE
 //#include <QLabel>
 
-#define CURVE_PLOT_POINTS_COUNT 11  //?
+#define CURVE_PLOT_POINTS_COUNT 11 //?
 
-#define CURVES_MIN_VALUE -100   //?
+#define CURVES_MIN_VALUE -100 //?
 #define CURVES_MAX_VALUE 100
 
 namespace Ui {
@@ -25,23 +25,23 @@ public:
     explicit AxesCurvesPlot(QWidget *parent = nullptr);
     ~AxesCurvesPlot();
 
-    int GetPointValue(int point_number);
-    int GetPointCount() const;
+    int pointValue(int point_number);
+    int pointCount() const;
 
-    void SetPointValue(int point_number, int value);
+    void setPointValue(int pointNumber, int value);
 
-    void UpdateAxis(int pos_x, int pos_y);
-    void DeviceStatus(bool is_connect);
+    void updateAxis(int posX, int posY);
+    void deviceStatus(bool isConnect);
 
-    void SetLinear();
-    void SetLinearInvert();
-    void SetExponent();
-    void SetExponentInvert();
-    void SetShape();
+    void setLinear();
+    void setLinearInvert();
+    void setExponent();
+    void setExponentInvert();
+    void setShape();
 
 signals:
     //! current x and width for a2b
-    void sizeChanged(int width);    // not used
+    void sizeChanged(int width); // not used
     void pointValueChanged(const int *point, const int *value);
 
 protected:
@@ -49,41 +49,42 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
-    void resizeEvent(QResizeEvent* event) override;
+    void resizeEvent(QResizeEvent *event) override;
     //bool event(QEvent *event) override;
 
 private:
     Ui::AxesCurvesPlot *ui;
-    int CalcPointValue(int current_pos) const;
-    int CalcPointPos(int value) const;
-    int CalcPointPosX(int value_x) const;
-    void MovePoint(int pos_y, int point_number);
-    void UpdateLabelPos();
+    int calcPointValue(int currentPos) const;
+    int calcPointPos(int value) const;
+    int calcPointPosX(int valueX) const;
+    void movePoint(int pos_y, int point_number);
+    void updateLabelPos();
 
-    const int kOffset_ = 20;//20
-    const int kColumnsCount_ = 10;
-    const int kRowsCount_ = 10;
-    const int kRadius_ = 16;
-    const int kLabelWidth_ = 20;
-    bool is_device_connect_;
+    const int m_kOffset = 20; //20
+    const int m_kColumnsCount = 10;
+    const int m_kRowsCount = 10;
+    const int m_kRadius = 16;
+    const int m_kLabelWidth = 20;
+    bool m_isDeviceConnect;
 
-    float column_width_;
-    float row_height_;
-    int width_, height_;
-    int half_radius_;
+    float m_columnWidth;
+    float m_rowHeight;
+    int m_width;
+    int m_height;
+    int m_halfRadius;
 
-    const int kMaxPointValue_ = CURVES_MAX_VALUE;
-    const int kMinPointValue_ = CURVES_MIN_VALUE;
+    const int m_kMaxPointValue = CURVES_MAX_VALUE;
+    const int m_kMinPointValue = CURVES_MIN_VALUE;
 
-    int points_count_;
+    int m_pointsCount;
 
-    const QColor kPointCurrentPosColor_ = QColor(190,0,0,200);
-    const QColor kPointInactiveColor_ = QColor(1,119,215);
-    const QColor kPointActiveColor_ = Qt::black;
-    const QColor kPointMoveColor_ = Qt::lightGray;
-    const QColor kCurveColor_ = QColor(1,119,215);
+    const QColor m_kPointCurrentPosColor = QColor(190, 0, 0, 200);
+    const QColor m_kPointInactiveColor = QColor(1, 119, 215);
+    const QColor m_kPointActiveColor = Qt::black;
+    const QColor m_kPointMoveColor = Qt::lightGray;
+    const QColor m_kCurveColor = QColor(1, 119, 215);
 
-    bool point_active_;
+    bool m_pointActive;
 
     struct AxesCurve_currentPos
     {
@@ -92,7 +93,7 @@ private:
         int posX;
         int posY;
     };
-    AxesCurve_currentPos cur_axis_pos_;
+    AxesCurve_currentPos m_curAxisPos;
 
     struct AxesCurve_point
     {
@@ -104,8 +105,8 @@ private:
         bool is_drag;
         //QLabel text_label;
     };
-     QList<AxesCurve_point*> PointPtrList_;
-     QList<QLabel*> LabelPtrList_;
+    QList<AxesCurve_point *> m_pointPtrList;
+    QList<QLabel *> m_labelPtrList;
 };
 
 #endif // AXESCURVESPLOT_H

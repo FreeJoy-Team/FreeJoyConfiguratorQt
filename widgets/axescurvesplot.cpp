@@ -3,83 +3,58 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QLabel>
+#include <QTimer>
 #include <cmath>
 
 #include <QDebug>
 
 
-
-
-
-
-#include <QTimer>
-
-
-
-
-
-//////////////// ЭТО НЕ КОД ЭТО ПИЗДЕЦ !!!!!!!!!!
-/// ПЕРЕДАЛАТЬ И УБРАТЬ МУСОР
-/// ///////////////////////////////////////////////////// ПЕРЕД СНОМ НЕ СМОТРЕТЬ УЖОСНАХ /////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :
+AxesCurvesPlot::AxesCurvesPlot(QWidget *parent) :   // в коде много мусора, костыля для выравнивания TODO
     QWidget(parent),
     ui(new Ui::AxesCurvesPlot)
 {
     ui->setupUi(this);
     setMouseTracking(true);
 
-    points_count_ = CURVE_PLOT_POINTS_COUNT; // axescurvesconfig
-    point_active_ = false;
-    is_device_connect_ = false;
-    half_radius_ = kRadius_/2;
+    m_pointsCount = CURVE_PLOT_POINTS_COUNT; // axescurvesconfig
+    m_pointActive = false;
+    m_isDeviceConnect = false;
+    m_halfRadius = m_kRadius/2;
 
     // если вкладка не открыта, то размер не загружается и высота = 0. т.к. при изменении размера окна у меня не меняется высота,
     // то захардкодил 450, но это херовое решение
-    height_ = 450;
-    this->setMinimumHeight(height_);
+    m_height = 450;
+    setMinimumHeight(m_height);
 
-    cur_axis_pos_.color = kPointCurrentPosColor_;
+    m_curAxisPos.color = m_kPointCurrentPosColor;
 
     int tmp_range;
-    if ((kMinPointValue_ < 0 && kMaxPointValue_ < 0) || (kMinPointValue_ >= 0 && kMaxPointValue_ >= 0)) {
-        tmp_range = kMaxPointValue_ - kMinPointValue_;
+    if ((m_kMinPointValue < 0 && m_kMaxPointValue < 0) || (m_kMinPointValue >= 0 && m_kMaxPointValue >= 0)) {
+        tmp_range = m_kMaxPointValue - m_kMinPointValue;
     }
     else {
-        tmp_range = abs(kMinPointValue_) + abs(kMaxPointValue_);
+        tmp_range = abs(m_kMinPointValue) + abs(m_kMaxPointValue);
     }
 
-    for (int i = 0; i < points_count_; ++i){
+    for (int i = 0; i < m_pointsCount; ++i){
         AxesCurve_point* point = new AxesCurve_point;
 
         QLabel* label = new QLabel(this);
-        LabelPtrList_.append(label);
+        m_labelPtrList.append(label);
 
-        PointPtrList_.append(point);
-        PointPtrList_[i]->color = kPointInactiveColor_;
-        PointPtrList_[i]->posX = 0;
-        PointPtrList_[i]->posY = 0;
-        PointPtrList_[i]->is_drag = false;
-        PointPtrList_[i]->current_value = ((tmp_range / (points_count_ - 1.0)) * i) + kMinPointValue_;    // hz
+        m_pointPtrList.append(point);
+        m_pointPtrList[i]->color = m_kPointInactiveColor;
+        m_pointPtrList[i]->posX = 0;
+        m_pointPtrList[i]->posY = 0;
+        m_pointPtrList[i]->is_drag = false;
+        m_pointPtrList[i]->current_value = ((tmp_range / (m_pointsCount - 1.0)) * i) + m_kMinPointValue;    // hz
 
-        LabelPtrList_[i]->setFont(QFont("MS Shell Dlg 2", 8));
-        LabelPtrList_[i]->setNum(PointPtrList_[i]->current_value);
-        LabelPtrList_[i]->setMinimumWidth(kLabelWidth_);
-        LabelPtrList_[i]->setAlignment(Qt::AlignHCenter);
-        LabelPtrList_[i]->setStyleSheet("background:transparent;");
-        LabelPtrList_[i]->setVisible(true);
+        m_labelPtrList[i]->setFont(QFont("MS Shell Dlg 2", 8));
+        m_labelPtrList[i]->setNum(m_pointPtrList[i]->current_value);
+        m_labelPtrList[i]->setMinimumWidth(m_kLabelWidth);
+        m_labelPtrList[i]->setAlignment(Qt::AlignHCenter);
+        m_labelPtrList[i]->setStyleSheet("background:transparent;");
+        m_labelPtrList[i]->setVisible(true);
     }
 }
 
@@ -102,14 +77,14 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
 //    if (resize_activated_ == true){
 //        qDebug()<<"resize";
         //paint columns
-        for (int i = 0; i < kColumnsCount_ + 1; ++i){
-            tmp_x = (i * column_width_) + kOffset_;
-            painter.drawLine(tmp_x, kOffset_, tmp_x, height_ - kOffset_);
+        for (int i = 0; i < m_kColumnsCount + 1; ++i){
+            tmp_x = (i * m_columnWidth) + m_kOffset;
+            painter.drawLine(tmp_x, m_kOffset, tmp_x, m_height - m_kOffset);
         }
         // paint rows
-        for (int i = 0; i < kRowsCount_ + 1; ++i){
-            tmp_y = (i * row_height_) + kOffset_;
-            painter.drawLine(kOffset_, tmp_y, width_ - kOffset_, tmp_y);
+        for (int i = 0; i < m_kRowsCount + 1; ++i){
+            tmp_y = (i * m_rowHeight) + m_kOffset;
+            painter.drawLine(m_kOffset, tmp_y, m_width - m_kOffset, tmp_y);
         }
 //        resize_activated_ = false;
 //    }
@@ -120,207 +95,207 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
     // paint line       // можно в цикл paint rect, но лучше отдельно
     QPen pen;
     pen.setWidth(2);
-    pen.setColor(kPointInactiveColor_);
-    for (int i = 0; i < PointPtrList_.size(); ++i)   // проверка на драг=труе + соседние
+    pen.setColor(m_kPointInactiveColor);
+    for (int i = 0; i < m_pointPtrList.size(); ++i)   // проверка на драг=труе + соседние
     {
         painter.setPen(pen);
-        if (i < PointPtrList_.size() - 1){
-            painter.drawLine(PointPtrList_[i]->posX  + half_radius_, PointPtrList_[i]->posY  + half_radius_,
-                             PointPtrList_[i + 1]->posX  + half_radius_, PointPtrList_[i + 1]->posY  + half_radius_);
+        if (i < m_pointPtrList.size() - 1){
+            painter.drawLine(m_pointPtrList[i]->posX  + m_halfRadius, m_pointPtrList[i]->posY  + m_halfRadius,
+                             m_pointPtrList[i + 1]->posX  + m_halfRadius, m_pointPtrList[i + 1]->posY  + m_halfRadius);
         }
     }
 
     // coordinates for rect
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        PointPtrList_[i]->area.setRect(PointPtrList_[i]->posX, PointPtrList_[i]->posY,
-                                      kRadius_, kRadius_);
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        m_pointPtrList[i]->area.setRect(m_pointPtrList[i]->posX, m_pointPtrList[i]->posY,
+                                      m_kRadius, m_kRadius);
     }
     // paint rect
     //painter.setPen(Qt::lightGray);
-    for (int i = 0; i < PointPtrList_.size(); ++i)   // проверка на драг=труе
+    for (int i = 0; i < m_pointPtrList.size(); ++i)   // проверка на драг=труе
     {
-        painter.setPen(PointPtrList_[i]->color);
-        painter.setBrush(PointPtrList_[i]->color);
-        painter.drawEllipse(PointPtrList_[i]->area);
+        painter.setPen(m_pointPtrList[i]->color);
+        painter.setBrush(m_pointPtrList[i]->color);
+        painter.drawEllipse(m_pointPtrList[i]->area);
 
-        painter.setPen(kPointMoveColor_);
-        painter.setBrush(kPointMoveColor_);
-        painter.drawEllipse(PointPtrList_[i]->area.x() + half_radius_/2, PointPtrList_[i]->area.y() + half_radius_/2,
-                            half_radius_, half_radius_);
+        painter.setPen(m_kPointMoveColor);
+        painter.setBrush(m_kPointMoveColor);
+        painter.drawEllipse(m_pointPtrList[i]->area.x() + m_halfRadius/2, m_pointPtrList[i]->area.y() + m_halfRadius/2,
+                            m_halfRadius, m_halfRadius);
     }
 
     // paint current axix position
-    if (is_device_connect_ == true)
+    if (m_isDeviceConnect == true)
     {
         // coordinates for rect
-        cur_axis_pos_.area.setRect(cur_axis_pos_.posX, cur_axis_pos_.posY,
-                                  kRadius_, kRadius_);
+        m_curAxisPos.area.setRect(m_curAxisPos.posX, m_curAxisPos.posY,
+                                  m_kRadius, m_kRadius);
         // paint rect
-        painter.setPen(cur_axis_pos_.color);
-        painter.setBrush(cur_axis_pos_.color);
-        painter.drawEllipse(cur_axis_pos_.area);
+        painter.setPen(m_curAxisPos.color);
+        painter.setBrush(m_curAxisPos.color);
+        painter.drawEllipse(m_curAxisPos.area);
     }
 
     painter.end();
 }
 
-void AxesCurvesPlot::UpdateAxis(int pos_x, int pos_y)
+void AxesCurvesPlot::updateAxis(int posX, int posY)
 {
-    cur_axis_pos_.posX = CalcPointPosX(pos_x);   // увеличить Х
-    cur_axis_pos_.posY = CalcPointPos(pos_y);
+    m_curAxisPos.posX = calcPointPosX(posX);   // увеличить Х
+    m_curAxisPos.posY = calcPointPos(posY);
     update();
 }
 
 
-int AxesCurvesPlot::GetPointValue(int point_number)
+int AxesCurvesPlot::pointValue(int point_number)
 {
-    return PointPtrList_[point_number]->current_value = CalcPointValue(PointPtrList_[point_number]->posY);
+    return m_pointPtrList[point_number]->current_value = calcPointValue(m_pointPtrList[point_number]->posY);
 }
 
-int AxesCurvesPlot::GetPointCount() const
+int AxesCurvesPlot::pointCount() const
 {
-    return points_count_;
+    return m_pointsCount;
 }
 
-void AxesCurvesPlot::SetPointValue(int point_number, int value)
+void AxesCurvesPlot::setPointValue(int pointNumber, int value)
 {
-    PointPtrList_[point_number]->posY = CalcPointPos(value);
-    PointPtrList_[point_number]->current_value = value;
-    LabelPtrList_[point_number]->setNum(value);
-    UpdateLabelPos();
+    m_pointPtrList[pointNumber]->posY = calcPointPos(value);
+    m_pointPtrList[pointNumber]->current_value = value;
+    m_labelPtrList[pointNumber]->setNum(value);
+    updateLabelPos();
     update();
 }
 
-void AxesCurvesPlot::SetLinear()
+void AxesCurvesPlot::setLinear()
 {
     int tmp_y;
-    for (int i = 0; i < PointPtrList_.size(); ++i){
-        tmp_y = (i * row_height_) + kOffset_;
-        PointPtrList_[(PointPtrList_.size() - 1) - i]->posY = tmp_y - half_radius_;
-        PointPtrList_[(PointPtrList_.size() - 1) - i]->current_value = CalcPointValue(PointPtrList_[(PointPtrList_.size() - 1) - i]->posY);
-        LabelPtrList_[(PointPtrList_.size() - 1) - i]->setNum(PointPtrList_[(PointPtrList_.size() - 1) - i]->current_value);
+    for (int i = 0; i < m_pointPtrList.size(); ++i){
+        tmp_y = (i * m_rowHeight) + m_kOffset;
+        m_pointPtrList[(m_pointPtrList.size() - 1) - i]->posY = tmp_y - m_halfRadius;
+        m_pointPtrList[(m_pointPtrList.size() - 1) - i]->current_value = calcPointValue(m_pointPtrList[(m_pointPtrList.size() - 1) - i]->posY);
+        m_labelPtrList[(m_pointPtrList.size() - 1) - i]->setNum(m_pointPtrList[(m_pointPtrList.size() - 1) - i]->current_value);
     }
-    UpdateLabelPos();
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        emit pointValueChanged(&i, &PointPtrList_[i]->current_value);
+    updateLabelPos();
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        emit pointValueChanged(&i, &m_pointPtrList[i]->current_value);
     }
     update();
 }
 
-void AxesCurvesPlot::SetLinearInvert()
+void AxesCurvesPlot::setLinearInvert()
 {
     int tmp_y;
-    for (int i = 0; i < PointPtrList_.size(); ++i){
-        tmp_y = (i * row_height_) + kOffset_;
-        PointPtrList_[i]->posY = tmp_y - half_radius_;
-        PointPtrList_[i]->current_value = CalcPointValue(PointPtrList_[i]->posY);
-        LabelPtrList_[i]->setNum(PointPtrList_[i]->current_value);
+    for (int i = 0; i < m_pointPtrList.size(); ++i){
+        tmp_y = (i * m_rowHeight) + m_kOffset;
+        m_pointPtrList[i]->posY = tmp_y - m_halfRadius;
+        m_pointPtrList[i]->current_value = calcPointValue(m_pointPtrList[i]->posY);
+        m_labelPtrList[i]->setNum(m_pointPtrList[i]->current_value);
     }
-    UpdateLabelPos();
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        emit pointValueChanged(&i, &PointPtrList_[i]->current_value);
+    updateLabelPos();
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        emit pointValueChanged(&i, &m_pointPtrList[i]->current_value);
     }
     update();
 }
 
-void AxesCurvesPlot::SetExponent()
+void AxesCurvesPlot::setExponent()
 {
     int tmp_range;
-    if ((kMinPointValue_ < 0 && kMaxPointValue_ < 0) || (kMinPointValue_ >= 0 && kMaxPointValue_ >= 0)) {
-        tmp_range = kMaxPointValue_ - kMinPointValue_;
+    if ((m_kMinPointValue < 0 && m_kMaxPointValue < 0) || (m_kMinPointValue >= 0 && m_kMaxPointValue >= 0)) {
+        tmp_range = m_kMaxPointValue - m_kMinPointValue;
     }
     else {
-        tmp_range = abs(kMinPointValue_) + abs(kMaxPointValue_);
+        tmp_range = abs(m_kMinPointValue) + abs(m_kMaxPointValue);
     }
 
     int tmp_value;
-    for (int i = 0; i < PointPtrList_.size(); ++i)
+    for (int i = 0; i < m_pointPtrList.size(); ++i)
     {
-        tmp_value = round(exp(i * log(tmp_range) / (points_count_ - 1)) + kMinPointValue_);
-        if (tmp_value <= kMinPointValue_ +1){
-            tmp_value = kMinPointValue_;
-        } else if (tmp_value >= kMaxPointValue_ -1){
-            tmp_value = kMaxPointValue_;
+        tmp_value = round(exp(i * log(tmp_range) / (m_pointsCount - 1)) + m_kMinPointValue);
+        if (tmp_value <= m_kMinPointValue +1){
+            tmp_value = m_kMinPointValue;
+        } else if (tmp_value >= m_kMaxPointValue -1){
+            tmp_value = m_kMaxPointValue;
         }
-        SetPointValue(i, tmp_value);
+        setPointValue(i, tmp_value);
     }
-    UpdateLabelPos();
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        emit pointValueChanged(&i, &PointPtrList_[i]->current_value);
+    updateLabelPos();
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        emit pointValueChanged(&i, &m_pointPtrList[i]->current_value);
     }
 }
 
-void AxesCurvesPlot::SetExponentInvert()
+void AxesCurvesPlot::setExponentInvert()
 {
     int tmp_range;
-    if ((kMinPointValue_ < 0 && kMaxPointValue_ < 0) || (kMinPointValue_ >= 0 && kMaxPointValue_ >= 0)) {
-        tmp_range = kMaxPointValue_ - kMinPointValue_;
+    if ((m_kMinPointValue < 0 && m_kMaxPointValue < 0) || (m_kMinPointValue >= 0 && m_kMaxPointValue >= 0)) {
+        tmp_range = m_kMaxPointValue - m_kMinPointValue;
     }
     else {
-        tmp_range = abs(kMinPointValue_) + abs(kMaxPointValue_);
+        tmp_range = abs(m_kMinPointValue) + abs(m_kMaxPointValue);
     }
 
     int tmp_value;
-    for (int i = 0; i < PointPtrList_.size(); ++i)
+    for (int i = 0; i < m_pointPtrList.size(); ++i)
     {
-        tmp_value = round(exp(i * log(tmp_range) / (points_count_ - 1)) + kMinPointValue_);
-        if (tmp_value <= kMinPointValue_ +1){
-            tmp_value = kMinPointValue_;
-        } else if (tmp_value >= kMaxPointValue_ -1){
-            tmp_value = kMaxPointValue_;
+        tmp_value = round(exp(i * log(tmp_range) / (m_pointsCount - 1)) + m_kMinPointValue);
+        if (tmp_value <= m_kMinPointValue +1){
+            tmp_value = m_kMinPointValue;
+        } else if (tmp_value >= m_kMaxPointValue -1){
+            tmp_value = m_kMaxPointValue;
         }
-        SetPointValue((points_count_ - 1) - i, tmp_value);
+        setPointValue((m_pointsCount - 1) - i, tmp_value);
     }
-    UpdateLabelPos();
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        emit pointValueChanged(&i, &PointPtrList_[i]->current_value);
+    updateLabelPos();
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        emit pointValueChanged(&i, &m_pointPtrList[i]->current_value);
     }
 }
 
-void AxesCurvesPlot::SetShape()
+void AxesCurvesPlot::setShape()
 {
-    if (PointPtrList_.size() >= 11)
+    if (m_pointPtrList.size() >= 11)
     {
-        SetPointValue(0, -100);
-        SetPointValue(1, -60);
-        SetPointValue(2, -20);
-        SetPointValue(3, -6);
-        SetPointValue(4, -2);
-        SetPointValue(5, 0);
-        SetPointValue(6, 2);
-        SetPointValue(7, 6);
-        SetPointValue(8, 20);
-        SetPointValue(9, 60);
-        SetPointValue(10, 100);
+        setPointValue(0, -100);
+        setPointValue(1, -60);
+        setPointValue(2, -20);
+        setPointValue(3, -6);
+        setPointValue(4, -2);
+        setPointValue(5, 0);
+        setPointValue(6, 2);
+        setPointValue(7, 6);
+        setPointValue(8, 20);
+        setPointValue(9, 60);
+        setPointValue(10, 100);
     }
-    UpdateLabelPos();
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        emit pointValueChanged(&i, &PointPtrList_[i]->current_value);
+    updateLabelPos();
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        emit pointValueChanged(&i, &m_pointPtrList[i]->current_value);
     }
 }
 
-void AxesCurvesPlot::UpdateLabelPos()
+void AxesCurvesPlot::updateLabelPos()
 {
-    for (int i = 0; i < LabelPtrList_.size(); ++i) {
-        LabelPtrList_[i]->move(PointPtrList_[i]->posX, PointPtrList_[i]->posY + kRadius_);
+    for (int i = 0; i < m_labelPtrList.size(); ++i) {
+        m_labelPtrList[i]->move(m_pointPtrList[i]->posX, m_pointPtrList[i]->posY + m_kRadius);
     }
 }
 
-int AxesCurvesPlot::CalcPointValue(int current_pos) const     // ужоснах
+int AxesCurvesPlot::calcPointValue(int currentPos) const     // ужоснах
 {
     int value = 0;
-    float half_height = (height_) / 2.0 - kOffset_;
+    float half_height = (m_height) / 2.0 - m_kOffset;
     //current_pos -= - half_radius_;
-    current_pos = current_pos - 13;     // костыль
+    currentPos = currentPos - 13;     // костыль
     //qDebug()<<"height"<<height_;
-    if (current_pos > half_height){
-        float tmp_min = half_height / kMinPointValue_;
-        value = floor((current_pos - half_height) / float(tmp_min));
+    if (currentPos > half_height){
+        float tmp_min = half_height / m_kMinPointValue;
+        value = floor((currentPos - half_height) / float(tmp_min));
         //qDebug()<<"value ="<<value;
         return value;
     } else {
-        float tmp_max = half_height / kMaxPointValue_;
-        value = -((current_pos - half_height) / float(tmp_max));
+        float tmp_max = half_height / m_kMaxPointValue;
+        value = -((currentPos - half_height) / float(tmp_max));
         //qDebug()<<"value ="<<value;
         return value;
     }
@@ -328,47 +303,29 @@ int AxesCurvesPlot::CalcPointValue(int current_pos) const     // ужоснах
     return value;
 }
      // ужоснах
-int AxesCurvesPlot::CalcPointPos(int value) const     // хз, центр посередине, а дальше скейлится, в зависимости от значений min и max
+int AxesCurvesPlot::calcPointPos(int value) const     // хз, центр посередине, а дальше скейлится, в зависимости от значений min и max
 {                                               // наверно лучше потом сделать центр в зависимости от значений min и max
     int pos = 0;
-    float half_height = (height_) / 2.0 - kOffset_;    // отдельной переменной для оптимизации?
+    float half_height = (m_height) / 2.0 - m_kOffset;    // отдельной переменной для оптимизации?
 
-    if (value < kMaxPointValue_ - kMinPointValue_){
-        float tmp_min = half_height / kMinPointValue_;      // эта функция запускается до инииализации height_, неопределённое поведение
+    if (value < m_kMaxPointValue - m_kMinPointValue){
+        float tmp_min = half_height / m_kMinPointValue;      // эта функция запускается до инииализации height_, неопределённое поведение
         pos = round(value * tmp_min + half_height);
     } else {
-        float tmp_max = half_height / kMaxPointValue_;
+        float tmp_max = half_height / m_kMaxPointValue;
         pos = round(value * tmp_max + half_height);
     }
 
     return pos + 12;        // костыль
 }
 
-int AxesCurvesPlot::CalcPointPosX(int value_x) const     // хз, центр посередине, а дальше скейлится, в зависимости от значений min и max
-{                                               // наверно лучше потом сделать центр в зависимости от значений min и max
+int AxesCurvesPlot::calcPointPosX(int valueX) const     // хз, центр посередине, а дальше скейлится, в зависимости от значений min и max
+{                                                   // наверно лучше потом сделать центр в зависимости от значений min и max
     int pos = 0;
-    float half_width = (width_) / 2.0 - kOffset_;    // отдельной переменной для оптимизации?
+    float half_width = (m_width) / 2.0 - m_kOffset;    // отдельной переменной для оптимизации?
 
-
-//    if (value_x < 50){
-//        value_x += value_x;
-//    } else {
-//        value_x += value_x;
-//        //value_x = value_x * -1;
-//    }
-        float tmp_max = half_width / 100;
-        pos = round(value_x * tmp_max);
-
-
-
-
-//    if (value_x < max_point_value - min_point_value){
-//        float tmp_min = half_width / min_point_value;      // эта функция запускается до инииализации height_, неопределённое поведение
-//        pos = round(value_x * tmp_min + half_width);
-//    } else {
-//        float tmp_max = half_width / max_point_value;
-//        pos = round(value_x * tmp_max + half_width);
-//    }
+    float tmp_max = half_width / 100;// эта функция запускается до инииализации height_, неопределённое поведение
+    pos = round(valueX * tmp_max);
 
     return pos + 12;        // костыль
 }
@@ -379,20 +336,20 @@ void AxesCurvesPlot::resizeEvent(QResizeEvent* event)
     Q_UNUSED(event)
 
     int tmp_x;//, tmp_y;
-    width_ = this->width();
-    height_ = this->height();
+    m_width = this->width();
+    m_height = this->height();
 
-    column_width_ = (width_ - kOffset_*2) / float(kColumnsCount_);
-    row_height_ = (height_ - kOffset_*2) / float(kRowsCount_);
+    m_columnWidth = (m_width - m_kOffset*2) / float(m_kColumnsCount);
+    m_rowHeight = (m_height - m_kOffset*2) / float(m_kRowsCount);
 
 
-    for (int i = 0; i < PointPtrList_.size(); ++i){
-        tmp_x = (i * column_width_) + kOffset_;
-        PointPtrList_[i]->posX = tmp_x - half_radius_;      // temp
-        PointPtrList_[i]->posY = CalcPointPos(PointPtrList_[i]->current_value);
-        UpdateLabelPos();
+    for (int i = 0; i < m_pointPtrList.size(); ++i){
+        tmp_x = (i * m_columnWidth) + m_kOffset;
+        m_pointPtrList[i]->posX = tmp_x - m_halfRadius;      // temp
+        m_pointPtrList[i]->posY = calcPointPos(m_pointPtrList[i]->current_value);
+        updateLabelPos();
     }
-    for (int i = 0; i < PointPtrList_.size(); ++i){
+    for (int i = 0; i < m_pointPtrList.size(); ++i){
         //////tmp_y = (i * row_height_) + offset_;
         //PointAdrList[i]->posY = CalcPointPos(PointAdrList[i]->current_value);//tmp_y - radius_/2;      // temp
     }
@@ -403,43 +360,43 @@ void AxesCurvesPlot::resizeEvent(QResizeEvent* event)
 
     // size for a2b
     //int x = this->geometry().x();
-    int width = width_-kOffset_;
+    int width = m_width-m_kOffset;
     emit sizeChanged(width);
 }
 
 void AxesCurvesPlot::mouseMoveEvent(QMouseEvent *event)
 {
     // оптимизировать, добавить проверку только по columns line + radius/2 ?
-    for (int i = 0; i < PointPtrList_.size(); ++i)
+    for (int i = 0; i < m_pointPtrList.size(); ++i)
     {
-        if (PointPtrList_[i]->is_drag == false){
-            if (PointPtrList_[i]->area.contains(event->pos()))   // наверх
+        if (m_pointPtrList[i]->is_drag == false){
+            if (m_pointPtrList[i]->area.contains(event->pos()))   // наверх
             {
-                PointPtrList_[i]->color = kPointActiveColor_;
-                point_active_ = true;       // ????
+                m_pointPtrList[i]->color = m_kPointActiveColor;
+                m_pointActive = true;       // ????
                 update();
                 break;  //?
-            } else if (point_active_ == true){
-                PointPtrList_[i]->color = kPointInactiveColor_;
+            } else if (m_pointActive == true){
+                m_pointPtrList[i]->color = m_kPointInactiveColor;
                 update();
                 //break;  //?
             }
         }
-        else if (PointPtrList_[i]->is_drag == true){     // if nah
+        else if (m_pointPtrList[i]->is_drag == true){     // if nah
 
-            if (event->pos().y() < kOffset_ || event->pos().y() > this->height() - kOffset_) {        // event->pos().y() сделать переменную для оптимизации?
+            if (event->pos().y() < m_kOffset || event->pos().y() > this->height() - m_kOffset) {        // event->pos().y() сделать переменную для оптимизации?
                 return;
             }
 
             if (event->buttons() & Qt::LeftButton){
-                PointPtrList_[i]->posY = event->pos().y() - half_radius_;   // half_radius_ - убрать ненужные во всём коде
-                PointPtrList_[i]->color = kPointMoveColor_;
+                m_pointPtrList[i]->posY = event->pos().y() - m_halfRadius;   // half_radius_ - убрать ненужные во всём коде
+                m_pointPtrList[i]->color = m_kPointMoveColor;
 
-                PointPtrList_[i]->current_value = CalcPointValue(PointPtrList_[i]->posY);
-                LabelPtrList_[i]->setNum(PointPtrList_[i]->current_value);
-                UpdateLabelPos();
+                m_pointPtrList[i]->current_value = calcPointValue(m_pointPtrList[i]->posY);
+                m_labelPtrList[i]->setNum(m_pointPtrList[i]->current_value);
+                updateLabelPos();
                 update();
-                emit pointValueChanged(&i, &PointPtrList_[i]->current_value);
+                emit pointValueChanged(&i, &m_pointPtrList[i]->current_value);
 //                qDebug()<<"event->pos().y()"<<event->pos().y();
 //                qDebug()<<"value"<<PointAdrList[i]->current_value;
                 //CalcPointValue(event->pos().y());
@@ -452,9 +409,9 @@ void AxesCurvesPlot::mouseMoveEvent(QMouseEvent *event)
 
 void AxesCurvesPlot::mousePressEvent(QMouseEvent *event)
 {
-    for (int i = 0; i < PointPtrList_.size(); ++i){
-        if (PointPtrList_[i]->area.contains(event->pos())) {
-            PointPtrList_[i]->is_drag = true;
+    for (int i = 0; i < m_pointPtrList.size(); ++i){
+        if (m_pointPtrList[i]->area.contains(event->pos())) {
+            m_pointPtrList[i]->is_drag = true;
             break;
         }
     }
@@ -462,19 +419,19 @@ void AxesCurvesPlot::mousePressEvent(QMouseEvent *event)
 void AxesCurvesPlot::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event)
-    for (int i = 0; i < PointPtrList_.size(); ++i){
-        if(PointPtrList_[i]->is_drag == true){
-            PointPtrList_[i]->is_drag = false;
-            PointPtrList_[i]->color = kPointInactiveColor_;
+    for (int i = 0; i < m_pointPtrList.size(); ++i){
+        if(m_pointPtrList[i]->is_drag == true){
+            m_pointPtrList[i]->is_drag = false;
+            m_pointPtrList[i]->color = m_kPointInactiveColor;
             break;
         }
     }
     update();
 }
 
-void AxesCurvesPlot::DeviceStatus(bool is_connect)
+void AxesCurvesPlot::deviceStatus(bool isConnect)
 {
-    is_device_connect_ = is_connect;
+    m_isDeviceConnect = isConnect;
     update();
 }
 

@@ -1,8 +1,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#include <QElapsedTimer> //?
 #include <QString>
-#include <QElapsedTimer>    //?
 //QT_BEGIN_NAMESPACE
 //class QString;
 //class QElapsedTimer;
@@ -17,19 +17,18 @@ class DebugWindow; /////////////////////
 //!	This is a faster way to get interface pointer then calling ISystem interface to retrieve one.
 struct GlobalEnvironment
 {
-    QElapsedTimer*             pApp_start_time = nullptr;
-    DeviceConfig*              pDeviceConfig = nullptr;
-    QSettings*                 pAppSettings = nullptr;
-    QString*                   pAppVersion = nullptr;   // тупо, надо в дефайне?
-    DebugWindow*               pDebugWindow = nullptr;
+    QElapsedTimer *pApp_start_time = nullptr;
+    DeviceConfig *pDeviceConfig = nullptr;
+    QSettings *pAppSettings = nullptr;
+    QString *pAppVersion = nullptr; // тупо, надо в дефайне?
+    DebugWindow *pDebugWindow = nullptr;
 
     // thread
 };
 extern GlobalEnvironment gEnv;
 
 // flasher
-enum
-{
+enum {
     FINISHED = 0,
     SIZE_ERROR,
     CRC_ERROR,
@@ -38,14 +37,13 @@ enum
     IN_PROCESS = 99,
 };
 
-
 struct deviceEnum_guiName_t
 {
-    int device_enum_index;
-    QString gui_name;
+    int deviceEnumIndex;
+    QString guiName;
 };
 
-    //! Remove pointer indirection.
+//! Remove pointer indirection.
 //        ILINE SSystemGlobalEnvironment* operator->()
 //        {
 //            return this;
@@ -62,7 +60,6 @@ struct deviceEnum_guiName_t
 //        {
 //            return true;
 //        }
-
 
 #endif // GLOBAL_H
 //#if defined(SYS_ENV_AS_STRUCT)

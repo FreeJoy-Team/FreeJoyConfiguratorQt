@@ -1,262 +1,255 @@
 #include "axestobuttonsslider.h"
 #include "ui_axestobuttonsslider.h"
-#include <QPainter>
-#include <QMouseEvent>
-#include <QPolygon>
 #include <cmath>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPolygon>
 
 //#include <QDebug>
-AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::AxesToButtonsSlider)
+AxesToButtonsSlider::AxesToButtonsSlider(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::AxesToButtonsSlider)
 {
     ui->setupUi(this);
 
     setMouseTracking(true);
 
-    this->setMinimumHeight(kMinHeight_);
+    this->setMinimumHeight(m_kMinHeight);
 
     // call SetPointsCount?
-    points_count_ = 0;
-    axis_output_value_ = 0;
-    axis_output_width_ = 0;
-    axis_rect_color_ = kAxisRectColor_dis_;
-    is_out_enabled_ = true;
-
+    m_pointsCount = 0;
+    m_axisOutputValue = 0;
+    m_axisOutputWidth = 0;
+    m_axisRectColor = m_kAxisRectColor_dis;
+    m_isOutEnabled = true;
 }
 
 AxesToButtonsSlider::~AxesToButtonsSlider()
 {
-    for (uint i = 0; i < points_count_; ++i) {
-        A2B_point* point = PointPtrList_.takeLast();
-        QLabel* label = LabelPtrList_.takeLast();
+    for (uint i = 0; i < m_pointsCount; ++i) {
+        A2B_point *point = m_pointPtrList.takeLast();
+        QLabel *label = m_labelPtrList.takeLast();
         delete point;
         delete label;
     }
     delete ui;
 }
 
-void AxesToButtonsSlider::SetAxisOutputValue(int out_value, bool is_enable)
+void AxesToButtonsSlider::setAxisOutputValue(int outValue, bool isEnable)
 {
-    is_out_enabled_ = is_enable;
-    axis_output_value_ = out_value;// + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE;        //abs((value  - min)/ (float)(max - min));
-    if (is_enable && this->isEnabled() == true){
-        axis_rect_color_ = kAxisRectColor_;
+    m_isOutEnabled = isEnable;
+    m_axisOutputValue = outValue; // + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE;        //abs((value  - min)/ (float)(max - min));
+    if (isEnable && this->isEnabled() == true) {
+        m_axisRectColor = m_kAxisRectColor;
     } else {
-        axis_rect_color_ = kAxisRectColor_dis_;
+        m_axisRectColor = m_kAxisRectColor_dis;
     }
     update();
 }
 
-void AxesToButtonsSlider::paintEvent(QPaintEvent *event)        // оптимизхировать width_ - offset_*2
+void AxesToButtonsSlider::paintEvent(QPaintEvent *event) // оптимизхировать width_ - offset_*2
 {
     Q_UNUSED(event)
     QPainter painter;
     int rect_height = 5;
-    int rect_y = 7 + kPaddingTop_;
+    int rect_y = 7 + m_kPaddingTop;
 
     painter.begin(this);
 
     painter.setPen(Qt::lightGray);
-    painter.drawRect(QRect(kOffset_, rect_y, this->width() - kOffset_*2, rect_height));
+    painter.drawRect(QRect(m_kOffset, rect_y, this->width() - m_kOffset * 2, rect_height));
 
     // calc and paint raw data on a2b
-    axis_output_width_ = (axis_output_value_ + AXIS_MAX_VALUE) / (float)AXIS_FULLSCALE * (this->width() - kOffset_*2);
-    QRect rect(kOffset_, rect_y, axis_output_width_, rect_height);
+    m_axisOutputWidth = (m_axisOutputValue + AXIS_MAX_VALUE) / (float) AXIS_FULLSCALE * (this->width() - m_kOffset * 2);
+    QRect rect(m_kOffset, rect_y, m_axisOutputWidth, rect_height);
     painter.drawRect(rect);
-    painter.fillRect(rect, axis_rect_color_);
+    painter.fillRect(rect, m_axisRectColor);
 
     // paint separators
     painter.setPen(Qt::lightGray);
-    for (uint i = 0; i < 25; ++i){
-        painter.drawLine((i * line_spacing_) + kOffset_, 15 + kPaddingTop_, (i * line_spacing_) + kOffset_, 18 + kPaddingTop_);
+    for (uint i = 0; i < 25; ++i) {
+        painter.drawLine((i * m_lineSpacing) + m_kOffset,
+                         15 + m_kPaddingTop,
+                         (i * m_lineSpacing) + m_kOffset,
+                         18 + m_kPaddingTop);
     }
     // Antialiasing     // спорно, мазня
     //painter.setRenderHint(QPainter::Antialiasing, true);
 
     // paint pointers
-    for (uint i = 0; i < points_count_; ++i)
-    {
-//        if (this->isEnabled() == true && PointAdrList[i]->posX - half_pointer_width < (uint)axis_raw_width_){
-//            painter.setBrush(kPointRawActivColor);
-//            painter.setPen(kPointRawActivColor);
-//        } else {
-            painter.setBrush(PointPtrList_[i]->color);
-            painter.setPen(PointPtrList_[i]->color);
-//        }
-        painter.drawPolygon(PointPtrList_[i]->polygon, Qt::WindingFill);
+    for (uint i = 0; i < m_pointsCount; ++i) {
+        //        if (this->isEnabled() == true && PointAdrList[i]->posX - half_pointer_width < (uint)axis_raw_width_){
+        //            painter.setBrush(kPointRawActivColor);
+        //            painter.setPen(kPointRawActivColor);
+        //        } else {
+        painter.setBrush(m_pointPtrList[i]->color);
+        painter.setPen(m_pointPtrList[i]->color);
+        //        }
+        painter.drawPolygon(m_pointPtrList[i]->polygon, Qt::WindingFill);
     }
     painter.end();
 }
 
-void AxesToButtonsSlider::DrawPoint(QPoint point_pos, uint point_number) {
-
-    if (point_pos.x() < kOffset_ || point_pos.x() > this->width() - kOffset_) {
+void AxesToButtonsSlider::drawPoint(const QPoint &pointPos, uint pointNumber)
+{
+    if (pointPos.x() < m_kOffset || pointPos.x() > this->width() - m_kOffset) {
         return;
-    }
-    else if (PointPtrList_[point_number]->is_drag && point_pos.x() < this->width() + kOffset_) {
-
-        if (points_count_ > 1){
-            if (point_number > 0 && point_number < points_count_ - 1)
-            {
-                if (uint(point_pos.x()) < PointPtrList_[point_number - 1]->posX +kRangeBetween_ ||        // баг при загрузке конфига?
-                    uint(point_pos.x()) > PointPtrList_[point_number + 1]->posX -kRangeBetween_)          // если точки впритык и происходит округление
+    } else if (m_pointPtrList[pointNumber]->is_drag && pointPos.x() < this->width() + m_kOffset) {
+        if (m_pointsCount > 1) {
+            if (pointNumber > 0 && pointNumber < m_pointsCount - 1) {
+                if (uint(pointPos.x()) < m_pointPtrList[pointNumber - 1]->posX + m_kRangeBetween // баг при загрузке конфига?
+                    || uint(pointPos.x()) > m_pointPtrList[pointNumber + 1]->posX - m_kRangeBetween) // если точки впритык и происходит округление
                 {
                     return;
                 }
-            } else if (point_number == 0){
-                if (uint(point_pos.x()) > PointPtrList_[point_number + 1]->posX -kRangeBetween_){
+            } else if (pointNumber == 0) {
+                if (uint(pointPos.x()) > m_pointPtrList[pointNumber + 1]->posX - m_kRangeBetween) {
                     return;
                 }
             } else {
-                if (uint(point_pos.x()) < PointPtrList_[point_number - 1]->posX +kRangeBetween_){
+                if (uint(pointPos.x()) < m_pointPtrList[pointNumber - 1]->posX + m_kRangeBetween) {
                     return;
                 }
             }
         }
-        MovePointer(point_pos.x(), point_number);
-        PointPtrList_[point_number]->posX = point_pos.x();
-        PointPtrList_[point_number]->current_value = CalcPointValue(PointPtrList_[point_number]->posX);
+        movePointer(pointPos.x(), pointNumber);
+        m_pointPtrList[pointNumber]->posX = pointPos.x();
+        m_pointPtrList[pointNumber]->current_value = calcPointValue(m_pointPtrList[pointNumber]->posX);
         //SetLableValue(point_pos.x(), point_number);
-        LabelPtrList_[point_number]->setNum((int)PointPtrList_[point_number]->current_value);
+        m_labelPtrList[pointNumber]->setNum((int) m_pointPtrList[pointNumber]->current_value);
         return;
     }
 }
 
-void AxesToButtonsSlider::SetLableValue(int point_pos ,uint point_number)
+void AxesToButtonsSlider::setLableValue(int pointPos, uint pointNumber)
 {
-    LabelPtrList_[point_number]->setNum(int(CalcPointValue(point_pos)));
+    m_labelPtrList[pointNumber]->setNum(int(calcPointValue(pointPos)));
 }
 
-void AxesToButtonsSlider::SetPointsCount(uint count)        // count = 0 -crash
+void AxesToButtonsSlider::setPointsCount(uint count)
 {
-    if (count < 2) count = 2;
+    if (count < 2)
+        count = 2;
     // create points
-    if (count > points_count_)
-    {
-        for (uint i = 0; i < count - points_count_; ++i) {
-            A2B_point* point = new A2B_point;
-            QLabel* label = new QLabel(this);
+    if (count > m_pointsCount) {
+        for (uint i = 0; i < count - m_pointsCount; ++i) {
+            A2B_point *point = new A2B_point;
+            QLabel *label = new QLabel(this);
             label->setFont(QFont("MS Shell Dlg 2", 8));
-            PointPtrList_.append(point);
-            LabelPtrList_.append(label);
-            point->polygon << kPointer_[0] << kPointer_[1] << kPointer_[2] << kPointer_[3] << kPointer_[4];
-            label->setMinimumWidth(kLabelWidth_);
+            m_pointPtrList.append(point);
+            m_labelPtrList.append(label);
+            point->polygon << m_kPointer[0] << m_kPointer[1] << m_kPointer[2] << m_kPointer[3] << m_kPointer[4];
+            label->setMinimumWidth(m_kLabelWidth);
             label->setAlignment(Qt::AlignHCenter);
             label->setStyleSheet("background:transparent;");
             label->setVisible(true);
         }
     }
     // delete points
-    else if (count < points_count_)
-    {
-        for (uint i = 0; i < points_count_ - count; ++i) {
-            A2B_point* point = PointPtrList_.takeLast();
-            QLabel* label = LabelPtrList_.takeLast();
+    else if (count < m_pointsCount) {
+        for (uint i = 0; i < m_pointsCount - count; ++i) {
+            A2B_point *point = m_pointPtrList.takeLast();
+            QLabel *label = m_labelPtrList.takeLast();
             delete point;
             delete label;
         }
     }
-    points_count_ = count;
-    PointsPositionReset();
+    m_pointsCount = count;
+    pointsPositionReset();
 }
 
-uint AxesToButtonsSlider::GetPointsCount() const
+uint AxesToButtonsSlider::pointsCount() const
 {
-    return points_count_;
+    return m_pointsCount;
 }
 
-void AxesToButtonsSlider::SetPointValue(uint value, uint point_number)
+void AxesToButtonsSlider::setPointValue(uint value, uint pointNumber)
 {
-    if (point_number > points_count_){
-        point_number = points_count_;
+    if (pointNumber > m_pointsCount) {
+        pointNumber = m_pointsCount;
     }
-    uint pos = uint((value * (this->width() - kOffset_*2.0f) / kMaxPointValue_));   // поколдовать
+    uint pos = uint((value * (this->width() - m_kOffset * 2.0f) / m_kMaxPointValue)); // поколдовать
     // ?
-    pos += kOffset_;
-    if (pos > uint(this->width() - kOffset_)){
-        pos = this->width() - kOffset_;
-    } else if (pos < uint(kOffset_)){
-        pos = kOffset_;
+    pos += m_kOffset;
+    if (pos > uint(this->width() - m_kOffset)) {
+        pos = this->width() - m_kOffset;
+    } else if (pos < uint(m_kOffset)) {
+        pos = m_kOffset;
     }
-    MovePointer(pos, point_number);
+    movePointer(pos, pointNumber);
     //SetLableValue(pos, point_number);
-    LabelPtrList_[point_number]->setNum(int(value));
+    m_labelPtrList[pointNumber]->setNum(int(value));
     update();
 }
 
-uint AxesToButtonsSlider::GetPointValue(uint point_number) const
+uint AxesToButtonsSlider::pointValue(uint pointNumber) const
 {
-    return PointPtrList_[point_number]->current_value;
+    return m_pointPtrList[pointNumber]->current_value;
 }
 
-
-uint AxesToButtonsSlider::CalcPointValue(int current_pos) const
+uint AxesToButtonsSlider::calcPointValue(int currentPos) const
 {
-    float tmp_value = (this->width() - kOffset_*2.0f) / kMaxPointValue_;    // для красоты
-    return uint(round(  (current_pos - kOffset_) / tmp_value  ));
+    float tmp_value = (this->width() - m_kOffset * 2.0f) / m_kMaxPointValue;
+    return uint(round((currentPos - m_kOffset) / tmp_value));
 }
 
-void AxesToButtonsSlider::PointsPositionReset()
+void AxesToButtonsSlider::pointsPositionReset()
 {
-    float tmp_distance = (this->width() - kOffset_*2.0f) / (points_count_ -1);   // поколдовать
+    float tmp_distance = (this->width() - m_kOffset * 2.0f) / (m_pointsCount - 1); // поколдовать
     // apply color, position
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        if (this->isEnabled() == true){
-            PointPtrList_[i]->color = kPointerColor_;
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        if (this->isEnabled() == true) {
+            m_pointPtrList[i]->color = m_kPointerColor;
             //axis_rect_color_ = kAxisRectColor;
         } else {
-            PointPtrList_[i]->color = Qt::lightGray;
+            m_pointPtrList[i]->color = Qt::lightGray;
             //axis_rect_color_ = kAxisRectColor_dis;
         }
         //PointAdrList[i]->color = pointer_color_;
-        PointPtrList_[i]->is_drag = false;
-        PointPtrList_[i]->posX = round(i * tmp_distance + kOffset_);
+        m_pointPtrList[i]->is_drag = false;
+        m_pointPtrList[i]->posX = round(i * tmp_distance + m_kOffset);
     }
     // last to last X position
-    PointPtrList_[points_count_ - 1]->posX = this->width() - kOffset_;
+    m_pointPtrList[m_pointsCount - 1]->posX = this->width() - m_kOffset;
     // move points
-    for (uint i = 0; i < points_count_; ++i) {
-        MovePointer(PointPtrList_[i]->posX, i);
+    for (uint i = 0; i < m_pointsCount; ++i) {
+        movePointer(m_pointPtrList[i]->posX, i);
         //SetLableValue(PointAdrList[i]->posX, i);
-        PointPtrList_[i]->current_value = CalcPointValue(PointPtrList_[i]->posX);
-        LabelPtrList_[i]->setNum((int)PointPtrList_[i]->current_value);
+        m_pointPtrList[i]->current_value = calcPointValue(m_pointPtrList[i]->posX);
+        m_labelPtrList[i]->setNum((int) m_pointPtrList[i]->current_value);
     }
     update();
 }
 
-void AxesToButtonsSlider::MovePointer(uint pos_x, uint point_number)
+void AxesToButtonsSlider::movePointer(uint posX, uint pointNumber)
 {
-    //QPolygon* polygon = &PointAdrList[point_number]->polygon;       // не думаю что это даст выигрыш в оптимизации вместо нескольких PointAdrList[point_number]->polygon
-    LabelPtrList_[point_number]->move(pos_x - kLabelWidth_/2, kPointer_[2].y() + kPaddingTop_);       // label move
-    PointPtrList_[point_number]->posX = pos_x;
-    PointPtrList_[point_number]->polygon.setPoint(0, pos_x - kHalfPointerWidth_, kPointer_[0].y() + kPaddingTop_);
-    PointPtrList_[point_number]->polygon.setPoint(1, pos_x - kHalfPointerWidth_, kPointer_[1].y() + kPaddingTop_);
-    PointPtrList_[point_number]->polygon.setPoint(2, pos_x, kPointer_[2].y() + kPaddingTop_);
-    PointPtrList_[point_number]->polygon.setPoint(3, pos_x + kHalfPointerWidth_, kPointer_[3].y() + kPaddingTop_);
-    PointPtrList_[point_number]->polygon.setPoint(4, pos_x + kHalfPointerWidth_, kPointer_[4].y() + kPaddingTop_);
+    QPolygon *polygon = &m_pointPtrList[pointNumber]->polygon;
+    m_labelPtrList[pointNumber]->move(posX - m_kLabelWidth / 2, m_kPointer[2].y() + m_kPaddingTop); // label move
+    m_pointPtrList[pointNumber]->posX = posX;
+    polygon->setPoint(0, posX - m_kHalfPointerWidth, m_kPointer[0].y() + m_kPaddingTop);
+    polygon->setPoint(1, posX - m_kHalfPointerWidth, m_kPointer[1].y() + m_kPaddingTop);
+    polygon->setPoint(2, posX, m_kPointer[2].y() + m_kPaddingTop);
+    polygon->setPoint(3, posX + m_kHalfPointerWidth, m_kPointer[3].y() + m_kPaddingTop);
+    polygon->setPoint(4, posX + m_kHalfPointerWidth, m_kPointer[4].y() + m_kPaddingTop);
 }
-
 
 void AxesToButtonsSlider::mouseMoveEvent(QMouseEvent *event)
 {
-    for (uint i = 0; i < points_count_; ++i)
-    {
-        if (PointPtrList_[i]->is_drag == false){
-            if (PointPtrList_[i]->polygon.containsPoint(event->pos(), Qt::WindingFill)) {
-                    PointPtrList_[i]->color = Qt::black;
+    for (uint i = 0; i < m_pointsCount; ++i) {
+        if (m_pointPtrList[i]->is_drag == false) {
+            if (m_pointPtrList[i]->polygon.containsPoint(event->pos(), Qt::WindingFill)) {
+                m_pointPtrList[i]->color = Qt::black;
             } else {
-                PointPtrList_[i]->color = kPointerColor_;
+                m_pointPtrList[i]->color = m_kPointerColor;
             }
-        }
-        else if (PointPtrList_[i]->is_drag == true){        // много лишнего. потом чекнуть
-            if (event->buttons() & Qt::LeftButton){
-                DrawPoint(event->pos(), i);
+        } else if (m_pointPtrList[i]->is_drag == true) { // много лишнего. потом чекнуть
+            if (event->buttons() & Qt::LeftButton) {
+                drawPoint(event->pos(), i);
             }
-            if (PointPtrList_[i]->is_drag) {
-                PointPtrList_[i]->color = Qt::lightGray;
+            if (m_pointPtrList[i]->is_drag) {
+                m_pointPtrList[i]->color = Qt::lightGray;
             }
-            break;      // not tested
+            break; // not tested
         }
     }
     update();
@@ -264,54 +257,53 @@ void AxesToButtonsSlider::mouseMoveEvent(QMouseEvent *event)
 
 void AxesToButtonsSlider::mousePressEvent(QMouseEvent *event)
 {
-    for (uint i = 0; i < points_count_; ++i){
-        if (PointPtrList_[i]->polygon.containsPoint(event->pos(), Qt::WindingFill)) {
-            PointPtrList_[i]->is_drag = true;
+    for (uint i = 0; i < m_pointsCount; ++i) {
+        if (m_pointPtrList[i]->polygon.containsPoint(event->pos(), Qt::WindingFill)) {
+            m_pointPtrList[i]->is_drag = true;
             break;
         }
     }
 }
 
-void AxesToButtonsSlider::mouseReleaseEvent(QMouseEvent *event) {
+void AxesToButtonsSlider::mouseReleaseEvent(QMouseEvent *event)
+{
     Q_UNUSED(event)
-    for (uint i = 0; i < points_count_; ++i)
-    {
-        if(PointPtrList_[i]->is_drag == true)
-        {
-            PointPtrList_[i]->is_drag = false;
-            PointPtrList_[i]->color = kPointerColor_;        // ????
+    for (uint i = 0; i < m_pointsCount; ++i) {
+        if (m_pointPtrList[i]->is_drag == true) {
+            m_pointPtrList[i]->is_drag = false;
+            m_pointPtrList[i]->color = m_kPointerColor; // ????
             break;
         }
     }
     update();
 }
 
-void AxesToButtonsSlider::resizeEvent(QResizeEvent* event)
+void AxesToButtonsSlider::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
-    float tmp_value = (this->width() - kOffset_*2.0f) / (float)kMaxPointValue_;
-    for (int i = 0; i < PointPtrList_.size(); ++i) {
-        PointPtrList_[i]->posX = (PointPtrList_[i]->current_value * tmp_value) + kOffset_;
-        MovePointer(PointPtrList_[i]->posX, i);
+    float tmp_value = (this->width() - m_kOffset * 2.0f) / (float) m_kMaxPointValue;
+    for (int i = 0; i < m_pointPtrList.size(); ++i) {
+        m_pointPtrList[i]->posX = (m_pointPtrList[i]->current_value * tmp_value) + m_kOffset;
+        movePointer(m_pointPtrList[i]->posX, i);
     }
-    line_spacing_ = (this->width() - kOffset_*2.0f) / 24.0f;
+    m_lineSpacing = (this->width() - m_kOffset * 2.0f) / 24.0f;
 }
 
 bool AxesToButtonsSlider::event(QEvent *event)
 {
     if (event->type() == QEvent::EnabledChange) {
-        if (this->isEnabled() == true){
-            for (int i = 0; i < PointPtrList_.size(); ++i) {
-                PointPtrList_[i]->color = kPointerColor_;
+        if (this->isEnabled() == true) {
+            for (int i = 0; i < m_pointPtrList.size(); ++i) {
+                m_pointPtrList[i]->color = m_kPointerColor;
             }
-            if (is_out_enabled_ == true){
-               axis_rect_color_ = kAxisRectColor_;
+            if (m_isOutEnabled == true) {
+                m_axisRectColor = m_kAxisRectColor;
             }
         } else {
-            for (int i = 0; i < PointPtrList_.size(); ++i) {
-                PointPtrList_[i]->color = Qt::lightGray;
+            for (int i = 0; i < m_pointPtrList.size(); ++i) {
+                m_pointPtrList[i]->color = Qt::lightGray;
             }
-            axis_rect_color_ = kAxisRectColor_dis_;
+            m_axisRectColor = m_kAxisRectColor_dis;
         }
         update();
         return true;

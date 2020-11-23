@@ -10,10 +10,10 @@ public:
     explicit CenteredCBox(QWidget *parent = nullptr); //, int arrow_width = 18
 
 protected:
-    void paintEvent (QPaintEvent * event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
-    int arrow_width_;
+    int m_arrowWidth;
 };
 
 #endif // CENTEREDCBOX_H

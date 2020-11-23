@@ -3,32 +3,15 @@
 
 #include "widgets/debugwindow.h"
 
-ButtonLogical::ButtonLogical(int button_number, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ButtonLogical)
+ButtonLogical::ButtonLogical(int buttonNumber, QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::ButtonLogical)
 {
     ui->setupUi(this);
-    button_number_ = button_number;
-    function_previous_index_ = 0;
-    current_state_ = false;
-    ui->label_LogicalButtonNumber->setNum(button_number_ + 1);
-
-//    // add gui text
-//    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
-//        ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
-//    }
-//    for (int i = 0; i < SHIFT_COUNT; i++) {
-//        ui->comboBox_ShiftIndex->addItem(shift_list_[i].gui_name);
-//    }
-//    for (int i = 0; i < TIMER_COUNT; i++) {
-//        ui->comboBox_DelayTimerIndex->addItem(timer_list_[i].gui_name);
-//        ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
-//    }
-
-//    connect(ui->comboBox_ButtonFunction, SIGNAL(currentIndexChanged(int)),
-//            this, SLOT(functionTypeChanged(int)));
-//    connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
-//            this, SLOT(editingOnOff(int)));
+    m_buttonNumber = buttonNumber;
+    m_functionPrevIndex = 0;
+    m_currentState = false;
+    ui->label_LogicalButtonNumber->setNum(m_buttonNumber + 1);
 }
 
 ButtonLogical::~ButtonLogical()
@@ -36,23 +19,23 @@ ButtonLogical::~ButtonLogical()
     delete ui;
 }
 
-void ButtonLogical::RetranslateUi()
+void ButtonLogical::retranslateUi()
 {
     ui->retranslateUi(this);
 }
 
-void ButtonLogical::Initialization()
+void ButtonLogical::initialization()
 {
     // add gui text
-    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // add gui text
-        ui->comboBox_ButtonFunction->addItem(logical_function_list_[i].gui_name);
+    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {
+        ui->comboBox_ButtonFunction->addItem(m_logicFunctionList[i].guiName);
     }
     for (int i = 0; i < SHIFT_COUNT; i++) {
-        ui->comboBox_ShiftIndex->addItem(shift_list_[i].gui_name);
+        ui->comboBox_ShiftIndex->addItem(m_shiftList[i].guiName);
     }
     for (int i = 0; i < TIMER_COUNT; i++) {
-        ui->comboBox_DelayTimerIndex->addItem(timer_list_[i].gui_name);
-        ui->comboBox_PressTimerIndex->addItem(timer_list_[i].gui_name);
+        ui->comboBox_DelayTimerIndex->addItem(m_timerList[i].guiName);
+        ui->comboBox_PressTimerIndex->addItem(m_timerList[i].guiName);
     }
 
     connect(ui->comboBox_ButtonFunction, SIGNAL(currentIndexChanged(int)),
@@ -61,14 +44,14 @@ void ButtonLogical::Initialization()
             this, SLOT(editingOnOff(int)));
 }
 
-void ButtonLogical::SetMaxPhysButtons(int max_phys_buttons)
+void ButtonLogical::setMaxPhysButtons(int maxPhysButtons)
 {
-    ui->spinBox_PhysicalButtonNumber->setMaximum(max_phys_buttons);
+    ui->spinBox_PhysicalButtonNumber->setMaximum(maxPhysButtons);
 }
 
-void ButtonLogical::SetSpinBoxOnOff(int max_phys_buttons)
+void ButtonLogical::setSpinBoxOnOff(int max_phys_buttons)
 {
-    if (max_phys_buttons > 0){
+    if (max_phys_buttons > 0) {
         ui->spinBox_PhysicalButtonNumber->setEnabled(true);
     } else {
         ui->spinBox_PhysicalButtonNumber->setEnabled(false);
@@ -77,13 +60,13 @@ void ButtonLogical::SetSpinBoxOnOff(int max_phys_buttons)
 
 void ButtonLogical::functionTypeChanged(int index)
 {
-    emit functionIndexChanged(index, function_previous_index_, button_number_);
-    function_previous_index_ = index;
+    emit functionIndexChanged(index, m_functionPrevIndex, m_buttonNumber);
+    m_functionPrevIndex = index;
 }
 
 void ButtonLogical::editingOnOff(int value)
 {
-    if(value > 0){
+    if (value > 0) {
         ui->checkBox_IsInvert->setEnabled(true);
         ui->checkBox_IsDisable->setEnabled(true);
         ui->comboBox_ButtonFunction->setEnabled(true);
@@ -100,89 +83,87 @@ void ButtonLogical::editingOnOff(int value)
     }
 }
 
-void ButtonLogical::SetButtonState(bool set_state)
+void ButtonLogical::setButtonState(bool state)
 {
     static QPalette default_palette;
     static QString default_style;
 
-    if (set_state != current_state_)
-    {
-        this->setAutoFillBackground(true);
+    if (state != m_currentState) {
+        setAutoFillBackground(true);
 
-        if (set_state){
-            default_palette = this->palette();
-            default_style = ui->label_LogicalButtonNumber->styleSheet();
+        if (state) {
+            default_palette = palette();
+            default_style = ui->label_LogicalButtonNumber->styleSheet(); // default_style ="" бесполезно
 
-            this->setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
-            ui->label_LogicalButtonNumber->setStyleSheet(default_style + "background-color: rgb(0, 128, 0);");
+            setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
+            ui->label_LogicalButtonNumber->setStyleSheet(default_style
+                                                         + QStringLiteral("background-color: rgb(0, 128, 0);"));
 
-            if (gEnv.pDebugWindow){
-                gEnv.pDebugWindow->LogicalButtonState(button_number_ + 1, true);
+            if (gEnv.pDebugWindow) {
+                gEnv.pDebugWindow->logicalButtonState(m_buttonNumber + 1, true);
             }
         } else {
-            this->setPalette(default_palette);
+            setPalette(window()->palette());
             ui->label_LogicalButtonNumber->setStyleSheet(default_style);
 
-            if (gEnv.pDebugWindow){
-                gEnv.pDebugWindow->LogicalButtonState(button_number_ + 1, false);
+            if (gEnv.pDebugWindow) {
+                gEnv.pDebugWindow->logicalButtonState(m_buttonNumber + 1, false);
             }
         }
-        current_state_ = set_state;
+        m_currentState = state;
     }
 }
 
-
-void ButtonLogical::ReadFromConfig()
+void ButtonLogical::readFromConfig()
 {
+    button_t *button = &gEnv.pDeviceConfig->config.buttons[m_buttonNumber];
     // physical
-    ui->spinBox_PhysicalButtonNumber->setValue(gEnv.pDeviceConfig->config.buttons[button_number_].physical_num + 1);        // !!!!
+    ui->spinBox_PhysicalButtonNumber->setValue(button->physical_num + 1); // +1 !!!!
     // isDisable
-    ui->checkBox_IsDisable->setChecked(gEnv.pDeviceConfig->config.buttons[button_number_].is_disabled);
+    ui->checkBox_IsDisable->setChecked(button->is_disabled);
     // isInvert
-    ui->checkBox_IsInvert->setChecked(gEnv.pDeviceConfig->config.buttons[button_number_].is_inverted);
+    ui->checkBox_IsInvert->setChecked(button->is_inverted);
 
     // logical button function
-    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {      // get config
-        if (gEnv.pDeviceConfig->config.buttons[button_number_].type == logical_function_list_[i].device_enum_index )
-        {
+    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {
+        if (button->type == m_logicFunctionList[i].deviceEnumIndex) {
             ui->comboBox_ButtonFunction->setCurrentIndex(i);
             break;
         }
     }
     // shift
     for (int i = 0; i < SHIFT_COUNT; i++) {
-        if (gEnv.pDeviceConfig->config.buttons[button_number_].shift_modificator == shift_list_[i].device_enum_index )
-        {
+        if (button->shift_modificator == m_shiftList[i].deviceEnumIndex) {
             ui->comboBox_ShiftIndex->setCurrentIndex(i);
             break;
         }
     }
     // delay timer
     for (int i = 0; i < TIMER_COUNT; i++) {
-        if (gEnv.pDeviceConfig->config.buttons[button_number_].delay_timer == timer_list_[i].device_enum_index )
-        {
+        if (button->delay_timer == m_timerList[i].deviceEnumIndex) {
             ui->comboBox_DelayTimerIndex->setCurrentIndex(i);
             break;
         }
     }
     // toggle timer
     for (int i = 0; i < TIMER_COUNT; i++) {
-        if (gEnv.pDeviceConfig->config.buttons[button_number_].press_timer == timer_list_[i].device_enum_index )
-        {
+        if (button->press_timer == m_timerList[i].deviceEnumIndex) {
             ui->comboBox_PressTimerIndex->setCurrentIndex(i);
             break;
         }
     }
 }
 
-void ButtonLogical::WriteToConfig()
+void ButtonLogical::writeToConfig()
 {
-    gEnv.pDeviceConfig->config.buttons[button_number_].physical_num = ui->spinBox_PhysicalButtonNumber->value() - 1;        // !!!!
-    gEnv.pDeviceConfig->config.buttons[button_number_].is_disabled = ui->checkBox_IsDisable->isChecked();
-    gEnv.pDeviceConfig->config.buttons[button_number_].is_inverted = ui->checkBox_IsInvert->isChecked();
+    button_t *button = &gEnv.pDeviceConfig->config.buttons[m_buttonNumber];
 
-    gEnv.pDeviceConfig->config.buttons[button_number_].type = logical_function_list_[ui->comboBox_ButtonFunction->currentIndex()].device_enum_index;
-    gEnv.pDeviceConfig->config.buttons[button_number_].shift_modificator = shift_list_[ui->comboBox_ShiftIndex->currentIndex()].device_enum_index;
-    gEnv.pDeviceConfig->config.buttons[button_number_].delay_timer = timer_list_[ui->comboBox_DelayTimerIndex->currentIndex()].device_enum_index;
-    gEnv.pDeviceConfig->config.buttons[button_number_].press_timer = timer_list_[ui->comboBox_PressTimerIndex->currentIndex()].device_enum_index;
+    button->physical_num = ui->spinBox_PhysicalButtonNumber->value() - 1; // -1 !!!!
+    button->is_disabled = ui->checkBox_IsDisable->isChecked();
+    button->is_inverted = ui->checkBox_IsInvert->isChecked();
+
+    button->type = m_logicFunctionList[ui->comboBox_ButtonFunction->currentIndex()].deviceEnumIndex;
+    button->shift_modificator = m_shiftList[ui->comboBox_ShiftIndex->currentIndex()].deviceEnumIndex;
+    button->delay_timer = m_timerList[ui->comboBox_DelayTimerIndex->currentIndex()].deviceEnumIndex;
+    button->press_timer = m_timerList[ui->comboBox_PressTimerIndex->currentIndex()].deviceEnumIndex;
 }

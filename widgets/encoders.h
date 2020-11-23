@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-#include "global.h"
 #include "deviceconfig.h"
+#include "global.h"
 
 #define ENCODER_TYPE_COUNT 3
 namespace Ui {
@@ -16,36 +16,35 @@ class Encoders : public QWidget
     Q_OBJECT
 
 public:
-    explicit Encoders(int encoders_number, QWidget *parent = nullptr);
+    explicit Encoders(int encodersNumber, QWidget *parent = nullptr);
     ~Encoders();
 
-    void ReadFromConfig();
-    void WriteToConfig();
+    void readFromConfig();
+    void writeToConfig();
 
-    void RetranslateUi();
+    void retranslateUi();
 
-    int GetInputA() const;
-    int GetInputB() const;
+    int inputA() const;
+    int inputB() const;
 
-    void SetInputA(int);
-    void SetInputB(int);
+    void setInputA(int);
+    void setInputB(int);
 
 private:
     Ui::Encoders *ui;
-    void SetUiOnOff();
+    void setUiOnOff();
 
-    int encoders_number_;
-    int input_A_;
-    int input_B_;
-    QString not_defined_;
+    int m_encodersNumber;
+    int m_input_A;
+    int m_input_B;
+    QString m_notDefined;
 
-    const deviceEnum_guiName_t encoder_type_list_[ENCODER_TYPE_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
-    {
-        {ENCODER_CONF_1x,        tr("Encoder 1x")},
-        {ENCODER_CONF_2x,        tr("Encoder 2x")},
-        {ENCODER_CONF_4x,        tr("Encoder 4x")},
-    };
-
+    const deviceEnum_guiName_t m_encoderTypeList[ENCODER_TYPE_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!
+        {
+            {ENCODER_CONF_1x, tr("Encoder 1x")},
+            {ENCODER_CONF_2x, tr("Encoder 2x")},
+            {ENCODER_CONF_4x, tr("Encoder 4x")},
+        };
 };
 
 #endif // ENCODERS_H

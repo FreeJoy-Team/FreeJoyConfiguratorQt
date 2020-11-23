@@ -11,41 +11,30 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
     ui(new Ui::PinConfig)                       // мои соболезнования тем кто будет разбираться)
 {
     ui->setupUi(this);
-    max_buttons_warning_ = false;
-    pin_count_ = 0;
-    shift_latch_count_ = 0;
-    shift_data_count_ = 0;
+    m_maxButtonsWarning = false;
+    m_pinCount = 0;
+    m_shiftLatchCount = 0;
+    m_shiftDataCount = 0;
 
-    axis_sources_ = 0;
-    buttons_from_axes_ = 0;
-    buttons_from_shift_regs_ = 0;
-    single_buttons_ = 0;
-    rows_of_buttons_ = 0;
-    columns_of_buttons_ = 0;
-    single_LED_ = 0;
-    rows_of_LED_ = 0;
-    columns_of_LED_ = 0;
-
-//    FilterObject *filter = new FilterObject();  // delete
-//    filter->target=ui->label_ControllerImage;
-//    ui->label_ControllerImage->installEventFilter(filter);
-
-//    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
-//    // get label dimensions
-//    int w = ui->label_ControllerImage->width();
-//    int h = ui->label_ControllerImage->height();
-//    // set a scaled pixmap to a w x h window keeping its aspect ratio
-//    ui->label_ControllerImage->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
+    m_axisSources = 0;
+    m_buttonsFromAxes = 0;
+    m_buttonsFromShiftRegs = 0;
+    m_singleButtons = 0;
+    m_rowsOfButtons = 0;
+    m_columnsOfButtons = 0;
+    m_singleLed = 0;
+    m_rowsOfLed = 0;
+    m_columnsOfLed = 0;
 
     int number = 1;
     QString name_template_pinA(QStringLiteral("widgetPin_PA%1"));//QtConcurrent::run()
     for(uint8_t i = 0; i < 16; i++) {                   // 16 to PINS_IN_GROUP_RANGE
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinA.arg(i));
         if (pinComboBox != nullptr){
-            pin_count_++;
+            m_pinCount++;
             //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
-            pinComboBox->InitializationPins(number++);
-            PinCBoxPtrList_.append(pinComboBox);
+            pinComboBox->initializationPins(number++);
+            m_pinCBoxPtrList.append(pinComboBox);
         }
     }
     // search and initializate pins PB
@@ -53,10 +42,10 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
     for(uint8_t i = 0; i < 16; i++) {
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinB.arg(i));
         if (pinComboBox != nullptr){
-            pin_count_++;
+            m_pinCount++;
             //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
-            pinComboBox->InitializationPins(number++);
-            PinCBoxPtrList_.append(pinComboBox);
+            pinComboBox->initializationPins(number++);
+            m_pinCBoxPtrList.append(pinComboBox);
         }
     }
     // search and initializate pins PC
@@ -64,23 +53,23 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
     for(uint8_t i = 0; i < 16; i++) {
         PinComboBox *pinComboBox = this->findChild<PinComboBox *>(name_template_pinC.arg(i));
         if (pinComboBox != nullptr){
-            pin_count_++;
+            m_pinCount++;
             //QFuture<void> future = QtConcurrent::run(pinComboBox, &PinComboBox::InitializationPins, number++);      // hz
-            pinComboBox->InitializationPins(number++);
-            PinCBoxPtrList_.append(pinComboBox);
+            pinComboBox->initializationPins(number++);
+            m_pinCBoxPtrList.append(pinComboBox);
         }
     }
 
-    for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
-            connect(PinCBoxPtrList_[i], SIGNAL(valueChangedForInteraction(int, int, int)),       // valgrind сообщает о утечке, но почему?
+    for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
+            connect(m_pinCBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),       // valgrind сообщает о утечке, но почему?
                         this, SLOT(pinInteraction(int, int, int)));
-            connect(PinCBoxPtrList_[i], SIGNAL(currentIndexChanged(int, int, int)),
+            connect(m_pinCBoxPtrList[i], SIGNAL(currentIndexChanged(int, int, int)),
                         this, SLOT(pinIndexChanged(int, int, int)));
     }
     connect(this, SIGNAL(totalButtonsValueChanged(int)),
             this, SLOT(totalButtonsChanged(int)));
 
-    if (pin_count_ != PINS_COUNT){
+    if (m_pinCount != PINS_COUNT){
         qCritical()<<"pinconfig.cpp pin_count_ != PINS_COUNT";
     }
 }
@@ -90,29 +79,29 @@ PinConfig::~PinConfig()
     delete ui;
 }
 
-void PinConfig::RetranslateUi()
+void PinConfig::retranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
-        PinCBoxPtrList_[i]->RetranslateUi();
+    for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
+        m_pinCBoxPtrList[i]->retranslateUi();
     }
 }
 
-void PinConfig::pinInteraction(int index, int sender_index, int pin)
+void PinConfig::pinInteraction(int index, int senderIndex, int pin)
 {
     if (index != NOT_USED)//current_enum_index
     {
-        for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
-            for (int j = 0; j < PinCBoxPtrList_[i]->PinTypeIndex().size(); ++j) {
-                if (PinCBoxPtrList_[i]->PinTypeIndex()[j] == index)
+        for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
+            for (int j = 0; j < m_pinCBoxPtrList[i]->pinTypeIndex().size(); ++j) {
+                if (m_pinCBoxPtrList[i]->pinTypeIndex()[j] == index)
                 {
-                    if(PinCBoxPtrList_[i]->InteractCount() == 0){
+                    if(m_pinCBoxPtrList[i]->interactCount() == 0){
                         // как-то некрасиво
-                        PinCBoxPtrList_[i]->SetInteractCount(PinCBoxPtrList_[i]->InteractCount() + pin);
-                        PinCBoxPtrList_[i]->SetIndex_Iteraction(j, sender_index);
+                        m_pinCBoxPtrList[i]->setInteractCount(m_pinCBoxPtrList[i]->interactCount() + pin);
+                        m_pinCBoxPtrList[i]->setIndex_iteraction(j, senderIndex);
                     }
-                    else if (PinCBoxPtrList_[i]->IsInteracts() == true){
-                        PinCBoxPtrList_[i]->SetInteractCount(PinCBoxPtrList_[i]->InteractCount() + pin);
+                    else if (m_pinCBoxPtrList[i]->isInteracts() == true){
+                        m_pinCBoxPtrList[i]->setInteractCount(m_pinCBoxPtrList[i]->interactCount() + pin);
                     }
                 }
             }
@@ -120,17 +109,17 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
     }
     else
     {
-        for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
-            if (PinCBoxPtrList_[i]->IsInteracts() == true)
+        for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
+            if (m_pinCBoxPtrList[i]->isInteracts() == true)
             {
-                for (int j = 0; j < PinCBoxPtrList_[i]->PinTypeIndex().size(); ++j) {
-                    if (PinCBoxPtrList_[i]->PinTypeIndex()[j] == sender_index)
+                for (int j = 0; j < m_pinCBoxPtrList[i]->pinTypeIndex().size(); ++j) {
+                    if (m_pinCBoxPtrList[i]->pinTypeIndex()[j] == senderIndex)
                     {
-                        if(PinCBoxPtrList_[i]->InteractCount() > 0){
-                            PinCBoxPtrList_[i]->SetInteractCount(PinCBoxPtrList_[i]->InteractCount() - pin);
+                        if(m_pinCBoxPtrList[i]->interactCount() > 0){
+                            m_pinCBoxPtrList[i]->setInteractCount(m_pinCBoxPtrList[i]->interactCount() - pin);
                         }
-                        if (PinCBoxPtrList_[i]->InteractCount() <= 0) {
-                            PinCBoxPtrList_[i]->SetIndex_Iteraction(0, sender_index);
+                        if (m_pinCBoxPtrList[i]->interactCount() <= 0) {
+                            m_pinCBoxPtrList[i]->setIndex_iteraction(0, senderIndex);
                         }
                     }
                 }
@@ -140,93 +129,93 @@ void PinConfig::pinInteraction(int index, int sender_index, int pin)
 }
 
 
-void PinConfig::pinIndexChanged(int current_device_enum, int previous_device_enum, int pin_number)              // мб сделать сразу запись в конфиг из пинов
+void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)              // мб сделать сразу запись в конфиг из пинов
 {                                                                                                               // или отдельный класс для их состояний
     // signals for another widgets
-    SignalsForWidgets(current_device_enum, previous_device_enum, pin_number);
+    signalsForWidgets(currentDeviceEnum, previousDeviceEnum, pinNumber);
 
     // pin type limit           // переизбыток функционала(изи менять в структуре), не думаю, что понадобится в будущем, можно было и захардкодить
-    PinTypeLimit(current_device_enum, previous_device_enum);
+    pinTypeLimit(currentDeviceEnum, previousDeviceEnum);
 
     // set current config and generate signals for another widgets
 //    else {
-    SetCurrentConfig(current_device_enum, previous_device_enum, pin_number);
+    setCurrentConfig(currentDeviceEnum, previousDeviceEnum, pinNumber);
     //}
 }
 
 
-void PinConfig::SignalsForWidgets(int current_device_enum, int previous_device_enum, int pin_number)
+void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
 {
     //fast encoder selected
-    if (current_device_enum == FAST_ENCODER){
-        emit fastEncoderSelected(PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name, true);    // hz
-    } else if (previous_device_enum == FAST_ENCODER){
-        emit fastEncoderSelected(PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name, false);    // hz
+    if (currentDeviceEnum == FAST_ENCODER){
+        emit fastEncoderSelected(m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].gui_name, true);    // hz
+    } else if (previousDeviceEnum == FAST_ENCODER){
+        emit fastEncoderSelected(m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].gui_name, false);    // hz
     }
     // shift register latch selected
-    if (current_device_enum == SHIFT_REG_LATCH){
-        shift_latch_count_++;
-        emit shiftRegSelected(pin_number, 0, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
-    } else if (previous_device_enum == SHIFT_REG_LATCH){
-        shift_latch_count_--;
-        emit shiftRegSelected((pin_number)*-1, 0, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
+    if (currentDeviceEnum == SHIFT_REG_LATCH){
+        m_shiftLatchCount++;
+        emit shiftRegSelected(pinNumber, 0, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].gui_name);    // hz
+    } else if (previousDeviceEnum == SHIFT_REG_LATCH){
+        m_shiftLatchCount--;
+        emit shiftRegSelected((pinNumber)*-1, 0, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].gui_name);    // hz
     }
     // shift register data selected
-    if (current_device_enum == SHIFT_REG_DATA){
-        shift_data_count_++;
-        emit shiftRegSelected(0, pin_number, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
-    } else if (previous_device_enum == SHIFT_REG_DATA){
-        shift_data_count_--;
-        emit shiftRegSelected(0, (pin_number)*-1, PinCBoxPtrList_[0]->PinList()[pin_number - PA_0].gui_name);    // hz
+    if (currentDeviceEnum == SHIFT_REG_DATA){
+        m_shiftDataCount++;
+        emit shiftRegSelected(0, pinNumber, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].gui_name);    // hz
+    } else if (previousDeviceEnum == SHIFT_REG_DATA){
+        m_shiftDataCount--;
+        emit shiftRegSelected(0, (pinNumber)*-1, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].gui_name);    // hz
     }
     // I2C selected
-    if (current_device_enum == I2C_SCL){// || current_device_enum == I2C_SDA){
+    if (currentDeviceEnum == I2C_SCL){// || current_device_enum == I2C_SDA){
         emit axesSourceChanged(-2, true);                                            // -2 enum I2C в axes.h
-    } else if (previous_device_enum == I2C_SCL){// || previous_device_enum == I2C_SDA){
+    } else if (previousDeviceEnum == I2C_SCL){// || previous_device_enum == I2C_SDA){
         emit axesSourceChanged(-2, false);
     }
 }
 
-void PinConfig::PinTypeLimit(int current_device_enum, int previous_device_enum)
+void PinConfig::pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum)
 {
     static int limit_count_array[PIN_TYPE_LIMIT_COUNT]{};
     static bool limit_is_enable[PIN_TYPE_LIMIT_COUNT]{};
 
     for (int i = 0; i < PIN_TYPE_LIMIT_COUNT; ++i)
     {
-        if (current_device_enum == pin_type_limit_[i].device_enum_index)
+        if (currentDeviceEnum == m_pinTypeLimit[i].deviceEnumIndex)
         {
             limit_count_array[i]++;
         }
-        if (previous_device_enum == pin_type_limit_[i].device_enum_index)
+        if (previousDeviceEnum == m_pinTypeLimit[i].deviceEnumIndex)
         {
             limit_count_array[i]--;
         }
 
-        if (limit_count_array[i] >= pin_type_limit_[i].max_count && limit_is_enable[i] == false)
+        if (limit_count_array[i] >= m_pinTypeLimit[i].maxCount && limit_is_enable[i] == false)
         {
             limit_is_enable[i] = true;
-            for (int j = 0; j < PinCBoxPtrList_.size(); ++j)
+            for (int j = 0; j < m_pinCBoxPtrList.size(); ++j)
             {
-                for (int k = 0; k < PinCBoxPtrList_[j]->EnumIndex().size(); ++k) {
-                    if (PinCBoxPtrList_[j]->EnumIndex()[k] == pin_type_limit_[i].device_enum_index &&
-                        PinCBoxPtrList_[j]->CurrentDevEnum() != current_device_enum)
+                for (int k = 0; k < m_pinCBoxPtrList[j]->enumIndex().size(); ++k) {
+                    if (m_pinCBoxPtrList[j]->enumIndex()[k] == m_pinTypeLimit[i].deviceEnumIndex &&
+                        m_pinCBoxPtrList[j]->currentDevEnum() != currentDeviceEnum)
                     {
-                        PinCBoxPtrList_[j]->SetIndexStatus(int(k), false);
+                        m_pinCBoxPtrList[j]->setIndexStatus(int(k), false);
                     }
                 }
             }
         }
 
-        if (limit_is_enable[i] == true && limit_count_array[i] < pin_type_limit_[i].max_count)
+        if (limit_is_enable[i] == true && limit_count_array[i] < m_pinTypeLimit[i].maxCount)
         {
             limit_is_enable[i] = false;
-            for (int j = 0; j < PinCBoxPtrList_.size(); ++j)
+            for (int j = 0; j < m_pinCBoxPtrList.size(); ++j)
             {
-                for (int k = 0; k < PinCBoxPtrList_[j]->EnumIndex().size(); ++k) {
-                    if (PinCBoxPtrList_[j]->EnumIndex()[k] == pin_type_limit_[i].device_enum_index)
+                for (int k = 0; k < m_pinCBoxPtrList[j]->enumIndex().size(); ++k) {
+                    if (m_pinCBoxPtrList[j]->enumIndex()[k] == m_pinTypeLimit[i].deviceEnumIndex)
                     {
-                        PinCBoxPtrList_[j]->SetIndexStatus(int(k), true);
+                        m_pinCBoxPtrList[j]->setIndexStatus(int(k), true);
                     }
                 }
             }
@@ -234,63 +223,63 @@ void PinConfig::PinTypeLimit(int current_device_enum, int previous_device_enum)
     }
 }
 
-void PinConfig::SetCurrentConfig(int current_device_enum, int previous_device_enum, int pin_number)
+void PinConfig::setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
 {
     for (int i = 0; i < SOURCE_COUNT; ++i) {
         for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
-            if(source[i].pin_type[j] == 0){
+            if(m_source[i].pinType[j] == 0){
                 break;
             }
-            else if(source[i].pin_type[j] == current_device_enum || source[i].pin_type[j] == previous_device_enum){
+            else if(m_source[i].pinType[j] == currentDeviceEnum || m_source[i].pinType[j] == previousDeviceEnum){
 
                 int tmp;
-                if (source[i].pin_type[j] == current_device_enum){
+                if (m_source[i].pinType[j] == currentDeviceEnum){
                     tmp = 1;
                 } else {
                     tmp = -1;
                 }
 
                 if (i == AXIS_SOURCE){      //int source_enum, bool is_add      axesSourceChanged
-                    axis_sources_+=tmp;
-                    ui->label_AxisSources->setNum(axis_sources_);
+                    m_axisSources+=tmp;
+                    ui->label_AxisSources->setNum(m_axisSources);
                     if (tmp > 0){
-                        emit axesSourceChanged(pin_number - 1, true);
+                        emit axesSourceChanged(pinNumber - 1, true);
                     } else {
-                        emit axesSourceChanged(pin_number - 1, false);
+                        emit axesSourceChanged(pinNumber - 1, false);
                     }
                 }
                 else if (i == SINGLE_BUTTON){
-                    single_buttons_+=tmp;
-                    ui->label_SingleButtons->setNum(single_buttons_);
-                    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    m_singleButtons+=tmp;
+                    ui->label_SingleButtons->setNum(m_singleButtons);
+                    ui->label_TotalButtons->setNum(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
+                    emit totalButtonsValueChanged(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
                 }
                 else if (i == ROW_OF_BUTTONS){
-                    rows_of_buttons_+=tmp;
-                    ui->label_RowsOfButtons->setNum(rows_of_buttons_);
-                    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    m_rowsOfButtons+=tmp;
+                    ui->label_RowsOfButtons->setNum(m_rowsOfButtons);
+                    ui->label_TotalButtons->setNum(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
+                    emit totalButtonsValueChanged(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
                 }
                 else if (i == COLUMN_OF_BUTTONS){
-                    columns_of_buttons_+=tmp;
-                    ui->label_ColumnsOfButtons->setNum(columns_of_buttons_);
-                    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-                    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+                    m_columnsOfButtons+=tmp;
+                    ui->label_ColumnsOfButtons->setNum(m_columnsOfButtons);
+                    ui->label_TotalButtons->setNum(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
+                    emit totalButtonsValueChanged(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
                 }
                 else if (i == SINGLE_LED){
-                    single_LED_+=tmp;
-                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                    emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    m_singleLed+=tmp;
+                    ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
+                    emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
                 }
                 else if (i == ROW_OF_LED){
-                    rows_of_LED_+=tmp;
-                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                    emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    m_rowsOfLed+=tmp;
+                    ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
+                    emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
                 }
                 else if (i == COLUMN_OF_LED){
-                    columns_of_LED_+=tmp;
-                    ui->label_TotalLEDs->setNum(single_LED_ + (rows_of_LED_ * columns_of_LED_));
-                    emit totalLEDsValueChanged(single_LED_ + (rows_of_LED_ * columns_of_LED_));
+                    m_columnsOfLed+=tmp;
+                    ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
+                    emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
                 }
             }
         }
@@ -299,66 +288,55 @@ void PinConfig::SetCurrentConfig(int current_device_enum, int previous_device_en
 
 
 
-void PinConfig::ResetAllPins()
+void PinConfig::resetAllPins()
 {
-    for (int i = 0; i < PinCBoxPtrList_.size(); ++i) {
-        PinCBoxPtrList_[i]->ResetPin();
+    for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
+        m_pinCBoxPtrList[i]->resetPin();
     }
 }
 
 void PinConfig::a2bCountChanged(int count)
 {
-    buttons_from_axes_ = count;
-    ui->label_ButtonFromAxes->setNum(buttons_from_axes_);
-    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+    m_buttonsFromAxes = count;
+    ui->label_ButtonFromAxes->setNum(m_buttonsFromAxes);
+    int total_buttons = m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons);
+    ui->label_TotalButtons->setNum(total_buttons);
+    emit totalButtonsValueChanged(total_buttons);
 }
 
 void PinConfig::shiftRegButtonsCountChanged(int count)
 {
-    buttons_from_shift_regs_ = count;
-    ui->label_ButtonsFromShiftRegs->setNum(buttons_from_shift_regs_);
-    ui->label_TotalButtons->setNum(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
-    emit totalButtonsValueChanged(buttons_from_shift_regs_ + buttons_from_axes_ + single_buttons_ + (columns_of_buttons_ * rows_of_buttons_));
+    m_buttonsFromShiftRegs = count;
+    ui->label_ButtonsFromShiftRegs->setNum(m_buttonsFromShiftRegs);
+    int total_buttons = m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons);
+    ui->label_TotalButtons->setNum(total_buttons);
+    emit totalButtonsValueChanged(total_buttons);
 }
 
 void PinConfig::totalButtonsChanged(int count)
 {
     if (count > MAX_BUTTONS_NUM){
-        default_label_style_ = ui->label_TotalButtons->styleSheet();
+        m_defaultLabelStyle = ui->label_TotalButtons->styleSheet();
         //ui->label_TotalButtons->setStyleSheet(default_label_style_ + "background-color: rgb(200, 0, 0);");
-        ui->text_TotalButtons->setStyleSheet(default_label_style_ + QStringLiteral("background-color: rgb(200, 0, 0);"));
-        max_buttons_warning_ = true;
-    } else if (max_buttons_warning_ == true){   // && count <= MAX_BUTTONS_NUM
-        //ui->label_TotalButtons->setStyleSheet(default_label_style_);
-        ui->text_TotalButtons->setStyleSheet(default_label_style_);
-        max_buttons_warning_ = false;
+        ui->text_TotalButtons->setStyleSheet(m_defaultLabelStyle + QStringLiteral("background-color: rgb(200, 0, 0);"));
+        m_maxButtonsWarning = true;
+    } else if (m_maxButtonsWarning == true){   // && count <= MAX_BUTTONS_NUM
+        // а не будет ли тут проблемы, если кнопка активна и в это время изменился стиль приложения
+        // то default_label_style_ будет же со старым стилем?
+        ui->text_TotalButtons->setStyleSheet(m_defaultLabelStyle);
+        m_maxButtonsWarning = false;
     }
 }
 
-
-//void PinConfig::resizeEvent(QResizeEvent* event)
-//{
-//    QPixmap pix(":/Images/BluePill_pic2.jpg"); // load pixmap
-//    // get label dimensions
-//    int w = ui->label_ControllerImage->width();
-//    int h = ui->label_ControllerImage->height();
-//    // set a scaled pixmap to a w x h window keeping its aspect ratio
-//    ui->label_ControllerImage->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatioByExpanding));
-//    QSize size = pix.size();
-//    ui->label_ControllerImage->setMaximumSize(size.width(), size.height());
-//}
-
-
-void PinConfig::ReadFromConfig(){
-    for (uint i = 0; i < pin_count_; ++i) {
-        PinCBoxPtrList_[i]->ReadFromConfig(i);
+void PinConfig::readFromConfig(){
+    for (uint i = 0; i < m_pinCount; ++i) {
+        m_pinCBoxPtrList[i]->readFromConfig(i);
     }
 }
 
-void PinConfig::WriteToConfig(){
-    for (uint i = 0; i < pin_count_; ++i) {
-        PinCBoxPtrList_[i]->WriteToConfig(i);
+void PinConfig::writeToConfig(){
+    for (uint i = 0; i < m_pinCount; ++i) {
+        m_pinCBoxPtrList[i]->writeToConfig(i);
     }
 }
 

@@ -1,15 +1,15 @@
 #ifndef CONFIGUICONVERTER_H
 #define CONFIGUICONVERTER_H
 
-#include "global.h"
 #include "deviceconfig.h"
+#include "global.h"
 
 class Converter
 {
 public:
     Converter();
 
-    static int EnumToIndex(const int device_emun, const QVector<deviceEnum_guiName_t>& list);
+    static int EnumToIndex(const int deviceEmun, const QVector<deviceEnum_guiName_t> &list);
 };
 
 #endif // CONFIGUICONVERTER_H

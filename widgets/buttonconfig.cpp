@@ -3,30 +3,29 @@
 #include <QTimer>
 
 #include <QDebug>
-ButtonConfig::ButtonConfig(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ButtonConfig)
+ButtonConfig::ButtonConfig(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::ButtonConfig)
 {
     ui->setupUi(this);
-    is_shifts_activated_ = false;
-    shift1_activated_ = false;
-    shift2_activated_ = false;
-    shift3_activated_ = false;
-    shift4_activated_ = false;
-    shift5_activated_ = false;
+    m_isShifts_act = false;
+    m_shift1_act = false;
+    m_shift2_act = false;
+    m_shift3_act = false;
+    m_shift4_act = false;
+    m_shift5_act = false;
 
     // make dynamic spawn?
-    for (int i = 0; i < MAX_BUTTONS_NUM; i++)
-    {
-        ButtonLogical* logical_buttons_widget = new ButtonLogical(i, this);
+    for (int i = 0; i < MAX_BUTTONS_NUM; i++) {
+        ButtonLogical *logical_buttons_widget = new ButtonLogical(i, this);
         ui->layoutV_LogicalButton->addWidget(logical_buttons_widget);
-        LogicButtonPtrList_.append(logical_buttons_widget);
+        m_logicButtonPtrList.append(logical_buttons_widget);
 
-        connect(LogicButtonPtrList_[i], SIGNAL(functionIndexChanged(int, int, int)),
+        connect(m_logicButtonPtrList[i], SIGNAL(functionIndexChanged(int, int, int)),
                 this, SLOT(functionTypeChanged(int, int, int)));
     }
 
-    LogicaButtonslCreator();
+    logicaButtonslCreator();
 }
 
 ButtonConfig::~ButtonConfig()
@@ -34,45 +33,45 @@ ButtonConfig::~ButtonConfig()
     delete ui;
 }
 
-void ButtonConfig::RetranslateUi()
+void ButtonConfig::retranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < LogicButtonPtrList_.size(); ++i) {
-        LogicButtonPtrList_[i]->RetranslateUi();
+    for (int i = 0; i < m_logicButtonPtrList.size(); ++i) {
+        m_logicButtonPtrList[i]->retranslateUi();
     }
 }
 
 // dynamic initialization of widgets. its decrease app startup time
 // в идеале надо и создавать виджеты здесь, но возникает проблема - долго открывается вкладка
 // и пока не знаю как это решить
-void ButtonConfig::LogicaButtonslCreator()
+void ButtonConfig::logicaButtonslCreator()
 {
     static int tmp = 0;
-    if (tmp >= MAX_BUTTONS_NUM){
-        if (MAX_BUTTONS_NUM != 128){
-            qCritical()<<"buttonconfig.cpp MAX_BUTTONS_NUM != 128";
+    if (tmp >= MAX_BUTTONS_NUM) {
+        if (MAX_BUTTONS_NUM != 128) {
+            qCritical() << "buttonconfig.cpp MAX_BUTTONS_NUM != 128";
         }
-        qDebug()<<"LogicaButtonslCreator() finished";
+        qDebug() << "LogicaButtonslCreator() finished";
         emit logicalButtonsCreated();
         return;
     }
     // как я понял таймер срабатывает после полной загрузки приложения(оно отобразится)
     // т.к. в LogicaButtonslCreator заходит при инициализации, но срабатывает после запуска приложения
-    QTimer::singleShot(10, [&]{
+    QTimer::singleShot(10, [&] {
         for (int i = 0; i < 8; i++) // MAX_BUTTONS_NUM(128)/8 = 16 ДОЛЖНО ДЕЛИТЬСЯ БЕЗ ОСТАТКА
         {
-            LogicButtonPtrList_[tmp]->Initialization();
+            m_logicButtonPtrList[tmp]->initialization();
             tmp++;
         }
-        LogicaButtonslCreator();
+        logicaButtonslCreator();
     });
 }
 
-void ButtonConfig::PhysicalButtonsSpawn(int count)
+void ButtonConfig::physButtonsSpawn(int count)
 {
     // delete all
-    while (!PhysicButtonPtrList_.empty()) {
-        QWidget *widget = PhysicButtonPtrList_.takeLast();
+    while (!m_PhysButtonPtrList.empty()) {
+        QWidget *widget = m_PhysButtonPtrList.takeLast();
         ui->layoutG_PhysicalButton->removeWidget(widget);
         widget->deleteLater();
     }
@@ -81,36 +80,36 @@ void ButtonConfig::PhysicalButtonsSpawn(int count)
     int column = 0;
     ui->layoutG_PhysicalButton->setAlignment(Qt::AlignTop);
     for (int i = 0; i < count; i++) {
-        if(column >= 8)     // phys buttons column
+        if (column >= 8) // phys buttons column
         {
             row++;
             column = 0;
         }
-        ButtonPhysical* physical_button_widget = new ButtonPhysical(i, this);
+        ButtonPhysical *physical_button_widget = new ButtonPhysical(i, this);
         ui->layoutG_PhysicalButton->addWidget(physical_button_widget, row, column);
-        PhysicButtonPtrList_.append(physical_button_widget);
+        m_PhysButtonPtrList.append(physical_button_widget);
         column++;
     }
 }
 
-void ButtonConfig::functionTypeChanged(int index, int function_previous_index, int button_number)
+void ButtonConfig::functionTypeChanged(int index, int functionPreviousIndex, int buttonNumber)
 {
-    if (index == ENCODER_INPUT_A){
-        emit encoderInputChanged(button_number + 1, 0);
-    } else if (index == ENCODER_INPUT_B){
-        emit encoderInputChanged(0, button_number + 1);
+    if (index == ENCODER_INPUT_A) {
+        emit encoderInputChanged(buttonNumber + 1, 0);
+    } else if (index == ENCODER_INPUT_B) {
+        emit encoderInputChanged(0, buttonNumber + 1);
     }
 
-    if (function_previous_index == ENCODER_INPUT_A){
-        emit encoderInputChanged((button_number + 1) * -1, 0);  // send negative number
-    } else if (function_previous_index == ENCODER_INPUT_B){
-        emit encoderInputChanged(0, (button_number + 1) * -1);
+    if (functionPreviousIndex == ENCODER_INPUT_A) {
+        emit encoderInputChanged((buttonNumber + 1) * -1, 0); // send negative number
+    } else if (functionPreviousIndex == ENCODER_INPUT_B) {
+        emit encoderInputChanged(0, (buttonNumber + 1) * -1);
     }
 }
 
 void ButtonConfig::setUiOnOff(int value)
 {
-    if (value > 0){
+    if (value > 0) {
         ui->spinBox_Shift1->setEnabled(true);
         ui->spinBox_Shift2->setEnabled(true);
         ui->spinBox_Shift3->setEnabled(true);
@@ -123,172 +122,151 @@ void ButtonConfig::setUiOnOff(int value)
         ui->spinBox_Shift4->setEnabled(false);
         ui->spinBox_Shift5->setEnabled(false);
     }
-    for (int i = 0; i < LogicButtonPtrList_.size(); ++i) {
-        LogicButtonPtrList_[i]->SetMaxPhysButtons(value);
-        LogicButtonPtrList_[i]->SetSpinBoxOnOff(value);
+    for (int i = 0; i < m_logicButtonPtrList.size(); ++i) {
+        m_logicButtonPtrList[i]->setMaxPhysButtons(value);
+        m_logicButtonPtrList[i]->setSpinBoxOnOff(value);
     }
 
-    PhysicalButtonsSpawn(value);
+    physButtonsSpawn(value);
 }
 
-void ButtonConfig::ButtonStateChanged()
+void ButtonConfig::buttonStateChanged()
 {
     int number = 0;
 
     // logical buttons state
-    for (int i = 0; i < 16; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            number = j + (i)*8;
-            if ((gEnv.pDeviceConfig->gamepad_report.button_data[i] & (1 << (j & 0x07))))
-            {
-                if (number < LogicButtonPtrList_.size())
-                {
-                    LogicButtonPtrList_[number]->SetButtonState(true);
+    for (int i = 0; i < 16; i++) {
+        for (int j = 0; j < 8; j++) {
+            number = j + (i) *8;
+            if ((gEnv.pDeviceConfig->gamepadReport.button_data[i] & (1 << (j & 0x07)))) {
+                if (number < m_logicButtonPtrList.size()) {
+                    m_logicButtonPtrList[number]->setButtonState(true);
                 }
-            }
-            else if ((gEnv.pDeviceConfig->gamepad_report.button_data[i] & (1 << (j & 0x07))) == false)
-            {
-                if (number < LogicButtonPtrList_.size())
-                {
-                    LogicButtonPtrList_[number]->SetButtonState(false);
+            } else if ((gEnv.pDeviceConfig->gamepadReport.button_data[i] & (1 << (j & 0x07))) == false) {
+                if (number < m_logicButtonPtrList.size()) {
+                    m_logicButtonPtrList[number]->setButtonState(false);
                 }
             }
         }
     }
 
     // physical button state
-    for (int i = 1; i < 9; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-                number = gEnv.pDeviceConfig->gamepad_report.raw_button_data[0] + j + (i-1)*8;  //number = 64 + j + (i-1)*8;
+    for (int i = 1; i < 9; i++) {
+        for (int j = 0; j < 8; j++) {
+            number = gEnv.pDeviceConfig->gamepadReport.raw_button_data[0] + j + (i - 1) * 8; //number = 64 + j + (i-1)*8;
 
-            if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))))
-            {
-                if (number < PhysicButtonPtrList_.size())
-                {
-                    PhysicButtonPtrList_[number]->SetButtonState(true);
+            if ((gEnv.pDeviceConfig->gamepadReport.raw_button_data[i] & (1 << (j & 0x07)))) {
+                if (number < m_PhysButtonPtrList.size()) {
+                    m_PhysButtonPtrList[number]->setButtonState(true);
                 }
-            }
-            else if ((gEnv.pDeviceConfig->gamepad_report.raw_button_data[i] & (1 << (j & 0x07))) == false)
-            {
-
-                if ( number < PhysicButtonPtrList_.size())
-                {
-                    PhysicButtonPtrList_[number]->SetButtonState(false);
+            } else if ((gEnv.pDeviceConfig->gamepadReport.raw_button_data[i] & (1 << (j & 0x07))) == false) {
+                if (number < m_PhysButtonPtrList.size()) {
+                    m_PhysButtonPtrList[number]->setButtonState(false);
                 }
             }
         }
     }
 
     // shift state
-    for (int i = 0; i < SHIFT_COUNT; ++i)       // выглядит как избыточный код, но так необходимо для оптимизации
+    for (int i = 0; i < SHIFT_COUNT; ++i) // выглядит как избыточный код, но так необходимо для оптимизации
     {
-        if (gEnv.pDeviceConfig->gamepad_report.shift_button_data & (1 << (i & 0x07)))
-        {
-            is_shifts_activated_ = true;
+        if (gEnv.pDeviceConfig->gamepadReport.shift_button_data & (1 << (i & 0x07))) {
+            m_isShifts_act = true;
 
-            if (i == 0 && shift1_activated_ == false){
-                default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift1_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
+            if (i == 0 && m_shift1_act == false) {
+                m_defaultShiftStyle = ui->text_shift1_logicalButton->styleSheet();
+                ui->text_shift1_logicalButton->setStyleSheet(m_defaultShiftStyle + "background-color: rgb(0, 128, 0);");
                 //ui->groupBox_Shift1->setStyleSheet("background-color: rgb(0, 128, 0);");
                 //ui->spinBox_Shift1->setStyleSheet("background-color: rgb(0, 128, 0);");
-                shift1_activated_ = true;
-            }
-            else if (i == 1 && shift2_activated_ == false){
-                default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift2_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
-                shift2_activated_ = true;
-            }
-            else if (i == 2 && shift3_activated_ == false){
-                default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift3_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
-                shift3_activated_ = true;
-            }
-            else if (i == 3 && shift4_activated_ == false){
-                default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift4_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
-                shift4_activated_ = true;
-            }
-            else if (i == 4 && shift5_activated_ == false){
-                default_shift_style_ = ui->text_shift1_logicalButton->styleSheet();
-                ui->text_shift5_logicalButton->setStyleSheet(default_shift_style_ + "background-color: rgb(0, 128, 0);");
-                shift5_activated_ = true;
+                m_shift1_act = true;
+            } else if (i == 1 && m_shift2_act == false) {
+                m_defaultShiftStyle = ui->text_shift1_logicalButton->styleSheet();
+                ui->text_shift2_logicalButton->setStyleSheet(m_defaultShiftStyle + "background-color: rgb(0, 128, 0);");
+                m_shift2_act = true;
+            } else if (i == 2 && m_shift3_act == false) {
+                m_defaultShiftStyle = ui->text_shift1_logicalButton->styleSheet();
+                ui->text_shift3_logicalButton->setStyleSheet(m_defaultShiftStyle + "background-color: rgb(0, 128, 0);");
+                m_shift3_act = true;
+            } else if (i == 3 && m_shift4_act == false) {
+                m_defaultShiftStyle = ui->text_shift1_logicalButton->styleSheet();
+                ui->text_shift4_logicalButton->setStyleSheet(m_defaultShiftStyle + "background-color: rgb(0, 128, 0);");
+                m_shift4_act = true;
+            } else if (i == 4 && m_shift5_act == false) {
+                m_defaultShiftStyle = ui->text_shift1_logicalButton->styleSheet();
+                ui->text_shift5_logicalButton->setStyleSheet(m_defaultShiftStyle + "background-color: rgb(0, 128, 0);");
+                m_shift5_act = true;
             }
 
-        }
-        else if (is_shifts_activated_ == true)
-        {
-            if (i == 0 && shift1_activated_ == true){
-                ui->text_shift1_logicalButton->setStyleSheet(default_shift_style_);
-                shift1_activated_ = false;
-            } else if (i == 0 && shift2_activated_ == true){
-                ui->text_shift2_logicalButton->setStyleSheet(default_shift_style_);
-                shift2_activated_ = false;
-            } else if (i == 0 && shift3_activated_ == true){
-                ui->text_shift3_logicalButton->setStyleSheet(default_shift_style_);
-                shift3_activated_ = false;
-            } else if (i == 0 && shift4_activated_ == true){
-                ui->text_shift4_logicalButton->setStyleSheet(default_shift_style_);
-                shift4_activated_ = false;
-            } else if (i == 0 && shift5_activated_ == true){
-                ui->text_shift5_logicalButton->setStyleSheet(default_shift_style_);
-                shift5_activated_ = false;
+        } else if (m_isShifts_act == true) {
+            if (i == 0 && m_shift1_act == true) {
+                ui->text_shift1_logicalButton->setStyleSheet(m_defaultShiftStyle);
+                m_shift1_act = false;
+            } else if (i == 0 && m_shift2_act == true) {
+                ui->text_shift2_logicalButton->setStyleSheet(m_defaultShiftStyle);
+                m_shift2_act = false;
+            } else if (i == 0 && m_shift3_act == true) {
+                ui->text_shift3_logicalButton->setStyleSheet(m_defaultShiftStyle);
+                m_shift3_act = false;
+            } else if (i == 0 && m_shift4_act == true) {
+                ui->text_shift4_logicalButton->setStyleSheet(m_defaultShiftStyle);
+                m_shift4_act = false;
+            } else if (i == 0 && m_shift5_act == true) {
+                ui->text_shift5_logicalButton->setStyleSheet(m_defaultShiftStyle);
+                m_shift5_act = false;
             }
 
-            if (shift1_activated_ == false && shift2_activated_ == false && shift3_activated_ == false &&
-                shift4_activated_ == false && shift5_activated_ == false)
-            {
-                is_shifts_activated_ = false;
+            if (m_shift1_act == false && m_shift2_act == false && m_shift3_act == false && m_shift4_act == false
+                && m_shift5_act == false) {
+                m_isShifts_act = false;
             }
         }
     }
 }
 
-void ButtonConfig::ReadFromConfig()
+void ButtonConfig::readFromConfig()
 {
+    dev_config_t *devc = &gEnv.pDeviceConfig->config;
     // logical buttons
-    for (int i = 0; i < LogicButtonPtrList_.size(); i++) {
-        LogicButtonPtrList_[i]->ReadFromConfig();
+    for (int i = 0; i < m_logicButtonPtrList.size(); i++) {
+        m_logicButtonPtrList[i]->readFromConfig();
     }
     // other
-    ui->spinBox_Shift1->setValue(gEnv.pDeviceConfig->config.shift_config[0].button + 1);
-    ui->spinBox_Shift2->setValue(gEnv.pDeviceConfig->config.shift_config[1].button + 1);
-    ui->spinBox_Shift3->setValue(gEnv.pDeviceConfig->config.shift_config[2].button + 1);
-    ui->spinBox_Shift4->setValue(gEnv.pDeviceConfig->config.shift_config[3].button + 1);
-    ui->spinBox_Shift5->setValue(gEnv.pDeviceConfig->config.shift_config[4].button + 1);
+    ui->spinBox_Shift1->setValue(devc->shift_config[0].button + 1);
+    ui->spinBox_Shift2->setValue(devc->shift_config[1].button + 1);
+    ui->spinBox_Shift3->setValue(devc->shift_config[2].button + 1);
+    ui->spinBox_Shift4->setValue(devc->shift_config[3].button + 1);
+    ui->spinBox_Shift5->setValue(devc->shift_config[4].button + 1);
 
-    ui->spinBox_Timer1->setValue(gEnv.pDeviceConfig->config.button_timer1_ms);
-    ui->spinBox_Timer2->setValue(gEnv.pDeviceConfig->config.button_timer2_ms);
-    ui->spinBox_Timer3->setValue(gEnv.pDeviceConfig->config.button_timer3_ms);
+    ui->spinBox_Timer1->setValue(devc->button_timer1_ms);
+    ui->spinBox_Timer2->setValue(devc->button_timer2_ms);
+    ui->spinBox_Timer3->setValue(devc->button_timer3_ms);
 
-    ui->spinBox_DebounceTimer->setValue(gEnv.pDeviceConfig->config.button_debounce_ms);
-    ui->spinBox_A2bDebounce->setValue(gEnv.pDeviceConfig->config.a2b_debounce_ms);
+    ui->spinBox_DebounceTimer->setValue(devc->button_debounce_ms);
+    ui->spinBox_A2bDebounce->setValue(devc->a2b_debounce_ms);
 
-    ui->spinBox_EncoderPressTimer->setValue(gEnv.pDeviceConfig->config.encoder_press_time_ms);
+    ui->spinBox_EncoderPressTimer->setValue(devc->encoder_press_time_ms);
 }
 
-void ButtonConfig::WriteToConfig()
+void ButtonConfig::writeToConfig()
 {
-    gEnv.pDeviceConfig->config.shift_config[0].button = ui->spinBox_Shift1->value() - 1;
-    gEnv.pDeviceConfig->config.shift_config[1].button = ui->spinBox_Shift2->value() - 1;
-    gEnv.pDeviceConfig->config.shift_config[2].button = ui->spinBox_Shift3->value() - 1;
-    gEnv.pDeviceConfig->config.shift_config[3].button = ui->spinBox_Shift4->value() - 1;
-    gEnv.pDeviceConfig->config.shift_config[4].button = ui->spinBox_Shift5->value() - 1;
+    dev_config_t *devc = &gEnv.pDeviceConfig->config;
+    devc->shift_config[0].button = ui->spinBox_Shift1->value() - 1;
+    devc->shift_config[1].button = ui->spinBox_Shift2->value() - 1;
+    devc->shift_config[2].button = ui->spinBox_Shift3->value() - 1;
+    devc->shift_config[3].button = ui->spinBox_Shift4->value() - 1;
+    devc->shift_config[4].button = ui->spinBox_Shift5->value() - 1;
 
-    gEnv.pDeviceConfig->config.button_timer1_ms = ui->spinBox_Timer1->value();
-    gEnv.pDeviceConfig->config.button_timer2_ms = ui->spinBox_Timer2->value();
-    gEnv.pDeviceConfig->config.button_timer3_ms = ui->spinBox_Timer3->value();
+    devc->button_timer1_ms = ui->spinBox_Timer1->value();
+    devc->button_timer2_ms = ui->spinBox_Timer2->value();
+    devc->button_timer3_ms = ui->spinBox_Timer3->value();
 
-    gEnv.pDeviceConfig->config.button_debounce_ms = ui->spinBox_DebounceTimer->value();
-    gEnv.pDeviceConfig->config.a2b_debounce_ms = ui->spinBox_A2bDebounce->value();
+    devc->button_debounce_ms = ui->spinBox_DebounceTimer->value();
+    devc->a2b_debounce_ms = ui->spinBox_A2bDebounce->value();
 
-    gEnv.pDeviceConfig->config.encoder_press_time_ms = ui->spinBox_EncoderPressTimer->value();
+    devc->encoder_press_time_ms = ui->spinBox_EncoderPressTimer->value();
 
     // logical buttons
-    for (int i = 0; i < LogicButtonPtrList_.size(); ++i) {
-        LogicButtonPtrList_[i]->WriteToConfig();
+    for (int i = 0; i < m_logicButtonPtrList.size(); ++i) {
+        m_logicButtonPtrList[i]->writeToConfig();
     }
 }

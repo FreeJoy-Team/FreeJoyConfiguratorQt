@@ -4,33 +4,30 @@
 #include "hidapi.h"
 #include "reportconverter.h"
 
-#include "global.h"
 #include "deviceconfig.h"
+#include "global.h"
 
 #include <QObject>
 
-#define BUFFSIZE                            64
-#define CONFIG_COUNT                        16
+#define BUFFSIZE 64
+#define CONFIG_COUNT 16
 
 class HidDevice : public QObject
 {
     Q_OBJECT
 
 public:
+    void getConfigFromDevice();
+    void sendConfigToDevice();
 
-    void GetConfigFromDevice();
-    void SendConfigToDevice();
+    bool enterToFlashMode();
+    void flashFirmware(const QByteArray *firmware);
 
-    bool EnterToFlashMode();
-    void FlashFirmware(const QByteArray* firmware);
-
-    void SetIsFinish(bool is_finish);
-    void SetSelectedDevice(int device_number);
-
+    void setIsFinish(bool is_finish);
+    void setSelectedDevice(int device_number);
 
 public slots:
     void processData();
-
 
 signals:
     void putDisconnectedDeviceInfo();
@@ -40,28 +37,28 @@ signals:
     void configReceived(bool is_success);
     void configSent(bool is_success);
 
-    void hidDeviceList(QStringList* device_list);
+    void hidDeviceList(QStringList *device_list);
 
     void flasherFound(bool is_found);
     void flashStatus(int status, int percent);
 
 private:
-    hid_device *handle_read;
-    bool is_finish_ = false;
-    int selected_device_;
-    int current_work_;
+    hid_device *m_handleRead;
+    bool m_isFinish = false;
+    int m_selectedDevice;
+    int m_currentWork;
 
-    void ReadConfigFromDevice(uint8_t *buffer);
-    void WriteConfigToDevice(uint8_t *buffer);
-    void FlashFirmwareToDevice();
+    void readConfigFromDevice(uint8_t *buffer);
+    void writeConfigToDevice(uint8_t *buffer);
+    void flashFirmwareToDevice();
 
-    uint8_t device_buffer_[BUFFSIZE];
-    dev_config_t device_config_;                // ????
-    QList<hid_device_info*> HidDevicesAdrList;
-    hid_device_info* flasher_;
-    const QByteArray* firmware_;
+    uint8_t m_deviceBuffer[BUFFSIZE];
+    dev_config_t m_deviceConfig; // ????
+    QList<hid_device_info *> m_HidDevicesAdrList;
+    hid_device_info *m_flasher;
+    const QByteArray *m_firmware;
 
-    ReportConverter *report_convert;                     // !!!!
+    ReportConverter *m_reportConvert; // !!!!
 };
 
 #endif // HIDDEVICE_H

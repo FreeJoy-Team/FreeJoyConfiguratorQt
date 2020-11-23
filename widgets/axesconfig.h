@@ -1,11 +1,11 @@
 #ifndef AXESCONFIG_H
 #define AXESCONFIG_H
 
-#include <QWidget>
 #include "axes.h"
+#include <QWidget>
 
-#include "global.h"
 #include "deviceconfig.h"
+#include "global.h"
 
 namespace Ui {
 class AxesConfig;
@@ -19,12 +19,12 @@ public:
     explicit AxesConfig(QWidget *parent = nullptr);
     ~AxesConfig();
 
-    void ReadFromConfig();
-    void WriteToConfig();
+    void readFromConfig();
+    void writeToConfig();
 
-    void RetranslateUi();
+    void retranslateUi();
 
-    void AxesValueChanged();
+    void axesValueChanged();
 
 signals:
     void axisRawValueChanged(int);
@@ -32,15 +32,15 @@ signals:
     void a2bCountChanged(int count);
 
 private slots:
-    void addOrDeleteMainSource(int source_enum, bool is_add);
-    void a2bCountCalc(int count, int previous_count);
-//    void axesValueChanged(int value);
+    void addOrDeleteMainSource(int sourceEnum, bool isAdd);
+    void a2bCountCalc(int count, int previousCount);
+    //    void axesValueChanged(int value);
 
 private:
     Ui::AxesConfig *ui;
-    int a2b_buttons_count_;
+    int m_a2bButtonsCount;
 
-    QList<Axes*> AxesPtrList_;
+    QList<Axes *> m_axesPtrList;
 };
 
 #endif // AXESCONFIG_H

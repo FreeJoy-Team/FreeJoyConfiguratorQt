@@ -1,22 +1,22 @@
 #include "encoders.h"
 #include "ui_encoders.h"
 
-Encoders::Encoders(int encoders_number, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Encoders)
+Encoders::Encoders(int encodersNumber, QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::Encoders)
 {
     ui->setupUi(this);
-    input_A_ = 0;
-    input_B_ = 0;
-    not_defined_ = tr("Not defined");
+    m_input_A = 0;
+    m_input_B = 0;
+    m_notDefined = tr("Not defined");
 
-    encoders_number_ = encoders_number + 1;         // fast encoder index 0
-    ui->label_EncoderIndex->setNum(encoders_number_);
+    m_encodersNumber = encodersNumber + 1; // fast encoder index 0
+    ui->label_EncoderIndex->setNum(m_encodersNumber);
 
     for (int i = 0; i < ENCODER_TYPE_COUNT; ++i) {
-        ui->comboBox_EncoderType->addItem(encoder_type_list_[i].gui_name);
-        ui->label_ButtonNumberA->setText(not_defined_);
-        ui->label_ButtonNumberB->setText(not_defined_);
+        ui->comboBox_EncoderType->addItem(m_encoderTypeList[i].guiName);
+        ui->label_ButtonNumberA->setText(m_notDefined);
+        ui->label_ButtonNumberB->setText(m_notDefined);
     }
 }
 
@@ -25,66 +25,66 @@ Encoders::~Encoders()
     delete ui;
 }
 
-void Encoders::RetranslateUi()
+void Encoders::retranslateUi()
 {
     ui->retranslateUi(this);
 }
 
-int Encoders::GetInputA() const
+int Encoders::inputA() const
 {
-    return input_A_;
+    return m_input_A;
 }
 
-int Encoders::GetInputB() const
+int Encoders::inputB() const
 {
-    return input_B_;
+    return m_input_B;
 }
 
-void Encoders::SetInputA(int input_A)
+void Encoders::setInputA(int input_A)
 {
-    if (input_A != 0){
-        input_A_ = input_A;
+    if (input_A != 0) {
+        m_input_A = input_A;
         QString name_template("Button № %1");
-        ui->label_ButtonNumberA->setText(name_template.arg(input_A_));
+        ui->label_ButtonNumberA->setText(name_template.arg(m_input_A));
     } else {
-        input_A_ = 0;
-        ui->label_ButtonNumberA->setText(not_defined_);
+        m_input_A = 0;
+        ui->label_ButtonNumberA->setText(m_notDefined);
     }
-    SetUiOnOff();
+    setUiOnOff();
 }
 
-void Encoders::SetInputB(int input_B)
+void Encoders::setInputB(int input_B)
 {
-    if (input_B != 0){
-        input_B_ = input_B;
+    if (input_B != 0) {
+        m_input_B = input_B;
         QString name_template("Button № %1");
-        ui->label_ButtonNumberB->setText(name_template.arg(input_B_));
+        ui->label_ButtonNumberB->setText(name_template.arg(m_input_B));
     } else {
-        input_B_ = 0;
-        ui->label_ButtonNumberB->setText(not_defined_);
+        m_input_B = 0;
+        ui->label_ButtonNumberB->setText(m_notDefined);
     }
-    SetUiOnOff();
+    setUiOnOff();
 }
 
-void Encoders::SetUiOnOff()
+void Encoders::setUiOnOff()
 {
-    if (input_A_ > 0 && input_B_ > 0){
-        for(auto&& child:this->findChildren<QWidget *>()){
-        child->setEnabled(true);
+    if (m_input_A > 0 && m_input_B > 0) {
+        for (auto &&child : this->findChildren<QWidget *>()) {
+            child->setEnabled(true);
         }
     } else {
-        for(auto&& child:this->findChildren<QWidget *>()){
-        child->setEnabled(false);
+        for (auto &&child : this->findChildren<QWidget *>()) {
+            child->setEnabled(false);
         }
     }
 }
 
-void Encoders::ReadFromConfig()
+void Encoders::readFromConfig()
 {
-    ui->comboBox_EncoderType->setCurrentIndex(gEnv.pDeviceConfig->config.encoders[encoders_number_]);
+    ui->comboBox_EncoderType->setCurrentIndex(gEnv.pDeviceConfig->config.encoders[m_encodersNumber]);
 }
 
-void Encoders::WriteToConfig()
+void Encoders::writeToConfig()
 {
-    gEnv.pDeviceConfig->config.encoders[encoders_number_] = ui->comboBox_EncoderType->currentIndex();
+    gEnv.pDeviceConfig->config.encoders[m_encodersNumber] = ui->comboBox_EncoderType->currentIndex();
 }

@@ -9,9 +9,8 @@
 #include "common_defines.h"
 #include "common_types.h"
 
-#include "global.h"
 #include "deviceconfig.h"
-
+#include "global.h"
 
 namespace Ui {
 class ButtonConfig;
@@ -25,39 +24,36 @@ public:
     explicit ButtonConfig(QWidget *parent = nullptr);
     ~ButtonConfig();
 
-    void ReadFromConfig();
-    void WriteToConfig();
-    void ButtonStateChanged();
+    void readFromConfig();
+    void writeToConfig();
+    void buttonStateChanged();
 
-    void RetranslateUi();
+    void retranslateUi();
 
 signals:
     void encoderInputChanged(int ecoder_A, int ecoder_B);
     void logicalButtonsCreated();
     //void buttonLEDStateChanged(int button_number);            // for future
 
-public slots:   // private?
-    void setUiOnOff(int value);
-
 private slots:
-    void functionTypeChanged(int index, int function_previous_index, int button_number);
+    void setUiOnOff(int value);
+    void functionTypeChanged(int index, int functionPreviousIndex, int buttonNumber);
 
 private:
     Ui::ButtonConfig *ui;
-    void PhysicalButtonsSpawn(int count);
-    QString default_shift_style_;
-    bool is_shifts_activated_;
-    bool shift1_activated_;
-    bool shift2_activated_;
-    bool shift3_activated_;
-    bool shift4_activated_;
-    bool shift5_activated_;
+    void physButtonsSpawn(int count);
+    QString m_defaultShiftStyle;
+    bool m_isShifts_act;
+    bool m_shift1_act;
+    bool m_shift2_act;
+    bool m_shift3_act;
+    bool m_shift4_act;
+    bool m_shift5_act;
 
-    void LogicaButtonslCreator();
+    void logicaButtonslCreator();
 
-    QList<ButtonLogical*> LogicButtonPtrList_;
-    QList<ButtonPhysical*> PhysicButtonPtrList_;
-
+    QList<ButtonLogical *> m_logicButtonPtrList;
+    QList<ButtonPhysical *> m_PhysButtonPtrList;
 };
 
 #endif // BUTTONCONFIG_H

@@ -5,22 +5,22 @@
 
 //static int reportSuccess = 0;
 
-void ReportConverter::GamepadReport( uint8_t * gamepad_buf)
+void ReportConverter::gamepadReport( uint8_t *gamepad_buf)
 {
     if (gamepad_buf != nullptr)   // !
     {
-        memcpy((uint8_t *)&(gEnv.pDeviceConfig->gamepad_report)+1, gamepad_buf, sizeof(joy_report_t)-1);          // +1 ALIGHNING !!!!!!!!!!!!!!!!!!
+        memcpy((uint8_t *)&(gEnv.pDeviceConfig->gamepadReport)+1, gamepad_buf, sizeof(joy_report_t)-1);          // +1 ALIGHNING !!!!!!!!!!!!!!!!!!
     }
 }
 
 // temp dummy
-void USB_CUSTOM_HID_SendReport(uint8_t * dummy, uint8_t dummy2){
+void USB_CUSTOM_HID_SendReport(uint8_t *dummy, uint8_t dummy2){
     Q_UNUSED(dummy)
     Q_UNUSED(dummy2)
 }
 
 /////////////////////////  temporarily, for combining with the old configurator  ////////////////////////////
-std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_number)      // СНЕСТИ И ЗАБЫТЬ// ***1111111*
+std::vector<uint8_t> ReportConverter::sendConfigToDevice(uint8_t request_config_number)      // СНЕСТИ И ЗАБЫТЬ// ***1111111*
 {
     dev_config_t tmp_dev_config{};                                         // !!!!!!!!!!
     memcpy((uint8_t *)&tmp_dev_config ,&gEnv.pDeviceConfig->config, sizeof(dev_config_t));
@@ -229,7 +229,7 @@ std::vector<uint8_t> ReportConverter::SendConfigToDevice(uint8_t request_config_
 ///////////////////////////////////////////////  temporarily, for combining with the old configurator  ///////////////////////////////
 
 uint16_t pos_test = 0;
-dev_config_t ReportConverter::GetConfigFromDevice(uint8_t * hid_buf)
+dev_config_t ReportConverter::getConfigFromDevice(uint8_t * hid_buf)
 {
     uint8_t i;
     uint8_t pos = 2;

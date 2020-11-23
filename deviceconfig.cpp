@@ -7,11 +7,10 @@ extern "C" {
 DeviceConfig::DeviceConfig()
 {
     config = InitConfig();
-    gamepad_report = {};        //??
+    gamepadReport = {}; //??
 }
 
-
-void DeviceConfig::ResetConfig()
+void DeviceConfig::resetConfig()
 {
     config = InitConfig();
 }

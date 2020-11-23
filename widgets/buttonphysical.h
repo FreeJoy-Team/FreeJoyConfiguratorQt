@@ -12,13 +12,13 @@ class ButtonPhysical : public QWidget
     Q_OBJECT
 
 public:
-    explicit ButtonPhysical(int button_number, QWidget *parent = nullptr);
+    explicit ButtonPhysical(int buttonNumber, QWidget *parent = nullptr);
     ~ButtonPhysical();
-    void SetButtonState(bool set_state);
+    void setButtonState(bool setState);
 
 private:
     Ui::ButtonPhysical *ui;
-    bool current_state_; // private, set?
+    bool m_currentState; // private, set?
 };
 
 #endif // BUTTONPHYSICAL_H

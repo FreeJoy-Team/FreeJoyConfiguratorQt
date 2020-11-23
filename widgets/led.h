@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-#include "global.h"
 #include "deviceconfig.h"
+#include "global.h"
 
 #define LED_FUNCTION_COUNT 2
 namespace Ui {
@@ -16,29 +16,29 @@ class LED : public QWidget
     Q_OBJECT
 
 public:
-    explicit LED(int led_number, QWidget *parent = nullptr);
+    explicit LED(int ledNumber, QWidget *parent = nullptr);
     ~LED();
 
-    int CurrentButtonSelected() const;
+    int currentButtonSelected() const;
 
-    void LEDStateChanged(bool set_state);
+    void setLedState(bool state);
 
-    void ReadFromConfig();
-    void WriteToConfig();
+    void readFromConfig();
+    void writeToConfig();
 
-    void RetranslateUi();
+    void retranslateUi();
 
 private:
     Ui::LED *ui;
-    int led_number_;
+    int m_ledNumber;
 
-    bool current_state_;
+    bool m_currentState;
 
-    const deviceEnum_guiName_t led_list_[LED_FUNCTION_COUNT] =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
-    {
-        {LED_NORMAL,          tr("Normal")},
-        {LED_INVERTED,        tr("Inverted")},
-    };
+    const deviceEnum_guiName_t m_ledList[LED_FUNCTION_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!
+        {
+            {LED_NORMAL, tr("Normal")},
+            {LED_INVERTED, tr("Inverted")},
+        };
 };
 
 #endif // LED_H
