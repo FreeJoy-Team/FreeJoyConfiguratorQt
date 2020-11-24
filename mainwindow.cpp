@@ -104,6 +104,7 @@ MainWindow::MainWindow(QWidget *parent)
         child->installEventFilter(new MouseWheelGuard(child));
     }
     // хз так или сверху исключать?
+    ui->comboBox_HidDeviceList->setFocusPolicy(Qt::WheelFocus);
     for (auto&& child: m_pinConfig->findChildren<PinComboBox *>())
     {
         for (auto&& comBox: child->findChildren<QComboBox *>())

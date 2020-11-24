@@ -33,7 +33,7 @@ void HidDevice::processData()
             timer.start();
             change = true;
         }
-        else if (change && timer.elapsed() > 800)   // change is always true
+        else if (timer.elapsed() > 800)
         {
             hidDevInfo = hid_enumerate(VID, 0x0);
             if (!hidDevInfo && noDeviceSent == false)
@@ -55,7 +55,7 @@ void HidDevice::processData()
                     }
                     m_flasher = hidDevInfo;    // второй раз?
                     hidDevInfo = hidDevInfo->next;
-                    if (m_currentWork == REPORT_ID_FIRMWARE)    // дерьма накодил?
+                    if (m_currentWork == REPORT_ID_FIRMWARE)
                     {
                         flashFirmwareToDevice();
                         m_currentWork = REPORT_ID_JOY;
@@ -472,21 +472,23 @@ void HidDevice::setSelectedDevice(int device_number)        // заблочит�
     } else if (device_number > m_HidDevicesAdrList.size() - 1){
         device_number = m_HidDevicesAdrList.size() - 1;
     }
-    m_selectedDevice = device_number; 
-    qDebug()<<"HID open start";
-    qDebug()<<device_number + 1<<"devices connected";
+    m_selectedDevice = device_number;
+    ushort pid = m_HidDevicesAdrList[m_selectedDevice]->product_id;
+    wchar_t *serNum = m_HidDevicesAdrList[m_selectedDevice]->serial_number;
+    qDebug().nospace()<<"Open HID device №"<<device_number + 1
+                     <<". VID"<<QString::number(VID, 16).toInt()<<", PID"<<QString::number(pid, 16).toInt()<<", Serial number "<<serNum;
         // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()
-    m_handleRead = hid_open(VID, m_HidDevicesAdrList[m_selectedDevice]->product_id, m_HidDevicesAdrList[m_selectedDevice]->serial_number);
-
+    m_handleRead = hid_open(VID, pid, serNum);
+    //QSignalBlocker blocker(ui->comboBox);
 //    if (m_handleRead) {
 //        emit putConnectedDeviceInfo();
 //    } else {
 //        emit putDisconnectedDeviceInfo();
 //    }
 
-#ifdef _WIN32
-    qDebug()<<"Unsuccessful serial number attempts ="<<GetSerialNumberAttemption()<<"(not a error)";
-    qDebug()<<"Unsuccessful product string attempts ="<<GetProductStrAttemption()<<"(not a error)";
-#endif
+//#ifdef _WIN32
+//    qDebug()<<"Unsuccessful serial number attempts ="<<GetSerialNumberAttemption()<<"(not a error)";
+//    qDebug()<<"Unsuccessful product string attempts ="<<GetProductStrAttemption()<<"(not a error)";
+//#endif
     qDebug()<<"HID opened";
 }

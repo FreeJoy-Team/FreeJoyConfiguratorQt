@@ -86,12 +86,11 @@ void DebugWindow::logicalButtonState(int buttonNumber, bool state)
         if (state) {
             ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
                                                              + QString::number(buttonNumber) + tr(" pressed") + '\n');
-            ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
+            ui->textBrowser_ButtonsPressLog->moveCursor(QTextCursor::End);
         } else {
-            ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": "
-                                                               + tr("Logical button ") + QString::number(buttonNumber)
-                                                               + tr(" unpressed") + '\n');
-            ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End);
+            ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
+                                                               + QString::number(buttonNumber) + tr(" unpressed") + '\n');
+            ui->textBrowser_ButtonsUnpressLog->moveCursor(QTextCursor::End);
         }
     }
 }
