@@ -64,7 +64,7 @@ AxesCurvesPlot::~AxesCurvesPlot()
 }
         ////////////////// half_radius_ - убрать                ///                 /// half_radius_
         /// сделать SetPointValue в % ?
-
+#include <QElapsedTimer>
 void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можно оптимизировать
 {
     Q_UNUSED(event)
@@ -72,26 +72,30 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
     int tmp_x, tmp_y;
 
     painter.begin(this);
-    painter.setPen(Qt::lightGray);
-    //painter.setPen(QColor(120,120,120));
-
-//    if (resize_activated_ == true){
-//        qDebug()<<"resize";
-        //paint columns
-        for (int i = 0; i < m_kColumnsCount + 1; ++i){
-            tmp_x = (i * m_columnWidth) + m_kOffset;
-            painter.drawLine(tmp_x, m_kOffset, tmp_x, m_height - m_kOffset);
-        }
-        // paint rows
-        for (int i = 0; i < m_kRowsCount + 1; ++i){
-            tmp_y = (i * m_rowHeight) + m_kOffset;
-            painter.drawLine(m_kOffset, tmp_y, m_width - m_kOffset, tmp_y);
-        }
-//        resize_activated_ = false;
+    if (QWidget::palette().color(QWidget::backgroundRole()).value() < 80) {
+        painter.setPen(QColor(110,110,110));
+    } else {
+        painter.setPen(Qt::lightGray);
+    }
+//    #include <QElapsedTimer>
+//    QElapsedTimer timer;
+//    timer.start();
+//    for (int i = 0; i < 1000; ++i) {
 //    }
+//    qDebug()<<timer.elapsed();
 
+    //paint columns //330 67
+    for (int i = 0; i < m_kColumnsCount + 1; ++i){
+        tmp_x = (i * m_columnWidth) + m_kOffset;
+        painter.drawLine(tmp_x, m_kOffset, tmp_x, m_height - m_kOffset);
+    }
+    // paint rows
+    for (int i = 0; i < m_kRowsCount + 1; ++i){
+        tmp_y = (i * m_rowHeight) + m_kOffset;
+        painter.drawLine(m_kOffset, tmp_y, m_width - m_kOffset, tmp_y);
+    }
 
-    // Antialiasing         // можно светху но всё станет мазнёй
+    // Antialiasing         // можно светху но всё станет мазнёй //105 21
     painter.setRenderHint(QPainter::Antialiasing, true);
     // paint line       // можно в цикл paint rect, но лучше отдельно
     QPen pen;
@@ -106,7 +110,7 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)     // жирно, можн�
         }
     }
 
-    // coordinates for rect
+    // coordinates for rect //250 78
     for (int i = 0; i < m_pointPtrList.size(); ++i) {
         m_pointPtrList[i]->area.setRect(m_pointPtrList[i]->posX, m_pointPtrList[i]->posY,
                                       m_kRadius, m_kRadius);

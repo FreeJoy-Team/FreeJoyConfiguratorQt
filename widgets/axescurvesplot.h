@@ -83,6 +83,7 @@ private:
     const QColor m_kPointActiveColor = Qt::black;
     const QColor m_kPointMoveColor = Qt::lightGray;
     const QColor m_kCurveColor = QColor(1, 119, 215);
+    QColor m_frameColor = Qt::lightGray;
 
     bool m_pointActive;
 

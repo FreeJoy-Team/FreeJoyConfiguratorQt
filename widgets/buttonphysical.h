@@ -19,6 +19,7 @@ public:
 private:
     Ui::ButtonPhysical *ui;
     bool m_currentState; // private, set?
+    QString m_defStyle;
 };
 
 #endif // BUTTONPHYSICAL_H
