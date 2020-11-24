@@ -213,54 +213,54 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="105"/>
-        <location filename="widgets/axes.h" line="126"/>
+        <location filename="widgets/axes.h" line="107"/>
+        <location filename="widgets/axes.h" line="144"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="105"/>
-        <location filename="widgets/axes.h" line="127"/>
+        <location filename="widgets/axes.h" line="108"/>
+        <location filename="widgets/axes.h" line="145"/>
         <source>Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="132"/>
+        <location filename="widgets/axes.h" line="150"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="133"/>
+        <location filename="widgets/axes.h" line="151"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="134"/>
+        <location filename="widgets/axes.h" line="152"/>
         <source>Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="135"/>
+        <location filename="widgets/axes.h" line="153"/>
         <source>Rx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="136"/>
+        <location filename="widgets/axes.h" line="154"/>
         <source>Ry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="137"/>
+        <location filename="widgets/axes.h" line="155"/>
         <source>Rz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="138"/>
+        <location filename="widgets/axes.h" line="156"/>
         <source>Slider 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="139"/>
+        <location filename="widgets/axes.h" line="157"/>
         <source>Slider 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -546,136 +546,136 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="56"/>
+        <location filename="widgets/axesextended.h" line="57"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="57"/>
+        <location filename="widgets/axesextended.h" line="58"/>
         <source>Plus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="58"/>
+        <location filename="widgets/axesextended.h" line="59"/>
         <source>Minus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="59"/>
+        <location filename="widgets/axesextended.h" line="60"/>
         <source>Equal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="64"/>
-        <location filename="widgets/axesextended.h" line="74"/>
-        <source>Function enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="65"/>
         <location filename="widgets/axesextended.h" line="75"/>
-        <source>Prescale enable</source>
+        <source>Function enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="66"/>
         <location filename="widgets/axesextended.h" line="76"/>
-        <source>Center</source>
+        <source>Prescale enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="67"/>
         <location filename="widgets/axesextended.h" line="77"/>
-        <source>Reset</source>
+        <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="68"/>
-        <source>Down</source>
+        <location filename="widgets/axesextended.h" line="78"/>
+        <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="69"/>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/axesextended.h" line="70"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="82"/>
+        <location filename="widgets/axesextended.h" line="83"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="83"/>
+        <location filename="widgets/axesextended.h" line="84"/>
         <source>level 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="84"/>
+        <location filename="widgets/axesextended.h" line="85"/>
         <source>level 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="85"/>
+        <location filename="widgets/axesextended.h" line="86"/>
         <source>level 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="86"/>
+        <location filename="widgets/axesextended.h" line="87"/>
         <source>level 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="87"/>
+        <location filename="widgets/axesextended.h" line="88"/>
         <source>level 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="88"/>
+        <location filename="widgets/axesextended.h" line="89"/>
         <source>level 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="89"/>
+        <location filename="widgets/axesextended.h" line="90"/>
         <source>level 7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="94"/>
+        <location filename="widgets/axesextended.h" line="95"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="95"/>
+        <location filename="widgets/axesextended.h" line="96"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="96"/>
+        <location filename="widgets/axesextended.h" line="97"/>
         <source>Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="97"/>
+        <location filename="widgets/axesextended.h" line="98"/>
         <source>Rx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="98"/>
+        <location filename="widgets/axesextended.h" line="99"/>
         <source>Ry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="99"/>
+        <location filename="widgets/axesextended.h" line="100"/>
         <source>Rz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="100"/>
+        <location filename="widgets/axesextended.h" line="101"/>
         <source>Slider 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="101"/>
+        <location filename="widgets/axesextended.h" line="102"/>
         <source>Slider 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1113,7 +1113,7 @@
     </message>
     <message>
         <location filename="widgets/debugwindow.cpp" line="87"/>
-        <location filename="widgets/debugwindow.cpp" line="92"/>
+        <location filename="widgets/debugwindow.cpp" line="91"/>
         <source>Logical button </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1123,7 +1123,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.cpp" line="93"/>
+        <location filename="widgets/debugwindow.cpp" line="92"/>
         <source> unpressed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1170,6 +1170,12 @@
     <message>
         <location filename="widgets/encoders.h" line="46"/>
         <source>Encoder 4x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/encoders.cpp" line="47"/>
+        <location filename="widgets/encoders.cpp" line="60"/>
+        <source>Button № %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1562,262 +1568,262 @@ g</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="145"/>
+        <location filename="widgets/pincombobox.h" line="146"/>
         <source>Pin A3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="146"/>
+        <location filename="widgets/pincombobox.h" line="147"/>
         <source>Pin A4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="146"/>
+        <location filename="widgets/pincombobox.h" line="148"/>
         <source>Pin A5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="147"/>
+        <location filename="widgets/pincombobox.h" line="149"/>
         <source>Pin A6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="147"/>
+        <location filename="widgets/pincombobox.h" line="150"/>
         <source>Pin A7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="148"/>
+        <location filename="widgets/pincombobox.h" line="151"/>
         <source>Pin A8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="148"/>
+        <location filename="widgets/pincombobox.h" line="152"/>
         <source>Pin A9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="149"/>
+        <location filename="widgets/pincombobox.h" line="153"/>
         <source>Pin A10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="149"/>
+        <location filename="widgets/pincombobox.h" line="154"/>
         <source>Pin A15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="150"/>
+        <location filename="widgets/pincombobox.h" line="155"/>
         <source>Pin B0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="150"/>
+        <location filename="widgets/pincombobox.h" line="156"/>
         <source>Pin B1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="151"/>
+        <location filename="widgets/pincombobox.h" line="157"/>
         <source>Pin B3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="151"/>
+        <location filename="widgets/pincombobox.h" line="158"/>
         <source>Pin B4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="152"/>
+        <location filename="widgets/pincombobox.h" line="159"/>
         <source>Pin B5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="152"/>
+        <location filename="widgets/pincombobox.h" line="160"/>
         <source>Pin B6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="153"/>
+        <location filename="widgets/pincombobox.h" line="161"/>
         <source>Pin B7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="153"/>
+        <location filename="widgets/pincombobox.h" line="162"/>
         <source>Pin B8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="154"/>
+        <location filename="widgets/pincombobox.h" line="163"/>
         <source>Pin B9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="154"/>
+        <location filename="widgets/pincombobox.h" line="164"/>
         <source>Pin B10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="155"/>
+        <location filename="widgets/pincombobox.h" line="165"/>
         <source>Pin B11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="155"/>
+        <location filename="widgets/pincombobox.h" line="166"/>
         <source>Pin B12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="156"/>
+        <location filename="widgets/pincombobox.h" line="167"/>
         <source>Pin B13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="156"/>
+        <location filename="widgets/pincombobox.h" line="168"/>
         <source>Pin B14</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="157"/>
+        <location filename="widgets/pincombobox.h" line="169"/>
         <source>Pin B15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="157"/>
+        <location filename="widgets/pincombobox.h" line="170"/>
         <source>Pin C13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="158"/>
+        <location filename="widgets/pincombobox.h" line="171"/>
         <source>Pin C14</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="158"/>
+        <location filename="widgets/pincombobox.h" line="172"/>
         <source>Pin C15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="163"/>
+        <location filename="widgets/pincombobox.h" line="177"/>
         <source>Not Used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="166"/>
+        <location filename="widgets/pincombobox.h" line="182"/>
         <source>Button Gnd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="172"/>
+        <location filename="widgets/pincombobox.h" line="187"/>
         <source>Button Vcc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="174"/>
+        <location filename="widgets/pincombobox.h" line="192"/>
         <source>Button Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="176"/>
+        <location filename="widgets/pincombobox.h" line="197"/>
         <source>Button Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="179"/>
+        <location filename="widgets/pincombobox.h" line="202"/>
         <source>ShiftReg LATCH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="185"/>
+        <location filename="widgets/pincombobox.h" line="207"/>
         <source>ShiftReg DATA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="188"/>
+        <location filename="widgets/pincombobox.h" line="212"/>
         <source>TLE5011 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="195"/>
+        <location filename="widgets/pincombobox.h" line="217"/>
         <source>MCP3201 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="202"/>
+        <location filename="widgets/pincombobox.h" line="222"/>
         <source>MCP3202 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="209"/>
+        <location filename="widgets/pincombobox.h" line="227"/>
         <source>MCP3204 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="216"/>
+        <location filename="widgets/pincombobox.h" line="232"/>
         <source>MCP3208 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="223"/>
+        <location filename="widgets/pincombobox.h" line="237"/>
         <source>MLX90393 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="229"/>
+        <location filename="widgets/pincombobox.h" line="242"/>
         <source>LED Single</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="231"/>
+        <location filename="widgets/pincombobox.h" line="247"/>
         <source>LED Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="233"/>
+        <location filename="widgets/pincombobox.h" line="252"/>
         <source>LED Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="235"/>
+        <location filename="widgets/pincombobox.h" line="257"/>
         <source>LED PWM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="237"/>
+        <location filename="widgets/pincombobox.h" line="262"/>
         <source>Axis Analog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="239"/>
+        <location filename="widgets/pincombobox.h" line="267"/>
         <source>Fast Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="241"/>
+        <location filename="widgets/pincombobox.h" line="272"/>
         <source>SPI SCK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="243"/>
+        <location filename="widgets/pincombobox.h" line="277"/>
         <source>SPI MOSI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="245"/>
+        <location filename="widgets/pincombobox.h" line="282"/>
         <source>SPI MISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="247"/>
+        <location filename="widgets/pincombobox.h" line="287"/>
         <source>TLE5011 GEN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="249"/>
+        <location filename="widgets/pincombobox.h" line="292"/>
         <source>I2C SCL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="251"/>
+        <location filename="widgets/pincombobox.h" line="297"/>
         <source>I2C SDA</source>
         <translation type="unfinished"></translation>
     </message>

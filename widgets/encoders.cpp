@@ -44,7 +44,7 @@ void Encoders::setInputA(int input_A)
 {
     if (input_A != 0) {
         m_input_A = input_A;
-        QString name_template("Button № %1");
+        QString name_template(tr("Button № %1"));
         ui->label_ButtonNumberA->setText(name_template.arg(m_input_A));
     } else {
         m_input_A = 0;
@@ -57,7 +57,7 @@ void Encoders::setInputB(int input_B)
 {
     if (input_B != 0) {
         m_input_B = input_B;
-        QString name_template("Button № %1");
+        QString name_template(tr("Button № %1"));
         ui->label_ButtonNumberB->setText(name_template.arg(m_input_B));
     } else {
         m_input_B = 0;

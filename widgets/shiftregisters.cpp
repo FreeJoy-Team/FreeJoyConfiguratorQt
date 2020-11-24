@@ -2,13 +2,18 @@
 #include "ui_shiftregisters.h"
 #include <cmath>
 
-QString ShiftRegisters::m_notDefined = tr("Not defined");
+QString ShiftRegisters::m_notDefined = nullptr;
 
 ShiftRegisters::ShiftRegisters(int shiftRegNumber, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ShiftRegisters)
 {
     ui->setupUi(this);
+
+    // для перевода при старте приложения, надо определить после старта транслятора
+    if (m_notDefined == nullptr) {
+        m_notDefined = tr("Not defined");
+    }
 
     m_buttonsCount = 0;
     m_latchPin = 0;

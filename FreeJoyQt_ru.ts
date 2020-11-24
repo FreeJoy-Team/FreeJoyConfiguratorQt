@@ -999,6 +999,10 @@
         <source>Encoder 4x</source>
         <translation>Энкодер 4x</translation>
     </message>
+    <message>
+        <source>Button № %1</source>
+        <translation>Кнопка № %1</translation>
+    </message>
 </context>
 <context>
     <name>EncodersConfig</name>
