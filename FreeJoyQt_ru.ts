@@ -119,6 +119,18 @@
         <source>Wiki</source>
         <translation>Вики</translation>
     </message>
+    <message>
+        <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
+        <translation>&lt;br&gt;Собрано с Qt %1 (%2)&lt;br&gt;Исходный код доступен по GPLv3 на &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Check &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;our wiki &lt;/a&gt;for detailed instructions.</source>
+        <translation>&lt;br&gt;Посетите &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;наше вики &lt;/a&gt;для подробных инструкций.</translation>
+    </message>
+    <message>
+        <source>About FreeJoyQt</source>
+        <translation>О FreeJoyQt</translation>
+    </message>
 </context>
 <context>
     <name>Axes</name>
