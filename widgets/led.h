@@ -35,10 +35,10 @@ private:
     bool m_currentState;
 
     const deviceEnum_guiName_t m_ledList[LED_FUNCTION_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!
-        {
-            {LED_NORMAL, tr("Normal")},
-            {LED_INVERTED, tr("Inverted")},
-        };
+    {
+        {LED_NORMAL, tr("Normal")},
+        {LED_INVERTED, tr("Inverted")},
+    };
 };
 
 #endif // LED_H

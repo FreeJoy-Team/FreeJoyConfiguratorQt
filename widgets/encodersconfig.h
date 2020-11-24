@@ -41,11 +41,11 @@ private:
     int m_fastEncoderInput_B;
 
     const deviceEnum_guiName_t m_fastEncoderTypeList[ENCODER_TYPE_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!
-        {
-            {ENCODER_CONF_1x, tr("Encoder 1x")},
-            {ENCODER_CONF_2x, tr("Encoder 2x")},
-            {ENCODER_CONF_4x, tr("Encoder 4x")},
-        };
+    {
+        {ENCODER_CONF_1x, tr("Encoder 1x")},
+        {ENCODER_CONF_2x, tr("Encoder 2x")},
+        {ENCODER_CONF_4x, tr("Encoder 4x")},
+    };
 };
 
 #endif // ENCODERSCONFIG_H

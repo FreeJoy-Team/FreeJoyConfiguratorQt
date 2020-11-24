@@ -238,7 +238,6 @@ MainWindow::~MainWindow()
     delete m_hidDeviceWorker;
     delete m_thread;              // не уверен в нужности, если есть thread->deleteLater();
     delete m_threadGetSendConfig;
-    //delete thread_getSend_config;       // hz
     delete ui;
 }
 

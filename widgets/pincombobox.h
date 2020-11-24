@@ -139,118 +139,166 @@ private:
 
     ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ static!!///////////////////////
     const pins m_pinList[PINS_COUNT] = // каждый пин хранит по структуре. а жирно не будет?
-        {
-            {PA_0, {tr("Pin A0")}, {ANALOG_IN}}, // пин // GUI name // его типы
-            {PA_1, {tr("Pin A1")}, {ANALOG_IN}}, // добавить SERIAL, PWM...
-            {PA_2, {tr("Pin A2")}, {ANALOG_IN}}, {PA_3, {tr("Pin A3")}, {ANALOG_IN}},
-            {PA_4, {tr("Pin A4")}, {ANALOG_IN}}, {PA_5, {tr("Pin A5")}, {ANALOG_IN}},
-            {PA_6, {tr("Pin A6")}, {ANALOG_IN}}, {PA_7, {tr("Pin A7")}, {ANALOG_IN}},
-            {PA_8, {tr("Pin A8")}, {}},          {PA_9, {tr("Pin A9")}, {}},
-            {PA_10, {tr("Pin A10")}, {}},        {PA_15, {tr("Pin A15")}, {SPI1_NSS}},
-            {PB_0, {tr("Pin B0")}, {}},          {PB_1, {tr("Pin B1")}, {}},
-            {PB_3, {tr("Pin B3")}, {SPI1_SCK}},  {PB_4, {tr("Pin B4")}, {SPI1_MISO}},
-            {PB_5, {tr("Pin B5")}, {SPI1_MOSI}}, {PB_6, {tr("Pin B6")}, {}},
-            {PB_7, {tr("Pin B7")}, {}},          {PB_8, {tr("Pin B8")}, {I2C1_SCL}},
-            {PB_9, {tr("Pin B9")}, {I2C1_SDA}},  {PB_10, {tr("Pin B10")}, {}},
-            {PB_11, {tr("Pin B11")}, {}},        {PB_12, {tr("Pin B12")}, {}},
-            {PB_13, {tr("Pin B13")}, {}},        {PB_14, {tr("Pin B14")}, {}},
-            {PB_15, {tr("Pin B15")}, {}},        {PC_13, {tr("Pin C13")}, {}},
-            {PC_14, {tr("Pin C14")}, {}},        {PC_15, {tr("Pin C15")}, {}},
-        };
+    {
+        {PA_0,  {tr("Pin A0")},     {ANALOG_IN}}, // пин // GUI name // его типы
+        {PA_1,  {tr("Pin A1")},     {ANALOG_IN}}, // добавить SERIAL, PWM...
+        {PA_2,  {tr("Pin A2")},     {ANALOG_IN}},
+        {PA_3,  {tr("Pin A3")},     {ANALOG_IN}},
+        {PA_4,  {tr("Pin A4")},     {ANALOG_IN}},
+        {PA_5,  {tr("Pin A5")},     {ANALOG_IN}},
+        {PA_6,  {tr("Pin A6")},     {ANALOG_IN}},
+        {PA_7,  {tr("Pin A7")},     {ANALOG_IN}},
+        {PA_8,  {tr("Pin A8")},     {}},
+        {PA_9,  {tr("Pin A9")},     {}},
+        {PA_10, {tr("Pin A10")},    {}},
+        {PA_15, {tr("Pin A15")},    {SPI1_NSS}},
+        {PB_0,  {tr("Pin B0")},     {}},
+        {PB_1,  {tr("Pin B1")},     {}},
+        {PB_3,  {tr("Pin B3")},     {SPI1_SCK}},
+        {PB_4,  {tr("Pin B4")},     {SPI1_MISO}},
+        {PB_5,  {tr("Pin B5")},     {SPI1_MOSI}},
+        {PB_6,  {tr("Pin B6")},     {}},
+        {PB_7,  {tr("Pin B7")},     {}},
+        {PB_8,  {tr("Pin B8")},     {I2C1_SCL}},
+        {PB_9,  {tr("Pin B9")},     {I2C1_SDA}},
+        {PB_10, {tr("Pin B10")},    {}},
+        {PB_11, {tr("Pin B11")},    {}},
+        {PB_12, {tr("Pin B12")},    {}},
+        {PB_13, {tr("Pin B13")},    {}},
+        {PB_14, {tr("Pin B14")},    {}},
+        {PB_15, {tr("Pin B15")},    {}},
+        {PC_13, {tr("Pin C13")},    {}},
+        {PC_14, {tr("Pin C14")},    {}},
+        {PC_15, {tr("Pin C15")},    {}},
+    };
 
     const cBox m_pinTypes[PIN_TYPE_COUNT] = // static ?
-        {
-            {NOT_USED, tr("Not Used"), {ALL}, {}, {}, {}},
+    {
+        {NOT_USED,       tr("Not Used"),
+        {ALL},
+        {},
+        {}, {}},
 
-            {BUTTON_GND,
-             tr("Button Gnd"), // контроллер enum,  имя в ui   tr(нужен перевод)
-             {ALL}, // добавление в конкретный пин или пины типа
-             {},    // исключая пины
-             {},
-             {"color: rgb(150, 155, 55);"}}, // взаимодействие с другими типами // стиль color, background-color, border-color...
+        {BUTTON_GND,     tr("Button Gnd"),      // контроллер enum,  имя в ui   tr(нужен перевод)
+        {ALL},                                 // добавление в конкретный пин или пины типа
+        {},                                    // исключая пины
+        {}, {"color: rgb(150, 155, 55);"}},     // взаимодействие с другими типами // стиль color, background-color, border-color...
 
-            {BUTTON_VCC, tr("Button Vcc"), {ALL}, {}, {}, {"color: rgb(170, 25, 25);"}},
+        {BUTTON_VCC,     tr("Button Vcc"),
+        {ALL},
+        {},
+        {}, {"color: rgb(170, 25, 25);"}},
 
-            {BUTTON_ROW, tr("Button Row"), {ALL}, {}, {}, {"color: rgb(25, 130, 220);"}},
+        {BUTTON_ROW,     tr("Button Row"),
+        {ALL},
+        {},
+        {}, {"color: rgb(25, 130, 220);"}},
 
-            {BUTTON_COLUMN, tr("Button Column"), {ALL}, {}, {}, {"color: rgb(120, 130, 250);"}},
+        {BUTTON_COLUMN,  tr("Button Column"),
+        {ALL},
+        {},
+        {}, {"color: rgb(120, 130, 250);"}},
 
-            {SHIFT_REG_LATCH,
-             tr("ShiftReg LATCH"),
-             {ALL},
-             {SPI1_SCK},
-             {SPI_SCK},
-             {"color: rgb(53, 153, 120);"}},
+        {SHIFT_REG_LATCH,tr("ShiftReg LATCH"),
+        {ALL},
+        {SPI1_SCK},
+        {SPI_SCK}, {"color: rgb(53, 153, 120);"}},
 
-            {SHIFT_REG_DATA, tr("ShiftReg DATA"), {ALL}, {SPI1_SCK}, {SPI_SCK}, {"color: rgb(53, 153, 120);"}},
+        {SHIFT_REG_DATA, tr("ShiftReg DATA"),
+        {ALL},
+        {SPI1_SCK},
+        {SPI_SCK}, {"color: rgb(53, 153, 120);"}},
 
-            {TLE5011_CS,
-             tr("TLE5011 CS"),
-             {ALL},
-             {SPI1_SCK, SPI1_MOSI, PB_6},
-             {SPI_SCK, SPI_MOSI, TLE5011_GEN},
-             {"color: rgb(53, 153, 120);"}},
+        {TLE5011_CS,     tr("TLE5011 CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, PB_6},
+        {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 120);"}},
 
-            {MCP3201_CS,
-             tr("MCP3201 CS"),
-             {ALL},
-             {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-             {SPI_SCK, SPI_MOSI, SPI_MISO},
-             {"color: rgb(53, 153, 120);"}},
+        {MCP3201_CS,     tr("MCP3201 CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
-            {MCP3202_CS,
-             tr("MCP3202 CS"),
-             {ALL},
-             {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-             {SPI_SCK, SPI_MOSI, SPI_MISO},
-             {"color: rgb(53, 153, 120);"}},
+        {MCP3202_CS,     tr("MCP3202 CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
-            {MCP3204_CS,
-             tr("MCP3204 CS"),
-             {ALL},
-             {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-             {SPI_SCK, SPI_MOSI, SPI_MISO},
-             {"color: rgb(53, 153, 120);"}},
+        {MCP3204_CS,     tr("MCP3204 CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
-            {MCP3208_CS,
-             tr("MCP3208 CS"),
-             {ALL},
-             {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-             {SPI_SCK, SPI_MOSI, SPI_MISO},
-             {"color: rgb(53, 153, 120);"}},
+        {MCP3208_CS,     tr("MCP3208 CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
-            {MLX90393_CS,
-             tr("MLX90393 CS"),
-             {ALL},
-             {SPI1_SCK, SPI1_MOSI, SPI_MISO},
-             {SPI_SCK, SPI_MOSI, SPI_MISO},
-             {"color: rgb(53, 153, 120);"}},
+        {MLX90393_CS,    tr("MLX90393 CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
-            {LED_SINGLE, tr("LED Single"), {ALL}, {}, {}, {"color: rgb(155, 0, 200);"}},
+        {LED_SINGLE,     tr("LED Single"),
+        {ALL},
+        {},
+        {}, {"color: rgb(155, 0, 200);"}},
 
-            {LED_ROW, tr("LED Row"), {ALL}, {}, {}, {"color: rgb(155, 0, 120);"}},
+        {LED_ROW,        tr("LED Row"),
+        {ALL},
+        {},
+        {}, {"color: rgb(155, 0, 120);"}},
 
-            {LED_COLUMN, tr("LED Column"), {ALL}, {}, {}, {"color: rgb(190, 20, 120);"}},
+        {LED_COLUMN,     tr("LED Column"),
+        {ALL},
+        {},
+        {}, {"color: rgb(190, 20, 120);"}},
 
-            {LED_PWM, tr("LED PWM"), {PB_0, PB_1, PB_4}, {}, {}, {"color: rgb(200, 0, 180);"}},
+        {LED_PWM,        tr("LED PWM"),
+        {PB_0, PB_1, PB_4},
+        {},
+        {}, {"color: rgb(200, 0, 180);"}},
 
-            {AXIS_ANALOG, tr("Axis Analog"), {ANALOG_IN}, {}, {}, {"color: rgb(0, 155, 0);"}},
+        {AXIS_ANALOG,    tr("Axis Analog"),
+        {ANALOG_IN},
+        {},
+        {}, {"color: rgb(0, 155, 0);"}},
 
-            {FAST_ENCODER, tr("Fast Encoder"), {PA_8, PA_9}, {}, {}, {"color: rgb(200, 10, 10);"}},
+        {FAST_ENCODER,   tr("Fast Encoder"),
+        {PA_8, PA_9},
+        {},
+        {}, {"color: rgb(200, 10, 10);"}},
 
-            {SPI_SCK, tr("SPI SCK"), {SPI1_SCK}, {}, {}, {}},
+        {SPI_SCK,        tr("SPI SCK"),
+        {SPI1_SCK},
+        {},
+        {}, {}},
 
-            {SPI_MOSI, tr("SPI MOSI"), {SPI1_MOSI}, {}, {}, {}},
+        {SPI_MOSI,       tr("SPI MOSI"),
+        {SPI1_MOSI},
+        {},
+        {}, {}},
 
-            {SPI_MISO, tr("SPI MISO"), {SPI1_MISO}, {}, {}, {}},
+        {SPI_MISO,       tr("SPI MISO"),
+        {SPI1_MISO},
+        {},
+        {}, {}},
 
-            {TLE5011_GEN, tr("TLE5011 GEN"), {PB_6}, {}, {}, {}},
+        {TLE5011_GEN,    tr("TLE5011 GEN"),
+        {PB_6},
+        {},
+        {}, {}},
 
-            {I2C_SCL, tr("I2C SCL"), {I2C1_SCL}, {}, {I2C_SDA}, {"color: rgb(53, 53, 255);"}},
+        {I2C_SCL,        tr("I2C SCL"),
+        {I2C1_SCL},
+        {},
+        {I2C_SDA}, {"color: rgb(53, 53, 255);"}},
 
-            {I2C_SDA, tr("I2C SDA"), {I2C1_SDA}, {}, {I2C_SCL}, {"color: rgb(53, 53, 255);"}},
-
-        };
+        {I2C_SDA,        tr("I2C SDA"),
+        {I2C1_SDA},
+        {},
+        {I2C_SCL}, {"color: rgb(53, 53, 255);"}},
+    };
 };
 
 #endif // PINCOMBOBOX_H

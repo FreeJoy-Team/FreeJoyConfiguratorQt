@@ -58,16 +58,16 @@ private:
     int m_curvePointsValue[CURVE_PLOT_POINTS_COUNT];
 
     QVector<deviceEnum_guiName_t> m_axesList = // дублируется в axestobuttons.h , axes.h // ОНО ВЕЗДЕ, ВЫНЕСТИ В ГЛОБАЛ
-        {{
-            {0, tr("X")},
-            {1, tr("Y")},
-            {2, tr("Z")},
-            {3, tr("Rx")},
-            {4, tr("Ry")},
-            {5, tr("Rz")},
-            {6, tr("Slider 1")},
-            {7, tr("Slider 2")},
-        }};
+    {{
+        {0, tr("X")},
+        {1, tr("Y")},
+        {2, tr("Z")},
+        {3, tr("Rx")},
+        {4, tr("Ry")},
+        {5, tr("Rz")},
+        {6, tr("Slider 1")},
+        {7, tr("Slider 2")},
+    }};
 };
 
 #endif // AXESCURVES_H

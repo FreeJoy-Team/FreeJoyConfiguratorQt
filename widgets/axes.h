@@ -64,7 +64,8 @@ private:
 
     QVector<int> m_mainSourceEnumIndex;
 
-    enum {
+    enum
+    {
         Encoder = -3,
         I2C = -2,
         None = -1,
@@ -100,44 +101,61 @@ private:
         C15,
     };
 
-    QVector<deviceEnum_guiName_t> m_axesPinList = // любая последовательность, но первые 2 добавляются в конструкторе
-        {{
-            {None, tr("None")}, {Encoder, tr("Encoder")},
-            {I2C, "I2C"},       {A0, "A0"},
-            {A1, "A1"},         {A2, "A2"},
-            {A3, "A3"},         {A4, "A4"},
-            {A5, "A5"},         {A6, "A6"},
-            {A7, "A7"},         {A8, "A8"},
-            {A9, "A9"},         {A10, "A10"},
-            {A15, "A15"},       {B0, "B0"},
-            {B1, "B1"},         {B3, "B3"},
-            {B4, "B4"},         {B5, "B5"},
-            {B6, "B6"},         {B7, "B7"},
-            {B8, "B8"},         {B9, "B9"},
-            {B10, "B10"},       {B11, "B11"},
-            {B12, "B12"},       {B13, "B13"},
-            {B14, "B14"},       {B15, "B15"},
-            {C13, "C13"},       {C14, "C14"},
-            {C15, "C15"},
-        }};
 
-    QVector<deviceEnum_guiName_t> m_axisSourceMain = // порядов обязан быть как в common_types.h!!!!!!!!!!!
-        {{
-            {None, tr("None")},
-            {Encoder, tr("Encoder")},
-        }};
+    QVector <deviceEnum_guiName_t> m_axesPinList =      // любая последовательность, но первые 2 добавляются в конструкторе
+    {{
+        {None,     tr("None")},
+        {Encoder,  tr("Encoder")},
+        {I2C,      "I2C"},
+        {A0,       "A0"},
+        {A1,       "A1"},
+        {A2,       "A2"},
+        {A3,       "A3"},
+        {A4,       "A4"},
+        {A5,       "A5"},
+        {A6,       "A6"},
+        {A7,       "A7"},
+        {A8,       "A8"},
+        {A9,       "A9"},
+        {A10,      "A10"},
+        {A15,      "A15"},
+        {B0,       "B0"},
+        {B1,       "B1"},
+        {B3,       "B3"},
+        {B4,       "B4"},
+        {B5,       "B5"},
+        {B6,       "B6"},
+        {B7,       "B7"},
+        {B8,       "B8"},
+        {B9,       "B9"},
+        {B10,      "B10"},
+        {B11,      "B11"},
+        {B12,      "B12"},
+        {B13,      "B13"},
+        {B14,      "B14"},
+        {B15,      "B15"},
+        {C13,      "C13"},
+        {C14,      "C14"},
+        {C15,      "C15"},
+    }};
 
-    QVector<deviceEnum_guiName_t> m_axesList = // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h // да бля вынести его уже в глобал
-        {{
-            {0, tr("X")},
-            {1, tr("Y")},
-            {2, tr("Z")},
-            {3, tr("Rx")},
-            {4, tr("Ry")},
-            {5, tr("Rz")},
-            {6, tr("Slider 1")},
-            {7, tr("Slider 2")},
-        }};
+    QVector <deviceEnum_guiName_t> m_axisSourceMain =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    {{
+        {None,          tr("None")},
+        {Encoder,       tr("Encoder")},
+    }};
+
+    QVector <deviceEnum_guiName_t> m_axesList =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h // да бля вынести его уже в глобал
+    {{
+        {0,      tr("X")},
+        {1,      tr("Y")},
+        {2,      tr("Z")},
+        {3,      tr("Rx")},
+        {4,      tr("Ry")},
+        {5,      tr("Rz")},
+        {6,      tr("Slider 1")},
+        {7,      tr("Slider 2")},
+    }};
 };
 
 #endif // AXES_H

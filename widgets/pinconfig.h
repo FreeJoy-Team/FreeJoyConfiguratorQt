@@ -83,28 +83,29 @@ private:
         int maxCount;
     };
 
-    const source_t m_source[SOURCE_COUNT] = {
-        {AXIS_SOURCE,
-         {AXIS_ANALOG, TLE5011_CS, MCP3201_CS, MCP3202_CS, MCP3204_CS, MCP3208_CS, MLX90393_CS}},
+    const source_t m_source[SOURCE_COUNT] =
+    {
+        {AXIS_SOURCE,        {AXIS_ANALOG, TLE5011_CS, MCP3201_CS, MCP3202_CS, MCP3204_CS, MCP3208_CS, MLX90393_CS}},
 
-        {BUTTON_FROM_AXES, {678}}, // 678 в DeviceConfig
+        {BUTTON_FROM_AXES,   {678}},        // 678 в DeviceConfig
 
-        {SINGLE_BUTTON, {BUTTON_VCC, BUTTON_GND}},
-        {ROW_OF_BUTTONS, {BUTTON_ROW}},
-        {COLUMN_OF_BUTTONS, {BUTTON_COLUMN}},
+        {SINGLE_BUTTON,      {BUTTON_VCC, BUTTON_GND}},
+        {ROW_OF_BUTTONS,     {BUTTON_ROW}},
+        {COLUMN_OF_BUTTONS,  {BUTTON_COLUMN}},
 
-        {SINGLE_LED, {LED_SINGLE}},
-        {ROW_OF_LED, {LED_ROW}},
-        {COLUMN_OF_LED, {LED_COLUMN}},
+        {SINGLE_LED,         {LED_SINGLE}},
+        {ROW_OF_LED,         {LED_ROW}},
+        {COLUMN_OF_LED,      {LED_COLUMN}},
     };
 
-    const pinTypeLimit_t m_pinTypeLimit[PIN_TYPE_LIMIT_COUNT] = // static ?
-        {
-            {SHIFT_REG_LATCH, 4},
-            {SHIFT_REG_DATA, 4},
-        };
+    const pinTypeLimit_t m_pinTypeLimit[PIN_TYPE_LIMIT_COUNT] =       // static ?
+    {
+        {SHIFT_REG_LATCH,        4},
+        {SHIFT_REG_DATA,         4},
+    };
 
-    enum {
+    enum
+    {
         AXIS_SOURCE = 0,
         BUTTON_FROM_AXES,
         SINGLE_BUTTON,

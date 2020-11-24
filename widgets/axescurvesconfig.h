@@ -50,17 +50,17 @@ private:
     int m_curvesPointsValue[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT];
 
     const QStringList m_curvesList = // курве 8 = MAX_AXIS_NUM ! или менять curves_points_value_ в axescurvesconfig
-        {{
-            {tr("Not used")},
-            {tr("Curve 1")},
-            {tr("Curve 2")},
-            {tr("Curve 3")},
-            {tr("Curve 4")},
-            {tr("Curve 5")},
-            {tr("Curve 6")},
-            {tr("Curve 7")},
-            {tr("Curve 8")},
-        }};
+    {{
+        {tr("Not used")},
+        {tr("Curve 1")},
+        {tr("Curve 2")},
+        {tr("Curve 3")},
+        {tr("Curve 4")},
+        {tr("Curve 5")},
+        {tr("Curve 6")},
+        {tr("Curve 7")},
+        {tr("Curve 8")},
+    }};
 };
 
 #endif // AXESCURVESCONFIG_H
