@@ -216,27 +216,27 @@ private:
 
         {MCP3201_CS,     tr("MCP3201 CS"),
         {ALL},
-        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3202_CS,     tr("MCP3202 CS"),
         {ALL},
-        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3204_CS,     tr("MCP3204 CS"),
         {ALL},
-        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3208_CS,     tr("MCP3208 CS"),
         {ALL},
-        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MLX90393_CS,    tr("MLX90393 CS"),
         {ALL},
-        {SPI1_SCK, SPI1_MOSI, SPI_MISO},
+        {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {LED_SINGLE,     tr("LED Single"),

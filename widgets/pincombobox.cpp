@@ -116,29 +116,40 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
 {                                                   // это из-за того, что пустые значения структуры const cBox pin_types_[PIN_TYPE_COUNT]
     m_pinNumber = pin;                              // инициализированы 0 и хер поймёшь код. переделаю, если будет не лень
 
+    int typeExceptSize = sizeof(m_pinTypes->pin_except) / sizeof(m_pinTypes->pin_except[0]);
+    int typeSize = sizeof(m_pinTypes->pin_type) / sizeof(m_pinTypes->pin_type[0]);
+    int pinListTypeSize = sizeof(m_pinList->pin_type) / sizeof(m_pinList->pin_type[0]);
+    bool tmp = false;
+
     for (int i = 0; i < PIN_TYPE_COUNT; ++i) {
         // except
-        for (int c = 0; c < 10; ++c) {
+        tmp = false;
+        for (int c = 0; c < typeExceptSize; ++c) {
             if (m_pinTypes[i].pin_except[c] == 0){
                 break;
             }
             if (m_pinTypes[i].pin_except[c] == m_pinNumber){
                 ++i;
+                tmp = true;
                 break;
             }
-            for (int k = 0; k < 10; ++k)
+            for (int k = 0; k < pinListTypeSize; ++k)
             {
                 if (m_pinList[m_pinNumber-1].pin_type[k] == 0){
                     break;
                 }
                 if (m_pinTypes[i].pin_except[c] == m_pinList[m_pinNumber-1].pin_type[k]){
                     ++i;
+                    tmp = true;
                     break;
                 }
             }
         }
+        if (tmp){
+            continue;
+        }
         // add
-        for (int j = 0; j < 10; ++j) {
+        for (int j = 0; j < typeSize; ++j) {
             if (m_pinTypes[i].pin_type[j] == 0) {
                 break;
             }
@@ -154,7 +165,7 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
                 m_enumIndex.push_back(m_pinTypes[i].device_enum_index);
                 continue;
             }
-            for (int k = 0; k < 10; ++k)
+            for (int k = 0; k < pinListTypeSize; ++k)
             {
                 if (m_pinList[m_pinNumber-1].pin_type[k] == 0){
                     break;
