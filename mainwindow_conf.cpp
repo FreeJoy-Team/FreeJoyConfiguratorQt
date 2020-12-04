@@ -53,15 +53,13 @@ void MainWindow::writeToConfig()
     m_advSettings->writeToConfig();
     // write button config
     m_buttonConfig->writeToConfig();
-//HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0483&PID_5757
-    //HKEY_USERS\S-1-5-21-2838183475-2523747707-3792555809-1001\System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0483&PID_5757
-    // remove device name from registry. This should be after write adv.settings config
+    // remove device name from registry.
 #ifdef Q_OS_WIN
-    if (ui->comboBox_HidDeviceList->currentText() != gEnv.pDeviceConfig->config.device_name){
         qDebug()<<"Remove device OEMName from registry";
         QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
+        QString path2("HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
         QSettings(path.arg(QString::number(gEnv.pDeviceConfig->config.pid, 16)), QSettings::NativeFormat).remove("OEMName");
-    }
+        QSettings(path2.arg(QString::number(gEnv.pDeviceConfig->config.pid, 16)), QSettings::NativeFormat).remove("OEMName");
 #endif
 }
 

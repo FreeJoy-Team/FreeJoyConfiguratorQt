@@ -39,15 +39,14 @@ void Flasher::deviceConnected(bool isConnect)
 
 void Flasher::flasherFound(bool isFound)
 {
-    qDebug() << "Flasher found";
     ui->pushButton_FlashFirmware->setEnabled(isFound);
     // disable enter to flash button if flasher connected
+    ui->pushButton_FlasherMode->setEnabled(!isFound);
     if (isFound == true) {
-        ui->pushButton_FlasherMode->setEnabled(false);
+        qDebug()<< "Flasher found";
         ui->pushButton_FlasherMode->setStyleSheet(m_defaultButtonStyle + "color: white; background-color: rgb(0, 128, 0);");
         ui->pushButton_FlasherMode->setText(tr("Ready to flash"));
     } else {
-        ui->pushButton_FlasherMode->setEnabled(true);
         ui->pushButton_FlasherMode->setStyleSheet(m_defaultButtonStyle);
         ui->pushButton_FlasherMode->setText(m_enterToFlash_BtnText);
     }

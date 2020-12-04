@@ -16,10 +16,9 @@ void HidDevice::processData()
     int res = 0;
     bool change = false;
     bool noDeviceSent = false;
-    //bool name_checked = false;
     m_flasher = nullptr;
     QList<hid_device_info*> tmp_HidDevicesAdrList;
-    hid_device_info* hidDevInfo;
+    hid_device_info *hidDevInfo;
     QStringList strList;
     uint8_t buffer[BUFFSIZE]={0};
 
@@ -40,25 +39,33 @@ void HidDevice::processData()
             {
                 strList.clear();
                 m_HidDevicesAdrList.clear();
-                emit hidDeviceList(&strList);
+                emit hidDeviceList(strList);
                 noDeviceSent = true;
-                //name_checked = false;
             }
 
             while(hidDevInfo)
             {
                 if(QString::fromWCharArray(hidDevInfo->product_string) == "FreeJoy Flasher"){
                     if (!m_flasher){
-                        qDebug()<<"processData - Flasher found";
                         m_flasher = hidDevInfo;    // первый
+                        m_HidDevicesAdrList.clear();
+                        strList.clear();
+                        strList << "FreeJoy Flasher";
+                        emit hidDeviceList(strList);
                         emit flasherFound(true);
                     }
-                    m_flasher = hidDevInfo;    // второй раз?
+                    //m_flasher = hidDevInfo;    // второй раз?
                     hidDevInfo = hidDevInfo->next;
                     if (m_currentWork == REPORT_ID_FIRMWARE)
                     {
                         flashFirmwareToDevice();
+                        // flash done
+                        m_flasher = nullptr;
                         m_currentWork = REPORT_ID_JOY;
+                        strList.clear();
+                        emit hidDeviceList(strList);
+                        hid_free_enumeration(hidDevInfo);   // hz nado li
+                        break;
                     }
                     continue;
                 }
@@ -67,7 +74,6 @@ void HidDevice::processData()
                 hidDevInfo = hidDevInfo->next;
                 if (!hidDevInfo && m_HidDevicesAdrList.size() != tmp_HidDevicesAdrList.size())
                 {
-                    //QThread::msleep(20);   // хз
                     m_HidDevicesAdrList.clear();
                     strList.clear();
                     noDeviceSent = false;
@@ -76,24 +82,27 @@ void HidDevice::processData()
                         m_HidDevicesAdrList.append(tmp_HidDevicesAdrList[i]);
                         strList << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
                     }
-                    emit hidDeviceList(&strList);
+                    emit hidDeviceList(strList);
                     tmp_HidDevicesAdrList.clear();
                 }
             }
             tmp_HidDevicesAdrList.clear();
             change = false;
         }
+        // update devices names
+        updateHidNames();
 
         // no device
         if (!m_handleRead)
         {
-            if (m_HidDevicesAdrList.size()){          // ?
+            if (!m_HidDevicesAdrList.empty()) {
                 m_handleRead = hid_open(VID, m_HidDevicesAdrList[0]->product_id,nullptr);
             }
             if (!m_handleRead) {
-                //name_checked = false;
                 emit putDisconnectedDeviceInfo();
-                //hid_free_enumeration(hid_dev_info);
+                strList.clear();
+                emit hidDeviceList(strList);
+                //hid_free_enumeration(hidDevInfo);
                 QThread::msleep(500);
             } else {
                 emit putConnectedDeviceInfo();
@@ -102,20 +111,6 @@ void HidDevice::processData()
         // device connected
         if (m_handleRead)
         {
-
-//            if (name_checked == false)
-//            {
-//                for (int i = 0; i < str_list.size(); ++i){
-//                    if (str_list[i] == ""){
-//                        qDebug()<<"No product string, repeat";
-//                        str_list[i] =QString::fromWCharArray(HidDevicesAdrList[i]->product_string);
-//                        emit hidDeviceList(&str_list);
-//                        //qDebug()<<QString::fromWCharArray(str);
-//                    }
-//                }
-//                name_checked = true;
-//            }
-
             // read joy report
             if (m_currentWork == REPORT_ID_JOY)
             {
@@ -140,18 +135,31 @@ void HidDevice::processData()
             else if (m_currentWork == REPORT_ID_CONFIG_OUT)
             {
                 writeConfigToDevice(buffer);
-//                HidDevicesAdrList.clear();      // очистка спика устройств после записи конфига
-//                str_list.clear();               // чтобы небыло бага в имени при выборе устройства
-//                no_device_sent = false;         // говнокод
-//                hid_free_enumeration(hid_dev_info);
             }
-//            else if (current_work_ == REPORT_ID_FIRMWARE)
-//            {
-//                EnterToFlashMode();
-//            }
         }
     }
     hid_free_enumeration(hidDevInfo);            // ????
+}
+
+void HidDevice::updateHidNames()
+{
+    static bool change = false;
+    static QElapsedTimer timer;
+    if (!change)
+    {
+        timer.start();
+        change = true;
+    }
+    else if (timer.elapsed() > 3000)
+    {
+        QStringList tmp;
+        for (int i = 0; i < m_HidDevicesAdrList.size(); ++i)
+        {
+            tmp << QString::fromWCharArray(m_HidDevicesAdrList[i]->product_string);
+        }
+        emit hidDeviceList(tmp);
+        change = false;
+    }
 }
 
 // stop processData, close app
@@ -466,7 +474,7 @@ bool HidDevice::enterToFlashMode()
 // another device selected in comboBox
 void HidDevice::setSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
 {                                                           // только в винде. решил костылём в hidapi.c
-    if (device_number < 0){
+    if (device_number < 0 || m_flasher){
         //device_number = 0;
         return;
     } else if (device_number > m_HidDevicesAdrList.size() - 1){
@@ -475,6 +483,7 @@ void HidDevice::setSelectedDevice(int device_number)        // заблочит�
     m_selectedDevice = device_number;
     ushort pid = m_HidDevicesAdrList[m_selectedDevice]->product_id;
     wchar_t *serNum = m_HidDevicesAdrList[m_selectedDevice]->serial_number;
+    //qDebug()<<m_HidDevicesAdrList[m_selectedDevice]->path;
     qDebug().nospace()<<"Open HID device №"<<device_number + 1
                      <<". VID"<<QString::number(VID, 16).toInt()<<", PID"<<QString::number(pid, 16).toInt()<<", Serial number "<<serNum;
         // возможно не стоит здесь открывать, оставить изменение selected_device_, а открытие в processData()

@@ -37,7 +37,7 @@ signals:
     void configReceived(bool is_success);
     void configSent(bool is_success);
 
-    void hidDeviceList(QStringList *device_list);
+    void hidDeviceList(const QStringList &deviceList);
 
     void flasherFound(bool is_found);
     void flashStatus(int status, int percent);
@@ -46,7 +46,9 @@ private:
     hid_device *m_handleRead;
     bool m_isFinish = false;
     int m_selectedDevice;
-    int m_currentWork;
+    volatile int m_currentWork;
+
+    void updateHidNames();
 
     void readConfigFromDevice(uint8_t *buffer);
     void writeConfigToDevice(uint8_t *buffer);
