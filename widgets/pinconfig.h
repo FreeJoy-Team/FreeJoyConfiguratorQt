@@ -4,6 +4,13 @@
 #include <QWidget>
 
 #include "pincombobox.h"
+#include "pinscontrlite.h"
+#include "pinsbluepill.h"
+//#include "currentconfig.h"
+
+QT_BEGIN_NAMESPACE
+class QGridLayout;
+QT_END_NAMESPACE
 
 #define SOURCE_COUNT 8
 #define PIN_TYPE_LIMIT_COUNT 2
@@ -40,14 +47,17 @@ signals:
 private slots:
     void pinInteraction(int index, int senderIndex, int pin);
     void pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
-    void a2bCountChanged(int count);
+    void a2bCountChanged(int);
     void shiftRegButtonsCountChanged(int count);
-    void totalButtonsChanged(int count);
+    void boardChanged(int index);
 
 private:
     Ui::PinConfig *ui;
-    //! 0 if no pins
-    uint m_pinCount; // пинов всегда 30, бесполезная хрень
+
+    PinsBluePill *m_bluePill;
+    PinsContrLite *m_contrLite;
+    int m_lastBoard;
+
     //! PinComboBox widget list
     QList<PinComboBox *> m_pinCBoxPtrList;
 
@@ -60,16 +70,6 @@ private:
     void signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
     void pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum);
     void setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
-
-    int m_axisSources;
-    int m_buttonsFromAxes;
-    int m_buttonsFromShiftRegs;
-    int m_singleButtons;
-    int m_rowsOfButtons;
-    int m_columnsOfButtons;
-    int m_singleLed;
-    int m_rowsOfLed;
-    int m_columnsOfLed;
 
     struct source_t
     {
@@ -104,7 +104,7 @@ private:
         {SHIFT_REG_DATA,         4},
     };
 
-    enum
+    enum        // and in current config
     {
         AXIS_SOURCE = 0,
         BUTTON_FROM_AXES,

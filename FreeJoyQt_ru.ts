@@ -812,7 +812,7 @@
     </message>
     <message>
         <source>POV1 Left</source>
-        <translation>POV1 лево</translation>
+        <translation>POV1 Лево</translation>
     </message>
     <message>
         <source>POV2 Up</source>
@@ -908,6 +908,49 @@
     <message>
         <source>Form</source>
         <translation>Форма</translation>
+    </message>
+</context>
+<context>
+    <name>CurrentConfig</name>
+    <message>
+        <source>Form</source>
+        <translation type="obsolete">Форма</translation>
+    </message>
+    <message>
+        <source>Current Config</source>
+        <translation>Текущий конфиг</translation>
+    </message>
+    <message>
+        <source>Axis sources:</source>
+        <translation>Источников осей:</translation>
+    </message>
+    <message>
+        <source>Total LEDs:</source>
+        <translation>Всего светодиодов:</translation>
+    </message>
+    <message>
+        <source>Buttons from axes:</source>
+        <translation>Кнопок из осей:</translation>
+    </message>
+    <message>
+        <source>Single buttons:</source>
+        <translation>Одиночных кнопок:</translation>
+    </message>
+    <message>
+        <source>Columns of buttons:</source>
+        <translation>Колонн кнопок:</translation>
+    </message>
+    <message>
+        <source>Rows of buttons:</source>
+        <translation>Рядов кнопок:</translation>
+    </message>
+    <message>
+        <source>Total buttons:</source>
+        <translation>Всего кнопок:</translation>
+    </message>
+    <message>
+        <source>Buttons from shift regs:</source>
+        <translation>Кнопок у регистров:</translation>
     </message>
 </context>
 <context>
@@ -1284,7 +1327,7 @@ e
 b
 u
 g</source>
-        <translation>О
+        <translation type="vanished">О
 т
 л
 а
@@ -1532,43 +1575,54 @@ g</source>
     <name>PinConfig</name>
     <message>
         <source>Form</source>
-        <translation>Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
     <message>
         <source>Current Config</source>
-        <translation>Текущий конфиг</translation>
+        <translation type="vanished">Текущий конфиг</translation>
     </message>
     <message>
         <source>Axis sources:</source>
-        <translation>Источников осей:</translation>
+        <translation type="vanished">Источников осей:</translation>
     </message>
     <message>
         <source>Total LEDs:</source>
-        <translation>Всего светодиодов:</translation>
+        <translation type="vanished">Всего светодиодов:</translation>
     </message>
     <message>
         <source>Buttons from axes:</source>
-        <translation>Кнопок из осей:</translation>
+        <translation type="vanished">Кнопок из осей:</translation>
     </message>
     <message>
         <source>Single buttons:</source>
-        <translation>Одиночных кнопок:</translation>
+        <translation type="vanished">Одиночных кнопок:</translation>
     </message>
     <message>
         <source>Columns of buttons:</source>
-        <translation>Колонн кнопок:</translation>
+        <translation type="vanished">Колонн кнопок:</translation>
     </message>
     <message>
         <source>Rows of buttons:</source>
-        <translation>Рядов кнопок:</translation>
+        <translation type="vanished">Рядов кнопок:</translation>
     </message>
     <message>
         <source>Total buttons:</source>
-        <translation>Всего кнопок:</translation>
+        <translation type="vanished">Всего кнопок:</translation>
     </message>
     <message>
         <source>Buttons from shift regs:</source>
-        <translation>Кнопок у регистров:</translation>
+        <translation type="vanished">Кнопок у регистров:</translation>
+    </message>
+    <message>
+        <source>Select board</source>
+        <translation>Выбор платы</translation>
+    </message>
+</context>
+<context>
+    <name>PinsBluePill</name>
+    <message>
+        <source>Form</source>
+        <translation type="obsolete">Форма</translation>
     </message>
 </context>
 <context>

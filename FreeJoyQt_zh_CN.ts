@@ -1058,6 +1058,54 @@
     </message>
 </context>
 <context>
+    <name>CurrentConfig</name>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="32"/>
+        <source>Current Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="44"/>
+        <source>Axis sources:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="76"/>
+        <source>Total LEDs:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="86"/>
+        <source>Buttons from axes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="162"/>
+        <source>Single buttons:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="172"/>
+        <source>Columns of buttons:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="182"/>
+        <source>Rows of buttons:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="192"/>
+        <source>Total buttons:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="268"/>
+        <source>Buttons from shift regs:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DebugWindow</name>
     <message>
         <location filename="widgets/debugwindow.ui" line="14"/>
@@ -1257,37 +1305,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/flasher.cpp" line="64"/>
+        <location filename="widgets/flasher.cpp" line="63"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/flasher.cpp" line="64"/>
+        <location filename="widgets/flasher.cpp" line="63"/>
         <source>Binary files (.bin) (*.bin)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/flasher.cpp" line="87"/>
+        <location filename="widgets/flasher.cpp" line="86"/>
         <source>Firmware flashing..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/flasher.cpp" line="91"/>
+        <location filename="widgets/flasher.cpp" line="90"/>
         <source>Finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/flasher.cpp" line="96"/>
+        <location filename="widgets/flasher.cpp" line="95"/>
         <source>SIZE ERROR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/flasher.cpp" line="101"/>
+        <location filename="widgets/flasher.cpp" line="100"/>
         <source>CRC ERROR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/flasher.cpp" line="106"/>
+        <location filename="widgets/flasher.cpp" line="105"/>
         <source>ERASE ERROR</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1368,8 +1416,8 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="683"/>
-        <location filename="mainwindow.cpp" line="621"/>
+        <location filename="mainwindow.ui" line="655"/>
+        <location filename="mainwindow.cpp" line="623"/>
         <source>Show debug</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1431,7 +1479,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="305"/>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="247"/>
         <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1441,51 +1489,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="374"/>
-        <source>D
-e
-b
-u
-g</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="403"/>
+        <location filename="mainwindow.ui" line="375"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="513"/>
+        <location filename="mainwindow.ui" line="485"/>
         <source>Set file to default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="661"/>
+        <location filename="mainwindow.ui" line="633"/>
         <source>Save config to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="595"/>
+        <location filename="mainwindow.ui" line="567"/>
         <source>Read config from Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="570"/>
+        <location filename="mainwindow.ui" line="542"/>
         <source>Reset All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="535"/>
+        <location filename="mainwindow.ui" line="507"/>
         <source>Load default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="478"/>
+        <location filename="mainwindow.ui" line="450"/>
         <source>Load config from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="639"/>
+        <location filename="mainwindow.ui" line="611"/>
         <source>Write config to Device</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1495,52 +1534,52 @@ g</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="260"/>
+        <location filename="mainwindow.cpp" line="256"/>
         <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="100"/>
+        <location filename="mainwindow_conf.cpp" line="106"/>
         <source>Device firmware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="103"/>
+        <location filename="mainwindow_conf.cpp" line="109"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="114"/>
-        <location filename="mainwindow_conf.cpp" line="152"/>
+        <location filename="mainwindow_conf.cpp" line="120"/>
+        <location filename="mainwindow_conf.cpp" line="158"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="137"/>
+        <location filename="mainwindow_conf.cpp" line="143"/>
         <source>Sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="550"/>
-        <location filename="mainwindow.cpp" line="573"/>
+        <location filename="mainwindow.cpp" line="552"/>
+        <location filename="mainwindow.cpp" line="575"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="550"/>
-        <location filename="mainwindow.cpp" line="561"/>
-        <location filename="mainwindow.cpp" line="573"/>
+        <location filename="mainwindow.cpp" line="552"/>
+        <location filename="mainwindow.cpp" line="563"/>
+        <location filename="mainwindow.cpp" line="575"/>
         <source>Config Files (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="561"/>
+        <location filename="mainwindow.cpp" line="563"/>
         <source>Save Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="404"/>
-        <location filename="mainwindow.cpp" line="613"/>
+        <location filename="mainwindow.cpp" line="406"/>
+        <location filename="mainwindow.cpp" line="615"/>
         <source>Hide debug</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1553,277 +1592,277 @@ g</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="143"/>
+        <location filename="widgets/pincombobox.h" line="145"/>
         <source>Pin A0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="144"/>
+        <location filename="widgets/pincombobox.h" line="146"/>
         <source>Pin A1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="145"/>
+        <location filename="widgets/pincombobox.h" line="147"/>
         <source>Pin A2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="146"/>
+        <location filename="widgets/pincombobox.h" line="148"/>
         <source>Pin A3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="147"/>
+        <location filename="widgets/pincombobox.h" line="149"/>
         <source>Pin A4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="148"/>
+        <location filename="widgets/pincombobox.h" line="150"/>
         <source>Pin A5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="149"/>
+        <location filename="widgets/pincombobox.h" line="151"/>
         <source>Pin A6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="150"/>
+        <location filename="widgets/pincombobox.h" line="152"/>
         <source>Pin A7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="151"/>
+        <location filename="widgets/pincombobox.h" line="153"/>
         <source>Pin A8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="152"/>
+        <location filename="widgets/pincombobox.h" line="154"/>
         <source>Pin A9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="153"/>
+        <location filename="widgets/pincombobox.h" line="155"/>
         <source>Pin A10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="154"/>
+        <location filename="widgets/pincombobox.h" line="156"/>
         <source>Pin A15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="155"/>
+        <location filename="widgets/pincombobox.h" line="157"/>
         <source>Pin B0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="156"/>
+        <location filename="widgets/pincombobox.h" line="158"/>
         <source>Pin B1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="157"/>
+        <location filename="widgets/pincombobox.h" line="159"/>
         <source>Pin B3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="158"/>
+        <location filename="widgets/pincombobox.h" line="160"/>
         <source>Pin B4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="159"/>
+        <location filename="widgets/pincombobox.h" line="161"/>
         <source>Pin B5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="160"/>
+        <location filename="widgets/pincombobox.h" line="162"/>
         <source>Pin B6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="161"/>
+        <location filename="widgets/pincombobox.h" line="163"/>
         <source>Pin B7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="162"/>
+        <location filename="widgets/pincombobox.h" line="164"/>
         <source>Pin B8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="163"/>
+        <location filename="widgets/pincombobox.h" line="165"/>
         <source>Pin B9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="164"/>
+        <location filename="widgets/pincombobox.h" line="166"/>
         <source>Pin B10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="165"/>
+        <location filename="widgets/pincombobox.h" line="167"/>
         <source>Pin B11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="166"/>
+        <location filename="widgets/pincombobox.h" line="168"/>
         <source>Pin B12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="167"/>
+        <location filename="widgets/pincombobox.h" line="169"/>
         <source>Pin B13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="168"/>
+        <location filename="widgets/pincombobox.h" line="170"/>
         <source>Pin B14</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="169"/>
+        <location filename="widgets/pincombobox.h" line="171"/>
         <source>Pin B15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="170"/>
+        <location filename="widgets/pincombobox.h" line="172"/>
         <source>Pin C13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="171"/>
+        <location filename="widgets/pincombobox.h" line="173"/>
         <source>Pin C14</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="172"/>
+        <location filename="widgets/pincombobox.h" line="174"/>
         <source>Pin C15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="177"/>
+        <location filename="widgets/pincombobox.h" line="179"/>
         <source>Not Used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="182"/>
+        <location filename="widgets/pincombobox.h" line="184"/>
         <source>Button Gnd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="187"/>
+        <location filename="widgets/pincombobox.h" line="189"/>
         <source>Button Vcc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="192"/>
+        <location filename="widgets/pincombobox.h" line="194"/>
         <source>Button Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="197"/>
+        <location filename="widgets/pincombobox.h" line="199"/>
         <source>Button Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="202"/>
+        <location filename="widgets/pincombobox.h" line="204"/>
         <source>ShiftReg LATCH</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="207"/>
+        <location filename="widgets/pincombobox.h" line="209"/>
         <source>ShiftReg DATA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="212"/>
+        <location filename="widgets/pincombobox.h" line="214"/>
         <source>TLE5011 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="217"/>
+        <location filename="widgets/pincombobox.h" line="219"/>
         <source>MCP3201 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="222"/>
+        <location filename="widgets/pincombobox.h" line="224"/>
         <source>MCP3202 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="227"/>
+        <location filename="widgets/pincombobox.h" line="229"/>
         <source>MCP3204 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="232"/>
+        <location filename="widgets/pincombobox.h" line="234"/>
         <source>MCP3208 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="237"/>
+        <location filename="widgets/pincombobox.h" line="239"/>
         <source>MLX90393 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="242"/>
+        <location filename="widgets/pincombobox.h" line="244"/>
         <source>LED Single</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="247"/>
+        <location filename="widgets/pincombobox.h" line="249"/>
         <source>LED Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="252"/>
+        <location filename="widgets/pincombobox.h" line="254"/>
         <source>LED Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="257"/>
+        <location filename="widgets/pincombobox.h" line="259"/>
         <source>LED PWM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="262"/>
+        <location filename="widgets/pincombobox.h" line="264"/>
         <source>Axis Analog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="267"/>
+        <location filename="widgets/pincombobox.h" line="269"/>
         <source>Fast Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="272"/>
+        <location filename="widgets/pincombobox.h" line="274"/>
         <source>SPI SCK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="277"/>
+        <location filename="widgets/pincombobox.h" line="279"/>
         <source>SPI MOSI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="282"/>
+        <location filename="widgets/pincombobox.h" line="284"/>
         <source>SPI MISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="287"/>
+        <location filename="widgets/pincombobox.h" line="289"/>
         <source>TLE5011 GEN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="292"/>
+        <location filename="widgets/pincombobox.h" line="294"/>
         <source>I2C SCL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/pincombobox.h" line="297"/>
+        <location filename="widgets/pincombobox.h" line="299"/>
         <source>I2C SDA</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1831,53 +1870,8 @@ g</source>
 <context>
     <name>PinConfig</name>
     <message>
-        <location filename="widgets/pinconfig.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="38"/>
-        <source>Current Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="50"/>
-        <source>Axis sources:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="82"/>
-        <source>Total LEDs:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="92"/>
-        <source>Buttons from axes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="168"/>
-        <source>Single buttons:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="178"/>
-        <source>Columns of buttons:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="188"/>
-        <source>Rows of buttons:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="198"/>
-        <source>Total buttons:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/pinconfig.ui" line="274"/>
-        <source>Buttons from shift regs:</source>
+        <location filename="widgets/pinconfig.ui" line="54"/>
+        <source>Select board</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1920,7 +1914,7 @@ g</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/shiftregisters.cpp" line="5"/>
+        <location filename="widgets/shiftregisters.cpp" line="15"/>
         <source>Not defined</source>
         <translation type="unfinished"></translation>
     </message>

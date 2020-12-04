@@ -350,34 +350,6 @@ border: 1px solid rgb(173, 173, 173);
          <string notr="true">Test button</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_ShowDebug2_2">
-        <property name="geometry">
-         <rect>
-          <x>570</x>
-          <y>10</y>
-          <width>15</width>
-          <height>597</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">min-width: 13px;
-max-width: 13px;
-padding: 0px;</string>
-        </property>
-        <property name="text">
-         <string>D
-e
-b
-u
-g</string>
-        </property>
-       </widget>
        <widget class="QLineEdit" name="lineEdit_2">
         <property name="geometry">
          <rect>

@@ -9,7 +9,8 @@
 #define PINS_COUNT 30
 #define PIN_TYPE_COUNT 25
 enum // разделить и вынести отдельно?                 // все структуры в global.h?
-{ PA_0 = 1,
+{
+  PA_0 = 1,
   PA_1,
   PA_2,
   PA_3,
@@ -65,10 +66,10 @@ enum // разделить и вынести отдельно?                 /
 
 struct cBox
 {
-    int device_enum_index;
-    QString gui_name;
-    int pin_type[10];
-    int pin_except[10];
+    int deviceEnumIndex;
+    QString guiName;
+    int pinType[10];
+    int pinExcept[10];
     int interaction[10];
     QString styleSheet; // стиль взаимодействия
 };
@@ -76,8 +77,9 @@ struct cBox
 struct pins
 {
     int pin;
-    QString gui_name;
-    int pin_type[10];
+    QString objectName;
+    QString guiName;
+    int pinType[10];
 };
 
 namespace Ui {
@@ -89,7 +91,7 @@ class PinComboBox : public QWidget
     Q_OBJECT
 
 public:
-    explicit PinComboBox(QWidget *parent = nullptr);
+    explicit PinComboBox(uint pinNumber, QWidget *parent = nullptr);
     ~PinComboBox();
 
     //! return pointer to the first element, size=PINS_COUNT
@@ -118,7 +120,7 @@ signals:
     void valueChangedForInteraction(int index, int senderIndex, int pin);
     void currentIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
 private slots:
-    void IndexChanged(int index);
+    void indexChanged(int index);
 
 private:
     Ui::PinComboBox *ui;
@@ -140,36 +142,36 @@ private:
     ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ static!!///////////////////////
     const pins m_pinList[PINS_COUNT] = // каждый пин хранит по структуре. а жирно не будет?
     {
-        {PA_0,  {tr("Pin A0")},     {ANALOG_IN}}, // пин // GUI name // его типы
-        {PA_1,  {tr("Pin A1")},     {ANALOG_IN}}, // добавить SERIAL, PWM...
-        {PA_2,  {tr("Pin A2")},     {ANALOG_IN}},
-        {PA_3,  {tr("Pin A3")},     {ANALOG_IN}},
-        {PA_4,  {tr("Pin A4")},     {ANALOG_IN}},
-        {PA_5,  {tr("Pin A5")},     {ANALOG_IN}},
-        {PA_6,  {tr("Pin A6")},     {ANALOG_IN}},
-        {PA_7,  {tr("Pin A7")},     {ANALOG_IN}},
-        {PA_8,  {tr("Pin A8")},     {}},
-        {PA_9,  {tr("Pin A9")},     {}},
-        {PA_10, {tr("Pin A10")},    {}},
-        {PA_15, {tr("Pin A15")},    {SPI1_NSS}},
-        {PB_0,  {tr("Pin B0")},     {}},
-        {PB_1,  {tr("Pin B1")},     {}},
-        {PB_3,  {tr("Pin B3")},     {SPI1_SCK}},
-        {PB_4,  {tr("Pin B4")},     {SPI1_MISO}},
-        {PB_5,  {tr("Pin B5")},     {SPI1_MOSI}},
-        {PB_6,  {tr("Pin B6")},     {}},
-        {PB_7,  {tr("Pin B7")},     {}},
-        {PB_8,  {tr("Pin B8")},     {I2C1_SCL}},
-        {PB_9,  {tr("Pin B9")},     {I2C1_SDA}},
-        {PB_10, {tr("Pin B10")},    {}},
-        {PB_11, {tr("Pin B11")},    {}},
-        {PB_12, {tr("Pin B12")},    {}},
-        {PB_13, {tr("Pin B13")},    {}},
-        {PB_14, {tr("Pin B14")},    {}},
-        {PB_15, {tr("Pin B15")},    {}},
-        {PC_13, {tr("Pin C13")},    {}},
-        {PC_14, {tr("Pin C14")},    {}},
-        {PC_15, {tr("Pin C15")},    {}},
+        {PA_0,  {"A0"},    {tr("Pin A0")},     {ANALOG_IN}}, // пин // GUI name // его типы
+        {PA_1,  {"A1"},    {tr("Pin A1")},     {ANALOG_IN}}, // добавить SERIAL, PWM...
+        {PA_2,  {"A2"},    {tr("Pin A2")},     {ANALOG_IN}},
+        {PA_3,  {"A3"},    {tr("Pin A3")},     {ANALOG_IN}},
+        {PA_4,  {"A4"},    {tr("Pin A4")},     {ANALOG_IN}},
+        {PA_5,  {"A5"},    {tr("Pin A5")},     {ANALOG_IN}},
+        {PA_6,  {"A6"},    {tr("Pin A6")},     {ANALOG_IN}},
+        {PA_7,  {"A7"},    {tr("Pin A7")},     {ANALOG_IN}},
+        {PA_8,  {"A8"},    {tr("Pin A8")},     {}},
+        {PA_9,  {"A9"},    {tr("Pin A9")},     {}},
+        {PA_10, {"A10"},   {tr("Pin A10")},    {}},
+        {PA_15, {"A15"},   {tr("Pin A15")},    {SPI1_NSS}},
+        {PB_0,  {"B0"},    {tr("Pin B0")},     {}},
+        {PB_1,  {"B1"},    {tr("Pin B1")},     {}},
+        {PB_3,  {"B3"},    {tr("Pin B3")},     {SPI1_SCK}},
+        {PB_4,  {"B4"},    {tr("Pin B4")},     {SPI1_MISO}},
+        {PB_5,  {"B5"},    {tr("Pin B5")},     {SPI1_MOSI}},
+        {PB_6,  {"B6"},    {tr("Pin B6")},     {}},
+        {PB_7,  {"B7"},    {tr("Pin B7")},     {}},
+        {PB_8,  {"B8"},    {tr("Pin B8")},     {I2C1_SCL}},
+        {PB_9,  {"B9"},    {tr("Pin B9")},     {I2C1_SDA}},
+        {PB_10, {"B10"},   {tr("Pin B10")},    {}},
+        {PB_11, {"B11"},   {tr("Pin B11")},    {}},
+        {PB_12, {"B12"},   {tr("Pin B12")},    {}},
+        {PB_13, {"B13"},   {tr("Pin B13")},    {}},
+        {PB_14, {"B14"},   {tr("Pin B14")},    {}},
+        {PB_15, {"B15"},   {tr("Pin B15")},    {}},
+        {PC_13, {"C13"},   {tr("Pin C13")},    {}},
+        {PC_14, {"C14"},   {tr("Pin C14")},    {}},
+        {PC_15, {"C15"},   {tr("Pin C15")},    {}},
     };
 
     const cBox m_pinTypes[PIN_TYPE_COUNT] = // static ?

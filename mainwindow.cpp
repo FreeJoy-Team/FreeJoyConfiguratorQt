@@ -88,31 +88,27 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug()<<"advanced settings load time ="<< timer.restart() << "ms";
 
 
-
     // strong focus for mouse wheel
     // без протекта можно при прокручивании страницы случайно навести на комбобокс и изменить его колесом мыши
     // при установке setFocusPolicy(Qt::StrongFocus) и протекта на комбобокс придётся нажать, для прокручивания колесом
-    for (auto&& child: this->findChildren<QSpinBox *>())
+    for (auto &&child: this->findChildren<QSpinBox *>())
     {
         child->setFocusPolicy(Qt::StrongFocus);
         child->installEventFilter(new MouseWheelGuard(child));
     }
 
-    for (auto&& child: this->findChildren<QComboBox *>())
+    for (auto &&child: this->findChildren<QComboBox *>())
     {
         child->setFocusPolicy(Qt::StrongFocus);
         child->installEventFilter(new MouseWheelGuard(child));
     }
     // хз так или сверху исключать?
     ui->comboBox_HidDeviceList->setFocusPolicy(Qt::WheelFocus);
-    for (auto&& child: m_pinConfig->findChildren<PinComboBox *>())
+    for (auto &&comBox: m_pinConfig->findChildren<QComboBox *>())
     {
-        for (auto&& comBox: child->findChildren<QComboBox *>())
-        {
             comBox->setFocusPolicy(Qt::WheelFocus);
-        }
     }
-    for (auto&& comBox: m_axesCurvesConfig->findChildren<QComboBox *>())
+    for (auto &&comBox: m_axesCurvesConfig->findChildren<QComboBox *>())
     {
         comBox->setFocusPolicy(Qt::WheelFocus);
     }
@@ -190,8 +186,8 @@ MainWindow::MainWindow(QWidget *parent)
                           this, SLOT(showConnectDeviceInfo()));
     connect(m_hidDeviceWorker, SIGNAL(putDisconnectedDeviceInfo()),
                           this, SLOT(hideConnectDeviceInfo()));
-    connect(m_hidDeviceWorker, SIGNAL(hidDeviceList(QStringList*)),
-                          this, SLOT(hidDeviceList(QStringList*)));
+    connect(m_hidDeviceWorker, SIGNAL(hidDeviceList(const QStringList &)),
+                          this, SLOT(hidDeviceList(const QStringList &)));
 
 
     // read config from device
@@ -275,19 +271,25 @@ void MainWindow::hideConnectDeviceInfo() {
 }
 
 // add/delete hid devices to/from combobox
-void MainWindow::hidDeviceList(QStringList *deviceList)
+void MainWindow::hidDeviceList(const QStringList &deviceList)
 {
-    if (deviceList->size() == 0 && ui->comboBox_HidDeviceList->count() > 0)
+    QSignalBlocker blocker(ui->comboBox_HidDeviceList);
+//    QMap<QString, QString> map;
+//    map.insert("\\?\\hid#vid_0483&pid_5750#8&452d809&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}", "FreeJoy");
+//    map.insert("\\?\\hid#vid_0483&pid_5750#8&452d809&0&0000#{4d1e55b2-f16f-11cf-88cb-004533440030}", "FreeJoy2");
+    int curIndex = ui->comboBox_HidDeviceList->currentIndex();
+    if (deviceList.size() == 0 && ui->comboBox_HidDeviceList->count() > 0)
     {
         ui->comboBox_HidDeviceList->clear();
         return;
-    } else if (deviceList->size() > 0)
+    } else if (deviceList.size() > 0)
     {
         ui->comboBox_HidDeviceList->clear();
-        ui->comboBox_HidDeviceList->addItems(*deviceList);
-//        if (ui->comboBox_HidDeviceList->count() >= index_device_before_write_){
-//            ui->comboBox_HidDeviceList->setCurrentIndex(index_device_before_write_);
-//        }
+        ui->comboBox_HidDeviceList->addItems(deviceList);
+    }
+    blocker.unblock();
+    if (curIndex >=0) {
+        ui->comboBox_HidDeviceList->setCurrentIndex(curIndex);
     }
 }
 
@@ -295,9 +297,9 @@ void MainWindow::hidDeviceList(QStringList *deviceList)
 void MainWindow::getGamepadPacket(uint8_t *buff)
 {
     reportConvert.gamepadReport(buff);
-
     // update button state without delay. fix gamepad_report.raw_button_data[0]
-    // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся. Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
+    // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся.
+    // Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
     // и не видеть оставшиеся физические 64 кнопки. ленивый и неоптимизированный фикс
     if(ui->tab_ButtonConfig->isVisible() == true || m_debugWindow){
         m_buttonConfig->buttonStateChanged();
@@ -374,7 +376,7 @@ void MainWindow::interfaceStyleChanged(bool isDark)
 }
 
 // slot language change
-void MainWindow::languageChanged(const QString &language)        // QSignalBlocker blocker(ui->comboBox);
+void MainWindow::languageChanged(const QString &language)
 {
     qDebug()<<"Retranslate UI";
     if (language == "russian")

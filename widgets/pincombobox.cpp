@@ -1,12 +1,20 @@
 #include "pincombobox.h"
 #include "ui_pincombobox.h"
 
-PinComboBox::PinComboBox(QWidget *parent) :     // пины - первое, что я начал кодить в конфигураторе и спустя время
-    QWidget(parent),                            // заявляю - это говнокод!1 который даже мне тяжело понять
-    ui(new Ui::PinComboBox)                     // мои соболезнования тем кто будет разбираться)
+//! pinNumber cannot be less 1 and more than PINS_COUNT
+PinComboBox::PinComboBox(uint pinNumber, QWidget *parent) : // пины - первое, что я начал кодить в конфигураторе и спустя время
+    QWidget(parent),                                        // заявляю - это говнокод!1 который даже мне тяжело понять
+    ui(new Ui::PinComboBox)                                 // мои соболезнования тем кто будет разбираться)
 {
     ui->setupUi(this);
-    m_pinNumber = -1;
+    // minimum pinNumber = enum PA_0 = 1
+    if (pinNumber < 1 || pinNumber > PINS_COUNT) {
+        qFatal("(pinNumber < 1 || pinNumber > PINS_COUNT) in pincombobox.cpp");
+    }
+    m_pinNumber = pinNumber;
+    // set object name for for placement in PinConfig layout
+    setObjectName(m_pinList[m_pinNumber-1].objectName);
+
     m_previousIndex = 0;
     m_interactCount = 0;
     m_currentDevEnum = 0;
@@ -14,10 +22,12 @@ PinComboBox::PinComboBox(QWidget *parent) :     // пины - первое, чт
     m_isCall_Interaction = false;
     m_isInteracts = false;
 
-    m_styleSheetDefault = ui->comboBox_PinsType->styleSheet();       // will not work with styles, remove from constructor, вроде пашет
+    m_styleSheetDefault = ui->comboBox_PinsType->styleSheet();       // хрень
+
+    initializationPins(m_pinNumber);
 
     connect(ui->comboBox_PinsType, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(IndexChanged(int)));
+                this, SLOT(indexChanged(int)));
 }
 
 PinComboBox::~PinComboBox()
@@ -94,7 +104,7 @@ void PinComboBox::setIndex_iteraction(int index, int senderIndex)
 {
     if(m_isInteracts == false && m_isCall_Interaction == false)     // ui->comboBox_PinsType->isEnabled()
     {
-        if(m_pinTypes[m_pinTypesIndex[index]].device_enum_index != TLE5011_GEN)
+        if(m_pinTypes[m_pinTypesIndex[index]].deviceEnumIndex != TLE5011_GEN)
         {
             ui->comboBox_PinsType->setEnabled(false);
         }
@@ -114,31 +124,31 @@ void PinComboBox::setIndex_iteraction(int index, int senderIndex)
 //! Set pin items
 void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так се
 {                                                   // это из-за того, что пустые значения структуры const cBox pin_types_[PIN_TYPE_COUNT]
-    m_pinNumber = pin;                              // инициализированы 0 и хер поймёшь код. переделаю, если будет не лень
+    m_pinNumber = pin;                              // инициализированы 0 и хер поймёшь код. возможно переделаю
 
-    int typeExceptSize = sizeof(m_pinTypes->pin_except) / sizeof(m_pinTypes->pin_except[0]);
-    int typeSize = sizeof(m_pinTypes->pin_type) / sizeof(m_pinTypes->pin_type[0]);
-    int pinListTypeSize = sizeof(m_pinList->pin_type) / sizeof(m_pinList->pin_type[0]);
+    int typeExceptSize = sizeof(m_pinTypes->pinExcept) / sizeof(m_pinTypes->pinExcept[0]);
+    int typeSize = sizeof(m_pinTypes->pinType) / sizeof(m_pinTypes->pinType[0]);
+    int pinListTypeSize = sizeof(m_pinList->pinType) / sizeof(m_pinList->pinType[0]);
     bool tmp = false;
 
     for (int i = 0; i < PIN_TYPE_COUNT; ++i) {
         // except
         tmp = false;
         for (int c = 0; c < typeExceptSize; ++c) {
-            if (m_pinTypes[i].pin_except[c] == 0){
+            if (m_pinTypes[i].pinExcept[c] == 0){
                 break;
             }
-            if (m_pinTypes[i].pin_except[c] == m_pinNumber){
+            if (m_pinTypes[i].pinExcept[c] == m_pinNumber){
                 ++i;
                 tmp = true;
                 break;
             }
             for (int k = 0; k < pinListTypeSize; ++k)
             {
-                if (m_pinList[m_pinNumber-1].pin_type[k] == 0){
+                if (m_pinList[m_pinNumber-1].pinType[k] == 0){
                     break;
                 }
-                if (m_pinTypes[i].pin_except[c] == m_pinList[m_pinNumber-1].pin_type[k]){
+                if (m_pinTypes[i].pinExcept[c] == m_pinList[m_pinNumber-1].pinType[k]){
                     ++i;
                     tmp = true;
                     break;
@@ -150,45 +160,44 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
         }
         // add
         for (int j = 0; j < typeSize; ++j) {
-            if (m_pinTypes[i].pin_type[j] == 0) {
+            if (m_pinTypes[i].pinType[j] == 0) {
                 break;
             }
-            if (m_pinTypes[i].pin_type[j] == ALL){
-                ui->comboBox_PinsType->addItem(m_pinTypes[i].gui_name);
+            if (m_pinTypes[i].pinType[j] == ALL){
+                ui->comboBox_PinsType->addItem(m_pinTypes[i].guiName);
                 m_pinTypesIndex.push_back(i);
-                m_enumIndex.push_back(m_pinTypes[i].device_enum_index);
+                m_enumIndex.push_back(m_pinTypes[i].deviceEnumIndex);
                 continue;
             }
-            if (m_pinTypes[i].pin_type[j] == m_pinNumber){
-                ui->comboBox_PinsType->addItem(m_pinTypes[i].gui_name);
+            if (m_pinTypes[i].pinType[j] == m_pinNumber){
+                ui->comboBox_PinsType->addItem(m_pinTypes[i].guiName);
                 m_pinTypesIndex.push_back(i);
-                m_enumIndex.push_back(m_pinTypes[i].device_enum_index);
+                m_enumIndex.push_back(m_pinTypes[i].deviceEnumIndex);
                 continue;
             }
             for (int k = 0; k < pinListTypeSize; ++k)
             {
-                if (m_pinList[m_pinNumber-1].pin_type[k] == 0){
+                if (m_pinList[m_pinNumber-1].pinType[k] == 0){
                     break;
                 }
-                if (m_pinTypes[i].pin_type[j] == m_pinList[m_pinNumber-1].pin_type[k]){
-                    ui->comboBox_PinsType->addItem(m_pinTypes[i].gui_name);
+                if (m_pinTypes[i].pinType[j] == m_pinList[m_pinNumber-1].pinType[k]){
+                    ui->comboBox_PinsType->addItem(m_pinTypes[i].guiName);
                     m_pinTypesIndex.push_back(i);
-                    m_enumIndex.push_back(m_pinTypes[i].device_enum_index);
+                    m_enumIndex.push_back(m_pinTypes[i].deviceEnumIndex);
                 }
             }
         }
     }
 }
 
-void PinComboBox::IndexChanged(int index)
+void PinComboBox::indexChanged(int index)
 {
-
     if(!m_pinTypesIndex.empty() && m_isInteracts == false)
     {
         ui->comboBox_PinsType->setStyleSheet(m_pinTypes[m_pinTypesIndex[index]].styleSheet);      // временно?
-
+        int iteractionSize = sizeof(m_pinTypes->interaction) / sizeof(m_pinTypes->interaction[0]);
         int tmp = 0;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < iteractionSize; ++i) {
             if (m_isCall_Interaction == true && tmp == 0)
             {
                 m_isCall_Interaction = false;
@@ -202,7 +211,7 @@ void PinComboBox::IndexChanged(int index)
                         if (m_pinTypes[m_pinTypesIndex[index]].interaction[t] > 0)
                         {
                             for (int k = 0; k < PIN_TYPE_COUNT; ++k) {
-                                if(m_pinTypes[k].device_enum_index == m_pinTypes[m_pinTypesIndex[index]].interaction[t]){
+                                if(m_pinTypes[k].deviceEnumIndex == m_pinTypes[m_pinTypesIndex[index]].interaction[t]){
                                     emit valueChangedForInteraction(k, m_pinTypesIndex[index], m_pinNumber);
                                     break;
                                 }
@@ -211,14 +220,14 @@ void PinComboBox::IndexChanged(int index)
                     }
                 }
                 // delete
-                for (int n = 0; n < 10; ++n) {
+                for (int n = 0; n < iteractionSize; ++n) {
                     if (m_pinTypes[m_call_interaction].interaction[n] <= 0){
                         break;
                     }
                     if(m_pinTypes[m_call_interaction].interaction[n] > 0){
 
                         for (int m = 0; m < PIN_TYPE_COUNT; ++m) {
-                            if(m_pinTypes[m].device_enum_index == m_pinTypes[m_call_interaction].interaction[n]){
+                            if(m_pinTypes[m].deviceEnumIndex == m_pinTypes[m_call_interaction].interaction[n]){
                                 emit valueChangedForInteraction(NOT_USED, m, m_pinNumber);
                             }
                         }
@@ -235,7 +244,7 @@ void PinComboBox::IndexChanged(int index)
                 m_isCall_Interaction = true;
                 ui->comboBox_PinsType->setStyleSheet(m_pinTypes[m_pinTypesIndex[index]].styleSheet);        // ????
                 for (int k = 0; k < PIN_TYPE_COUNT; ++k) {
-                    if(m_pinTypes[k].device_enum_index == m_pinTypes[m_pinTypesIndex[index]].interaction[i]){
+                    if(m_pinTypes[k].deviceEnumIndex == m_pinTypes[m_pinTypesIndex[index]].interaction[i]){
                         m_call_interaction = m_pinTypesIndex[index];
                         emit valueChangedForInteraction(k, m_pinTypesIndex[index], m_pinNumber);
                         tmp++;

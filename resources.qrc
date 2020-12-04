@@ -16,5 +16,6 @@
         <file>Images/icon.png</file>
         <file>Images/icon-32.png</file>
         <file>styles/default.qss</file>
+        <file>Images/pinout.png</file>
     </qresource>
 </RCC>

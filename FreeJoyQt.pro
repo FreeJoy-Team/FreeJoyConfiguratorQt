@@ -7,6 +7,8 @@ CONFIG += static \
 
 RC_ICONS = Images/icon.ico
 
+#TARGET = FreeJoyQt
+
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -42,6 +44,7 @@ SOURCES += \
     widgets/buttonconfig.cpp \
     widgets/buttonlogical.cpp \
     widgets/buttonphysical.cpp \
+    widgets/currentconfig.cpp \
     widgets/debugwindow.cpp \
     widgets/encoders.cpp \
     widgets/encodersconfig.cpp \
@@ -50,6 +53,8 @@ SOURCES += \
     widgets/ledconfig.cpp \
     widgets/pincombobox.cpp \
     widgets/pinconfig.cpp \
+    widgets/pinsbluepill.cpp \
+    widgets/pinscontrlite.cpp \
     widgets/shiftregisters.cpp \
     widgets/shiftregistersconfig.cpp
 
@@ -78,6 +83,7 @@ HEADERS += \
     widgets/buttonconfig.h \
     widgets/buttonlogical.h \
     widgets/buttonphysical.h \
+    widgets/currentconfig.h \
     widgets/debugwindow.h \
     widgets/encoders.h \
     widgets/encodersconfig.h \
@@ -86,6 +92,8 @@ HEADERS += \
     widgets/ledconfig.h \
     widgets/pincombobox.h \
     widgets/pinconfig.h \
+    widgets/pinsbluepill.h \
+    widgets/pinscontrlite.h \
     widgets/shiftregisters.h \
     widgets/shiftregistersconfig.h
 
@@ -102,6 +110,7 @@ FORMS += \
     widgets/buttonconfig.ui \
     widgets/buttonlogical.ui \
     widgets/buttonphysical.ui \
+    widgets/currentconfig.ui \
     widgets/debugwindow.ui \
     widgets/encoders.ui \
     widgets/encodersconfig.ui \
@@ -110,6 +119,8 @@ FORMS += \
     widgets/ledconfig.ui \
     widgets/pincombobox.ui \
     widgets/pinconfig.ui \
+    widgets/pinsbluepill.ui \
+    widgets/pinscontrlite.ui \
     widgets/shiftregisters.ui \
     widgets/shiftregistersconfig.ui
 
