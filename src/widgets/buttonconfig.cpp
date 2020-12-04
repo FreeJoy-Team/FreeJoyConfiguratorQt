@@ -69,6 +69,12 @@ void ButtonConfig::logicaButtonslCreator()
 
 void ButtonConfig::physButtonsSpawn(int count)
 {
+//    if (count > MAX_BUTTONS_NUM) {
+//        count = MAX_BUTTONS_NUM;
+//    }
+//    if (count == m_PhysButtonPtrList.size()) {
+//        return;
+//    }
     // delete all
     while (!m_PhysButtonPtrList.empty()) {
         QWidget *widget = m_PhysButtonPtrList.takeLast();
