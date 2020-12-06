@@ -19,6 +19,7 @@ public:
 
 signals:
     void totalLEDsValueChanged(int totalLed);
+    void totalButtonsValueChanged(int count);
 
 public slots:
     void a2bCountChanged(int count);

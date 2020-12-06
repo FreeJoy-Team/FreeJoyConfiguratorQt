@@ -104,4 +104,5 @@ void CurrentConfig::totalButtonsChanged(int count)
         ui->text_TotalButtons->setStyleSheet(m_defaultLabelStyle);
         m_maxButtonsWarning = false;
     }
+    emit totalButtonsValueChanged(count);
 }

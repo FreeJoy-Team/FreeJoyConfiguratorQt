@@ -60,6 +60,8 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
                         this, SLOT(pinIndexChanged(int, int, int)));
     }
 
+    connect(ui->widget_currConfig, SIGNAL(totalButtonsValueChanged(int)),
+            this, SIGNAL(totalButtonsValueChanged(int)));
     connect(ui->widget_currConfig, SIGNAL(totalLEDsValueChanged(int)),
             this, SIGNAL(totalLEDsValueChanged(int)));
 

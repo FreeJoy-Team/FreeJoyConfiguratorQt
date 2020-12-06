@@ -34,7 +34,7 @@ public:
     void resetAllPins();
 
 signals:
-    void totalButtonsValueChanged(int totalButtons);
+    void totalButtonsValueChanged(int count);
     void totalLEDsValueChanged(int totalLed);
     void fastEncoderSelected(QString pinGuiName, bool isSelected);
     void shiftRegSelected(int latchPin, int dataPin, QString pinGuiName);
