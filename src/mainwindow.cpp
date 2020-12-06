@@ -180,12 +180,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_thread, SIGNAL(started()), m_hidDeviceWorker, SLOT(processData()));
 
-    connect(m_hidDeviceWorker, SIGNAL(putGamepadPacket(uint8_t *)),
+    connect(m_hidDeviceWorker, SIGNAL(gamepadPacketReceived(uint8_t *)),
                           this, SLOT(getGamepadPacket(uint8_t *)));
-    connect(m_hidDeviceWorker, SIGNAL(putConnectedDeviceInfo()),
+    connect(m_hidDeviceWorker, SIGNAL(deviceConnected()),
                           this, SLOT(showConnectDeviceInfo()));
-    connect(m_hidDeviceWorker, SIGNAL(putDisconnectedDeviceInfo()),
+    connect(m_hidDeviceWorker, SIGNAL(deviceDisconnected()),
                           this, SLOT(hideConnectDeviceInfo()));
+    connect(m_hidDeviceWorker, SIGNAL(flasherConnected()),
+                          this, SLOT(flasherConnected()));
     connect(m_hidDeviceWorker, SIGNAL(hidDeviceList(const QStringList &)),
                           this, SLOT(hidDeviceList(const QStringList &)));
 
@@ -269,28 +271,38 @@ void MainWindow::hideConnectDeviceInfo() {
         }
     });
 }
+// flasher connected
+void MainWindow::flasherConnected()
+{
+    ui->label_DeviceStatus->setText(tr("Connected"));
+    ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+    ui->pushButton_ReadConfig->setEnabled(false);
+    ui->pushButton_WriteConfig->setEnabled(false);
+    m_advSettings->flasher()->deviceConnected(false);
+    if (m_debugWindow){
+        m_debugWindow->resetPacketsCount();
+    }
+    if (ui->pushButton_ReadConfig->isEnabled() == false){
+        m_axesCurvesConfig->deviceStatus(false);
+    }
+}
 
 // add/delete hid devices to/from combobox
 void MainWindow::hidDeviceList(const QStringList &deviceList)
 {
-    QSignalBlocker blocker(ui->comboBox_HidDeviceList);
-//    QMap<QString, QString> map;
-//    map.insert("\\?\\hid#vid_0483&pid_5750#8&452d809&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}", "FreeJoy");
-//    map.insert("\\?\\hid#vid_0483&pid_5750#8&452d809&0&0000#{4d1e55b2-f16f-11cf-88cb-004533440030}", "FreeJoy2");
-    int curIndex = ui->comboBox_HidDeviceList->currentIndex();
-    if (deviceList.size() == 0 && ui->comboBox_HidDeviceList->count() > 0)
-    {
+//    QSignalBlocker blocker(ui->comboBox_HidDeviceList);
+//    int curIndex = ui->comboBox_HidDeviceList->currentIndex();
+    if (deviceList.size() == 0) {
         ui->comboBox_HidDeviceList->clear();
         return;
-    } else if (deviceList.size() > 0)
-    {
+    } else {
         ui->comboBox_HidDeviceList->clear();
         ui->comboBox_HidDeviceList->addItems(deviceList);
     }
-    blocker.unblock();
-    if (curIndex >=0) {
-        ui->comboBox_HidDeviceList->setCurrentIndex(curIndex);
-    }
+//    blocker.unblock();
+//    if (curIndex >=0) {
+//        ui->comboBox_HidDeviceList->setCurrentIndex(curIndex);
+//    }
 }
 
 // received device report

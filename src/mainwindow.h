@@ -44,6 +44,7 @@ signals:
 private slots:
     void showConnectDeviceInfo();
     void hideConnectDeviceInfo();
+    void flasherConnected();
     void getGamepadPacket(uint8_t *);
 
     void configReceived(bool success);

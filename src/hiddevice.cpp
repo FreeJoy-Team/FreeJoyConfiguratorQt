@@ -19,7 +19,6 @@ void HidDevice::processData()
     m_flasher = nullptr;
     QList<hid_device_info*> tmp_HidDevicesAdrList;
     hid_device_info *hidDevInfo;
-    QStringList strList;
     uint8_t buffer[BUFFSIZE]={0};
 
     m_currentWork = REPORT_ID_JOY;
@@ -35,12 +34,14 @@ void HidDevice::processData()
         else if (timer.elapsed() > 800)
         {
             hidDevInfo = hid_enumerate(VID, 0x0);
-            if (!hidDevInfo && noDeviceSent == false)
+            if (!hidDevInfo && (noDeviceSent == false || m_flasher))
             {
-                strList.clear();
+                m_devicesNames.clear();
                 m_HidDevicesAdrList.clear();
-                emit hidDeviceList(strList);
+                emit hidDeviceList(m_devicesNames);
                 noDeviceSent = true;
+                m_flasher = nullptr;
+                emit flasherFound(false);
             }
 
             while(hidDevInfo)
@@ -49,9 +50,10 @@ void HidDevice::processData()
                     if (!m_flasher){
                         m_flasher = hidDevInfo;    // первый
                         m_HidDevicesAdrList.clear();
-                        strList.clear();
-                        strList << "FreeJoy Flasher";
-                        emit hidDeviceList(strList);
+                        m_devicesNames.clear();
+                        m_devicesNames << "FreeJoy Flasher";
+                        emit flasherConnected();
+                        emit hidDeviceList(m_devicesNames);
                         emit flasherFound(true);
                     }
                     //m_flasher = hidDevInfo;    // второй раз?
@@ -62,12 +64,14 @@ void HidDevice::processData()
                         // flash done
                         m_flasher = nullptr;
                         m_currentWork = REPORT_ID_JOY;
-                        strList.clear();
-                        emit hidDeviceList(strList);
+                        m_devicesNames.clear();
+                        emit hidDeviceList(m_devicesNames);
+                        emit deviceConnected();
                         hid_free_enumeration(hidDevInfo);   // hz nado li
+                        QThread::msleep(300);
                         break;
                     }
-                    continue;
+                    break;//continue
                 }
 
                 tmp_HidDevicesAdrList.append(hidDevInfo);
@@ -75,66 +79,68 @@ void HidDevice::processData()
                 if (!hidDevInfo && m_HidDevicesAdrList.size() != tmp_HidDevicesAdrList.size())
                 {
                     m_HidDevicesAdrList.clear();
-                    strList.clear();
+                    m_devicesNames.clear();
                     noDeviceSent = false;
                     for (int i = 0; i < tmp_HidDevicesAdrList.size(); ++i)
                     {
                         m_HidDevicesAdrList.append(tmp_HidDevicesAdrList[i]);
-                        strList << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
+                        m_devicesNames << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
                     }
-                    emit hidDeviceList(strList);
+                    emit hidDeviceList(m_devicesNames);
                     tmp_HidDevicesAdrList.clear();
                 }
             }
             tmp_HidDevicesAdrList.clear();
             change = false;
         }
-        // update devices names
-        updateHidNames();
+        if (!m_flasher) {
+            // update devices names
+            updateHidNames();
 
-        // no device
-        if (!m_handleRead)
-        {
-            if (!m_HidDevicesAdrList.empty()) {
-                m_handleRead = hid_open(VID, m_HidDevicesAdrList[0]->product_id,nullptr);
-            }
-            if (!m_handleRead) {
-                emit putDisconnectedDeviceInfo();
-                strList.clear();
-                emit hidDeviceList(strList);
-                //hid_free_enumeration(hidDevInfo);
-                QThread::msleep(500);
-            } else {
-                emit putConnectedDeviceInfo();
-            }
-        }
-        // device connected
-        if (m_handleRead)
-        {
-            // read joy report
-            if (m_currentWork == REPORT_ID_JOY)
+            // no device
+            if (!m_handleRead)
             {
-                res=hid_read_timeout(m_handleRead, buffer, BUFFSIZE,10000);         // 10000?
-                if (res < 0) {
-                    hid_close(m_handleRead);
-                    m_handleRead=nullptr;
+                if (!m_HidDevicesAdrList.empty()) {
+                    m_handleRead = hid_open(VID, m_HidDevicesAdrList[0]->product_id,nullptr);
+                }
+                if (!m_handleRead) {
+                    emit deviceDisconnected();
+                    m_devicesNames.clear();
+                    emit hidDeviceList(m_devicesNames);
+                    m_HidDevicesAdrList.clear();
+                    QThread::msleep(500);
                 } else {
-                    if (buffer[0] == REPORT_ID_JOY) {   // перестраховка
-                        memset(m_deviceBuffer, 0, BUFFSIZE);
-                        memcpy(m_deviceBuffer, buffer, BUFFSIZE);
-                        emit putGamepadPacket(m_deviceBuffer);
-                    }
+                    emit deviceConnected();
                 }
             }
-            // read config from device
-            else if (m_currentWork == REPORT_ID_CONFIG_IN)
+            // device connected
+            if (m_handleRead)
             {
-                readConfigFromDevice(buffer);
-            }
-            // write config to device
-            else if (m_currentWork == REPORT_ID_CONFIG_OUT)
-            {
-                writeConfigToDevice(buffer);
+                // read joy report
+                if (m_currentWork == REPORT_ID_JOY)
+                {
+                    res=hid_read_timeout(m_handleRead, buffer, BUFFSIZE,10000);
+                    if (res < 0) {
+                        hid_close(m_handleRead);
+                        m_handleRead=nullptr;
+                    } else {
+                        if (buffer[0] == REPORT_ID_JOY) {   // перестраховка
+                            memset(m_deviceBuffer, 0, BUFFSIZE);
+                            memcpy(m_deviceBuffer, buffer, BUFFSIZE);
+                            emit gamepadPacketReceived(m_deviceBuffer);
+                        }
+                    }
+                }
+                // read config from device
+                else if (m_currentWork == REPORT_ID_CONFIG_IN)
+                {
+                    readConfigFromDevice(buffer);
+                }
+                // write config to device
+                else if (m_currentWork == REPORT_ID_CONFIG_OUT)
+                {
+                    writeConfigToDevice(buffer);
+                }
             }
         }
     }
@@ -152,12 +158,16 @@ void HidDevice::updateHidNames()
     }
     else if (timer.elapsed() > 3000)
     {
-        QStringList tmp;
+        QStringList str;
         for (int i = 0; i < m_HidDevicesAdrList.size(); ++i)
         {
-            tmp << QString::fromWCharArray(m_HidDevicesAdrList[i]->product_string);
+            str << QString::fromWCharArray(m_HidDevicesAdrList[i]->product_string);
         }
-        emit hidDeviceList(tmp);
+        if (str != m_devicesNames) {
+            qDebug()<<"devices names updated";
+            emit hidDeviceList(str);
+            m_devicesNames = str;
+        }
         change = false;
     }
 }
@@ -474,6 +484,7 @@ bool HidDevice::enterToFlashMode()
 // another device selected in comboBox
 void HidDevice::setSelectedDevice(int device_number)        // заблочить сигнал до запуска, скорее всего крашит из-за разных потоков
 {                                                           // только в винде. решил костылём в hidapi.c
+    qDebug()<<m_flasher;
     if (device_number < 0 || m_flasher){
         //device_number = 0;
         return;

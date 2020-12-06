@@ -30,9 +30,10 @@ public slots:
     void processData();
 
 signals:
-    void putDisconnectedDeviceInfo();
-    void putConnectedDeviceInfo();
-    void putGamepadPacket(uint8_t *);
+    void deviceDisconnected();
+    void deviceConnected();
+    void flasherConnected();
+    void gamepadPacketReceived(uint8_t *);
 
     void configReceived(bool is_success);
     void configSent(bool is_success);
@@ -54,6 +55,7 @@ private:
     void writeConfigToDevice(uint8_t *buffer);
     void flashFirmwareToDevice();
 
+    QStringList m_devicesNames;
     uint8_t m_deviceBuffer[BUFFSIZE];
     dev_config_t m_deviceConfig; // ????
     QList<hid_device_info *> m_HidDevicesAdrList;
