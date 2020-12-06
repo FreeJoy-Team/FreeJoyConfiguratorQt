@@ -1417,7 +1417,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="655"/>
-        <location filename="mainwindow.cpp" line="623"/>
+        <location filename="mainwindow.cpp" line="635"/>
         <source>Show debug</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1479,7 +1479,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="305"/>
-        <location filename="mainwindow.cpp" line="247"/>
+        <location filename="mainwindow.cpp" line="249"/>
+        <location filename="mainwindow.cpp" line="277"/>
         <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1534,52 +1535,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="256"/>
+        <location filename="mainwindow.cpp" line="258"/>
         <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="106"/>
+        <location filename="mainwindow_conf.cpp" line="99"/>
         <source>Device firmware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="109"/>
+        <location filename="mainwindow_conf.cpp" line="102"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="120"/>
-        <location filename="mainwindow_conf.cpp" line="158"/>
+        <location filename="mainwindow_conf.cpp" line="113"/>
+        <location filename="mainwindow_conf.cpp" line="151"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="143"/>
+        <location filename="mainwindow_conf.cpp" line="136"/>
         <source>Sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="552"/>
-        <location filename="mainwindow.cpp" line="575"/>
+        <location filename="mainwindow.cpp" line="564"/>
+        <location filename="mainwindow.cpp" line="587"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="552"/>
-        <location filename="mainwindow.cpp" line="563"/>
+        <location filename="mainwindow.cpp" line="564"/>
         <location filename="mainwindow.cpp" line="575"/>
+        <location filename="mainwindow.cpp" line="587"/>
         <source>Config Files (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="563"/>
+        <location filename="mainwindow.cpp" line="575"/>
         <source>Save Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="406"/>
-        <location filename="mainwindow.cpp" line="615"/>
+        <location filename="mainwindow.cpp" line="418"/>
+        <location filename="mainwindow.cpp" line="627"/>
         <source>Hide debug</source>
         <translation type="unfinished"></translation>
     </message>
