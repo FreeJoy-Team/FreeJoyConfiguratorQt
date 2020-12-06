@@ -74,6 +74,7 @@ HEADERS += \
     mousewheelguard.h \
     reportconverter.h \
     stm_main.h \
+    version.h \
     widgets/advancedsettings.h \
     widgets/axes.h \
     widgets/axesconfig.h \
