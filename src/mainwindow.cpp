@@ -12,6 +12,7 @@
 #include "common_types.h"
 #include "global.h"
 #include "deviceconfig.h"
+#include "version.h"
 
 #include <QDebug>
 
@@ -42,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     // firmware version
     QString str = QString::number(FIRMWARE_VERSION, 16);
     if (str.size() >= 4){
-        setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2] + " (" + gEnv.pAppVersion + ")");// + "b" + str[3]);
+        setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2] + " (" + APP_VERSION + ")");// + "b" + str[3]);
     }
 
     // load application config

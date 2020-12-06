@@ -1,4 +1,6 @@
 
 *.user
 *.pro.user
+*.pro.user.*
 FreeJoyQt.pro.user
+

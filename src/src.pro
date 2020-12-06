@@ -148,6 +148,7 @@ linux-g++ | linux-g++-64 | linux-g++-32 {
 }
 
 win32 {
+    RC_FILE = winapp.rc
     LIBS += -lhid -lsetupapi
     SOURCES += \
         windows/hidapi.c

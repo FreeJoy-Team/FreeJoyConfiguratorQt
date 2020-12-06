@@ -39,11 +39,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // global
-    QString app_version = "1.1.0"; // тупо, надо в дефайне?
     QSettings app_settings("FreeJoySettings.conf", QSettings::IniFormat);
     DeviceConfig device_config;
 
-    gEnv.pAppVersion = &app_version;
     gEnv.pAppSettings = &app_settings;
     gEnv.pDeviceConfig = &device_config;
 

@@ -3,14 +3,10 @@
 
 #include <QElapsedTimer> //?
 #include <QString>
-//QT_BEGIN_NAMESPACE
-//class QString;
-//class QElapsedTimer;
-//QT_END_NAMESPACE
 
 class DeviceConfig;
 class QSettings;
-class DebugWindow; /////////////////////
+class DebugWindow;
 //class QElapsedTimer;    //?
 //! CryEngine style global environment
 //!	Global environment. Contains pointers to all global often needed interfaces.
@@ -20,10 +16,7 @@ struct GlobalEnvironment
     QElapsedTimer *pApp_start_time = nullptr;
     DeviceConfig *pDeviceConfig = nullptr;
     QSettings *pAppSettings = nullptr;
-    QString *pAppVersion = nullptr; // тупо, надо в дефайне?
     DebugWindow *pDebugWindow = nullptr;
-
-    // thread
 };
 extern GlobalEnvironment gEnv;
 
