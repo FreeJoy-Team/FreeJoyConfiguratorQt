@@ -189,8 +189,7 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
             devC->device_name[i] = '\0';
         }
     }
-    //devc->vid = QString::number(appS->value("Pid", devc->vid).toInt()).toShort(&tmp ,16);
-    devC->pid = QString::number(deviceSettings->value("Pid", devC->pid).toInt()).toUShort(&tmp ,16);
+    devC->pid = QString(deviceSettings->value("Pid", devC->pid).toString()).toUShort(&tmp ,16);
     devC->is_dynamic_config = deviceSettings->value("DynamicHID", devC->is_dynamic_config).toInt();
     devC->exchange_period_ms = deviceSettings->value("USBExchange", devC->exchange_period_ms).toInt();
     deviceSettings->endGroup();
