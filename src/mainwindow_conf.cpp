@@ -180,7 +180,7 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     // load Device USB config from file
     deviceSettings->beginGroup("DeviceUsbConfig");
 
-    devC->firmware_version = QString::number(deviceSettings->value("FirmwareVersion", devC->firmware_version).toInt()).toUShort(&tmp ,16);
+    devC->firmware_version = QString(deviceSettings->value("FirmwareVersion", devC->firmware_version).toString()).toUShort(&tmp ,16);
     std::string tmp_string = deviceSettings->value("DeviceName", devC->device_name).toString().toStdString();
     for (uint i = 0; i < sizeof(devC->device_name); i++) {
         if (i < tmp_string.size()){

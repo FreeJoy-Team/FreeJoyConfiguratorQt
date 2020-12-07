@@ -1343,6 +1343,14 @@ g</source>
         <source>Hide debug</source>
         <translation>Скрыть отладку</translation>
     </message>
+    <message>
+        <source>devices connected</source>
+        <translation>устр. подключено</translation>
+    </message>
+    <message>
+        <source>device connected</source>
+        <translation>устр. подключено</translation>
+    </message>
 </context>
 <context>
     <name>PinComboBox</name>

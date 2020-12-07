@@ -247,7 +247,12 @@ MainWindow::~MainWindow()
 // device connected
 void MainWindow::showConnectDeviceInfo() {
     //qDebug()<<"Device connected";
-    ui->label_DeviceStatus->setText(tr("Connected"));
+    qDebug()<<ui->comboBox_HidDeviceList->count();
+    if (ui->comboBox_HidDeviceList->count() > 1) {
+        ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("devices connected"));
+    } else {
+        ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("device connected"));
+    }
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
     ui->pushButton_ReadConfig->setEnabled(true);
     ui->pushButton_WriteConfig->setEnabled(true);
@@ -313,7 +318,7 @@ void MainWindow::getGamepadPacket(uint8_t *buff)
     // update button state without delay. fix gamepad_report.raw_button_data[0]
     // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся.
     // Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
-    // и не видеть оставшиеся физические 64 кнопки. ленивый и неоптимизированный фикс
+    // и не видеть оставшиеся физические 64 кнопки.
     if(ui->tab_ButtonConfig->isVisible() == true || m_debugWindow){
         m_buttonConfig->buttonStateChanged();
     }

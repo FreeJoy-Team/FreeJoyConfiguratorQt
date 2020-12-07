@@ -24,7 +24,7 @@ public:
     void flashFirmware(const QByteArray *firmware);
 
     void setIsFinish(bool is_finish);
-    void setSelectedDevice(int device_number);
+    void setSelectedDevice(int deviceNumber);
 
 public slots:
     void processData();
@@ -46,10 +46,10 @@ signals:
 private:
     hid_device *m_handleRead;
     bool m_isFinish = false;
-    int m_selectedDevice;
+    volatile int m_selectedDevice = -1;
     volatile int m_currentWork;
 
-    void updateHidNames();
+    void updateHidNames(const QList<hid_device_info *> &newHidDevicesAdrList);
 
     void readConfigFromDevice(uint8_t *buffer);
     void writeConfigToDevice(uint8_t *buffer);
