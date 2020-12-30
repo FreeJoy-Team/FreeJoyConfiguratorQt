@@ -3,7 +3,7 @@
 
 #define MAJOR_VERSION 1
 #define MINOR_VERSION 1
-#define PATCH_VERSION 1
+#define PATCH_VERSION 2
 
 #define str(s) #s
 #define xstr(s) str(s)
