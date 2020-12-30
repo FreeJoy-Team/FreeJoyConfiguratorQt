@@ -36,19 +36,20 @@ public:
 signals:
     void totalButtonsValueChanged(int count);
     void totalLEDsValueChanged(int totalLed);
-    void fastEncoderSelected(QString pinGuiName, bool isSelected);
-    void shiftRegSelected(int latchPin, int dataPin, QString pinGuiName);
+    void fastEncoderSelected(const QString &pinGuiName, bool isSelected);
+    void shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName);
     void i2cSelected(bool i2cSelected);
     void axesSourceChanged(int sourceEnum, bool isAdd);
 
     //protected:
     //    void resizeEvent(QResizeEvent*) override;
 
+public slots:
+    void a2bCountChanged(int);
+    void shiftRegButtonsCountChanged(int count);
 private slots:
     void pinInteraction(int index, int senderIndex, int pin);
     void pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
-    void a2bCountChanged(int);
-    void shiftRegButtonsCountChanged(int count);
     void boardChanged(int index);
 
 private:

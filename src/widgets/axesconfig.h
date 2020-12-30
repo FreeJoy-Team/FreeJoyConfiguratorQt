@@ -31,8 +31,9 @@ signals:
     void axisOutValueChanged(int);
     void a2bCountChanged(int count);
 
-private slots:
+public slots:
     void addOrDeleteMainSource(int sourceEnum, bool isAdd);
+private slots:
     void a2bCountCalc(int count, int previousCount);
     //    void axesValueChanged(int value);
 

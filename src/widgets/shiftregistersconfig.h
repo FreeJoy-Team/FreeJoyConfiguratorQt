@@ -28,8 +28,9 @@ public:
 signals:
     void shiftRegButtonsCountChanged(int buttonsCount);
 
+public slots:
+    void shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName);
 private slots:
-    void shiftRegSelected(int latchPin, int dataPin, QString pinGuiName);
     void shiftRegButtonsCalc(int count, int previousCount);
 
 private:

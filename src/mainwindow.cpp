@@ -115,97 +115,71 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
                                             //////////////// SIGNASL-SLOTS ////////////////
-            ///////// GET / SEND     CONFIG ///////
-    connect(this, SIGNAL(getConfigDone(bool)),
-            this, SLOT(configReceived(bool)));
-    connect(this, SIGNAL(sendConfigDone(bool)),
-            this, SLOT(configSent(bool)));
+                ///////// GET / SEND  CONFIG ///////
+    connect(this, &MainWindow::getConfigDone, this, &MainWindow::configReceived);
+    connect(this, &MainWindow::sendConfigDone, this, &MainWindow::configSent);
 
 
-
-            /////////      /////////////
+               /////////      /////////////
     // buttons pin changed
-    connect(m_pinConfig, SIGNAL(totalButtonsValueChanged(int)),
-                m_buttonConfig, SLOT(setUiOnOff(int)));
+    connect(m_pinConfig, &PinConfig::totalButtonsValueChanged, m_buttonConfig, &ButtonConfig::setUiOnOff);
     // LEDs changed
-    connect(m_pinConfig, SIGNAL(totalLEDsValueChanged(int)),
-                m_ledConfig, SLOT(spawnLeds(int)));
+    connect(m_pinConfig, &PinConfig::totalLEDsValueChanged, m_ledConfig, &LedConfig::spawnLeds);
     // encoder changed
-    connect(m_buttonConfig, SIGNAL(encoderInputChanged(int, int)),
-            m_encoderConfig, SLOT(encoderInputChanged(int, int)));
+    connect(m_buttonConfig, &ButtonConfig::encoderInputChanged, m_encoderConfig, &EncodersConfig::encoderInputChanged);
     // fast encoder
-    connect(m_pinConfig, SIGNAL(fastEncoderSelected(QString, bool)),
-            m_encoderConfig, SLOT(fastEncoderSelected(QString, bool)));
+    connect(m_pinConfig, &PinConfig::fastEncoderSelected, m_encoderConfig, &EncodersConfig::fastEncoderSelected);
     // shift registers
-    connect(m_pinConfig, SIGNAL(shiftRegSelected(int, int, QString)),
-            m_shiftRegConfig, SLOT(shiftRegSelected(int, int, QString)));
+    connect(m_pinConfig, &PinConfig::shiftRegSelected, m_shiftRegConfig, &ShiftRegistersConfig::shiftRegSelected);
     // a2b count
-    connect(m_axesConfig, SIGNAL(a2bCountChanged(int)),
-            m_pinConfig, SLOT(a2bCountChanged(int)));
+    connect(m_axesConfig, &AxesConfig::a2bCountChanged, m_pinConfig, &PinConfig::a2bCountChanged);
     // shift reg buttons count shiftRegsButtonsCount
-    connect(m_shiftRegConfig, SIGNAL(shiftRegButtonsCountChanged(int)),
-            m_pinConfig, SLOT(shiftRegButtonsCountChanged(int)));
+    connect(m_shiftRegConfig, &ShiftRegistersConfig::shiftRegButtonsCountChanged,
+            m_pinConfig, &PinConfig::shiftRegButtonsCountChanged);
     // axes source changed//axesSourceChanged
-    connect(m_pinConfig, SIGNAL(axesSourceChanged(int, bool)),
-            m_axesConfig, SLOT(addOrDeleteMainSource(int, bool)));
+    connect(m_pinConfig, &PinConfig::axesSourceChanged, m_axesConfig, &AxesConfig::addOrDeleteMainSource);
     // language changed
-    connect(m_advSettings, SIGNAL(languageChanged(const QString &)),
-            this, SLOT(languageChanged(const QString &)));
+    connect(m_advSettings, &AdvancedSettings::languageChanged, this, &MainWindow::languageChanged);
     // interface changed
-    connect(m_advSettings, SIGNAL(interfaceStyleChanged(bool)),
-            this, SLOT(interfaceStyleChanged(bool)));
+    connect(m_advSettings, &AdvancedSettings::interfaceStyleChanged, this, &MainWindow::interfaceStyleChanged);
     // font changed
-    connect(m_advSettings, SIGNAL(fontChanged()),
-            this, SLOT(setFont()));
+    connect(m_advSettings, &AdvancedSettings::fontChanged, this, &MainWindow::setFont);
 
 
     // enter flash mode clicked
-    connect(m_advSettings->flasher(), SIGNAL(flashModeClicked(bool)),
-            this, SLOT(deviceFlasherController(bool)));
+    connect(m_advSettings->flasher(), &Flasher::flashModeClicked, this, &MainWindow::deviceFlasherController);
     // flasher found
-    connect(m_hidDeviceWorker, SIGNAL(flasherFound(bool)),
-            m_advSettings->flasher(), SLOT(flasherFound(bool)));
+    connect(m_hidDeviceWorker, &HidDevice::flasherFound, m_advSettings->flasher(), &Flasher::flasherFound);
     // start flash
-    connect(m_advSettings->flasher(), SIGNAL(startFlash(bool)),              // thread  flashStatus
-            this, SLOT(deviceFlasherController(bool)));
+    connect(m_advSettings->flasher(), &Flasher::startFlash, this, &MainWindow::deviceFlasherController);
     // flash status
-    connect(m_hidDeviceWorker, SIGNAL(flashStatus(int, int)),              // thread  flashStatus
-            m_advSettings->flasher(), SLOT(flashStatus(int, int)));
+    connect(m_hidDeviceWorker, &HidDevice::flashStatus, m_advSettings->flasher(), &Flasher::flashStatus);
     // set selected hid device
     connect(ui->comboBox_HidDeviceList, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(hidDeviceListChanged(int)));
+                this, SLOT(hidDeviceListChanged(int)));
 
 
     // HID worker
     m_hidDeviceWorker->moveToThread(m_thread);
+    connect(m_thread, &QThread::started, m_hidDeviceWorker, &HidDevice::processData);
 
-    connect(m_thread, SIGNAL(started()), m_hidDeviceWorker, SLOT(processData()));
-
-    connect(m_hidDeviceWorker, SIGNAL(gamepadPacketReceived(uint8_t *)),
-                          this, SLOT(getGamepadPacket(uint8_t *)));
-    connect(m_hidDeviceWorker, SIGNAL(deviceConnected()),
-                          this, SLOT(showConnectDeviceInfo()));
-    connect(m_hidDeviceWorker, SIGNAL(deviceDisconnected()),
-                          this, SLOT(hideConnectDeviceInfo()));
-    connect(m_hidDeviceWorker, SIGNAL(flasherConnected()),
-                          this, SLOT(flasherConnected()));
-    connect(m_hidDeviceWorker, SIGNAL(hidDeviceList(const QStringList &)),
-                          this, SLOT(hidDeviceList(const QStringList &)));
+    connect(m_hidDeviceWorker, &HidDevice::gamepadPacketReceived, this, &MainWindow::getGamepadPacket);
+    connect(m_hidDeviceWorker, &HidDevice::deviceConnected, this, &MainWindow::showConnectDeviceInfo);
+    connect(m_hidDeviceWorker, &HidDevice::deviceDisconnected, this, &MainWindow::hideConnectDeviceInfo);
+    connect(m_hidDeviceWorker, &HidDevice::flasherConnected, this, &MainWindow::flasherConnected);
+    connect(m_hidDeviceWorker, &HidDevice::hidDeviceList, this, &MainWindow::hidDeviceList);
 
 
     // read config from device
-    connect(m_hidDeviceWorker, SIGNAL(configReceived(bool)),
-            this, SLOT(configReceived(bool)));
+    connect(m_hidDeviceWorker, &HidDevice::configReceived, this, &MainWindow::configReceived);
     // write config to device
-    connect(m_hidDeviceWorker, SIGNAL(configSent(bool)),
-            this, SLOT(configSent(bool)));
+    connect(m_hidDeviceWorker, &HidDevice::configSent, this, &MainWindow::configSent);
 
 
     // load default config // loading will occur after loading buttons config
     // комбобоксы у кнопок заполняются после старта приложения и конфиг должен
     // запускаться сигналом от кнопок
-    connect(m_buttonConfig, SIGNAL(logicalButtonsCreated()),
-            this, SLOT(loadDefaultConfig()));
+    connect(m_buttonConfig, &ButtonConfig::logicalButtonsCreated, this, &MainWindow::loadDefaultConfig);
 
 
     // set style for some widgets
@@ -645,7 +619,14 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
 // test button in debug tab
 void MainWindow::on_pushButton_TestButton_clicked()
 {
-
+    dev_config_t initialCfg = gEnv.pDeviceConfig->config;
+    readFromConfig();
+    writeToConfig();
+    if (memcmp(&initialCfg, &gEnv.pDeviceConfig->config, sizeof(dev_config_t)) == 0) {
+        qDebug()<<"equal";
+    } else {
+        qDebug()<<"ERROR. NOT EQUAL";
+    }
 }
 
 

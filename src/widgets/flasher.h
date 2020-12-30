@@ -25,10 +25,10 @@ signals:
     void flashModeClicked(bool is_start_flash);
     void startFlash(bool is_start_flash);
 
-private slots:
+public slots:
     void flasherFound(bool isFound);
     void flashStatus(int status, int percent);
-
+private slots:
     void on_pushButton_FlasherMode_clicked();
     void on_pushButton_FlashFirmware_clicked();
 

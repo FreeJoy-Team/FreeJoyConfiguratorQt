@@ -412,7 +412,7 @@
          <number>360</number>
         </property>
         <property name="singleStep">
-         <number>10</number>
+         <number>15</number>
         </property>
        </widget>
       </item>

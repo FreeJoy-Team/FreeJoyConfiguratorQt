@@ -33,17 +33,18 @@ void CenteredCBox::paintEvent(QPaintEvent *event)
     QFontMetricsF font_metric(property("font").value<QFont>());
     // походу width измеряется по центрам букв и она короче, чем есть на самом
     // деле. умножаю на 1.1
-    qreal font_width = font_metric.width(option.currentText) * 1.1f;
+    qreal font_width = font_metric.horizontalAdvance(option.currentText);// * 1.1f;
+    font_metric.averageCharWidth();
 
     // если сделать по центру всего комбобокса, то будет ощущение, что слева
     // больше свободного места из-за стрелки справа. Если по центру не считая
     // стрелки, то тоже выглядит криво arrow_width_/3 тут я сделал промежуточный
     // вариант
-    int offset = option.rect.center().x() - m_arrowWidth / 3.2f - font_metric.width(option.currentText) / 2;
+    int offset = option.rect.center().x() - m_arrowWidth / 3.2f - font_width / 2;
 
     // если длина комбобокса меньше длины текста, сдвиг слева уменьшается
-    if (offset + font_width > option.rect.right() - m_arrowWidth) {
-        offset -= ((offset + font_width) - (option.rect.right() - m_arrowWidth));
+    if (offset + font_width*1.1f > option.rect.right() - m_arrowWidth) {
+        offset -= ((offset + font_width*1.1f) - (option.rect.right() - m_arrowWidth));
         if (offset < 0)
             offset = 0;
     }

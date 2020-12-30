@@ -24,9 +24,9 @@ public:
 
     void retranslateUi();
 
-private slots:
+public slots:
     void encoderInputChanged(int encoder_A, int encoder_B);
-    void fastEncoderSelected(QString pinGuiName, bool isSelected);
+    void fastEncoderSelected(const QString &pinGuiName, bool isSelected);
 
 private:
     Ui::EncodersConfig *ui;

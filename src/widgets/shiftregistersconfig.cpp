@@ -53,7 +53,7 @@ bool ShiftRegistersConfig::sortNullLast(const ShiftRegData_t& lhs, const ShiftRe
     return rhs.pinNumber == 0;
 }
 
-void ShiftRegistersConfig::shiftRegSelected(int latchPin, int dataPin, QString pinGuiName)
+void ShiftRegistersConfig::shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName)
 {
     // add shift reg latch pin
     if (latchPin != 0){

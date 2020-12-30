@@ -25,7 +25,7 @@ public:
 
     //void ButtonLEDStateChanged();     // future
 
-private slots:
+public slots:
     void spawnLeds(int ledCount);
 
 private:

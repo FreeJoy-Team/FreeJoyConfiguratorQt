@@ -35,8 +35,9 @@ signals:
     void logicalButtonsCreated();
     //void buttonLEDStateChanged(int button_number);            // for future
 
-private slots:
+public slots:
     void setUiOnOff(int value);
+private slots:
     void functionTypeChanged(int index, int functionPreviousIndex, int buttonNumber);
 
 private:

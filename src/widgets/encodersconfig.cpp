@@ -44,7 +44,7 @@ void EncodersConfig::retranslateUi()
     }
 }
 
-void EncodersConfig::fastEncoderSelected(QString pinGuiName, bool isSelected)
+void EncodersConfig::fastEncoderSelected(const QString &pinGuiName, bool isSelected)
 {
     if (isSelected == true){
         if (ui->label_ButtonNumberA->text() == m_notDefined){
