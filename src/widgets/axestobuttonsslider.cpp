@@ -216,7 +216,7 @@ void AxesToButtonsSlider::pointsPositionReset()
         movePointer(m_pointPtrList[i]->posX, i);
         //SetLableValue(PointAdrList[i]->posX, i);
         m_pointPtrList[i]->current_value = calcPointValue(m_pointPtrList[i]->posX);
-        m_labelPtrList[i]->setNum((int) m_pointPtrList[i]->current_value);
+        m_labelPtrList[i]->setNum(int(m_pointPtrList[i]->current_value));
     }
     update();
 }

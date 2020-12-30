@@ -47,7 +47,7 @@ private slots:
     void on_pushButton_SetCenter_clicked();
     void on_checkBox_Center_stateChanged(int state);
 
-    void on_pushButton_clicked();
+    void on_pushButton_ResetCalib_clicked();
 
     void on_checkBox_ShowExtend_stateChanged(int state);
 
@@ -57,6 +57,7 @@ private:
     bool m_calibrationStarted;
     bool m_outputEnabled;
     int m_a2bButtonsCount;
+    int m_lastA2bCount;
     int m_axisNumber;
     const QString m_kStartCalStr = tr("Calibrate"); // const? а они переводятся?
     const QString m_kStopCalStr = tr("Stop && Save");

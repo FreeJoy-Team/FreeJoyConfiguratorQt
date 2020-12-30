@@ -9,13 +9,12 @@ Axes::Axes(int axisNumber, QWidget *parent)
     ui->setupUi(this);
 
     m_a2bButtonsCount = 0;
+    m_lastA2bCount = 1;
     m_calibrationStarted = false;
     m_outputEnabled = ui->checkBox_Output->isChecked();
 
     m_axisNumber = axisNumber;
-    ui->groupBox_AxixName->setTitle(
-        m_axesList[m_axisNumber].guiName); // для 64бит в будущем axis_number_ должен быть 64 бита для большого массива
-    // т.к. 32 бит переменная переполнится и отсчёт пойдёт с 0 и .size() return 64 bit
+    ui->groupBox_AxixName->setTitle(m_axesList[m_axisNumber].guiName);
 
     // add main source
     for (int i = 0; i < 2; ++i) {
@@ -23,11 +22,11 @@ Axes::Axes(int axisNumber, QWidget *parent)
         m_mainSourceEnumIndex.push_back(m_axesPinList[i].deviceEnumIndex);
     }
 
-    // set a2b
+    // set a2b  // двойная работа? readFromConfig()
     ui->spinBox_A2bCount->setMaximum(MAX_A2B_BUTTONS);
     if (ui->spinBox_A2bCount->value() < m_kMinA2bButtons) {
         ui->widget_A2bSlider->setEnabled(false);
-        ui->widget_A2bSlider->setPointsCount(m_kMinA2bButtons + 1);
+        ui->widget_A2bSlider->setPointsCount(m_kMinA2bButtons);//+1
         //count = kMinA2bButtons;
     } else {
         ui->widget_A2bSlider->setEnabled(true);
@@ -41,9 +40,9 @@ Axes::Axes(int axisNumber, QWidget *parent)
     //ui->layoutV_Axes->addWidget(axes_extend);
 
     // output checked
-    connect(ui->checkBox_Output, SIGNAL(toggled(bool)),
-            this, SLOT(outputValueChanged(bool)));
+    connect(ui->checkBox_Output, &QCheckBox::toggled, this, &Axes::outputValueChanged);
     // calibration value changed
+    //connect(ui->spinBox_CalibMax, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Axes::calibMinMaxValueChanged);
     connect(ui->spinBox_CalibMax, SIGNAL(valueChanged(int)),
             this, SLOT(calibMinMaxValueChanged(int)));
     connect(ui->spinBox_CalibMin, SIGNAL(valueChanged(int)),
@@ -181,7 +180,7 @@ void Axes::on_checkBox_Center_stateChanged(int state)
     }
 }
 
-void Axes::on_pushButton_clicked()
+void Axes::on_pushButton_ResetCalib_clicked()
 {
     ui->spinBox_CalibMax->setValue(AXIS_MAX_VALUE);
     ui->spinBox_CalibMin->setValue(AXIS_MIN_VALUE);
@@ -189,6 +188,18 @@ void Axes::on_pushButton_clicked()
 
 void Axes::a2bSpinBoxChanged(int count)
 {
+    // skip "1" number
+    if (count == 1) {
+        if (m_lastA2bCount < 1) {
+            ui->spinBox_A2bCount->setValue(2);
+        } else {
+            ui->spinBox_A2bCount->setValue(0);
+        }
+        return;
+    } else {
+        m_lastA2bCount = count;
+    }
+
     if (count < m_kMinA2bButtons) {
         ui->widget_A2bSlider->setEnabled(false);
         ui->widget_A2bSlider->setPointsCount(0);
@@ -209,21 +220,18 @@ void Axes::a2bSpinBoxChanged(int count)
 
 void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 {
+    // QTimer::singleShot(10 - antiblink
     if (state == 2) { // 2 = true
-        //ui->frame->setMinimumHeight(110);
         m_axesExtend->setMinimumHeight(110);
-        QTimer::singleShot(10, [&] { // я долбоёб или да? как ещё это сраное мигание победить????????!"!11112112121
+        QTimer::singleShot(10, this, [this] {
             m_axesExtend->setVisible(true);
         });
-        //        axes_extend->setVisible(true);
     } else {
         m_axesExtend->setVisible(false);
-        QTimer::singleShot(10, [&] {
+        QTimer::singleShot(10, this, [this] {
             m_axesExtend->setMinimumHeight(0);
             ui->frame->setMinimumHeight(0);
         });
-        //        axes_extend->setMinimumHeight(0);
-        //        ui->frame->setMinimumHeight(0);
     }
 }
 
@@ -246,9 +254,12 @@ void Axes::readFromConfig() // Converter::EnumToIndex(device_enum, list)
     ui->checkBox_Center->setChecked(axCfg->is_centered);
     ui->spinBox_CalibMax->setValue(axCfg->calib_max);
     // axes to buttons
+    m_lastA2bCount = a2bCfg->buttons_cnt;
     ui->spinBox_A2bCount->setValue(a2bCfg->buttons_cnt);
-    for (int i = 0; i < a2bCfg->buttons_cnt + 1; ++i) {
-        ui->widget_A2bSlider->setPointValue(a2bCfg->points[i], i);
+    if (a2bCfg->buttons_cnt > 1) {
+        for (int i = 0; i < a2bCfg->buttons_cnt + 1; ++i) {
+            ui->widget_A2bSlider->setPointValue(a2bCfg->points[i], i);
+        }
     }
     // axes extended settings
     m_axesExtend->readFromConfig();
@@ -274,7 +285,11 @@ void Axes::writeToConfig()
     } else {
         a2bCfg->is_enabled = 0;
     }
-    a2bCfg->buttons_cnt = ui->spinBox_A2bCount->value();
+    if (ui->spinBox_A2bCount->value() == 0) {
+        a2bCfg->buttons_cnt = 1;
+    } else {
+        a2bCfg->buttons_cnt = ui->spinBox_A2bCount->value();
+    }
     for (int i = 0; i < ui->spinBox_A2bCount->value() + 1; ++i) {
         a2bCfg->points[i] = ui->widget_A2bSlider->pointValue(i);
     }
