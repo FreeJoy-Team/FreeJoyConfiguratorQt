@@ -254,11 +254,16 @@ void Axes::readFromConfig() // Converter::EnumToIndex(device_enum, list)
     ui->checkBox_Center->setChecked(axCfg->is_centered);
     ui->spinBox_CalibMax->setValue(axCfg->calib_max);
     // axes to buttons
-    m_lastA2bCount = a2bCfg->buttons_cnt;
-    ui->spinBox_A2bCount->setValue(a2bCfg->buttons_cnt);
-    if (a2bCfg->buttons_cnt > 1) {
-        for (int i = 0; i < a2bCfg->buttons_cnt + 1; ++i) {
-            ui->widget_A2bSlider->setPointValue(a2bCfg->points[i], i);
+    if (a2bCfg->is_enabled == 0) {
+        m_lastA2bCount = 0;
+        ui->spinBox_A2bCount->setValue(0);
+    } else {
+        m_lastA2bCount = a2bCfg->buttons_cnt;
+        ui->spinBox_A2bCount->setValue(a2bCfg->buttons_cnt);
+        if (a2bCfg->buttons_cnt > 1) {
+            for (int i = 0; i < a2bCfg->buttons_cnt + 1; ++i) {
+                ui->widget_A2bSlider->setPointValue(a2bCfg->points[i], i);
+            }
         }
     }
     // axes extended settings
