@@ -95,7 +95,7 @@ void AxesExtended::readFromConfig()
     ui->spinBox_Prescaler->setValue(axisCfg->prescaler);
     // resolution, offset
     ui->spinBox_Resolution->setValue(axisCfg->resolution + 1);
-    ui->spinBox_Offset->setValue(axisCfg->offset_angle);
+    ui->spinBox_Offset->setValue(axisCfg->offset_angle * 15);
     //deadband
     ui->checkBox_DynDeadband->setChecked(axisCfg->is_dynamic_deadband);
     ui->spinBox_Deadband->setValue(axisCfg->deadband_size);
@@ -124,7 +124,7 @@ void AxesExtended::writeToConfig()
     axisCfg->prescaler = ui->spinBox_Prescaler->value();
     // resolution, offset
     axisCfg->resolution = ui->spinBox_Resolution->value() - 1;
-    axisCfg->offset_angle = ui->spinBox_Offset->value();
+    axisCfg->offset_angle = ui->spinBox_Offset->value() / 15;
     // deadband
     axisCfg->is_dynamic_deadband = ui->checkBox_DynDeadband->isChecked();
     axisCfg->deadband_size = ui->spinBox_Deadband->value();
