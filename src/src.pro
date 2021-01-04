@@ -107,7 +107,6 @@ FORMS += \
     widgets/axesconfig.ui \
     widgets/axescurves.ui \
     widgets/axescurvesconfig.ui \
-    widgets/axescurvesplot.ui \
     widgets/axesextended.ui \
     widgets/axestobuttonsslider.ui \
     widgets/buttonconfig.ui \

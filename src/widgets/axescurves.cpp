@@ -129,7 +129,7 @@ void AxesCurves::updateAxis()
 
     value_x = abs(round((joyRep->raw_axis_data[m_axisNumber] - min) / (float) (max - min) * 200));
 
-    ui->widget_AxesCurvesPlot->updateAxis(value_x, value_y);
+    ui->widget_AxesCurvesPlot->setCurAxisPos(value_x, value_y);
     //    }
 }
 

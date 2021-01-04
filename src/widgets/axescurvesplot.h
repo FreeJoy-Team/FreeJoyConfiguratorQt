@@ -13,35 +13,31 @@ QT_END_NAMESPACE
 #define CURVES_MIN_VALUE -100 //?
 #define CURVES_MAX_VALUE 100
 
-namespace Ui {
-class AxesCurvesPlot;
-}
-
 class AxesCurvesPlot : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AxesCurvesPlot(QWidget *parent = nullptr);
-    ~AxesCurvesPlot();
+    explicit AxesCurvesPlot(bool labelEnabled = true, QWidget *parent = nullptr);
+
+    void setBorderOffset(int offset);
+    void setPointRadius(int radius);
+    void setLineWidth(int width);
 
     int pointValue(int point_number);
     int pointCount() const;
 
     void setPointValue(int pointNumber, int value);
 
-    void updateAxis(int posX, int posY);
+    void setCurAxisPos(int posX, int posY);
     void deviceStatus(bool isConnect);
 
     void setLinear();
-    void setLinearInvert();
     void setExponent();
     void setExponentInvert();
     void setShape();
 
 signals:
-    //! current x and width for a2b
-    void sizeChanged(int width); // not used
     void pointValueChanged(const int *point, const int *value);
 
 protected:
@@ -50,20 +46,20 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    //bool event(QEvent *event) override;
 
 private:
-    Ui::AxesCurvesPlot *ui;
     int calcPointValue(int currentPos) const;
-    int calcPointPos(int value) const;
-    int calcPointPosX(int valueX) const;
+    int calcPointPosY(int value) const;
+    int calcPointPosX(int value) const;
     void movePoint(int pos_y, int point_number);
     void updateLabelPos();
 
-    const int m_kOffset = 20; //20
-    const int m_kColumnsCount = 10;
-    const int m_kRowsCount = 10;
-    const int m_kRadius = 16;
+    int m_radius = 8;
+    int m_lineWidth = 2;
+    int m_offset = 20;
+    const int m_kPointsCount = CURVE_PLOT_POINTS_COUNT;
+    const int m_kColumnsCount = CURVE_PLOT_POINTS_COUNT - 1;
+    const int m_kRowsCount = CURVE_PLOT_POINTS_COUNT - 1;
     const int m_kLabelWidth = 20;
     bool m_isDeviceConnect;
 
@@ -71,26 +67,19 @@ private:
     float m_rowHeight;
     int m_width;
     int m_height;
-    int m_halfRadius;
 
     const int m_kMaxPointValue = CURVES_MAX_VALUE;
     const int m_kMinPointValue = CURVES_MIN_VALUE;
-
-    int m_pointsCount;
 
     const QColor m_kPointCurrentPosColor = QColor(190, 0, 0, 200);
     const QColor m_kPointInactiveColor = QColor(1, 119, 215);
     const QColor m_kPointActiveColor = Qt::black;
     const QColor m_kPointMoveColor = Qt::lightGray;
     const QColor m_kCurveColor = QColor(1, 119, 215);
-    QColor m_frameColor = Qt::lightGray;
-
-    bool m_pointActive;
 
     struct AxesCurve_currentPos
     {
         QColor color;
-        QRect area;
         int posX;
         int posY;
     };
