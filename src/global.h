@@ -17,6 +17,10 @@ struct GlobalEnvironment
     DeviceConfig *pDeviceConfig = nullptr;
     QSettings *pAppSettings = nullptr;
     DebugWindow *pDebugWindow = nullptr;
+
+#ifdef QT_DEBUG
+bool readFinished = false;
+#endif
 };
 extern GlobalEnvironment gEnv;
 
@@ -53,6 +57,7 @@ struct deviceEnum_guiName_t
 //        {
 //            return true;
 //        }
+
 
 #endif // GLOBAL_H
 //#if defined(SYS_ENV_AS_STRUCT)

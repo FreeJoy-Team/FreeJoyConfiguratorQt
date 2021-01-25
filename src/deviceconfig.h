@@ -12,7 +12,8 @@ public:
     void resetConfig();
 
     dev_config_t config;
-    joy_report_t gamepadReport;
+    //joy_report_t joyReport;
+    params_report_t paramsReport;
 };
 
 #endif // DEVICECONFIG_H

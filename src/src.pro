@@ -41,6 +41,7 @@ SOURCES += \
     widgets/axescurves.cpp \
     widgets/axescurvesconfig.cpp \
     widgets/axescurvesplot.cpp \
+    widgets/axescurvesprofiles.cpp \
     widgets/axesextended.cpp \
     widgets/axestobuttonsslider.cpp \
     widgets/buttonconfig.cpp \
@@ -81,6 +82,7 @@ HEADERS += \
     widgets/axescurves.h \
     widgets/axescurvesconfig.h \
     widgets/axescurvesplot.h \
+    widgets/axescurvesprofiles.h \
     widgets/axesextended.h \
     widgets/axestobuttonsslider.h \
     widgets/buttonconfig.h \

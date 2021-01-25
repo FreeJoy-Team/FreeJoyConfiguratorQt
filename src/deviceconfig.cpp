@@ -7,7 +7,8 @@ extern "C" {
 DeviceConfig::DeviceConfig()
 {
     config = InitConfig();
-    gamepadReport = {}; //??
+    //joyReport = {};
+    paramsReport = {};
 }
 
 void DeviceConfig::resetConfig()

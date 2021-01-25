@@ -45,7 +45,7 @@ private slots:
     void showConnectDeviceInfo();
     void hideConnectDeviceInfo();
     void flasherConnected();
-    void getGamepadPacket(uint8_t *);
+    void getParamsPacket(uint8_t *buffer);
 
     void configReceived(bool success);
     void configSent(bool success);
@@ -79,6 +79,8 @@ private slots:
 
     void on_pushButton_ShowDebug_clicked();
 
+    void on_pushButton_TestButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTranslator m_translator;
@@ -89,7 +91,6 @@ private:
     //QScopedPointer<HidDevice> worker;
 
     QThread *m_threadGetSendConfig; // smart pointer?
-    ReportConverter reportConvert;  // nah?
 
     PinConfig *m_pinConfig;
     ButtonConfig *m_buttonConfig;

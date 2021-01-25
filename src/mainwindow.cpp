@@ -163,7 +163,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_hidDeviceWorker->moveToThread(m_thread);
     connect(m_thread, &QThread::started, m_hidDeviceWorker, &HidDevice::processData);
 
-    connect(m_hidDeviceWorker, &HidDevice::gamepadPacketReceived, this, &MainWindow::getGamepadPacket);
+    connect(m_hidDeviceWorker, &HidDevice::paramsPacketReceived, this, &MainWindow::getParamsPacket);
     connect(m_hidDeviceWorker, &HidDevice::deviceConnected, this, &MainWindow::showConnectDeviceInfo);
     connect(m_hidDeviceWorker, &HidDevice::deviceDisconnected, this, &MainWindow::hideConnectDeviceInfo);
     connect(m_hidDeviceWorker, &HidDevice::flasherConnected, this, &MainWindow::flasherConnected);
@@ -219,9 +219,8 @@ MainWindow::~MainWindow()
 
                                                         ///////////////////// device reports /////////////////////
 // device connected
-void MainWindow::showConnectDeviceInfo() {
-    //qDebug()<<"Device connected";
-    qDebug()<<ui->comboBox_HidDeviceList->count();
+void MainWindow::showConnectDeviceInfo()
+{
     if (ui->comboBox_HidDeviceList->count() > 1) {
         ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("devices connected"));
     } else {
@@ -233,20 +232,19 @@ void MainWindow::showConnectDeviceInfo() {
     m_advSettings->flasher()->deviceConnected(true);
 }
 // device disconnected
-void MainWindow::hideConnectDeviceInfo() {
-    //qDebug()<<"Device disconected";
+void MainWindow::hideConnectDeviceInfo()
+{
     ui->label_DeviceStatus->setText(tr("Disconnected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(160, 0, 0);");
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     m_advSettings->flasher()->deviceConnected(false);
-    if (m_debugWindow){
+    if (m_debugWindow) {
         m_debugWindow->resetPacketsCount();
     }
-
     // disable curve point
-    QTimer::singleShot(3000, [&]{   // не лучший способ
-        if (ui->pushButton_ReadConfig->isEnabled() == false){
+    QTimer::singleShot(3000, this, [&] {   // не лучший способ
+        if (ui->pushButton_ReadConfig->isEnabled() == false) {
             m_axesCurvesConfig->deviceStatus(false);
         }
     });
@@ -259,10 +257,10 @@ void MainWindow::flasherConnected()
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     m_advSettings->flasher()->deviceConnected(false);
-    if (m_debugWindow){
+    if (m_debugWindow) {
         m_debugWindow->resetPacketsCount();
     }
-    if (ui->pushButton_ReadConfig->isEnabled() == false){
+    if (ui->pushButton_ReadConfig->isEnabled() == false) {
         m_axesCurvesConfig->deviceStatus(false);
     }
 }
@@ -286,9 +284,9 @@ void MainWindow::hidDeviceList(const QStringList &deviceList)
 }
 
 // received device report
-void MainWindow::getGamepadPacket(uint8_t *buff)
+void MainWindow::getParamsPacket(uint8_t *buffer)
 {
-    reportConvert.gamepadReport(buff);
+    ReportConverter::paramReport(buffer);
     // update button state without delay. fix gamepad_report.raw_button_data[0]
     // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся.
     // Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
@@ -326,8 +324,7 @@ void MainWindow::getGamepadPacket(uint8_t *buff)
 
     // debug tab
 #ifdef QT_DEBUG
-    static int asd = 0;
-    ui->lineEdit->setText(QString::number(++asd));
+
 #endif
 }
 
@@ -335,7 +332,7 @@ void MainWindow::getGamepadPacket(uint8_t *buff)
 void MainWindow::deviceFlasherController(bool isStartFlash)
 {        // херня? mb QtConcurrent::run()
     // так оставить или как read/write а bool через сигнал?
-    QEventLoop loop;
+    QEventLoop loop; // static?
     QObject context;
     context.moveToThread(m_threadGetSendConfig);
     connect(m_threadGetSendConfig, &QThread::started, &context, [&]() {
@@ -402,7 +399,8 @@ void MainWindow::languageChanged(const QString &language)
 // set font
 void MainWindow::setFont()
 {
-    for (QWidget *widget : QApplication::allWidgets()) {
+    QWidgetList list = QApplication::allWidgets();
+    for (QWidget *widget : list) {
         widget->setFont(QApplication::font());
         widget->update();
     }
@@ -616,20 +614,53 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
     }
 }
 
+
+
 // test button in debug tab
+#ifdef QT_DEBUG
+dev_config_t testCfg;
+#endif
 void MainWindow::on_pushButton_TestButton_clicked()
 {
-    dev_config_t initialCfg = gEnv.pDeviceConfig->config;
-    readFromConfig();
-    writeToConfig();
-    if (memcmp(&initialCfg, &gEnv.pDeviceConfig->config, sizeof(dev_config_t)) == 0) {
-        qDebug()<<"equal";
-    } else {
-        qDebug()<<"ERROR. NOT EQUAL";
-    }
+#ifdef QT_DEBUG
+    on_pushButton_LoadFromFile_clicked();
+    testCfg = gEnv.pDeviceConfig->config;
+    on_pushButton_WriteConfig_clicked();
+#endif
 }
 
 
+void MainWindow::on_pushButton_TestButton_2_clicked()
+{
+#ifdef QT_DEBUG
+    on_pushButton_ReadConfig_clicked();
+    QElapsedTimer timer;
+    timer.start();
+    while (3000 > timer.elapsed()) {
+        if (gEnv.readFinished) {
+            qDebug()<<"compare before write to file";
+            int cmp = memcmp(&testCfg, &gEnv.pDeviceConfig->config, sizeof(dev_config_t));
+            if (cmp == 0) {
+                qDebug()<<"equal";
+            } else {
+                qDebug()<<"ERROR. NOT EQUAL! memcmp ="<< cmp;
+                return;
+            }
+            on_pushButton_SaveToFile_clicked();
+            on_pushButton_LoadFromFile_clicked();
+            qDebug()<<"final compare";
+            cmp = memcmp(&testCfg, &gEnv.pDeviceConfig->config, sizeof(dev_config_t));
+            if (cmp == 0) {
+                qDebug()<<"equal";
+            } else {
+                qDebug()<<"ERROR. NOT EQUAL! memcmp ="<< cmp;
+            }
+            break;
+        }
+        QThread::msleep(50);
+    }
+#endif
+}
 
 
 // add dyn // constructor

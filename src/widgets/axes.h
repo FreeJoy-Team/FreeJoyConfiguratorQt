@@ -9,6 +9,18 @@
 #include "deviceconfig.h"
 #include "global.h"
 
+static const QVector <deviceEnum_guiName_t> axesList =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h // да бля вынести его уже в глобал
+{{
+    {0,      QT_TR_NOOP("X")},
+    {1,      QT_TR_NOOP("Y")},
+    {2,      QT_TR_NOOP("Z")},
+    {3,      QT_TR_NOOP("Rx")},
+    {4,      QT_TR_NOOP("Ry")},
+    {5,      QT_TR_NOOP("Rz")},
+    {6,      QT_TR_NOOP("Slider 1")},
+    {7,      QT_TR_NOOP("Slider 2")},
+}};
+
 namespace Ui {
 class Axes;
 }
@@ -53,7 +65,7 @@ private slots:
 
 private:
     Ui::Axes *ui;
-    const int m_kMinA2bButtons = 2;
+    const int m_kMinA2bButtons = 1;//2
     bool m_calibrationStarted;
     bool m_outputEnabled;
     int m_a2bButtonsCount;

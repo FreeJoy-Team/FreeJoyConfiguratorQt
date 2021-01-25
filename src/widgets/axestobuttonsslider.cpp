@@ -121,10 +121,10 @@ void AxesToButtonsSlider::drawPoint(const QPoint &pointPos, uint pointNumber)
     }
 }
 
-void AxesToButtonsSlider::setLableValue(int pointPos, uint pointNumber)
-{
-    m_labelPtrList[pointNumber]->setNum(int(calcPointValue(pointPos)));
-}
+//void AxesToButtonsSlider::setLableValue(int pointPos, uint pointNumber)
+//{
+//    m_labelPtrList[pointNumber]->setNum(int(calcPointValue(pointPos)));
+//}
 
 void AxesToButtonsSlider::setPointsCount(uint count)
 {
@@ -179,6 +179,7 @@ void AxesToButtonsSlider::setPointValue(uint value, uint pointNumber)
     movePointer(pos, pointNumber);
     //SetLableValue(pos, point_number);
     m_labelPtrList[pointNumber]->setNum(int(value));
+    m_pointPtrList[pointNumber]->current_value = value;
     update();
 }
 

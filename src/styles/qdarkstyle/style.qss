@@ -2253,3 +2253,87 @@ PlotWidget {
   /* Fix cut labels in plots #134 */
   padding: 0px;
 }
+
+
+
+
+
+
+
+
+/* Custom Widgets -------------------------------------------------------------
+
+--------------------------------------------------------------------------- */
+
+AxesCurvesProfiles {
+  border: 1px solid #32414B;
+  border-radius: 4px;
+}
+
+AxesCurvesProfiles:disabled {
+  background-color: #32414B;
+  border: 1px solid #32414B;
+  color: #787878;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+AxesCurvesProfiles[checked="true"] {
+  background-color: #32414B;
+  border: 15px solid #32414B;
+  border-radius: 4px;
+}
+
+AxesCurvesProfiles:checked {
+  background-color: #32414B;
+  border: 15px solid #32414B;
+  border-radius: 4px;
+}
+
+AxesCurvesProfiles:checked:disabled {
+  background-color: #31363b;
+  border: 1px solid #32414B;
+  color: #787878;
+  border-radius: 4px;
+  padding: 3px;
+  outline: none;
+}
+
+AxesCurvesProfiles:checked:selected {
+  background: #1464A0;
+  color: #32414B;
+}
+
+AxesCurvesProfiles::menu-indicator {
+  subcontrol-origin: padding;
+  subcontrol-position: bottom right;
+  bottom: 4px;
+}
+
+AxesCurvesProfiles:pressed {
+  background-color: #31363b;
+  border: 1px solid #31363b;
+}
+
+AxesCurvesProfiles:pressed:hover {
+  border: 1px solid #148CD2;
+}
+
+AxesCurvesProfiles:hover {
+  border: 1px solid #148CD2;
+  color: #F0F0F0;
+}
+
+AxesCurvesProfiles:selected {
+  background: #1464A0;
+  color: #32414B;
+}
+
+AxesCurvesProfiles:hover {
+  border: 1px solid #148CD2;
+  color: #F0F0F0;
+}
+
+AxesCurvesProfiles:focus {
+  border: 1px solid #1464A0;
+}

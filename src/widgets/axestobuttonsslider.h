@@ -47,7 +47,7 @@ private:
     void movePointer(uint posX, uint pointNumber);
     uint calcPointValue(int currentPos) const;
     void pointsPositionReset();
-    void setLableValue(int pointPos, uint pointNumber);
+    //void setLableValue(int pointPos, uint pointNumber);
 
     float m_lineSpacing;
 

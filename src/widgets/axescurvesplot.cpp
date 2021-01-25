@@ -47,8 +47,7 @@ AxesCurvesPlot::AxesCurvesPlot(bool labelEnabled ,QWidget *parent) :
         }
     }
 }
-
-
+#include <QStylePainter>
 void AxesCurvesPlot::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
@@ -118,7 +117,7 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)
         painter.setPen(m_curAxisPos.color);
         painter.setBrush(m_curAxisPos.color);
         painter.drawEllipse(QPoint(m_curAxisPos.posX, m_curAxisPos.posY),
-                            halfRadius, halfRadius);
+                            m_currentPosRadius, m_currentPosRadius);
     }
     painter.end();
 }

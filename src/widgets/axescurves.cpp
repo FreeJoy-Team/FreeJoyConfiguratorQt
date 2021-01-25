@@ -115,19 +115,19 @@ void AxesCurves::updateAxis()
     //    if (gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled == 1)
     //    {
 
-    joy_report_t *joyRep = &gEnv.pDeviceConfig->gamepadReport;
+    params_report_t *paramsRep = &gEnv.pDeviceConfig->paramsReport;
     int min = gEnv.pDeviceConfig->config.axis_config[m_axisNumber].calib_min;
     int max = gEnv.pDeviceConfig->config.axis_config[m_axisNumber].calib_max;
     int value_x;
     int value_y;
 
-    if (joyRep->axis_data[m_axisNumber] < AXIS_CENTER_VALUE) {
-        value_y = round(joyRep->axis_data[m_axisNumber] / (float) AXIS_MIN_VALUE * CURVES_MIN_VALUE);
+    if (paramsRep->axis_data[m_axisNumber] < AXIS_CENTER_VALUE) {
+        value_y = round(paramsRep->axis_data[m_axisNumber] / (float) AXIS_MIN_VALUE * CURVES_MIN_VALUE);
     } else {
-        value_y = round(joyRep->axis_data[m_axisNumber] / (float) AXIS_MAX_VALUE * CURVES_MAX_VALUE);
+        value_y = round(paramsRep->axis_data[m_axisNumber] / (float) AXIS_MAX_VALUE * CURVES_MAX_VALUE);
     }
 
-    value_x = abs(round((joyRep->raw_axis_data[m_axisNumber] - min) / (float) (max - min) * 200));
+    value_x = abs(round((paramsRep->raw_axis_data[m_axisNumber] - min) / (float) (max - min) * 200));
 
     ui->widget_AxesCurvesPlot->setCurAxisPos(value_x, value_y);
     //    }

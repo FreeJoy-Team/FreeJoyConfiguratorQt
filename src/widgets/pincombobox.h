@@ -7,7 +7,7 @@
 #include "global.h"
 
 #define PINS_COUNT 30
-#define PIN_TYPE_COUNT 25
+#define PIN_TYPE_COUNT 27
 enum // разделить и вынести отдельно?                 // все структуры в global.h?
 {
   PA_0 = 1,
@@ -163,8 +163,8 @@ private:
         {PB_7,  {"B7"},    {tr("Pin B7")},     {}},
         {PB_8,  {"B8"},    {tr("Pin B8")},     {I2C1_SCL}},
         {PB_9,  {"B9"},    {tr("Pin B9")},     {I2C1_SDA}},
-        {PB_10, {"B10"},   {tr("Pin B10")},    {}},
-        {PB_11, {"B11"},   {tr("Pin B11")},    {}},
+        {PB_10, {"B10"},   {tr("Pin B10")},    {I2C2_SCL}},
+        {PB_11, {"B11"},   {tr("Pin B11")},    {I2C2_SDA}},
         {PB_12, {"B12"},   {tr("Pin B12")},    {}},
         {PB_13, {"B13"},   {tr("Pin B13")},    {}},
         {PB_14, {"B14"},   {tr("Pin B14")},    {}},
@@ -182,8 +182,8 @@ private:
         {}, {}},
 
         {BUTTON_GND,     tr("Button Gnd"),      // контроллер enum,  имя в ui   tr(нужен перевод)
-        {ALL},                                 // добавление в конкретный пин или пины типа
-        {},                                    // исключая пины
+        {ALL},                                  // добавление в конкретный пин или пины типа
+        {},                                     // исключая пины
         {}, {"color: rgb(150, 155, 55);"}},     // взаимодействие с другими типами // стиль color, background-color, border-color...
 
         {BUTTON_VCC,     tr("Button Vcc"),
@@ -213,7 +213,12 @@ private:
 
         {TLE5011_CS,     tr("TLE5011 CS"),
         {ALL},
-        {SPI1_SCK, SPI1_MOSI, PB_6},
+        {SPI1_SCK, SPI1_MOSI},  // check  PB_6
+        {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 120);"}},
+
+        {TLE5012_CS,     tr("TLE5012B CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI},
         {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 120);"}},
 
         {MCP3201_CS,     tr("MCP3201 CS"),
@@ -241,6 +246,11 @@ private:
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
+        {AS5048A_CS,    tr("AS5048A CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+
         {LED_SINGLE,     tr("LED Single"),
         {ALL},
         {},
@@ -257,7 +267,7 @@ private:
         {}, {"color: rgb(190, 20, 120);"}},
 
         {LED_PWM,        tr("LED PWM"),
-        {PB_0, PB_1, PB_4},
+        {PA_8, PB_0, PB_1, PB_4},
         {},
         {}, {"color: rgb(200, 0, 180);"}},
 
@@ -292,12 +302,12 @@ private:
         {}, {}},
 
         {I2C_SCL,        tr("I2C SCL"),
-        {I2C1_SCL},
+        {I2C2_SCL},
         {},
         {I2C_SDA}, {"color: rgb(53, 53, 255);"}},
 
         {I2C_SDA,        tr("I2C SDA"),
-        {I2C1_SDA},
+        {I2C2_SDA},
         {},
         {I2C_SCL}, {"color: rgb(53, 53, 255);"}},
     };

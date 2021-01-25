@@ -139,16 +139,18 @@ void ButtonConfig::setUiOnOff(int value)
 void ButtonConfig::buttonStateChanged()
 {
     int number = 0;
+    params_report_t *paramsRep = &gEnv.pDeviceConfig->paramsReport;
+    //joy_report_t *joyRep = &gEnv.pDeviceConfig->joyReport;
 
     // logical buttons state
     for (int i = 0; i < 16; i++) {
         for (int j = 0; j < 8; j++) {
             number = j + (i) *8;
-            if ((gEnv.pDeviceConfig->gamepadReport.button_data[i] & (1 << (j & 0x07)))) {
+            if ((paramsRep->log_button_data[i] & (1 << (j & 0x07)))) {
                 if (number < m_logicButtonPtrList.size()) {
                     m_logicButtonPtrList[number]->setButtonState(true);
                 }
-            } else if ((gEnv.pDeviceConfig->gamepadReport.button_data[i] & (1 << (j & 0x07))) == false) {
+            } else if ((paramsRep->log_button_data[i] & (1 << (j & 0x07))) == false) {
                 if (number < m_logicButtonPtrList.size()) {
                     m_logicButtonPtrList[number]->setButtonState(false);
                 }
@@ -157,15 +159,29 @@ void ButtonConfig::buttonStateChanged()
     }
 
     // physical button state
-    for (int i = 1; i < 9; i++) {
-        for (int j = 0; j < 8; j++) {
-            number = gEnv.pDeviceConfig->gamepadReport.raw_button_data[0] + j + (i - 1) * 8; //number = 64 + j + (i-1)*8;
+//    for (int i = 1; i < 9; i++) {
+//        for (int j = 0; j < 8; j++) {
+//            number = gEnv.pDeviceConfig->joyReport.raw_button_data[0] + j + (i - 1) * 8; //number = 64 + j + (i-1)*8;
 
-            if ((gEnv.pDeviceConfig->gamepadReport.raw_button_data[i] & (1 << (j & 0x07)))) {
+//            if ((gEnv.pDeviceConfig->joyReport.raw_button_data[i] & (1 << (j & 0x07)))) {
+//                if (number < m_PhysButtonPtrList.size()) {
+//                    m_PhysButtonPtrList[number]->setButtonState(true);
+//                }
+//            } else if ((gEnv.pDeviceConfig->joyReport.raw_button_data[i] & (1 << (j & 0x07))) == false) {
+//                if (number < m_PhysButtonPtrList.size()) {
+//                    m_PhysButtonPtrList[number]->setButtonState(false);
+//                }
+//            }
+//        }
+//    }
+    for (int i = 0; i < 16; i++) {
+        for (int j = 0; j < 8; j++) {
+            number = j + (i) *8;
+            if ((paramsRep->phy_button_data[i] & (1 << (j & 0x07)))) {
                 if (number < m_PhysButtonPtrList.size()) {
                     m_PhysButtonPtrList[number]->setButtonState(true);
                 }
-            } else if ((gEnv.pDeviceConfig->gamepadReport.raw_button_data[i] & (1 << (j & 0x07))) == false) {
+            } else if ((paramsRep->phy_button_data[i] & (1 << (j & 0x07))) == false) {
                 if (number < m_PhysButtonPtrList.size()) {
                     m_PhysButtonPtrList[number]->setButtonState(false);
                 }
@@ -173,10 +189,11 @@ void ButtonConfig::buttonStateChanged()
         }
     }
 
+
     // shift state
     for (int i = 0; i < SHIFT_COUNT; ++i) // выглядит как избыточный код, но так необходимо для оптимизации
     {
-        if (gEnv.pDeviceConfig->gamepadReport.shift_button_data & (1 << (i & 0x07))) {
+        if (paramsRep->shift_button_data & (1 << (i & 0x07))) {
             m_isShifts_act = true;
 
             if (i == 0 && m_shift1_act == false) {

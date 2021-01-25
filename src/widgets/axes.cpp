@@ -131,15 +131,15 @@ void Axes::on_pushButton_StartCalib_clicked(bool checked)
 
 void Axes::updateAxisRaw()
 {
-    ui->progressBar_Raw->setValue(gEnv.pDeviceConfig->gamepadReport.raw_axis_data[m_axisNumber]);
+    ui->progressBar_Raw->setValue(gEnv.pDeviceConfig->paramsReport.raw_axis_data[m_axisNumber]);
 }
 
 void Axes::updateAxisOut()
 {
-    ui->progressBar_Out->setValue(gEnv.pDeviceConfig->gamepadReport.axis_data[m_axisNumber]);
+    ui->progressBar_Out->setValue(gEnv.pDeviceConfig->paramsReport.axis_data[m_axisNumber]);
 
     // a2b  axis_number_
-    ui->widget_A2bSlider->setAxisOutputValue(gEnv.pDeviceConfig->gamepadReport.axis_data[m_axisNumber], m_outputEnabled);
+    ui->widget_A2bSlider->setAxisOutputValue(gEnv.pDeviceConfig->paramsReport.axis_data[m_axisNumber], m_outputEnabled);
 }
 
 void Axes::outputValueChanged(bool isChecked)
@@ -158,14 +158,14 @@ void Axes::outputValueChanged(bool isChecked)
 void Axes::on_pushButton_SetCenter_clicked()
 {
     ui->checkBox_Center->setChecked(true);
-    joy_report_t *joyRep = &gEnv.pDeviceConfig->gamepadReport;
+    params_report_t *paramsRep = &gEnv.pDeviceConfig->paramsReport;
 
-    if (joyRep->raw_axis_data[m_axisNumber] > ui->spinBox_CalibMax->value()) {
+    if (paramsRep->raw_axis_data[m_axisNumber] > ui->spinBox_CalibMax->value()) {
         ui->spinBox_CalibCenter->setValue(ui->spinBox_CalibMax->value());
-    } else if (joyRep->raw_axis_data[m_axisNumber] < ui->spinBox_CalibMin->value()) {
+    } else if (paramsRep->raw_axis_data[m_axisNumber] < ui->spinBox_CalibMin->value()) {
         ui->spinBox_CalibCenter->setValue(ui->spinBox_CalibMin->value());
     } else {
-        ui->spinBox_CalibCenter->setValue(joyRep->raw_axis_data[m_axisNumber]);
+        ui->spinBox_CalibCenter->setValue(paramsRep->raw_axis_data[m_axisNumber]);
     }
 }
 
@@ -188,17 +188,17 @@ void Axes::on_pushButton_ResetCalib_clicked()
 
 void Axes::a2bSpinBoxChanged(int count)
 {
-    // skip "1" number
-    if (count == 1) {
-        if (m_lastA2bCount < 1) {
-            ui->spinBox_A2bCount->setValue(2);
-        } else {
-            ui->spinBox_A2bCount->setValue(0);
-        }
-        return;
-    } else {
-        m_lastA2bCount = count;
-    }
+//    // skip "1" number
+//    if (count == 1) {
+//        if (m_lastA2bCount < 1) {
+//            ui->spinBox_A2bCount->setValue(2);
+//        } else {
+//            ui->spinBox_A2bCount->setValue(0);
+//        }
+//        return;
+//    } else {
+//        m_lastA2bCount = count;
+//    }
 
     if (count < m_kMinA2bButtons) {
         ui->widget_A2bSlider->setEnabled(false);
@@ -254,18 +254,18 @@ void Axes::readFromConfig() // Converter::EnumToIndex(device_enum, list)
     ui->checkBox_Center->setChecked(axCfg->is_centered);
     ui->spinBox_CalibMax->setValue(axCfg->calib_max);
     // axes to buttons
-    if (a2bCfg->is_enabled == 0) {
-        m_lastA2bCount = 0;
-        ui->spinBox_A2bCount->setValue(0);
-    } else {
-        m_lastA2bCount = a2bCfg->buttons_cnt;
+//    if (a2bCfg->is_enabled == 0) {
+//        m_lastA2bCount = 0;
+//        ui->spinBox_A2bCount->setValue(0);
+//    } else {
+//        m_lastA2bCount = a2bCfg->buttons_cnt;
         ui->spinBox_A2bCount->setValue(a2bCfg->buttons_cnt);
-        if (a2bCfg->buttons_cnt > 1) {
+        if (a2bCfg->buttons_cnt > 0) {
             for (int i = 0; i < a2bCfg->buttons_cnt + 1; ++i) {
                 ui->widget_A2bSlider->setPointValue(a2bCfg->points[i], i);
             }
         }
-    }
+//    }
     // axes extended settings
     m_axesExtend->readFromConfig();
 }
@@ -285,16 +285,16 @@ void Axes::writeToConfig()
     axCfg->is_centered = ui->checkBox_Center->isChecked();
     axCfg->calib_max = ui->spinBox_CalibMax->value();
     // axes to buttons
-    if (ui->spinBox_A2bCount->value() >= m_kMinA2bButtons) {
-        a2bCfg->is_enabled = 1;
-    } else {
-        a2bCfg->is_enabled = 0;
-    }
-    if (ui->spinBox_A2bCount->value() == 0) {
-        a2bCfg->buttons_cnt = 1;
-    } else {
+//    if (ui->spinBox_A2bCount->value() >= m_kMinA2bButtons) {
+//        a2bCfg->is_enabled = 1;
+//    } else {
+//        a2bCfg->is_enabled = 0;
+//    }
+//    if (ui->spinBox_A2bCount->value() == 0) {
+//        a2bCfg->buttons_cnt = 1;
+//    } else {
         a2bCfg->buttons_cnt = ui->spinBox_A2bCount->value();
-    }
+//    }
     for (int i = 0; i < ui->spinBox_A2bCount->value() + 1; ++i) {
         a2bCfg->points[i] = ui->widget_A2bSlider->pointValue(i);
     }

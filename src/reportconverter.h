@@ -7,13 +7,18 @@
 #include "deviceconfig.h"
 #include "global.h"
 
+#define BUFFERSIZE 64
+
 class ReportConverter
 {
 public:
-    void gamepadReport(uint8_t *hid_buffer);
+    static void paramReport(uint8_t *paramsBuffer);
 
-    dev_config_t getConfigFromDevice(uint8_t *hid_buffer);
-    std::vector<uint8_t> sendConfigToDevice(uint8_t request_config_number); // ****
+    static void getConfigFromDevice(uint8_t *hidBuffer);
+    static uint8_t *sendConfigToDevice(uint8_t requestConfigNumber);
+
+private:
+    static uint8_t buffer[BUFFERSIZE];
 };
 
 #endif // REPORTCONVERTER_H

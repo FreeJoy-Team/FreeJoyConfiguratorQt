@@ -57,6 +57,7 @@ private:
     int m_radius = 8;
     int m_lineWidth = 2;
     int m_offset = 20;
+    int m_currentPosRadius = 6;
     const int m_kPointsCount = CURVE_PLOT_POINTS_COUNT;
     const int m_kColumnsCount = CURVE_PLOT_POINTS_COUNT - 1;
     const int m_kRowsCount = CURVE_PLOT_POINTS_COUNT - 1;
@@ -71,7 +72,7 @@ private:
     const int m_kMaxPointValue = CURVES_MAX_VALUE;
     const int m_kMinPointValue = CURVES_MIN_VALUE;
 
-    const QColor m_kPointCurrentPosColor = QColor(190, 0, 0, 200);
+    const QColor m_kPointCurrentPosColor = QColor(190, 0, 0, 220);
     const QColor m_kPointInactiveColor = QColor(1, 119, 215);
     const QColor m_kPointActiveColor = Qt::black;
     const QColor m_kPointMoveColor = Qt::lightGray;

@@ -190,7 +190,7 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
         }
     }
     devC->pid = QString(deviceSettings->value("Pid", devC->pid).toString()).toUShort(&tmp ,16);
-    devC->is_dynamic_config = deviceSettings->value("DynamicHID", devC->is_dynamic_config).toInt();
+    //devC->is_dynamic_config = deviceSettings->value("DynamicHID", devC->is_dynamic_config).toInt();
     devC->exchange_period_ms = deviceSettings->value("USBExchange", devC->exchange_period_ms).toInt();
     deviceSettings->endGroup();
 
@@ -307,7 +307,7 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
         deviceSettings->beginGroup("Axes2bConfig_" + QString::number(i));
 
         devC->axes_to_buttons[i].buttons_cnt = deviceSettings->value("ButtonsCount", devC->axes_to_buttons[i].buttons_cnt).toInt();
-        devC->axes_to_buttons[i].is_enabled = deviceSettings->value("Enabled", devC->axes_to_buttons[i].is_enabled).toInt();
+        //devC->axes_to_buttons[i].is_enabled = deviceSettings->value("Enabled", devC->axes_to_buttons[i].is_enabled).toInt();
         for (int j = 0; j < MAX_A2B_BUTTONS + 1; ++j) {
             devC->axes_to_buttons[i].points[j] = deviceSettings->value("Point_" + QString::number(j), devC->axes_to_buttons[i].points[j]).toInt();
         }
@@ -333,10 +333,20 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
 
     // load LEDs config from file
     deviceSettings->beginGroup("LedsPWMConfig");
+    devC->led_pwm_config[0].duty_cycle = deviceSettings->value("PinPA8", devC->led_pwm_config[0].duty_cycle).toInt();
+    devC->led_pwm_config[1].duty_cycle = deviceSettings->value("PinPB0", devC->led_pwm_config[1].duty_cycle).toInt();
+    devC->led_pwm_config[2].duty_cycle = deviceSettings->value("PinPB1", devC->led_pwm_config[2].duty_cycle).toInt();
+    devC->led_pwm_config[3].duty_cycle = deviceSettings->value("PinPB4", devC->led_pwm_config[3].duty_cycle).toInt();
 
-    devC->led_pwm_config.duty_cycle[0] = deviceSettings->value("PinPB0", devC->led_pwm_config.duty_cycle[0]).toInt();
-    devC->led_pwm_config.duty_cycle[1] = deviceSettings->value("PinPB1", devC->led_pwm_config.duty_cycle[1]).toInt();
-    devC->led_pwm_config.duty_cycle[2] = deviceSettings->value("PinPB4", devC->led_pwm_config.duty_cycle[2]).toInt();
+    devC->led_pwm_config[0].is_axis = deviceSettings->value("PinPA8_AxisEnabled", devC->led_pwm_config[0].is_axis).toBool();
+    devC->led_pwm_config[1].is_axis = deviceSettings->value("PinPB0_AxisEnabled", devC->led_pwm_config[1].is_axis).toBool();
+    devC->led_pwm_config[2].is_axis = deviceSettings->value("PinPB1_AxisEnabled", devC->led_pwm_config[2].is_axis).toBool();
+    devC->led_pwm_config[3].is_axis = deviceSettings->value("PinPB4_AxisEnabled", devC->led_pwm_config[3].is_axis).toBool();
+
+    devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPA8_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
+    devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPB0_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
+    devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPB1_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
+    devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPB4_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
     deviceSettings->endGroup();
 
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
@@ -364,7 +374,7 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
     deviceSettings->setValue("DeviceName", devC->device_name);
     //appS->setValue("Vid", QString::number(devC->vid, 16));
     deviceSettings->setValue("Pid", QString::number(devC->pid, 16));
-    deviceSettings->setValue("DynamicHID", devC->is_dynamic_config);
+    //deviceSettings->setValue("DynamicHID", devC->is_dynamic_config);
     deviceSettings->setValue("USBExchange", devC->exchange_period_ms);
     deviceSettings->endGroup();
     // save Pins config to file
@@ -479,7 +489,7 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
         deviceSettings->beginGroup("Axes2bConfig_" + QString::number(i));
 
         deviceSettings->setValue("ButtonsCount", devC->axes_to_buttons[i].buttons_cnt);
-        deviceSettings->setValue("Enabled", devC->axes_to_buttons[i].is_enabled);
+        //deviceSettings->setValue("Enabled", devC->axes_to_buttons[i].is_enabled);
         for (int j = 0; j < MAX_A2B_BUTTONS + 1; ++j) {
             deviceSettings->setValue("Point_" + QString::number(j), devC->axes_to_buttons[i].points[j]);
         }
@@ -505,9 +515,20 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
 
     // save LEDs config to file
     deviceSettings->beginGroup("LedsPWMConfig");
-    deviceSettings->setValue("PinPB0", devC->led_pwm_config.duty_cycle[0]);
-    deviceSettings->setValue("PinPB1", devC->led_pwm_config.duty_cycle[1]);
-    deviceSettings->setValue("PinPB4", devC->led_pwm_config.duty_cycle[2]);
+    deviceSettings->setValue("PinPA8", devC->led_pwm_config[0].duty_cycle);
+    deviceSettings->setValue("PinPB0", devC->led_pwm_config[1].duty_cycle);
+    deviceSettings->setValue("PinPB1", devC->led_pwm_config[2].duty_cycle);
+    deviceSettings->setValue("PinPB4", devC->led_pwm_config[3].duty_cycle);
+
+    deviceSettings->setValue("PinPA8_AxisEnabled", devC->led_pwm_config[0].is_axis);
+    deviceSettings->setValue("PinPB0_AxisEnabled", devC->led_pwm_config[1].is_axis);
+    deviceSettings->setValue("PinPB1_AxisEnabled", devC->led_pwm_config[2].is_axis);
+    deviceSettings->setValue("PinPB4_AxisEnabled", devC->led_pwm_config[3].is_axis);
+
+    deviceSettings->setValue("PinPA8_AxisNum", devC->led_pwm_config[0].axis_num);
+    deviceSettings->setValue("PinPB0_AxisNum", devC->led_pwm_config[1].axis_num);
+    deviceSettings->setValue("PinPB1_AxisNum", devC->led_pwm_config[2].axis_num);
+    deviceSettings->setValue("PinPB4_AxisNum", devC->led_pwm_config[3].axis_num);
     deviceSettings->endGroup();
 
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {

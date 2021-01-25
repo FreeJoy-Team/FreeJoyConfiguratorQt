@@ -9,9 +9,6 @@
 
 #include <QObject>
 
-#define BUFFSIZE 64
-#define CONFIG_COUNT 16
-
 class HidDevice : public QObject
 {
     Q_OBJECT
@@ -33,7 +30,7 @@ signals:
     void deviceDisconnected();
     void deviceConnected();
     void flasherConnected();
-    void gamepadPacketReceived(uint8_t *);
+    void paramsPacketReceived(uint8_t *buffer);
 
     void configReceived(bool is_success);
     void configSent(bool is_success);
@@ -44,7 +41,8 @@ signals:
     void flashStatus(int status, int percent);
 
 private:
-    hid_device *m_handleRead;
+    hid_device *m_paramsRead;
+    hid_device *m_joyRead;
     bool m_isFinish = false;
     volatile int m_selectedDevice = -1;
     volatile int m_currentWork;
@@ -56,13 +54,11 @@ private:
     void flashFirmwareToDevice();
 
     QStringList m_devicesNames;
-    uint8_t m_deviceBuffer[BUFFSIZE];
+    uint8_t m_deviceBuffer[BUFFERSIZE];
     dev_config_t m_deviceConfig; // ????
     QList<hid_device_info *> m_HidDevicesAdrList;
     hid_device_info *m_flasher;
     const QByteArray *m_firmware;
-
-    ReportConverter *m_reportConvert; // !!!!
 };
 
 #endif // HIDDEVICE_H
