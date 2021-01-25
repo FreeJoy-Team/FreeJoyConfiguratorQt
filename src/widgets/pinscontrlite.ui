@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PinsContrLite</class>
+ <widget class="QWidget" name="PinsContrLite">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>936</width>
+    <height>651</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="11,0,4">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label_contrLiteImage">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../resources.qrc">:/Images/pinout.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="layoutG_pins" rowstretch="1,1,1,1,1,1,0" columnstretch="1,5,0,1,5,0,1,5,0,1,5,0,1,5">
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="5" column="0">
+      <widget class="QLabel" name="text_6">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A5</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="9">
+      <widget class="QLabel" name="text_19">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B7</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QLabel" name="text_9">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A8</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="11">
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>15</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="5">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>15</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="6">
+      <widget class="QLabel" name="text_16">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(140, 98, 57, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B4</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="9">
+      <widget class="QLabel" name="text_24">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B12</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="8">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>15</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="5" column="6">
+      <widget class="QLabel" name="text_18">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(41, 171, 226, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B6</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="6">
+      <widget class="QLabel" name="text_15">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(34, 181, 115, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B3</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="12">
+      <widget class="QLabel" name="text_26">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B14</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>15</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="12">
+      <widget class="QLabel" name="text_28">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">C13</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="12">
+      <widget class="QLabel" name="text_29">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">C14</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="6">
+      <widget class="QLabel" name="text_14">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B1</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="9">
+      <widget class="QLabel" name="text_20">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B8</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="9">
+      <widget class="QLabel" name="text_23">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B11</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="6">
+      <widget class="QLabel" name="text_13">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="text_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A2</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="text_4">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A3</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="text">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="9">
+      <widget class="QLabel" name="text_21">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B9</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QLabel" name="text_10">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A9</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="12">
+      <widget class="QLabel" name="text_25">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B13</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="12">
+      <widget class="QLabel" name="text_30">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">C15</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="text_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A1</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="6">
+      <widget class="QLabel" name="text_17">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 123, 172, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B5</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="text_5">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A4</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLabel" name="text_8">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A7</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QLabel" name="text_12">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A15</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLabel" name="text_11">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A10</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="9">
+      <widget class="QLabel" name="text_22">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B10</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="text_7">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(251, 176, 59, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A6</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="12">
+      <widget class="QLabel" name="text_27">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(199, 178, 153, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B15</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="4">
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="7">
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="10">
+      <spacer name="horizontalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="13">
+      <spacer name="horizontalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="1">
+      <spacer name="horizontalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
