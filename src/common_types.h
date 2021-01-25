@@ -432,9 +432,9 @@ typedef struct
 {
     analog_data_t				raw_axis_data[MAX_AXIS_NUM];
     analog_data_t			 	axis_data[MAX_AXIS_NUM];
-    uint8_t							shift_button_data;
     uint8_t							phy_button_data[MAX_BUTTONS_NUM/8];
     uint8_t							log_button_data[MAX_BUTTONS_NUM/8];
+    uint8_t							shift_button_data;
 
 } params_report_t;
 
