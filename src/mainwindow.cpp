@@ -41,10 +41,11 @@ MainWindow::MainWindow(QWidget *parent)
     //setWindowFlags( Qt::FramelessWindowHint );
 
     // firmware version
-    QString str = QString::number(FIRMWARE_VERSION, 16);
-    if (str.size() >= 4){
-        setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2] + " (" + APP_VERSION + ")");// + "b" + str[3]);
-    }
+    setWindowTitle(tr("FreeJoy Configurator") + " v" + APP_VERSION);// + "b" + str[3]);
+//    QString str = QString::number(FIRMWARE_VERSION, 16);
+//    if (str.size() >= 4){
+//        setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2] + APP_VERSION);// + "b" + str[3]);
+//    }
 
     // load application config
     loadAppConfig();
