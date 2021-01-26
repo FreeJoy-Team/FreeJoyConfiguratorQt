@@ -213,7 +213,7 @@ void AdvancedSettings::on_pushButton_About_clicked()
     const QString version("<p align=\"center\">FreeJoyConfiguratorQt v" + QStringLiteral(APP_VERSION) + " ");
     const QString source = tr("<br>Built with Qt %1 (%2)<br>"
                               R"(Source code available under GPLv3 on <a style="color: #03A9F4; text-decoration:none;" href="https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt">Github</a><br>)")
-                               .arg(QT_VERSION_STR, QSysInfo::buildCpuArchitecture()); //"Copyright © %3 Reksotiv and contributors"//, "2020"
+                               .arg(QT_VERSION_STR, QSysInfo::buildCpuArchitecture()); //"Copyright © %3 Reksotiv and contributors"//, "2021"
 
     const QString wiki(tr(R"(<br>Check <a style="color: #03A9F4; text-decoration:none;" href="https://github.com/FreeJoy-Team/FreeJoyWiki">our wiki </a>)"
         "for detailed instructions."));
@@ -223,10 +223,10 @@ void AdvancedSettings::on_pushButton_About_clicked()
 void AdvancedSettings::readFromConfig()
 {
     // PID
+    ui->lineEdit_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid, 16));
+    // PID
     //ui->lineEdit_PID->setInputMask("HHHH");
     ui->lineEdit_PID->setText(QString::number(gEnv.pDeviceConfig->config.pid, 16));
-    // dynamic conf.
-    //ui->checkBox_DynamicHIDConfig->setChecked(gEnv.pDeviceConfig->config.is_dynamic_config);
     // device name
     ui->lineEdit_DeviceUSBName->setText(gEnv.pDeviceConfig->config.device_name);
     // usb exchange period
@@ -235,13 +235,13 @@ void AdvancedSettings::readFromConfig()
 
 void AdvancedSettings::writeToConfig()
 {
+    // VID
+    gEnv.pDeviceConfig->config.vid = ui->lineEdit_VID->text().toInt(nullptr, 16);
     // PID
-    gEnv.pDeviceConfig->config.pid = ui->lineEdit_PID->text().toInt(nullptr, 16);
-    // dynamic conf.
-    //gEnv.pDeviceConfig->config.is_dynamic_config = ui->checkBox_DynamicHIDConfig->isChecked();
+    gEnv.pDeviceConfig->config.pid = ui->lineEdit_PID->text().toInt(nullptr, 16);  
     // device name
     std::string tmp_string = ui->lineEdit_DeviceUSBName->text().toStdString();
-    for (uint i = 0; i < sizeof(gEnv.pDeviceConfig->config.device_name); i++) { // ...
+    for (uint i = 0; i < sizeof(gEnv.pDeviceConfig->config.device_name); i++) {
         if (i < tmp_string.size()) {
             gEnv.pDeviceConfig->config.device_name[i] = tmp_string[i];
         } else {

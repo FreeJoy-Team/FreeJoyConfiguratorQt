@@ -56,10 +56,12 @@ void MainWindow::writeToConfig()
     // remove device name from registry.
 #ifdef Q_OS_WIN
         qDebug()<<"Remove device OEMName from registry";
-        QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
-        QString path2("HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_0483&PID_%1");
-        QSettings(path.arg(QString::number(gEnv.pDeviceConfig->config.pid, 16)), QSettings::NativeFormat).remove("OEMName");
-        QSettings(path2.arg(QString::number(gEnv.pDeviceConfig->config.pid, 16)), QSettings::NativeFormat).remove("OEMName");
+        QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QString path2("HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QSettings(path.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
+        QSettings(path2.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
 #endif
 }
 
@@ -189,8 +191,8 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
             devC->device_name[i] = '\0';
         }
     }
+    devC->vid = QString(deviceSettings->value("Vid", devC->vid).toString()).toUShort(&tmp ,16);
     devC->pid = QString(deviceSettings->value("Pid", devC->pid).toString()).toUShort(&tmp ,16);
-    //devC->is_dynamic_config = deviceSettings->value("DynamicHID", devC->is_dynamic_config).toInt();
     devC->exchange_period_ms = deviceSettings->value("USBExchange", devC->exchange_period_ms).toInt();
     deviceSettings->endGroup();
 
@@ -307,7 +309,6 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
         deviceSettings->beginGroup("Axes2bConfig_" + QString::number(i));
 
         devC->axes_to_buttons[i].buttons_cnt = deviceSettings->value("ButtonsCount", devC->axes_to_buttons[i].buttons_cnt).toInt();
-        //devC->axes_to_buttons[i].is_enabled = deviceSettings->value("Enabled", devC->axes_to_buttons[i].is_enabled).toInt();
         for (int j = 0; j < MAX_A2B_BUTTONS + 1; ++j) {
             devC->axes_to_buttons[i].points[j] = deviceSettings->value("Point_" + QString::number(j), devC->axes_to_buttons[i].points[j]).toInt();
         }
@@ -372,9 +373,8 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
     deviceSettings->beginGroup("DeviceUsbConfig");
     deviceSettings->setValue("FirmwareVersion", QString::number(devC->firmware_version, 16));
     deviceSettings->setValue("DeviceName", devC->device_name);
-    //appS->setValue("Vid", QString::number(devC->vid, 16));
+    deviceSettings->setValue("Vid", QString::number(devC->vid, 16));
     deviceSettings->setValue("Pid", QString::number(devC->pid, 16));
-    //deviceSettings->setValue("DynamicHID", devC->is_dynamic_config);
     deviceSettings->setValue("USBExchange", devC->exchange_period_ms);
     deviceSettings->endGroup();
     // save Pins config to file
@@ -489,7 +489,6 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
         deviceSettings->beginGroup("Axes2bConfig_" + QString::number(i));
 
         deviceSettings->setValue("ButtonsCount", devC->axes_to_buttons[i].buttons_cnt);
-        //deviceSettings->setValue("Enabled", devC->axes_to_buttons[i].is_enabled);
         for (int j = 0; j < MAX_A2B_BUTTONS + 1; ++j) {
             deviceSettings->setValue("Point_" + QString::number(j), devC->axes_to_buttons[i].points[j]);
         }
