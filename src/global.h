@@ -7,6 +7,7 @@
 class DeviceConfig;
 class QSettings;
 class DebugWindow;
+class QTranslator;
 //class QElapsedTimer;    //?
 //! CryEngine style global environment
 //!	Global environment. Contains pointers to all global often needed interfaces.
@@ -17,6 +18,7 @@ struct GlobalEnvironment
     DeviceConfig *pDeviceConfig = nullptr;
     QSettings *pAppSettings = nullptr;
     DebugWindow *pDebugWindow = nullptr;
+    QTranslator *pTranslator = nullptr;
 
 #ifdef QT_DEBUG
 bool readFinished = false;

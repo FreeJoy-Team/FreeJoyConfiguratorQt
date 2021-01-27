@@ -83,7 +83,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QTranslator m_translator;
+    //QTranslator m_translator;
 
     QThread *m_thread;            // smart pointer?
     HidDevice *m_hidDeviceWorker; // smart pointer?

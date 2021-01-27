@@ -39,11 +39,13 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // global
-    QSettings app_settings("FreeJoySettings.conf", QSettings::IniFormat);
-    DeviceConfig device_config;
+    QSettings appSettings("FreeJoySettings.conf", QSettings::IniFormat);
+    DeviceConfig deviceConfig;
+    QTranslator translator;
 
-    gEnv.pAppSettings = &app_settings;
-    gEnv.pDeviceConfig = &device_config;
+    gEnv.pAppSettings = &appSettings;
+    gEnv.pDeviceConfig = &deviceConfig;
+    gEnv.pTranslator = &translator;
 
     qInstallMessageHandler(CustomMessageHandler);
 
@@ -58,6 +60,15 @@ int main(int argc, char *argv[])
     gEnv.pAppSettings->beginGroup("StyleSettings");
     QString style = gEnv.pAppSettings->value("StyleSheet", "default").toString();
     gEnv.pAppSettings->endGroup();
+
+    // load language settings
+    appSettings.beginGroup("LanguageSettings");
+    if (appSettings.value("Language", "english").toString() == "russian")
+    {
+        gEnv.pTranslator->load(":/FreeJoyQt_ru");
+        qApp->installTranslator(gEnv.pTranslator);
+    }
+    appSettings.endGroup();
 
     MainWindow w;
 

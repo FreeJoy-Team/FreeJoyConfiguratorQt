@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Dynamic HID config</source>
-        <translation>Динамический HID</translation>
+        <translation type="vanished">Динамический HID</translation>
     </message>
     <message>
         <source>Firmware flasher</source>
@@ -180,27 +180,7 @@
     </message>
     <message>
         <source>X</source>
-        <translation>Х</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rx</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ry</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rz</source>
-        <translation></translation>
+        <translation type="vanished">Х</translation>
     </message>
     <message>
         <source>Slider 1</source>
@@ -258,35 +238,15 @@
     </message>
     <message>
         <source>X</source>
-        <translation>Х</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rx</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ry</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rz</source>
-        <translation></translation>
+        <translation type="vanished">Х</translation>
     </message>
     <message>
         <source>Slider 1</source>
-        <translation>Слайдер 1</translation>
+        <translation type="vanished">Слайдер 1</translation>
     </message>
     <message>
         <source>Slider 2</source>
-        <translation>Слайдер 2</translation>
+        <translation type="vanished">Слайдер 2</translation>
     </message>
     <message>
         <source>Linear</source>
@@ -444,7 +404,7 @@
     <name>AxesCurvesPlot</name>
     <message>
         <source>Form</source>
-        <translation>Форма</translation>
+        <translation type="vanished">Форма</translation>
     </message>
 </context>
 <context>
@@ -590,36 +550,12 @@
         <translation>ур. 7</translation>
     </message>
     <message>
-        <source>X</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rx</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ry</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rz</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Slider 1</source>
-        <translation>Слайдер 1</translation>
+        <translation type="vanished">Слайдер 1</translation>
     </message>
     <message>
         <source>Slider 2</source>
-        <translation>Слайдер 2</translation>
+        <translation type="vanished">Слайдер 2</translation>
     </message>
 </context>
 <context>
@@ -1007,6 +943,10 @@
         <source>Write log to file</source>
         <translation>Запись лога в файл</translation>
     </message>
+    <message>
+        <source>Debug packets speed within 5 seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Encoders</name>
@@ -1167,10 +1107,6 @@
         <translation>Пин PB0</translation>
     </message>
     <message>
-        <source>%</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Pin PB1</source>
         <translation>Пин PB1</translation>
     </message>
@@ -1194,16 +1130,24 @@
         <source>№</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Pin PA8</source>
+        <translation>Пин PA8</translation>
+    </message>
+    <message>
+        <source>Connected to axis</source>
+        <translation>Соединить с осью</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>TextLabel</source>
-        <translation>Текст</translation>
+        <translation type="vanished">Текст</translation>
     </message>
     <message>
         <source>REPORT_ID_JOY count</source>
-        <translation>REPORT_ID_JOY количество</translation>
+        <translation type="vanished">REPORT_ID_JOY количество</translation>
     </message>
     <message>
         <source>Connected</source>
@@ -1211,7 +1155,7 @@
     </message>
     <message>
         <source>Device name:</source>
-        <translation>Название девайса:</translation>
+        <translation type="vanished">Название девайса:</translation>
     </message>
     <message>
         <source>Disconnected</source>
@@ -1227,11 +1171,11 @@
     </message>
     <message>
         <source> Axes Config </source>
-        <translation> Оси </translation>
+        <translation type="vanished"> Оси </translation>
     </message>
     <message>
         <source> Axes Curves </source>
-        <translation> Кривые осей </translation>
+        <translation type="vanished"> Кривые осей </translation>
     </message>
     <message>
         <source> Shift Registers </source>
@@ -1243,7 +1187,7 @@
     </message>
     <message>
         <source> LED </source>
-        <translation> Светодиоды </translation>
+        <translation type="vanished"> Светодиоды </translation>
     </message>
     <message>
         <source> Advanced Settings </source>
@@ -1350,6 +1294,66 @@ g</source>
     <message>
         <source>device connected</source>
         <translation>устр. подключено</translation>
+    </message>
+    <message>
+        <source> Axis Config </source>
+        <translation> Оси </translation>
+    </message>
+    <message>
+        <source> Axis Curves </source>
+        <translation> Кривые осей </translation>
+    </message>
+    <message>
+        <source> LED/PWM </source>
+        <translation> Светодиоды/ШИМ </translation>
+    </message>
+    <message>
+        <source>Profile 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile 6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile 7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile 8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation>Х</translation>
+    </message>
+    <message>
+        <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
+        <translation>Версия прошивки в файле конфигурации не совпадает с версией конфигуратора. Проверьте настройки перед записью конфига.</translation>
+    </message>
+    <message>
+        <source>Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!</source>
+        <translation>Пины B8, B9 сброшены! В этой версии I2C перенесён с пинов B8, B9 на пины B10, B11, проверьте их!</translation>
+    </message>
+    <message>
+        <source>Firmware version!</source>
+        <translation>Версия прошивки!</translation>
     </message>
 </context>
 <context>
@@ -1576,6 +1580,14 @@ g</source>
     </message>
     <message>
         <source>I2C SDA</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>TLE5012B CS</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>AS5048A CS</source>
         <translation></translation>
     </message>
 </context>

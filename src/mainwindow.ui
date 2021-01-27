@@ -100,7 +100,7 @@ border: 1px solid rgb(173, 173, 173);
       </widget>
       <widget class="QWidget" name="tab_AxesConfig">
        <attribute name="title">
-        <string> Axes Config </string>
+        <string> Axis Config </string>
        </attribute>
        <layout class="QVBoxLayout" name="layoutV_tabAxesConfig">
         <property name="spacing">
@@ -122,7 +122,7 @@ border: 1px solid rgb(173, 173, 173);
       </widget>
       <widget class="QWidget" name="tab_AxesCurves">
        <attribute name="title">
-        <string> Axes Curves </string>
+        <string> Axis Curves </string>
        </attribute>
        <layout class="QVBoxLayout" name="layoutV_tabAxesCurvesConfig">
         <property name="spacing">

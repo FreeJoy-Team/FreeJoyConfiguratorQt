@@ -19,92 +19,87 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="77"/>
-        <source>Dynamic HID config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/advancedsettings.ui" line="119"/>
+        <location filename="widgets/advancedsettings.ui" line="171"/>
         <source>USB exchange period</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="284"/>
+        <location filename="widgets/advancedsettings.ui" line="213"/>
         <source>VID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="135"/>
+        <location filename="widgets/advancedsettings.ui" line="96"/>
         <source>Device USB name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="226"/>
+        <location filename="widgets/advancedsettings.ui" line="149"/>
         <source> ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="300"/>
+        <location filename="widgets/advancedsettings.ui" line="267"/>
         <source>PID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="326"/>
+        <location filename="widgets/advancedsettings.ui" line="316"/>
         <source>Application settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="347"/>
+        <location filename="widgets/advancedsettings.ui" line="337"/>
         <source>Other settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="416"/>
+        <location filename="widgets/advancedsettings.ui" line="406"/>
         <source>Font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="381"/>
+        <location filename="widgets/advancedsettings.ui" line="371"/>
         <source>Load default config on startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="439"/>
+        <location filename="widgets/advancedsettings.ui" line="429"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="446"/>
+        <location filename="widgets/advancedsettings.ui" line="436"/>
         <source>Wiki</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="456"/>
+        <location filename="widgets/advancedsettings.ui" line="446"/>
         <source>Languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="497"/>
+        <location filename="widgets/advancedsettings.ui" line="487"/>
         <source>Restart app for full changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="510"/>
+        <location filename="widgets/advancedsettings.ui" line="500"/>
         <source>Styles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="531"/>
+        <location filename="widgets/advancedsettings.ui" line="521"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="538"/>
+        <location filename="widgets/advancedsettings.ui" line="528"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="545"/>
+        <location filename="widgets/advancedsettings.ui" line="535"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -148,7 +143,7 @@
     </message>
     <message>
         <location filename="widgets/axes.ui" line="117"/>
-        <location filename="widgets/axes.h" line="61"/>
+        <location filename="widgets/axes.h" line="63"/>
         <source>Calibrate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -208,59 +203,29 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="62"/>
+        <location filename="widgets/axes.h" line="64"/>
         <source>Stop &amp;&amp; Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="107"/>
-        <location filename="widgets/axes.h" line="144"/>
+        <location filename="widgets/axes.h" line="109"/>
+        <location filename="widgets/axes.h" line="146"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="108"/>
-        <location filename="widgets/axes.h" line="145"/>
+        <location filename="widgets/axes.h" line="110"/>
+        <location filename="widgets/axes.h" line="147"/>
         <source>Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="150"/>
-        <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axes.h" line="151"/>
-        <source>Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axes.h" line="152"/>
-        <source>Z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axes.h" line="153"/>
-        <source>Rx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axes.h" line="154"/>
-        <source>Ry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axes.h" line="155"/>
-        <source>Rz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axes.h" line="156"/>
+        <location filename="widgets/axes.cpp" line="17"/>
         <source>Slider 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axes.h" line="157"/>
+        <location filename="widgets/axes.cpp" line="18"/>
         <source>Slider 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -303,46 +268,6 @@
     <message>
         <location filename="widgets/axescurves.ui" line="207"/>
         <source>Shape</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="62"/>
-        <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="63"/>
-        <source>Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="64"/>
-        <source>Z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="65"/>
-        <source>Rx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="66"/>
-        <source>Ry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="67"/>
-        <source>Rz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="68"/>
-        <source>Slider 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.h" line="69"/>
-        <source>Slider 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -450,14 +375,6 @@
     </message>
 </context>
 <context>
-    <name>AxesCurvesPlot</name>
-    <message>
-        <location filename="widgets/axescurvesplot.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AxesExtended</name>
     <message>
         <location filename="widgets/axesextended.ui" line="14"/>
@@ -540,8 +457,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.cpp" line="38"/>
-        <location filename="widgets/axesextended.cpp" line="65"/>
+        <location filename="widgets/axesextended.cpp" line="39"/>
+        <location filename="widgets/axesextended.cpp" line="66"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
@@ -637,46 +554,6 @@
     <message>
         <location filename="widgets/axesextended.h" line="90"/>
         <source>level 7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="95"/>
-        <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="96"/>
-        <source>Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="97"/>
-        <source>Z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="98"/>
-        <source>Rx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="99"/>
-        <source>Ry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="100"/>
-        <source>Rz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="101"/>
-        <source>Slider 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axesextended.h" line="102"/>
-        <source>Slider 2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1113,6 +990,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="widgets/debugwindow.ui" line="32"/>
+        <source>Debug packets speed within 5 seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="widgets/debugwindow.ui" line="86"/>
         <source>Write log to file</source>
         <translation type="unfinished"></translation>
@@ -1123,7 +1005,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.ui" line="32"/>
         <location filename="widgets/debugwindow.ui" line="93"/>
         <source>within 5 seconds</source>
         <translation type="unfinished"></translation>
@@ -1371,44 +1252,50 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/ledconfig.ui" line="53"/>
+        <location filename="widgets/ledconfig.ui" line="50"/>
+        <source>Pin PA8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/ledconfig.ui" line="89"/>
+        <location filename="widgets/ledconfig.ui" line="153"/>
+        <location filename="widgets/ledconfig.ui" line="217"/>
+        <location filename="widgets/ledconfig.ui" line="278"/>
+        <source>Connected to axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/ledconfig.ui" line="114"/>
         <source>Pin PB0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/ledconfig.ui" line="73"/>
-        <location filename="widgets/ledconfig.ui" line="115"/>
-        <location filename="widgets/ledconfig.ui" line="154"/>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/ledconfig.ui" line="95"/>
+        <location filename="widgets/ledconfig.ui" line="178"/>
         <source>Pin PB1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/ledconfig.ui" line="134"/>
+        <location filename="widgets/ledconfig.ui" line="239"/>
         <source>Pin PB4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/ledconfig.ui" line="180"/>
+        <location filename="widgets/ledconfig.ui" line="307"/>
         <source>LED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/ledconfig.ui" line="189"/>
+        <location filename="widgets/ledconfig.ui" line="316"/>
         <source>Input №</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/ledconfig.ui" line="199"/>
+        <location filename="widgets/ledconfig.ui" line="326"/>
         <source>Function</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/ledconfig.ui" line="209"/>
+        <location filename="widgets/ledconfig.ui" line="336"/>
         <source>№</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1416,8 +1303,8 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="655"/>
-        <location filename="mainwindow.cpp" line="641"/>
+        <location filename="mainwindow.ui" line="888"/>
+        <location filename="mainwindow.cpp" line="598"/>
         <source>Show debug</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1433,12 +1320,14 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="103"/>
-        <source> Axes Config </source>
+        <source> Axis Config </source>
+        <oldsource> Axes Config </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="125"/>
-        <source> Axes Curves </source>
+        <source> Axis Curves </source>
+        <oldsource> Axes Curves </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1453,7 +1342,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="191"/>
-        <source> LED </source>
+        <source> LED/PWM </source>
+        <oldsource> LED </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1467,131 +1357,175 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="252"/>
-        <location filename="mainwindow.ui" line="337"/>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="268"/>
-        <source>REPORT_ID_JOY count</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="305"/>
-        <location filename="mainwindow.cpp" line="283"/>
+        <location filename="mainwindow.cpp" line="255"/>
         <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="321"/>
-        <source>Device name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="375"/>
+        <location filename="mainwindow.ui" line="608"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="485"/>
+        <location filename="mainwindow.ui" line="718"/>
         <source>Set file to default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="633"/>
+        <location filename="mainwindow.ui" line="866"/>
         <source>Save config to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="567"/>
+        <location filename="mainwindow.ui" line="800"/>
         <source>Read config from Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="542"/>
+        <location filename="mainwindow.ui" line="775"/>
         <source>Reset All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="507"/>
+        <location filename="mainwindow.ui" line="740"/>
         <source>Load default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="450"/>
+        <location filename="mainwindow.ui" line="273"/>
+        <source>Profile 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="286"/>
+        <source>Profile 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="302"/>
+        <source>Profile 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="315"/>
+        <source>Profile 6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="328"/>
+        <source>Profile 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="341"/>
+        <source>Profile 7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="354"/>
+        <source>Profile 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="367"/>
+        <source>Profile 8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="380"/>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="683"/>
         <source>Load config from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="611"/>
+        <location filename="mainwindow.ui" line="844"/>
         <source>Write config to Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="46"/>
+        <location filename="mainwindow.cpp" line="43"/>
         <source>FreeJoy Configurator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="252"/>
+        <location filename="mainwindow.cpp" line="225"/>
         <source>devices connected</source>
         <oldsource> devices connected</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="254"/>
+        <location filename="mainwindow.cpp" line="227"/>
         <source>device connected</source>
         <oldsource> device connected</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="264"/>
+        <location filename="mainwindow.cpp" line="237"/>
         <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="99"/>
+        <location filename="mainwindow_conf.cpp" line="102"/>
         <source>Device firmware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="102"/>
+        <location filename="mainwindow_conf.cpp" line="105"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="113"/>
-        <location filename="mainwindow_conf.cpp" line="151"/>
+        <location filename="mainwindow_conf.cpp" line="116"/>
+        <location filename="mainwindow_conf.cpp" line="154"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="136"/>
+        <location filename="mainwindow_conf.cpp" line="139"/>
         <source>Sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="570"/>
-        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow_conf.cpp" line="369"/>
+        <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow_conf.cpp" line="371"/>
+        <source>Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow_conf.cpp" line="372"/>
+        <location filename="mainwindow_conf.cpp" line="375"/>
+        <source>Firmware version!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="527"/>
+        <location filename="mainwindow.cpp" line="550"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="570"/>
-        <location filename="mainwindow.cpp" line="581"/>
-        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="527"/>
+        <location filename="mainwindow.cpp" line="538"/>
+        <location filename="mainwindow.cpp" line="550"/>
         <source>Config Files (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="581"/>
+        <location filename="mainwindow.cpp" line="538"/>
         <source>Save Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="424"/>
-        <location filename="mainwindow.cpp" line="633"/>
+        <location filename="mainwindow.cpp" line="389"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>Hide debug</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1795,86 +1729,96 @@
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="219"/>
-        <source>MCP3201 CS</source>
+        <source>TLE5012B CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="224"/>
-        <source>MCP3202 CS</source>
+        <source>MCP3201 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="229"/>
-        <source>MCP3204 CS</source>
+        <source>MCP3202 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="234"/>
-        <source>MCP3208 CS</source>
+        <source>MCP3204 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="239"/>
-        <source>MLX90393 CS</source>
+        <source>MCP3208 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="244"/>
-        <source>LED Single</source>
+        <source>MLX90393 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="249"/>
-        <source>LED Row</source>
+        <source>AS5048A CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="254"/>
-        <source>LED Column</source>
+        <source>LED Single</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="259"/>
-        <source>LED PWM</source>
+        <source>LED Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="264"/>
-        <source>Axis Analog</source>
+        <source>LED Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="269"/>
-        <source>Fast Encoder</source>
+        <source>LED PWM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="274"/>
-        <source>SPI SCK</source>
+        <source>Axis Analog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="279"/>
-        <source>SPI MOSI</source>
+        <source>Fast Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="284"/>
-        <source>SPI MISO</source>
+        <source>SPI SCK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="289"/>
-        <source>TLE5011 GEN</source>
+        <source>SPI MOSI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="294"/>
-        <source>I2C SCL</source>
+        <source>SPI MISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="299"/>
+        <source>TLE5011 GEN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pincombobox.h" line="304"/>
+        <source>I2C SCL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pincombobox.h" line="309"/>
         <source>I2C SDA</source>
         <translation type="unfinished"></translation>
     </message>

@@ -38,14 +38,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     QMainWindow::setWindowIcon(QIcon(":/Images/icon-32.png"));
-    //setWindowFlags( Qt::FramelessWindowHint );
 
     // firmware version
-    setWindowTitle(tr("FreeJoy Configurator") + " v" + APP_VERSION);// + "b" + str[3]);
-//    QString str = QString::number(FIRMWARE_VERSION, 16);
-//    if (str.size() >= 4){
-//        setWindowTitle(tr("FreeJoy Configurator") + " v" + str[0] + "." + str[1] + "." + str[2] + APP_VERSION);// + "b" + str[3]);
-//    }
+    setWindowTitle(tr("FreeJoy Configurator") + " v" + APP_VERSION);
 
     // load application config
     loadAppConfig();
@@ -111,6 +106,10 @@ MainWindow::MainWindow(QWidget *parent)
             comBox->setFocusPolicy(Qt::WheelFocus);
     }
     for (auto &&comBox: m_axesCurvesConfig->findChildren<QComboBox *>())
+    {
+        comBox->setFocusPolicy(Qt::WheelFocus);
+    }
+    for (auto &&comBox: m_ledConfig->findChildren<QComboBox *>())
     {
         comBox->setFocusPolicy(Qt::WheelFocus);
     }
@@ -269,8 +268,6 @@ void MainWindow::flasherConnected()
 // add/delete hid devices to/from combobox
 void MainWindow::hidDeviceList(const QStringList &deviceList)
 {
-//    QSignalBlocker blocker(ui->comboBox_HidDeviceList);
-//    int curIndex = ui->comboBox_HidDeviceList->currentIndex();
     if (deviceList.size() == 0) {
         ui->comboBox_HidDeviceList->clear();
         return;
@@ -278,10 +275,6 @@ void MainWindow::hidDeviceList(const QStringList &deviceList)
         ui->comboBox_HidDeviceList->clear();
         ui->comboBox_HidDeviceList->addItems(deviceList);
     }
-//    blocker.unblock();
-//    if (curIndex >=0) {
-//        ui->comboBox_HidDeviceList->setCurrentIndex(curIndex);
-//    }
 }
 
 // received device report
@@ -369,16 +362,16 @@ void MainWindow::interfaceStyleChanged(bool isDark)
 void MainWindow::languageChanged(const QString &language)
 {
     qDebug()<<"Retranslate UI";
-    if (language == "russian")
+    if (language == "russian")//m_translator
     {
-        m_translator.load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
-        qApp->installTranslator(&m_translator);
+        gEnv.pTranslator->load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
+        qApp->installTranslator(gEnv.pTranslator);
         ui->retranslateUi(this);
     }
     else if (language == "english")
     {
-        m_translator.load(":/FreeJoyQt_en");
-        qApp->installTranslator(&m_translator);
+        gEnv.pTranslator->load(":/FreeJoyQt_en");
+        qApp->installTranslator(gEnv.pTranslator);
         ui->retranslateUi(this);
     } else {
         return;
@@ -412,15 +405,6 @@ void MainWindow::loadAppConfig()
 {
     QSettings *appS = gEnv.pAppSettings;
     qDebug()<<"Loading application config";
-    // load language settings
-    appS->beginGroup("LanguageSettings");
-    if (appS->value("Language", "english").toString() == "russian")
-    {
-        m_translator.load(":/FreeJoyQt_ru");
-        qApp->installTranslator(&m_translator);
-        ui->retranslateUi(this);
-    }
-    appS->endGroup();
 
     // load window settings
     appS->beginGroup("WindowSettings");
@@ -662,31 +646,3 @@ void MainWindow::on_pushButton_TestButton_2_clicked()
     }
 #endif
 }
-
-
-// add dyn // constructor
-//    QGridLayout* layout = new QGridLayout;
-//    Encoders* qwe = new Encoders;
-//    layout->addWidget(qwe);
-//    ui->tab_Encoders->setLayout(layout);
-// dynamic widgets spawn
-//    QScrollBar* scroll = ui->scrollArea_2->verticalScrollBar();
-//    connect( scroll , SIGNAL(valueChanged(int)) ,this , SLOT(addvalues(int)) );
-
-// dynamic widgets spawn
-//void MainWindow::addvalues(int value)
-//{
-//    Q_UNUSED(value)
-////    if (value > 90 && LogicButtonAdrList2.size()< 512)
-////    {
-////        for (int i = 0; i< 5; i++) {
-////            ButtonConfig* qwe = new ButtonConfig;
-////            ui->verticalLayout_3->addWidget(qwe, i);
-////            LogicButtonAdrList2.append(qwe);
-////        }
-//////        QList<PinComboBox *> allPButtons = this->findChildren<PinComboBox *>();
-//////        for (int i = 0; i< allPButtons.size(); i++) {
-//////            allPButtons[i]->PinComboBox::GenText();
-//////        }
-////    }
-//}
