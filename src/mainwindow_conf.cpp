@@ -2,6 +2,7 @@
 #include <QTimer>
 #include <QSettings>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <ctime>
 
 #include "mainwindow.h"
@@ -191,8 +192,9 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
             devC->device_name[i] = '\0';
         }
     }
-    devC->vid = QString(deviceSettings->value("Vid", devC->vid).toString()).toUShort(&tmp ,16);
-    devC->pid = QString(deviceSettings->value("Pid", devC->pid).toString()).toUShort(&tmp ,16);
+
+    devC->vid = QString(deviceSettings->value("Vid", QString::number(devC->vid, 16)).toString()).toUShort(&tmp ,16);
+    devC->pid = QString(deviceSettings->value("Pid", QString::number(devC->pid, 16)).toString()).toUShort(&tmp ,16);
     devC->exchange_period_ms = deviceSettings->value("USBExchange", devC->exchange_period_ms).toInt();
     deviceSettings->endGroup();
 
@@ -358,6 +360,23 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
         deviceSettings->endGroup();
     }
     qDebug()<<"LoadDeviceConfigFromFile() finished";
+
+    if (devC->firmware_version != FIRMWARE_VERSION) {
+        qDebug()<<"Firmware warning";
+        if (devC->firmware_version == 0x1624 || devC->firmware_version == 0x1623 ||
+                devC->firmware_version == 0x1622 || devC->firmware_version == 0x1621 ||
+                devC->firmware_version == 0x1620) {
+            QString warning(tr("Firmware version in config file doesnt match configurator version. Check settings before write config."));
+            if (devC->pins[19] == I2C_SCL || devC->pins[20] == I2C_SDA) {
+                QString differences(tr("Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!"));
+                QMessageBox::warning(this, tr("Firmware version!"), warning + " " + differences);
+                devC->pins[19] = devC->pins[20] = NOT_USED;
+            } else {
+                QMessageBox::warning(this, tr("Firmware version!"), warning);
+            }
+        }
+        devC->firmware_version = FIRMWARE_VERSION;
+    }
     readFromConfig();
 }
 
