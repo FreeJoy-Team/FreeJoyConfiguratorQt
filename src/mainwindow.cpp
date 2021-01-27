@@ -2,6 +2,7 @@
 #include <QTimer>
 #include <QSettings>
 #include <QFileDialog>
+#include <QDesktopServices>
 #include <ctime>
 
 #include "mainwindow.h"
@@ -597,6 +598,11 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
         m_debugIsEnable = false;
         ui->pushButton_ShowDebug->setText(tr("Show debug"));
     }
+}
+// Wiki
+void MainWindow::on_pushButton_Wiki_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/FreeJoy-Team/FreeJoyWiki"));
 }
 
 

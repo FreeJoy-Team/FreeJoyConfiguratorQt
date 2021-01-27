@@ -2265,6 +2265,30 @@ PlotWidget {
 
 --------------------------------------------------------------------------- */
 
+QPushButton#pushButton_Wiki {
+border: 1px solid #32414B;
+border-radius:15px;
+background-color: rgb(49, 54, 59);
+padding:0px;
+margin: 0px;
+min-width: 30;
+max-width: 30;
+max-height: 30;
+min-height: 30;
+width: 30;
+height: 30;
+icon: url("://Images/ST_wiki_dark.png");
+}
+
+QPushButton#pushButton_Wiki:hover {
+border: 1px solid #148CD2;
+border-color: rgb(0, 120, 215);
+background-color: rgb(90, 95, 115);
+border-radius:15px;
+}
+
+
+/*/////////////////////////////////////////////////AxesCurvesProfiles///////////////////////////////////////////*/ 
 AxesCurvesProfiles {
   border: 1px solid #32414B;
   border-radius: 4px;

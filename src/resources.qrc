@@ -17,5 +17,7 @@
         <file>Images/icon-32.png</file>
         <file>styles/default.qss</file>
         <file>Images/pinout.png</file>
+        <file>Images/ST_wiki.png</file>
+        <file>Images/ST_wiki_dark.png</file>
     </qresource>
 </RCC>

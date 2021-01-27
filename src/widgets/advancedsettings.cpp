@@ -3,7 +3,6 @@
 
 //#include <QFile>
 #include <QComboBox>
-#include <QDesktopServices> // wiki
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
@@ -176,7 +175,7 @@ void AdvancedSettings::setStyle(QPushButton *pressedButton, QString filePath, QS
                 child->show();
             }
 
-            qDebug() << timer.elapsed();
+            qDebug() << "Style changed in" <<timer.elapsed() <<"ms";
             f.close();
         }
 
@@ -201,11 +200,6 @@ void AdvancedSettings::on_spinBox_FontSize_valueChanged(int fontSize)
     //gEnv.pAppSettings->endGroup();
 }
 
-//wiki
-void AdvancedSettings::on_pushButton_Wiki_clicked()
-{
-    QDesktopServices::openUrl(QUrl("https://github.com/FreeJoy-Team/FreeJoyWiki"));
-}
 
 // about
 void AdvancedSettings::on_pushButton_About_clicked()

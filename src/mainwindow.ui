@@ -55,7 +55,7 @@ border: 1px solid rgb(173, 173, 173);
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>8</number>
       </property>
       <property name="movable">
        <bool>true</bool>
@@ -590,7 +590,7 @@ border-color: rgb(182, 182, 182);</string>
          </rect>
         </property>
         <property name="text">
-         <string notr="true">2</string>
+         <string>2</string>
         </property>
        </widget>
       </widget>
@@ -607,7 +607,7 @@ border-color: rgb(182, 182, 182);</string>
       <property name="title">
        <string>Device</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+      <layout class="QGridLayout" name="gridLayout_7" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" columnstretch="0,0,0">
        <property name="leftMargin">
         <number>6</number>
        </property>
@@ -620,35 +620,12 @@ border-color: rgb(182, 182, 182);</string>
        <property name="bottomMargin">
         <number>6</number>
        </property>
+       <property name="horizontalSpacing">
+        <number>6</number>
+       </property>
        <property name="verticalSpacing">
         <number>9</number>
        </property>
-       <item row="12" column="2">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="2">
-        <widget class="CenteredCBox" name="comboBox_HidDeviceList">
-         <property name="minimumSize">
-          <size>
-           <width>165</width>
-           <height>26</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">height: 22px;</string>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
@@ -661,85 +638,6 @@ border-color: rgb(182, 182, 182);</string>
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="9" column="2">
-        <widget class="QPushButton" name="pushButton_LoadFromFile">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>165</width>
-           <height>37</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">height: 30px;</string>
-         </property>
-         <property name="text">
-          <string>Load config from file</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="7" column="2">
-        <widget class="QPushButton" name="pushButton_SetDefaultConfig">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>165</width>
-           <height>37</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">height: 30px;</string>
-         </property>
-         <property name="text">
-          <string>Set file to default config</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="2">
-        <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>165</width>
-           <height>37</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">height: 30px;</string>
-         </property>
-         <property name="text">
-          <string>Load default config</string>
-         </property>
-        </widget>
        </item>
        <item row="8" column="2">
         <spacer name="verticalSpacer_3">
@@ -754,29 +652,57 @@ border-color: rgb(182, 182, 182);</string>
          </property>
         </spacer>
        </item>
-       <item row="13" column="2">
-        <widget class="QPushButton" name="pushButton_ResetAllPins">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+       <item row="12" column="2">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="minimumSize">
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>165</width>
-           <height>37</height>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
+        </spacer>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="pushButton_Wiki">
          <property name="styleSheet">
-          <string notr="true">height: 30px;</string>
+          <string notr="true">
+</string>
          </property>
          <property name="text">
-          <string>Reset All</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/Images/ST_wiki.png</normaloff>:/Images/ST_wiki.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
+       <item row="2" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0" colspan="3">
         <widget class="QPushButton" name="pushButton_ReadConfig">
          <property name="enabled">
           <bool>false</bool>
@@ -801,26 +727,23 @@ border-color: rgb(182, 182, 182);</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="label_DeviceStatus">
-         <property name="minimumSize">
+       <item row="2" column="0">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>0</width>
+           <width>40</width>
            <height>20</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
+        </spacer>
        </item>
-       <item row="4" column="2">
+       <item row="4" column="0" colspan="3">
         <widget class="QPushButton" name="pushButton_WriteConfig">
          <property name="enabled">
           <bool>false</bool>
@@ -845,7 +768,73 @@ border-color: rgb(182, 182, 182);</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="2">
+       <item row="6" column="0" colspan="3">
+        <widget class="QPushButton" name="pushButton_LoadDefaultConfig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>165</width>
+           <height>37</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">height: 30px;</string>
+         </property>
+         <property name="text">
+          <string>Load default config</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="3">
+        <widget class="QPushButton" name="pushButton_SetDefaultConfig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>165</width>
+           <height>37</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">height: 30px;</string>
+         </property>
+         <property name="text">
+          <string>Set file to default config</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0" colspan="3">
+        <widget class="QPushButton" name="pushButton_LoadFromFile">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>165</width>
+           <height>37</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">height: 30px;</string>
+         </property>
+         <property name="text">
+          <string>Load config from file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0" colspan="3">
         <widget class="QPushButton" name="pushButton_SaveToFile">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -867,7 +856,29 @@ border-color: rgb(182, 182, 182);</string>
          </property>
         </widget>
        </item>
-       <item row="14" column="2">
+       <item row="13" column="0" colspan="3">
+        <widget class="QPushButton" name="pushButton_ResetAllPins">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>165</width>
+           <height>37</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">height: 30px;</string>
+         </property>
+         <property name="text">
+          <string>Reset All</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0" colspan="3">
         <widget class="QPushButton" name="pushButton_ShowDebug">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -886,6 +897,38 @@ border-color: rgb(182, 182, 182);</string>
          </property>
          <property name="text">
           <string>Show debug</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QLabel" name="label_DeviceStatus">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="3">
+        <widget class="CenteredCBox" name="comboBox_HidDeviceList">
+         <property name="minimumSize">
+          <size>
+           <width>165</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">height: 22px;</string>
          </property>
         </widget>
        </item>
@@ -908,6 +951,8 @@ border-color: rgb(182, 182, 182);</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
