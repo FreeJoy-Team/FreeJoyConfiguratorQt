@@ -89,18 +89,6 @@ private:
         {FILTER_LEVEL_6,      tr("level 6")},
         {FILTER_LEVEL_7,      tr("level 7")},
     }};
-
-    QVector <deviceEnum_guiName_t> m_axesList =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h
-    {{
-        {0,      tr("X")},
-        {1,      tr("Y")},
-        {2,      tr("Z")},
-        {3,      tr("Rx")},
-        {4,      tr("Ry")},
-        {5,      tr("Rz")},
-        {6,      tr("Slider 1")},
-        {7,      tr("Slider 2")},
-    }};
 };
 
 #endif // AXESEXTENDED_H

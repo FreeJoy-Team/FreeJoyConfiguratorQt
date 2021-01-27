@@ -66,7 +66,7 @@ void ButtonLogical::functionTypeChanged(int index)
 
 void ButtonLogical::editingOnOff(int value)
 {
-    if (value > 0) {
+    if (value > 0 && ui->spinBox_PhysicalButtonNumber->isEnabled()) {
         ui->checkBox_IsInvert->setEnabled(true);
         ui->checkBox_IsDisable->setEnabled(true);
         ui->comboBox_ButtonFunction->setEnabled(true);

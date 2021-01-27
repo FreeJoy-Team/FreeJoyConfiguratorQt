@@ -223,10 +223,10 @@ void AdvancedSettings::on_pushButton_About_clicked()
 void AdvancedSettings::readFromConfig()
 {
     // PID
-    ui->lineEdit_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid, 16));
+    ui->lineEdit_VID->setText(QString::number(gEnv.pDeviceConfig->config.vid, 16).toUpper().rightJustified(4, '0'));
     // PID
     //ui->lineEdit_PID->setInputMask("HHHH");
-    ui->lineEdit_PID->setText(QString::number(gEnv.pDeviceConfig->config.pid, 16));
+    ui->lineEdit_PID->setText(QString::number(gEnv.pDeviceConfig->config.pid, 16).toUpper().rightJustified(4, '0'));
     // device name
     ui->lineEdit_DeviceUSBName->setText(gEnv.pDeviceConfig->config.device_name);
     // usb exchange period

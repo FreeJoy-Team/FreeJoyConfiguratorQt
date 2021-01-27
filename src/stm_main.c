@@ -68,10 +68,10 @@ dev_config_t InitConfig (void)
                     - BUTTON_COLUMN
                     - BUTTON_ROW
                 */
-        .pins[0] 	= AXIS_ANALOG,					// PA0
-        .pins[1] 	= AXIS_ANALOG,					// PA1
-        .pins[2] 	= AXIS_ANALOG,					// PA2
-        .pins[3] 	= AXIS_ANALOG,					// PA3
+        .pins[0] 	= NOT_USED,					// PA0
+        .pins[1] 	= NOT_USED,					// PA1
+        .pins[2] 	= NOT_USED,					// PA2
+        .pins[3] 	= NOT_USED,					// PA3
         .pins[4] 	= NOT_USED,							// PA4
         .pins[5] 	= NOT_USED,							// PA5
         .pins[6] 	= NOT_USED,							// PA6
@@ -91,10 +91,10 @@ dev_config_t InitConfig (void)
         .pins[20] = NOT_USED,							// PB9
         .pins[21] = NOT_USED,							// PB10
         .pins[22] = NOT_USED,							// PB11
-        .pins[23] = BUTTON_GND,						// PB12
-        .pins[24] = BUTTON_GND,						// PB13
-        .pins[25] = BUTTON_GND,						// PB14
-        .pins[26] = BUTTON_GND,						// PB15
+        .pins[23] = NOT_USED,						// PB12
+        .pins[24] = NOT_USED,						// PB13
+        .pins[25] = NOT_USED,						// PB14
+        .pins[26] = NOT_USED,						// PB15
         .pins[27] = NOT_USED,							// PC13
         .pins[28] = NOT_USED,							// PC14
         .pins[29] = NOT_USED,							// PC15
@@ -124,7 +124,7 @@ dev_config_t InitConfig (void)
         .axis_config[0].deadband_size = 0,
         .axis_config[0].channel = 0,
         .axis_config[0].i2c_address = 0x48,
-        .axis_config[0].source_main = 0,
+        .axis_config[0].source_main = -1,
         .axis_config[0].function = 0,
         .axis_config[0].source_secondary = 0,
         .axis_config[0].button1 = -1,
@@ -158,7 +158,7 @@ dev_config_t InitConfig (void)
         .axis_config[1].deadband_size = 0,
         .axis_config[1].channel = 0,
         .axis_config[1].i2c_address = 0x48,
-        .axis_config[1].source_main = 1,
+        .axis_config[1].source_main = -1,
         .axis_config[1].function = 0,
         .axis_config[1].source_secondary = 0,
         .axis_config[1].button1 = -1,
@@ -192,7 +192,7 @@ dev_config_t InitConfig (void)
         .axis_config[2].deadband_size = 0,
         .axis_config[2].i2c_address = 0x48,
         .axis_config[2].channel = 0,
-        .axis_config[2].source_main = 2,
+        .axis_config[2].source_main = -1,
         .axis_config[2].function = 0,
         .axis_config[2].source_secondary = 0,
         .axis_config[2].button1 = -1,
@@ -226,7 +226,7 @@ dev_config_t InitConfig (void)
         .axis_config[3].deadband_size = 0,
         .axis_config[3].channel = 0,
         .axis_config[3].i2c_address = 0x48,
-        .axis_config[3].source_main = 3,
+        .axis_config[3].source_main = -1,
         .axis_config[3].function = 0,
         .axis_config[3].source_secondary = 0,
         .axis_config[3].button1 = -1,
@@ -404,13 +404,13 @@ dev_config_t InitConfig (void)
                     - ENCODER_INPUT_A
                     - ENCODER_INPUT_B
                 */
-        .buttons[0].physical_num = 12,
+        .buttons[0].physical_num = -1,
         .buttons[0].type = BUTTON_NORMAL,
-        .buttons[1].physical_num = 13,
+        .buttons[1].physical_num = -1,
         .buttons[1].type = BUTTON_NORMAL,
-        .buttons[2].physical_num = 14,
+        .buttons[2].physical_num = -1,
         .buttons[2].type = BUTTON_NORMAL,
-        .buttons[3].physical_num = 15,
+        .buttons[3].physical_num = -1,
         .buttons[3].type = BUTTON_NORMAL,
         .buttons[4].physical_num = -1,
         .buttons[4].type = BUTTON_NORMAL,

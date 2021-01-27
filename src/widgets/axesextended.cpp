@@ -2,6 +2,7 @@
 #include "ui_axesextended.h"
 
 #include "converter.h"
+#include "widgets/axes.h"
 
 AxesExtended::AxesExtended(int axisNumber, QWidget *parent)
     : QWidget(parent)
@@ -24,8 +25,8 @@ AxesExtended::AxesExtended(int axisNumber, QWidget *parent)
     for (int i = 0; i < m_button_2_list.size(); ++i) {
         ui->comboBox_Button2->addItem(m_button_2_list[i].guiName);
     }
-    for (int i = 0; i < m_axesList.size(); ++i) {
-        ui->comboBox_AxisSource2->addItem(m_axesList[i].guiName);
+    for (int i = 0; i < axesList().size(); ++i) {
+        ui->comboBox_AxisSource2->addItem(axesList()[i].guiName);
     }
 
     ui->comboBox_Button1->setCurrentIndex(AXIS_BUTTON_DOWN);
@@ -79,7 +80,7 @@ void AxesExtended::readFromConfig()
     axis_config_t *axisCfg = &gEnv.pDeviceConfig->config.axis_config[m_axisNumber];
     // I2C, sources, function
     ui->comboBox_I2cAddress->setCurrentIndex(Converter::EnumToIndex(axisCfg->i2c_address, m_i2cAddressList));
-    ui->comboBox_AxisSource2->setCurrentIndex(Converter::EnumToIndex(axisCfg->source_secondary, m_axesList));
+    ui->comboBox_AxisSource2->setCurrentIndex(Converter::EnumToIndex(axisCfg->source_secondary, axesList()));
     ui->comboBox_Function->setCurrentIndex(Converter::EnumToIndex(axisCfg->function, m_functionList));
     // chanel
     ui->spinBox_ChanelEncoder->setValue(axisCfg->channel);
@@ -108,7 +109,7 @@ void AxesExtended::writeToConfig()
     axis_config_t *axisCfg = &gEnv.pDeviceConfig->config.axis_config[m_axisNumber];
     // I2C, sources, function
     axisCfg->i2c_address = m_i2cAddressList[ui->comboBox_I2cAddress->currentIndex()].deviceEnumIndex;
-    axisCfg->source_secondary = m_axesList[ui->comboBox_AxisSource2->currentIndex()].deviceEnumIndex;
+    axisCfg->source_secondary = axesList()[ui->comboBox_AxisSource2->currentIndex()].deviceEnumIndex;
     axisCfg->function = m_functionList[ui->comboBox_Function->currentIndex()].deviceEnumIndex;
     // chanel
     axisCfg->channel = ui->spinBox_ChanelEncoder->value();

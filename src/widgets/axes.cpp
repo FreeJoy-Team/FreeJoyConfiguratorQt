@@ -1,6 +1,25 @@
 #include "axes.h"
 #include "ui_axes.h"
 #include <QTimer>
+#include <QTranslator>
+#include "converter.h"
+
+const QVector <deviceEnum_guiName_t> &axesList()
+{
+    static const QVector <deviceEnum_guiName_t> aL =
+    {{
+        {0,      ("X")},
+        {1,      ("Y")},
+        {2,      ("Z")},
+        {3,      ("Rx")},
+        {4,      ("Ry")},
+        {5,      ("Rz")},
+        {6,      QCoreApplication::translate("Axes", "Slider 1")},
+        {7,      QCoreApplication::translate("Axes", "Slider 2")},
+    }};
+
+    return aL;
+}
 
 Axes::Axes(int axisNumber, QWidget *parent)
     : QWidget(parent)
@@ -14,7 +33,7 @@ Axes::Axes(int axisNumber, QWidget *parent)
     m_outputEnabled = ui->checkBox_Output->isChecked();
 
     m_axisNumber = axisNumber;
-    ui->groupBox_AxixName->setTitle(m_axesList[m_axisNumber].guiName);
+    ui->groupBox_AxixName->setTitle(axesList()[m_axisNumber].guiName);
 
     // add main source
     for (int i = 0; i < 2; ++i) {
@@ -254,18 +273,12 @@ void Axes::readFromConfig() // Converter::EnumToIndex(device_enum, list)
     ui->checkBox_Center->setChecked(axCfg->is_centered);
     ui->spinBox_CalibMax->setValue(axCfg->calib_max);
     // axes to buttons
-//    if (a2bCfg->is_enabled == 0) {
-//        m_lastA2bCount = 0;
-//        ui->spinBox_A2bCount->setValue(0);
-//    } else {
-//        m_lastA2bCount = a2bCfg->buttons_cnt;
-        ui->spinBox_A2bCount->setValue(a2bCfg->buttons_cnt);
-        if (a2bCfg->buttons_cnt > 0) {
-            for (int i = 0; i < a2bCfg->buttons_cnt + 1; ++i) {
-                ui->widget_A2bSlider->setPointValue(a2bCfg->points[i], i);
-            }
+    ui->spinBox_A2bCount->setValue(a2bCfg->buttons_cnt);
+    if (a2bCfg->buttons_cnt > 0) {
+        for (int i = 0; i < a2bCfg->buttons_cnt + 1; ++i) {
+            ui->widget_A2bSlider->setPointValue(a2bCfg->points[i], i);
         }
-//    }
+    }
     // axes extended settings
     m_axesExtend->readFromConfig();
 }
@@ -285,16 +298,7 @@ void Axes::writeToConfig()
     axCfg->is_centered = ui->checkBox_Center->isChecked();
     axCfg->calib_max = ui->spinBox_CalibMax->value();
     // axes to buttons
-//    if (ui->spinBox_A2bCount->value() >= m_kMinA2bButtons) {
-//        a2bCfg->is_enabled = 1;
-//    } else {
-//        a2bCfg->is_enabled = 0;
-//    }
-//    if (ui->spinBox_A2bCount->value() == 0) {
-//        a2bCfg->buttons_cnt = 1;
-//    } else {
-        a2bCfg->buttons_cnt = ui->spinBox_A2bCount->value();
-//    }
+    a2bCfg->buttons_cnt = ui->spinBox_A2bCount->value();
     for (int i = 0; i < ui->spinBox_A2bCount->value() + 1; ++i) {
         a2bCfg->points[i] = ui->widget_A2bSlider->pointValue(i);
     }

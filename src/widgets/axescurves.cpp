@@ -2,6 +2,7 @@
 #include "ui_axescurves.h"
 #include <QTimer>
 #include <cmath>
+#include "widgets/axes.h"
 
 AxesCurves::AxesCurves(int axisNumber, QWidget *parent)
     : QWidget(parent)
@@ -10,12 +11,10 @@ AxesCurves::AxesCurves(int axisNumber, QWidget *parent)
     ui->setupUi(this);
     m_axisNumber = axisNumber;
     m_currentProfile = 0;
-    ui->groupBox_Curve->setTitle(m_axesList[m_axisNumber].guiName);
+    ui->groupBox_Curve->setTitle(axesList()[m_axisNumber].guiName);
 
-    connect(ui->widget_AxesCurvesPlot,
-            SIGNAL(pointValueChanged(const int *, const int *)),
-            this,
-            SLOT(pointValueChanged(const int *, const int *)));
+    connect(ui->widget_AxesCurvesPlot, SIGNAL(pointValueChanged(const int *, const int *)),
+            this, SLOT(pointValueChanged(const int *, const int *)));
 }
 
 AxesCurves::~AxesCurves()

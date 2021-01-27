@@ -265,7 +265,7 @@ void PinComboBox::indexChanged(int index)
 }
 
 
-void PinComboBox::readFromConfig(uint pin)          // try?
+void PinComboBox::readFromConfig(uint pin)
 {
     for (int i = 0; i < m_enumIndex.size(); ++i) {
         if (gEnv.pDeviceConfig->config.pins[pin] == m_enumIndex[i])
@@ -276,7 +276,7 @@ void PinComboBox::readFromConfig(uint pin)          // try?
     }
 }
 
-void PinComboBox::writeToConfig(uint pin)           // if pin = 0 try?
+void PinComboBox::writeToConfig(uint pin)
 {   
     gEnv.pDeviceConfig->config.pins[pin] = m_currentDevEnum;
 }

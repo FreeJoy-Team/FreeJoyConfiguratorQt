@@ -46,7 +46,7 @@ void ButtonConfig::retranslateUi()
 // и пока не знаю как это решить
 void ButtonConfig::logicaButtonslCreator()
 {
-    static int tmp = 0;
+    static int tmp = 0;     //
     if (tmp >= MAX_BUTTONS_NUM) {
         if (MAX_BUTTONS_NUM != 128) {
             qCritical() << "buttonconfig.cpp MAX_BUTTONS_NUM != 128";
@@ -129,8 +129,8 @@ void ButtonConfig::setUiOnOff(int value)
         ui->spinBox_Shift5->setEnabled(false);
     }
     for (int i = 0; i < m_logicButtonPtrList.size(); ++i) {
-        m_logicButtonPtrList[i]->setMaxPhysButtons(value);
         m_logicButtonPtrList[i]->setSpinBoxOnOff(value);
+        m_logicButtonPtrList[i]->setMaxPhysButtons(value);
     }
 
     physButtonsSpawn(value);
@@ -140,7 +140,6 @@ void ButtonConfig::buttonStateChanged()
 {
     int number = 0;
     params_report_t *paramsRep = &gEnv.pDeviceConfig->paramsReport;
-    //joy_report_t *joyRep = &gEnv.pDeviceConfig->joyReport;
 
     // logical buttons state
     for (int i = 0; i < 16; i++) {
@@ -159,21 +158,6 @@ void ButtonConfig::buttonStateChanged()
     }
 
     // physical button state
-//    for (int i = 1; i < 9; i++) {
-//        for (int j = 0; j < 8; j++) {
-//            number = gEnv.pDeviceConfig->joyReport.raw_button_data[0] + j + (i - 1) * 8; //number = 64 + j + (i-1)*8;
-
-//            if ((gEnv.pDeviceConfig->joyReport.raw_button_data[i] & (1 << (j & 0x07)))) {
-//                if (number < m_PhysButtonPtrList.size()) {
-//                    m_PhysButtonPtrList[number]->setButtonState(true);
-//                }
-//            } else if ((gEnv.pDeviceConfig->joyReport.raw_button_data[i] & (1 << (j & 0x07))) == false) {
-//                if (number < m_PhysButtonPtrList.size()) {
-//                    m_PhysButtonPtrList[number]->setButtonState(false);
-//                }
-//            }
-//        }
-//    }
     for (int i = 0; i < 16; i++) {
         for (int j = 0; j < 8; j++) {
             number = j + (i) *8;

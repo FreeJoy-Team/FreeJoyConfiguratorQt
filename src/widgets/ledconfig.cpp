@@ -23,10 +23,10 @@ LedConfig::LedConfig(QWidget *parent)
         led->hide();
     }
     for (int i = 0; i < MAX_AXIS_NUM; ++i) {
-        ui->comboBox_axisConPA8->addItem(axesList[i].guiName);
-        ui->comboBox_axisConPB0->addItem(axesList[i].guiName);
-        ui->comboBox_axisConPB1->addItem(axesList[i].guiName);
-        ui->comboBox_axisConPB4->addItem(axesList[i].guiName);
+        ui->comboBox_axisConPA8->addItem(axesList()[i].guiName);
+        ui->comboBox_axisConPB0->addItem(axesList()[i].guiName);
+        ui->comboBox_axisConPB1->addItem(axesList()[i].guiName);
+        ui->comboBox_axisConPB4->addItem(axesList()[i].guiName);
     }
 }
 

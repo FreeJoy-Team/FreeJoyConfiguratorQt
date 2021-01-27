@@ -1,7 +1,6 @@
 #ifndef AXES_H
 #define AXES_H
 
-#include "converter.h"
 #include "widgets/axesextended.h"
 #include "widgets/axestobuttonsslider.h"
 #include <QWidget>
@@ -9,17 +8,7 @@
 #include "deviceconfig.h"
 #include "global.h"
 
-static const QVector <deviceEnum_guiName_t> axesList =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h // да бля вынести его уже в глобал
-{{
-    {0,      QT_TR_NOOP("X")},
-    {1,      QT_TR_NOOP("Y")},
-    {2,      QT_TR_NOOP("Z")},
-    {3,      QT_TR_NOOP("Rx")},
-    {4,      QT_TR_NOOP("Ry")},
-    {5,      QT_TR_NOOP("Rz")},
-    {6,      QT_TR_NOOP("Slider 1")},
-    {7,      QT_TR_NOOP("Slider 2")},
-}};
+const QVector <deviceEnum_guiName_t> &axesList();
 
 namespace Ui {
 class Axes;
@@ -71,7 +60,7 @@ private:
     int m_a2bButtonsCount;
     int m_lastA2bCount;
     int m_axisNumber;
-    const QString m_kStartCalStr = tr("Calibrate"); // const? а они переводятся?
+    const QString m_kStartCalStr = tr("Calibrate");
     const QString m_kStopCalStr = tr("Stop && Save");
     AxesExtended *m_axesExtend;
 
@@ -115,7 +104,7 @@ private:
     };
 
 
-    QVector <deviceEnum_guiName_t> m_axesPinList =      // любая последовательность, но первые 2 добавляются в конструкторе
+    const QVector <deviceEnum_guiName_t> m_axesPinList =      // любая последовательность, но первые 2 добавляются в конструкторе
     {{
         {None,     tr("None")},
         {Encoder,  tr("Encoder")},
@@ -152,22 +141,10 @@ private:
         {C15,      "C15"},
     }};
 
-    QVector <deviceEnum_guiName_t> m_axisSourceMain =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    const QVector <deviceEnum_guiName_t> m_axisSourceMain =      // порядов обязан быть как в common_types.h!!!!!!!!!!!
     {{
         {None,          tr("None")},
         {Encoder,       tr("Encoder")},
-    }};
-
-    QVector <deviceEnum_guiName_t> m_axesList =     // дублируется в axestobuttons.h , axescurves.h, axes.h, axesextended.h // да бля вынести его уже в глобал
-    {{
-        {0,      tr("X")},
-        {1,      tr("Y")},
-        {2,      tr("Z")},
-        {3,      tr("Rx")},
-        {4,      tr("Ry")},
-        {5,      tr("Rz")},
-        {6,      tr("Slider 1")},
-        {7,      tr("Slider 2")},
     }};
 };
 
