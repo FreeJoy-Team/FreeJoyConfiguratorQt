@@ -366,15 +366,17 @@ void HidDevice::writeConfigToDevice(uint8_t *buffer)
     if (reportCount == cfg_count) {
         qDebug() << "All config sent";
         while (timer.elapsed() < startTime + 2000) {
-            res = hid_read_timeout(m_paramsRead, buffer, BUFFERSIZE,100);
-            if (res < 0) {
-                hid_close(m_paramsRead);
-                m_paramsRead=nullptr;
-            } else if (buffer[1] == 0xFE) {
-                qDebug() << "ERROR! Version doesnt match";
-                m_currentWork = REPORT_ID_PARAM;
-                emit configSent(false);
-                return;
+            if (m_paramsRead) {
+                res = hid_read_timeout(m_paramsRead, buffer, BUFFERSIZE,100);
+                if (res < 0) {
+                    hid_close(m_paramsRead);
+                    m_paramsRead=nullptr;
+                } else if (buffer[1] == 0xFE) {
+                    qDebug() << "ERROR! Version doesnt match";
+                    m_currentWork = REPORT_ID_PARAM;
+                    emit configSent(false);
+                    return;
+                }
             }
         }
         m_currentWork = REPORT_ID_PARAM;
