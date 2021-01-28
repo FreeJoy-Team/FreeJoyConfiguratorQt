@@ -351,12 +351,42 @@ void MainWindow::deviceFlasherController(bool isStartFlash)
 
 
 
-                                            /////////////////////                 /////////////////////
+                                            /////////////////////    APP SETTINGS   /////////////////////
 
 // slot interface style changed
 void MainWindow::interfaceStyleChanged(bool isDark)
 {
     m_axesCurvesConfig->setDarkInterface(isDark);
+    if (isDark == false) {
+        setDefaultStyleSheet();
+    }
+}
+
+// we need set default styleSheet only for a small amount widgets
+// if i use w.setStyleSheet(ts.readAll()); load time increases by 500ms!
+// this function set styleSheet only for the necessary widgets
+void MainWindow::setDefaultStyleSheet()
+{
+    ui->pushButton_Wiki->setStyleSheet(
+    "QPushButton#pushButton_Wiki {"
+        "border: 1px solid;"
+        "border-color: rgb(173, 173, 173);"
+        "border-radius:15px;"
+        "padding:0px;"
+        "margin: 0px;"
+        "min-width: 30;"
+        "max-width: 30;"
+        "max-height: 30;"
+        "min-height: 30;"
+        "width: 30;"
+        "height: 30;"
+    "}"
+    "QPushButton#pushButton_Wiki:hover {"
+        "border: 1px solid;"
+        "border-color: rgb(0, 120, 215);"
+        "background-color: rgb(229, 241, 251);"
+        "border-radius:15px;"
+    "}");
 }
 
 // slot language change

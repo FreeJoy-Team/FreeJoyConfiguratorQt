@@ -10,7 +10,7 @@
 #include "global.h"
 GlobalEnvironment gEnv;
 #include "deviceconfig.h"
-
+#include <QTimer>
 // Get the default Qt message handler.
 static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
 
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 
     // slightly increased startup(+30-50ms) but
     // w.setStyleSheet(ts.readAll());  --  x7 faster style switch. details in advancedsettings.cpp AdvancedSettings::SetStyle()
-    if (style == "default") // ?
+    if (style == "default")
     {
         QFile f(":/styles/default.qss");
         if (!f.exists()) {
@@ -82,7 +82,11 @@ int main(int argc, char *argv[])
         } else {
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
-            w.setStyleSheet(ts.readAll());
+            //w.setStyleSheet(ts.readAll());
+            // we need set default styleSheet only for a small amount widgets
+            // if i use w.setStyleSheet(ts.readAll()); load time increases by 500ms!
+            // this function set styleSheet only for the necessary widgets
+            w.setDefaultStyleSheet();
         }
     } else if (style == "white") {
         QFile f(":qss/qss.qss");

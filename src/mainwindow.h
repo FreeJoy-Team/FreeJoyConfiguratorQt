@@ -36,6 +36,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void setDefaultStyleSheet();
 
 signals:
     void getConfigDone(bool success);
