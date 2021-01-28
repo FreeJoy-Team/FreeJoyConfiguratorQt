@@ -2,8 +2,8 @@
 #include "version.h"
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION     MAJOR_VERSION, MINOR_VERSION, CONFIGURATOR_VERSION, 0
-PRODUCTVERSION  MAJOR_VERSION, MINOR_VERSION, CONFIGURATOR_VERSION, 0
+FILEVERSION     MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, CONFIGURATOR_VERSION
+PRODUCTVERSION  MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, CONFIGURATOR_VERSION
 FILEOS          VOS_NT_WINDOWS32
 FILETYPE        VFT_APP
 BEGIN
@@ -11,8 +11,8 @@ BEGIN
     BEGIN
         BLOCK "000004B0"
         BEGIN
-            VALUE "FileVersion",      APP_VERSION "." xstr(BUILD_VERSION)
-            VALUE "ProductVersion",   APP_VERSION "." xstr(BUILD_VERSION)
+            VALUE "FileVersion",      APP_VERSION
+            VALUE "ProductVersion",   APP_VERSION
             VALUE "FileDescription",  "FreeJoyConfiguratorQt"
             VALUE "ProductName",      "FreeJoyConfiguratorQt"
             VALUE "InternalName",     "FreeJoyConfiguratorQt"
