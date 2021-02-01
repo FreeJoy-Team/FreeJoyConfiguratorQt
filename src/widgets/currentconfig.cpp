@@ -30,7 +30,7 @@ CurrentConfig::~CurrentConfig()
 void CurrentConfig::setConfig(int type, int changedHowMuch)
 {
     if (type == AXIS_SOURCE){      //int source_enum, bool is_add      axesSourceChanged
-        m_axisSources+=changedHowMuch;
+        m_axisSources += changedHowMuch;
         ui->label_AxisSources->setNum(m_axisSources);
 //        if (changedHowMuch > 0){
 //            emit axesSourceChanged(pinNumber - 1, true);
@@ -39,35 +39,37 @@ void CurrentConfig::setConfig(int type, int changedHowMuch)
 //        }
     }
     else if (type == SINGLE_BUTTON){
-        m_singleButtons+=changedHowMuch;
+        m_singleButtons += changedHowMuch;
         ui->label_SingleButtons->setNum(m_singleButtons);
         ui->label_TotalButtons->setNum(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
         totalButtonsChanged(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
     }
     else if (type == ROW_OF_BUTTONS){
-        m_rowsOfButtons+=changedHowMuch;
+        m_rowsOfButtons += changedHowMuch;
         ui->label_RowsOfButtons->setNum(m_rowsOfButtons);
+        ui->label_ButtonsFromMatrix->setNum(m_columnsOfButtons * m_rowsOfButtons);
         ui->label_TotalButtons->setNum(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
         totalButtonsChanged(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
     }
     else if (type == COLUMN_OF_BUTTONS){
-        m_columnsOfButtons+=changedHowMuch;
+        m_columnsOfButtons += changedHowMuch;
         ui->label_ColumnsOfButtons->setNum(m_columnsOfButtons);
+        ui->label_ButtonsFromMatrix->setNum(m_columnsOfButtons * m_rowsOfButtons);
         ui->label_TotalButtons->setNum(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
         totalButtonsChanged(m_buttonsFromShiftRegs + m_buttonsFromAxes + m_singleButtons + (m_columnsOfButtons * m_rowsOfButtons));
     }
     else if (type == SINGLE_LED){
-        m_singleLed+=changedHowMuch;
+        m_singleLed += changedHowMuch;
         ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
         emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
     }
     else if (type == ROW_OF_LED){
-        m_rowsOfLed+=changedHowMuch;
+        m_rowsOfLed += changedHowMuch;
         ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
         emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
     }
     else if (type == COLUMN_OF_LED){
-        m_columnsOfLed+=changedHowMuch;
+        m_columnsOfLed += changedHowMuch;
         ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
         emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
     }
