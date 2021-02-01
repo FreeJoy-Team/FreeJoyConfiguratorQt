@@ -61,6 +61,8 @@ void DebugWindow::resetPacketsCount()
 
     m_timer.invalidate();
     ui->label_PacketsSpeed->setText(tr("0 ms"));
+
+    buttonLogReset();
 }
 
 void DebugWindow::printMsg(const QString &msg)
@@ -82,7 +84,7 @@ void DebugWindow::printMsg(const QString &msg)
 
 void DebugWindow::logicalButtonState(int buttonNumber, bool state)
 {
-    if (gEnv.pDebugWindow) {
+    if (gEnv.pDebugWindow) { //?
         if (state) {
             ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
                                                              + QString::number(buttonNumber) + tr(" pressed") + '\n');
@@ -93,6 +95,12 @@ void DebugWindow::logicalButtonState(int buttonNumber, bool state)
             ui->textBrowser_ButtonsUnpressLog->moveCursor(QTextCursor::End);
         }
     }
+}
+
+void DebugWindow::buttonLogReset()
+{
+    ui->textBrowser_ButtonsPressLog->clear();
+    ui->textBrowser_ButtonsUnpressLog->clear(); // need to improve
 }
 
 void DebugWindow::on_checkBox_WriteLog_clicked(bool checked)

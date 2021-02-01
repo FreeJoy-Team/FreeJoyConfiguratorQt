@@ -51,7 +51,7 @@ private:
     bool m_shift4_act;
     bool m_shift5_act;
 
-    void logicaButtonslCreator();
+    void logicaButtonsCreator();
 
     QList<ButtonLogical *> m_logicButtonPtrList;
     QList<ButtonPhysical *> m_PhysButtonPtrList;

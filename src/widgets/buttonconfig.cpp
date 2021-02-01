@@ -25,7 +25,7 @@ ButtonConfig::ButtonConfig(QWidget *parent)
                 this, SLOT(functionTypeChanged(int, int, int)));
     }
 
-    logicaButtonslCreator();
+    logicaButtonsCreator();
 }
 
 ButtonConfig::~ButtonConfig()
@@ -44,26 +44,26 @@ void ButtonConfig::retranslateUi()
 // dynamic initialization of widgets. its decrease app startup time
 // в идеале надо и создавать виджеты здесь, но возникает проблема - долго открывается вкладка
 // и пока не знаю как это решить
-void ButtonConfig::logicaButtonslCreator()
+void ButtonConfig::logicaButtonsCreator()
 {
     static int tmp = 0;     //
     if (tmp >= MAX_BUTTONS_NUM) {
         if (MAX_BUTTONS_NUM != 128) {
             qCritical() << "buttonconfig.cpp MAX_BUTTONS_NUM != 128";
         }
-        qDebug() << "LogicaButtonslCreator() finished";
+        qDebug() << "LogicaButtonsCreator() finished";
         emit logicalButtonsCreated();
         return;
     }
     // как я понял таймер срабатывает после полной загрузки приложения(оно отобразится)
-    // т.к. в LogicaButtonslCreator заходит при инициализации, но срабатывает после запуска приложения
-    QTimer::singleShot(10, [&] {
+    // т.к. в LogicaButtonsCreator заходит при инициализации, но срабатывает после запуска приложения
+    QTimer::singleShot(10, this, [&] {
         for (int i = 0; i < 8; i++) // MAX_BUTTONS_NUM(128)/8 = 16 ДОЛЖНО ДЕЛИТЬСЯ БЕЗ ОСТАТКА
         {
             m_logicButtonPtrList[tmp]->initialization();
             tmp++;
         }
-        logicaButtonslCreator();
+        logicaButtonsCreator();
     });
 }
 

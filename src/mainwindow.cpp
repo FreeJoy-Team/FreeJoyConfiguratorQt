@@ -240,6 +240,11 @@ void MainWindow::hideConnectDeviceInfo()
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     m_advSettings->flasher()->deviceConnected(false);
+//    // reset paramsReport
+//    memset(&gEnv.pDeviceConfig->paramsReport, 0, sizeof(gEnv.pDeviceConfig->paramsReport));
+//    uint8_t tmp[64]{};        // todo
+//    getParamsPacket(tmp);
+    // debug window
     if (m_debugWindow) {
         m_debugWindow->resetPacketsCount();
     }

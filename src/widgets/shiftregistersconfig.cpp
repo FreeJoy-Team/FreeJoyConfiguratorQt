@@ -58,7 +58,7 @@ void ShiftRegistersConfig::shiftRegSelected(int latchPin, int dataPin, const QSt
     // add shift reg latch pin
     if (latchPin != 0){
         if (latchPin > 0){
-            m_latchPinsArray[m_latchPinsArray.size() - 1].pinNumber = latchPin;       // latch_pins_array.size() - 1// мб сделать отдельную переменную?
+            m_latchPinsArray[m_latchPinsArray.size() - 1].pinNumber = latchPin;
             m_latchPinsArray[m_latchPinsArray.size() - 1].guiName = pinGuiName;
         }
         // delete shift reg latch pin

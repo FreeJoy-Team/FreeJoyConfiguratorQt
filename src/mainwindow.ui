@@ -55,7 +55,7 @@ border: 1px solid rgb(173, 173, 173);
 }</string>
       </property>
       <property name="currentIndex">
-       <number>8</number>
+       <number>0</number>
       </property>
       <property name="movable">
        <bool>true</bool>
@@ -100,7 +100,7 @@ border: 1px solid rgb(173, 173, 173);
       </widget>
       <widget class="QWidget" name="tab_AxesConfig">
        <attribute name="title">
-        <string> Axis Config </string>
+        <string> Axes Config </string>
        </attribute>
        <layout class="QVBoxLayout" name="layoutV_tabAxesConfig">
         <property name="spacing">
@@ -122,7 +122,7 @@ border: 1px solid rgb(173, 173, 173);
       </widget>
       <widget class="QWidget" name="tab_AxesCurves">
        <attribute name="title">
-        <string> Axis Curves </string>
+        <string> Axes Curves </string>
        </attribute>
        <layout class="QVBoxLayout" name="layoutV_tabAxesCurvesConfig">
         <property name="spacing">
@@ -496,20 +496,6 @@ border-color: rgb(170, 0, 255);</string>
 border-color: rgb(182, 182, 182);</string>
         </property>
        </widget>
-       <widget class="AxesCurvesProfiles" name="widget_10" native="true">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>460</y>
-          <width>121</width>
-          <height>101</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 1px solid;
-border-color: rgb(182, 182, 182);</string>
-        </property>
-       </widget>
        <widget class="AxesCurvesProfiles" name="widget_11" native="true">
         <property name="geometry">
          <rect>
@@ -668,8 +654,7 @@ border-color: rgb(182, 182, 182);</string>
        <item row="2" column="1">
         <widget class="QPushButton" name="pushButton_Wiki">
          <property name="styleSheet">
-          <string notr="true">
-</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string/>

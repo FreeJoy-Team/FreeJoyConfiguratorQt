@@ -361,6 +361,7 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     }
     qDebug()<<"LoadDeviceConfigFromFile() finished";
 
+    // old configs handler
     if (devC->firmware_version != FIRMWARE_VERSION) {
         qDebug()<<"Firmware warning";
         if (devC->firmware_version == 0x1624 || devC->firmware_version == 0x1623 ||
@@ -372,7 +373,13 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
                 QMessageBox::warning(this, tr("Firmware version!"), warning + " " + differences);
                 devC->pins[19] = devC->pins[20] = NOT_USED;
             } else {
-                QMessageBox::warning(this, tr("Firmware version!"), warning);
+                //QMessageBox::information(this, tr("Firmware version!"), warning);
+                qDebug()<<"Loaded old config file";
+            }
+            for (int i = 0; i < MAX_AXIS_NUM; ++i) {
+                if (devC->axes_to_buttons[i].buttons_cnt == 1) {
+                    devC->axes_to_buttons[i].buttons_cnt = 0;
+                }
             }
         }
         devC->firmware_version = FIRMWARE_VERSION;

@@ -31,6 +31,7 @@ private slots:
 
 private:
     Ui::DebugWindow *ui;
+    void buttonLogReset();
 
     int m_packetsCount;
     QElapsedTimer m_timer;
