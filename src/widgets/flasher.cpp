@@ -106,6 +106,11 @@ void Flasher::flashStatus(int status, int percent)
         ui->pushButton_FlashFirmware->setStyleSheet(m_defaultButtonStyle
                                                     + "color: white; background-color: rgb(200, 128, 0);");
         flashDone();
+    } else if (status == 666) {
+        ui->pushButton_FlashFirmware->setText(tr("ERROR"));
+        ui->pushButton_FlashFirmware->setStyleSheet(m_defaultButtonStyle
+                                                    + "color: white; background-color: rgb(200, 0, 0);");
+        flashDone();
     }
 }
 

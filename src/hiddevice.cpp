@@ -6,7 +6,7 @@
 #include "common_defines.h"
 #include "firmwareupdater.h"
 
-#define FLASHER_VID 0x0483
+#define REPORT_ID_FLASH 4
 
 void HidDevice::processData()
 {
@@ -46,8 +46,8 @@ void HidDevice::processData()
             }
             while(hidDevInfo) {
                 // flasher connected
-                if(QString::fromWCharArray(hidDevInfo->product_string) == "FreeJoy Flasher"){
-                    if (!m_flasher){
+                if(QString::fromWCharArray(hidDevInfo->product_string) == "FreeJoy Flasher") {
+                    if (!m_flasher) {
                         m_flasher = hidDevInfo;
                         m_HidDevicesAdrList.clear();
                         m_devicesNames.clear();
@@ -57,8 +57,8 @@ void HidDevice::processData()
                         emit flasherFound(true);
                     }
                     hidDevInfo = hidDevInfo->next;
-                    if (m_currentWork == REPORT_ID_FIRMWARE)
-                    {
+
+                    if (m_currentWork == REPORT_ID_FIRMWARE) {
                         flashFirmwareToDevice();
                         // flash done
                         m_flasher = nullptr;
@@ -122,8 +122,8 @@ void HidDevice::processData()
                     const char *path = m_HidDevicesAdrList[m_selectedDevice]->path;
 
                     qDebug().nospace()<<"Open HID device №"<<m_selectedDevice + 1
-                                     <<". VID"<<QString::number(vid, 16).toInt()
-                                    <<", PID"<<QString::number(pid, 16).toInt()
+                                     <<". VID"<<QString::number(vid, 16).toUpper().rightJustified(4, '0')
+                                    <<", PID"<<QString::number(pid, 16).toUpper().rightJustified(4, '0')
                                    <<", Serial number "<<QString::fromWCharArray(serNum);
                     m_paramsRead = hid_open_path(path);
 
@@ -159,7 +159,7 @@ void HidDevice::processData()
                     #endif
                 }
                 // write config to device
-                else if (m_currentWork == REPORT_ID_CONFIG_OUT) {
+                else if (m_currentWork == REPORT_ID_CONFIG_OUT) { ////////////// ХУЁВО ПАШЕТ редко
                     writeConfigToDevice(buffer);
                     // disconnect all devices
                     emit deviceDisconnected();
@@ -394,7 +394,8 @@ void HidDevice::flashFirmwareToDevice()
     qDebug()<<"flash size = "<<m_firmware->size();
     if(m_flasher)
     {
-        hid_device* flasher = hid_open(FLASHER_VID, m_flasher->product_id, m_flasher->serial_number);;
+        //hid_device* flasher = hid_open(FLASHER_VID, m_flasher->product_id, m_flasher->serial_number);
+        hid_device* flasher = hid_open_path(m_flasher->path);
         qint64 millis;
         QElapsedTimer time;
         time.start();
@@ -405,7 +406,7 @@ void HidDevice::flashFirmwareToDevice()
         uint16_t crc16 = FirmwareUpdater::computeChecksum(m_firmware);
         int update_percent = 0;
 
-        flash_buffer[0] = REPORT_ID_FIRMWARE;
+        flash_buffer[0] = REPORT_ID_FLASH;
         flash_buffer[1] = 0;
         flash_buffer[2] = 0;
         flash_buffer[3] = 0;
@@ -417,7 +418,7 @@ void HidDevice::flashFirmwareToDevice()
         hid_write(flasher, flash_buffer, BUFFERSIZE);
 
         int res = 0;
-        uint8_t buffer[BUFFERSIZE]={0};
+        uint8_t buffer[BUFFERSIZE]{};
         while (time.elapsed() < millis + 30000) // 30 сек на прошивку
         {
             if (flasher){
@@ -426,16 +427,16 @@ void HidDevice::flashFirmwareToDevice()
                     hid_close(flasher);
                     flasher=nullptr;
                     //flasher_ = nullptr;
-                    break;
+                    return;
                 } else {
-                    if (buffer[0] == REPORT_ID_FIRMWARE) {
+                    if (buffer[0] == REPORT_ID_FLASH) {
                         memset(flasher_device_buffer, 0, BUFFERSIZE);
                         memcpy(flasher_device_buffer, buffer, BUFFERSIZE);
                     }
                 }
             }
 
-            if (flasher_device_buffer[0] == REPORT_ID_FIRMWARE)
+            if (flasher_device_buffer[0] == REPORT_ID_FLASH)
             {
                 uint16_t cnt = (uint16_t)(flasher_device_buffer[1] << 8 | flasher_device_buffer[2]);
                 if ((cnt & 0xF000) == 0xF000)  // status packet
@@ -446,35 +447,35 @@ void HidDevice::flashFirmwareToDevice()
                         hid_close(flasher);
                         //flasher_ = nullptr;
                         emit flashStatus(SIZE_ERROR, update_percent);
-                        break;
+                        return;
                     }
                     else if (cnt == 0xF002) // CRC error
                     {
                         hid_close(flasher);
                         //flasher_ = nullptr;
                         emit flashStatus(CRC_ERROR, update_percent);
-                        break;
+                        return;
                     }
                     else if (cnt == 0xF003) // flash erase error
                     {
                         hid_close(flasher);
                         //flasher_ = nullptr;
                         emit flashStatus(ERASE_ERROR, update_percent);
-                        break;
+                        return;
                     }
                     else if (cnt == 0xF000) // OK
                     {
                         hid_close(flasher);
                         //flasher_ = nullptr;
                         emit flashStatus(FINISHED, update_percent);
-                        break;
+                        return;
                     }
                 }
                 else
                 {
                     qDebug()<<"Firmware packet requested:"<<cnt;
 
-                    flash_buffer[0] = REPORT_ID_FIRMWARE;
+                    flash_buffer[0] = REPORT_ID_FLASH;
                     flash_buffer[1] = (uint8_t)(cnt >> 8);
                     flash_buffer[2] = (uint8_t)(cnt & 0xFF);
                     flash_buffer[3] = 0;
@@ -500,6 +501,9 @@ void HidDevice::flashFirmwareToDevice()
                 }
             }
         }
+        hid_close(flasher);
+        //flasher_ = nullptr;
+        emit flashStatus(666, update_percent);
     }
 }
 
