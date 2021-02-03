@@ -35,6 +35,7 @@ SOURCES += \
     mousewheelguard.cpp \
     reportconverter.cpp \
     stm_main.c \
+    switchbutton.cpp \
     widgets/advancedsettings.cpp \
     widgets/axes.cpp \
     widgets/axesconfig.cpp \
@@ -75,6 +76,7 @@ HEADERS += \
     mousewheelguard.h \
     reportconverter.h \
     stm_main.h \
+    switchbutton.h \
     version.h \
     widgets/advancedsettings.h \
     widgets/axes.h \

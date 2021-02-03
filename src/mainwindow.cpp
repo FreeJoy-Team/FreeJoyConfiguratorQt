@@ -144,6 +144,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_advSettings, &AdvancedSettings::interfaceStyleChanged, this, &MainWindow::interfaceStyleChanged);
     // font changed
     connect(m_advSettings, &AdvancedSettings::fontChanged, this, &MainWindow::setFont);
+    // style switch
+    connect(ui->widget_StyleSwitch, &SwitchButton::currentIndexChanged, this, &MainWindow::styleSwitched);
 
 
     // enter flash mode clicked
@@ -651,6 +653,55 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
 void MainWindow::on_pushButton_Wiki_clicked()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/FreeJoy-Team/FreeJoyWiki"));
+}
+// style
+#include <QCheckBox>
+void MainWindow::styleSwitched(int index)
+{
+    setCursor(Qt::WaitCursor);
+    QString path;
+    if (index == 0) {
+        path = ":/styles/default.qss";
+    } else if (index == 1) {
+        path = ":qss/qss.qss";
+    } else {
+        path = ":qdarkstyle/style.qss";
+    }
+
+    QFile f(path);
+    if (!f.open(QFile::ReadOnly | QFile::Text)) {
+        qDebug() << "Unable to set stylesheet, file not found\n";
+    } else {
+        QElapsedTimer timer;
+        timer.start();
+
+        for (auto &&child : window()->findChildren<QComboBox *>()) {
+            child->hide();
+        }
+        for (auto &&child : window()->findChildren<QCheckBox *>()) {
+            child->hide();
+        }
+        for (auto &&child : window()->findChildren<QSpinBox *>()) {
+            child->hide();
+        }
+
+        window()->setStyleSheet(QLatin1String(f.readAll()));
+        qApp->setStyleSheet(QLatin1String(""));
+
+        for (auto &&child : window()->findChildren<QComboBox *>()) {
+            child->show();
+        }
+        for (auto &&child : window()->findChildren<QCheckBox *>()) {
+            child->show();
+        }
+        for (auto &&child : window()->findChildren<QSpinBox *>()) {
+            child->show();
+        }
+
+        qDebug() << "Style changed in" <<timer.elapsed() <<"ms";
+        f.close();
+    }
+    unsetCursor();
 }
 
 

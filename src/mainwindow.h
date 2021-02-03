@@ -17,6 +17,7 @@
 #include "widgets/ledconfig.h"
 #include "widgets/pinconfig.h"
 #include "widgets/shiftregistersconfig.h"
+#include "switchbutton.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -76,6 +77,8 @@ private slots:
     void on_pushButton_TestButton_2_clicked();
 
     void on_pushButton_Wiki_clicked();
+
+    void styleSwitched(int index);
 
 private:
     Ui::MainWindow *ui;

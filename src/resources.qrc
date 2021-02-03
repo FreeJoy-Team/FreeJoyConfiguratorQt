@@ -19,5 +19,8 @@
         <file>Images/pinout.png</file>
         <file>Images/ST_wiki.png</file>
         <file>Images/ST_wiki_dark.png</file>
+        <file>Images/moon.png</file>
+        <file>Images/sun.png</file>
+        <file>Images/cloud.png</file>
     </qresource>
 </RCC>
