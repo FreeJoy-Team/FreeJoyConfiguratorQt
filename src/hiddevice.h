@@ -35,7 +35,7 @@ signals:
     void configReceived(bool is_success);
     void configSent(bool is_success);
 
-    void hidDeviceList(const QStringList &deviceList);
+    void hidDeviceList(const QList<QPair<bool, QString>> &deviceNames);
 
     void flasherFound(bool is_found);
     void flashStatus(int status, int percent);
@@ -47,15 +47,14 @@ private:
     volatile int m_selectedDevice = -1;
     volatile int m_currentWork;
 
-    void updateHidNames(const QList<hid_device_info *> &newHidDevicesAdrList);
+    bool m_oldFirmwareSelected;
 
     void readConfigFromDevice(uint8_t *buffer);
     void writeConfigToDevice(uint8_t *buffer);
     void flashFirmwareToDevice();
 
-    QStringList m_devicesNames;
+    QList<QPair<bool, QString>> m_deviceNames;
     uint8_t m_deviceBuffer[BUFFERSIZE];
-    dev_config_t m_deviceConfig; // ????
     QList<hid_device_info *> m_HidDevicesAdrList;
     hid_device_info *m_flasher;
     const QByteArray *m_firmware;

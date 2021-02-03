@@ -116,12 +116,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
                                             //////////////// SIGNASL-SLOTS ////////////////
-                ///////// GET / SEND  CONFIG ///////
+    // get/send config
     connect(this, &MainWindow::getConfigDone, this, &MainWindow::configReceived);
     connect(this, &MainWindow::sendConfigDone, this, &MainWindow::configSent);
 
 
-               /////////      /////////////
     // buttons pin changed
     connect(m_pinConfig, &PinConfig::totalButtonsValueChanged, m_buttonConfig, &ButtonConfig::setUiOnOff);
     // LEDs changed
@@ -227,9 +226,16 @@ void MainWindow::showConnectDeviceInfo()
     } else {
         ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("device connected"));
     }
-    ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
-    ui->pushButton_ReadConfig->setEnabled(true);
-    ui->pushButton_WriteConfig->setEnabled(true);
+    if (ui->comboBox_HidDeviceList->itemData(ui->comboBox_HidDeviceList->currentIndex()).toInt() != 1) {
+        ui->pushButton_WriteConfig->setEnabled(true);
+        ui->pushButton_ReadConfig->setEnabled(true);
+        ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+    } else {
+        // for old firmware
+        ui->pushButton_WriteConfig->setEnabled(false);
+        ui->pushButton_ReadConfig->setEnabled(false);
+        ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
+    }
     m_advSettings->flasher()->deviceConnected(true);
 }
 // device disconnected
@@ -272,14 +278,21 @@ void MainWindow::flasherConnected()
 }
 
 // add/delete hid devices to/from combobox
-void MainWindow::hidDeviceList(const QStringList &deviceList)
+void MainWindow::hidDeviceList(const QList<QPair<bool, QString>> &deviceNames)
 {
-    if (deviceList.size() == 0) {
+    if (deviceNames.size() == 0) {
         ui->comboBox_HidDeviceList->clear();
         return;
     } else {
         ui->comboBox_HidDeviceList->clear();
-        ui->comboBox_HidDeviceList->addItems(deviceList);
+        for (int i = 0; i < deviceNames.size(); ++i) {
+            if (deviceNames[i].first) {
+                // for old firmware
+                ui->comboBox_HidDeviceList->addItem("ONLY FLASH " + deviceNames[i].second, 1);
+            } else {
+                ui->comboBox_HidDeviceList->addItem(deviceNames[i].second);
+            }
+        }
     }
 }
 

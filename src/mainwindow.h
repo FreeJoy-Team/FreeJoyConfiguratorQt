@@ -18,11 +18,6 @@
 #include "widgets/pinconfig.h"
 #include "widgets/shiftregistersconfig.h"
 
-/* Defining */
-//#define ORGANIZATION_NAME "FreeJoy"
-//#define ORGANIZATION_DOMAIN "https://github.com/FreeJoy-Team"
-//#define APPLICATION_NAME "FreeJoy QtConfigurator"
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -53,7 +48,7 @@ private slots:
 
     void deviceFlasherController(bool isStartFlash);
 
-    void hidDeviceList(const QStringList &deviceList);
+    void hidDeviceList(const QList<QPair<bool, QString>> &deviceNames);
     void hidDeviceListChanged(int index);
 
     void languageChanged(const QString &language);
@@ -74,8 +69,6 @@ private slots:
     void on_pushButton_SetDefaultConfig_clicked();
     void on_pushButton_LoadDefaultConfig_clicked();
 
-    //void addvalues(int);
-
     void on_pushButton_TestButton_clicked();
 
     void on_pushButton_ShowDebug_clicked();
@@ -86,7 +79,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    //QTranslator m_translator;
 
     QThread *m_thread;            // smart pointer?
     HidDevice *m_hidDeviceWorker; // smart pointer?
@@ -107,18 +99,16 @@ private:
     DebugWindow *m_debugWindow = nullptr;
     bool m_debugIsEnable;
 
-    QString m_buttonDefaultStyle; // мб статик в функции?
-                                  //    int index_device_before_write_;
+    QString m_buttonDefaultStyle;
 
     void readFromConfig();
     void writeToConfig();
+    void oldConfigHandler();
 
     void loadAppConfig();
     void saveAppConfig();
 
     void loadDeviceConfigFromFile(QSettings *deviceSettings);
     void saveDeviceConfigToFile(QSettings *deviceSettings);
-
-    //void moveEvent(QMoveEvent *event);
 };
 #endif // MAINWINDOW_H

@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     //qputenv("QT_SCALE_FACTOR", "0.8");
+    qRegisterMetaType<QList<QPair<bool, QString>> >();
 
     QElapsedTimer time;
     time.start();

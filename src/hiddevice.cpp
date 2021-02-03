@@ -1,12 +1,14 @@
 #include <QThread>
 #include <QDebug>
 #include <QElapsedTimer>
+#include <QMap>
 #include "hiddevice.h"
 #include "hidapi.h"
 #include "common_defines.h"
 #include "firmwareupdater.h"
 
 #define REPORT_ID_FLASH 4
+#define OLD_FIRMWARE_VID 0x0483
 
 void HidDevice::processData()
 {
@@ -19,7 +21,8 @@ void HidDevice::processData()
     bool change = false;
     bool noDeviceSent = false;
     m_flasher = nullptr;
-    QList<hid_device_info*> tmp_HidDevicesAdrList;
+    QList<QPair<bool, hid_device_info*>> tmp_HidList;
+
     hid_device_info *hidDevInfo;
     uint8_t buffer[BUFFERSIZE]{};
 
@@ -37,22 +40,22 @@ void HidDevice::processData()
             hidDevInfo = hid_enumerate(0x0, 0x0);
             if (!hidDevInfo && (noDeviceSent == false || m_flasher))
             {
-                m_devicesNames.clear();
+                m_deviceNames.clear();
                 m_HidDevicesAdrList.clear();
-                emit hidDeviceList(m_devicesNames);
+                emit hidDeviceList(m_deviceNames);
                 noDeviceSent = true;
                 m_flasher = nullptr;
                 emit flasherFound(false);
             }
             while(hidDevInfo) {
-                // flasher connected
+                // flasher search
                 if(QString::fromWCharArray(hidDevInfo->product_string) == "FreeJoy Flasher") {
                     if (!m_flasher) {
                         m_flasher = hidDevInfo;
                         m_HidDevicesAdrList.clear();
-                        m_devicesNames.clear();
-                        m_devicesNames << "FreeJoy Flasher";
-                        emit hidDeviceList(m_devicesNames);
+                        m_deviceNames.clear();
+                        m_deviceNames.append(QPair(false, "FreeJoy Flasher"));
+                        emit hidDeviceList(m_deviceNames);
                         emit flasherConnected();
                         emit flasherFound(true);
                     }
@@ -63,8 +66,8 @@ void HidDevice::processData()
                         // flash done
                         m_flasher = nullptr;
                         m_currentWork = REPORT_ID_PARAM;
-                        m_devicesNames.clear();
-                        emit hidDeviceList(m_devicesNames);
+                        m_deviceNames.clear();
+                        emit hidDeviceList(m_deviceNames);
                         emit deviceConnected();
                         hid_free_enumeration(hidDevInfo);   // hz nado li
                         QThread::msleep(300);
@@ -72,36 +75,39 @@ void HidDevice::processData()
                     }
                     break;//continue
                 }
+
                 // add devices ptr to list
                 if (QString::fromWCharArray(hidDevInfo->manufacturer_string) == "FreeJoy" && hidDevInfo->interface_number == 1) {
-                    tmp_HidDevicesAdrList.append(hidDevInfo);
+                    tmp_HidList.append(QPair(false, hidDevInfo));
+                } else if (hidDevInfo->vendor_id == OLD_FIRMWARE_VID && QString::fromWCharArray(hidDevInfo->manufacturer_string) != "FreeJoy" &&
+                           hidDevInfo->interface_number == 0)
+                {
+                    tmp_HidList.append(QPair(true, hidDevInfo));
                 }
                 hidDevInfo = hidDevInfo->next;
                 // all devices added
                 if (!hidDevInfo) {
                     // old devices count != new devices count
-                    if (m_HidDevicesAdrList.size() != tmp_HidDevicesAdrList.size()) {
+                    if (m_HidDevicesAdrList.size() != tmp_HidList.size()) {
                         m_HidDevicesAdrList.clear();
-                        m_devicesNames.clear();
+                        m_deviceNames.clear();
                         noDeviceSent = false;
-                        for (int i = 0; i < tmp_HidDevicesAdrList.size(); ++i) {
-                            m_HidDevicesAdrList.append(tmp_HidDevicesAdrList[i]);
-                            m_devicesNames << QString::fromWCharArray(tmp_HidDevicesAdrList[i]->product_string);
+                        for (int i = 0; i < tmp_HidList.size(); ++i) {
+                            qDebug()<<tmp_HidList.size();
+                            m_HidDevicesAdrList.append(tmp_HidList[i].second);
+                            m_deviceNames.append(QPair(tmp_HidList[i].first, QString::fromWCharArray(tmp_HidList[i].second->product_string)));
                         }
-                        emit hidDeviceList(m_devicesNames);
-                        tmp_HidDevicesAdrList.clear();
+                        emit hidDeviceList(m_deviceNames);
+                        tmp_HidList.clear();
                         deviceCountChanged = true;
                         if (m_flasher) {
                             m_flasher = nullptr;
                             emit flasherFound(false);
                         }
-                    } else if (m_paramsRead) {
-                        // update devices names
-                        updateHidNames(tmp_HidDevicesAdrList);
                     }
                 }
             }
-            tmp_HidDevicesAdrList.clear();
+            tmp_HidList.clear();
             //hid_free_enumeration(hidDevInfo);
             change = false;
         }
@@ -131,6 +137,12 @@ void HidDevice::processData()
                         emit deviceConnected();
                         oldSelectedDevice = m_selectedDevice;
                         deviceCountChanged = false;
+                        // for old firmware
+                        if (m_deviceNames[m_selectedDevice].first) {
+                            m_oldFirmwareSelected = true;
+                        } else {
+                            m_oldFirmwareSelected = false;
+                        }
                         qDebug()<<"HID opened, connected devices ="<<m_HidDevicesAdrList.size();
                     }
                 }
@@ -138,7 +150,7 @@ void HidDevice::processData()
             // device connected
             if (m_paramsRead) {
                 // read joy report
-                if (m_currentWork == REPORT_ID_PARAM) {
+                if (m_currentWork == REPORT_ID_PARAM && !m_oldFirmwareSelected) {
                     res=hid_read_timeout(m_paramsRead, buffer, BUFFERSIZE,10000);
                     if (res < 0) {
                         hid_close(m_paramsRead);
@@ -163,8 +175,8 @@ void HidDevice::processData()
                     writeConfigToDevice(buffer);
                     // disconnect all devices
                     emit deviceDisconnected();
-                    m_devicesNames.clear();
-                    emit hidDeviceList(m_devicesNames);
+                    m_deviceNames.clear();
+                    emit hidDeviceList(m_deviceNames);
                     m_HidDevicesAdrList.clear();
                     oldSelectedDevice = m_selectedDevice = -1;
                     #ifdef QT_DEBUG
@@ -178,27 +190,6 @@ void HidDevice::processData()
     //hid_free_enumeration(hidDevInfo);
 }
 
-// i think this is not necessary
-void HidDevice::updateHidNames(const QList<hid_device_info *> &newHidDevicesAdrList)
-{
-    static bool change = false;
-    static QElapsedTimer timer;
-    if (!change) {
-        timer.start();
-        change = true;
-    } else if (timer.elapsed() > 3000) {
-        QStringList str;
-        for (int i = 0; i < newHidDevicesAdrList.size(); ++i) {
-            str << QString::fromWCharArray(newHidDevicesAdrList[i]->product_string);
-        }
-        if (str != m_devicesNames) {
-            qDebug()<<"devices names updated";
-            emit hidDeviceList(str);
-            m_devicesNames = str;
-        }
-        change = false;
-    }
-}
 
 // another device selected in comboBox
 void HidDevice::setSelectedDevice(int deviceNumber)
@@ -533,10 +524,12 @@ bool HidDevice::enterToFlashMode()
         QElapsedTimer time;
         time.start();
         millis = time.elapsed();
-        qDebug()<<"before hid_write";
-        uint8_t config_buffer[64] = {REPORT_ID_FIRMWARE,'b','o','o','t','l','o','a','d','e','r',' ','r','u','n'};
+        uint8_t report = REPORT_ID_FIRMWARE;
+        if (m_oldFirmwareSelected) {
+            report = 4;
+        }
+        uint8_t config_buffer[64] = {report,'b','o','o','t','l','o','a','d','e','r',' ','r','u','n'};
         hid_write(m_paramsRead, config_buffer, 64);
-        qDebug()<<"after hid_write";
         while (time.elapsed() < millis + 1000)
         {
             if (m_flasher){
