@@ -31,7 +31,7 @@ signals:
 public slots:
     void shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName);
 private slots:
-    void shiftRegButtonsCalc(int count, int previousCount);
+    void shiftRegButtonsCalc(int currentCount, int previousCount);
 
 private:
     Ui::ShiftRegistersConfig *ui;

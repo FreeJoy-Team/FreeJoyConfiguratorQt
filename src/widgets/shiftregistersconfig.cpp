@@ -35,9 +35,9 @@ void ShiftRegistersConfig::retranslateUi()
 }
 
 
-void ShiftRegistersConfig::shiftRegButtonsCalc(int count, int previousCount)
+void ShiftRegistersConfig::shiftRegButtonsCalc(int currentCount, int previousCount)
 {
-    m_shiftButtonsCount += count - previousCount;
+    m_shiftButtonsCount += currentCount - previousCount;
     emit shiftRegButtonsCountChanged(m_shiftButtonsCount);
 }
 

@@ -14,7 +14,7 @@ namespace Ui {
 class Axes;
 }
 
-class Axes : public QWidget // наверно надо было назвать axis
+class Axes : public QWidget
 {
     Q_OBJECT
 
@@ -33,7 +33,7 @@ public:
     void addOrDeleteMainSource(int sourceEnum, bool isAdd);
 
 signals:
-    void a2bCountChanged(int count, int previous_count);
+    void a2bCountChanged(int count, int previousCount);
 
 private slots:
     void calibMinMaxValueChanged(int value);

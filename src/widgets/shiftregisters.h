@@ -31,7 +31,7 @@ public:
     const QString &defaultText() const;
 
 signals:
-    void buttonCountChanged(int buttonsCount, int shiftRegNumber);
+    void buttonCountChanged(int currentCount, int previousCount);
 
 private slots:
     void calcRegistersCount(int buttonCount);

@@ -66,6 +66,7 @@ void MainWindow::writeToConfig()
 #endif
 }
 
+
 // load default config
 void MainWindow::loadDefaultConfig()
 {
@@ -96,7 +97,7 @@ void MainWindow::configReceived(bool success)
         // curves pointer activated
         m_axesCurvesConfig->deviceStatus(true);
 
-        // set firmware version     // label_FirmwareVersion
+        // set firmware version
         QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
         if (str.size() == 4){
             ui->label_DeviceStatus->setText(tr("Device firmware") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
@@ -347,9 +348,9 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     devC->led_pwm_config[3].is_axis = deviceSettings->value("PinPB4_AxisEnabled", devC->led_pwm_config[3].is_axis).toBool();
 
     devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPA8_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
-    devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPB0_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
-    devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPB1_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
-    devC->led_pwm_config[0].axis_num = deviceSettings->value("PinPB4_AxisNum", devC->led_pwm_config[0].axis_num).toInt();
+    devC->led_pwm_config[1].axis_num = deviceSettings->value("PinPB0_AxisNum", devC->led_pwm_config[1].axis_num).toInt();
+    devC->led_pwm_config[2].axis_num = deviceSettings->value("PinPB1_AxisNum", devC->led_pwm_config[2].axis_num).toInt();
+    devC->led_pwm_config[3].axis_num = deviceSettings->value("PinPB4_AxisNum", devC->led_pwm_config[3].axis_num).toInt();
     deviceSettings->endGroup();
 
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
@@ -362,11 +363,20 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
     qDebug()<<"LoadDeviceConfigFromFile() finished";
 
     // old configs handler
+    oldConfigHandler();
+
+    readFromConfig();
+}
+
+void MainWindow::oldConfigHandler()
+{
+    dev_config_t* devC = &gEnv.pDeviceConfig->config;
     if (devC->firmware_version != FIRMWARE_VERSION) {
         qDebug()<<"Firmware warning";
         if (devC->firmware_version == 0x1624 || devC->firmware_version == 0x1623 ||
                 devC->firmware_version == 0x1622 || devC->firmware_version == 0x1621 ||
-                devC->firmware_version == 0x1620) {
+                devC->firmware_version == 0x1620)
+        {
             QString warning(tr("Firmware version in config file doesnt match configurator version. Check settings before write config."));
             if (devC->pins[19] == I2C_SCL || devC->pins[20] == I2C_SDA) {
                 QString differences(tr("Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!"));
@@ -384,7 +394,6 @@ void MainWindow::loadDeviceConfigFromFile(QSettings* deviceSettings)
         }
         devC->firmware_version = FIRMWARE_VERSION;
     }
-    readFromConfig();
 }
 
 

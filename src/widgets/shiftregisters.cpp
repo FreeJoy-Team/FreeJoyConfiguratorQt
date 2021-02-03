@@ -81,6 +81,7 @@ void ShiftRegisters::setUiOnOff()
             child->setEnabled(true);
         }
     } else {
+        ui->spinBox_ButtonCount->setValue(0);
         for (auto &&child : this->findChildren<QWidget *>()) {
             child->setEnabled(false);
         }
