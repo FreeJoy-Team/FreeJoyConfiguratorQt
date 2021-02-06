@@ -145,7 +145,7 @@ RESOURCES += \
     styles/qdarkstyle/style.qrc \
     styles/white/qss.qrc
 
-linux-g++ | linux-g++-64 | linux-g++-32 {
+linux {
     LIBS += -ludev
     SOURCES += \
         linux/hidapi.c

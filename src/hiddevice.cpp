@@ -54,7 +54,7 @@ void HidDevice::processData()
                         m_flasher = hidDevInfo;
                         m_HidDevicesAdrList.clear();
                         m_deviceNames.clear();
-                        m_deviceNames.append(QPair(false, "FreeJoy Flasher"));
+                        m_deviceNames.append(qMakePair(false, QString("FreeJoy Flasher")));
                         emit hidDeviceList(m_deviceNames);
                         emit flasherConnected();
                         emit flasherFound(true);
@@ -78,11 +78,11 @@ void HidDevice::processData()
 
                 // add devices ptr to list
                 if (QString::fromWCharArray(hidDevInfo->manufacturer_string) == "FreeJoy" && hidDevInfo->interface_number == 1) {
-                    tmp_HidList.append(QPair(false, hidDevInfo));
+                    tmp_HidList.append(qMakePair(false, hidDevInfo));
                 } else if (hidDevInfo->vendor_id == OLD_FIRMWARE_VID && QString::fromWCharArray(hidDevInfo->manufacturer_string) != "FreeJoy" &&
                            hidDevInfo->interface_number == 0)
                 {
-                    tmp_HidList.append(QPair(true, hidDevInfo));
+                    tmp_HidList.append(qMakePair(true, hidDevInfo));
                 }
                 hidDevInfo = hidDevInfo->next;
                 // all devices added
@@ -95,7 +95,7 @@ void HidDevice::processData()
                         for (int i = 0; i < tmp_HidList.size(); ++i) {
                             qDebug()<<tmp_HidList.size();
                             m_HidDevicesAdrList.append(tmp_HidList[i].second);
-                            m_deviceNames.append(QPair(tmp_HidList[i].first, QString::fromWCharArray(tmp_HidList[i].second->product_string)));
+                            m_deviceNames.append(qMakePair(tmp_HidList[i].first, QString::fromWCharArray(tmp_HidList[i].second->product_string)));
                         }
                         emit hidDeviceList(m_deviceNames);
                         tmp_HidList.clear();
