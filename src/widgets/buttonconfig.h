@@ -12,6 +12,10 @@
 #include "deviceconfig.h"
 #include "global.h"
 
+//#define DYNAMIC_CREATION
+#ifdef DYNAMIC_CREATION
+    //#define DYNAMIC_CREATION_ALL
+#endif
 namespace Ui {
 class ButtonConfig;
 }
@@ -33,12 +37,19 @@ public:
 signals:
     void encoderInputChanged(int ecoder_A, int ecoder_B);
     void logicalButtonsCreated();
-    //void buttonLEDStateChanged(int button_number);            // for future
 
 public slots:
     void setUiOnOff(int value);
 private slots:
     void functionTypeChanged(int index, int functionPreviousIndex, int buttonNumber);
+
+#ifdef DYNAMIC_CREATION
+private slots:
+    void logScrollValueChanged(int value);
+    void createLogButtons(int count);
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+#endif
 
 private:
     Ui::ButtonConfig *ui;

@@ -271,7 +271,7 @@
        </widget>
       </item>
       <item row="1" column="0" colspan="10">
-       <widget class="QScrollArea" name="scrollArea">
+       <widget class="QScrollArea" name="scrollArea_LogButtons">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>

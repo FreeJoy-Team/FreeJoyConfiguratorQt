@@ -3,6 +3,8 @@
 #include <QTimer>
 
 #include <QDebug>
+#include <QScrollArea>
+#include <QScrollBar>
 ButtonConfig::ButtonConfig(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ButtonConfig)
@@ -15,7 +17,10 @@ ButtonConfig::ButtonConfig(QWidget *parent)
     m_shift4_act = false;
     m_shift5_act = false;
 
-    // make dynamic spawn?
+    // dynamic creation with scroll
+#ifdef DYNAMIC_CREATION
+    connect(ui->scrollArea_LogButtons->verticalScrollBar(), &QScrollBar::valueChanged, this, &ButtonConfig::logScrollValueChanged);
+#else
     for (int i = 0; i < MAX_BUTTONS_NUM; i++) {
         ButtonLogical *logical_buttons_widget = new ButtonLogical(i, this);
         ui->layoutV_LogicalButton->addWidget(logical_buttons_widget);
@@ -24,7 +29,7 @@ ButtonConfig::ButtonConfig(QWidget *parent)
         connect(m_logicButtonPtrList[i], SIGNAL(functionIndexChanged(int, int, int)),
                 this, SLOT(functionTypeChanged(int, int, int)));
     }
-
+#endif
     logicaButtonsCreator();
 }
 
@@ -41,28 +46,87 @@ void ButtonConfig::retranslateUi()
     }
 }
 
-// dynamic initialization of widgets. its decrease app startup time
-// в идеале надо и создавать виджеты здесь, но возникает проблема - долго открывается вкладка
-// и пока не знаю как это решить
+#ifdef DYNAMIC_CREATION
+void ButtonConfig::createLogButtons(int count)
+{
+    int size = m_logicButtonPtrList.size();
+    for (int i = 0; i < count; i++) {
+        if (size == MAX_BUTTONS_NUM) {
+            break;
+        }
+        ButtonLogical *logical_buttons_widget = new ButtonLogical(size, this);
+        ui->layoutV_LogicalButton->addWidget(logical_buttons_widget);
+        m_logicButtonPtrList.append(logical_buttons_widget);
+        //m_logicButtonPtrList[tmp]->setMinimumHeight(30);
+        m_logicButtonPtrList[size]->initialization();
+
+        connect(m_logicButtonPtrList[size], SIGNAL(functionIndexChanged(int, int, int)),
+                this, SLOT(functionTypeChanged(int, int, int)));
+        size++;
+    }
+}
+void ButtonConfig::logScrollValueChanged(int value)
+{
+    // dynamic creation with scroll
+    QScrollBar *scroll = ui->scrollArea_LogButtons->verticalScrollBar();
+    int size = m_logicButtonPtrList.size();
+    if (size != MAX_BUTTONS_NUM && (value / float(scroll->maximum())) >= 1.0f)
+    {
+        createLogButtons(4);
+    }
+}
+void ButtonConfig::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event)
+    // dynamic creation with scroll
+    QScrollBar *scroll = ui->scrollArea_LogButtons->verticalScrollBar();
+    int size = m_logicButtonPtrList.size();
+    if (isVisible() && scroll->isVisible() == false && size != MAX_BUTTONS_NUM)
+    {
+        createLogButtons(4);
+    }
+}
+#endif
+// dynamic creation of widgets. its decrease app startup time
 void ButtonConfig::logicaButtonsCreator()
 {
     static int tmp = 0;     //
+    static QElapsedTimer timer;
     if (tmp >= MAX_BUTTONS_NUM) {
         if (MAX_BUTTONS_NUM != 128) {
             qCritical() << "buttonconfig.cpp MAX_BUTTONS_NUM != 128";
         }
-        qDebug() << "LogicaButtonsCreator() finished";
+        qDebug() << "LogicaButtonsCreator() finished in"<<timer.elapsed()<<"ms";
         emit logicalButtonsCreated();
         return;
     }
     // как я понял таймер срабатывает после полной загрузки приложения(оно отобразится)
     // т.к. в LogicaButtonsCreator заходит при инициализации, но срабатывает после запуска приложения
     QTimer::singleShot(10, this, [&] {
+        if (tmp == 0) {
+            timer.start();
+        }
+        // dynamic creation with scroll
+#ifdef DYNAMIC_CREATION
+        createLogButtons(8);
+        tmp += 8;
+        ui->layoutV_LogicalButton->activate();
+        // stop creating after QScrollBar is visible
+        // 30 its ButtonLogical height
+        #ifndef DYNAMIC_CREATION_ALL
+        if (tmp * 30 > window()->height()) {
+            qDebug() << "LogicaButtonsCreator() finished in"<<timer.elapsed()<<"ms";
+            emit logicalButtonsCreated();
+            return;
+        }
+        #endif
+#else
         for (int i = 0; i < 8; i++) // MAX_BUTTONS_NUM(128)/8 = 16 ДОЛЖНО ДЕЛИТЬСЯ БЕЗ ОСТАТКА
         {
             m_logicButtonPtrList[tmp]->initialization();
             tmp++;
         }
+#endif
         logicaButtonsCreator();
     });
 }
@@ -233,6 +297,20 @@ void ButtonConfig::buttonStateChanged()
 void ButtonConfig::readFromConfig()
 {
     dev_config_t *devc = &gEnv.pDeviceConfig->config;
+
+    // dynamic creation with scroll
+#ifdef DYNAMIC_CREATION
+    for (int i = MAX_BUTTONS_NUM; i > 0; --i) {
+        if (gEnv.pDeviceConfig->config.buttons[i -1].physical_num != -1) {
+            int size = m_logicButtonPtrList.size();
+            int count = i - size;
+            createLogButtons(count);
+            ui->layoutV_LogicalButton->activate();
+            break;
+        }
+    }
+#endif
+
     // logical buttons
     for (int i = 0; i < m_logicButtonPtrList.size(); i++) {
         m_logicButtonPtrList[i]->readFromConfig();
