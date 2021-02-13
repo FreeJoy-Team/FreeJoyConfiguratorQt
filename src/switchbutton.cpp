@@ -31,6 +31,7 @@ void SwitchButton::paintEvent(QPaintEvent *event)
 
     int height = this->height();
     int width = this->width();
+    int offset = 5;
 
     p.setPen(QColor(90, 90, 90));
     p.setBrush(m_backgroundColor);
@@ -54,17 +55,20 @@ void SwitchButton::paintEvent(QPaintEvent *event)
         point = QPointF(width / m_currentSwitch, m_halfHeight);
     }
     p.setPen(QColor(110, 64, 201));
-    p.drawEllipse(point, m_halfHeight -1, m_halfHeight -1);
+    p.drawEllipse(point, m_halfHeight -1.0f, m_halfHeight -1.0f);
 
-    QRectF target(5, 5, height - height/3, height - height/3);
+    QRectF target(offset, offset,
+                  height - offset *2, height - offset *2);
     QRectF source(0.0, 0.0, m_cloudPix.size().width(), m_cloudPix.size().height());
     p.drawPixmap(target, m_cloudPix, source);
 
-    QRectF target2(m_halfWidth - m_cloudPix.size().width()/2 +5, 5, height - height/3, height - height/3);
+    QRectF target2(m_halfWidth - offset *2, offset,
+                   height - offset *2, height - offset *2);
     QRectF source2(0.0, 0.0, m_sunPix.size().width(), m_sunPix.size().height());
     p.drawPixmap(target2, m_sunPix, source2);
 
-    QRectF target3(width - height +5, 5, height - height/3, height - height/3);
+    QRectF target3(width - height +offset, offset,
+                   height - offset *2, height - offset *2);
     QRectF source3(0.0, 0.0, m_moonPix.size().width(), m_moonPix.size().height());
     p.drawPixmap(target3, m_moonPix, source3);
 }
@@ -150,10 +154,11 @@ void SwitchButton::mouseReleaseEvent(QMouseEvent *event)
 
 void SwitchButton::resizeEvent(QResizeEvent *event)
 {
+    Q_UNUSED(event)
     m_halfWidth = width() / 2.0;
     m_halfHeight = height() / 2.0;
-    for (int i = 0; i < 50; ++i) {
-        poin2[i].setX(rand() % (width() - 8));
-        poin2[i].setY(rand() % height());
-    }
+//    for (int i = 0; i < 50; ++i) {
+//        poin2[i].setX(rand() % (width() - 8));
+//        poin2[i].setY(rand() % height());
+//    }
 }

@@ -99,7 +99,7 @@
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Fast encioder input A</string>
+             <string>Fast encoder input A</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -112,7 +112,7 @@
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Fast encioder input B</string>
+             <string>Fast encoder input B</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>

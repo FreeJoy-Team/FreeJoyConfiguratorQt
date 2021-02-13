@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Wiki</source>
-        <translation>Вики</translation>
+        <translation type="vanished">Вики</translation>
     </message>
     <message>
         <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
@@ -888,6 +888,14 @@
         <source>Buttons from shift regs:</source>
         <translation>Кнопок у регистров:</translation>
     </message>
+    <message>
+        <source>Buttons from matrix:</source>
+        <translation>Кнопок из матрицы:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>DebugWindow</name>
@@ -945,7 +953,7 @@
     </message>
     <message>
         <source>Debug packets speed within 5 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Отлидочные пакеты в течении 5 сек</translation>
     </message>
 </context>
 <context>
@@ -999,11 +1007,11 @@
     </message>
     <message>
         <source>Fast encioder input A</source>
-        <translation>Быстрый энкодер вход А</translation>
+        <translation type="vanished">Быстрый энкодер вход А</translation>
     </message>
     <message>
         <source>Fast encioder input B</source>
-        <translation>Быстрый энкодер вход Б</translation>
+        <translation type="vanished">Быстрый энкодер вход Б</translation>
     </message>
     <message>
         <source>Encoder type</source>
@@ -1028,6 +1036,14 @@
     <message>
         <source>Encoder 4x</source>
         <translation>Энкодер 4x</translation>
+    </message>
+    <message>
+        <source>Fast encoder input A</source>
+        <translation>Быстрый энкодер вход А</translation>
+    </message>
+    <message>
+        <source>Fast encoder input B</source>
+        <translation>Быстрый энкодер вход Б</translation>
     </message>
 </context>
 <context>
@@ -1075,6 +1091,10 @@
     <message>
         <source>ERASE ERROR</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>ERROR</source>
+        <translation>ОШИБКА</translation>
     </message>
 </context>
 <context>
@@ -1171,11 +1191,11 @@
     </message>
     <message>
         <source> Axes Config </source>
-        <translation type="vanished"> Оси </translation>
+        <translation> Оси </translation>
     </message>
     <message>
         <source> Axes Curves </source>
-        <translation type="vanished"> Кривые осей </translation>
+        <translation> Кривые осей </translation>
     </message>
     <message>
         <source> Shift Registers </source>
@@ -1297,11 +1317,11 @@ g</source>
     </message>
     <message>
         <source> Axis Config </source>
-        <translation> Оси </translation>
+        <translation type="vanished"> Оси </translation>
     </message>
     <message>
         <source> Axis Curves </source>
-        <translation> Кривые осей </translation>
+        <translation type="vanished"> Кривые осей </translation>
     </message>
     <message>
         <source> LED/PWM </source>
@@ -1354,6 +1374,10 @@ g</source>
     <message>
         <source>Firmware version!</source>
         <translation>Версия прошивки!</translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

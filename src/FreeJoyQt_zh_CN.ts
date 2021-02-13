@@ -69,57 +69,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="436"/>
-        <source>Wiki</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/advancedsettings.ui" line="446"/>
+        <location filename="widgets/advancedsettings.ui" line="439"/>
         <source>Languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="487"/>
+        <location filename="widgets/advancedsettings.ui" line="480"/>
         <source>Restart app for full changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="500"/>
+        <location filename="widgets/advancedsettings.ui" line="493"/>
         <source>Styles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="521"/>
+        <location filename="widgets/advancedsettings.ui" line="514"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="528"/>
+        <location filename="widgets/advancedsettings.ui" line="521"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="535"/>
+        <location filename="widgets/advancedsettings.ui" line="528"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="103"/>
+        <location filename="widgets/advancedsettings.cpp" line="102"/>
         <source>Loading... Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="214"/>
+        <location filename="widgets/advancedsettings.cpp" line="208"/>
         <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="218"/>
+        <location filename="widgets/advancedsettings.cpp" line="212"/>
         <source>&lt;br&gt;Check &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;our wiki &lt;/a&gt;for detailed instructions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.cpp" line="220"/>
+        <location filename="widgets/advancedsettings.cpp" line="214"/>
         <source>About FreeJoyQt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -942,42 +937,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="44"/>
+        <location filename="widgets/currentconfig.ui" line="86"/>
         <source>Axis sources:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="76"/>
+        <location filename="widgets/currentconfig.ui" line="106"/>
         <source>Total LEDs:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="86"/>
+        <location filename="widgets/currentconfig.ui" line="116"/>
+        <source>Buttons from matrix:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="224"/>
         <source>Buttons from axes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="162"/>
+        <location filename="widgets/currentconfig.ui" line="310"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/currentconfig.ui" line="96"/>
         <source>Single buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="172"/>
+        <location filename="widgets/currentconfig.ui" line="76"/>
         <source>Columns of buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="182"/>
+        <location filename="widgets/currentconfig.ui" line="66"/>
         <source>Rows of buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="192"/>
+        <location filename="widgets/currentconfig.ui" line="126"/>
         <source>Total buttons:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/currentconfig.ui" line="268"/>
+        <location filename="widgets/currentconfig.ui" line="294"/>
         <source>Buttons from shift regs:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1041,18 +1046,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.cpp" line="87"/>
-        <location filename="widgets/debugwindow.cpp" line="91"/>
+        <location filename="widgets/debugwindow.cpp" line="89"/>
+        <location filename="widgets/debugwindow.cpp" line="93"/>
         <source>Logical button </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.cpp" line="88"/>
+        <location filename="widgets/debugwindow.cpp" line="90"/>
         <source> pressed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.cpp" line="92"/>
+        <location filename="widgets/debugwindow.cpp" line="94"/>
         <source> unpressed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1122,12 +1127,14 @@
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="102"/>
-        <source>Fast encioder input A</source>
+        <source>Fast encoder input A</source>
+        <oldsource>Fast encioder input A</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="115"/>
-        <source>Fast encioder input B</source>
+        <source>Fast encoder input B</source>
+        <oldsource>Fast encioder input B</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1220,6 +1227,11 @@
         <source>ERASE ERROR</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="widgets/flasher.cpp" line="110"/>
+        <source>ERROR</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LED</name>
@@ -1303,8 +1315,8 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="888"/>
-        <location filename="mainwindow.cpp" line="598"/>
+        <location filename="mainwindow.ui" line="769"/>
+        <location filename="mainwindow.cpp" line="649"/>
         <source>Show debug</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1320,14 +1332,14 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="103"/>
-        <source> Axis Config </source>
-        <oldsource> Axes Config </oldsource>
+        <source> Axes Config </source>
+        <oldsource> Axis Config </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="125"/>
-        <source> Axis Curves </source>
-        <oldsource> Axes Curves </oldsource>
+        <source> Axes Curves </source>
+        <oldsource> Axis Curves </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1357,37 +1369,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="255"/>
+        <location filename="mainwindow.cpp" line="269"/>
         <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="608"/>
+        <location filename="mainwindow.ui" line="663"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="718"/>
+        <location filename="mainwindow.ui" line="886"/>
         <source>Set file to default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="866"/>
+        <location filename="mainwindow.ui" line="807"/>
         <source>Save config to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="800"/>
+        <location filename="mainwindow.ui" line="937"/>
         <source>Read config from Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="775"/>
+        <location filename="mainwindow.ui" line="864"/>
         <source>Reset All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="740"/>
+        <location filename="mainwindow.ui" line="972"/>
         <source>Load default config</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1437,95 +1449,99 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="683"/>
+        <location filename="mainwindow.ui" line="579"/>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="702"/>
         <source>Load config from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="844"/>
+        <location filename="mainwindow.ui" line="747"/>
         <source>Write config to Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="43"/>
+        <location filename="mainwindow.cpp" line="44"/>
         <source>FreeJoy Configurator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="225"/>
+        <location filename="mainwindow.cpp" line="227"/>
         <source>devices connected</source>
         <oldsource> devices connected</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="227"/>
+        <location filename="mainwindow.cpp" line="229"/>
         <source>device connected</source>
         <oldsource> device connected</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="237"/>
+        <location filename="mainwindow.cpp" line="246"/>
         <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="102"/>
+        <location filename="mainwindow_conf.cpp" line="103"/>
         <source>Device firmware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="105"/>
+        <location filename="mainwindow_conf.cpp" line="106"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="116"/>
-        <location filename="mainwindow_conf.cpp" line="154"/>
+        <location filename="mainwindow_conf.cpp" line="117"/>
+        <location filename="mainwindow_conf.cpp" line="155"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="139"/>
+        <location filename="mainwindow_conf.cpp" line="140"/>
         <source>Sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="369"/>
+        <location filename="mainwindow_conf.cpp" line="380"/>
         <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="371"/>
+        <location filename="mainwindow_conf.cpp" line="382"/>
         <source>Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="372"/>
-        <location filename="mainwindow_conf.cpp" line="375"/>
+        <location filename="mainwindow_conf.cpp" line="383"/>
         <source>Firmware version!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="527"/>
-        <location filename="mainwindow.cpp" line="550"/>
+        <location filename="mainwindow.cpp" line="578"/>
+        <location filename="mainwindow.cpp" line="601"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="527"/>
-        <location filename="mainwindow.cpp" line="538"/>
-        <location filename="mainwindow.cpp" line="550"/>
+        <location filename="mainwindow.cpp" line="578"/>
+        <location filename="mainwindow.cpp" line="589"/>
+        <location filename="mainwindow.cpp" line="601"/>
         <source>Config Files (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="538"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>Save Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="389"/>
-        <location filename="mainwindow.cpp" line="590"/>
+        <location filename="mainwindow.cpp" line="440"/>
+        <location filename="mainwindow.cpp" line="641"/>
         <source>Hide debug</source>
         <translation type="unfinished"></translation>
     </message>

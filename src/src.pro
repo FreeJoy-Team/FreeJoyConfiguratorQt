@@ -146,6 +146,7 @@ RESOURCES += \
     styles/white/qss.qrc
 
 linux {
+    QMAKE_LFLAGS += -no-pie
     LIBS += -ludev
     SOURCES += \
         linux/hidapi.c
