@@ -22,10 +22,6 @@ ButtonConfig::ButtonConfig(QWidget *parent)
     m_shift4_act = false;
     m_shift5_act = false;
 
-    gEnv.pAppSettings->beginGroup("OtherSettings");
-    ui->checkBox_AutoPhysBut->setChecked(gEnv.pAppSettings->value("AutoSetPhysButton", true).toBool());
-    gEnv.pAppSettings->endGroup();
-
     // dynamic creation with scroll
 #ifdef DYNAMIC_CREATION
     connect(ui->scrollArea_LogButtons->verticalScrollBar(), &QScrollBar::valueChanged, this, &ButtonConfig::logScrollValueChanged);
@@ -38,6 +34,9 @@ ButtonConfig::ButtonConfig(QWidget *parent)
         connect(m_logicButtonPtrList[i], SIGNAL(functionIndexChanged(int, int, int)),
                 this, SLOT(functionTypeChanged(int, int, int)));
     }
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    ui->checkBox_AutoPhysBut->setChecked(gEnv.pAppSettings->value("AutoSetPhysButton", true).toBool());
+    gEnv.pAppSettings->endGroup();
     on_checkBox_AutoPhysBut_toggled(ui->checkBox_AutoPhysBut->isChecked());
 #endif
     logicaButtonsCreator();
@@ -132,6 +131,9 @@ void ButtonConfig::logicaButtonsCreator()
             emit logicalButtonsCreated();
             return;
         }
+        gEnv.pAppSettings->beginGroup("OtherSettings");
+        ui->checkBox_AutoPhysBut->setChecked(gEnv.pAppSettings->value("AutoSetPhysButton", true).toBool());
+        gEnv.pAppSettings->endGroup();
         on_checkBox_AutoPhysBut_toggled(ui->checkBox_AutoPhysBut->isChecked());
         #endif
 #else
@@ -159,6 +161,7 @@ void ButtonConfig::setLogicButton(int buttonNumber)
 void ButtonConfig::on_checkBox_AutoPhysBut_toggled(bool checked)
 {
     m_autoPhysButEnabled = checked;
+    qDebug()<<m_logicButtonPtrList.size();
     m_logicButtonPtrList[0]->setAutoPhysBut(checked);
 }
 

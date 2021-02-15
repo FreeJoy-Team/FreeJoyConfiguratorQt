@@ -60,7 +60,7 @@ private:
 
     const deviceEnum_guiName_t m_timerList[TIMER_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
     {
-        {BUTTON_TIMER_OFF,      tr("No")},
+        {BUTTON_TIMER_OFF,      tr("-")},
         {BUTTON_TIMER_1,        tr("Timer 1")},
         {BUTTON_TIMER_2,        tr("Timer 2")},
         {BUTTON_TIMER_3,        tr("Timer 3")},
@@ -68,7 +68,7 @@ private:
 
     const deviceEnum_guiName_t m_shiftList[SHIFT_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
     {
-        {0,        tr("No shift")},
+        {0,        tr("-")},
         {1,        tr("Shift 1")},
         {2,        tr("Shift 2")},
         {3,        tr("Shift 3")},
