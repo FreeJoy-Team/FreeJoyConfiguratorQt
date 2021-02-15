@@ -7,7 +7,8 @@ ButtonPhysical::ButtonPhysical(int buttonNumber, QWidget *parent)
 {
     ui->setupUi(this);
     m_currentState = false;
-    ui->label_PhysicalButton->setNum(buttonNumber + 1);
+    m_buttonNumber = buttonNumber;
+    ui->label_PhysicalButton->setNum(m_buttonNumber + 1);
     m_defStyle = QStringLiteral("QLabel {  border-radius: 13px; min-height: 26px; min-width: 26px; "
                                 "background-color: rgb(170, 0, 0); color: rgb(210, 210, 210);}");
     ui->label_PhysicalButton->setStyleSheet(m_defStyle);
@@ -30,6 +31,7 @@ void ButtonPhysical::setButtonState(bool setState)
             ui->label_PhysicalButton->setStyleSheet(
                 QStringLiteral("QLabel {  border-radius: 13px; min-height: 26px; min-width: 26px; "
                                "background-color: rgb(0, 128, 0); color: rgb(210, 210, 210);}"));
+            emit physButtonPressed(m_buttonNumber); // +1?
         } else {
             ui->label_PhysicalButton->setStyleSheet(m_defStyle);
         }

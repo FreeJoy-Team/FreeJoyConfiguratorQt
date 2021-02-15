@@ -42,6 +42,7 @@ public slots:
     void setUiOnOff(int value);
 private slots:
     void functionTypeChanged(int index, int functionPreviousIndex, int buttonNumber);
+    void setLogicButton(int buttonNumber);
 
 #ifdef DYNAMIC_CREATION
 private slots:
@@ -51,10 +52,14 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 #endif
 
+    void on_checkBox_AutoPhysBut_toggled(bool checked);
+
 private:
     Ui::ButtonConfig *ui;
-    void physButtonsSpawn(int count);
+    void physButtonsCreator(int count);
     QString m_defaultShiftStyle;
+    int m_logicButtonInFocus;
+    bool m_autoPhysButEnabled;
     bool m_isShifts_act;
     bool m_shift1_act;
     bool m_shift2_act;

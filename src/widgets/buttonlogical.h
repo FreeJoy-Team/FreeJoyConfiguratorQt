@@ -10,7 +10,6 @@
 
 #define TIMER_COUNT 4 // "NO timer" + count
 #define SHIFT_COUNT 6
-#define LOGICAL_FUNCTION_COUNT 31
 
 namespace Ui {
 class ButtonLogical;
@@ -29,9 +28,13 @@ public:
     void initialization();
 
     void setMaxPhysButtons(int maxPhysButtons);
-    void setSpinBoxOnOff(int max_phys_buttons);
+    void setSpinBoxOnOff(int maxPhysButtons);
 
     void setButtonState(bool set_state);
+
+    void setLogicButton(int buttonNumber);
+    void setAutoPhysBut(bool enabled);
+    int currentFocus() const;
 
     void retranslateUi();
 
@@ -42,11 +45,18 @@ private slots:
     void editingOnOff(int value);
     void functionTypeChanged(int index);
 
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
 private:
     Ui::ButtonLogical *ui;
     int m_functionPrevIndex;
     bool m_currentState;
     int m_buttonNumber;
+    static int m_currentFocus;
+    static bool m_autoPhysButEnabled;
+
+    QVector<int> m_logicFunc_enumIndex;
 
     const deviceEnum_guiName_t m_timerList[TIMER_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
     {
@@ -67,8 +77,8 @@ private:
     };
     //static deviceEnum_guiName_t logical_function_list_[LOGICAL_FUNCTION_COUNT];
 
-    const deviceEnum_guiName_t m_logicFunctionList[LOGICAL_FUNCTION_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
-    {
+    const QVector <deviceEnum_guiName_t> m_logicFunctionList = // любой порядок          // static ?
+    {{
         {BUTTON_NORMAL,        tr("Button normal")},
         {BUTTON_TOGGLE,        tr("Button toggle")},
         {TOGGLE_SWITCH,        tr("Toggle switch")},
@@ -100,7 +110,7 @@ private:
         {RADIO_BUTTON4,        tr("Radio button 4")},
         {SEQUENTIAL_TOGGLE,    tr("Sequential toggle")},
         {SEQUENTIAL_BUTTON,    tr("Sequential button")},
-    };
+    }};
 };
 
 #endif // BUTTONLOGICAL_H

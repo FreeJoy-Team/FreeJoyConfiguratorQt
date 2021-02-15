@@ -2,6 +2,10 @@
 #include "ui_buttonlogical.h"
 
 #include "widgets/debugwindow.h"
+#include "converter.h"
+
+int ButtonLogical::m_currentFocus = -1;
+bool ButtonLogical::m_autoPhysButEnabled = false;
 
 ButtonLogical::ButtonLogical(int buttonNumber, QWidget *parent)
     : QWidget(parent)
@@ -12,6 +16,7 @@ ButtonLogical::ButtonLogical(int buttonNumber, QWidget *parent)
     m_functionPrevIndex = 0;
     m_currentState = false;
     ui->label_LogicalButtonNumber->setNum(m_buttonNumber + 1);
+    ui->spinBox_PhysicalButtonNumber->installEventFilter(this);
 }
 
 ButtonLogical::~ButtonLogical()
@@ -27,8 +32,16 @@ void ButtonLogical::retranslateUi()
 void ButtonLogical::initialization()
 {
     // add gui text
-    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {
+    m_logicFunc_enumIndex.reserve(m_logicFunctionList.size());
+    for (int i = 0; i < m_logicFunctionList.size(); i++) {
+//        // Encoder only for first 30 buttons  // if uncomment DONT FORGET EDIT MainWindow::oldConfigHandler() !!!!!!!!
+//        if (m_buttonNumber > 29 &&
+//                (m_logicFunctionList[i].deviceEnumIndex == ENCODER_INPUT_A ||
+//                 m_logicFunctionList[i].deviceEnumIndex == ENCODER_INPUT_B)) {
+//            continue;
+//        }
         ui->comboBox_ButtonFunction->addItem(m_logicFunctionList[i].guiName);
+        m_logicFunc_enumIndex.push_back(m_logicFunctionList[i].deviceEnumIndex);
     }
     for (int i = 0; i < SHIFT_COUNT; i++) {
         ui->comboBox_ShiftIndex->addItem(m_shiftList[i].guiName);
@@ -49,9 +62,9 @@ void ButtonLogical::setMaxPhysButtons(int maxPhysButtons)
     ui->spinBox_PhysicalButtonNumber->setMaximum(maxPhysButtons);
 }
 
-void ButtonLogical::setSpinBoxOnOff(int max_phys_buttons)
+void ButtonLogical::setSpinBoxOnOff(int maxPhysButtons)
 {
-    if (max_phys_buttons > 0) {
+    if (maxPhysButtons > 0) {
         ui->spinBox_PhysicalButtonNumber->setEnabled(true);
     } else {
         ui->spinBox_PhysicalButtonNumber->setEnabled(false);
@@ -85,8 +98,8 @@ void ButtonLogical::editingOnOff(int value)
 
 void ButtonLogical::setButtonState(bool state)
 {
-    static QPalette default_palette;
-    static QString default_style;
+    static QPalette default_palette;    ///////////////////////////////////////////////// ????????????????????????????
+    static QString default_style;    ///////////////////////////////////////////////// ????????????????????????????
 
     if (state != m_currentState) {
         setAutoFillBackground(true);
@@ -114,6 +127,36 @@ void ButtonLogical::setButtonState(bool state)
     }
 }
 
+void ButtonLogical::setLogicButton(int buttonNumber)
+{
+    ui->spinBox_PhysicalButtonNumber->setValue(buttonNumber + 1); // +1 !!!!
+}
+
+int ButtonLogical::currentFocus() const
+{
+    return m_currentFocus;
+}
+
+void ButtonLogical::setAutoPhysBut(bool enabled)
+{
+    m_autoPhysButEnabled = enabled;
+}
+
+bool ButtonLogical::eventFilter(QObject *obj, QEvent *event)
+{
+    Q_UNUSED(obj)
+    if (m_autoPhysButEnabled) {
+        if (event->type() == QEvent::FocusIn) {
+            ui->spinBox_PhysicalButtonNumber->setStyleSheet("background-color: rgba(0, 120, 215, 200); color: rgb(255, 255, 255)");
+            m_currentFocus = m_buttonNumber;
+        } else if (event->type() == QEvent::FocusOut){
+            ui->spinBox_PhysicalButtonNumber->setStyleSheet("");
+            m_currentFocus = -1;
+        }
+    }
+    return false;
+}
+
 void ButtonLogical::readFromConfig()
 {
     button_t *button = &gEnv.pDeviceConfig->config.buttons[m_buttonNumber];
@@ -125,12 +168,7 @@ void ButtonLogical::readFromConfig()
     ui->checkBox_IsInvert->setChecked(button->is_inverted);
 
     // logical button function
-    for (int i = 0; i < LOGICAL_FUNCTION_COUNT; i++) {
-        if (button->type == m_logicFunctionList[i].deviceEnumIndex) {
-            ui->comboBox_ButtonFunction->setCurrentIndex(i);
-            break;
-        }
-    }
+    ui->comboBox_ButtonFunction->setCurrentIndex(Converter::EnumToIndex(button->type, m_logicFunc_enumIndex));
     // shift
     for (int i = 0; i < SHIFT_COUNT; i++) {
         if (button->shift_modificator == m_shiftList[i].deviceEnumIndex) {
@@ -162,7 +200,7 @@ void ButtonLogical::writeToConfig()
     button->is_disabled = ui->checkBox_IsDisable->isChecked();
     button->is_inverted = ui->checkBox_IsInvert->isChecked();
 
-    button->type = m_logicFunctionList[ui->comboBox_ButtonFunction->currentIndex()].deviceEnumIndex;
+    button->type = m_logicFunc_enumIndex[ui->comboBox_ButtonFunction->currentIndex()];
     button->shift_modificator = m_shiftList[ui->comboBox_ShiftIndex->currentIndex()].deviceEnumIndex;
     button->delay_timer = m_timerList[ui->comboBox_DelayTimerIndex->currentIndex()].deviceEnumIndex;
     button->press_timer = m_timerList[ui->comboBox_PressTimerIndex->currentIndex()].deviceEnumIndex;

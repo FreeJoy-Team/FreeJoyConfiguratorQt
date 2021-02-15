@@ -452,102 +452,102 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.cpp" line="39"/>
-        <location filename="widgets/axesextended.cpp" line="66"/>
+        <location filename="widgets/axesextended.cpp" line="52"/>
+        <location filename="widgets/axesextended.cpp" line="79"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="57"/>
+        <location filename="widgets/axesextended.h" line="61"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="58"/>
+        <location filename="widgets/axesextended.h" line="62"/>
         <source>Plus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="59"/>
+        <location filename="widgets/axesextended.h" line="63"/>
         <source>Minus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="60"/>
+        <location filename="widgets/axesextended.h" line="64"/>
         <source>Equal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="65"/>
-        <location filename="widgets/axesextended.h" line="75"/>
+        <location filename="widgets/axesextended.h" line="69"/>
+        <location filename="widgets/axesextended.h" line="79"/>
         <source>Function enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="66"/>
-        <location filename="widgets/axesextended.h" line="76"/>
+        <location filename="widgets/axesextended.h" line="70"/>
+        <location filename="widgets/axesextended.h" line="80"/>
         <source>Prescale enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="67"/>
-        <location filename="widgets/axesextended.h" line="77"/>
+        <location filename="widgets/axesextended.h" line="71"/>
+        <location filename="widgets/axesextended.h" line="81"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="68"/>
-        <location filename="widgets/axesextended.h" line="78"/>
+        <location filename="widgets/axesextended.h" line="72"/>
+        <location filename="widgets/axesextended.h" line="82"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="69"/>
+        <location filename="widgets/axesextended.h" line="73"/>
         <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="70"/>
+        <location filename="widgets/axesextended.h" line="74"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="83"/>
+        <location filename="widgets/axesextended.h" line="87"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="84"/>
+        <location filename="widgets/axesextended.h" line="88"/>
         <source>level 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="85"/>
+        <location filename="widgets/axesextended.h" line="89"/>
         <source>level 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="86"/>
+        <location filename="widgets/axesextended.h" line="90"/>
         <source>level 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="87"/>
+        <location filename="widgets/axesextended.h" line="91"/>
         <source>level 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="88"/>
+        <location filename="widgets/axesextended.h" line="92"/>
         <source>level 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="89"/>
+        <location filename="widgets/axesextended.h" line="93"/>
         <source>level 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/axesextended.h" line="90"/>
+        <location filename="widgets/axesextended.h" line="94"/>
         <source>level 7</source>
         <translation type="unfinished"></translation>
     </message>
@@ -623,87 +623,92 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="256"/>
+        <location filename="widgets/buttonconfig.ui" line="349"/>
         <source>Function</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="266"/>
+        <location filename="widgets/buttonconfig.ui" line="359"/>
         <source>Invert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="326"/>
+        <location filename="widgets/buttonconfig.ui" line="316"/>
         <source>Press timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="336"/>
+        <location filename="widgets/buttonconfig.ui" line="386"/>
         <source>Disable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="346"/>
+        <location filename="widgets/buttonconfig.ui" line="306"/>
         <source>Delay timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="376"/>
+        <location filename="widgets/buttonconfig.ui" line="256"/>
         <source>Shift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="386"/>
+        <location filename="widgets/buttonconfig.ui" line="326"/>
         <source>Physical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="399"/>
+        <location filename="widgets/buttonconfig.ui" line="420"/>
+        <source>Automatically set physical button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/buttonconfig.ui" line="448"/>
         <source>Physical buttons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="450"/>
+        <location filename="widgets/buttonconfig.ui" line="499"/>
         <source>Timer settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="530"/>
+        <location filename="widgets/buttonconfig.ui" line="579"/>
         <source>Timer 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="546"/>
-        <location filename="widgets/buttonconfig.ui" line="622"/>
-        <location filename="widgets/buttonconfig.ui" line="698"/>
-        <location filename="widgets/buttonconfig.ui" line="774"/>
-        <location filename="widgets/buttonconfig.ui" line="850"/>
-        <location filename="widgets/buttonconfig.ui" line="926"/>
+        <location filename="widgets/buttonconfig.ui" line="595"/>
+        <location filename="widgets/buttonconfig.ui" line="671"/>
+        <location filename="widgets/buttonconfig.ui" line="747"/>
+        <location filename="widgets/buttonconfig.ui" line="823"/>
+        <location filename="widgets/buttonconfig.ui" line="899"/>
+        <location filename="widgets/buttonconfig.ui" line="975"/>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="612"/>
+        <location filename="widgets/buttonconfig.ui" line="661"/>
         <source>Timer 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="688"/>
+        <location filename="widgets/buttonconfig.ui" line="737"/>
         <source>Timer 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="764"/>
+        <location filename="widgets/buttonconfig.ui" line="813"/>
         <source>Debounce timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="840"/>
+        <location filename="widgets/buttonconfig.ui" line="889"/>
         <source>Axes to buttons timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonconfig.ui" line="916"/>
+        <location filename="widgets/buttonconfig.ui" line="965"/>
         <source>Encoder press timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -716,207 +721,207 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="53"/>
+        <location filename="widgets/buttonlogical.h" line="63"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="54"/>
+        <location filename="widgets/buttonlogical.h" line="64"/>
         <source>Timer 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="55"/>
+        <location filename="widgets/buttonlogical.h" line="65"/>
         <source>Timer 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="56"/>
+        <location filename="widgets/buttonlogical.h" line="66"/>
         <source>Timer 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="61"/>
+        <location filename="widgets/buttonlogical.h" line="71"/>
         <source>No shift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="62"/>
+        <location filename="widgets/buttonlogical.h" line="72"/>
         <source>Shift 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="63"/>
+        <location filename="widgets/buttonlogical.h" line="73"/>
         <source>Shift 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="64"/>
+        <location filename="widgets/buttonlogical.h" line="74"/>
         <source>Shift 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="65"/>
+        <location filename="widgets/buttonlogical.h" line="75"/>
         <source>Shift 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="66"/>
+        <location filename="widgets/buttonlogical.h" line="76"/>
         <source>Shift 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="72"/>
+        <location filename="widgets/buttonlogical.h" line="82"/>
         <source>Button normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="73"/>
+        <location filename="widgets/buttonlogical.h" line="83"/>
         <source>Button toggle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="74"/>
+        <location filename="widgets/buttonlogical.h" line="84"/>
         <source>Toggle switch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="75"/>
+        <location filename="widgets/buttonlogical.h" line="85"/>
         <source>Toggle switch ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="76"/>
+        <location filename="widgets/buttonlogical.h" line="86"/>
         <source>Toggle switch ON/OFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="77"/>
+        <location filename="widgets/buttonlogical.h" line="87"/>
         <source>POV1 Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="78"/>
+        <location filename="widgets/buttonlogical.h" line="88"/>
         <source>POV1 Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="79"/>
+        <location filename="widgets/buttonlogical.h" line="89"/>
         <source>POV1 Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="80"/>
+        <location filename="widgets/buttonlogical.h" line="90"/>
         <source>POV1 Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="81"/>
+        <location filename="widgets/buttonlogical.h" line="91"/>
         <source>POV1 Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="82"/>
+        <location filename="widgets/buttonlogical.h" line="92"/>
         <source>POV2 Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="83"/>
+        <location filename="widgets/buttonlogical.h" line="93"/>
         <source>POV2 Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="84"/>
+        <location filename="widgets/buttonlogical.h" line="94"/>
         <source>POV2 Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="85"/>
+        <location filename="widgets/buttonlogical.h" line="95"/>
         <source>POV2 Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="86"/>
+        <location filename="widgets/buttonlogical.h" line="96"/>
         <source>POV2 Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="87"/>
+        <location filename="widgets/buttonlogical.h" line="97"/>
         <source>POV3 Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="88"/>
+        <location filename="widgets/buttonlogical.h" line="98"/>
         <source>POV3 Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="89"/>
+        <location filename="widgets/buttonlogical.h" line="99"/>
         <source>POV3 Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="90"/>
+        <location filename="widgets/buttonlogical.h" line="100"/>
         <source>POV3 Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="91"/>
+        <location filename="widgets/buttonlogical.h" line="101"/>
         <source>POV4 Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="92"/>
+        <location filename="widgets/buttonlogical.h" line="102"/>
         <source>POV4 Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="93"/>
+        <location filename="widgets/buttonlogical.h" line="103"/>
         <source>POV4 Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="94"/>
+        <location filename="widgets/buttonlogical.h" line="104"/>
         <source>POV4 Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="95"/>
+        <location filename="widgets/buttonlogical.h" line="105"/>
         <source>Encoder A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="96"/>
+        <location filename="widgets/buttonlogical.h" line="106"/>
         <source>Encoder B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="97"/>
+        <location filename="widgets/buttonlogical.h" line="107"/>
         <source>Radio button 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="98"/>
+        <location filename="widgets/buttonlogical.h" line="108"/>
         <source>Radio button 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="99"/>
+        <location filename="widgets/buttonlogical.h" line="109"/>
         <source>Radio button 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="100"/>
+        <location filename="widgets/buttonlogical.h" line="110"/>
         <source>Radio button 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="101"/>
+        <location filename="widgets/buttonlogical.h" line="111"/>
         <source>Sequential toggle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/buttonlogical.h" line="102"/>
+        <location filename="widgets/buttonlogical.h" line="112"/>
         <source>Sequential button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1315,7 +1320,7 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="769"/>
+        <location filename="mainwindow.ui" line="453"/>
         <location filename="mainwindow.cpp" line="649"/>
         <source>Show debug</source>
         <translation type="unfinished"></translation>
@@ -1374,92 +1379,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="663"/>
+        <location filename="mainwindow.ui" line="344"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="886"/>
+        <location filename="mainwindow.ui" line="570"/>
         <source>Set file to default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="807"/>
+        <location filename="mainwindow.ui" line="491"/>
         <source>Save config to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="937"/>
+        <location filename="mainwindow.ui" line="621"/>
         <source>Read config from Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="864"/>
+        <location filename="mainwindow.ui" line="548"/>
         <source>Reset All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="972"/>
+        <location filename="mainwindow.ui" line="656"/>
         <source>Load default config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="273"/>
-        <source>Profile 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="286"/>
-        <source>Profile 5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="302"/>
-        <source>Profile 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="315"/>
-        <source>Profile 6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="328"/>
-        <source>Profile 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="341"/>
-        <source>Profile 7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="354"/>
-        <source>Profile 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="367"/>
-        <source>Profile 8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="380"/>
-        <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="579"/>
+        <location filename="mainwindow.ui" line="260"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="702"/>
+        <location filename="mainwindow.ui" line="383"/>
         <source>Load config from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="747"/>
+        <location filename="mainwindow.ui" line="431"/>
         <source>Write config to Device</source>
         <translation type="unfinished"></translation>
     </message>

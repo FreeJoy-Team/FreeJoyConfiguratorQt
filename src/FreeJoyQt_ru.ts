@@ -667,6 +667,10 @@
         <source>Axes to buttons timer</source>
         <translation>Оси в кнопки таймер</translation>
     </message>
+    <message>
+        <source>Automatically set physical button</source>
+        <translation>Автоматически устанавливать физическую кнопку</translation>
+    </message>
 </context>
 <context>
     <name>ButtonLogical</name>
@@ -1328,40 +1332,8 @@ g</source>
         <translation> Светодиоды/ШИМ </translation>
     </message>
     <message>
-        <source>Profile 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile 5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile 6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile 7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile 8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>X</source>
-        <translation>Х</translation>
+        <translation type="vanished">Х</translation>
     </message>
     <message>
         <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
@@ -1377,7 +1349,7 @@ g</source>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

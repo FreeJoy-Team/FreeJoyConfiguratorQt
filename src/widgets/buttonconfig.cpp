@@ -1,15 +1,20 @@
 #include "buttonconfig.h"
 #include "ui_buttonconfig.h"
 #include <QTimer>
-
+#include <QSettings>
 #include <QDebug>
-#include <QScrollArea>
-#include <QScrollBar>
+
+#ifdef DYNAMIC_CREATION
+    #include <QScrollArea>
+    #include <QScrollBar>
+#endif
+
 ButtonConfig::ButtonConfig(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ButtonConfig)
 {
     ui->setupUi(this);
+    m_logicButtonInFocus = -1;
     m_isShifts_act = false;
     m_shift1_act = false;
     m_shift2_act = false;
@@ -17,24 +22,32 @@ ButtonConfig::ButtonConfig(QWidget *parent)
     m_shift4_act = false;
     m_shift5_act = false;
 
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    ui->checkBox_AutoPhysBut->setChecked(gEnv.pAppSettings->value("AutoSetPhysButton", true).toBool());
+    gEnv.pAppSettings->endGroup();
+
     // dynamic creation with scroll
 #ifdef DYNAMIC_CREATION
     connect(ui->scrollArea_LogButtons->verticalScrollBar(), &QScrollBar::valueChanged, this, &ButtonConfig::logScrollValueChanged);
 #else
     for (int i = 0; i < MAX_BUTTONS_NUM; i++) {
-        ButtonLogical *logical_buttons_widget = new ButtonLogical(i, this);
-        ui->layoutV_LogicalButton->addWidget(logical_buttons_widget);
-        m_logicButtonPtrList.append(logical_buttons_widget);
+        ButtonLogical *logicalButtonsWidget = new ButtonLogical(i, this);
+        ui->layoutV_LogicalButton->addWidget(logicalButtonsWidget);
+        m_logicButtonPtrList.append(logicalButtonsWidget);
 
         connect(m_logicButtonPtrList[i], SIGNAL(functionIndexChanged(int, int, int)),
                 this, SLOT(functionTypeChanged(int, int, int)));
     }
+    on_checkBox_AutoPhysBut_toggled(ui->checkBox_AutoPhysBut->isChecked());
 #endif
     logicaButtonsCreator();
 }
 
 ButtonConfig::~ButtonConfig()
 {
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    gEnv.pAppSettings->setValue("AutoSetPhysButton", ui->checkBox_AutoPhysBut->isChecked());
+    gEnv.pAppSettings->endGroup();
     delete ui;
 }
 
@@ -119,6 +132,7 @@ void ButtonConfig::logicaButtonsCreator()
             emit logicalButtonsCreated();
             return;
         }
+        on_checkBox_AutoPhysBut_toggled(ui->checkBox_AutoPhysBut->isChecked());
         #endif
 #else
         for (int i = 0; i < 8; i++) // MAX_BUTTONS_NUM(128)/8 = 16 ДОЛЖНО ДЕЛИТЬСЯ БЕЗ ОСТАТКА
@@ -131,7 +145,24 @@ void ButtonConfig::logicaButtonsCreator()
     });
 }
 
-void ButtonConfig::physButtonsSpawn(int count)
+// set physical button for focused logical button
+void ButtonConfig::setLogicButton(int buttonNumber)
+{
+    if (m_autoPhysButEnabled) {
+        int buttonInFocus = m_logicButtonPtrList[0]->currentFocus();
+        if (buttonInFocus >= 0) {
+            m_logicButtonPtrList[buttonInFocus]->setLogicButton(buttonNumber);
+        }
+    }
+}
+
+void ButtonConfig::on_checkBox_AutoPhysBut_toggled(bool checked)
+{
+    m_autoPhysButEnabled = checked;
+    m_logicButtonPtrList[0]->setAutoPhysBut(checked);
+}
+
+void ButtonConfig::physButtonsCreator(int count)
 {
 //    if (count > MAX_BUTTONS_NUM) {
 //        count = MAX_BUTTONS_NUM;
@@ -155,10 +186,11 @@ void ButtonConfig::physButtonsSpawn(int count)
             row++;
             column = 0;
         }
-        ButtonPhysical *physical_button_widget = new ButtonPhysical(i, this);
-        ui->layoutG_PhysicalButton->addWidget(physical_button_widget, row, column);
-        m_PhysButtonPtrList.append(physical_button_widget);
+        ButtonPhysical *physicalButtonWidget = new ButtonPhysical(i, this);
+        ui->layoutG_PhysicalButton->addWidget(physicalButtonWidget, row, column);
+        m_PhysButtonPtrList.append(physicalButtonWidget);
         column++;
+        connect(physicalButtonWidget, &ButtonPhysical::physButtonPressed, this, &ButtonConfig::setLogicButton);
     }
 }
 
@@ -197,7 +229,7 @@ void ButtonConfig::setUiOnOff(int value)
         m_logicButtonPtrList[i]->setMaxPhysButtons(value);
     }
 
-    physButtonsSpawn(value);
+    physButtonsCreator(value);
 }
 
 void ButtonConfig::buttonStateChanged()

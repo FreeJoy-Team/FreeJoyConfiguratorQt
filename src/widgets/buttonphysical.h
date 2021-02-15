@@ -16,9 +16,13 @@ public:
     ~ButtonPhysical();
     void setButtonState(bool setState);
 
+signals:
+    void physButtonPressed(int number);
+
 private:
     Ui::ButtonPhysical *ui;
-    bool m_currentState; // private, set?
+    int m_buttonNumber;
+    bool m_currentState;
     QString m_defStyle;
 };
 
