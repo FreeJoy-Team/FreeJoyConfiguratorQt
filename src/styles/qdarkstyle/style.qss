@@ -2262,11 +2262,11 @@ PlotWidget {
 
 
 /* Custom Widgets -------------------------------------------------------------
-
+border: 1px solid #32414B;
 --------------------------------------------------------------------------- */
 
 QPushButton#pushButton_Wiki {
-border: 1px solid #32414B;
+border: 1px solid #148CD2;
 border-radius:15px;
 background-color: rgb(49, 54, 59);
 padding:0px;

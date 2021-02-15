@@ -12,19 +12,32 @@ AxesExtended::AxesExtended(int axisNumber, QWidget *parent)
 
     m_axisNumber = axisNumber;
 
-    for (int i = 0; i < m_i2cAddressList.size(); ++i) {
-        ui->comboBox_I2cAddress->addItem(m_i2cAddressList[i].guiName);
+    // I2C
+    m_i2c_enumIndex.reserve(m_i2cPtrList.size());
+    for (int i = 0; i < m_i2cPtrList.size(); ++i) {
+        ui->comboBox_I2cAddress->addItem(m_i2cPtrList[i].guiName);
+        m_i2c_enumIndex.push_back(m_i2cPtrList[i].deviceEnumIndex);
     }
+    // function
+    m_function_enumIndex.reserve(m_functionList.size());
     for (int i = 0; i < m_functionList.size(); ++i) {
         ui->comboBox_Function->addItem(m_functionList[i].guiName);
+        m_function_enumIndex.push_back(m_functionList[i].deviceEnumIndex);
     }
+    // button 1 and 3
+    m_button_1_3_enumIndex.reserve(m_button_1_3_list.size());
     for (int i = 0; i < m_button_1_3_list.size(); ++i) {
         ui->comboBox_Button1->addItem(m_button_1_3_list[i].guiName);
         ui->comboBox_Button3->addItem(m_button_1_3_list[i].guiName);
+        m_button_1_3_enumIndex.push_back(m_button_1_3_list[i].deviceEnumIndex);
     }
+    // button 2
+    m_button_2_enumIndex.reserve(m_button_2_list.size());
     for (int i = 0; i < m_button_2_list.size(); ++i) {
         ui->comboBox_Button2->addItem(m_button_2_list[i].guiName);
+        m_button_2_enumIndex.push_back(m_button_2_list[i].deviceEnumIndex);
     }
+    // function axis
     for (int i = 0; i < axesList().size(); ++i) {
         ui->comboBox_AxisSource2->addItem(axesList()[i].guiName);
     }
@@ -77,19 +90,20 @@ void AxesExtended::functionIndexChanged(int index)
 
 void AxesExtended::readFromConfig()
 {
+    //ui->comboBox_I2cAddress->setCurrentIndex(Converter::EnumToIndex(axisCfg->i2c_address, m_i2c_enumIndex));
     axis_config_t *axisCfg = &gEnv.pDeviceConfig->config.axis_config[m_axisNumber];
     // I2C, sources, function
-    ui->comboBox_I2cAddress->setCurrentIndex(Converter::EnumToIndex(axisCfg->i2c_address, m_i2cAddressList));
+    ui->comboBox_I2cAddress->setCurrentIndex(Converter::EnumToIndex(axisCfg->i2c_address, m_i2c_enumIndex));
     ui->comboBox_AxisSource2->setCurrentIndex(Converter::EnumToIndex(axisCfg->source_secondary, axesList()));
-    ui->comboBox_Function->setCurrentIndex(Converter::EnumToIndex(axisCfg->function, m_functionList));
+    ui->comboBox_Function->setCurrentIndex(Converter::EnumToIndex(axisCfg->function, m_function_enumIndex));
     // chanel
     ui->spinBox_ChanelEncoder->setValue(axisCfg->channel);
     // buttons
-    ui->comboBox_Button1->setCurrentIndex(Converter::EnumToIndex(axisCfg->button1_type, m_button_1_3_list));
+    ui->comboBox_Button1->setCurrentIndex(Converter::EnumToIndex(axisCfg->button1_type, m_button_1_3_enumIndex));
     ui->spinBox_Button1->setValue(axisCfg->button1 + 1);
-    ui->comboBox_Button2->setCurrentIndex(Converter::EnumToIndex(axisCfg->button2_type, m_button_2_list));
+    ui->comboBox_Button2->setCurrentIndex(Converter::EnumToIndex(axisCfg->button2_type, m_button_2_enumIndex));
     ui->spinBox_Button2->setValue(axisCfg->button2 + 1);
-    ui->comboBox_Button3->setCurrentIndex(Converter::EnumToIndex(axisCfg->button3_type, m_button_1_3_list));
+    ui->comboBox_Button3->setCurrentIndex(Converter::EnumToIndex(axisCfg->button3_type, m_button_1_3_enumIndex));
     ui->spinBox_Button3->setValue(axisCfg->button3 + 1);
     // divider, prescaler
     ui->spinBox_StepDiv->setValue(axisCfg->divider);
@@ -108,7 +122,7 @@ void AxesExtended::writeToConfig()
 {
     axis_config_t *axisCfg = &gEnv.pDeviceConfig->config.axis_config[m_axisNumber];
     // I2C, sources, function
-    axisCfg->i2c_address = m_i2cAddressList[ui->comboBox_I2cAddress->currentIndex()].deviceEnumIndex;
+    axisCfg->i2c_address = m_i2cPtrList[ui->comboBox_I2cAddress->currentIndex()].deviceEnumIndex;
     axisCfg->source_secondary = axesList()[ui->comboBox_AxisSource2->currentIndex()].deviceEnumIndex;
     axisCfg->function = m_functionList[ui->comboBox_Function->currentIndex()].deviceEnumIndex;
     // chanel

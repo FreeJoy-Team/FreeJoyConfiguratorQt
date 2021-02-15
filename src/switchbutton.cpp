@@ -52,7 +52,7 @@ void SwitchButton::paintEvent(QPaintEvent *event)
 //        }
     } else {
         // other
-        point = QPointF(width / m_currentSwitch, m_halfHeight);
+        point = QPointF(width / float(m_currentSwitch), m_halfHeight);
     }
     p.setPen(QColor(110, 64, 201));
     p.drawEllipse(point, m_halfHeight -1.0f, m_halfHeight -1.0f);
@@ -155,8 +155,8 @@ void SwitchButton::mouseReleaseEvent(QMouseEvent *event)
 void SwitchButton::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
-    m_halfWidth = width() / 2.0;
-    m_halfHeight = height() / 2.0;
+    m_halfWidth = width() / 2.0f;
+    m_halfHeight = height() / 2.0f;
 //    for (int i = 0; i < 50; ++i) {
 //        poin2[i].setX(rand() % (width() - 8));
 //        poin2[i].setY(rand() % height());

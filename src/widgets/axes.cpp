@@ -4,7 +4,7 @@
 #include <QTranslator>
 #include "converter.h"
 
-const QVector <deviceEnum_guiName_t> &axesList()
+const QVector <deviceEnum_guiName_t> &axesList()    // порядок обязан быть как в common_types.h!!!!!!!!!!!
 {
     static const QVector <deviceEnum_guiName_t> aL =
     {{
@@ -38,7 +38,7 @@ Axes::Axes(int axisNumber, QWidget *parent)
     // add main source
     for (int i = 0; i < 2; ++i) {
         ui->comboBox_AxisSource1->addItem(m_axesPinList[i].guiName);
-        m_mainSourceEnumIndex.push_back(m_axesPinList[i].deviceEnumIndex);
+        m_mainSource_enumIndex.push_back(m_axesPinList[i].deviceEnumIndex);
     }
 
     // set a2b  // двойная работа? readFromConfig()
@@ -46,14 +46,13 @@ Axes::Axes(int axisNumber, QWidget *parent)
     if (ui->spinBox_A2bCount->value() < m_kMinA2bButtons) {
         ui->widget_A2bSlider->setEnabled(false);
         ui->widget_A2bSlider->setPointsCount(m_kMinA2bButtons);//+1
-        //count = kMinA2bButtons;
     } else {
         ui->widget_A2bSlider->setEnabled(true);
         ui->widget_A2bSlider->setPointsCount(ui->spinBox_A2bCount->value() + 1);
     }
 
     // add axes extended settings
-    m_axesExtend = new AxesExtended(m_axisNumber, this); //check
+    m_axesExtend = new AxesExtended(m_axisNumber, this);
     m_axesExtend->setVisible(false);
     ui->layoutH_AxesExtend->addWidget(m_axesExtend);
     //ui->layoutV_Axes->addWidget(axes_extend);
@@ -76,8 +75,8 @@ Axes::Axes(int axisNumber, QWidget *parent)
 
 Axes::~Axes()
 {
-    m_mainSourceEnumIndex.clear();
-    m_mainSourceEnumIndex.shrink_to_fit();
+    m_mainSource_enumIndex.clear();
+    m_mainSource_enumIndex.shrink_to_fit();
     delete ui;
 }
 
@@ -91,15 +90,15 @@ void Axes::addOrDeleteMainSource(int sourceEnum, bool isAdd)
 {
     if (isAdd == true) {
         ui->comboBox_AxisSource1->addItem(m_axesPinList[Converter::EnumToIndex(sourceEnum, m_axesPinList)].guiName);
-        m_mainSourceEnumIndex.push_back(m_axesPinList[Converter::EnumToIndex(sourceEnum, m_axesPinList)].deviceEnumIndex);
+        m_mainSource_enumIndex.push_back(m_axesPinList[Converter::EnumToIndex(sourceEnum, m_axesPinList)].deviceEnumIndex);
     } else {
-        for (int i = 0; i < m_mainSourceEnumIndex.size(); ++i) {
-            if (m_mainSourceEnumIndex[i] == sourceEnum) {
+        for (int i = 0; i < m_mainSource_enumIndex.size(); ++i) {
+            if (m_mainSource_enumIndex[i] == sourceEnum) {
                 if (ui->comboBox_AxisSource1->currentIndex() == (int) i) {
                     ui->comboBox_AxisSource1->setCurrentIndex(0);
                 }
                 ui->comboBox_AxisSource1->removeItem(i);
-                m_mainSourceEnumIndex.erase(m_mainSourceEnumIndex.begin() + i);
+                m_mainSource_enumIndex.erase(m_mainSource_enumIndex.begin() + i);
                 break;
             }
         }
@@ -108,7 +107,7 @@ void Axes::addOrDeleteMainSource(int sourceEnum, bool isAdd)
 
 void Axes::mainSourceIndexChanged(int index)
 {
-    if (m_mainSourceEnumIndex[index] == I2C) {
+    if (m_mainSource_enumIndex[index] == I2C) {
         m_axesExtend->setI2CEnabled(true);
     } else {
         m_axesExtend->setI2CEnabled(false);
@@ -207,18 +206,6 @@ void Axes::on_pushButton_ResetCalib_clicked()
 
 void Axes::a2bSpinBoxChanged(int count)
 {
-//    // skip "1" number
-//    if (count == 1) {
-//        if (m_lastA2bCount < 1) {
-//            ui->spinBox_A2bCount->setValue(2);
-//        } else {
-//            ui->spinBox_A2bCount->setValue(0);
-//        }
-//        return;
-//    } else {
-//        m_lastA2bCount = count;
-//    }
-
     if (count < m_kMinA2bButtons) {
         ui->widget_A2bSlider->setEnabled(false);
         ui->widget_A2bSlider->setPointsCount(0);
@@ -254,19 +241,14 @@ void Axes::on_checkBox_ShowExtend_stateChanged(int state)
     }
 }
 
-void Axes::readFromConfig() // Converter::EnumToIndex(device_enum, list)
+void Axes::readFromConfig()
 {
     axis_config_t *axCfg = &gEnv.pDeviceConfig->config.axis_config[m_axisNumber];
     axis_to_buttons_t *a2bCfg = &gEnv.pDeviceConfig->config.axes_to_buttons[m_axisNumber];
     // output, inverted
     ui->checkBox_Output->setChecked(axCfg->out_enabled);
     ui->checkBox_Inverted->setChecked(axCfg->inverted);
-    for (int i = 0; i < m_mainSourceEnumIndex.size(); ++i) { // сделать Converter::    ?
-        if (m_mainSourceEnumIndex[i] == axCfg->source_main) {
-            ui->comboBox_AxisSource1->setCurrentIndex(i);
-            break;
-        }
-    }
+    ui->comboBox_AxisSource1->setCurrentIndex(Converter::EnumToIndex(axCfg->source_main, m_mainSource_enumIndex));
     // calibration
     ui->spinBox_CalibMin->setValue(axCfg->calib_min);
     ui->spinBox_CalibCenter->setValue(axCfg->calib_center);
@@ -291,7 +273,7 @@ void Axes::writeToConfig()
     axCfg->out_enabled = ui->checkBox_Output->isChecked();
     axCfg->inverted = ui->checkBox_Inverted->isChecked();
     // I2C, sources, function
-    axCfg->source_main = m_mainSourceEnumIndex[ui->comboBox_AxisSource1->currentIndex()];
+    axCfg->source_main = m_mainSource_enumIndex[ui->comboBox_AxisSource1->currentIndex()];
     // calibration
     axCfg->calib_min = ui->spinBox_CalibMin->value();
     axCfg->calib_center = ui->spinBox_CalibCenter->value();

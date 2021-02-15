@@ -10,6 +10,7 @@ public:
     Converter();
 
     static int EnumToIndex(const int deviceEmun, const QVector<deviceEnum_guiName_t> &list);
+    static int EnumToIndex(const int deviceEnum, const QVector<int> &list);
 };
 
 #endif // CONFIGUICONVERTER_H

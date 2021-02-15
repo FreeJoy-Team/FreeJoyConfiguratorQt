@@ -64,7 +64,7 @@ private:
     const QString m_kStopCalStr = tr("Stop && Save");
     AxesExtended *m_axesExtend;
 
-    QVector<int> m_mainSourceEnumIndex;
+    QVector<int> m_mainSource_enumIndex;
 
     enum
     {
