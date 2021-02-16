@@ -80,7 +80,7 @@ void HidDevice::processData()
                 if (QString::fromWCharArray(hidDevInfo->manufacturer_string) == "FreeJoy" && hidDevInfo->interface_number == 1) {
                     tmp_HidList.append(qMakePair(false, hidDevInfo));
                 } else if (hidDevInfo->vendor_id == OLD_FIRMWARE_VID && QString::fromWCharArray(hidDevInfo->manufacturer_string) != "FreeJoy" &&
-                           hidDevInfo->interface_number == -1)
+                           hidDevInfo->interface_number <= 0)
                 {
                     tmp_HidList.append(qMakePair(true, hidDevInfo));
                 }
