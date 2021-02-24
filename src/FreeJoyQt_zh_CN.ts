@@ -6,117 +6,117 @@
     <message>
         <location filename="widgets/advancedsettings.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="32"/>
         <source>Firmware flasher</source>
-        <translation type="unfinished"></translation>
+        <translation>固件刷写</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="53"/>
         <source>USB settings</source>
-        <translation type="unfinished"></translation>
+        <translation>USB选项</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="171"/>
         <source>USB exchange period</source>
-        <translation type="unfinished"></translation>
+        <translation>USB交换时间(原文: USB echange period)</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="213"/>
         <source>VID</source>
-        <translation type="unfinished"></translation>
+        <translation>VID</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="96"/>
         <source>Device USB name</source>
-        <translation type="unfinished"></translation>
+        <translation>设备USB名称</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="149"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> 毫秒</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="267"/>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="316"/>
         <source>Application settings</source>
-        <translation type="unfinished"></translation>
+        <translation>应用程序设置</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="337"/>
         <source>Other settings</source>
-        <translation type="unfinished"></translation>
+        <translation>其他设置</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="406"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>字体大小</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="371"/>
         <source>Load default config on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>启动时加载默认配置</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="429"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="439"/>
         <source>Languages</source>
-        <translation type="unfinished"></translation>
+        <translation>语言</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="480"/>
         <source>Restart app for full changes</source>
-        <translation type="unfinished"></translation>
+        <translation>重新启动该应用以进行完整更改</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="493"/>
         <source>Styles</source>
-        <translation type="unfinished"></translation>
+        <translation>风格</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="514"/>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>暗色</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="521"/>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>亮色</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.ui" line="528"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>默认</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.cpp" line="102"/>
         <source>Loading... Please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>正在切换... 稍稍休息会吧</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.cpp" line="208"/>
         <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;采用 Qt %1 (%2) 构建&lt;br&gt;源代码可在&lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;上获取&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.cpp" line="212"/>
         <source>&lt;br&gt;Check &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;our wiki &lt;/a&gt;for detailed instructions.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;检查我们的&lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;our wiki&lt;/a&gt;以获得更多说明.</translation>
     </message>
     <message>
         <location filename="widgets/advancedsettings.cpp" line="214"/>
         <source>About FreeJoyQt</source>
-        <translation type="unfinished"></translation>
+        <translation>关于 FreeJoyQt</translation>
     </message>
 </context>
 <context>
@@ -124,105 +124,105 @@
     <message>
         <location filename="widgets/axes.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="47"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>群组框</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="74"/>
         <source>Show extended settings</source>
-        <translation type="unfinished"></translation>
+        <translation>展开更多选项</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="117"/>
         <location filename="widgets/axes.h" line="63"/>
         <source>Calibrate</source>
-        <translation type="unfinished"></translation>
+        <translation>校准</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="136"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>中心</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="149"/>
         <source>Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation>最小</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="178"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>最大</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="191"/>
         <source>Set Center</source>
-        <translation type="unfinished"></translation>
+        <translation>设为中心</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="270"/>
         <source>Reset calibration</source>
-        <translation type="unfinished"></translation>
+        <translation>重置校准</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="305"/>
         <source>Raw</source>
-        <translation type="unfinished"></translation>
+        <translation>原生(Raw)数据</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="327"/>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>处理后的数据</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="473"/>
         <source>Inverted</source>
-        <translation type="unfinished"></translation>
+        <translation>反向</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="492"/>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>输出</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="502"/>
         <source>Buttons from axes</source>
-        <translation type="unfinished"></translation>
+        <translation>轴上的按钮数量</translation>
     </message>
     <message>
         <location filename="widgets/axes.ui" line="553"/>
         <source>Axis source</source>
-        <translation type="unfinished"></translation>
+        <translation>轴数据源</translation>
     </message>
     <message>
         <location filename="widgets/axes.h" line="64"/>
         <source>Stop &amp;&amp; Save</source>
-        <translation type="unfinished"></translation>
+        <translation>中止并保存</translation>
     </message>
     <message>
         <location filename="widgets/axes.h" line="109"/>
         <location filename="widgets/axes.h" line="146"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>空</translation>
     </message>
     <message>
         <location filename="widgets/axes.h" line="110"/>
         <location filename="widgets/axes.h" line="147"/>
         <source>Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>编码器</translation>
     </message>
     <message>
         <location filename="widgets/axes.cpp" line="17"/>
         <source>Slider 1</source>
-        <translation type="unfinished"></translation>
+        <translation>滑条 1 (原文Slider 1)</translation>
     </message>
     <message>
         <location filename="widgets/axes.cpp" line="18"/>
         <source>Slider 2</source>
-        <translation type="unfinished"></translation>
+        <translation>滑条 2 (原文Slider 2)</translation>
     </message>
 </context>
 <context>
@@ -230,7 +230,7 @@
     <message>
         <location filename="widgets/axesconfig.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
 </context>
 <context>
@@ -238,32 +238,32 @@
     <message>
         <location filename="widgets/axescurves.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/axescurves.ui" line="52"/>
         <source>Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线</translation>
     </message>
     <message>
         <location filename="widgets/axescurves.ui" line="105"/>
         <source>Linear</source>
-        <translation type="unfinished"></translation>
+        <translation>线性</translation>
     </message>
     <message>
         <location filename="widgets/axescurves.ui" line="139"/>
         <source>Exponent</source>
-        <translation type="unfinished"></translation>
+        <translation>指数</translation>
     </message>
     <message>
         <location filename="widgets/axescurves.ui" line="173"/>
         <source>Exponent inverted</source>
-        <translation type="unfinished"></translation>
+        <translation>反指数</translation>
     </message>
     <message>
         <location filename="widgets/axescurves.ui" line="207"/>
         <source>Shape</source>
-        <translation type="unfinished"></translation>
+        <translation>两端线性中间平滑曲线(原文Shape)</translation>
     </message>
 </context>
 <context>
@@ -271,102 +271,104 @@
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="78"/>
         <source>Curves profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线形状</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="99"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="112"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="125"/>
         <source>Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="138"/>
         <source>Rx</source>
-        <translation type="unfinished"></translation>
+        <translation>Rx</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="151"/>
         <source>Ry</source>
-        <translation type="unfinished"></translation>
+        <translation>Ry</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="164"/>
         <source>Rz</source>
-        <translation type="unfinished"></translation>
+        <translation>Rz</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="177"/>
         <source>Slider 1</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>原文Slider 1</translatorcomment>
+        <translation>滑条 1</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="190"/>
         <source>Slider 2</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>原文Slider 2</translatorcomment>
+        <translation>滑条 1</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.ui" line="228"/>
         <source>Reset profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>重置曲线形状</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="54"/>
         <source>Not used</source>
-        <translation type="unfinished"></translation>
+        <translation>未使用</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="55"/>
         <source>Curve 1</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 1</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="56"/>
         <source>Curve 2</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 2</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="57"/>
         <source>Curve 3</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 3</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="58"/>
         <source>Curve 4</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 4</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="59"/>
         <source>Curve 5</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 5</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="60"/>
         <source>Curve 6</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 6</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="61"/>
         <source>Curve 7</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 7</translation>
     </message>
     <message>
         <location filename="widgets/axescurvesconfig.h" line="62"/>
         <source>Curve 8</source>
-        <translation type="unfinished"></translation>
+        <translation>曲线 8</translation>
     </message>
 </context>
 <context>
@@ -374,12 +376,12 @@
     <message>
         <location filename="widgets/axesextended.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="56"/>
         <source>Chanel/Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>通道/编码器</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="75"/>
@@ -394,27 +396,27 @@
     <message>
         <location filename="widgets/axesextended.ui" line="102"/>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>分辨率</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="184"/>
         <source>Button 3</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮 3</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="216"/>
         <source>Button 2</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮 2</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="229"/>
         <source>Button 1</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮 1</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="296"/>
         <source>Filter off</source>
-        <translation type="unfinished"></translation>
+        <translation>滤波关闭</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="312"/>
@@ -429,33 +431,33 @@
     <message>
         <location filename="widgets/axesextended.ui" line="360"/>
         <source>I2C address</source>
-        <translation type="unfinished"></translation>
+        <translation>I2C 地址</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="389"/>
         <source> bits</source>
-        <translation type="unfinished"></translation>
+        <translation> 位(bits)</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="396"/>
         <source>Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>偏移</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="429"/>
         <source>Deadband</source>
-        <translation type="unfinished"></translation>
+        <translation>死区</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.ui" line="468"/>
         <source>Dynamic deadband</source>
-        <translation type="unfinished"></translation>
+        <translation>动态死区</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.cpp" line="52"/>
         <location filename="widgets/axesextended.cpp" line="79"/>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>滤波</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="61"/>
@@ -519,37 +521,37 @@
     <message>
         <location filename="widgets/axesextended.h" line="88"/>
         <source>level 1</source>
-        <translation type="unfinished"></translation>
+        <translation>1级</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="89"/>
         <source>level 2</source>
-        <translation type="unfinished"></translation>
+        <translation>2级</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="90"/>
         <source>level 3</source>
-        <translation type="unfinished"></translation>
+        <translation>3级</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="91"/>
         <source>level 4</source>
-        <translation type="unfinished"></translation>
+        <translation>4级</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="92"/>
         <source>level 5</source>
-        <translation type="unfinished"></translation>
+        <translation>5级</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="93"/>
         <source>level 6</source>
-        <translation type="unfinished"></translation>
+        <translation>6级</translation>
     </message>
     <message>
         <location filename="widgets/axesextended.h" line="94"/>
         <source>level 7</source>
-        <translation type="unfinished"></translation>
+        <translation>7级</translation>
     </message>
 </context>
 <context>
@@ -557,7 +559,7 @@
     <message>
         <location filename="widgets/axestobuttonsslider.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/axestobuttonsslider.ui" line="26"/>
@@ -573,7 +575,7 @@
         <location filename="widgets/axestobuttonsslider.ui" line="156"/>
         <location filename="widgets/axestobuttonsslider.ui" line="169"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>文本标签</translation>
     </message>
 </context>
 <context>
@@ -581,7 +583,7 @@
     <message>
         <location filename="widgets/buttonconfig.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="43"/>
@@ -595,7 +597,7 @@
         <location filename="widgets/buttonconfig.ui" line="172"/>
         <location filename="widgets/buttonconfig.ui" line="210"/>
         <source>Logical button</source>
-        <translation type="unfinished"></translation>
+        <translation>逻辑按钮</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="81"/>
@@ -620,17 +622,17 @@
     <message>
         <location filename="widgets/buttonconfig.ui" line="235"/>
         <source>Logical buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>逻辑按钮</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="349"/>
         <source>Function</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="359"/>
         <source>Invert</source>
-        <translation type="unfinished"></translation>
+        <translation>反向</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="316"/>
@@ -640,7 +642,7 @@
     <message>
         <location filename="widgets/buttonconfig.ui" line="386"/>
         <source>Disable</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="306"/>
@@ -665,17 +667,17 @@
     <message>
         <location filename="widgets/buttonconfig.ui" line="448"/>
         <source>Physical buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>物理按钮</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="499"/>
         <source>Timer settings</source>
-        <translation type="unfinished"></translation>
+        <translation>计时器设置</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="579"/>
         <source>Timer 1</source>
-        <translation type="unfinished"></translation>
+        <translation>计时器 1</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="595"/>
@@ -685,17 +687,17 @@
         <location filename="widgets/buttonconfig.ui" line="899"/>
         <location filename="widgets/buttonconfig.ui" line="975"/>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>毫秒</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="661"/>
         <source>Timer 2</source>
-        <translation type="unfinished"></translation>
+        <translation>计时器 2</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="737"/>
         <source>Timer 3</source>
-        <translation type="unfinished"></translation>
+        <translation>计时器 3</translation>
     </message>
     <message>
         <location filename="widgets/buttonconfig.ui" line="813"/>
@@ -718,7 +720,7 @@
     <message>
         <location filename="widgets/buttonlogical.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/buttonlogical.h" line="63"/>
@@ -931,7 +933,7 @@
     <message>
         <location filename="widgets/buttonphysical.ui" line="32"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
 </context>
 <context>
@@ -939,57 +941,57 @@
     <message>
         <location filename="widgets/currentconfig.ui" line="32"/>
         <source>Current Config</source>
-        <translation type="unfinished"></translation>
+        <translation>当前配置</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="86"/>
         <source>Axis sources:</source>
-        <translation type="unfinished"></translation>
+        <translation>轴数据源数量:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="106"/>
         <source>Total LEDs:</source>
-        <translation type="unfinished"></translation>
+        <translation>总计 LED数量:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="116"/>
         <source>Buttons from matrix:</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮矩阵上的按钮数量:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="224"/>
         <source>Buttons from axes:</source>
-        <translation type="unfinished"></translation>
+        <translation>源自轴的按钮数量:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="310"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="96"/>
         <source>Single buttons:</source>
-        <translation type="unfinished"></translation>
+        <translation>独立按钮数量:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="76"/>
         <source>Columns of buttons:</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮列数:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="66"/>
         <source>Rows of buttons:</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮行数:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="126"/>
         <source>Total buttons:</source>
-        <translation type="unfinished"></translation>
+        <translation>总计 按钮数量:</translation>
     </message>
     <message>
         <location filename="widgets/currentconfig.ui" line="294"/>
         <source>Buttons from shift regs:</source>
-        <translation type="unfinished"></translation>
+        <translation>移位寄存器上的按钮数量:</translation>
     </message>
 </context>
 <context>
@@ -997,74 +999,74 @@
     <message>
         <location filename="widgets/debugwindow.ui" line="14"/>
         <source>Debug</source>
-        <translation type="unfinished"></translation>
+        <translation>调试信息</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="32"/>
         <source>Debug packets speed within 5 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>对5秒内交换的数据包进行测速</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="86"/>
         <source>Write log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>将日志保存到文件</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="116"/>
         <source>Buttons log</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮日志</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="93"/>
         <source>within 5 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>在5秒内</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="96"/>
         <location filename="widgets/debugwindow.cpp" line="63"/>
         <source>0 ms</source>
-        <translation type="unfinished"></translation>
+        <translation>0 毫秒</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="76"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="106"/>
         <source>Packets received:</source>
-        <translation type="unfinished"></translation>
+        <translation>已接收数据包:</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="35"/>
         <source>Packets speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>数据包速度:</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.ui" line="45"/>
         <source>Application log</source>
-        <translation type="unfinished"></translation>
+        <translation>应用程序日志</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.cpp" line="48"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> 毫秒</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.cpp" line="89"/>
         <location filename="widgets/debugwindow.cpp" line="93"/>
         <source>Logical button </source>
-        <translation type="unfinished"></translation>
+        <translation>逻辑按钮 </translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.cpp" line="90"/>
         <source> pressed</source>
-        <translation type="unfinished"></translation>
+        <translation> 按下</translation>
     </message>
     <message>
         <location filename="widgets/debugwindow.cpp" line="94"/>
         <source> unpressed</source>
-        <translation type="unfinished"></translation>
+        <translation> 松开</translation>
     </message>
 </context>
 <context>
@@ -1072,7 +1074,7 @@
     <message>
         <location filename="widgets/encoders.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/encoders.ui" line="60"/>
@@ -1084,17 +1086,17 @@
     <message>
         <location filename="widgets/encoders.ui" line="73"/>
         <source>Encoder type</source>
-        <translation type="unfinished"></translation>
+        <translation>编码器类型</translation>
     </message>
     <message>
         <location filename="widgets/encoders.ui" line="86"/>
         <source>Input A</source>
-        <translation type="unfinished"></translation>
+        <translation>A相输入</translation>
     </message>
     <message>
         <location filename="widgets/encoders.ui" line="125"/>
         <source>Input B</source>
-        <translation type="unfinished"></translation>
+        <translation>B相输入</translation>
     </message>
     <message>
         <location filename="widgets/encoders.h" line="44"/>
@@ -1123,41 +1125,41 @@
     <message>
         <location filename="widgets/encodersconfig.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="68"/>
         <source>Fast encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>高分辨率编码器</translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="102"/>
         <source>Fast encoder input A</source>
         <oldsource>Fast encioder input A</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>高分编码器A相</translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="115"/>
         <source>Fast encoder input B</source>
         <oldsource>Fast encioder input B</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>高分编码器B相</translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="128"/>
         <source>Encoder type</source>
-        <translation type="unfinished"></translation>
+        <translation>编码器类型</translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="154"/>
         <location filename="widgets/encodersconfig.ui" line="167"/>
         <location filename="widgets/encodersconfig.cpp" line="12"/>
         <source>Not defined</source>
-        <translation type="unfinished"></translation>
+        <translation>未定义</translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.ui" line="187"/>
         <source>Slow encoders</source>
-        <translation type="unfinished"></translation>
+        <translation>低分辨率编码器</translation>
     </message>
     <message>
         <location filename="widgets/encodersconfig.h" line="45"/>
@@ -1180,7 +1182,7 @@
     <message>
         <location filename="widgets/flasher.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/flasher.ui" line="54"/>
@@ -1243,17 +1245,17 @@
     <message>
         <location filename="widgets/led.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/led.h" line="39"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>正常</translation>
     </message>
     <message>
         <location filename="widgets/led.h" line="40"/>
         <source>Inverted</source>
-        <translation type="unfinished"></translation>
+        <translation>相反</translation>
     </message>
 </context>
 <context>
@@ -1261,7 +1263,7 @@
     <message>
         <location filename="widgets/ledconfig.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/ledconfig.ui" line="32"/>
@@ -1323,50 +1325,50 @@
         <location filename="mainwindow.ui" line="453"/>
         <location filename="mainwindow.cpp" line="649"/>
         <source>Show debug</source>
-        <translation type="unfinished"></translation>
+        <translation>显示调试信息</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="65"/>
         <source> Pin Config </source>
-        <translation type="unfinished"></translation>
+        <translation> Pin 配置 </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="84"/>
         <source> Button Config </source>
-        <translation type="unfinished"></translation>
+        <translation> 按钮配置 </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="103"/>
         <source> Axes Config </source>
         <oldsource> Axis Config </oldsource>
-        <translation type="unfinished"></translation>
+        <translation> 轴配置 </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="125"/>
         <source> Axes Curves </source>
         <oldsource> Axis Curves </oldsource>
-        <translation type="unfinished"></translation>
+        <translation> 轴曲线 </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="147"/>
         <source> Shift Registers </source>
-        <translation type="unfinished"></translation>
+        <translation> 移位寄存器 </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="169"/>
         <source> Encoders</source>
-        <translation type="unfinished"></translation>
+        <translation> 编码器 </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="191"/>
         <source> LED/PWM </source>
         <oldsource> LED </oldsource>
-        <translation type="unfinished"></translation>
+        <translation> LED/PWM </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="213"/>
         <source> Advanced Settings </source>
-        <translation type="unfinished"></translation>
+        <translation> 高级设置 </translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="235"/>
@@ -1381,32 +1383,32 @@
     <message>
         <location filename="mainwindow.ui" line="344"/>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>设备</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="570"/>
         <source>Set file to default config</source>
-        <translation type="unfinished"></translation>
+        <translation>将文件设置为默认配置</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="491"/>
         <source>Save config to file</source>
-        <translation type="unfinished"></translation>
+        <translation>将配置保存到文件</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="621"/>
         <source>Read config from Device</source>
-        <translation type="unfinished"></translation>
+        <translation>从设备中读取配置</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="548"/>
         <source>Reset All</source>
-        <translation type="unfinished"></translation>
+        <translation>重置所有设置</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="656"/>
         <source>Load default config</source>
-        <translation type="unfinished"></translation>
+        <translation>加载默认配置</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="260"/>
@@ -1416,17 +1418,17 @@
     <message>
         <location filename="mainwindow.ui" line="383"/>
         <source>Load config from file</source>
-        <translation type="unfinished"></translation>
+        <translation>从文件中加载配置</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="431"/>
         <source>Write config to Device</source>
-        <translation type="unfinished"></translation>
+        <translation>将配置写入设备</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="44"/>
         <source>FreeJoy Configurator</source>
-        <translation type="unfinished"></translation>
+        <translation>FreeJoy 配置程序 （由@sht2017翻译）</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="227"/>
@@ -1503,7 +1505,7 @@
         <location filename="mainwindow.cpp" line="440"/>
         <location filename="mainwindow.cpp" line="641"/>
         <source>Hide debug</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏调试信息</translation>
     </message>
 </context>
 <context>
@@ -1511,162 +1513,162 @@
     <message>
         <location filename="widgets/pincombobox.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="145"/>
         <source>Pin A0</source>
-        <translation type="unfinished"></translation>
+        <translation>AO 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="146"/>
         <source>Pin A1</source>
-        <translation type="unfinished"></translation>
+        <translation>A1 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="147"/>
         <source>Pin A2</source>
-        <translation type="unfinished"></translation>
+        <translation>A2 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="148"/>
         <source>Pin A3</source>
-        <translation type="unfinished"></translation>
+        <translation>A3 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="149"/>
         <source>Pin A4</source>
-        <translation type="unfinished"></translation>
+        <translation>A4 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="150"/>
         <source>Pin A5</source>
-        <translation type="unfinished"></translation>
+        <translation>A5 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="151"/>
         <source>Pin A6</source>
-        <translation type="unfinished"></translation>
+        <translation>A6 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="152"/>
         <source>Pin A7</source>
-        <translation type="unfinished"></translation>
+        <translation>A7 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="153"/>
         <source>Pin A8</source>
-        <translation type="unfinished"></translation>
+        <translation>A8 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="154"/>
         <source>Pin A9</source>
-        <translation type="unfinished"></translation>
+        <translation>A9 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="155"/>
         <source>Pin A10</source>
-        <translation type="unfinished"></translation>
+        <translation>A10 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="156"/>
         <source>Pin A15</source>
-        <translation type="unfinished"></translation>
+        <translation>A15 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="157"/>
         <source>Pin B0</source>
-        <translation type="unfinished"></translation>
+        <translation>B0 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="158"/>
         <source>Pin B1</source>
-        <translation type="unfinished"></translation>
+        <translation>B1 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="159"/>
         <source>Pin B3</source>
-        <translation type="unfinished"></translation>
+        <translation>B3 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="160"/>
         <source>Pin B4</source>
-        <translation type="unfinished"></translation>
+        <translation>B4 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="161"/>
         <source>Pin B5</source>
-        <translation type="unfinished"></translation>
+        <translation>B5 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="162"/>
         <source>Pin B6</source>
-        <translation type="unfinished"></translation>
+        <translation>B6 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="163"/>
         <source>Pin B7</source>
-        <translation type="unfinished"></translation>
+        <translation>B7 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="164"/>
         <source>Pin B8</source>
-        <translation type="unfinished"></translation>
+        <translation>B8 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="165"/>
         <source>Pin B9</source>
-        <translation type="unfinished"></translation>
+        <translation>B9 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="166"/>
         <source>Pin B10</source>
-        <translation type="unfinished"></translation>
+        <translation>B10 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="167"/>
         <source>Pin B11</source>
-        <translation type="unfinished"></translation>
+        <translation>B11 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="168"/>
         <source>Pin B12</source>
-        <translation type="unfinished"></translation>
+        <translation>B12 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="169"/>
         <source>Pin B13</source>
-        <translation type="unfinished"></translation>
+        <translation>B13 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="170"/>
         <source>Pin B14</source>
-        <translation type="unfinished"></translation>
+        <translation>B14 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="171"/>
         <source>Pin B15</source>
-        <translation type="unfinished"></translation>
+        <translation>B15 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="172"/>
         <source>Pin C13</source>
-        <translation type="unfinished"></translation>
+        <translation>C13 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="173"/>
         <source>Pin C14</source>
-        <translation type="unfinished"></translation>
+        <translation>C14 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="174"/>
         <source>Pin C15</source>
-        <translation type="unfinished"></translation>
+        <translation>C15 引脚</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="179"/>
         <source>Not Used</source>
-        <translation type="unfinished"></translation>
+        <translation>未使用</translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="184"/>
@@ -1804,7 +1806,7 @@
     <message>
         <location filename="widgets/pinconfig.ui" line="54"/>
         <source>Select board</source>
-        <translation type="unfinished"></translation>
+        <translation>选择开发板</translation>
     </message>
 </context>
 <context>
@@ -1812,7 +1814,7 @@
     <message>
         <location filename="widgets/shiftregisters.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单</translation>
     </message>
     <message>
         <location filename="widgets/shiftregisters.ui" line="44"/>
@@ -1828,7 +1830,7 @@
     <message>
         <location filename="widgets/shiftregisters.ui" line="70"/>
         <source>Shift register type</source>
-        <translation type="unfinished"></translation>
+        <translation>移位寄存器类型</translation>
     </message>
     <message>
         <location filename="widgets/shiftregisters.ui" line="83"/>
@@ -1876,7 +1878,7 @@
     <message>
         <location filename="widgets/shiftregistersconfig.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">子菜单</translation>
     </message>
 </context>
 </TS>

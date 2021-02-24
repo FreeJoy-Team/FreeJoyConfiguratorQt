@@ -71,6 +71,15 @@ void AdvancedSettings::on_pushButton_LangRussian_clicked() // мб в дестр
     emit languageChanged("russian");
 }
 
+void AdvancedSettings::on_pushButton_LangSChinese_clicked()
+{
+    gEnv.pAppSettings->beginGroup("LanguageSettings");
+    gEnv.pAppSettings->setValue("Language", "schinese");
+    gEnv.pAppSettings->endGroup();
+
+    emit languageChanged("schinese");
+}
+
 // default style
 void AdvancedSettings::on_pushButton_StyleDefault_clicked()
 {

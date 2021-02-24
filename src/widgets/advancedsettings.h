@@ -39,6 +39,7 @@ signals:
 private slots:
     void on_pushButton_LangEnglish_clicked();
     void on_pushButton_LangRussian_clicked();
+    void on_pushButton_LangSChinese_clicked();
 
     void on_pushButton_StyleDefault_clicked();
     void on_pushButton_StyleWhite_clicked();

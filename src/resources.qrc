@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>FreeJoyQt_ru.qm</file>
+        <file>FreeJoyQt_zh_CN.qm</file>
         <file>Images/BluePill_pic2.jpg</file>
         <file>Images/Exponent.png</file>
         <file>Images/ExponentInvert.png</file>
