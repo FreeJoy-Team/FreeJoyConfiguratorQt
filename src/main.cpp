@@ -69,6 +69,11 @@ int main(int argc, char *argv[])
         gEnv.pTranslator->load(":/FreeJoyQt_ru");
         qApp->installTranslator(gEnv.pTranslator);
     }
+    else if (appSettings.value("Language", "english").toString() == "schinese")
+    {
+        gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");
+        qApp->installTranslator(gEnv.pTranslator);
+    }
     appSettings.endGroup();
 
     MainWindow w;

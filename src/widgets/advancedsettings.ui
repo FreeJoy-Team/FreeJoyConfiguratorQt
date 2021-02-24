@@ -441,7 +441,7 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
-        <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0,0">
+        <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0,0,0">
          <property name="leftMargin">
           <number>50</number>
          </property>
@@ -454,20 +454,6 @@
          <property name="bottomMargin">
           <number>6</number>
          </property>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_LangRussian">
-           <property name="text">
-            <string notr="true">Русский</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_LangEnglish">
-           <property name="text">
-            <string notr="true">English</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="sizePolicy">
@@ -484,7 +470,32 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_LangRussian">
+           <property name="text">
+            <string notr="true">Русский</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pushButton_LangEnglish">
+           <property name="text">
+            <string notr="true">English</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QPushButton" name="pushButton_LangSChinese">
+           <property name="text">
+            <string>简体中文</string>
+           </property>
+          </widget>
+         </item>
         </layout>
+        <zorder>pushButton_LangSChinese</zorder>
+        <zorder>pushButton_LangEnglish</zorder>
+        <zorder>label</zorder>
+        <zorder>pushButton_LangRussian</zorder>
        </widget>
       </item>
       <item row="1" column="0">

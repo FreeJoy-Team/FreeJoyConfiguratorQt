@@ -413,6 +413,12 @@ void MainWindow::setDefaultStyleSheet()
 void MainWindow::languageChanged(const QString &language)
 {
     qDebug()<<"Retranslate UI";
+    if (language == "schinese")//m_translator
+    {
+        gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");// + QString("zh_CN"));//QLocale::system().name();//QString("zh_CN"));//QLocale::name());
+        qApp->installTranslator(gEnv.pTranslator);
+        ui->retranslateUi(this);
+    }
     if (language == "russian")//m_translator
     {
         gEnv.pTranslator->load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
