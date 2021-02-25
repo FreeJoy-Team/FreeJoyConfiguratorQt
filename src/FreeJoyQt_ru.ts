@@ -131,6 +131,10 @@
         <source>About FreeJoyQt</source>
         <translation>О FreeJoyQt</translation>
     </message>
+    <message>
+        <source>简体中文</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>Axes</name>
@@ -238,15 +242,15 @@
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">Х</translation>
+        <translation>Х</translation>
     </message>
     <message>
         <source>Slider 1</source>
-        <translation type="vanished">Слайдер 1</translation>
+        <translation>Слайдер 1</translation>
     </message>
     <message>
         <source>Slider 2</source>
-        <translation type="vanished">Слайдер 2</translation>
+        <translation>Слайдер 2</translation>
     </message>
     <message>
         <source>Linear</source>
@@ -314,7 +318,31 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>Кривая</translation>
+        <translation type="vanished">Кривая</translation>
+    </message>
+    <message>
+        <source>current curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rz</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -669,7 +697,15 @@
     </message>
     <message>
         <source>Automatically set physical button</source>
-        <translation>Автоматически устанавливать физическую кнопку</translation>
+        <translation type="vanished">Автоматически устанавливать физическую кнопку</translation>
+    </message>
+    <message>
+        <source>Press a physical button for assigning it to a logical one.</source>
+        <translation>Нажмите физическую кнопку, чтобы назначить её логической кнопке.</translation>
+    </message>
+    <message>
+        <source>Automatically set physical button when pressed</source>
+        <translation>Автоматически устанавливать физическую кнопку при нажатии</translation>
     </message>
 </context>
 <context>
@@ -680,7 +716,7 @@
     </message>
     <message>
         <source>No</source>
-        <translation>Нет</translation>
+        <translation type="vanished">Нет</translation>
     </message>
     <message>
         <source>Timer 1</source>
@@ -696,7 +732,7 @@
     </message>
     <message>
         <source>No shift</source>
-        <translation>Нет шифта</translation>
+        <translation type="vanished">Нет шифта</translation>
     </message>
     <message>
         <source>Shift 1</source>
@@ -841,6 +877,10 @@
     <message>
         <source>POV2 Center</source>
         <translation>POV2 Центр</translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1191,7 +1231,7 @@
     </message>
     <message>
         <source> Button Config </source>
-        <translation> Кнопоки </translation>
+        <translation> Кнопки </translation>
     </message>
     <message>
         <source> Axes Config </source>
@@ -1333,7 +1373,7 @@ g</source>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">Х</translation>
+        <translation>Х</translation>
     </message>
     <message>
         <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
@@ -1350,6 +1390,34 @@ g</source>
     <message>
         <source>2</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Z</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Slider 1</source>
+        <translation>Слайдер 1</translation>
+    </message>
+    <message>
+        <source>Rx</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Ry</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Rz</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Slider 2</source>
+        <translation>Слайдер 2</translation>
     </message>
 </context>
 <context>

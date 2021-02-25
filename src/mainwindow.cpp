@@ -240,6 +240,7 @@ void MainWindow::showConnectDeviceInfo()
     }
     m_advSettings->flasher()->deviceConnected(true);
 }
+
 // device disconnected
 void MainWindow::hideConnectDeviceInfo()
 {
@@ -263,6 +264,7 @@ void MainWindow::hideConnectDeviceInfo()
         }
     });
 }
+
 // flasher connected
 void MainWindow::flasherConnected()
 {
@@ -413,13 +415,7 @@ void MainWindow::setDefaultStyleSheet()
 void MainWindow::languageChanged(const QString &language)
 {
     qDebug()<<"Retranslate UI";
-    if (language == "schinese")//m_translator
-    {
-        gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");// + QString("zh_CN"));//QLocale::system().name();//QString("zh_CN"));//QLocale::name());
-        qApp->installTranslator(gEnv.pTranslator);
-        ui->retranslateUi(this);
-    }
-    if (language == "russian")//m_translator
+    if (language == "russian")
     {
         gEnv.pTranslator->load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
         qApp->installTranslator(gEnv.pTranslator);
@@ -428,6 +424,12 @@ void MainWindow::languageChanged(const QString &language)
     else if (language == "english")
     {
         gEnv.pTranslator->load(":/FreeJoyQt_en");
+        qApp->installTranslator(gEnv.pTranslator);
+        ui->retranslateUi(this);
+    }
+    else if (language == "schinese")
+    {
+        gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");
         qApp->installTranslator(gEnv.pTranslator);
         ui->retranslateUi(this);
     } else {
@@ -447,6 +449,7 @@ void MainWindow::languageChanged(const QString &language)
     }
     qDebug()<<"done";
 }
+
 // set font
 void MainWindow::setFont()
 {
@@ -507,8 +510,9 @@ void MainWindow::loadAppConfig()
     #endif
     qDebug()<<"Finished loading application config";
 }
+
 // save app config
-void MainWindow::saveAppConfig()    // перенести сюда сохранение профилей кривых
+void MainWindow::saveAppConfig()
 {
     QSettings *appS = gEnv.pAppSettings;
     qDebug()<<"Saving application config";

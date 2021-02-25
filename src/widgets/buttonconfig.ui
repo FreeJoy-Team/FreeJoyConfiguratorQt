@@ -416,8 +416,11 @@
         </item>
         <item>
          <widget class="QCheckBox" name="checkBox_AutoPhysBut">
+          <property name="toolTip">
+           <string>Press a physical button for assigning it to a logical one.</string>
+          </property>
           <property name="text">
-           <string>Automatically set physical button</string>
+           <string>Automatically set physical button when pressed</string>
           </property>
           <property name="checked">
            <bool>true</bool>
