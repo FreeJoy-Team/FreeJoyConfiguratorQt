@@ -23,5 +23,8 @@
         <file>Images/moon.png</file>
         <file>Images/sun.png</file>
         <file>Images/cloud.png</file>
+        <file>Images/china.png</file>
+        <file>Images/eng.png</file>
+        <file>Images/rus.png</file>
     </qresource>
 </RCC>

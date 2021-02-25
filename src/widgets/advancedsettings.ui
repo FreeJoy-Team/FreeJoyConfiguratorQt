@@ -475,6 +475,10 @@
            <property name="text">
             <string notr="true">Русский</string>
            </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Images/rus.png</normaloff>:/Images/rus.png</iconset>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
@@ -482,12 +486,20 @@
            <property name="text">
             <string notr="true">English</string>
            </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Images/eng.png</normaloff>:/Images/eng.png</iconset>
+           </property>
           </widget>
          </item>
          <item row="3" column="0">
           <widget class="QPushButton" name="pushButton_LangSChinese">
            <property name="text">
             <string>简体中文</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Images/china.png</normaloff>:/Images/china.png</iconset>
            </property>
           </widget>
          </item>
@@ -548,6 +560,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
