@@ -213,7 +213,7 @@ private:
 
         {TLE5011_CS,     tr("TLE5011 CS"),
         {ALL},
-        {SPI1_SCK, SPI1_MOSI},  // check  PB_6
+        {SPI1_SCK, SPI1_MOSI},  // check  PB_6 - not work //////////// NEED FIX !!!!!!!!!!!!!!!!!!!
         {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 120);"}},
 
         {TLE5012_CS,     tr("TLE5012B CS"),
@@ -284,22 +284,22 @@ private:
         {SPI_SCK,        tr("SPI SCK"),
         {SPI1_SCK},
         {},
-        {}, {}},
+        {}, {"color: rgb(53, 153, 120);"}},
 
         {SPI_MOSI,       tr("SPI MOSI"),
         {SPI1_MOSI},
         {},
-        {}, {}},
+        {}, {"color: rgb(53, 153, 120);"}},
 
         {SPI_MISO,       tr("SPI MISO"),
         {SPI1_MISO},
         {},
-        {}, {}},
+        {}, {"color: rgb(53, 153, 120);"}},
 
         {TLE5011_GEN,    tr("TLE5011 GEN"),
         {PB_6},
         {},
-        {}, {}},
+        {}, {"color: rgb(53, 153, 120);"}},
 
         {I2C_SCL,        tr("I2C SCL"),
         {I2C2_SCL},
