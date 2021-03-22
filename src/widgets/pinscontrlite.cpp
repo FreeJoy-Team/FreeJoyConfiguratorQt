@@ -1,6 +1,6 @@
 #include "pinscontrlite.h"
 #include "ui_pinscontrlite.h"
-
+#include <QComboBox>
 
 PinsContrLite::PinsContrLite(QWidget *parent) :
     QWidget(parent),
@@ -17,6 +17,7 @@ PinsContrLite::~PinsContrLite()
 void PinsContrLite::addPinComboBox(QList<PinComboBox *> pinList)
 {
     int tmp = 0;
+    QComboBox *prevCBox = nullptr;
     for (int i = 0; i < 5; ++i) {
         for (int j = 0; j < ui->layoutG_pins->rowCount(); ++j) {
             if (!ui->layoutG_pins->itemAtPosition(j, i*3)) {
@@ -28,6 +29,15 @@ void PinsContrLite::addPinComboBox(QList<PinComboBox *> pinList)
                     if (pinList[k]->objectName() == label->text()) {// clone pinList and remove if addWidget?
                         ui->layoutG_pins->addWidget(pinList[k], j, i*3+1);
                         tmp++;
+                        // tab order
+                        QComboBox *child = pinList[k]->findChild<QComboBox*>();
+                        if (!prevCBox) {
+                            child->setTabOrder(this, child);
+                            prevCBox = child;
+                        } else {
+                            child->setTabOrder(prevCBox, child);
+                            prevCBox = child;
+                        }
                         break;
                     }
                 }

@@ -1,5 +1,6 @@
 #include "pinsbluepill.h"
 #include "ui_pinsbluepill.h"
+#include <QComboBox>
 
 PinsBluePill::PinsBluePill(QWidget *parent) :
     QWidget(parent),
@@ -23,6 +24,7 @@ void PinsBluePill::addPinComboBox(QList<PinComboBox *> pinList)
     // left layout
     labelColumn = 1;
     pinsColumn = 0;
+    QComboBox *prevCBox = nullptr;
     for (int i = 0; i < ui->layoutG_pinsLeft->rowCount(); ++i) {
         // continue if no label or pin row not empty
         if (!ui->layoutG_pinsLeft->itemAtPosition(i, labelColumn) || ui->layoutG_pinsLeft->itemAtPosition(i, pinsColumn)) {
@@ -36,6 +38,15 @@ void PinsBluePill::addPinComboBox(QList<PinComboBox *> pinList)
                 if (pinList[k]->objectName() == label->text()) {// clone pinList and remove item if addWidget?
                     ui->layoutG_pinsLeft->addWidget(pinList[k], i, pinsColumn);
                     tmp++;
+                    // tab order
+                    QComboBox *child = pinList[k]->findChild<QComboBox*>();
+                    if (!prevCBox) {
+                        child->setTabOrder(this, child);
+                        prevCBox = child;
+                    } else {
+                        child->setTabOrder(prevCBox, child);
+                        prevCBox = child;
+                    }
                     break;
                 }
             }
@@ -57,6 +68,15 @@ void PinsBluePill::addPinComboBox(QList<PinComboBox *> pinList)
                 if (pinList[k]->objectName() == label->text()) {// clone pinList and remove item if addWidget?
                     ui->layoutG_pinsRight->addWidget(pinList[k], i, pinsColumn);
                     tmp++;
+                    // tab order
+                    QComboBox *child = pinList[k]->findChild<QComboBox*>();
+                    if (!prevCBox) {
+                        child->setTabOrder(this, child);
+                        prevCBox = child;
+                    } else {
+                        child->setTabOrder(prevCBox, child);
+                        prevCBox = child;
+                    }
                     break;
                 }
             }
