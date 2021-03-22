@@ -71,6 +71,7 @@ private:
     void signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
     void pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum);
     void setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
+    void blockPA8PWM(int currentDeviceEnum, int previousDeviceEnum);
 
     struct source_t
     {

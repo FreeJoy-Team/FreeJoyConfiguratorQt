@@ -145,8 +145,8 @@ void PinConfig::pinInteraction(int index, int senderIndex, int pin)
 }
 
 
-void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)  // мб сделать сразу запись в конфиг из пинов
-{                                                                                              // или отдельный класс для их состояний
+void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
+{
     // signals for another widgets
     signalsForWidgets(currentDeviceEnum, previousDeviceEnum, pinNumber);
 
@@ -154,38 +154,42 @@ void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, i
     pinTypeLimit(currentDeviceEnum, previousDeviceEnum);
 
     // set current config and generate signals for another widgets
-//    else {
     setCurrentConfig(currentDeviceEnum, previousDeviceEnum, pinNumber);
+
+    // block or reset PWM on PA_8 if selected SPI
+    blockPA8PWM(currentDeviceEnum, previousDeviceEnum);
 }
 
 
 void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
 {
+    // здесь такой пиздец. индекс хуиндекс 1 = 0 намбер хуямбер. нахуевертил
+    int pinIndex = pinNumber - PA_0;
     //fast encoder selected
     if (currentDeviceEnum == FAST_ENCODER){
-        emit fastEncoderSelected(m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].guiName, true);    // hz
+        emit fastEncoderSelected(m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName, true);    // hz
     } else if (previousDeviceEnum == FAST_ENCODER){
-        emit fastEncoderSelected(m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].guiName, false);    // hz
+        emit fastEncoderSelected(m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName, false);    // hz
     }
     // shift register latch selected
     if (currentDeviceEnum == SHIFT_REG_LATCH){
         m_shiftLatchCount++;
-        emit shiftRegSelected(pinNumber, 0, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].guiName);    // hz
+        emit shiftRegSelected(pinNumber, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     } else if (previousDeviceEnum == SHIFT_REG_LATCH){
         m_shiftLatchCount--;
-        emit shiftRegSelected((pinNumber)*-1, 0, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].guiName);    // hz
+        emit shiftRegSelected((pinNumber)*-1, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     }
     // shift register data selected
     if (currentDeviceEnum == SHIFT_REG_DATA){
         m_shiftDataCount++;
-        emit shiftRegSelected(0, pinNumber, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].guiName);    // hz
+        emit shiftRegSelected(0, pinNumber, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     } else if (previousDeviceEnum == SHIFT_REG_DATA){
         m_shiftDataCount--;
-        emit shiftRegSelected(0, (pinNumber)*-1, m_pinCBoxPtrList[0]->pinList()[pinNumber - PA_0].guiName);    // hz
+        emit shiftRegSelected(0, (pinNumber)*-1, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     }
     // I2C selected
     if (currentDeviceEnum == I2C_SCL){// || current_device_enum == I2C_SDA){
-        emit axesSourceChanged(-2, true);                                            // -2 enum I2C в axes.h
+        emit axesSourceChanged(-2, true);                                            // -2 enum I2C in axes.h
     } else if (previousDeviceEnum == I2C_SCL){// || previous_device_enum == I2C_SDA){
         emit axesSourceChanged(-2, false);
     }
@@ -193,44 +197,44 @@ void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum,
 
 void PinConfig::pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum)
 {
-    static int limit_count_array[PIN_TYPE_LIMIT_COUNT]{};
-    static bool limit_is_enable[PIN_TYPE_LIMIT_COUNT]{};
+    static int limitCountArray[PIN_TYPE_LIMIT_COUNT]{};
+    static bool limitIsEnable[PIN_TYPE_LIMIT_COUNT]{};
 
     for (int i = 0; i < PIN_TYPE_LIMIT_COUNT; ++i)
     {
         if (currentDeviceEnum == m_pinTypeLimit[i].deviceEnumIndex)
         {
-            limit_count_array[i]++;
+            limitCountArray[i]++;
         }
         if (previousDeviceEnum == m_pinTypeLimit[i].deviceEnumIndex)
         {
-            limit_count_array[i]--;
+            limitCountArray[i]--;
         }
 
-        if (limit_count_array[i] >= m_pinTypeLimit[i].maxCount && limit_is_enable[i] == false)
+        if (limitCountArray[i] >= m_pinTypeLimit[i].maxCount && limitIsEnable[i] == false)
         {
-            limit_is_enable[i] = true;
+            limitIsEnable[i] = true;
             for (int j = 0; j < m_pinCBoxPtrList.size(); ++j)
             {
                 for (int k = 0; k < m_pinCBoxPtrList[j]->enumIndex().size(); ++k) {
                     if (m_pinCBoxPtrList[j]->enumIndex()[k] == m_pinTypeLimit[i].deviceEnumIndex &&
                         m_pinCBoxPtrList[j]->currentDevEnum() != currentDeviceEnum)
                     {
-                        m_pinCBoxPtrList[j]->setIndexStatus(int(k), false);
+                        m_pinCBoxPtrList[j]->setIndexStatus(k, false);
                     }
                 }
             }
         }
 
-        if (limit_is_enable[i] == true && limit_count_array[i] < m_pinTypeLimit[i].maxCount)
+        if (limitIsEnable[i] == true && limitCountArray[i] < m_pinTypeLimit[i].maxCount)
         {
-            limit_is_enable[i] = false;
+            limitIsEnable[i] = false;
             for (int j = 0; j < m_pinCBoxPtrList.size(); ++j)
             {
                 for (int k = 0; k < m_pinCBoxPtrList[j]->enumIndex().size(); ++k) {
                     if (m_pinCBoxPtrList[j]->enumIndex()[k] == m_pinTypeLimit[i].deviceEnumIndex)
                     {
-                        m_pinCBoxPtrList[j]->setIndexStatus(int(k), true);
+                        m_pinCBoxPtrList[j]->setIndexStatus(k, true);
                     }
                 }
             }
@@ -266,6 +270,40 @@ void PinConfig::setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, 
         }
     }
 }
+
+void PinConfig::blockPA8PWM(int currentDeviceEnum, int previousDeviceEnum)
+{
+    static int spiCount = 0;
+    int PA8Index = PA_8 - PA_0;
+
+    if (currentDeviceEnum == SPI_SCK || currentDeviceEnum == SPI_MOSI || currentDeviceEnum == SPI_MISO) {
+        spiCount++;
+    } else if (previousDeviceEnum == SPI_SCK || previousDeviceEnum == SPI_MOSI || previousDeviceEnum == SPI_MISO) {
+        spiCount--;
+    }
+
+    if (spiCount > 0) {
+        if (m_pinCBoxPtrList[PA8Index]->currentDevEnum() == LED_PWM) {
+            m_pinCBoxPtrList[PA8Index]->resetPin();
+        }
+        for (int i = 0; i < m_pinCBoxPtrList[PA8Index]->enumIndex().size(); ++i) {
+            if (m_pinCBoxPtrList[PA8Index]->enumIndex()[i] == LED_PWM)
+            {
+                m_pinCBoxPtrList[PA8Index]->setIndexStatus(i, false);
+                break;
+            }
+        }
+    } else {
+        for (int i = 0; i < m_pinCBoxPtrList[PA8Index]->enumIndex().size(); ++i) {
+            if (m_pinCBoxPtrList[PA8Index]->enumIndex()[i] == LED_PWM)
+            {
+                m_pinCBoxPtrList[PA8Index]->setIndexStatus(i, true);
+                break;
+            }
+        }
+    }
+}
+
 
 void PinConfig::shiftRegButtonsCountChanged(int count)
 {
