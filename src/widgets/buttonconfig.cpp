@@ -161,7 +161,6 @@ void ButtonConfig::setLogicButton(int buttonNumber)
 void ButtonConfig::on_checkBox_AutoPhysBut_toggled(bool checked)
 {
     m_autoPhysButEnabled = checked;
-    qDebug()<<m_logicButtonPtrList.size();
     m_logicButtonPtrList[0]->setAutoPhysBut(checked);
 }
 

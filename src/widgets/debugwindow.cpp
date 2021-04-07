@@ -67,7 +67,7 @@ void DebugWindow::resetPacketsCount()
 
 void DebugWindow::printMsg(const QString &msg)
 {
-    QString log(QTime::currentTime().toString() + ": " + msg + '\n');
+    QString log(QDateTime::currentDateTime().toString("hh:mm:ss:zzz") + ": " + msg + '\n');
     ui->textBrowser_DebugMsg->insertPlainText(log);         // append?
     ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End); // с plainTextEdit криво пашет
 

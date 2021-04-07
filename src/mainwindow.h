@@ -83,12 +83,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QThread *m_thread;            // smart pointer?
-    HidDevice *m_hidDeviceWorker; // smart pointer?
+    QThread *m_thread;
+    HidDevice *m_hidDeviceWorker;
     //QScopedPointer<QThread> thread;
     //QScopedPointer<HidDevice> worker;
 
-    QThread *m_threadGetSendConfig; // smart pointer?
+    QThread *m_threadGetSendConfig;
 
     PinConfig *m_pinConfig;
     ButtonConfig *m_buttonConfig;

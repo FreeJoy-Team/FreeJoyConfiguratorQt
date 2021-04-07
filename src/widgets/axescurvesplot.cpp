@@ -47,7 +47,7 @@ AxesCurvesPlot::AxesCurvesPlot(bool labelEnabled ,QWidget *parent) :
         }
     }
 }
-#include <QStylePainter>
+
 void AxesCurvesPlot::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)

@@ -204,15 +204,13 @@ MainWindow::~MainWindow()
 {
     saveAppConfig();
     m_hidDeviceWorker->setIsFinish(true);
+    m_hidDeviceWorker->deleteLater();
     m_thread->quit();
     m_thread->deleteLater();
     m_thread->wait();
     m_threadGetSendConfig->quit();
     m_threadGetSendConfig->deleteLater();
     m_threadGetSendConfig->wait();
-    delete m_hidDeviceWorker;
-    delete m_thread;              // не уверен в нужности, если есть thread->deleteLater();
-    delete m_threadGetSendConfig;
     delete ui;
 }
 
@@ -664,6 +662,11 @@ void MainWindow::on_pushButton_Wiki_clicked()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/FreeJoy-Team/FreeJoyWiki"));
 }
+
+
+
+
+////////////////////////////////////////////////// debug tab //////////////////////////////////////////////////
 // style
 #include <QCheckBox>
 void MainWindow::styleSwitched(int index)
@@ -714,9 +717,7 @@ void MainWindow::styleSwitched(int index)
     unsetCursor();
 }
 
-
-
-// test button in debug tab
+// test buttons in debug tab
 #ifdef QT_DEBUG
 dev_config_t testCfg;
 #endif

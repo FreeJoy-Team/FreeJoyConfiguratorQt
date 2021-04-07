@@ -27,7 +27,7 @@ AxesConfig::~AxesConfig()
 void AxesConfig::retranslateUi()
 {
     ui->retranslateUi(this);
-    for (int i = 0; i < m_axesPtrList.size(); ++i) {
+    for (int i = 0; i < MAX_AXIS_NUM; ++i) {
         m_axesPtrList[i]->retranslateUi();
     }
 }
@@ -40,14 +40,14 @@ void AxesConfig::a2bCountCalc(int count, int previousCount)
 
 void AxesConfig::addOrDeleteMainSource(int sourceEnum, bool isAdd)
 {
-    for (int i = 0; i < m_axesPtrList.size(); ++i) {
+    for (int i = 0; i < MAX_AXIS_NUM; ++i) {
         m_axesPtrList[i]->addOrDeleteMainSource(sourceEnum, isAdd);
     }
 }
 
 void AxesConfig::axesValueChanged()
 {
-    for (int i = 0; i < m_axesPtrList.size(); ++i) {
+    for (int i = 0; i < MAX_AXIS_NUM; ++i) {
         m_axesPtrList[i]->updateAxisOut();
         m_axesPtrList[i]->updateAxisRaw();
     }
