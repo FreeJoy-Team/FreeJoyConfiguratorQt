@@ -26,7 +26,7 @@ Check [our wiki](https://github.com/FreeJoy-Team/FreeJoyWiki) for detailed instr
 1. Download, unpack, run
 
 ### Linux
-1. Downloand and unpack
+1. Downloand and unpack .tar.xz
 2. Edit 99-hid-FreeJoy.rules or leave it as it is
 3. Copy "99-hid-FreeJoy.rules" to /etc/udev/rules.d
 	* `sudo cp 99-hid-FreeJoy.rules /etc/udev/rules.d`
