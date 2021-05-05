@@ -50,4 +50,4 @@ Check [our wiki](https://github.com/FreeJoy-Team/FreeJoyWiki) for detailed instr
 1. Install the latest Qt SDK (and optionally, the Qt Creator IDE) from https://www.qt.io/download
     * You may also use your Linux distro's package manager for the Qt SDK as long as the packages are Qt 5.9 or later.
 2. Open the project in Qt Creator or build from qmake on the command line.
-    * Run `qmake FreeJoyQt.pro` then `make debug` or `make release`
+    * Run `qmake FreeJoyQt.pro` then `make`
