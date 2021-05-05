@@ -76,15 +76,15 @@ void AxesCurvesProfiles::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void AxesCurvesProfiles::enterEvent(QEvent *event)
-{
-    Q_UNUSED(event)
-    //setStyleSheet("border: 3px solid #31363b;");
-}
+//void AxesCurvesProfiles::enterEvent(QEvent *event)
+//{
+//    Q_UNUSED(event)
+//    //setStyleSheet("border: 3px solid #31363b;");
+//}
 
-void AxesCurvesProfiles::leaveEvent(QEvent *event)
-{
-    Q_UNUSED(event)
-    //setStyleSheet("border: 0px solid #31363b;");
-}
+//void AxesCurvesProfiles::leaveEvent(QEvent *event)
+//{
+//    Q_UNUSED(event)
+//    //setStyleSheet("border: 0px solid #31363b;");
+//}
 

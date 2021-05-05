@@ -413,21 +413,34 @@ void MainWindow::setDefaultStyleSheet()
 void MainWindow::languageChanged(const QString &language)
 {
     qDebug()<<"Retranslate UI";
+    bool ok;
     if (language == "russian")
     {
-        gEnv.pTranslator->load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
+        ok = gEnv.pTranslator->load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
+        if (ok == false) {
+            qCritical()<<"failed to load translate file";
+            return;
+        }
         qApp->installTranslator(gEnv.pTranslator);
         ui->retranslateUi(this);
     }
     else if (language == "english")
     {
-        gEnv.pTranslator->load(":/FreeJoyQt_en");
+        ok = gEnv.pTranslator->load(":/NO_FILE_IS_OK!!_DEFAULT_TRANSLATE");
+        if (ok == true) {
+            qCritical()<<"failed to load translate file";
+            return;
+        }
         qApp->installTranslator(gEnv.pTranslator);
         ui->retranslateUi(this);
     }
     else if (language == "schinese")
     {
-        gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");
+        ok = gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");
+        if (ok == false) {
+            qCritical()<<"failed to load translate file";
+            return;
+        }
         qApp->installTranslator(gEnv.pTranslator);
         ui->retranslateUi(this);
     } else {

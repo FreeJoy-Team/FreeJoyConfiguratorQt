@@ -12,7 +12,7 @@ GlobalEnvironment gEnv;
 #include "deviceconfig.h"
 #include <QTimer>
 // Get the default Qt message handler.
-static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
+static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(nullptr);
 
 // define QT_NO_DEBUG_OUTPUT - no debug info
 void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -20,7 +20,7 @@ void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, con
     // mutex?
     if (gEnv.pDebugWindow != nullptr) {
         // для мультипотока, хз правильно ли, но работает // не уверен насчёт ссылки, мб надо копию передавать с мультипотоком
-        QMetaObject::invokeMethod(gEnv.pDebugWindow, "printMsg", Qt::QueuedConnection, Q_ARG(const QString, msg));
+        QMetaObject::invokeMethod(gEnv.pDebugWindow, "printMsg", Qt::QueuedConnection, Q_ARG(QString, msg));
     }
 
     // Call the default handler.
@@ -29,8 +29,10 @@ void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 
 int main(int argc, char *argv[])
 {
+    #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    #endif
     //qputenv("QT_SCALE_FACTOR", "0.8");
     qRegisterMetaType<QList<QPair<bool, QString>> >();
 
@@ -64,15 +66,24 @@ int main(int argc, char *argv[])
 
     // load language settings
     appSettings.beginGroup("LanguageSettings");
+    bool ok = false;
     if (appSettings.value("Language", "english").toString() == "russian")
     {
-        gEnv.pTranslator->load(":/FreeJoyQt_ru");
-        qApp->installTranslator(gEnv.pTranslator);
+        ok = gEnv.pTranslator->load(":/FreeJoyQt_ru");
+        if (ok == false) {
+            qCritical()<<"failed to load translate file";
+        } else {
+            qApp->installTranslator(gEnv.pTranslator);
+        }
     }
     else if (appSettings.value("Language", "english").toString() == "schinese")
     {
-        gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");
-        qApp->installTranslator(gEnv.pTranslator);
+        ok = gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");
+        if (ok == false) {
+            qCritical()<<"failed to load translate file";
+        } else {
+            qApp->installTranslator(gEnv.pTranslator);
+        }
     }
     appSettings.endGroup();
 

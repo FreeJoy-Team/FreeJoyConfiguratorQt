@@ -44,7 +44,7 @@ void DebugWindow::devicePacketReceived()
     }
 
     if (m_timer.hasExpired(5000) && m_timer.isValid()) {
-        ui->label_PacketsSpeed->setText(QString::number(((double) m_timer.restart() / (double) count), 'f', 3)
+        ui->label_PacketsSpeed->setText(QString::number((double(m_timer.restart()) / double(count)), 'f', 3)
                                         + tr(" ms"));
         count = 0;
     } else if (m_timer.isValid() == false) { // валид-инвалид для правильного отображения при подключении-отключении девайса
@@ -67,7 +67,7 @@ void DebugWindow::resetPacketsCount()
 
 void DebugWindow::printMsg(const QString &msg)
 {
-    QString log(QDateTime::currentDateTime().toString("hh:mm:ss:zzz") + ": " + msg + '\n');
+    QString log(QDateTime::currentDateTime().toString("hh:mm:ss.zzz") + ": " + msg + '\n');
     ui->textBrowser_DebugMsg->insertPlainText(log);         // append?
     ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End); // с plainTextEdit криво пашет
 
@@ -84,16 +84,14 @@ void DebugWindow::printMsg(const QString &msg)
 
 void DebugWindow::logicalButtonState(int buttonNumber, bool state)
 {
-    if (gEnv.pDebugWindow) { //?
-        if (state) {
-            ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
-                                                             + QString::number(buttonNumber) + tr(" pressed") + '\n');
-            ui->textBrowser_ButtonsPressLog->moveCursor(QTextCursor::End);
-        } else {
-            ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
-                                                               + QString::number(buttonNumber) + tr(" unpressed") + '\n');
-            ui->textBrowser_ButtonsUnpressLog->moveCursor(QTextCursor::End);
-        }
+    if (state) {
+        ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
+                                                         + QString::number(buttonNumber) + tr(" pressed") + '\n');
+        ui->textBrowser_ButtonsPressLog->moveCursor(QTextCursor::End);
+    } else {
+        ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
+                                                           + QString::number(buttonNumber) + tr(" unpressed") + '\n');
+        ui->textBrowser_ButtonsUnpressLog->moveCursor(QTextCursor::End);
     }
 }
 

@@ -32,7 +32,7 @@ AxesCurvesPlot::AxesCurvesPlot(bool labelEnabled ,QWidget *parent) :
         m_pointPtrList[i]->posX = 0;
         m_pointPtrList[i]->posY = 0;
         m_pointPtrList[i]->is_drag = false;
-        m_pointPtrList[i]->current_value = ((tmp_range / (m_kPointsCount - 1.0)) * i) + m_kMinPointValue;
+        m_pointPtrList[i]->current_value = ((tmp_range / (m_kPointsCount - 1.0f)) * i) + m_kMinPointValue;
     }
     if (labelEnabled) {
         for (int i = 0; i < m_kPointsCount; ++i) {
@@ -58,7 +58,7 @@ void AxesCurvesPlot::paintEvent(QPaintEvent *event)
 
     // stylesheet
     QStyleOption opt;
-    opt.init(this);
+    opt.initFrom(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &painter, this);
 
     // for dark style
@@ -280,7 +280,7 @@ int AxesCurvesPlot::calcPointValue(int currentPos) const
         value = -roundf((currentPos - half_height) / float(tmp_max));
         return value;
     }
-    return value;
+    //return value;
 }
 
 int AxesCurvesPlot::calcPointPosY(int value) const
@@ -304,7 +304,7 @@ int AxesCurvesPlot::calcPointPosX(int value) const
     float half_width = m_width / 2.0f - m_offset;
 
     float tmp_max = half_width / 100.0f;
-    pos = round(value * tmp_max);
+    pos = roundf(value * tmp_max);
 
     return pos + m_offset;
 }

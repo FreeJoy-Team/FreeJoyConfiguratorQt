@@ -22,7 +22,7 @@ void SwitchButton::paintEvent(QPaintEvent *event)
     Q_UNUSED(event)
     QPainter p(this);
     QStyleOption opt;
-    opt.init(this);
+    opt.initFrom(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 
     p.setRenderHint(QPainter::Antialiasing, true);
