@@ -17,8 +17,8 @@ FreeJoy Configurator is a visual utility allowing you to setup your [FreeJoy](ht
 Check [our wiki](https://github.com/FreeJoy-Team/FreeJoyWiki) for detailed instructions.
 
 ## Downloads
-- [Windows](https://github.com/moonlight-stream/moonlight-qt/releases)
-- [AppImage](https://github.com/moonlight-stream/moonlight-qt/releases)
+- [Windows](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt/releases)
+- [AppImage](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt/releases)
 
 ## Installation
 
@@ -41,7 +41,7 @@ Check [our wiki](https://github.com/FreeJoy-Team/FreeJoyWiki) for detailed instr
 * Select **MSVC 2019** or **MinGW** option during Qt installation.
 
 ### Linux/Unix Build Requirements
-* Qt 5.9 SDK or later
+* Qt 5.11 SDK or later
 * GCC or Clang
 * Install the required packages:
   * `qt5-default libxcb-xinerama0 libudev-dev libusb-1.0-0-dev libfox-1.6-dev`
