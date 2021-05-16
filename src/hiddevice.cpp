@@ -27,8 +27,11 @@ void HidDevice::processData()                   /////// bad code, I'll try to re
     bool deviceCountChanged = false;
     uint8_t buffer[BUFFERSIZE]{};
     uint8_t deviceBuffer[BUFFERSIZE];
+    uint8_t paramsRequest[1] = {REPORT_ID_PARAM};
     QList<QPair<bool, hid_device_info*>> tmp_HidList;
     m_currentWork = REPORT_ID_PARAM;
+    QElapsedTimer paramsTimer;
+    //paramsTimer.start();
 
     hid_device_info *hidDevInfo;
     // first device in list need for hid_free_enumeration(). fixes memory leak
@@ -150,6 +153,8 @@ void HidDevice::processData()                   /////// bad code, I'll try to re
                         } else {
                             m_oldFirmwareSelected = false;
                         }
+                        // send params request
+                        hid_write(m_paramsRead, paramsRequest, 1);
                         qDebug()<<"HID opened, connected devices ="<<m_hidDevicesList.size();
                     }
                 }
@@ -158,7 +163,13 @@ void HidDevice::processData()                   /////// bad code, I'll try to re
             if (m_paramsRead) {
                 // read joy report
                 if (m_currentWork == REPORT_ID_PARAM && !m_oldFirmwareSelected) {
-                    res=hid_read_timeout(m_paramsRead, buffer, BUFFERSIZE,10000);
+                    // send params request
+                    if (!paramsTimer.isValid() || paramsTimer.hasExpired(5000)) {
+                        hid_write(m_paramsRead, paramsRequest, 1);
+                        paramsTimer.start();
+                    }
+                    // read report
+                    res=hid_read_timeout(m_paramsRead, buffer, BUFFERSIZE,1000);
                     if (res < 0) {
                         hid_close(m_paramsRead);
                         m_paramsRead=nullptr;
