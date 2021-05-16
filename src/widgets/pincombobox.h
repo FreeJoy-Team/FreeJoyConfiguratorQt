@@ -7,7 +7,7 @@
 #include "global.h"
 
 #define PINS_COUNT 30
-#define PIN_TYPE_COUNT 27
+#define PIN_TYPE_COUNT 28
 enum // разделить и вынести отдельно?                 // все структуры в global.h?
 {
   PA_0 = 1,
@@ -242,6 +242,11 @@ private:
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MLX90393_CS,    tr("MLX90393 CS"),
+        {ALL},
+        {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},//MLX90363_CS
+
+        {MLX90363_CS,    tr("MLX90363 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
         {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
