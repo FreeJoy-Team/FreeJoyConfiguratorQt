@@ -7,7 +7,7 @@
 #include "global.h"
 
 #define PINS_COUNT 30
-#define PIN_TYPE_COUNT 28
+#define PIN_TYPE_COUNT 29
 enum // разделить и вынести отдельно?                 // все структуры в global.h?
 {
   PA_0 = 1,
@@ -203,13 +203,18 @@ private:
 
         {SHIFT_REG_LATCH,tr("ShiftReg LATCH"),
         {ALL},
-        {SPI1_SCK},
-        {SPI_SCK}, {"color: rgb(53, 153, 120);"}},
+        {},
+        {}, {"color: rgb(53, 153, 120);"}},
 
         {SHIFT_REG_DATA, tr("ShiftReg DATA"),
         {ALL},
-        {SPI1_SCK},
-        {SPI_SCK}, {"color: rgb(53, 153, 120);"}},
+        {},
+        {}, {"color: rgb(53, 153, 120);"}},
+
+        {SHIFT_REG_CLK, tr("ShiftReg CLK"),
+        {ALL},
+        {},
+        {}, {"color: rgb(53, 153, 120);"}},
 
         {TLE5011_CS,     tr("TLE5011 CS"),
         {ALL},
