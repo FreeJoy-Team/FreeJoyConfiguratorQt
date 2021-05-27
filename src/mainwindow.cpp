@@ -732,7 +732,7 @@ void MainWindow::styleSwitched(int index)
 
 // test buttons in debug tab
 #ifdef QT_DEBUG
-dev_config_t testCfg;
+static dev_config_t testCfg;
 #endif
 void MainWindow::on_pushButton_TestButton_clicked()
 {
