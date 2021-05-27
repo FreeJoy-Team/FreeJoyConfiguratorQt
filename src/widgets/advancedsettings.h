@@ -48,6 +48,8 @@ private slots:
     void on_spinBox_FontSize_valueChanged(int fontSize);
     void on_pushButton_About_clicked();
 
+    void on_pushButton_removeName_clicked();
+
 private:
     Ui::AdvancedSettings *ui;
 

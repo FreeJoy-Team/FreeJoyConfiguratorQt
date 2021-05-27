@@ -135,6 +135,22 @@
         <source>简体中文</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Sometimes Windows does not update the name in gaming devices and has to be deleted in the registry</source>
+        <translation type="vanished">Иногда Windows не обновляет имя в игровых устройствах и его необходимо удалить в реестре</translation>
+    </message>
+    <message>
+        <source>Remove name</source>
+        <translation>Удалить имя</translation>
+    </message>
+    <message>
+        <source>Remove device name with selected VID/PID from registry</source>
+        <translation>Удалить имя устройства с выбранными VID/PID из реестра</translation>
+    </message>
+    <message>
+        <source>Sometimes Windows does not update the name in gaming devices and needs to be removed from the registry. This happens automatically when the config is written, but manual deletion may be required when the device is disconnected.</source>
+        <translation>Иногда Windows не обновляет имя в игровых устройствах, и его необходимо удалить в реестре. Это происходит автоматически при записи конфига, но может потребоваться ручное удаление при отклоючённом устройстве.</translation>
+    </message>
 </context>
 <context>
     <name>Axes</name>
@@ -242,15 +258,15 @@
     </message>
     <message>
         <source>X</source>
-        <translation>Х</translation>
+        <translation type="vanished">Х</translation>
     </message>
     <message>
         <source>Slider 1</source>
-        <translation>Слайдер 1</translation>
+        <translation type="vanished">Слайдер 1</translation>
     </message>
     <message>
         <source>Slider 2</source>
-        <translation>Слайдер 2</translation>
+        <translation type="vanished">Слайдер 2</translation>
     </message>
     <message>
         <source>Linear</source>
@@ -318,31 +334,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="vanished">Кривая</translation>
-    </message>
-    <message>
-        <source>current curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rz</source>
-        <translation type="unfinished"></translation>
+        <translation>Кривая</translation>
     </message>
 </context>
 <context>
@@ -1373,7 +1365,7 @@ g</source>
     </message>
     <message>
         <source>X</source>
-        <translation>Х</translation>
+        <translation type="vanished">Х</translation>
     </message>
     <message>
         <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
@@ -1392,32 +1384,12 @@ g</source>
         <translation></translation>
     </message>
     <message>
-        <source>Y</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Slider 1</source>
-        <translation>Слайдер 1</translation>
-    </message>
-    <message>
-        <source>Rx</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ry</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rz</source>
-        <translation></translation>
+        <translation type="vanished">Слайдер 1</translation>
     </message>
     <message>
         <source>Slider 2</source>
-        <translation>Слайдер 2</translation>
+        <translation type="vanished">Слайдер 2</translation>
     </message>
 </context>
 <context>
@@ -1652,6 +1624,14 @@ g</source>
     </message>
     <message>
         <source>AS5048A CS</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>ShiftReg CLK</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>MLX90363 CS</source>
         <translation></translation>
     </message>
 </context>

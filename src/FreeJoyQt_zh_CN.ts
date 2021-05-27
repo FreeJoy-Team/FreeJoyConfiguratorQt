@@ -19,87 +19,103 @@
         <translation>USB选项</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="171"/>
+        <location filename="widgets/advancedsettings.ui" line="328"/>
         <source>USB exchange period</source>
         <translation>USB交换时间(原文: USB exchange period)</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="213"/>
+        <location filename="widgets/advancedsettings.ui" line="310"/>
         <source>VID</source>
         <translation>VID</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="96"/>
+        <location filename="widgets/advancedsettings.ui" line="344"/>
         <source>Device USB name</source>
         <translation>设备USB名称</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="149"/>
+        <location filename="widgets/advancedsettings.ui" line="111"/>
         <source> ms</source>
         <translation> 毫秒</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="267"/>
+        <location filename="widgets/advancedsettings.ui" line="209"/>
         <source>PID</source>
         <translation>PID</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="316"/>
+        <location filename="widgets/advancedsettings.ui" line="354"/>
+        <location filename="widgets/advancedsettings.ui" line="364"/>
+        <source>Sometimes Windows does not update the name in gaming devices and needs to be removed from the registry. This happens automatically when the config is written, but manual deletion may be required when the device is disconnected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/advancedsettings.ui" line="390"/>
         <source>Application settings</source>
         <translation>应用程序设置</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="337"/>
+        <location filename="widgets/advancedsettings.ui" line="411"/>
         <source>Other settings</source>
         <translation>其他设置</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="406"/>
+        <location filename="widgets/advancedsettings.ui" line="480"/>
         <source>Font size</source>
         <translation>字体大小</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="371"/>
+        <location filename="widgets/advancedsettings.ui" line="445"/>
         <source>Load default config on startup</source>
         <translation>启动时加载默认配置</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="429"/>
+        <location filename="widgets/advancedsettings.ui" line="357"/>
+        <source>Remove name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/advancedsettings.ui" line="367"/>
+        <source>Remove device name with selected VID/PID from registry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/advancedsettings.ui" line="503"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="439"/>
+        <location filename="widgets/advancedsettings.ui" line="513"/>
         <source>Languages</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="466"/>
+        <location filename="widgets/advancedsettings.ui" line="540"/>
         <source>Restart app for full changes</source>
         <translation>重新启动该应用以进行完整更改</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="490"/>
+        <location filename="widgets/advancedsettings.ui" line="572"/>
         <source>简体中文</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="504"/>
+        <location filename="widgets/advancedsettings.ui" line="590"/>
         <source>Styles</source>
         <translation>风格</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="525"/>
+        <location filename="widgets/advancedsettings.ui" line="611"/>
         <source>Dark</source>
         <translation>暗色</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="532"/>
+        <location filename="widgets/advancedsettings.ui" line="618"/>
         <source>White</source>
         <translation>亮色</translation>
     </message>
     <message>
-        <location filename="widgets/advancedsettings.ui" line="539"/>
+        <location filename="widgets/advancedsettings.ui" line="625"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
@@ -246,73 +262,57 @@
         <translation>子菜单</translation>
     </message>
     <message>
+        <location filename="widgets/axescurves.ui" line="52"/>
         <source>Curve</source>
-        <translation type="vanished">曲线</translation>
+        <translation>曲线</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="49"/>
+        <location filename="widgets/axescurves.ui" line="105"/>
         <source>Linear</source>
         <translation>线性</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="83"/>
+        <location filename="widgets/axescurves.ui" line="139"/>
         <source>Exponent</source>
         <translation>指数</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="117"/>
+        <location filename="widgets/axescurves.ui" line="173"/>
         <source>Exponent inverted</source>
         <translation>反指数</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="151"/>
+        <location filename="widgets/axescurves.ui" line="207"/>
         <source>Shape</source>
         <translation>两端线性中间平滑曲线(原文Shape)</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="181"/>
-        <source>current curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.ui" line="196"/>
         <source>X</source>
-        <translation type="unfinished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="209"/>
         <source>Y</source>
-        <translation type="unfinished">Y</translation>
+        <translation type="obsolete">Y</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="222"/>
         <source>Z</source>
-        <translation type="unfinished">Z</translation>
+        <translation type="obsolete">Z</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="235"/>
         <source>Slider 1</source>
-        <translation type="unfinished">滑条 1 {1?}</translation>
+        <translation type="obsolete">滑条 1 {1?}</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="255"/>
         <source>Rx</source>
-        <translation type="unfinished">Rx</translation>
+        <translation type="obsolete">Rx</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="268"/>
         <source>Ry</source>
-        <translation type="unfinished">Ry</translation>
+        <translation type="obsolete">Ry</translation>
     </message>
     <message>
-        <location filename="widgets/axescurves.ui" line="281"/>
         <source>Rz</source>
-        <translation type="unfinished">Rz</translation>
-    </message>
-    <message>
-        <location filename="widgets/axescurves.ui" line="294"/>
-        <source>Slider 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Rz</translation>
     </message>
 </context>
 <context>
@@ -1103,18 +1103,18 @@
         <translation> 毫秒</translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.cpp" line="89"/>
-        <location filename="widgets/debugwindow.cpp" line="93"/>
+        <location filename="widgets/debugwindow.cpp" line="88"/>
+        <location filename="widgets/debugwindow.cpp" line="92"/>
         <source>Logical button </source>
         <translation>逻辑按钮 </translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.cpp" line="90"/>
+        <location filename="widgets/debugwindow.cpp" line="89"/>
         <source> pressed</source>
         <translation> 按下</translation>
     </message>
     <message>
-        <location filename="widgets/debugwindow.cpp" line="94"/>
+        <location filename="widgets/debugwindow.cpp" line="93"/>
         <source> unpressed</source>
         <translation> 松开</translation>
     </message>
@@ -1372,8 +1372,8 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="661"/>
-        <location filename="mainwindow.cpp" line="659"/>
+        <location filename="mainwindow.ui" line="453"/>
+        <location filename="mainwindow.cpp" line="670"/>
         <source>Show debug</source>
         <translation>显示调试信息</translation>
     </message>
@@ -1426,37 +1426,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="271"/>
+        <location filename="mainwindow.cpp" line="269"/>
         <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="552"/>
+        <location filename="mainwindow.ui" line="344"/>
         <source>Device</source>
         <translation>设备</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="778"/>
+        <location filename="mainwindow.ui" line="570"/>
         <source>Set file to default config</source>
         <translation>将文件设置为默认配置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="699"/>
+        <location filename="mainwindow.ui" line="491"/>
         <source>Save config to file</source>
         <translation>将配置保存到文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="829"/>
+        <location filename="mainwindow.ui" line="621"/>
         <source>Read config from Device</source>
         <translation>从设备中读取配置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="756"/>
+        <location filename="mainwindow.ui" line="548"/>
         <source>Reset All</source>
         <translation>重置所有设置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="864"/>
+        <location filename="mainwindow.ui" line="656"/>
         <source>Load default config</source>
         <translation>加载默认配置</translation>
     </message>
@@ -1466,53 +1466,40 @@
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="364"/>
-        <location filename="mainwindow.ui" line="443"/>
         <source>X</source>
-        <translation type="unfinished">X</translation>
+        <translation type="obsolete">X</translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation type="obsolete">Y</translation>
+    </message>
+    <message>
+        <source>Z</source>
+        <translation type="obsolete">Z</translation>
+    </message>
+    <message>
+        <source>Slider 1</source>
+        <translation type="obsolete">滑条 1 {1?}</translation>
+    </message>
+    <message>
+        <source>Rx</source>
+        <translation type="obsolete">Rx</translation>
+    </message>
+    <message>
+        <source>Ry</source>
+        <translation type="obsolete">Ry</translation>
+    </message>
+    <message>
+        <source>Rz</source>
+        <translation type="obsolete">Rz</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="383"/>
-        <source>Y</source>
-        <translation type="unfinished">Y</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="402"/>
-        <source>Z</source>
-        <translation type="unfinished">Z</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="421"/>
-        <source>Slider 1</source>
-        <translation type="unfinished">滑条 1 {1?}</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="471"/>
-        <source>Rx</source>
-        <translation type="unfinished">Rx</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="490"/>
-        <source>Ry</source>
-        <translation type="unfinished">Ry</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="509"/>
-        <source>Rz</source>
-        <translation type="unfinished">Rz</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="528"/>
-        <source>Slider 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="591"/>
         <source>Load config from file</source>
         <translation>从文件中加载配置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="639"/>
+        <location filename="mainwindow.ui" line="431"/>
         <source>Write config to Device</source>
         <translation>将配置写入设备</translation>
     </message>
@@ -1522,19 +1509,19 @@
         <translation>FreeJoy 配置程序 （由@sht2017翻译）</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="227"/>
+        <location filename="mainwindow.cpp" line="225"/>
         <source>devices connected</source>
         <oldsource> devices connected</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="229"/>
+        <location filename="mainwindow.cpp" line="227"/>
         <source>device connected</source>
         <oldsource> device connected</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="247"/>
+        <location filename="mainwindow.cpp" line="245"/>
         <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1550,7 +1537,7 @@
     </message>
     <message>
         <location filename="mainwindow_conf.cpp" line="117"/>
-        <location filename="mainwindow_conf.cpp" line="155"/>
+        <location filename="mainwindow_conf.cpp" line="152"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1560,41 +1547,41 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="380"/>
+        <location filename="mainwindow_conf.cpp" line="388"/>
         <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="382"/>
+        <location filename="mainwindow_conf.cpp" line="390"/>
         <source>Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_conf.cpp" line="383"/>
+        <location filename="mainwindow_conf.cpp" line="391"/>
         <source>Firmware version!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="588"/>
-        <location filename="mainwindow.cpp" line="611"/>
+        <location filename="mainwindow.cpp" line="599"/>
+        <location filename="mainwindow.cpp" line="622"/>
         <source>Open Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="588"/>
         <location filename="mainwindow.cpp" line="599"/>
-        <location filename="mainwindow.cpp" line="611"/>
+        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="622"/>
         <source>Config Files (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="599"/>
+        <location filename="mainwindow.cpp" line="610"/>
         <source>Save Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="448"/>
-        <location filename="mainwindow.cpp" line="651"/>
+        <location filename="mainwindow.cpp" line="459"/>
+        <location filename="mainwindow.cpp" line="662"/>
         <source>Hide debug</source>
         <translation>隐藏调试信息</translation>
     </message>
@@ -1793,101 +1780,111 @@
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="214"/>
-        <source>TLE5011 CS</source>
+        <source>ShiftReg CLK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="219"/>
-        <source>TLE5012B CS</source>
+        <source>TLE5011 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="224"/>
-        <source>MCP3201 CS</source>
+        <source>TLE5012B CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="229"/>
-        <source>MCP3202 CS</source>
+        <source>MCP3201 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="234"/>
-        <source>MCP3204 CS</source>
+        <source>MCP3202 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="239"/>
-        <source>MCP3208 CS</source>
+        <source>MCP3204 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="244"/>
-        <source>MLX90393 CS</source>
+        <source>MCP3208 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="249"/>
-        <source>AS5048A CS</source>
+        <source>MLX90393 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="254"/>
-        <source>LED Single</source>
+        <source>MLX90363 CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="259"/>
-        <source>LED Row</source>
+        <source>AS5048A CS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="264"/>
-        <source>LED Column</source>
+        <source>LED Single</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="269"/>
-        <source>LED PWM</source>
+        <source>LED Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="274"/>
-        <source>Axis Analog</source>
+        <source>LED Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="279"/>
-        <source>Fast Encoder</source>
+        <source>LED PWM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="284"/>
-        <source>SPI SCK</source>
+        <source>Axis Analog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="289"/>
-        <source>SPI MOSI</source>
+        <source>Fast Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="294"/>
-        <source>SPI MISO</source>
+        <source>SPI SCK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="299"/>
-        <source>TLE5011 GEN</source>
+        <source>SPI MOSI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="304"/>
-        <source>I2C SCL</source>
+        <source>SPI MISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="widgets/pincombobox.h" line="309"/>
+        <source>TLE5011 GEN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pincombobox.h" line="314"/>
+        <source>I2C SCL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pincombobox.h" line="319"/>
         <source>I2C SDA</source>
         <translation type="unfinished"></translation>
     </message>

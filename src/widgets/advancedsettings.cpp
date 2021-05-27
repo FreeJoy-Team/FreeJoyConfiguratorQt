@@ -31,6 +31,10 @@ AdvancedSettings::AdvancedSettings(QWidget *parent)
     gEnv.pAppSettings->beginGroup("OtherSettings");
     ui->checkBox_LoadDefCfg->setChecked(gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool());
     gEnv.pAppSettings->endGroup();
+#ifndef Q_OS_WIN
+    ui->text_removeName->setHidden(true);
+    ui->pushButton_removeName->setHidden(true);
+#endif
 }
 
 AdvancedSettings::~AdvancedSettings()
@@ -113,7 +117,7 @@ void AdvancedSettings::setStyle(QPushButton *pressedButton, QString filePath, QS
                                  + QStringLiteral("color: rgb(230, 230, 230); background-color: rgb(170, 170, 0);"));
 
     // без таймера не успевает отрисовать изменения текста и стиля кнопки
-    QTimer::singleShot(10, [&, pressedButton, filePath, styleName, isDark] {
+    QTimer::singleShot(10, this, [&, pressedButton, filePath, styleName, isDark] {
         QFile f(filePath);
         if (!f.open(QFile::ReadOnly | QFile::Text)) {
             qDebug() << "Unable to set stylesheet, file not found\n";
@@ -223,6 +227,20 @@ void AdvancedSettings::on_pushButton_About_clicked()
     QMessageBox::about(this, tr("About FreeJoyQt"), version + source + wiki);
 }
 
+// remove name from registry
+void AdvancedSettings::on_pushButton_removeName_clicked()
+{
+#ifdef Q_OS_WIN
+        qDebug()<<"Remove device OEMName from registry";
+        QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QString path2("HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QSettings(path.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
+        QSettings(path2.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
+#endif
+}
+
 void AdvancedSettings::readFromConfig()
 {
     // PID
@@ -239,9 +257,9 @@ void AdvancedSettings::readFromConfig()
 void AdvancedSettings::writeToConfig()
 {
     // VID
-    gEnv.pDeviceConfig->config.vid = ui->lineEdit_VID->text().toInt(nullptr, 16);
+    gEnv.pDeviceConfig->config.vid = uint16_t(ui->lineEdit_VID->text().toInt(nullptr, 16));
     // PID
-    gEnv.pDeviceConfig->config.pid = ui->lineEdit_PID->text().toInt(nullptr, 16);  
+    gEnv.pDeviceConfig->config.pid = uint16_t(ui->lineEdit_PID->text().toInt(nullptr, 16));
     // device name
     std::string tmp_string = ui->lineEdit_DeviceUSBName->text().toStdString();
     for (uint i = 0; i < sizeof(gEnv.pDeviceConfig->config.device_name); i++) {
@@ -252,5 +270,6 @@ void AdvancedSettings::writeToConfig()
         }
     }
     // usb exchange period
-    gEnv.pDeviceConfig->config.exchange_period_ms = ui->spinBox_USBExchangePeriod->value();
+    gEnv.pDeviceConfig->config.exchange_period_ms = uint8_t(ui->spinBox_USBExchangePeriod->value());
 }
+
