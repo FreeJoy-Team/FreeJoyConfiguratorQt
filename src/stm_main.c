@@ -19,7 +19,7 @@ dev_config_t InitConfig (void)
 #endif
     dev_config_t init_config =
     {
-        .firmware_version = 0x1700,		// do not change
+        .firmware_version = 0x1710,		// do not change
 
         /*
                     Name of device in devices dispatcher
@@ -37,7 +37,7 @@ dev_config_t InitConfig (void)
         .device_name[10] = '.',
         .device_name[11] = '7',
         .device_name[12] = '.',
-        .device_name[13] = '0',
+        .device_name[13] = '1',
         .device_name[14] = 0,
         .device_name[15] = 0,
         .device_name[16] = 0,
@@ -50,7 +50,7 @@ dev_config_t InitConfig (void)
 
         .button_debounce_ms = 50,					// debounce time for all buttons
 
-        .encoder_press_time_ms = 10,			// amount of milliseconds virtual button
+        .encoder_press_time_ms = 30,			// amount of milliseconds virtual button
         // will be pressed at encoder increment/decrement
 
         .exchange_period_ms = 5,					// amount of millisecond between joystick data sending
