@@ -30,9 +30,8 @@ ButtonConfig::ButtonConfig(QWidget *parent)
         ButtonLogical *logicalButtonsWidget = new ButtonLogical(i, this);
         ui->layoutV_LogicalButton->addWidget(logicalButtonsWidget);
         m_logicButtonPtrList.append(logicalButtonsWidget);
-
-        connect(m_logicButtonPtrList[i], SIGNAL(functionIndexChanged(int, int, int)),
-                this, SLOT(functionTypeChanged(int, int, int)));
+        connect(m_logicButtonPtrList[i], &ButtonLogical::functionIndexChanged,
+                this, &ButtonConfig::functionTypeChanged);
     }
     gEnv.pAppSettings->beginGroup("OtherSettings");
     ui->checkBox_AutoPhysBut->setChecked(gEnv.pAppSettings->value("AutoSetPhysButton", true).toBool());
@@ -148,12 +147,12 @@ void ButtonConfig::logicaButtonsCreator()
 }
 
 // set physical button for focused logical button
-void ButtonConfig::setLogicButton(int buttonNumber)
+void ButtonConfig::setLogicButton(int buttonIndex)
 {
     if (m_autoPhysButEnabled) {
         int buttonInFocus = m_logicButtonPtrList[0]->currentFocus();
         if (buttonInFocus >= 0) {
-            m_logicButtonPtrList[buttonInFocus]->setLogicButton(buttonNumber);
+            m_logicButtonPtrList[buttonInFocus]->setLogicButton(buttonIndex);
         }
     }
 }
@@ -196,18 +195,18 @@ void ButtonConfig::physButtonsCreator(int count)
     }
 }
 
-void ButtonConfig::functionTypeChanged(int index, int functionPreviousIndex, int buttonNumber)
+void ButtonConfig::functionTypeChanged(int index, int functionPreviousIndex, int buttonIndex)
 {
     if (index == ENCODER_INPUT_A) {
-        emit encoderInputChanged(buttonNumber + 1, 0);
+        emit encoderInputChanged(buttonIndex + 1, 0);
     } else if (index == ENCODER_INPUT_B) {
-        emit encoderInputChanged(0, buttonNumber + 1);
+        emit encoderInputChanged(0, buttonIndex + 1);
     }
 
     if (functionPreviousIndex == ENCODER_INPUT_A) {
-        emit encoderInputChanged((buttonNumber + 1) * -1, 0); // send negative number
+        emit encoderInputChanged((buttonIndex + 1) * -1, 0); // send negative number
     } else if (functionPreviousIndex == ENCODER_INPUT_B) {
-        emit encoderInputChanged(0, (buttonNumber + 1) * -1);
+        emit encoderInputChanged(0, (buttonIndex + 1) * -1);
     }
 }
 
@@ -242,13 +241,11 @@ void ButtonConfig::buttonStateChanged()
     // logical buttons state
     for (int i = 0; i < 16; i++) {
         for (int j = 0; j < 8; j++) {
-            number = j + (i) *8;
-            if ((paramsRep->log_button_data[i] & (1 << (j & 0x07)))) {
-                if (number < m_logicButtonPtrList.size()) {
+            number = j + (i *8);
+            if (number < m_logicButtonPtrList.size()) {
+                if ((paramsRep->log_button_data[i] & (1 << (j & 0x07)))) {
                     m_logicButtonPtrList[number]->setButtonState(true);
-                }
-            } else if ((paramsRep->log_button_data[i] & (1 << (j & 0x07))) == false) {
-                if (number < m_logicButtonPtrList.size()) {
+                } else if ((paramsRep->log_button_data[i] & (1 << (j & 0x07))) == false) {
                     m_logicButtonPtrList[number]->setButtonState(false);
                 }
             }
@@ -258,13 +255,16 @@ void ButtonConfig::buttonStateChanged()
     // physical button state
     for (int i = 0; i < 16; i++) {
         for (int j = 0; j < 8; j++) {
-            number = j + (i) *8;
-            if ((paramsRep->phy_button_data[i] & (1 << (j & 0x07)))) {
-                if (number < m_PhysButtonPtrList.size()) {
+            number = j + (i *8);
+//            if (number >= m_PhysButtonPtrList.size()) {
+//                i = 99;
+//                break;// goto
+//            }
+
+            if (number < m_PhysButtonPtrList.size()) {
+                if ((paramsRep->phy_button_data[i] & (1 << (j & 0x07)))) {
                     m_PhysButtonPtrList[number]->setButtonState(true);
-                }
-            } else if ((paramsRep->phy_button_data[i] & (1 << (j & 0x07))) == false) {
-                if (number < m_PhysButtonPtrList.size()) {
+                } else if ((paramsRep->phy_button_data[i] & (1 << (j & 0x07))) == false) {
                     m_PhysButtonPtrList[number]->setButtonState(false);
                 }
             }

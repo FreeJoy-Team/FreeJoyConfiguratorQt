@@ -41,8 +41,8 @@ signals:
 public slots:
     void setUiOnOff(int value);
 private slots:
-    void functionTypeChanged(int index, int functionPreviousIndex, int buttonNumber);
-    void setLogicButton(int buttonNumber);
+    void functionTypeChanged(int index, int functionPreviousIndex, int buttonIndex);
+    void setLogicButton(int buttonIndex);
 
 #ifdef DYNAMIC_CREATION
 private slots:

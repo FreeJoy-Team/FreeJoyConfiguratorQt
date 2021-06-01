@@ -30,16 +30,16 @@ public:
     void setMaxPhysButtons(int maxPhysButtons);
     void setSpinBoxOnOff(int maxPhysButtons);
 
-    void setButtonState(bool set_state);
+    void setButtonState(bool setState);
 
-    void setLogicButton(int buttonNumber);
+    void setLogicButton(int buttonIndex);
     void setAutoPhysBut(bool enabled);
     int currentFocus() const;
 
     void retranslateUi();
 
 signals:
-    void functionIndexChanged(int index, int previous_index, int button_number);
+    void functionIndexChanged(int index, int previousIndex, int buttonIndex);
 
 private slots:
     void editingOnOff(int value);
@@ -52,13 +52,15 @@ private:
     Ui::ButtonLogical *ui;
     int m_functionPrevIndex;
     bool m_currentState;
-    int m_buttonNumber;
+    bool m_debugState;
+    int m_buttonIndex;
     static int m_currentFocus;
     static bool m_autoPhysButEnabled;
+    QElapsedTimer m_lastAct;
 
     QVector<int> m_logicFunc_enumIndex;
 
-    const deviceEnum_guiName_t m_timerList[TIMER_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
+    const deviceEnum_guiName_t m_timerList[TIMER_COUNT] = // order must be as in common_types.h!!!!!!!!!!!          // static ?
     {
         {BUTTON_TIMER_OFF,      tr("-")},
         {BUTTON_TIMER_1,        tr("Timer 1")},
@@ -66,7 +68,7 @@ private:
         {BUTTON_TIMER_3,        tr("Timer 3")},
     };
 
-    const deviceEnum_guiName_t m_shiftList[SHIFT_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!          // static ?
+    const deviceEnum_guiName_t m_shiftList[SHIFT_COUNT] = // order must be as in common_types.h!!!!!!!!!!!          // static ?
     {
         {0,        tr("-")},
         {1,        tr("Shift 1")},
@@ -77,7 +79,7 @@ private:
     };
     //static deviceEnum_guiName_t logical_function_list_[LOGICAL_FUNCTION_COUNT];
 
-    const QVector <deviceEnum_guiName_t> m_logicFunctionList = // любой порядок          // static ?
+    const QVector <deviceEnum_guiName_t> m_logicFunctionList = // any order          // static ?
     {{
         {BUTTON_NORMAL,        tr("Button normal")},
         {BUTTON_TOGGLE,        tr("Button toggle")},

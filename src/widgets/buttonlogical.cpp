@@ -12,10 +12,11 @@ ButtonLogical::ButtonLogical(int buttonNumber, QWidget *parent)
     , ui(new Ui::ButtonLogical)
 {
     ui->setupUi(this);
-    m_buttonNumber = buttonNumber;
+    m_buttonIndex = buttonNumber;
     m_functionPrevIndex = 0;
     m_currentState = false;
-    ui->label_LogicalButtonNumber->setNum(m_buttonNumber + 1);
+    m_debugState = false;
+    ui->label_LogicalButtonNumber->setNum(m_buttonIndex + 1);
     ui->spinBox_PhysicalButtonNumber->installEventFilter(this);
 }
 
@@ -73,7 +74,7 @@ void ButtonLogical::setSpinBoxOnOff(int maxPhysButtons)
 
 void ButtonLogical::functionTypeChanged(int index)
 {
-    emit functionIndexChanged(index, m_functionPrevIndex, m_buttonNumber);
+    emit functionIndexChanged(index, m_functionPrevIndex, m_buttonIndex);
     m_functionPrevIndex = index;
 }
 
@@ -106,30 +107,40 @@ void ButtonLogical::setButtonState(bool state)
 
         if (state) {
             default_palette = palette();
-            default_style = ui->label_LogicalButtonNumber->styleSheet(); // default_style ="" бесполезно
+            default_style = ui->label_LogicalButtonNumber->styleSheet(); // default_style ="" useless
 
             setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
             ui->label_LogicalButtonNumber->setStyleSheet(default_style
                                                          + QStringLiteral("background-color: rgb(0, 128, 0);"));
-
-            if (gEnv.pDebugWindow) {
-                gEnv.pDebugWindow->logicalButtonState(m_buttonNumber + 1, true);
-            }
+            m_lastAct.start();
+            m_currentState = state;
         } else {
-            setPalette(window()->palette());
-            ui->label_LogicalButtonNumber->setStyleSheet(default_style);
-
-            if (gEnv.pDebugWindow) {
-                gEnv.pDebugWindow->logicalButtonState(m_buttonNumber + 1, false);
+            // sometimes state dont have time to render. e.g. encoder press time 10ms and monitor refresh time 17ms(60fps)
+            if (m_lastAct.hasExpired(30)) {
+                setPalette(window()->palette());
+                ui->label_LogicalButtonNumber->setStyleSheet(default_style);
+                m_currentState = state;
             }
         }
-        m_currentState = state;
+    }
+    // debug shows real state without a timer for rendering
+    if (state != m_debugState) {
+        if (state) {
+            if (gEnv.pDebugWindow) {
+                gEnv.pDebugWindow->logicalButtonState(m_buttonIndex + 1, true);
+            }
+        } else {
+            if (gEnv.pDebugWindow) {
+                gEnv.pDebugWindow->logicalButtonState(m_buttonIndex + 1, false);
+            }
+        }
+        m_debugState = state;
     }
 }
 
-void ButtonLogical::setLogicButton(int buttonNumber)
+void ButtonLogical::setLogicButton(int buttonIndex)
 {
-    ui->spinBox_PhysicalButtonNumber->setValue(buttonNumber + 1); // +1 !!!!
+    ui->spinBox_PhysicalButtonNumber->setValue(buttonIndex + 1); // +1 !!!!
 }
 
 int ButtonLogical::currentFocus() const
@@ -148,7 +159,7 @@ bool ButtonLogical::eventFilter(QObject *obj, QEvent *event)
     if (m_autoPhysButEnabled) {
         if (event->type() == QEvent::FocusIn) {
             ui->spinBox_PhysicalButtonNumber->setStyleSheet("background-color: rgba(0, 120, 215, 200); color: rgb(255, 255, 255)");
-            m_currentFocus = m_buttonNumber;
+            m_currentFocus = m_buttonIndex;
         } else if (event->type() == QEvent::FocusOut){
             ui->spinBox_PhysicalButtonNumber->setStyleSheet("");
             m_currentFocus = -1;
@@ -159,7 +170,7 @@ bool ButtonLogical::eventFilter(QObject *obj, QEvent *event)
 
 void ButtonLogical::readFromConfig()
 {
-    button_t *button = &gEnv.pDeviceConfig->config.buttons[m_buttonNumber];
+    button_t *button = &gEnv.pDeviceConfig->config.buttons[m_buttonIndex];
     // physical
     ui->spinBox_PhysicalButtonNumber->setValue(button->physical_num + 1); // +1 !!!!
     // isDisable
@@ -194,7 +205,7 @@ void ButtonLogical::readFromConfig()
 
 void ButtonLogical::writeToConfig()
 {
-    button_t *button = &gEnv.pDeviceConfig->config.buttons[m_buttonNumber];
+    button_t *button = &gEnv.pDeviceConfig->config.buttons[m_buttonIndex];
 
     button->physical_num = ui->spinBox_PhysicalButtonNumber->value() - 1; // -1 !!!!
     button->is_disabled = ui->checkBox_IsDisable->isChecked();
@@ -205,3 +216,4 @@ void ButtonLogical::writeToConfig()
     button->delay_timer = m_timerList[ui->comboBox_DelayTimerIndex->currentIndex()].deviceEnumIndex;
     button->press_timer = m_timerList[ui->comboBox_PressTimerIndex->currentIndex()].deviceEnumIndex;
 }
+

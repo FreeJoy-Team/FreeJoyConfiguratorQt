@@ -7,16 +7,11 @@ ButtonPhysical::ButtonPhysical(int buttonNumber, QWidget *parent)
 {
     ui->setupUi(this);
     m_currentState = false;
-    m_buttonNumber = buttonNumber;
-    ui->label_PhysicalButton->setNum(m_buttonNumber + 1);
+    m_buttonIndex = buttonNumber;
+    ui->label_PhysicalButton->setNum(m_buttonIndex + 1);
     m_defStyle = QStringLiteral("QLabel {  border-radius: 13px; min-height: 26px; min-width: 26px; "
                                 "background-color: rgb(170, 0, 0); color: rgb(210, 210, 210);}");
     ui->label_PhysicalButton->setStyleSheet(m_defStyle);
-//   border-radius: 14px;
-//   min-height: 28px;
-//   min-width: 28px;
-//   background-color: rgb(170, 0, 0);
-//   color: rgb(230, 230, 230);
 }
 
 ButtonPhysical::~ButtonPhysical()
@@ -24,17 +19,23 @@ ButtonPhysical::~ButtonPhysical()
     delete ui;
 }
 
-void ButtonPhysical::setButtonState(bool setState)
+void ButtonPhysical::setButtonState(bool state)
 {
-    if (setState != m_currentState) {
-        if (setState) { // QStringLiteral // QLatin1String
+    //qDebug()<<"button ="<<m_buttonIndex<<state;
+    if (state != m_currentState) {
+        if (state) {
             ui->label_PhysicalButton->setStyleSheet(
                 QStringLiteral("QLabel {  border-radius: 13px; min-height: 26px; min-width: 26px; "
                                "background-color: rgb(0, 128, 0); color: rgb(210, 210, 210);}"));
-            emit physButtonPressed(m_buttonNumber); // +1?
+            emit physButtonPressed(m_buttonIndex);
+            m_lastAct.start();
+            m_currentState = state;
         } else {
-            ui->label_PhysicalButton->setStyleSheet(m_defStyle);
+            // sometimes state dont have time to render. e.g. encoder press time 10ms and monitor refresh time 17ms(60fps)
+            if (m_lastAct.hasExpired(30)) {
+                ui->label_PhysicalButton->setStyleSheet(m_defStyle);
+                m_currentState = state;
+            }
         }
-        m_currentState = setState;
     }
 }
