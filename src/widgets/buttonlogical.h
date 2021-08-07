@@ -83,9 +83,9 @@ private:
     {{
         {BUTTON_NORMAL,        tr("Button normal")},
         {BUTTON_TOGGLE,        tr("Button toggle")},
-        {TOGGLE_SWITCH,        tr("Toggle switch")},
+        {TOGGLE_SWITCH,        tr("Toggle switch ON/OFF")},
         {TOGGLE_SWITCH_ON,     tr("Toggle switch ON")},
-        {TOGGLE_SWITCH_OFF,    tr("Toggle switch ON/OFF")},
+        {TOGGLE_SWITCH_OFF,    tr("Toggle switch OFF")},
         {POV1_UP,              tr("POV1 Up")},
         {POV1_RIGHT,           tr("POV1 Right")},
         {POV1_DOWN,            tr("POV1 Down")},
