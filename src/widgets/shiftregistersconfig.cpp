@@ -1,5 +1,6 @@
 #include "shiftregistersconfig.h"
 #include "ui_shiftregistersconfig.h"
+#include <QDebug>
 
 ShiftRegistersConfig::ShiftRegistersConfig(QWidget *parent) :
     QWidget(parent),
@@ -15,9 +16,8 @@ ShiftRegistersConfig::ShiftRegistersConfig(QWidget *parent) :
         ShiftRegisters * shift_register = new ShiftRegisters(i, this);
         ui->layoutV_ShiftRegisters->addWidget(shift_register);
         m_shiftRegsPtrList.append(shift_register);
-        //shift_register->hide();
-        connect(shift_register, SIGNAL(buttonCountChanged(int, int)),
-                this, SLOT(shiftRegButtonsCalc(int, int)));
+        connect(shift_register, &ShiftRegisters::buttonCountChanged,
+                this, &ShiftRegistersConfig::shiftRegButtonsCalc);
     }
 }
 
@@ -56,20 +56,19 @@ bool ShiftRegistersConfig::sortNullLast(const ShiftRegData_t& lhs, const ShiftRe
 void ShiftRegistersConfig::shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName)
 {
     // add shift reg latch pin
-    if (latchPin != 0){
-        if (latchPin > 0){
-            m_latchPinsArray[m_latchPinsArray.size() - 1].pinNumber = latchPin;
-            m_latchPinsArray[m_latchPinsArray.size() - 1].guiName = pinGuiName;
+    if (latchPin != 0) {
+        if (latchPin > 0) {
+            m_latchPinsArray.back().pinNumber = latchPin;
+            m_latchPinsArray.back().guiName = pinGuiName;
         }
         // delete shift reg latch pin
         else
         {
             latchPin = -latchPin;
             for (uint i = 0; i < m_latchPinsArray.size(); ++i) {
-                if (latchPin == m_latchPinsArray[i].pinNumber){
-
+                if (latchPin == m_latchPinsArray[i].pinNumber) {
                     m_latchPinsArray[i].pinNumber = 0;
-                    m_latchPinsArray[i].guiName = m_shiftRegsPtrList[0]->defaultText();      // hz
+                    m_latchPinsArray[i].guiName = m_shiftRegsPtrList[0]->defaultText();      //?????????????????
                 }
             }
         }
@@ -77,38 +76,45 @@ void ShiftRegistersConfig::shiftRegSelected(int latchPin, int dataPin, const QSt
         std::sort(m_latchPinsArray.begin(), m_latchPinsArray.end(), sortByPinNumber);           // хз можно ли через 1 сорт
         // sort null last
         std::stable_sort(m_latchPinsArray.begin(), m_latchPinsArray.end(), sortNullLast);
-        //all unused pins = bigger pin
-        for (int i = (int)m_latchPinsArray.size() - 1; i >= 0; --i) {         // бесконечный цикл, доработать
-            if (m_latchPinsArray[i].pinNumber > 0){
-                for (int j = (int)m_latchPinsArray.size() - 1; j > i; --j) {
+        //all unused pins (if (m_latchPinsArray[i].pinNumber == 0)) = bigger pin
+        for (uint i = m_latchPinsArray.size() -1; i >= 0; --i) {                        // bullshit // todo: refactoring
+
+            if (m_latchPinsArray[i].pinNumber > 0) {
+                // example: we have selected ShiftLatch pins{A0(pinNumber = 1), A2(pinNumber = 3), A6(pinNumber = 7)}
+                // in the end it should look like: m_latchPinsArray.pinNumber{1, 3, 7, 7, 7}
+                for (uint k = 0; k < m_latchPinsArray.size() -1; ++k) {
+                    if (m_latchPinsArray[k].pinNumber == m_latchPinsArray[k + 1].pinNumber && m_latchPinsArray.back().pinNumber > 0) {
+                        for (uint p = 0; p < m_latchPinsArray.size() -(k + 2); ++p) {
+                            m_latchPinsArray[k + p + 1].pinNumber = m_latchPinsArray.back().pinNumber;
+                            m_latchPinsArray[k + p + 1].guiName = m_latchPinsArray.back().guiName;
+                        }
+                        break;
+                    }
+                }
+
+                for (uint j = m_latchPinsArray.size() -1; j > i; --j) {
                     m_latchPinsArray[j].pinNumber = m_latchPinsArray[i].pinNumber;
-                    m_latchPinsArray[j].guiName = m_latchPinsArray[0].guiName;
+                    m_latchPinsArray[j].guiName = m_latchPinsArray[i].guiName;
                 }
                 break;
-            }/* else if (i == 0){    // сделать нормально
-                break;
-            }*/
+            }
         }
         // update shiftreg ui
         for (uint i = 0; i < m_latchPinsArray.size() - 1; ++i) {
             m_shiftRegsPtrList[i]->setLatchPin(m_latchPinsArray[i].pinNumber, m_latchPinsArray[i].guiName);
         }
-
     }
     // add shift reg data pin
-    else if (dataPin != 0){        // data_pin != 0 необязательно
-
-        if (dataPin > 0){
+    else if (dataPin != 0) {        // data_pin != 0 - необязательно
+        if (dataPin > 0) {
             m_dataPinsArray[m_dataPinsArray.size() - 1].pinNumber = dataPin;
             m_dataPinsArray[m_dataPinsArray.size() - 1].guiName = pinGuiName;
-        }
-        else
-        {
+        } else {
             dataPin = -dataPin;
             for (uint i = 0; i < m_dataPinsArray.size(); ++i) {
                 if (dataPin == m_dataPinsArray[i].pinNumber){
                     m_dataPinsArray[i].pinNumber = 0;
-                    m_dataPinsArray[i].guiName = m_shiftRegsPtrList[i]->defaultText();      // hz
+                    m_dataPinsArray[i].guiName = m_shiftRegsPtrList[i]->defaultText();      //?????????????????
                 }
             }
         }
