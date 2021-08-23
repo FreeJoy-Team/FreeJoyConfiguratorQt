@@ -1,11 +1,7 @@
 #ifndef REPORTCONVERTER_H
 #define REPORTCONVERTER_H
 
-#include "deviceconfig.h"
-#include <vector>
-
-#include "deviceconfig.h"
-#include "global.h"
+#include "stdint.h"
 
 #define BUFFERSIZE 64
 

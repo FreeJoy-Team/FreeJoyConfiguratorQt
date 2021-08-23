@@ -22,7 +22,7 @@ PinComboBox::PinComboBox(uint pinNumber, QWidget *parent) : // пины - пер
     m_isCall_Interaction = false;
     m_isInteracts = false;
 
-    m_styleSheetDefault = ui->comboBox_PinsType->styleSheet();       // хрень
+    m_styleSheetDefault = ui->comboBox_PinsType->styleSheet();       // useless
 
     initializationPins(m_pinNumber);
 
@@ -32,8 +32,8 @@ PinComboBox::PinComboBox(uint pinNumber, QWidget *parent) : // пины - пер
 
 PinComboBox::~PinComboBox()
 {
-    m_pinTypesIndex.clear();         // Fault tolerant heap
-    m_pinTypesIndex.shrink_to_fit(); // Fault tolerant heap
+    m_pinTypesIndex.clear();         // Fault tolerant heap??
+    m_pinTypesIndex.shrink_to_fit(); // Fault tolerant heap??
     m_enumIndex.clear();
     m_enumIndex.shrink_to_fit();
     delete ui;
@@ -49,12 +49,12 @@ const pins *PinComboBox::pinList() const
     return m_pinList;
 }
 
-//! номер элемента в pin_types
+
 const QVector<int> & PinComboBox::pinTypeIndex() const
 {
     return m_pinTypesIndex;
 }
-//! device enum присутствующие в комбобоксе
+
 const QVector<int> & PinComboBox::enumIndex() const
 {
     return m_enumIndex;
@@ -192,7 +192,7 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
 
 void PinComboBox::indexChanged(int index)
 {
-    if(!m_pinTypesIndex.empty() && m_isInteracts == false)
+    if(m_pinTypesIndex.empty() == false && m_isInteracts == false)
     {
         ui->comboBox_PinsType->setStyleSheet(m_pinTypes[m_pinTypesIndex[index]].styleSheet);      // временно?
         int iteractionSize = sizeof(m_pinTypes->interaction) / sizeof(m_pinTypes->interaction[0]);
@@ -256,7 +256,7 @@ void PinComboBox::indexChanged(int index)
     }
 
     // set current config
-    if(!m_pinTypesIndex.empty()){
+    if(m_pinTypesIndex.empty() == false){
         emit currentIndexChanged(m_enumIndex[index], m_previousIndex, m_pinNumber);
         m_previousIndex = m_enumIndex[index];
         m_currentDevEnum = m_enumIndex[index];

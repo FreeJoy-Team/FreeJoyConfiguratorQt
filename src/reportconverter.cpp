@@ -1,6 +1,7 @@
-#include <QDebug>
-#include <cstring>
 #include "reportconverter.h"
+
+#include "deviceconfig.h"
+#include "global.h"
 
 uint8_t ReportConverter::buffer[BUFFERSIZE]{};
 

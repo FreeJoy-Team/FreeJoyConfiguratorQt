@@ -89,7 +89,7 @@ void MainWindow::loadDefaultConfig()
 void MainWindow::configReceived(bool success)
 {
     m_buttonDefaultStyle = ui->pushButton_ReadConfig->styleSheet();
-    static QString button_default_text = ui->pushButton_ReadConfig->text();    //???
+    static QString button_default_text = ui->pushButton_ReadConfig->text();    //????????????????????????
 
     if (success == true)
     {
@@ -405,7 +405,7 @@ void MainWindow::oldConfigHandler()
 }
 
 
-                                            /////////////////////////////////// SAVE config to file ///////////////////////////////////
+                              /////////////////////////////////// SAVE config to file ///////////////////////////////////
 void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
 {
     dev_config_t* devC = &gEnv.pDeviceConfig->config;
@@ -421,7 +421,7 @@ void MainWindow::saveDeviceConfigToFile(QSettings* deviceSettings)
     deviceSettings->setValue("USBExchange", devC->exchange_period_ms);
     deviceSettings->endGroup();
     // save Pins config to file
-    deviceSettings->beginGroup("PinsConfig");        // can for x3
+    deviceSettings->beginGroup("PinsConfig");        // for(;;) x3
     deviceSettings->setValue("A0", devC->pins[0]);
     deviceSettings->setValue("A1", devC->pins[1]);
     deviceSettings->setValue("A2", devC->pins[2]);

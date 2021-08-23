@@ -71,7 +71,7 @@ struct cBox
     int pinType[10];
     int pinExcept[10];
     int interaction[10];
-    QString styleSheet; // стиль взаимодействия
+    QString styleSheet;
 };
 
 struct pins
@@ -97,9 +97,9 @@ public:
     //! return pointer to the first element, size=PINS_COUNT
     const pins *pinList() const;
     int currentDevEnum() const;
-    //! номер элемента в pin_types
+    //! return qvector of item index in m_pinTypes struct
     const QVector<int> &pinTypeIndex() const;
-    //! device enum присутствующие в комбобоксе
+    //! return qvector of device enums in combobox
     const QVector<int> &enumIndex() const;
 
     uint interactCount() const;
@@ -107,7 +107,6 @@ public:
     bool isInteracts() const;
 
     void setIndexStatus(int index, bool status);
-    //void SetIndex();
     void resetPin();
     void setIndex_iteraction(int index, int senderIndex);
     void initializationPins(uint pin);
@@ -127,9 +126,9 @@ private:
 
     int m_currentDevEnum;
     int m_pinNumber;
-    //! номер элемента в pin_types
+    //! return qvector of item index in m_pinTypes struct
     QVector<int> m_pinTypesIndex;
-    //! device enum присутствующие в комбобоксе
+    //! return qvector of device enums in combobox
     QVector<int> m_enumIndex;
     int m_previousIndex;
 
@@ -142,8 +141,8 @@ private:
     ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ static!!///////////////////////
     const pins m_pinList[PINS_COUNT] = // каждый пин хранит по структуре. а жирно не будет?
     {
-        {PA_0,  {"A0"},    {tr("Pin A0")},     {ANALOG_IN}}, // пин // GUI name // его типы
-        {PA_1,  {"A1"},    {tr("Pin A1")},     {ANALOG_IN}}, // добавить SERIAL, PWM...
+        {PA_0,  {"A0"},    {tr("Pin A0")},     {ANALOG_IN}}, // pin device enum // GUI name // pin type
+        {PA_1,  {"A1"},    {tr("Pin A1")},     {ANALOG_IN}}, // todo: add SERIAL, PWM...
         {PA_2,  {"A2"},    {tr("Pin A2")},     {ANALOG_IN}},
         {PA_3,  {"A3"},    {tr("Pin A3")},     {ANALOG_IN}},
         {PA_4,  {"A4"},    {tr("Pin A4")},     {ANALOG_IN}},
@@ -181,10 +180,10 @@ private:
         {},
         {}, {}},
 
-        {BUTTON_GND,     tr("Button Gnd"),      // контроллер enum,  имя в ui   tr(нужен перевод)
-        {ALL},                                  // добавление в конкретный пин или пины типа
-        {},                                     // исключая пины
-        {}, {"color: rgb(150, 155, 55);"}},     // взаимодействие с другими типами // стиль color, background-color, border-color...
+        {BUTTON_GND,     tr("Button Gnd"),      // device enum,   ui name   tr(need to translate)
+        {ALL},                                  // add to (example: ALL - add to all comboboxes, PA_8 - add to PA_8 combobox
+        {},                                     // except pins (example: add to - ALL, except - PA_8 = add everywhere except PA_8)
+        {}, {"color: rgb(150, 155, 55);"}},     // interaction with pins, style of interaction with other pins // color, background-color, border-color...
 
         {BUTTON_VCC,     tr("Button Vcc"),
         {ALL},
@@ -249,7 +248,7 @@ private:
         {MLX90393_CS,    tr("MLX90393 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},//MLX90363_CS
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
 
         {MLX90363_CS,    tr("MLX90363 CS"),
         {ALL},

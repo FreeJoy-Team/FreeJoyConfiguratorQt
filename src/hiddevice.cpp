@@ -282,7 +282,6 @@ void HidDevice::readConfigFromDevice(uint8_t *buffer)
                     }
                 }
                 else if ((resendTime + 250 - timer.elapsed()) <= 0)
-                //else if (config_request_buffer[1] < 2 && (resend_time + 250 - timer.elapsed()) <= 0) // for first packet
                 {
                     qDebug() << "Resend activated";
                     config_request_buffer[1] = report_count +1;
@@ -291,7 +290,7 @@ void HidDevice::readConfigFromDevice(uint8_t *buffer)
                     hid_write(m_paramsRead, config_request_buffer, 2);
                 }
             }
-        } else {    // перестаховка
+        } else {
             m_currentWork = REPORT_ID_PARAM;
             emit configReceived(false);
             break;
@@ -364,7 +363,7 @@ void HidDevice::writeConfigToDevice(uint8_t *buffer)
                         }
                     }
                 }
-                else if ((resendTime + 250 - timer.elapsed()) <= 0) // for first packet
+                else if ((resendTime + 250 - timer.elapsed()) <= 0)
                 {
                     qDebug() << "Resend activated";
                     resendTime = timer.elapsed();
@@ -372,7 +371,7 @@ void HidDevice::writeConfigToDevice(uint8_t *buffer)
                     hid_write(m_paramsRead, configOutBuf, BUFFERSIZE);
                 }
             }
-        } else {    // перестаховка
+        } else {
             m_currentWork = REPORT_ID_PARAM;
             emit configSent(false);
             break;
