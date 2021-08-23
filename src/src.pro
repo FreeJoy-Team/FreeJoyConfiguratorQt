@@ -158,3 +158,9 @@ win32 {
     SOURCES += \
         windows/hidapi.c
 }
+
+macx {
+    LIBS += -framework CoreFoundation -framework IOkit
+    SOURCES += \
+    mac/hidapi.c
+}
