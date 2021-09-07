@@ -145,6 +145,7 @@ void HidDevice::processData()                   /////// bad code, I'll try to re
                     m_paramsRead = hid_open_path(path);
                     // params hid opened
                     if (m_paramsRead) {
+                        ReportConverter::resetReport();
                         emit deviceConnected();
                         oldSelectedDevice = m_selectedDevice;
                         deviceCountChanged = false;
@@ -178,7 +179,13 @@ void HidDevice::processData()                   /////// bad code, I'll try to re
                         if (buffer[0] == REPORT_ID_PARAM) {   // перестраховка
                             memset(deviceBuffer, 0, BUFFERSIZE);
                             memcpy(deviceBuffer, buffer, BUFFERSIZE);
-                            emit paramsPacketReceived(deviceBuffer);    // pointer? thread
+                            if (ReportConverter::paramReport(deviceBuffer) == -1) continue;
+                            if (ReportConverter::paramReport(deviceBuffer)) { // datarace?
+                                emit paramsPacketReceived(true);
+                            } else {
+                                emit paramsPacketReceived(false);
+                                QThread::msleep(300);
+                            }
                         }
                     }
                 }

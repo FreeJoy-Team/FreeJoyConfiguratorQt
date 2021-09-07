@@ -26,7 +26,7 @@ signals:
     void deviceDisconnected();
     void deviceConnected();
     void flasherConnected();
-    void paramsPacketReceived(uint8_t *buffer);
+    void paramsPacketReceived(bool firmwareCompatible);
 
     void configReceived(bool isSuccess);
     void configSent(bool isSuccess);

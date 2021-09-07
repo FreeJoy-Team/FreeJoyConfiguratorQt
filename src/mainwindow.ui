@@ -57,9 +57,6 @@ border: 1px solid rgb(173, 173, 173);
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <property name="movable">
-       <bool>true</bool>
-      </property>
       <widget class="QWidget" name="tab_PinConfig">
        <attribute name="title">
         <string> Pin Config </string>

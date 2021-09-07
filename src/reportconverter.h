@@ -8,13 +8,15 @@
 class ReportConverter
 {
 public:
-    static void paramReport(uint8_t *paramsBuffer);
+    static int paramReport(uint8_t *paramsBuffer);
+    static void resetReport();
 
     static void getConfigFromDevice(uint8_t *hidBuffer);
     static uint8_t *sendConfigToDevice(uint8_t requestConfigNumber);
 
 private:
     static uint8_t buffer[BUFFERSIZE];
+    static int8_t firmwareCompatible;
 };
 
 #endif // REPORTCONVERTER_H

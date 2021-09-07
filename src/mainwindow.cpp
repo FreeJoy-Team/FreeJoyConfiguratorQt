@@ -3,12 +3,12 @@
 #include <QSettings>
 #include <QFileDialog>
 #include <QDesktopServices>
+#include <QSpinBox>
 #include <ctime>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mousewheelguard.h"
-#include <QSpinBox>
 
 #include "common_types.h"
 #include "global.h"
@@ -20,17 +20,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-//    , m_thread{new QThread}
-//    , m_hidDeviceWorker{new HidDevice()}
-//    , m_threadGetSendConfig{new QThread}
-//    , m_pinConfig{new PinConfig(this)}// not need delete. this - parent
-//    , m_buttonConfig{new ButtonConfig(this)}
-//    , m_ledConfig{new LedConfig(this)}
-//    , m_encoderConfig{new EncodersConfig(this)}
-//    , m_shiftRegConfig{new ShiftRegistersConfig(this)}
-//    , m_axesConfig{new AxesConfig(this)}
-//    , m_axesCurvesConfig{new AxesCurvesConfig(this)}
-//    , m_advSettings{new AdvancedSettings(this)}
+    , m_deviceChanged(false)
+//    , m_thread(new QThread)
+//    , m_hidDeviceWorker(new HidDevice())
+//    , m_threadGetSendConfig(new QThread)
+//    , m_pinConfig(new PinConfig(this))
+//    , m_buttonConfig(new ButtonConfig(this))
+//    , m_ledConfig(new LedConfig(this))
+//    , m_encoderConfig(new EncodersConfig(this))
+//    , m_shiftRegConfig(new ShiftRegistersConfig(this))
+//    , m_axesConfig(new AxesConfig(this))
+//    , m_axesCurvesConfig(new AxesCurvesConfig(this))
+//    , m_advSettings(new AdvancedSettings(this))
 {
     qDebug()<<"main + member initialize time ="<< gEnv.pApp_start_time->elapsed() << "ms";
     QElapsedTimer timer;
@@ -221,17 +222,10 @@ MainWindow::~MainWindow()
 // device connected
 void MainWindow::showConnectDeviceInfo()
 {
-    if (ui->comboBox_HidDeviceList->count() > 1) {
-        ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("devices connected"));
-    } else {
-        ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("device connected"));
-    }
     if (ui->comboBox_HidDeviceList->itemData(ui->comboBox_HidDeviceList->currentIndex()).toInt() != 1) {
-        ui->pushButton_WriteConfig->setEnabled(true);
-        ui->pushButton_ReadConfig->setEnabled(true);
-        ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+        m_deviceChanged = true;
     } else {
-        // for old firmware
+        // for old(1.6-) firmware
         ui->pushButton_WriteConfig->setEnabled(false);
         ui->pushButton_ReadConfig->setEnabled(false);
         ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
@@ -247,10 +241,6 @@ void MainWindow::hideConnectDeviceInfo()
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     m_advSettings->flasher()->deviceConnected(false);
-//    // reset paramsReport
-//    memset(&gEnv.pDeviceConfig->paramsReport, 0, sizeof(gEnv.pDeviceConfig->paramsReport));
-//    uint8_t tmp[64]{};        // todo
-//    getParamsPacket(tmp);
     // debug window
     if (m_debugWindow) {
         m_debugWindow->resetPacketsCount();
@@ -299,41 +289,55 @@ void MainWindow::hidDeviceList(const QList<QPair<bool, QString>> &deviceNames)
 }
 
 // received device report
-void MainWindow::getParamsPacket(uint8_t *buffer)
+void MainWindow::getParamsPacket(bool firmwareCompatible)
 {
-    ReportConverter::paramReport(buffer);
+    if (m_deviceChanged) {
+        if (firmwareCompatible == false) {
+            ui->pushButton_WriteConfig->setEnabled(false);
+            ui->pushButton_ReadConfig->setEnabled(false);
+            ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
+            ui->label_DeviceStatus->setText(tr("Incompatible Firmware"));
+        } else {
+            ui->pushButton_WriteConfig->setEnabled(true);
+            ui->pushButton_ReadConfig->setEnabled(true);
+            ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+            // set firmware version
+            QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
+            if (str.size() == 4) {
+                ui->label_DeviceStatus->setText(tr("Device firmware") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
+            }
+        }
+        m_deviceChanged = false;
+    }
+
     // update button state without delay. fix gamepad_report.raw_button_data[0]
     // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся.
     // Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
     // и не видеть оставшиеся физические 64 кнопки.
-    if(ui->tab_ButtonConfig->isVisible() == true || m_debugWindow){
+    if(ui->tab_ButtonConfig->isVisible() == true || m_debugWindow) {
         m_buttonConfig->buttonStateChanged();
     }
 
     static QElapsedTimer timer;
-    static bool change = false;
 
-    if (!change)
-    {
+    if (timer.isValid() == false) {
         timer.start();
-        change = true;
     }
-    else if (timer.elapsed() > 17)    // обновление раз в 17мс(~60fps), мб сделать дефайн в герцах
+    else if (timer.elapsed() > 17)    // update UI every 17ms(~60fps)
     {
-        // optimization
-        if(ui->tab_LED->isVisible() == true){
+        if(ui->tab_LED->isVisible() == true) {
             m_ledConfig->setLedsState();
         }
-        if(ui->tab_AxesConfig->isVisible() == true){
+        if(ui->tab_AxesConfig->isVisible() == true) {
             m_axesConfig->axesValueChanged();
         }
-        if(ui->tab_AxesCurves->isVisible() == true){
+        if(ui->tab_AxesCurves->isVisible() == true) {
             m_axesCurvesConfig->updateAxesCurves();
         }
-        change = false;
+        timer.restart();
     }
     // debug info
-    if (m_debugWindow){
+    if (m_debugWindow) {
         m_debugWindow->devicePacketReceived();
     }
 

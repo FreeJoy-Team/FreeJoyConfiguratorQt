@@ -42,7 +42,8 @@ private slots:
     void showConnectDeviceInfo();
     void hideConnectDeviceInfo();
     void flasherConnected();
-    void getParamsPacket(uint8_t *buffer);
+    //void getParamsPacket(uint8_t *buffer);
+    void getParamsPacket(bool firmwareCompatible);
 
     void configReceived(bool success);
     void configSent(bool success);
@@ -85,8 +86,6 @@ private:
 
     QThread *m_thread;
     HidDevice *m_hidDeviceWorker;
-    //QScopedPointer<QThread> thread;
-    //QScopedPointer<HidDevice> worker;
 
     QThread *m_threadGetSendConfig;
 
@@ -101,6 +100,8 @@ private:
 
     DebugWindow *m_debugWindow = nullptr;
     bool m_debugIsEnable;
+
+    bool m_deviceChanged;
 
     QString m_buttonDefaultStyle;
 
