@@ -49,19 +49,19 @@
     </message>
     <message>
         <source>Styles</source>
-        <translation>Стили</translation>
+        <translation type="vanished">Стили</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation>Тёмный</translation>
+        <translation type="vanished">Тёмный</translation>
     </message>
     <message>
         <source>White</source>
-        <translation>Белый</translation>
+        <translation type="vanished">Белый</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Стандартный</translation>
+        <translation type="vanished">Стандартный</translation>
     </message>
     <message>
         <source>Languages</source>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Loading... Please wait</source>
-        <translation>Загрузка... Подождите</translation>
+        <translation type="vanished">Загрузка... Подождите</translation>
     </message>
     <message>
         <source> ms</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Load default config on startup</source>
-        <translation>Стандартный конфиг при запуске</translation>
+        <translation type="vanished">Стандартный конфиг при запуске</translation>
     </message>
     <message>
         <source>About</source>
@@ -121,11 +121,11 @@
     </message>
     <message>
         <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
-        <translation>&lt;br&gt;Собрано с Qt %1 (%2)&lt;br&gt;Исходный код доступен по GPLv3 на &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</translation>
+        <translation type="vanished">&lt;br&gt;Собрано с Qt %1 (%2)&lt;br&gt;Исходный код доступен по GPLv3 на &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;Check &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;our wiki &lt;/a&gt;for detailed instructions.</source>
-        <translation>&lt;br&gt;Посетите &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;наше вики &lt;/a&gt;для подробных инструкций.</translation>
+        <translation type="vanished">&lt;br&gt;Посетите &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot; href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;наше вики &lt;/a&gt;для подробных инструкций.</translation>
     </message>
     <message>
         <source>About FreeJoyQt</source>
@@ -149,7 +149,29 @@
     </message>
     <message>
         <source>Sometimes Windows does not update the name in gaming devices and needs to be removed from the registry. This happens automatically when the config is written, but manual deletion may be required when the device is disconnected.</source>
-        <translation>Иногда Windows не обновляет имя в игровых устройствах, и его необходимо удалить в реестре. Это происходит автоматически при записи конфига, но может потребоваться ручное удаление при отклоючённом устройстве.</translation>
+        <translation type="vanished">Иногда Windows не обновляет имя в игровых устройствах, и его необходимо удалить в реестре. Это происходит автоматически при записи конфига, но может потребоваться ручное удаление при отклоючённом устройстве.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some values may not work on some operating systems(PID 5750 on Ubuntu, for example). After choosing the wrong value, the controller needs to be reflashed with ST-link/UART.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Некоторые значения могут не работать в вашей операционной системе(например PID 5750 не работает в  Ubuntu). После выбора неверного значения, контроллер потребуется перепрошить с помощью ST-link/UART.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sometimes Windows does not update the name in gaming devices and needs to be removed from the registry. This happens automatically when the config is written, but manual deletion may be required when the device is disconnected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Иногда Windows не обновляет имя в игровых устройствах и его приходится удалять из реестра. Это делается автоматически во время записи конфигурации, но иногда требуется ручное удаление с отключённым устройством.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;
+                                href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
+        <translation>&lt;br&gt;Собрано с Qt %1 (%2)&lt;br&gt;Исходный код доступен по GPLv3 на &lt;a style=&quot;color: #03A9F4; text-decoration:none;
+                                href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Check &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot;
+                            href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;our wiki &lt;/a&gt;
+                            for detailed instructions.</source>
+        <translation>&lt;br&gt;Посетите &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot;
+                            href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;наше вики &lt;/a&gt;
+                            для подробных инструкций.</translation>
     </message>
 </context>
 <context>
@@ -693,11 +715,15 @@
     </message>
     <message>
         <source>Press a physical button for assigning it to a logical one.</source>
-        <translation>Нажмите физическую кнопку, чтобы назначить её логической кнопке.</translation>
+        <translation type="vanished">Нажмите физическую кнопку, чтобы назначить её логической кнопке.</translation>
     </message>
     <message>
         <source>Automatically set physical button when pressed</source>
         <translation>Автоматически устанавливать физическую кнопку при нажатии</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press a physical button for assigning it to a logical one.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите физическую кнопку, чтобы назначить её логической кнопке.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -756,7 +782,7 @@
     </message>
     <message>
         <source>Toggle switch</source>
-        <translation>Тумблер</translation>
+        <translation type="vanished">Тумблер</translation>
     </message>
     <message>
         <source>Toggle switch ON</source>
@@ -874,12 +900,31 @@
         <source>-</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Toggle switch OFF</source>
+        <translation>Тумблер Выкл</translation>
+    </message>
 </context>
 <context>
     <name>ButtonPhysical</name>
     <message>
         <source>Form</source>
         <translation>Форма</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigToFile</name>
+    <message>
+        <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
+        <translation>Версия прошивки в файле конфигурации не совпадает с версией конфигуратора. Проверьте настройки перед записью конфига.</translation>
+    </message>
+    <message>
+        <source>Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!</source>
+        <translation>Пины B8, B9 сброшены! В этой версии I2C перенесён с пинов B8, B9 на пины B10, B11, проверьте их!</translation>
+    </message>
+    <message>
+        <source>Firmware version!</source>
+        <translation>Версия прошивки!</translation>
     </message>
 </context>
 <context>
@@ -1345,11 +1390,11 @@ g</source>
     </message>
     <message>
         <source>devices connected</source>
-        <translation>устр. подключено</translation>
+        <translation type="vanished">устр. подключено</translation>
     </message>
     <message>
         <source>device connected</source>
-        <translation>устр. подключено</translation>
+        <translation type="vanished">устр. подключено</translation>
     </message>
     <message>
         <source> Axis Config </source>
@@ -1369,15 +1414,15 @@ g</source>
     </message>
     <message>
         <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
-        <translation>Версия прошивки в файле конфигурации не совпадает с версией конфигуратора. Проверьте настройки перед записью конфига.</translation>
+        <translation type="vanished">Версия прошивки в файле конфигурации не совпадает с версией конфигуратора. Проверьте настройки перед записью конфига.</translation>
     </message>
     <message>
         <source>Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!</source>
-        <translation>Пины B8, B9 сброшены! В этой версии I2C перенесён с пинов B8, B9 на пины B10, B11, проверьте их!</translation>
+        <translation type="vanished">Пины B8, B9 сброшены! В этой версии I2C перенесён с пинов B8, B9 на пины B10, B11, проверьте их!</translation>
     </message>
     <message>
         <source>Firmware version!</source>
-        <translation>Версия прошивки!</translation>
+        <translation type="vanished">Версия прошивки!</translation>
     </message>
     <message>
         <source>2</source>
@@ -1390,6 +1435,10 @@ g</source>
     <message>
         <source>Slider 2</source>
         <translation type="vanished">Слайдер 2</translation>
+    </message>
+    <message>
+        <source>Incompatible Firmware</source>
+        <translation>Несовмест. прошивка</translation>
     </message>
 </context>
 <context>
@@ -1687,6 +1736,37 @@ g</source>
     <message>
         <source>Form</source>
         <translation type="obsolete">Форма</translation>
+    </message>
+</context>
+<context>
+    <name>SelectDefCfg</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Current file:</source>
+        <translation>Текущий файл:</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Loading selected config file on startup application.</source>
+        <translation>Загружать выбранный конфиг при запуске приложения.</translation>
+    </message>
+    <message>
+        <source>Default config file path</source>
+        <translation>Пусть стандартного конфига</translation>
+    </message>
+    <message>
+        <source>Open Config</source>
+        <translation>Открыть конфиг</translation>
+    </message>
+    <message>
+        <source>Config Files (*.cfg)</source>
+        <translation>Файл конфига (*.cfg)</translation>
     </message>
 </context>
 <context>

@@ -8,15 +8,15 @@
 #include "hiddevice.h"
 #include "reportconverter.h"
 
-#include "widgets/advancedsettings.h"
-#include "widgets/axesconfig.h"
-#include "widgets/axescurvesconfig.h"
-#include "widgets/buttonconfig.h"
-#include "widgets/debugwindow.h"
-#include "widgets/encodersconfig.h"
-#include "widgets/ledconfig.h"
-#include "widgets/pinconfig.h"
-#include "widgets/shiftregistersconfig.h"
+#include "advancedsettings.h"
+#include "axesconfig.h"
+#include "axescurvesconfig.h"
+#include "buttonconfig.h"
+#include "debugwindow.h"
+#include "encodersconfig.h"
+#include "ledconfig.h"
+#include "pinconfig.h"
+#include "shiftregistersconfig.h"
 #include "switchbutton.h"
 
 QT_BEGIN_NAMESPACE
@@ -58,8 +58,6 @@ private slots:
 
     void loadDefaultConfig();
 
-    void interfaceStyleChanged(bool isDark);
-
     void on_pushButton_ResetAllPins_clicked();
 
     void on_pushButton_ReadConfig_clicked();
@@ -79,7 +77,7 @@ private slots:
 
     void on_pushButton_Wiki_clicked();
 
-    void styleSwitched(int index);
+    void themeChanged(bool dark);
 
 private:
     Ui::MainWindow *ui;
@@ -105,14 +103,10 @@ private:
 
     QString m_buttonDefaultStyle;
 
-    void readFromConfig();
-    void writeToConfig();
-    void oldConfigHandler();
+    void UiReadFromConfig();
+    void UiWriteToConfig();
 
     void loadAppConfig();
     void saveAppConfig();
-
-    void loadDeviceConfigFromFile(QSettings *deviceSettings);
-    void saveDeviceConfigToFile(QSettings *deviceSettings);
 };
 #endif // MAINWINDOW_H

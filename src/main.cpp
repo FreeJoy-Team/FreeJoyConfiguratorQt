@@ -5,12 +5,15 @@
 #include <QElapsedTimer>
 #include <QFile>
 #include <QTextStream>
+#include <QStyleFactory>
+#include <QTimer>
+#include "infolabel.h"
 
 // global environment
 #include "global.h"
 GlobalEnvironment gEnv;
 #include "deviceconfig.h"
-#include <QTimer>
+
 // Get the default Qt message handler.
 static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(nullptr);
 
@@ -27,6 +30,7 @@ void CustomMessageHandler(QtMsgType type, const QMessageLogContext &context, con
     (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
 }
 
+
 int main(int argc, char *argv[])
 {
     #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -39,6 +43,8 @@ int main(int argc, char *argv[])
     QElapsedTimer time;
     time.start();
 
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
+    QApplication::setStyle(new InfoProxyStyle(qApp->style()));
     QApplication a(argc, argv);
 
     // global
@@ -56,12 +62,9 @@ int main(int argc, char *argv[])
 
     // set font size
     gEnv.pAppSettings->beginGroup("FontSettings");
-    QApplication::setFont(QFont("MS Shell Dlg 2", gEnv.pAppSettings->value("FontSize", "8").toInt()));
-    gEnv.pAppSettings->endGroup();
-
-    // set styleSheet
-    gEnv.pAppSettings->beginGroup("StyleSettings");
-    QString style = gEnv.pAppSettings->value("StyleSheet", "default").toString();
+    QFont defaultFont = QApplication::font();
+    defaultFont.setPointSize(gEnv.pAppSettings->value("FontSize", "8").toInt());
+    qApp->setFont(defaultFont);
     gEnv.pAppSettings->endGroup();
 
     // load language settings
@@ -88,42 +91,6 @@ int main(int argc, char *argv[])
     appSettings.endGroup();
 
     MainWindow w;
-
-    // slightly increased startup(+30-50ms) but
-    // w.setStyleSheet(ts.readAll());  --  x7 faster style switch. details in advancedsettings.cpp AdvancedSettings::SetStyle()
-    if (style == "default")
-    {
-        QFile f(":/styles/default.qss");
-        if (!f.exists()) {
-            qDebug() << "Unable to set stylesheet, file not found\n";
-        } else {
-            f.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&f);
-            //w.setStyleSheet(ts.readAll());
-            // we need set default styleSheet only for a small amount widgets
-            // if i use w.setStyleSheet(ts.readAll()); load time increases by 500ms!
-            // this function set styleSheet only for the necessary widgets
-            w.setDefaultStyleSheet();
-        }
-    } else if (style == "white") {
-        QFile f(":qss/qss.qss");
-        if (!f.exists()) {
-            qDebug() << "Unable to set stylesheet, file not found\n";
-        } else {
-            f.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&f);
-            w.setStyleSheet(ts.readAll());
-        }
-    } else if (style == "dark") {
-        QFile f(":qdarkstyle/style.qss");
-        if (!f.exists()) {
-            qDebug() << "Unable to set stylesheet, file not found\n";
-        } else {
-            f.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&f);
-            w.setStyleSheet(ts.readAll());
-        }
-    }
 
     qDebug() << "Application startup time =" << gEnv.pApp_start_time->elapsed() << "ms";
     w.show();

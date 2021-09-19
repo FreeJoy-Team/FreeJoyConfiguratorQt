@@ -23,49 +23,63 @@ WIN_DESKTOP
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH +="widgets" \
+    "widgets/adv-settings" \
+    "widgets/axes" \
+    "widgets/axes-curves" \
+    "widgets/buttons" \
+    "widgets/encoders" \
+    "widgets/led" \
+    "widgets/pins" \
+    "widgets/shift-reg"
+
 SOURCES += \
-    centered_cbox.cpp \
+    mainwindow_style.cpp \
+    widgets/centered_cbox.cpp \
+    configtofile.cpp \
     converter.cpp \
     deviceconfig.cpp \
     firmwareupdater.cpp \
     hiddevice.cpp \
     main.cpp \
     mainwindow.cpp \
-    mainwindow_conf.cpp \
     mousewheelguard.cpp \
     reportconverter.cpp \
     stm_main.c \
-    switchbutton.cpp \
-    widgets/advancedsettings.cpp \
-    widgets/axes.cpp \
-    widgets/axesconfig.cpp \
-    widgets/axescurves.cpp \
-    widgets/axescurvesconfig.cpp \
-    widgets/axescurvesplot.cpp \
-    widgets/axescurvesprofiles.cpp \
-    widgets/axesextended.cpp \
-    widgets/axestobuttonsslider.cpp \
-    widgets/buttonconfig.cpp \
-    widgets/buttonlogical.cpp \
-    widgets/buttonphysical.cpp \
-    widgets/currentconfig.cpp \
+    widgets/infolabel.cpp \
+    widgets/selectdefcfg.cpp \
+    widgets/switchbutton.cpp \
+    widgets/adv-settings/advancedsettings.cpp \
+    widgets/axes/axes.cpp \
+    widgets/axes/axesconfig.cpp \
+    widgets/axes-curves/axescurves.cpp \
+    widgets/axes-curves/axescurvesconfig.cpp \
+    widgets/axes-curves/axescurvesplot.cpp \
+    widgets/axes-curves/axescurvesprofiles.cpp \
+    widgets/axes/axesextended.cpp \
+    widgets/axes/axestobuttonsslider.cpp \
+    widgets/buttons/buttonconfig.cpp \
+    widgets/buttons/buttonlogical.cpp \
+    widgets/buttons/buttonphysical.cpp \
+    widgets/pins/currentconfig.cpp \
     widgets/debugwindow.cpp \
-    widgets/encoders.cpp \
-    widgets/encodersconfig.cpp \
-    widgets/flasher.cpp \
-    widgets/led.cpp \
-    widgets/ledconfig.cpp \
-    widgets/pincombobox.cpp \
-    widgets/pinconfig.cpp \
-    widgets/pinsbluepill.cpp \
-    widgets/pinscontrlite.cpp \
-    widgets/shiftregisters.cpp \
-    widgets/shiftregistersconfig.cpp
+    widgets/encoders/encoders.cpp \
+    widgets/encoders/encodersconfig.cpp \
+    widgets/adv-settings/flasher.cpp \
+    widgets/led/led.cpp \
+    widgets/led/ledconfig.cpp \
+    widgets/pins/pincombobox.cpp \
+    widgets/pins/pinconfig.cpp \
+    widgets/pins/pinsbluepill.cpp \
+    widgets/pins/pinscontrlite.cpp \
+    widgets/shift-reg/shiftregisters.cpp \
+    widgets/shift-reg/shiftregistersconfig.cpp
 
 HEADERS += \
-    centered_cbox.h \
+    widgets/centered_cbox.h \
     common_defines.h \
     common_types.h \
+    configtofile.h \
     converter.h \
     deviceconfig.h \
     firmwareupdater.h \
@@ -76,59 +90,62 @@ HEADERS += \
     mousewheelguard.h \
     reportconverter.h \
     stm_main.h \
-    switchbutton.h \
+    widgets/infolabel.h \
+    widgets/selectdefcfg.h \
+    widgets/switchbutton.h \
     version.h \
-    widgets/advancedsettings.h \
-    widgets/axes.h \
-    widgets/axesconfig.h \
-    widgets/axescurves.h \
-    widgets/axescurvesconfig.h \
-    widgets/axescurvesplot.h \
-    widgets/axescurvesprofiles.h \
-    widgets/axesextended.h \
-    widgets/axestobuttonsslider.h \
-    widgets/buttonconfig.h \
-    widgets/buttonlogical.h \
-    widgets/buttonphysical.h \
-    widgets/currentconfig.h \
+    widgets/adv-settings/advancedsettings.h \
+    widgets/axes/axes.h \
+    widgets/axes/axesconfig.h \
+    widgets/axes-curves/axescurves.h \
+    widgets/axes-curves/axescurvesconfig.h \
+    widgets/axes-curves/axescurvesplot.h \
+    widgets/axes-curves/axescurvesprofiles.h \
+    widgets/axes/axesextended.h \
+    widgets/axes/axestobuttonsslider.h \
+    widgets/buttons/buttonconfig.h \
+    widgets/buttons/buttonlogical.h \
+    widgets/buttons/buttonphysical.h \
+    widgets/pins/currentconfig.h \
     widgets/debugwindow.h \
-    widgets/encoders.h \
-    widgets/encodersconfig.h \
-    widgets/flasher.h \
-    widgets/led.h \
-    widgets/ledconfig.h \
-    widgets/pincombobox.h \
-    widgets/pinconfig.h \
-    widgets/pinsbluepill.h \
-    widgets/pinscontrlite.h \
-    widgets/shiftregisters.h \
-    widgets/shiftregistersconfig.h
+    widgets/encoders/encoders.h \
+    widgets/encoders/encodersconfig.h \
+    widgets/adv-settings/flasher.h \
+    widgets/led/led.h \
+    widgets/led/ledconfig.h \
+    widgets/pins/pincombobox.h \
+    widgets/pins/pinconfig.h \
+    widgets/pins/pinsbluepill.h \
+    widgets/pins/pinscontrlite.h \
+    widgets/shift-reg/shiftregisters.h \
+    widgets/shift-reg/shiftregistersconfig.h
 
 FORMS += \
     mainwindow.ui \
-    widgets/advancedsettings.ui \
-    widgets/axes.ui \
-    widgets/axesconfig.ui \
-    widgets/axescurves.ui \
-    widgets/axescurvesconfig.ui \
-    widgets/axesextended.ui \
-    widgets/axestobuttonsslider.ui \
-    widgets/buttonconfig.ui \
-    widgets/buttonlogical.ui \
-    widgets/buttonphysical.ui \
-    widgets/currentconfig.ui \
+    widgets/adv-settings/advancedsettings.ui \
+    widgets/axes/axes.ui \
+    widgets/axes/axesconfig.ui \
+    widgets/axes-curves/axescurves.ui \
+    widgets/axes-curves/axescurvesconfig.ui \
+    widgets/axes/axesextended.ui \
+    widgets/axes/axestobuttonsslider.ui \
+    widgets/buttons/buttonconfig.ui \
+    widgets/buttons/buttonlogical.ui \
+    widgets/buttons/buttonphysical.ui \
+    widgets/pins/currentconfig.ui \
     widgets/debugwindow.ui \
-    widgets/encoders.ui \
-    widgets/encodersconfig.ui \
-    widgets/flasher.ui \
-    widgets/led.ui \
-    widgets/ledconfig.ui \
-    widgets/pincombobox.ui \
-    widgets/pinconfig.ui \
-    widgets/pinsbluepill.ui \
-    widgets/pinscontrlite.ui \
-    widgets/shiftregisters.ui \
-    widgets/shiftregistersconfig.ui
+    widgets/encoders/encoders.ui \
+    widgets/encoders/encodersconfig.ui \
+    widgets/adv-settings/flasher.ui \
+    widgets/led/led.ui \
+    widgets/led/ledconfig.ui \
+    widgets/pins/pincombobox.ui \
+    widgets/pins/pinconfig.ui \
+    widgets/pins/pinsbluepill.ui \
+    widgets/pins/pinscontrlite.ui \
+    widgets/selectdefcfg.ui \
+    widgets/shift-reg/shiftregisters.ui \
+    widgets/shift-reg/shiftregistersconfig.ui
 
 TRANSLATIONS += \
     FreeJoyQt_ru.ts \

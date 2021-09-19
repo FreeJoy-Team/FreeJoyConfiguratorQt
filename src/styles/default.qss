@@ -1,0 +1,22 @@
+  QGroupBox {
+     background: none;
+     border: 1px solid #414246;
+     border-radius: 3px;
+     margin-top: 2ex;
+     padding: 6px 0px 0px 0px ;
+ }
+ 
+  QGroupBox::title 
+{
+	color:#ffffff;
+    left:10px;
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: -2px 2px 0px 2px;
+    background: none;
+ }
+ 
+ QComboBox:disabled
+{
+	background-color: #28292d;
+}

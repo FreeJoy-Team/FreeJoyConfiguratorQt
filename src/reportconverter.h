@@ -5,18 +5,13 @@
 
 #define BUFFERSIZE 64
 
-class ReportConverter
+namespace ReportConverter
 {
-public:
-    static int paramReport(uint8_t *paramsBuffer);
-    static void resetReport();
+    int paramReport(uint8_t *paramsBuffer);
+    void resetReport();
 
-    static void getConfigFromDevice(uint8_t *hidBuffer);
-    static uint8_t *sendConfigToDevice(uint8_t requestConfigNumber);
-
-private:
-    static uint8_t buffer[BUFFERSIZE];
-    static int8_t firmwareCompatible;
-};
+    void getConfigFromDevice(uint8_t *hidBuffer);
+    void sendConfigToDevice(uint8_t *hidBuf, uint8_t requestConfigNumber);
+}
 
 #endif // REPORTCONVERTER_H

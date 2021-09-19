@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>FreeJoyQt_ru.qm</file>
         <file>FreeJoyQt_zh_CN.qm</file>
-        <file>Images/BluePill_pic2.jpg</file>
         <file>Images/Exponent.png</file>
         <file>Images/ExponentInvert.png</file>
         <file>Images/linear.png</file>
@@ -22,9 +21,11 @@
         <file>Images/ST_wiki_dark.png</file>
         <file>Images/moon.png</file>
         <file>Images/sun.png</file>
-        <file>Images/cloud.png</file>
         <file>Images/china.png</file>
         <file>Images/eng.png</file>
         <file>Images/rus.png</file>
+        <file>Images/warning.png</file>
+        <file>Images/folder.png</file>
+        <file>Images/info_icon.png</file>
     </qresource>
 </RCC>

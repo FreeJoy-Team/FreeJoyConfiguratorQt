@@ -358,7 +358,8 @@ void HidDevice::writeConfigToDevice(uint8_t *buffer)
                     if (buffer[1] == configOutBuf[1] + 1)
                     {
                         configOutBuf[1] += 1;
-                        memcpy(configOutBuf, ReportConverter::sendConfigToDevice(configOutBuf[1]), BUFFERSIZE);
+                        ReportConverter::sendConfigToDevice(configOutBuf, configOutBuf[1]);
+                        memcpy(configOutBuf, configOutBuf, BUFFERSIZE);
 
                         hid_write(m_paramsRead, configOutBuf, BUFFERSIZE);
                         reportCount++;

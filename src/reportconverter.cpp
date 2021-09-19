@@ -3,8 +3,14 @@
 #include "deviceconfig.h"
 #include "global.h"
 
-uint8_t ReportConverter::buffer[BUFFERSIZE]{};
-int8_t ReportConverter::firmwareCompatible = -1;
+namespace ReportConverter
+{
+    int8_t firmwareCompatible = -1;
+//    namespace
+//    {
+//        int8_t firmwareCompatible = -1;
+//    }
+}
 
 int ReportConverter::paramReport(uint8_t *paramsBuf)
 {
@@ -48,7 +54,7 @@ void ReportConverter::getConfigFromDevice(uint8_t *hidBuf)
     }
 }
 
-uint8_t *ReportConverter::sendConfigToDevice(uint8_t requestConfigNumber)
+void ReportConverter::sendConfigToDevice(uint8_t *hidBuf, uint8_t requestConfigNumber)
 {
     uint8_t cfg_count = sizeof(dev_config_t) / 62;
     uint8_t last_cfg_size = sizeof(dev_config_t) % 62;
@@ -56,14 +62,12 @@ uint8_t *ReportConverter::sendConfigToDevice(uint8_t requestConfigNumber)
         cfg_count++;
     }
 
-    buffer[0] = REPORT_ID_CONFIG_OUT;
-    buffer[1] = requestConfigNumber;
+    hidBuf[0] = REPORT_ID_CONFIG_OUT;
+    hidBuf[1] = requestConfigNumber;
 
     if (requestConfigNumber == cfg_count && last_cfg_size > 0) {
-        memcpy(&buffer[2], (uint8_t *)&(gEnv.pDeviceConfig->config) + 62*(requestConfigNumber - 1), last_cfg_size);
+        memcpy(&hidBuf[2], (uint8_t *)&(gEnv.pDeviceConfig->config) + 62*(requestConfigNumber - 1), last_cfg_size);
     } else {
-        memcpy(&buffer[2], (uint8_t *)&(gEnv.pDeviceConfig->config) + 62*(requestConfigNumber - 1), 62);
+        memcpy(&hidBuf[2], (uint8_t *)&(gEnv.pDeviceConfig->config) + 62*(requestConfigNumber - 1), 62);
     }
-
-    return buffer;
 }

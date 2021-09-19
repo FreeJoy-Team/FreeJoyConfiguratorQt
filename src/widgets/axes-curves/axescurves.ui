@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AxesCurves</class>
+ <widget class="QWidget" name="AxesCurves">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>755</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="layoutG_AxisCurve" rowstretch="0" columnstretch="0">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_Curve">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox#groupBox_Curve {
+	font-weight: bold;
+    font-size: 10pt;
+}
+QGroupBox#groupBox_Curve::title 
+{
+	subcontrol-position: top center;
+}</string>
+     </property>
+     <property name="title">
+      <string>Curve</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="3,0,0" columnstretch="1,0,0">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
+      <property name="horizontalSpacing">
+       <number>0</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>6</number>
+      </property>
+      <item row="2" column="0" colspan="3">
+       <layout class="QHBoxLayout" name="layoutH_CurveButton">
+        <property name="spacing">
+         <number>3</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="pushButton_Linear">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Linear</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton:hover {
+	border: 1px solid;
+	border-color: rgb(45,160,250);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>170</width>
+            <height>104</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_Exponent">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Exponent</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton:hover {
+	border: 1px solid;
+	border-color: rgb(45,160,250);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>170</width>
+            <height>104</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_ExponentInvert">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Exponent inverted</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton:hover {
+	border: 1px solid;
+	border-color: rgb(45,160,250);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>170</width>
+            <height>104</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_Shape">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>174</width>
+            <height>108</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Shape</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton:hover {
+	border: 1px solid;
+	border-color: rgb(45,160,250);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>170</width>
+            <height>104</height>
+           </size>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QFrame" name="frame">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="layoutV_Curve">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="AxesCurvesPlot" name="widget_AxesCurvesPlot" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AxesCurvesPlot</class>
+   <extends>QWidget</extends>
+   <header>axescurvesplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
