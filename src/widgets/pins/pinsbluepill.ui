@@ -398,7 +398,7 @@ color: rgb(0, 0, 0);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -419,7 +419,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -440,7 +440,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -461,7 +461,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -482,7 +482,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -874,7 +874,7 @@ color: rgb(0, 0, 0);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -895,7 +895,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -916,7 +916,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -937,7 +937,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -958,7 +958,7 @@ background-color: rgba(105, 105, 105, 10);</string>
        <property name="styleSheet">
         <string notr="true">border: 1px solid;
 border-color: rgba(124, 124, 124, 130);
-background-color: rgba(105, 105, 105, 10);</string>
+background-color: rgba(105, 105, 105, 20);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>

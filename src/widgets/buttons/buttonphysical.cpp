@@ -6,17 +6,19 @@ const QString ButtonPhysical::m_whiteStyleOff = QStringLiteral(R"(
         border-radius: 13px;
         min-height: 26px;
         min-width: 26px;
-        background-color: rgb(170, 0, 0);
+        background-color: rgb(170, 60, 60);
         color: rgb(220, 221, 222);
     }
 )");
 
+//background-color: rgb(170, 70, 40); // background-color: rgb(90, 0, 0);
+//border: 1px solid #4b4b4b;
 const QString ButtonPhysical::m_darkStyleOff = QStringLiteral(R"(
     QLabel {
         border-radius: 13px;
         min-height: 26px;
         min-width: 26px;
-        background-color: rgb(90, 0, 00);
+        background-color: rgb(90, 90, 90);
         color: rgb(220, 221, 222);
     }
 )");

@@ -14,12 +14,9 @@
 // this trick skips groupBox_LogicalButtons. If anyone has any ideas on how to do this better, please tell me
 void MainWindow::themeChanged(bool dark)
 {
-    QElapsedTimer tim;
-    tim.start();
     // ЕБАНЫЙ БЛЯДЬ groupBox_LogicalButtons СУКА НАХУЙ!! В НЁМ ДОХУИЩЕ ЕБУЧИХ ЭЛЕМЕНТОВ И СТАЙЛЁБАНЫЕШИТЫ ПРИМЕНЯЮТСЯ ХУЙЛИАРД ЛЕТ
     // Я УЖЕ НЕ ЗНАЮ КАК ИЗЪЕБНУТЬСЯ ЧТОБЫ УСКОРИТЬ ЭТО ДЕРЬМО
     static QList<QGroupBox *> groupBoxes;
-    static QList<QCheckBox *> checkBoxes;
 
     QString styleName;
     ui->tabWidget->setDocumentMode(true);
@@ -30,12 +27,7 @@ void MainWindow::themeChanged(bool dark)
             groupBoxes.append(child);
         }
     }
-    if (checkBoxes.isEmpty()) {
-        for (auto &child : window()->findChildren<QCheckBox *>()) {
-            checkBoxes.append(child);
-        }
-    }
-qDebug()<<"child"<<tim.restart();
+
     if (dark == false) {
         for (int i = 0; i < groupBoxes.size(); ++i) {
             if (groupBoxes[i]->objectName() == QStringLiteral("groupBox_LogicalButtons") ||
@@ -112,7 +104,7 @@ qDebug()<<"child"<<tim.restart();
 
         qApp->setPalette(QPalette());
         QPalette pal(QColor(240, 240, 240));
-        pal.setColor(QPalette::Disabled, QPalette::Button, QColor(220, 220, 220));
+        pal.setColor(QPalette::Disabled, QPalette::Button, QColor(210, 210, 210));
         pal.setColor(QPalette::Dark, QColor(216, 216, 216));     // qframe
         qApp->setPalette(pal);
 
@@ -225,9 +217,7 @@ qDebug()<<"child"<<tim.restart();
 
         styleName = "dark";
     }
-qDebug()<<"style"<<tim.restart();
     gEnv.pAppSettings->beginGroup("StyleSettings");
     gEnv.pAppSettings->setValue("StyleSheet", styleName);
     gEnv.pAppSettings->endGroup();
-qDebug()<<"save"<<tim.restart();
 }

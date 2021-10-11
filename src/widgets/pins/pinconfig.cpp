@@ -271,6 +271,7 @@ void PinConfig::setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, 
     }
 }
 
+// PA8 should only works if SPI is not selected
 void PinConfig::blockPA8PWM(int currentDeviceEnum, int previousDeviceEnum)
 {
     static int spiCount = 0;

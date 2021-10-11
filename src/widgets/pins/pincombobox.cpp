@@ -22,8 +22,6 @@ PinComboBox::PinComboBox(uint pinNumber, QWidget *parent) : // пины - пер
     m_isCall_Interaction = false;
     m_isInteracts = false;
 
-    m_styleSheetDefault = ui->comboBox_PinsType->styleSheet();       // useless
-
     initializationPins(m_pinNumber);
 
     connect(ui->comboBox_PinsType, SIGNAL(currentIndexChanged(int)),
@@ -96,7 +94,6 @@ void PinComboBox::resetPin()
     {
         ui->comboBox_PinsType->setEnabled(true);
         m_isInteracts = false;
-        ui->comboBox_PinsType->setStyleSheet(m_styleSheetDefault);
     }
 }
 
@@ -108,15 +105,21 @@ void PinComboBox::setIndex_iteraction(int index, int senderIndex)
         {
             ui->comboBox_PinsType->setEnabled(false);
         }
+        // change text color
+        QPalette pal = ui->comboBox_PinsType->palette();
+        pal.setColor(QPalette::ButtonText, m_pinTypes[senderIndex].color);
+        ui->comboBox_PinsType->setPalette(pal);
+
         m_isInteracts = true;
-        ui->comboBox_PinsType->setStyleSheet(m_pinTypes[senderIndex].styleSheet);
         ui->comboBox_PinsType->setCurrentIndex(index);
     }
     else if (m_isInteracts == true)// && interact_count_ <= 0)
     {
         ui->comboBox_PinsType->setEnabled(true);
         m_isInteracts = false;
-        ui->comboBox_PinsType->setStyleSheet(m_styleSheetDefault);
+        // reset color
+        ui->comboBox_PinsType->setPalette(palette());
+
         ui->comboBox_PinsType->setCurrentIndex(index);
     }
 }
@@ -188,13 +191,25 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
             }
         }
     }
+    // change items text color // i = 1 -skip "NOT_USED"
+    for (int i = 1; i < m_pinTypesIndex.size(); ++i) {
+        ui->comboBox_PinsType->setItemData(i, QBrush(m_pinTypes[m_pinTypesIndex[i]].color), Qt::ForegroundRole);
+    }
 }
 
 void PinComboBox::indexChanged(int index)
 {
     if(m_pinTypesIndex.empty() == false && m_isInteracts == false)
     {
-        ui->comboBox_PinsType->setStyleSheet(m_pinTypes[m_pinTypesIndex[index]].styleSheet);      // временно?
+        // change text color
+        if (index == 0) {
+            ui->comboBox_PinsType->setPalette(palette());
+        } else {
+            QPalette pal = ui->comboBox_PinsType->palette();
+            pal.setColor(QPalette::ButtonText, m_pinTypes[m_pinTypesIndex[index]].color);
+            ui->comboBox_PinsType->setPalette(pal);
+        }
+
         int iteractionSize = sizeof(m_pinTypes->interaction) / sizeof(m_pinTypes->interaction[0]);
         int tmp = 0;
         for (int i = 0; i < iteractionSize; ++i) {
@@ -205,7 +220,6 @@ void PinComboBox::indexChanged(int index)
                 if (m_pinTypes[m_pinTypesIndex[index]].interaction[i] > 0)
                 {
                     m_isCall_Interaction = true;
-                    ui->comboBox_PinsType->setStyleSheet(m_pinTypes[m_pinTypesIndex[index]].styleSheet);          // ?????
                     for (int t = 0; t < 10; ++t)
                     {
                         if (m_pinTypes[m_pinTypesIndex[index]].interaction[t] > 0)
@@ -242,7 +256,6 @@ void PinComboBox::indexChanged(int index)
             else if (m_pinTypes[m_pinTypesIndex[index]].interaction[i] > 0)
             {
                 m_isCall_Interaction = true;
-                ui->comboBox_PinsType->setStyleSheet(m_pinTypes[m_pinTypesIndex[index]].styleSheet);        // ????
                 for (int k = 0; k < PIN_TYPE_COUNT; ++k) {
                     if(m_pinTypes[k].deviceEnumIndex == m_pinTypes[m_pinTypesIndex[index]].interaction[i]){
                         m_call_interaction = m_pinTypesIndex[index];

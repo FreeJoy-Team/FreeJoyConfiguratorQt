@@ -71,7 +71,7 @@ struct cBox
     int pinType[10];
     int pinExcept[10];
     int interaction[10];
-    QString styleSheet;
+    QColor color;
 };
 
 struct pins
@@ -136,7 +136,6 @@ private:
     bool m_isInteracts;
     uint m_interactCount;
     int m_call_interaction;
-    QString m_styleSheetDefault;
 
     ////////////////////////////// СЛИШКОМ ЖИРНО СДЕЛАТЬ static!!///////////////////////
     const pins m_pinList[PINS_COUNT] = // каждый пин хранит по структуре. а жирно не будет?
@@ -183,142 +182,142 @@ private:
         {BUTTON_GND,     tr("Button Gnd"),      // device enum,   ui name   tr(need to translate)
         {ALL},                                  // add to (example: ALL - add to all comboboxes, PA_8 - add to PA_8 combobox
         {},                                     // except pins (example: add to - ALL, except - PA_8 = add everywhere except PA_8)
-        {}, {"color: rgb(150, 155, 55);"}},     // interaction with pins, style of interaction with other pins // color, background-color, border-color...
+        {}, {QColor(25, 130, 240)}},            // interaction with pins, style of interaction with other pins // color, background-color, border-color...
 
         {BUTTON_VCC,     tr("Button Vcc"),
         {ALL},
         {},
-        {}, {"color: rgb(170, 25, 25);"}},
+        {}, {QColor(170, 170, 0)}},
 
         {BUTTON_ROW,     tr("Button Row"),
         {ALL},
         {},
-        {}, {"color: rgb(25, 130, 220);"}},
+        {}, {QColor(120, 130, 250)}},
 
         {BUTTON_COLUMN,  tr("Button Column"),
         {ALL},
         {},
-        {}, {"color: rgb(120, 130, 250);"}},
+        {}, {QColor(120, 130, 250)}},
 
         {SHIFT_REG_LATCH,tr("ShiftReg LATCH"),
         {ALL},
         {},
-        {}, {"color: rgb(53, 153, 120);"}},
+        {}, {QColor(105, 180, 55)}},
 
         {SHIFT_REG_DATA, tr("ShiftReg DATA"),
         {ALL},
         {},
-        {}, {"color: rgb(53, 153, 120);"}},
+        {}, {QColor(105, 180, 55)}},
 
         {SHIFT_REG_CLK, tr("ShiftReg CLK"),
         {ALL},
         {},
-        {}, {"color: rgb(53, 153, 120);"}},
+        {}, {QColor(105, 180, 55)}},
 
         {TLE5011_CS,     tr("TLE5011 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI},  // check  PB_6 - not work //////////// NEED FIX !!!!!!!!!!!!!!!!!!!
-        {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {QColor(53, 153, 120)}},
 
         {TLE5012_CS,     tr("TLE5012B CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI},
-        {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, TLE5011_GEN}, {QColor(53, 153, 120)}},
 
         {MCP3201_CS,     tr("MCP3201 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {QColor(53, 153, 120)}},
 
         {MCP3202_CS,     tr("MCP3202 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {QColor(53, 153, 120)}},
 
         {MCP3204_CS,     tr("MCP3204 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {QColor(53, 153, 120)}},
 
         {MCP3208_CS,     tr("MCP3208 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {QColor(53, 153, 120)}},
 
         {MLX90393_CS,    tr("MLX90393 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {QColor(53, 153, 120)}},
 
         {MLX90363_CS,    tr("MLX90363 CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {QColor(53, 153, 120)}},
 
         {AS5048A_CS,    tr("AS5048A CS"),
         {ALL},
         {SPI1_SCK, SPI1_MOSI, SPI1_MISO},
-        {SPI_SCK, SPI_MOSI, SPI_MISO}, {"color: rgb(53, 153, 120);"}},
+        {SPI_SCK, SPI_MOSI, SPI_MISO}, {QColor(53, 153, 120)}},
 
         {LED_SINGLE,     tr("LED Single"),
         {ALL},
         {},
-        {}, {"color: rgb(155, 0, 200);"}},
+        {}, {QColor(200, 150, 70)}},
 
         {LED_ROW,        tr("LED Row"),
         {ALL},
         {},
-        {}, {"color: rgb(155, 0, 120);"}},
+        {}, {QColor(200, 130, 70)}},
 
         {LED_COLUMN,     tr("LED Column"),
         {ALL},
         {},
-        {}, {"color: rgb(190, 20, 120);"}},
+        {}, {QColor(200, 130, 70)}},
 
         {LED_PWM,        tr("LED PWM"),
         {PA_8, PB_0, PB_1, PB_4},
         {},
-        {}, {"color: rgb(200, 0, 180);"}},
+        {}, {QColor(200, 90, 70)}},
 
         {AXIS_ANALOG,    tr("Axis Analog"),
         {ANALOG_IN},
         {},
-        {}, {"color: rgb(0, 155, 0);"}},
+        {}, {QColor(0, 160, 0)}},
 
         {FAST_ENCODER,   tr("Fast Encoder"),
         {PA_8, PA_9},
         {},
-        {}, {"color: rgb(200, 10, 10);"}},
+        {}, {QColor(55, 150, 25)}},
 
         {SPI_SCK,        tr("SPI SCK"),
         {SPI1_SCK},
         {},
-        {}, {"color: rgb(53, 153, 120);"}},
+        {}, {QColor(53, 153, 120)}},
 
         {SPI_MOSI,       tr("SPI MOSI"),
         {SPI1_MOSI},
         {},
-        {}, {"color: rgb(53, 153, 120);"}},
+        {}, {QColor(53, 153, 120)}},
 
         {SPI_MISO,       tr("SPI MISO"),
         {SPI1_MISO},
         {},
-        {}, {"color: rgb(53, 153, 120);"}},
+        {}, {QColor(53, 153, 120)}},
 
         {TLE5011_GEN,    tr("TLE5011 GEN"),
         {PB_6},
         {},
-        {}, {"color: rgb(53, 153, 120);"}},
+        {}, {QColor(53, 153, 120)}},
 
         {I2C_SCL,        tr("I2C SCL"),
         {I2C2_SCL},
         {},
-        {I2C_SDA}, {"color: rgb(53, 53, 255);"}},
+        {I2C_SDA}, {QColor(90, 155, 140)}},
 
         {I2C_SDA,        tr("I2C SDA"),
         {I2C2_SDA},
         {},
-        {I2C_SCL}, {"color: rgb(53, 53, 255);"}},
+        {I2C_SCL}, {QColor(90, 155, 140)}},
     };
 };
 
