@@ -230,7 +230,7 @@ void Axes::on_checkBox_ShowExtend_stateChanged(int state)
 {
     // QTimer::singleShot(10 - antiblink
     if (state == 2) { // 2 = true
-        m_axesExtend->setMinimumHeight(110);
+        m_axesExtend->setMinimumHeight(115);
         QTimer::singleShot(10, this, [this] {
             m_axesExtend->setVisible(true);
         });

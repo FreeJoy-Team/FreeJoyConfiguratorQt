@@ -11,6 +11,8 @@ namespace Ui {
 class AxesConfig;
 }
 
+class QCheckBox;
+
 class AxesConfig : public QWidget
 {
     Q_OBJECT
@@ -35,6 +37,7 @@ public slots:
     void addOrDeleteMainSource(int sourceEnum, bool isAdd);
 private slots:
     void a2bCountCalc(int count, int previousCount);
+    void hideAxis(int index, bool hide);
     //    void axesValueChanged(int value);
 
 private:
@@ -42,6 +45,7 @@ private:
     int m_a2bButtonsCount;
 
     QList<Axes *> m_axesPtrList;
+    QList<QCheckBox *> m_hideChBoxes;
 };
 
 #endif // AXESCONFIG_H

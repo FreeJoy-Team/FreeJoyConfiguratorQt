@@ -173,6 +173,10 @@
                             href=&quot;https://github.com/FreeJoy-Team/FreeJoyWiki&quot;&gt;наше вики &lt;/a&gt;
                             для подробных инструкций.</translation>
     </message>
+    <message>
+        <source>Additional confirmation when &quot;Write config to Device&quot; button pressed</source>
+        <translation>Дополнительное подтверждение при нажатии кнопки &quot;Запись конфига&quot;</translation>
+    </message>
 </context>
 <context>
     <name>Axes</name>
@@ -266,6 +270,10 @@
     <message>
         <source>Form</source>
         <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Hidden axes:</source>
+        <translation>Скрытые оси:</translation>
     </message>
 </context>
 <context>
@@ -1439,6 +1447,14 @@ g</source>
     <message>
         <source>Incompatible Firmware</source>
         <translation>Несовмест. прошивка</translation>
+    </message>
+    <message>
+        <source>Confirmation</source>
+        <translation>Подтверждение</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to write the config?</source>
+        <translation>Вы действительно хотите записать конфиг?</translation>
     </message>
 </context>
 <context>

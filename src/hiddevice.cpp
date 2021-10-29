@@ -211,6 +211,9 @@ void HidDevice::processData()                   /////// bad code, I'll try to re
                     #endif
                     QThread::msleep(200);
                 }
+                else if (m_oldFirmwareSelected) {
+                    QThread::msleep(200);
+                }
             }
         }
     }
