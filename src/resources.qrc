@@ -11,13 +11,14 @@
         <file>Images/ST_wiki_dark.png</file>
         <file>Images/moon.png</file>
         <file>Images/sun.png</file>
-        <file>Images/china.png</file>
-        <file>Images/eng.png</file>
-        <file>Images/rus.png</file>
         <file>Images/warning.png</file>
         <file>Images/folder.png</file>
         <file>Images/info_icon.png</file>
         <file>Images/reset.png</file>
         <file>Images/setings.png</file>
+        <file>Images/flags/china.png</file>
+        <file>Images/flags/Germany.png</file>
+        <file>Images/flags/Russia.png</file>
+        <file>Images/flags/United_Kingdom.png</file>
     </qresource>
 </RCC>

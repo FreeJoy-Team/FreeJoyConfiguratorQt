@@ -161,9 +161,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    resources.qrc \
-    styles/qdarkstyle/style.qrc \
-    styles/white/qss.qrc
+    resources.qrc
 
 linux {
     QMAKE_LFLAGS += -no-pie
