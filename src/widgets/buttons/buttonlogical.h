@@ -20,7 +20,7 @@ class ButtonLogical : public QWidget
     Q_OBJECT
 
 public:
-    explicit ButtonLogical(int buttonNumber, QWidget *parent = nullptr);
+    explicit ButtonLogical(int buttonIndex, QWidget *parent = nullptr);
     ~ButtonLogical();
     void readFromConfig();
     void writeToConfig();
@@ -32,7 +32,7 @@ public:
 
     void setButtonState(bool setState);
 
-    void setLogicButton(int buttonIndex);
+    void setPhysicButton(int buttonIndex);
     void setAutoPhysBut(bool enabled);
     int currentFocus() const;
 

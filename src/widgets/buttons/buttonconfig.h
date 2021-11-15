@@ -40,9 +40,10 @@ signals:
 
 public slots:
     void setUiOnOff(int value);
+
 private slots:
     void functionTypeChanged(int index, int functionPreviousIndex, int buttonIndex);
-    void setLogicButton(int buttonIndex);
+    void setPhysicButton(int buttonIndex);
 
 #ifdef DYNAMIC_CREATION
 private slots:
@@ -58,8 +59,10 @@ private:
     Ui::ButtonConfig *ui;
     void physButtonsCreator(int count);
     QString m_defaultShiftStyle;
+
     int m_logicButtonInFocus;
     bool m_autoPhysButEnabled;
+
     bool m_isShifts_act;
     bool m_shift1_act;
     bool m_shift2_act;

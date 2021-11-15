@@ -7,12 +7,12 @@
 int ButtonLogical::m_currentFocus = -1;
 bool ButtonLogical::m_autoPhysButEnabled = false;
 
-ButtonLogical::ButtonLogical(int buttonNumber, QWidget *parent)
+ButtonLogical::ButtonLogical(int buttonIndex, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ButtonLogical)
 {
     ui->setupUi(this);
-    m_buttonIndex = buttonNumber;
+    m_buttonIndex = buttonIndex;
     m_functionPrevIndex = 0;
     m_currentState = false;
     m_debugState = false;
@@ -99,26 +99,20 @@ void ButtonLogical::editingOnOff(int value)
 
 void ButtonLogical::setButtonState(bool state)
 {
-    static QPalette default_palette;    ///////////////////////////////////////////////// ????????????????????????????
-    static QString default_style;    ///////////////////////////////////////////////// ????????????????????????????
-
     if (state != m_currentState) {
         setAutoFillBackground(true);
 
         if (state) {
-            default_palette = palette();
-            default_style = ui->label_LogicalButtonNumber->styleSheet(); // default_style ="" useless
+            QPalette pal(window()->palette());
+            pal.setColor(QPalette::Window, QColor(0, 128, 0));
+            setPalette(pal);
 
-            setPalette(QPalette(QPalette::Window, QColor(0, 128, 0)));
-            ui->label_LogicalButtonNumber->setStyleSheet(default_style
-                                                         + QStringLiteral("background-color: rgb(0, 128, 0);"));
             m_lastAct.start();
             m_currentState = state;
         } else {
             // sometimes state dont have time to render. e.g. encoder press time 10ms and monitor refresh time 17ms(60fps)
             if (m_lastAct.hasExpired(30)) {
                 setPalette(window()->palette());
-                ui->label_LogicalButtonNumber->setStyleSheet(default_style);
                 m_currentState = state;
             }
         }
@@ -127,18 +121,18 @@ void ButtonLogical::setButtonState(bool state)
     if (state != m_debugState) {
         if (state) {
             if (gEnv.pDebugWindow) {
-                gEnv.pDebugWindow->logicalButtonState(m_buttonIndex + 1, true);
+                gEnv.pDebugWindow->logicalButtonState(ui->label_LogicalButtonNumber->text().toInt(), true);
             }
         } else {
             if (gEnv.pDebugWindow) {
-                gEnv.pDebugWindow->logicalButtonState(m_buttonIndex + 1, false);
+                gEnv.pDebugWindow->logicalButtonState(ui->label_LogicalButtonNumber->text().toInt(), false);
             }
         }
         m_debugState = state;
     }
 }
 
-void ButtonLogical::setLogicButton(int buttonIndex)
+void ButtonLogical::setPhysicButton(int buttonIndex)
 {
     ui->spinBox_PhysicalButtonNumber->setValue(buttonIndex + 1); // +1 !!!!
 }
@@ -216,4 +210,3 @@ void ButtonLogical::writeToConfig()
     button->delay_timer = m_timerList[ui->comboBox_DelayTimerIndex->currentIndex()].deviceEnumIndex;
     button->press_timer = m_timerList[ui->comboBox_PressTimerIndex->currentIndex()].deviceEnumIndex;
 }
-

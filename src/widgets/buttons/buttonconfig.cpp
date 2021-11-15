@@ -152,12 +152,12 @@ void ButtonConfig::logicaButtonsCreator()
 }
 
 // set physical button for focused logical button
-void ButtonConfig::setLogicButton(int buttonIndex)
+void ButtonConfig::setPhysicButton(int buttonIndex)
 {
     if (m_autoPhysButEnabled) {
         int buttonInFocus = m_logicButtonPtrList[0]->currentFocus();
         if (buttonInFocus >= 0) {
-            m_logicButtonPtrList[buttonInFocus]->setLogicButton(buttonIndex);
+            m_logicButtonPtrList[buttonInFocus]->setPhysicButton(buttonIndex);
         }
     }
 }
@@ -190,7 +190,7 @@ void ButtonConfig::physButtonsCreator(int count)
         ui->layoutG_PhysicalButton->addWidget(physicalButtonWidget, row, column);
         m_PhysButtonPtrList.append(physicalButtonWidget);
         column++;
-        connect(physicalButtonWidget, &ButtonPhysical::physButtonPressed, this, &ButtonConfig::setLogicButton);
+        connect(physicalButtonWidget, &ButtonPhysical::physButtonPressed, this, &ButtonConfig::setPhysicButton);
     }
 }
 
