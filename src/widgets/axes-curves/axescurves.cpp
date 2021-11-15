@@ -1,116 +1,102 @@
 #include "axescurves.h"
 #include "ui_axescurves.h"
 #include <QTimer>
+#include <QKeyEvent>
 #include <cmath>
 #include "axes.h"
 
-AxesCurves::AxesCurves(int axisNumber, QWidget *parent)
+#include <QDebug>
+
+AxesCurves::AxesCurves(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::AxesCurves)
+    , m_ctrlActivated(false)
+    , m_lastSelectedIndex(-1)
 {
     ui->setupUi(this);
-    m_axisNumber = axisNumber;
-    m_currentProfile = 0;
-    ui->groupBox_Curve->setTitle(axesList()[m_axisNumber].guiName);
+    Q_ASSERT(sizeof(gEnv.pDeviceConfig->config.axis_config[0].curve_shape) == CURVE_PLOT_POINTS_COUNT);
 
-    connect(ui->widget_AxesCurvesPlot, SIGNAL(pointValueChanged(const int *, const int *)),
-            this, SLOT(pointValueChanged(const int *, const int *)));
+    connect(ui->widget_AxesCurvesPlot, SIGNAL(pointValueChanged(int, int)),
+            this, SLOT(pointValueChanged(int, int)));
+
+
+    // should be X-Y-Z-Rx-Ry-Rz-Slider1-Slider2 !!!
+    m_curvesList << ui->widget_CurveX << ui->widget_CurveY << ui->widget_CurveZ <<
+                    ui->widget_CurveRx << ui->widget_CurveRy << ui->widget_CurveRz <<
+                    ui->widget_CurveSlider1 << ui->widget_CurveSlider2;
+
+    for (int i = 0; i < m_curvesList.size(); ++i)
+    {
+        m_curvesList[i]->setProperty("index", i);
+        m_curvesList[i]->setAutoExclusive(true);
+        m_curvesList[i]->setCheckable(true);
+
+        connect(m_curvesList[i], &AxesCurvesButton::toggled, this, [this](bool checked){
+            if (checked) {
+                int index = sender()->property("index").toInt();
+                m_lastSelectedIndex = index;
+                ui->widget_AxesCurvesPlot->setPointValues(m_curvesList[index]->pointValues());
+                //ui->label_CurrentAxis->setText(axesList()[index].guiName);
+            }
+        });
+    }
+
+    ui->widget_CurveX->setChecked(true);
 }
 
 AxesCurves::~AxesCurves()
 {
     delete ui;
 }
-void AxesCurves::on_groupBox_Curve_clicked(bool checked)
-{
-    if (checked == false) {
-        for (auto &&widget : this->findChildren<QWidget *>()) {
-            if (widget != ui->groupBox_Curve) {
-                widget->setVisible(false);
-            }
-        }
-        QTimer::singleShot(10, [&] {
-            //            ui->frame->setMinimumHeight(0);
-            //            ui->groupBox_Curve->setMinimumHeight(0);
-            this->setMinimumHeight(0);
-            //            ui->frame->setMaximumHeight(0);
-            //            ui->groupBox_Curve->setMaximumHeight(0);
-        });
-    } else {
-        for (auto &&widget : this->findChildren<QWidget *>()) {
-            widget->setVisible(true);
-        }
-        QTimer::singleShot(10, [&] {
-            //            ui->frame->setMinimumHeight(0);
-            //            ui->groupBox_Curve->setMinimumHeight(0);
-            this->setMinimumHeight(600);
-            //            ui->frame->setMaximumHeight(0);
-            //            ui->groupBox_Curve->setMaximumHeight(0);
-        });
-    }
-}
 
-void AxesCurves::setDarkIcon(bool isDark)
-{
-    // faster
-    static const QIcon linDark(":/Images/linear_dark.png");
-    static const QIcon expDark(":/Images/Exponent_dark.png");
-    static const QIcon expInvDark(":/Images/ExponentInvert_dark.png");
-    static const QIcon shapeDark(":/Images/Shape_dark.png");
-
-    static const QIcon linWhite(":/Images/linear.png");
-    static const QIcon expWhite(":/Images/Exponent.png");
-    static const QIcon expInvWhite(":/Images/ExponentInvert.png");
-    static const QIcon shapeWhite(":/Images/Shape.png");
-
-    if (isDark == true) {
-        ui->pushButton_Linear->setIcon(linDark);
-        //ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert_dark.png"));
-        ui->pushButton_Exponent->setIcon(expDark);
-        ui->pushButton_ExponentInvert->setIcon(expInvDark);
-        ui->pushButton_Shape->setIcon(shapeDark);
-    } else {
-        ui->pushButton_Linear->setIcon(linWhite);
-        //ui->pushButton_LinearInvert->setIcon(QIcon(":/Images/linearInvert.png"));
-        ui->pushButton_Exponent->setIcon(expWhite);
-        ui->pushButton_ExponentInvert->setIcon(expInvWhite);
-        ui->pushButton_Shape->setIcon(shapeWhite);
-    }
-}
 
 void AxesCurves::retranslateUi()
 {
     ui->retranslateUi(this);
 }
 
-void AxesCurves::pointValueChanged(const int *pointNumber, const int *value)
+void AxesCurves::pointValueChanged(int pointNumber, int value)
 {
-    if (m_currentProfile > 0) {
-        emit curvePointValueChanged(m_axisNumber, *pointNumber, *value);
-    } else if (m_currentProfile == 0) {
-        m_curvePointsValue[*pointNumber] = *value;
-    }
-}
-
-void AxesCurves::setCurveProfile(int profile)
-{
-    m_currentProfile = profile;
-    if (profile <= 0) {
-        for (int i = 0; i < ui->widget_AxesCurvesPlot->pointCount(); ++i) {
-            ui->widget_AxesCurvesPlot->setPointValue(i, m_curvePointsValue[i]);
+    Q_UNUSED(pointNumber)
+    Q_UNUSED(value)
+    for (int i = 0; i < m_curvesList.size(); ++i) {
+        if (m_curvesList[i]->isChecked()) {
+            for (int j = 0; j < CURVE_PLOT_POINTS_COUNT; ++j) {     // can be optimized
+                m_curvesList[i]->setPointValue(j, ui->widget_AxesCurvesPlot->pointValue(j));
+            }
         }
     }
 }
 
-int AxesCurves::getPointValue(int pointNumber) const
+
+int AxesCurves::pointValue(int pointNumber) const
 {
     return ui->widget_AxesCurvesPlot->pointValue(pointNumber);
 }
 
-void AxesCurves::setPointValue(int point_number, int value)
+QVector<int> AxesCurves::pointValues() const
 {
-    ui->widget_AxesCurvesPlot->setPointValue(point_number, value);
+    return ui->widget_AxesCurvesPlot->pointValues();
 }
+
+void AxesCurves::setPointValue(int pointNumber, int value)
+{
+    ui->widget_AxesCurvesPlot->setPointValue(pointNumber, value);
+}
+
+void AxesCurves::setPointValues(const QVector<int> &values)
+{
+    ui->widget_AxesCurvesPlot->setPointValues(values);
+}
+
+void AxesCurves::setExclusive(bool exclusive)
+{
+    m_ctrlActivated = !exclusive;
+    for (int i = 0; i < m_curvesList.size(); ++i) {
+        m_curvesList[i]->setAutoExclusive(exclusive);
+    }
+}
+
 
 void AxesCurves::updateAxis()
 {
@@ -125,65 +111,67 @@ void AxesCurves::updateAxis()
     //    if (gEnv.pDeviceConfig->config.axis_config[axis_number_].out_enabled == 1)
     //    {
 
-    params_report_t *paramsRep = &gEnv.pDeviceConfig->paramsReport;
-    int min = gEnv.pDeviceConfig->config.axis_config[m_axisNumber].calib_min;
-    int max = gEnv.pDeviceConfig->config.axis_config[m_axisNumber].calib_max;
-    int value_x;
-    int value_y;
+    if (m_lastSelectedIndex > -1) {
+        params_report_t *paramsRep = &gEnv.pDeviceConfig->paramsReport;
+        int min = gEnv.pDeviceConfig->config.axis_config[m_lastSelectedIndex].calib_min;
+        int max = gEnv.pDeviceConfig->config.axis_config[m_lastSelectedIndex].calib_max;
+        int value_x;
+        int value_y;
 
-    if (paramsRep->axis_data[m_axisNumber] < AXIS_CENTER_VALUE) {
-        value_y = round(paramsRep->axis_data[m_axisNumber] / (float) AXIS_MIN_VALUE * CURVES_MIN_VALUE);
-    } else {
-        value_y = round(paramsRep->axis_data[m_axisNumber] / (float) AXIS_MAX_VALUE * CURVES_MAX_VALUE);
+        if (paramsRep->axis_data[m_lastSelectedIndex] < AXIS_CENTER_VALUE) {
+            value_y = round(paramsRep->axis_data[m_lastSelectedIndex] / (float) AXIS_MIN_VALUE * CURVES_MIN_VALUE);
+        } else {
+            value_y = round(paramsRep->axis_data[m_lastSelectedIndex] / (float) AXIS_MAX_VALUE * CURVES_MAX_VALUE);
+        }
+
+        value_x = abs(round((paramsRep->raw_axis_data[m_lastSelectedIndex] - min) / (float)(max - min) * 200.0f));
+
+        ui->widget_AxesCurvesPlot->setCurAxisPos(value_x, value_y);
     }
-
-    value_x = abs(round((paramsRep->raw_axis_data[m_axisNumber] - min) / (float) (max - min) * 200));
-
-    ui->widget_AxesCurvesPlot->setCurAxisPos(value_x, value_y);
     //    }
-}
-
-void AxesCurves::on_pushButton_Linear_clicked()
-{
-    ui->widget_AxesCurvesPlot->setLinear();
-}
-
-//void AxesCurves::on_pushButton_LinearInvert_clicked()
-//{
-//    ui->widget_AxesCurvesPlot->SetLinearInvert();
-//}
-
-void AxesCurves::on_pushButton_Exponent_clicked()
-{
-    ui->widget_AxesCurvesPlot->setExponent();
-}
-
-void AxesCurves::on_pushButton_ExponentInvert_clicked()
-{
-    ui->widget_AxesCurvesPlot->setExponentInvert();
-}
-
-void AxesCurves::on_pushButton_Shape_clicked()
-{
-    ui->widget_AxesCurvesPlot->setShape();
 }
 
 void AxesCurves::deviceStatus(bool isConnect)
 {
-    ui->widget_AxesCurvesPlot->deviceStatus(isConnect);
+    if (gEnv.pDeviceConfig->config.axis_config[m_lastSelectedIndex].source_main != -1 &&
+            gEnv.pDeviceConfig->config.axis_config[m_lastSelectedIndex].out_enabled == 1)
+    {
+        ui->widget_AxesCurvesPlot->deviceStatus(isConnect);
+    } else {
+        ui->widget_AxesCurvesPlot->deviceStatus(false);
+    }
 }
+
 
 void AxesCurves::readFromConfig()
 {
-    for (int i = 0; i < ui->widget_AxesCurvesPlot->pointCount(); ++i) {
-        ui->widget_AxesCurvesPlot->setPointValue(i, gEnv.pDeviceConfig->config.axis_config[m_axisNumber].curve_shape[i]);
-        m_curvePointsValue[i] = gEnv.pDeviceConfig->config.axis_config[m_axisNumber].curve_shape[i];
+    dev_config_t *cfg = &gEnv.pDeviceConfig->config;
+
+    for (int i = 0; i < m_curvesList.size(); ++i)
+    {
+        AxesCurvesButton *curve = m_curvesList[i];
+
+        if (i == 0) {
+            curve->setChecked(true);
+        } else {
+            curve->setChecked(false);
+        }
+
+        for (int j = 0; j < curve->pointCount(); ++j) {
+            curve->setPointValue(j, cfg->axis_config[i].curve_shape[j]);
+            if (curve->isChecked()) {
+                ui->widget_AxesCurvesPlot->setPointValue(j, cfg->axis_config[i].curve_shape[j]);
+            }
+        }
     }
 }
 
 void AxesCurves::writeToConfig()
 {
-    for (int i = 0; i < ui->widget_AxesCurvesPlot->pointCount(); ++i) {
-        gEnv.pDeviceConfig->config.axis_config[m_axisNumber].curve_shape[i] = ui->widget_AxesCurvesPlot->pointValue(i);
+    dev_config_t *cfg = &gEnv.pDeviceConfig->config;
+    for (int i = 0; i < m_curvesList.size(); ++i) {
+        for (int j = 0; j < m_curvesList[i]->pointCount(); ++j) {
+            cfg->axis_config[i].curve_shape[j] = m_curvesList[i]->pointValue(j);
+        }
     }
 }

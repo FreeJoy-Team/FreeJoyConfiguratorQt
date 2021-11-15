@@ -56,7 +56,7 @@ private slots:
     void languageChanged(const QString &language);
     void setFont();
 
-    void loadDefaultConfig();
+    void finalInitialization();
 
     void on_pushButton_ResetAllPins_clicked();
 
@@ -66,18 +66,20 @@ private slots:
     void on_pushButton_SaveToFile_clicked();
     void on_pushButton_LoadFromFile_clicked();
 
-    void on_pushButton_SetDefaultConfig_clicked();
-    void on_pushButton_LoadDefaultConfig_clicked();
-
-    void on_pushButton_TestButton_clicked();
-
     void on_pushButton_ShowDebug_clicked();
 
+    void on_pushButton_TestButton_clicked();
     void on_pushButton_TestButton_2_clicked();
 
     void on_pushButton_Wiki_clicked();
 
     void themeChanged(bool dark);
+
+    void on_toolButton_ConfigsDir_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 
 private:
     Ui::MainWindow *ui;
@@ -101,7 +103,11 @@ private:
 
     bool m_deviceChanged;
 
-    QString m_buttonDefaultStyle;
+    QString m_buttonDefaultStyle;   // ?????????
+
+    QString m_cfgDirPath;
+    void curCfgFileChanged(const QString &fileName);
+    QStringList cfgFilesList(const QString &dirPath);
 
     void UiReadFromConfig();
     void UiWriteToConfig();

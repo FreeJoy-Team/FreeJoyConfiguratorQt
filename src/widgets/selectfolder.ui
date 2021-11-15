@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SelectDefCfg</class>
- <widget class="QDialog" name="SelectDefCfg">
+ <class>SelectFolder</class>
+ <widget class="QDialog" name="SelectFolder">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,14 +12,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>400</width>
+    <width>300</width>
     <height>100</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>650</width>
-    <height>150</height>
+    <height>100</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -38,17 +38,24 @@
    <property name="bottomMargin">
     <number>6</number>
    </property>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton_ok">
+     <property name="text">
+      <string>Ok</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="text_curFile">
        <property name="text">
-        <string>Current file:</string>
+        <string>Current folder:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_currentFile">
+      <widget class="QLineEdit" name="lineEdit_currentFolder">
        <property name="readOnly">
         <bool>true</bool>
        </property>
@@ -66,20 +73,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="2" column="1">
-    <widget class="QPushButton" name="pushButton_ok">
-     <property name="text">
-      <string>Ok</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QCheckBox" name="checkBox_LoadDefCfg">
-     <property name="text">
-      <string>Loading selected config file on startup application.</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

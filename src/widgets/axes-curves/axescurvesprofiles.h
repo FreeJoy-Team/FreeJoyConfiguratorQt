@@ -1,26 +1,53 @@
 #ifndef AXESCURVESPROFILES_H
 #define AXESCURVESPROFILES_H
 
-#include <QPushButton>
-#include "axescurvesplot.h"
+#include <QWidget>
+#include <functional>
 
-class AxesCurvesProfiles : public AxesCurvesPlot
+namespace Ui {
+class AxesCurvesProfiles;
+}
+
+class AxesCurvesProfiles : public QWidget
 {
     Q_OBJECT
 
 public:
     explicit AxesCurvesProfiles(QWidget *parent = nullptr);
+    ~AxesCurvesProfiles();
+    void retranslateUi();
 
-protected:
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
+    void setPointValue(int pointIndex, int value);
+    void setPointValues(const QVector<int> &values);
 
-//    void enterEvent(QEvent *event) override;
-//    void leaveEvent(QEvent *event) override;
-//bool eventFilter(QObject *obj, QEvent *event) override;
+    int pointCount() const;
+    int pointValue(int pointIndex) const;
+    QVector<int> pointValues() const;
+
+    void setLinear();
+    void setLinearInvert();
+    void setExponent();
+    void setExponentInvert();
+    void setShape();
+    void setShape2();
+    void setIDK();
+    void setIDK2();
+
+signals:
+    void presetClicked(QVector <int> values);
+    void setClicked();
+    void resetClicked();
+
+private slots:
+    void CurveClicked();
+
+    void on_toolButton_Set_clicked();
+    void on_toolButton_Reset_clicked();
+
 private:
-    bool m_toggled;
+    Ui::AxesCurvesProfiles *ui;
+    //void (AxesCurvesProfiles::*m_pPresetFunc)();
+    std::function<void(AxesCurvesProfiles*)> m_pPresetFunc;
 };
 
 #endif // AXESCURVESPROFILES_H

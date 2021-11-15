@@ -9,6 +9,16 @@ class InfoLabel : public QLabel
     Q_OBJECT
 public:
     explicit InfoLabel(QWidget *parent = nullptr);
+    virtual int heightForWidth(int width) const;
+    virtual QSize sizeHint() const;
+    QPixmap scaledPixmap() const;
+
+public slots:
+    void setPixmap(const QPixmap &p);
+    void resizeEvent(QResizeEvent *event);
+
+private:
+    QPixmap pix;
 };
 
 

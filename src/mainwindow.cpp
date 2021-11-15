@@ -5,12 +5,13 @@
 #include <QDesktopServices>
 #include <QSpinBox>
 #include <QCheckBox>
+#include <QKeyEvent>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mousewheelguard.h"
 #include "configtofile.h"
-#include "selectdefcfg.h"
+#include "selectfolder.h"
 
 #include "common_types.h"
 #include "global.h"
@@ -44,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
     QMainWindow::setWindowIcon(QIcon(":/Images/icon-32.png"));
 
     // firmware version
-    setWindowTitle(tr("FreeJoy Configurator") + " v" + APP_VERSION);
+    setWindowTitle(tr("FreeJoy Configurator") + " v" + APP_VERSION +" PREVIEW");
 
     // load application config
     loadAppConfig();
@@ -105,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     // хз так или сверху исключать?
     ui->comboBox_HidDeviceList->setFocusPolicy(Qt::WheelFocus);
+    ui->comboBox_Configs->setFocusPolicy(Qt::WheelFocus);
     for (auto &&comBox: m_pinConfig->findChildren<QComboBox *>())
     {
             comBox->setFocusPolicy(Qt::WheelFocus);
@@ -182,7 +184,7 @@ MainWindow::MainWindow(QWidget *parent)
     // load default config // loading will occur after loading buttons config
     // комбобоксы у кнопок заполняются после старта приложения и конфиг должен
     // запускаться сигналом от кнопок
-    connect(m_buttonConfig, &ButtonConfig::logicalButtonsCreated, this, &MainWindow::loadDefaultConfig);
+    connect(m_buttonConfig, &ButtonConfig::logicalButtonsCreated, this, &MainWindow::finalInitialization);
 
     // set theme
     gEnv.pAppSettings->beginGroup("StyleSettings");
@@ -425,18 +427,53 @@ void MainWindow::UiWriteToConfig()
 
 
 // load default config
-void MainWindow::loadDefaultConfig()
+void MainWindow::finalInitialization()
 {
-    // load default config from file if its set
-    gEnv.pAppSettings->beginGroup("OtherSettings");
-    if (gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool() == true)
-    {
+    // load config files
+    QStringList filesList = cfgFilesList(m_cfgDirPath);
+    if (filesList.isEmpty() == false) {
+        ui->comboBox_Configs->clear();
+        ui->comboBox_Configs->addItems(filesList);
+        gEnv.pAppSettings->beginGroup("Configs");
+        QString lastCfg(gEnv.pAppSettings->value("LastCfg").toString());
         gEnv.pAppSettings->endGroup();
-        on_pushButton_LoadDefaultConfig_clicked();
-    } else {
-        gEnv.pAppSettings->endGroup();
+        bool found = false;
+        for (int i = 0; i < filesList.size(); ++i) {
+            if (filesList[i] == lastCfg) {
+                curCfgFileChanged(lastCfg);
+                ui->comboBox_Configs->setCurrentIndex(i);
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            curCfgFileChanged(ui->comboBox_Configs->currentText());
+        }
+    }  else {
         UiReadFromConfig();
     }
+
+    // select config comboBox // should be after "// load config files"
+    connect(ui->comboBox_Configs, &QComboBox::currentTextChanged, this, &MainWindow::curCfgFileChanged);
+}
+
+// current cfg file changed
+void MainWindow::curCfgFileChanged(const QString &fileName)
+{
+    QString filePath = m_cfgDirPath + '/' + fileName + ".cfg";
+    ConfigToFile::loadDeviceConfigFromFile(this, filePath, gEnv.pDeviceConfig->config);
+    UiReadFromConfig();
+}
+// get config file list
+QStringList MainWindow::cfgFilesList(const QString &dirPath)
+{
+    QDir dir(dirPath);
+    QStringList cfgs = dir.entryList(QStringList() << "*.cfg", QDir::Files);
+    for (auto &line : cfgs) {
+        line.remove(line.size() - 4, 4);// 4 = ".cfg" characters count
+    }
+    cfgs.sort(Qt::CaseInsensitive);
+    return cfgs;
 }
 
 
@@ -564,7 +601,13 @@ void MainWindow::languageChanged(const QString &language)
     else if (language == "schinese")
     {
         if (trFunc(":/FreeJoyQt_zh_CN") == false) return;
-    } else {
+    }
+    else if (language == "schinese")
+    {
+        if (trFunc(":/FreeJoyQt_de_DE") == false) return;
+    }
+    else
+    {
         return;
     }
 
@@ -598,17 +641,14 @@ void MainWindow::loadAppConfig()
 {
     QSettings *appS = gEnv.pAppSettings;
     qDebug()<<"Loading application config";
-
     // load window settings
     appS->beginGroup("WindowSettings");
     this->restoreGeometry(appS->value("Geometry").toByteArray());
     appS->endGroup();
-
     // load tab index
     appS->beginGroup("TabIndexSettings");
     ui->tabWidget->setCurrentIndex(appS->value("CurrentIndex", 0).toInt());
     appS->endGroup();
-
     // load debug window
     appS->beginGroup("OtherSettings");
     m_debugIsEnable = appS->value("DebugEnable", "false").toBool();
@@ -618,6 +658,10 @@ void MainWindow::loadAppConfig()
             resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());
         }
     }
+    appS->endGroup();
+    // load configs dir path
+    appS->beginGroup("Configs");
+    m_cfgDirPath = appS->value("Path", QDir::currentPath() +'/'+ "configs").toString();
     appS->endGroup();
 
     //debug tab, only for debug build
@@ -648,6 +692,11 @@ void MainWindow::saveAppConfig()
     // save debug
     appS->beginGroup("OtherSettings");
     appS->setValue("DebugEnable", m_debugIsEnable);
+    appS->endGroup();
+    // save configs dir path
+    appS->beginGroup("Configs");
+    appS->setValue("Path", m_cfgDirPath);
+    appS->setValue("LastCfg", ui->comboBox_Configs->currentText());
     appS->endGroup();
     qDebug()<<"done";
 }
@@ -698,7 +747,7 @@ void MainWindow::on_pushButton_LoadFromFile_clicked()
 {
     qDebug()<<"Load from file started";
     QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
+        tr("Open Config"), m_cfgDirPath + "/", tr("Config Files (*.cfg)"));
 
     ConfigToFile::loadDeviceConfigFromFile(this, fileName, gEnv.pDeviceConfig->config);
     UiReadFromConfig();
@@ -709,55 +758,41 @@ void MainWindow::on_pushButton_LoadFromFile_clicked()
 void MainWindow::on_pushButton_SaveToFile_clicked()
 {
     qDebug()<<"Save to file started";
-    QString fileName = QFileDialog::getSaveFileName(this,
-        tr("Save Config"), QDir::currentPath() + "/" + gEnv.pDeviceConfig->config.device_name, tr("Config Files (*.cfg)"));
 
+    QString tmpStr(ui->comboBox_Configs->currentText());
+    if (tmpStr == "") {
+        tmpStr = gEnv.pDeviceConfig->config.device_name;
+    }
+
+    QFileInfo file(QFileDialog::getSaveFileName(this, tr("Save Config"),
+                                                m_cfgDirPath + "/" + tmpStr, tr("Config Files (*.cfg)")));
     UiWriteToConfig();
-    ConfigToFile::saveDeviceConfigToFile(fileName, gEnv.pDeviceConfig->config);
+    ConfigToFile::saveDeviceConfigToFile(file.absoluteFilePath(), gEnv.pDeviceConfig->config);
+
+    QTimer::singleShot(200, this, [this, file]{
+        QSignalBlocker bl(ui->comboBox_Configs);
+        ui->comboBox_Configs->clear();
+        ui->comboBox_Configs->addItems(cfgFilesList(m_cfgDirPath));
+        bl.unblock();
+
+        QString fileName(file.fileName());
+        fileName.remove(fileName.size() - 4, 4); // 4 = ".cfg" characters count
+        ui->comboBox_Configs->setCurrentText(fileName);
+    });
     qDebug()<<"done";
 }
 
-//set default config
-void MainWindow::on_pushButton_SetDefaultConfig_clicked()
+// select configs dir path
+void MainWindow::on_toolButton_ConfigsDir_clicked()
 {
-    qDebug()<<"Set default config started";
-
-    gEnv.pAppSettings->beginGroup("DefaultConfig");
-    QString filePath(gEnv.pAppSettings->value("FileName", "").toString());
-    gEnv.pAppSettings->endGroup();
-
-    gEnv.pAppSettings->beginGroup("OtherSettings");
-    bool loadOnStartUp(gEnv.pAppSettings->value("LoadDefCfgOnStartUp", false).toBool());
-    gEnv.pAppSettings->endGroup();
-    qDebug()<<loadOnStartUp;
-    SelectDefCfg dialog(filePath, loadOnStartUp, this);
+    SelectFolder dialog(m_cfgDirPath, this);
     if (dialog.exec() == QDialog::Accepted) {
-        gEnv.pAppSettings->beginGroup("DefaultConfig");
-        gEnv.pAppSettings->setValue("FileName", dialog.filePath());
-        gEnv.pAppSettings->endGroup();
-
-        gEnv.pAppSettings->beginGroup("OtherSettings");
-        gEnv.pAppSettings->setValue("LoadDefCfgOnStartUp", dialog.loadOnStartUp());
-        gEnv.pAppSettings->endGroup();
+        m_cfgDirPath = dialog.folderPath();
+        QSignalBlocker bl(ui->comboBox_Configs);
+        ui->comboBox_Configs->clear();
+        bl.unblock();
+        ui->comboBox_Configs->addItems(cfgFilesList(m_cfgDirPath));
     }
-
-    qDebug()<<"done";
-}
-
-// load default config file
-void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
-{
-    qDebug()<<"Load default config started";
-    gEnv.pAppSettings->beginGroup("DefaultConfig");
-
-    QString fileName(gEnv.pAppSettings->value("FileName", "").toString());
-    if (fileName != "none" || fileName != "") {
-        ConfigToFile::loadDeviceConfigFromFile(this, fileName, gEnv.pDeviceConfig->config);
-    }
-    UiReadFromConfig();
-
-    gEnv.pAppSettings->endGroup();
-    qDebug()<<"Load default config finished";
 }
 
 // Show debug widget
@@ -795,6 +830,22 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
 void MainWindow::on_pushButton_Wiki_clicked()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/FreeJoy-Team/FreeJoyWiki"));
+}
+
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Control) {
+        m_axesCurvesConfig->setExclusive(false);
+    }
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Control) {
+        m_axesCurvesConfig->setExclusive(true);
+    }
 }
 
 

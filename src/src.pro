@@ -35,6 +35,8 @@ INCLUDEPATH +="widgets" \
 
 SOURCES += \
     mainwindow_style.cpp \
+    widgets/axes-curves/axescurvesbutton.cpp \
+    widgets/axes-curves/axescurvesprofiles.cpp \
     widgets/centered_cbox.cpp \
     configtofile.cpp \
     converter.cpp \
@@ -47,7 +49,7 @@ SOURCES += \
     reportconverter.cpp \
     stm_main.c \
     widgets/infolabel.cpp \
-    widgets/selectdefcfg.cpp \
+    widgets/selectfolder.cpp \
     widgets/switchbutton.cpp \
     widgets/adv-settings/advancedsettings.cpp \
     widgets/axes/axes.cpp \
@@ -55,7 +57,6 @@ SOURCES += \
     widgets/axes-curves/axescurves.cpp \
     widgets/axes-curves/axescurvesconfig.cpp \
     widgets/axes-curves/axescurvesplot.cpp \
-    widgets/axes-curves/axescurvesprofiles.cpp \
     widgets/axes/axesextended.cpp \
     widgets/axes/axestobuttonsslider.cpp \
     widgets/buttons/buttonconfig.cpp \
@@ -76,6 +77,8 @@ SOURCES += \
     widgets/shift-reg/shiftregistersconfig.cpp
 
 HEADERS += \
+    widgets/axes-curves/axescurvesbutton.h \
+    widgets/axes-curves/axescurvesprofiles.h \
     widgets/centered_cbox.h \
     common_defines.h \
     common_types.h \
@@ -91,7 +94,7 @@ HEADERS += \
     reportconverter.h \
     stm_main.h \
     widgets/infolabel.h \
-    widgets/selectdefcfg.h \
+    widgets/selectfolder.h \
     widgets/switchbutton.h \
     version.h \
     widgets/adv-settings/advancedsettings.h \
@@ -100,7 +103,6 @@ HEADERS += \
     widgets/axes-curves/axescurves.h \
     widgets/axes-curves/axescurvesconfig.h \
     widgets/axes-curves/axescurvesplot.h \
-    widgets/axes-curves/axescurvesprofiles.h \
     widgets/axes/axesextended.h \
     widgets/axes/axestobuttonsslider.h \
     widgets/buttons/buttonconfig.h \
@@ -123,6 +125,7 @@ HEADERS += \
 FORMS += \
     mainwindow.ui \
     widgets/adv-settings/advancedsettings.ui \
+    widgets/axes-curves/axescurvesprofiles.ui \
     widgets/axes/axes.ui \
     widgets/axes/axesconfig.ui \
     widgets/axes-curves/axescurves.ui \
@@ -143,7 +146,7 @@ FORMS += \
     widgets/pins/pinconfig.ui \
     widgets/pins/pinsbluepill.ui \
     widgets/pins/pinscontrlite.ui \
-    widgets/selectdefcfg.ui \
+    widgets/selectfolder.ui \
     widgets/shift-reg/shiftregisters.ui \
     widgets/shift-reg/shiftregistersconfig.ui
 

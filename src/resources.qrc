@@ -2,16 +2,6 @@
     <qresource prefix="/">
         <file>FreeJoyQt_ru.qm</file>
         <file>FreeJoyQt_zh_CN.qm</file>
-        <file>Images/Exponent.png</file>
-        <file>Images/ExponentInvert.png</file>
-        <file>Images/linear.png</file>
-        <file>Images/linearInvert.png</file>
-        <file>Images/Shape.png</file>
-        <file>Images/Exponent_dark.png</file>
-        <file>Images/ExponentInvert_dark.png</file>
-        <file>Images/linear_dark.png</file>
-        <file>Images/linearInvert_dark.png</file>
-        <file>Images/Shape_dark.png</file>
         <file>Images/BluePill_render.jpg</file>
         <file>Images/icon.png</file>
         <file>Images/icon-32.png</file>
@@ -27,5 +17,7 @@
         <file>Images/warning.png</file>
         <file>Images/folder.png</file>
         <file>Images/info_icon.png</file>
+        <file>Images/reset.png</file>
+        <file>Images/setings.png</file>
     </qresource>
 </RCC>

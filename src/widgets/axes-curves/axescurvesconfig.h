@@ -6,12 +6,7 @@
 QT_BEGIN_NAMESPACE
 class QComboBox;
 QT_END_NAMESPACE
-//#include <QComboBox>
-
-#include "axescurves.h"
-
-#include "deviceconfig.h"
-#include "global.h"
+class AxesCurvesProfiles;
 
 namespace Ui {
 class AxesCurvesConfig;
@@ -30,37 +25,18 @@ public:
 
     void retranslateUi();
 
-    void setDarkInterface(bool isDark);
+    void setExclusive(bool exclusive);
 
     void updateAxesCurves();
-
     void deviceStatus(bool isConnect);
 
 private slots:
-    void setCurvesValue(int axisNumber, int pointNumber, int value); // может указатели?
-    void profileIndexChanged(int index);
-
-    void on_pushButton_ResetProfiles_clicked();
+    void setPoints(const QVector<int> &values);
+    void on_toolButton_Ctrl_toggled(bool checked);
 
 private:
     Ui::AxesCurvesConfig *ui;
-    QList<AxesCurves *> m_axesCurvPtrList;
-    QList<QComboBox *> m_profilesCBoxPtrList;
-
-    int m_curvesPointsValue[MAX_AXIS_NUM][CURVE_PLOT_POINTS_COUNT];
-
-    const QStringList m_curvesList = // курве 8 = MAX_AXIS_NUM ! или менять curves_points_value_ в axescurvesconfig
-    {{
-        {tr("Not used")},
-        {tr("Curve 1")},
-        {tr("Curve 2")},
-        {tr("Curve 3")},
-        {tr("Curve 4")},
-        {tr("Curve 5")},
-        {tr("Curve 6")},
-        {tr("Curve 7")},
-        {tr("Curve 8")},
-    }};
+    QList<AxesCurvesProfiles *> m_profiles;
 };
 
 #endif // AXESCURVESCONFIG_H

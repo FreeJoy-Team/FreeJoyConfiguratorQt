@@ -10,7 +10,7 @@ static const int MAX_A2B_BUTTONS = 12;
 
 void ConfigToFile::loadDeviceConfigFromFile(QWidget *parent, const QString &fileName, dev_config_t &devC)
 {
-    qDebug()<<"LoadDeviceConfigFromFile() started";
+    qDebug()<<"Load device config from file";
     QSettings deviceSettings(fileName, QSettings::IniFormat);
     bool tmp;
 
@@ -193,7 +193,6 @@ void ConfigToFile::loadDeviceConfigFromFile(QWidget *parent, const QString &file
         devC.leds[i].type = uint8_t(deviceSettings.value("LedType", devC.leds[i].type).toInt());
         deviceSettings.endGroup();
     }
-    qDebug()<<"LoadDeviceConfigFromFile() finished";
 
     oldConfigHandler(parent, devC);
 }

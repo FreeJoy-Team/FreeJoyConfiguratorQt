@@ -20,7 +20,6 @@ void MainWindow::themeChanged(bool dark)
 
     QString styleName;
     ui->tabWidget->setDocumentMode(true);
-    m_axesCurvesConfig->setDarkInterface(dark);///////////////////// ???
 
     if (groupBoxes.isEmpty()) {
         for (auto &child : window()->findChildren<QGroupBox *>()) {

@@ -1,90 +1,204 @@
 #include "axescurvesprofiles.h"
+#include "ui_axescurvesprofiles.h"
 #include <QPainter>
-#include <QMouseEvent>
-#include <QLabel>
-#include <QTimer>
-#include <QStyle>
+#include <QStyleOption>
 #include <cmath>
 
-#include <QDebug>
 AxesCurvesProfiles::AxesCurvesProfiles(QWidget *parent) :
-    AxesCurvesPlot(false, parent)
+    QWidget(parent),
+    ui(new Ui::AxesCurvesProfiles)
 {
-    //setMouseTracking(false);
-    m_toggled = false;
+    ui->setupUi(this);
 
-    setBorderOffset(2);
-    setPointRadius(2);
-    setLineWidth(1);
+    ui->toolButton_Set->setToolTip(tr("Set current axis curve to this preset"));
 
+    ui->widget_Curve->setLineWidth(2);
+    ui->widget_Curve->setPointRadius(0);
+    ui->widget_Curve->setBorderOffset(10);
+    ui->widget_Curve->setGridEnabled(false);
 
-    setStyleSheet("AxesCurvesProfiles[checked=""true""] {background-color: rgb(170, 0, 255); border: 15px solid #32414B;border-radius: 4px;}");
+    m_pPresetFunc = &AxesCurvesProfiles::setLinear;
 
-    //installEventFilter(this);
+    connect(ui->widget_Curve, &AxesCurvesButton::clicked, this, &AxesCurvesProfiles::CurveClicked);
 }
 
-//#include <QApplication>
-//#include <QStyleOptionButton>
-//#include <QStylePainter>
-//bool AxesCurvesProfiles::eventFilter(QObject *obj, QEvent *event)
-//{
-//    if (event->type() == QEvent::Paint)
-//    {
-//        obj->removeEventFilter(this);
-//        QApplication::sendEvent(obj, event);
-//        obj->installEventFilter(this);
-
-//        QStylePainter p(this);
-//        QStyleOptionButton option;
-//        option.state |= QStyle::State_On;
-//        option.state |= QStyle::State_HasFocus;
-//        p.drawControl(QStyle::CE_PushButton, option);
-
-//        return true;
-//    }
-//    return false;
-//}
-
-void AxesCurvesProfiles::mouseMoveEvent(QMouseEvent *event)
+AxesCurvesProfiles::~AxesCurvesProfiles()
 {
-    Q_UNUSED(event)
+    delete ui;
 }
 
-void AxesCurvesProfiles::mousePressEvent(QMouseEvent *event)
+void AxesCurvesProfiles::retranslateUi()
 {
-    if (event->button() == Qt::LeftButton)
+    ui->retranslateUi(this);
+}
+
+
+void AxesCurvesProfiles::setPointValue(int pointIndex, int value)
+{
+    ui->widget_Curve->setPointValue(pointIndex, value);
+}
+
+void AxesCurvesProfiles::setPointValues(const QVector<int> &values)
+{
+    ui->widget_Curve->setPointValues(values);
+}
+
+int AxesCurvesProfiles::pointCount() const
+{
+    return ui->widget_Curve->pointCount();
+}
+
+int AxesCurvesProfiles::pointValue(int pointIndex) const
+{
+    return ui->widget_Curve->pointValue(pointIndex);
+}
+
+QVector<int> AxesCurvesProfiles::pointValues() const
+{
+    return ui->widget_Curve->pointValues();
+}
+
+
+void AxesCurvesProfiles::setLinear()
+{
+    AxesCurvesButton *c = ui->widget_Curve;
+    if (c->pointCount() < 2) {
+        return;
+    }
+    int interval = (abs(c->minimum()) + abs(c->maximum())) / (c->pointCount() -1);
+    QVector<int> vec(ui->widget_Curve->pointCount());
+
+    for (int i = 0; i < ui->widget_Curve->pointCount(); ++i) {
+        vec[i] = c->minimum() + interval * i;
+    }
+    ui->toolButton_Reset->setToolTip(tr("Reset to Linear"));
+    m_pPresetFunc = &AxesCurvesProfiles::setLinear;
+}
+
+void AxesCurvesProfiles::setLinearInvert()
+{
+    AxesCurvesButton *c = ui->widget_Curve;
+    int count = c->pointCount();
+    if (count < 2) {
+        return;
+    }
+    int interval = (abs(c->minimum()) + abs(c->maximum())) / (count -1);
+    QVector<int> vec(count);
+
+    for (int i = 0; i < count; ++i) {
+        vec[i] = c->maximum() - interval * i;
+    }
+    c->setPointValues(vec);
+    ui->toolButton_Reset->setToolTip(tr("Reset to Linear Invert"));
+    m_pPresetFunc = &AxesCurvesProfiles::setLinearInvert;
+}
+
+void AxesCurvesProfiles::setExponent()
+{
+    AxesCurvesButton *c = ui->widget_Curve;
+    int count = c->pointCount();
+
+    int range, value, min = c->minimum(), max = c->maximum();
+    QVector<int> vec(count);
+
+    if ((min < 0 && max < 0) || (min >= 0 && max >= 0)) {
+        range = max - min;
+    } else {
+        range = abs(min) + abs(max);
+    }
+
+    for (int i = 0; i < count; ++i)
     {
-        qDebug()<<"press";
-        setProperty("checked", true);
-        //style()->unpolish(this);
-        style()->polish(this);
-        //update();
+        value = qRound(expf(i * logf(range) / (count - 1)) + min);
+        if (value <= min + 1) {
+            value = min;
+        } else if (value >= max - 1) {
+            value = max;
+        }
+        vec[i] = value;
+    }
+    c->setPointValues(vec);
+    ui->toolButton_Reset->setToolTip(tr("Reset to Exponent"));
+    m_pPresetFunc = &AxesCurvesProfiles::setExponent;
+}
+
+void AxesCurvesProfiles::setExponentInvert()
+{
+    AxesCurvesButton *c = ui->widget_Curve;
+    int count = c->pointCount();
+
+    int range, value, min = c->minimum(), max = c->maximum();
+    QVector<int> vec(count);
+
+    if ((min < 0 && max < 0) || (min >= 0 && max >= 0)) {
+        range = max - min;
+    } else {
+        range = abs(min) + abs(max);
+    }
+
+    for (int i = 0; i < count; ++i)
+    {
+        value = qRound(expf(i * logf(range) / (count - 1)) + min);
+        if (value <= min + 1) {
+            value = min;
+        } else if (value >= max - 1) {
+            value = max;
+        }
+        vec[count - 1 - i] = value;
+    }
+    c->setPointValues(vec);
+    ui->toolButton_Reset->setToolTip(tr("Reset to Exponent Invert"));
+    m_pPresetFunc = &AxesCurvesProfiles::setExponentInvert;
+}
+
+void AxesCurvesProfiles::setShape()
+{
+    QVector<int> vec {-100, -60, -20, -6, -2, 0, 2, 6, 20, 60, 100};
+    ui->widget_Curve->setPointValues(vec);
+    ui->toolButton_Reset->setToolTip(tr("Reset to Shape"));
+    m_pPresetFunc = &AxesCurvesProfiles::setShape;
+}
+
+void AxesCurvesProfiles::setShape2()
+{
+    QVector<int> vec {-100, -60, -40, -24, -12, 0, 12, 24, 40, 60, 100};
+    ui->widget_Curve->setPointValues(vec);
+    ui->toolButton_Reset->setToolTip(tr("Reset to Shape2"));
+    m_pPresetFunc = &AxesCurvesProfiles::setShape2;
+}
+
+void AxesCurvesProfiles::setIDK()
+{
+    QVector<int> vec {-100, 100, -100, 100, -100, 100, -100, 100, -100, 100, -100};
+    ui->widget_Curve->setPointValues(vec);
+    ui->toolButton_Reset->setToolTip(tr("Reset to Pulse"));
+    m_pPresetFunc = &AxesCurvesProfiles::setIDK;
+}
+
+void AxesCurvesProfiles::setIDK2()
+{
+    QVector<int> vec {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    ui->widget_Curve->setPointValues(vec);
+    ui->toolButton_Reset->setToolTip(tr("Reset to no Pulse"));
+    m_pPresetFunc = &AxesCurvesProfiles::setIDK2;
+}
+
+
+void AxesCurvesProfiles::CurveClicked()
+{
+    AxesCurvesButton *curve = qobject_cast<AxesCurvesButton*>(sender());
+    if (curve) {
+        emit presetClicked(curve->pointValues());
     }
 }
 
-void AxesCurvesProfiles::mouseReleaseEvent(QMouseEvent *event)
+void AxesCurvesProfiles::on_toolButton_Set_clicked()
 {
-    if (event->button() == Qt::LeftButton)
-    {
-        qDebug()<<"unpress";
-        setProperty("checked", false);
-        //style()->unpolish(this);
-        style()->polish(this);
-        //update();
-
-        m_toggled = !m_toggled;
-    }
+    emit setClicked();
 }
 
-//void AxesCurvesProfiles::enterEvent(QEvent *event)
-//{
-//    Q_UNUSED(event)
-//    //setStyleSheet("border: 3px solid #31363b;");
-//}
-
-//void AxesCurvesProfiles::leaveEvent(QEvent *event)
-//{
-//    Q_UNUSED(event)
-//    //setStyleSheet("border: 0px solid #31363b;");
-//}
-
+void AxesCurvesProfiles::on_toolButton_Reset_clicked()
+{
+    m_pPresetFunc(this);
+    //emit resetClicked();
+}

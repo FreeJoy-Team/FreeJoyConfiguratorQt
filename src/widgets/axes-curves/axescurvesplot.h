@@ -22,23 +22,29 @@ public:
 
     void setBorderOffset(int offset);
     void setPointRadius(int radius);
+
     void setLineWidth(int width);
+    int lineWidth() const;
 
-    int pointValue(int point_number);
+    void setGridEnabled(bool enabled);
+    bool gridEnabled() const;
+
     int pointCount() const;
+    int pointValue(int pointIndex) const;
+    QVector<int> pointValues() const;
 
-    void setPointValue(int pointNumber, int value);
+    void setPointValue(int pointIndex, int value);
+    void setPointValues(const QVector<int> &values);
+
+    int maximum() const;
+    int minimum() const;
 
     void setCurAxisPos(int posX, int posY);
     void deviceStatus(bool isConnect);
 
-    void setLinear();
-    void setExponent();
-    void setExponentInvert();
-    void setShape();
-
 signals:
-    void pointValueChanged(const int *point, const int *value);
+    void pointValueChanged(int point, int value);
+    //void pointValuesChanged(QVector<int> values);
 
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -49,11 +55,12 @@ protected:
 
 private:
     int calcPointValue(int currentPos) const;
-    int calcPointPosY(int value) const;
-    int calcPointPosX(int value) const;
+    float calcPointPosY(int value) const;
+    float calcPointPosX(int value) const;
     void movePoint(int pos_y, int point_number);
     void updateLabelPos();
 
+    bool m_gridEnabled = true;
     int m_radius = 8;
     int m_lineWidth = 2;
     int m_offset = 20;
@@ -90,8 +97,8 @@ private:
     {
         QColor color;
         QRect area;
-        int posX;
-        int posY;
+        float posX;
+        float posY;
         int current_value;
         bool is_drag;
         //QLabel text_label;
