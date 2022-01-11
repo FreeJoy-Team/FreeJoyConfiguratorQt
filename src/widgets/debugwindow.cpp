@@ -74,7 +74,7 @@ void DebugWindow::printMsg(const QString &msg)
     if (m_writeToFile) {
         QFile file(QDir::currentPath() + '/' + "FreeJoyConfigurator_Log.txt");
         if (!file.open(QIODevice::WriteOnly | QIODevice::Append)) {
-            qDebug() << "cant open file";
+            qWarning() << "cant open file";
             return;
         }
         QTextStream out(&file);
@@ -85,12 +85,16 @@ void DebugWindow::printMsg(const QString &msg)
 void DebugWindow::logicalButtonState(int buttonNumber, bool state)
 {
     if (state) {
-        ui->textBrowser_ButtonsPressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
-                                                         + QString::number(buttonNumber) + tr(" pressed") + '\n');
+        ui->textBrowser_ButtonsPressLog->insertPlainText(
+                    QDateTime::currentDateTime().toString("hh:mm:ss.zzz") + ": " + tr("Logical button ")
+                    + QString::number(buttonNumber) + tr(" pressed") + '\n');
+
         ui->textBrowser_ButtonsPressLog->moveCursor(QTextCursor::End);
     } else {
-        ui->textBrowser_ButtonsUnpressLog->insertPlainText(QTime::currentTime().toString() + ": " + tr("Logical button ")
-                                                           + QString::number(buttonNumber) + tr(" unpressed") + '\n');
+        ui->textBrowser_ButtonsUnpressLog->insertPlainText(
+                    QDateTime::currentDateTime().toString("hh:mm:ss.zzz") + ": " + tr("Logical button ")
+                    + QString::number(buttonNumber) + tr(" unpressed") + '\n');
+
         ui->textBrowser_ButtonsUnpressLog->moveCursor(QTextCursor::End);
     }
 }

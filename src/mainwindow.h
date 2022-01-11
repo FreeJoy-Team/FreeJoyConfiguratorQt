@@ -8,15 +8,15 @@
 #include "hiddevice.h"
 #include "reportconverter.h"
 
-#include "widgets/advancedsettings.h"
-#include "widgets/axesconfig.h"
-#include "widgets/axescurvesconfig.h"
-#include "widgets/buttonconfig.h"
-#include "widgets/debugwindow.h"
-#include "widgets/encodersconfig.h"
-#include "widgets/ledconfig.h"
-#include "widgets/pinconfig.h"
-#include "widgets/shiftregistersconfig.h"
+#include "advancedsettings.h"
+#include "axesconfig.h"
+#include "axescurvesconfig.h"
+#include "buttonconfig.h"
+#include "debugwindow.h"
+#include "encodersconfig.h"
+#include "ledconfig.h"
+#include "pinconfig.h"
+#include "shiftregistersconfig.h"
 #include "switchbutton.h"
 
 QT_BEGIN_NAMESPACE
@@ -42,7 +42,8 @@ private slots:
     void showConnectDeviceInfo();
     void hideConnectDeviceInfo();
     void flasherConnected();
-    void getParamsPacket(uint8_t *buffer);
+    //void getParamsPacket(uint8_t *buffer);
+    void getParamsPacket(bool firmwareCompatible);
 
     void configReceived(bool success);
     void configSent(bool success);
@@ -55,9 +56,7 @@ private slots:
     void languageChanged(const QString &language);
     void setFont();
 
-    void loadDefaultConfig();
-
-    void interfaceStyleChanged(bool isDark);
+    void finalInitialization();
 
     void on_pushButton_ResetAllPins_clicked();
 
@@ -67,26 +66,26 @@ private slots:
     void on_pushButton_SaveToFile_clicked();
     void on_pushButton_LoadFromFile_clicked();
 
-    void on_pushButton_SetDefaultConfig_clicked();
-    void on_pushButton_LoadDefaultConfig_clicked();
-
-    void on_pushButton_TestButton_clicked();
-
     void on_pushButton_ShowDebug_clicked();
 
+    void on_pushButton_TestButton_clicked();
     void on_pushButton_TestButton_2_clicked();
 
     void on_pushButton_Wiki_clicked();
 
-    void styleSwitched(int index);
+    void themeChanged(bool dark);
+
+    void on_toolButton_ConfigsDir_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 
 private:
     Ui::MainWindow *ui;
 
     QThread *m_thread;
     HidDevice *m_hidDeviceWorker;
-    //QScopedPointer<QThread> thread;
-    //QScopedPointer<HidDevice> worker;
 
     QThread *m_threadGetSendConfig;
 
@@ -102,16 +101,18 @@ private:
     DebugWindow *m_debugWindow = nullptr;
     bool m_debugIsEnable;
 
-    QString m_buttonDefaultStyle;
+    bool m_deviceChanged;
 
-    void readFromConfig();
-    void writeToConfig();
-    void oldConfigHandler();
+    QString m_buttonDefaultStyle;   // ?????????
+
+    QString m_cfgDirPath;
+    void curCfgFileChanged(const QString &fileName);
+    QStringList cfgFilesList(const QString &dirPath);
+
+    void UiReadFromConfig();
+    void UiWriteToConfig();
 
     void loadAppConfig();
     void saveAppConfig();
-
-    void loadDeviceConfigFromFile(QSettings *deviceSettings);
-    void saveDeviceConfigToFile(QSettings *deviceSettings);
 };
 #endif // MAINWINDOW_H

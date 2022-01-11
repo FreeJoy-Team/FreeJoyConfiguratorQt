@@ -3,12 +3,15 @@
 #include <QSettings>
 #include <QFileDialog>
 #include <QDesktopServices>
-#include <ctime>
+#include <QSpinBox>
+#include <QCheckBox>
+#include <QKeyEvent>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mousewheelguard.h"
-#include <QSpinBox>
+#include "configtofile.h"
+#include "selectfolder.h"
 
 #include "common_types.h"
 #include "global.h"
@@ -20,17 +23,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-//    , m_thread{new QThread}
-//    , m_hidDeviceWorker{new HidDevice()}
-//    , m_threadGetSendConfig{new QThread}
-//    , m_pinConfig{new PinConfig(this)}// not need delete. this - parent
-//    , m_buttonConfig{new ButtonConfig(this)}
-//    , m_ledConfig{new LedConfig(this)}
-//    , m_encoderConfig{new EncodersConfig(this)}
-//    , m_shiftRegConfig{new ShiftRegistersConfig(this)}
-//    , m_axesConfig{new AxesConfig(this)}
-//    , m_axesCurvesConfig{new AxesCurvesConfig(this)}
-//    , m_advSettings{new AdvancedSettings(this)}
+    , m_deviceChanged(false)
+//    , m_thread(new QThread)
+//    , m_hidDeviceWorker(new HidDevice())
+//    , m_threadGetSendConfig(new QThread)
+//    , m_pinConfig(new PinConfig(this))
+//    , m_buttonConfig(new ButtonConfig(this))
+//    , m_ledConfig(new LedConfig(this))
+//    , m_encoderConfig(new EncodersConfig(this))
+//    , m_shiftRegConfig(new ShiftRegistersConfig(this))
+//    , m_axesConfig(new AxesConfig(this))
+//    , m_axesCurvesConfig(new AxesCurvesConfig(this))
+//    , m_advSettings(new AdvancedSettings(this))
 {
     qDebug()<<"main + member initialize time ="<< gEnv.pApp_start_time->elapsed() << "ms";
     QElapsedTimer timer;
@@ -102,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     // хз так или сверху исключать?
     ui->comboBox_HidDeviceList->setFocusPolicy(Qt::WheelFocus);
+    ui->comboBox_Configs->setFocusPolicy(Qt::WheelFocus);
     for (auto &&comBox: m_pinConfig->findChildren<QComboBox *>())
     {
             comBox->setFocusPolicy(Qt::WheelFocus);
@@ -141,11 +146,9 @@ MainWindow::MainWindow(QWidget *parent)
     // language changed
     connect(m_advSettings, &AdvancedSettings::languageChanged, this, &MainWindow::languageChanged);
     // interface changed
-    connect(m_advSettings, &AdvancedSettings::interfaceStyleChanged, this, &MainWindow::interfaceStyleChanged);
+    connect(m_advSettings, &AdvancedSettings::themeChanged, this, &MainWindow::themeChanged);
     // font changed
     connect(m_advSettings, &AdvancedSettings::fontChanged, this, &MainWindow::setFont);
-    // style switch
-    connect(ui->widget_StyleSwitch, &SwitchButton::currentIndexChanged, this, &MainWindow::styleSwitched);
 
 
     // enter flash mode clicked
@@ -181,18 +184,17 @@ MainWindow::MainWindow(QWidget *parent)
     // load default config // loading will occur after loading buttons config
     // комбобоксы у кнопок заполняются после старта приложения и конфиг должен
     // запускаться сигналом от кнопок
-    connect(m_buttonConfig, &ButtonConfig::logicalButtonsCreated, this, &MainWindow::loadDefaultConfig);
+    connect(m_buttonConfig, &ButtonConfig::logicalButtonsCreated, this, &MainWindow::finalInitialization);
 
-
-    // set style for some widgets
+    // set theme
     gEnv.pAppSettings->beginGroup("StyleSettings");
-    if (gEnv.pAppSettings->value("StyleSheet", "default").toString() == "dark"){
-        interfaceStyleChanged(true);
-    } else {
-        interfaceStyleChanged(false);
-    }
+    QString style = gEnv.pAppSettings->value("StyleSheet", "default").toString();
     gEnv.pAppSettings->endGroup();
-
+    if (style == "dark") {
+        themeChanged(true);
+    } else {
+        themeChanged(false);
+    }
 
     m_thread->start();
 
@@ -221,17 +223,10 @@ MainWindow::~MainWindow()
 // device connected
 void MainWindow::showConnectDeviceInfo()
 {
-    if (ui->comboBox_HidDeviceList->count() > 1) {
-        ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("devices connected"));
-    } else {
-        ui->label_DeviceStatus->setText(QString::number(ui->comboBox_HidDeviceList->count()) + " " + tr("device connected"));
-    }
     if (ui->comboBox_HidDeviceList->itemData(ui->comboBox_HidDeviceList->currentIndex()).toInt() != 1) {
-        ui->pushButton_WriteConfig->setEnabled(true);
-        ui->pushButton_ReadConfig->setEnabled(true);
-        ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+        m_deviceChanged = true;
     } else {
-        // for old firmware
+        // for old(1.6-) firmware
         ui->pushButton_WriteConfig->setEnabled(false);
         ui->pushButton_ReadConfig->setEnabled(false);
         ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
@@ -247,10 +242,6 @@ void MainWindow::hideConnectDeviceInfo()
     ui->pushButton_ReadConfig->setEnabled(false);
     ui->pushButton_WriteConfig->setEnabled(false);
     m_advSettings->flasher()->deviceConnected(false);
-//    // reset paramsReport
-//    memset(&gEnv.pDeviceConfig->paramsReport, 0, sizeof(gEnv.pDeviceConfig->paramsReport));
-//    uint8_t tmp[64]{};        // todo
-//    getParamsPacket(tmp);
     // debug window
     if (m_debugWindow) {
         m_debugWindow->resetPacketsCount();
@@ -299,41 +290,55 @@ void MainWindow::hidDeviceList(const QList<QPair<bool, QString>> &deviceNames)
 }
 
 // received device report
-void MainWindow::getParamsPacket(uint8_t *buffer)
+void MainWindow::getParamsPacket(bool firmwareCompatible)
 {
-    ReportConverter::paramReport(buffer);
+    if (m_deviceChanged) {
+        if (firmwareCompatible == false) {
+            ui->pushButton_WriteConfig->setEnabled(false);
+            ui->pushButton_ReadConfig->setEnabled(false);
+            ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
+            ui->label_DeviceStatus->setText(tr("Incompatible Firmware"));
+        } else {
+            ui->pushButton_WriteConfig->setEnabled(true);
+            ui->pushButton_ReadConfig->setEnabled(true);
+            ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
+            // set firmware version
+            QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
+            if (str.size() == 4) {
+                ui->label_DeviceStatus->setText(tr("Device firmware") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
+            }
+        }
+        m_deviceChanged = false;
+    }
+
     // update button state without delay. fix gamepad_report.raw_button_data[0]
     // из-за задержки может не ловить изменения первых физических 64 кнопок или оставшихся.
     // Например, может подряд попасться gamepad_report.raw_button_data[0] = 0
     // и не видеть оставшиеся физические 64 кнопки.
-    if(ui->tab_ButtonConfig->isVisible() == true || m_debugWindow){
+    if(ui->tab_ButtonConfig->isVisible() == true || m_debugWindow) {
         m_buttonConfig->buttonStateChanged();
     }
 
     static QElapsedTimer timer;
-    static bool change = false;
 
-    if (!change)
-    {
+    if (timer.isValid() == false) {
         timer.start();
-        change = true;
     }
-    else if (timer.elapsed() > 17)    // обновление раз в 17мс(~60fps), мб сделать дефайн в герцах
+    else if (timer.elapsed() > 17)    // update UI every 17ms(~60fps)
     {
-        // optimization
-        if(ui->tab_LED->isVisible() == true){
+        if(ui->tab_LED->isVisible() == true) {
             m_ledConfig->setLedsState();
         }
-        if(ui->tab_AxesConfig->isVisible() == true){
+        if(ui->tab_AxesConfig->isVisible() == true) {
             m_axesConfig->axesValueChanged();
         }
-        if(ui->tab_AxesCurves->isVisible() == true){
+        if(ui->tab_AxesCurves->isVisible() == true) {
             m_axesCurvesConfig->updateAxesCurves();
         }
-        change = false;
+        timer.restart();
     }
     // debug info
-    if (m_debugWindow){
+    if (m_debugWindow) {
         m_debugWindow->devicePacketReceived();
     }
 
@@ -369,83 +374,243 @@ void MainWindow::deviceFlasherController(bool isStartFlash)
 }
 
 
-
-
-                                            /////////////////////    APP SETTINGS   /////////////////////
-
-// slot interface style changed
-void MainWindow::interfaceStyleChanged(bool isDark)
+                                            /////////////////////    CONFIG SLOTS    /////////////////////
+void MainWindow::UiReadFromConfig()
 {
-    m_axesCurvesConfig->setDarkInterface(isDark);
-    if (isDark == false) {
-        setDefaultStyleSheet();
+    // read pin config
+    m_pinConfig->readFromConfig();
+    // read axes config
+    m_axesConfig->readFromConfig();
+    // read axes curves config
+    m_axesCurvesConfig->readFromConfig();
+    // read shift registers config
+    m_shiftRegConfig->readFromConfig();
+    // read encoder config
+    m_encoderConfig->readFromConfig();
+    // read LED config
+    m_ledConfig->readFromConfig();
+    // read adv.settings config
+    m_advSettings->readFromConfig();
+    // read button config
+    m_buttonConfig->readFromConfig();
+}
+
+void MainWindow::UiWriteToConfig()
+{
+    // write pin config
+    m_pinConfig->writeToConfig();
+    // write axes config
+    m_axesConfig->writeToConfig();
+    // write axes curves config
+    m_axesCurvesConfig->writeToConfig();
+    // write shift registers config
+    m_shiftRegConfig->writeToConfig();
+    // write encoder config
+    m_encoderConfig->writeToConfig();
+    // write LED config
+    m_ledConfig->writeToConfig();
+    // write adv.settings config
+    m_advSettings->writeToConfig();
+    // write button config
+    m_buttonConfig->writeToConfig();
+    // remove device name from registry. sometimes windows does not update the name in gaming devices and has to be deleted in the registry
+#ifdef Q_OS_WIN
+        qDebug()<<"Remove device OEMName from registry";
+        QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QString path2("HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QSettings(path.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
+        QSettings(path2.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
+#endif
+}
+
+
+// load default config
+void MainWindow::finalInitialization()
+{
+    // load config files
+    QStringList filesList = cfgFilesList(m_cfgDirPath);
+    if (filesList.isEmpty() == false) {
+        ui->comboBox_Configs->clear();
+        ui->comboBox_Configs->addItems(filesList);
+        gEnv.pAppSettings->beginGroup("Configs");
+        QString lastCfg(gEnv.pAppSettings->value("LastCfg").toString());
+        gEnv.pAppSettings->endGroup();
+        bool found = false;
+        for (int i = 0; i < filesList.size(); ++i) {
+            if (filesList[i] == lastCfg) {
+                curCfgFileChanged(lastCfg);
+                ui->comboBox_Configs->setCurrentIndex(i);
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            curCfgFileChanged(ui->comboBox_Configs->currentText());
+        }
+    }  else {
+        UiReadFromConfig();
+    }
+
+    // select config comboBox // should be after "// load config files"
+    connect(ui->comboBox_Configs, &QComboBox::currentTextChanged, this, &MainWindow::curCfgFileChanged);
+}
+
+// current cfg file changed
+void MainWindow::curCfgFileChanged(const QString &fileName)
+{
+    QString filePath = m_cfgDirPath + '/' + fileName + ".cfg";
+    ConfigToFile::loadDeviceConfigFromFile(this, filePath, gEnv.pDeviceConfig->config);
+    UiReadFromConfig();
+}
+// get config file list
+QStringList MainWindow::cfgFilesList(const QString &dirPath)
+{
+    QDir dir(dirPath);
+    QStringList cfgs = dir.entryList(QStringList() << "*.cfg", QDir::Files);
+    for (auto &line : cfgs) {
+        line.remove(line.size() - 4, 4);// 4 = ".cfg" characters count
+    }
+    cfgs.sort(Qt::CaseInsensitive);
+    return cfgs;
+}
+
+
+// slot after receiving the config
+void MainWindow::configReceived(bool success)
+{
+    m_buttonDefaultStyle = ui->pushButton_ReadConfig->styleSheet();
+    static QString button_default_text = ui->pushButton_ReadConfig->text();    //????????????????????????
+
+    if (success == true)
+    {
+        UiReadFromConfig();
+        // curves pointer activated
+        m_axesCurvesConfig->deviceStatus(true);
+
+        // set firmware version
+        QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
+        if (str.size() == 4) {
+            ui->label_DeviceStatus->setText(tr("Device firmware") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3] + " ✔");
+        }
+
+        ui->pushButton_ReadConfig->setText(tr("Received"));
+        ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle + "color: rgb(235, 235, 235); background-color: rgb(0, 128, 0);");
+        QTimer::singleShot(1500, this, [&] {
+            ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle);
+            ui->pushButton_ReadConfig->setText(button_default_text);
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
+                ui->pushButton_ReadConfig->setEnabled(true);
+                ui->pushButton_WriteConfig->setEnabled(true);
+            }
+        });
+    } else {
+        ui->pushButton_ReadConfig->setText(tr("Error"));
+        ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle + "color: rgb(235, 235, 235); background-color: rgb(200, 0, 0);");
+        QTimer::singleShot(1500, this, [&] {
+            ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle);
+            ui->pushButton_ReadConfig->setText(button_default_text);
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0) {
+                ui->pushButton_ReadConfig->setEnabled(true);
+                ui->pushButton_WriteConfig->setEnabled(true);
+            }
+        });
     }
 }
 
-// we need set default styleSheet only for a small amount widgets
-// if i use w.setStyleSheet(ts.readAll()); load time increases by 500ms!
-// this function set styleSheet only for the necessary widgets
-void MainWindow::setDefaultStyleSheet()
+// slot after sending the config
+void MainWindow::configSent(bool success)
 {
-    ui->pushButton_Wiki->setStyleSheet(
-    "QPushButton#pushButton_Wiki {"
-        "border: 1px solid;"
-        "border-color: rgb(173, 173, 173);"
-        "border-radius:15px;"
-        "padding:0px;"
-        "margin: 0px;"
-        "min-width: 30;"
-        "max-width: 30;"
-        "max-height: 30;"
-        "min-height: 30;"
-        "width: 30;"
-        "height: 30;"
-    "}"
-    "QPushButton#pushButton_Wiki:hover {"
-        "border: 1px solid;"
-        "border-color: rgb(0, 120, 215);"
-        "background-color: rgb(229, 241, 251);"
-        "border-radius:15px;"
-    "}");
+    m_buttonDefaultStyle = ui->pushButton_ReadConfig->styleSheet();
+    static QString button_default_text = ui->pushButton_WriteConfig->text();    //???
+    // curves pointer activated
+    m_axesCurvesConfig->deviceStatus(true);
+
+    if (success == true)
+    {
+        ui->pushButton_WriteConfig->setText(tr("Sent"));
+        ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle + "color: white; background-color: rgb(0, 128, 0);");
+
+        QTimer::singleShot(1500, this, [&] {
+            ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle);
+            ui->pushButton_WriteConfig->setText(button_default_text);
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
+                ui->pushButton_ReadConfig->setEnabled(true);
+                ui->pushButton_WriteConfig->setEnabled(true);
+            }
+        });
+    } else {
+        ui->pushButton_WriteConfig->setText(tr("Error"));
+        ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle + "color: white; background-color: rgb(200, 0, 0);");
+
+        QTimer::singleShot(1500, this, [&] {
+            ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle);
+            ui->pushButton_WriteConfig->setText(button_default_text);
+            if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
+                ui->pushButton_ReadConfig->setEnabled(true);
+                ui->pushButton_WriteConfig->setEnabled(true);
+            }
+        });
+    }
+
+    // remove device name from registry. sometimes windows does not update the name in gaming devices and has to be deleted in the registry
+#ifdef Q_OS_WIN
+        qDebug()<<"Remove device OEMName from registry";
+        QString path("HKEY_CURRENT_USER\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QString path2("HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\MediaProperties\\PrivateProperties\\Joystick\\OEM\\VID_%1&PID_%2");
+        QSettings(path.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
+        QSettings(path2.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
+                  QSettings::NativeFormat).remove("OEMName");
+#endif
 }
+
+
+
+                                            /////////////////////    APP SETTINGS   /////////////////////
 
 // slot language change
 void MainWindow::languageChanged(const QString &language)
 {
     qDebug()<<"Retranslate UI";
-    bool ok;
-    if (language == "russian")
+
+    auto trFunc = [&](const QString &file) {
+        if (gEnv.pTranslator->load(file) == false) {
+            qWarning()<<"failed to load translate file";
+            return false;
+        }
+        qApp->installTranslator(gEnv.pTranslator);
+        ui->retranslateUi(this);
+        return true;
+    };
+
+    if (language == "english")
     {
-        ok = gEnv.pTranslator->load(":/FreeJoyQt_ru");// + QString("ru_RU"));//QLocale::system().name();//QString("ru_RU"));//QLocale::name());
-        if (ok == false) {
-            qCritical()<<"failed to load translate file";
+        if (gEnv.pTranslator->load(":/NO_FILE_IS_OK!!_DEFAULT_TRANSLATE") == true) {
+            qWarning()<<"failed to load translate file";
             return;
         }
         qApp->installTranslator(gEnv.pTranslator);
         ui->retranslateUi(this);
     }
-    else if (language == "english")
+    else if (language == "russian")
     {
-        ok = gEnv.pTranslator->load(":/NO_FILE_IS_OK!!_DEFAULT_TRANSLATE");
-        if (ok == true) {
-            qCritical()<<"failed to load translate file";
-            return;
-        }
-        qApp->installTranslator(gEnv.pTranslator);
-        ui->retranslateUi(this);
+        if (trFunc(":/FreeJoyQt_ru") == false) return;
     }
     else if (language == "schinese")
     {
-        ok = gEnv.pTranslator->load(":/FreeJoyQt_zh_CN");
-        if (ok == false) {
-            qCritical()<<"failed to load translate file";
-            return;
-        }
-        qApp->installTranslator(gEnv.pTranslator);
-        ui->retranslateUi(this);
-    } else {
+        if (trFunc(":/FreeJoyQt_zh_CN") == false) return;
+    }
+    else if (language == "schinese")
+    {
+        if (trFunc(":/FreeJoyQt_de_DE") == false) return;
+    }
+    else
+    {
         return;
     }
+
     m_pinConfig->retranslateUi();
     m_buttonConfig->retranslateUi();
     m_ledConfig->retranslateUi();
@@ -476,33 +641,14 @@ void MainWindow::loadAppConfig()
 {
     QSettings *appS = gEnv.pAppSettings;
     qDebug()<<"Loading application config";
-
     // load window settings
     appS->beginGroup("WindowSettings");
     this->restoreGeometry(appS->value("Geometry").toByteArray());
     appS->endGroup();
-
     // load tab index
     appS->beginGroup("TabIndexSettings");
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_PinConfig),
-                                      appS->value("PinConfig", ui->tabWidget->indexOf(ui->tab_PinConfig)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ButtonConfig),
-                                      appS->value("ButtonConfig", ui->tabWidget->indexOf(ui->tab_ButtonConfig)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesConfig),
-                                      appS->value("AxesConfig", ui->tabWidget->indexOf(ui->tab_AxesConfig)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AxesCurves),
-                                      appS->value("AxesCurves", ui->tabWidget->indexOf(ui->tab_AxesCurves)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_ShiftRegisters),
-                                      appS->value("ShiftRegs", ui->tabWidget->indexOf(ui->tab_ShiftRegisters)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_Encoders),
-                                      appS->value("Encoders", ui->tabWidget->indexOf(ui->tab_Encoders)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_LED),
-                                      appS->value("LED", ui->tabWidget->indexOf(ui->tab_LED)).toInt());
-    ui->tabWidget->tabBar()->moveTab (ui->tabWidget->indexOf(ui->tab_AdvancedSettings),
-                                      appS->value("AdvSettings", ui->tabWidget->indexOf(ui->tab_AdvancedSettings)).toInt());
     ui->tabWidget->setCurrentIndex(appS->value("CurrentIndex", 0).toInt());
     appS->endGroup();
-
     // load debug window
     appS->beginGroup("OtherSettings");
     m_debugIsEnable = appS->value("DebugEnable", "false").toBool();
@@ -512,6 +658,10 @@ void MainWindow::loadAppConfig()
             resize(width(), height() - 120 - ui->layoutG_MainLayout->verticalSpacing());
         }
     }
+    appS->endGroup();
+    // load configs dir path
+    appS->beginGroup("Configs");
+    m_cfgDirPath = appS->value("Path", QDir::currentPath() +'/'+ "configs").toString();
     appS->endGroup();
 
     //debug tab, only for debug build
@@ -529,14 +679,6 @@ void MainWindow::saveAppConfig()
     qDebug()<<"Saving application config";
     // save tab index
     appS->beginGroup("TabIndexSettings");
-    appS->setValue("PinConfig",       ui->tabWidget->indexOf(ui->tab_PinConfig));
-    appS->setValue("ButtonConfig",    ui->tabWidget->indexOf(ui->tab_ButtonConfig));
-    appS->setValue("AxesConfig",      ui->tabWidget->indexOf(ui->tab_AxesConfig));
-    appS->setValue("AxesCurves",      ui->tabWidget->indexOf(ui->tab_AxesCurves));
-    appS->setValue("ShiftRegs",       ui->tabWidget->indexOf(ui->tab_ShiftRegisters));
-    appS->setValue("Encoders",        ui->tabWidget->indexOf(ui->tab_Encoders));
-    appS->setValue("LED",             ui->tabWidget->indexOf(ui->tab_LED));
-    appS->setValue("AdvSettings",     ui->tabWidget->indexOf(ui->tab_AdvancedSettings));
     appS->setValue("CurrentIndex",    ui->tabWidget->currentIndex());
     appS->endGroup();
     // save window settings
@@ -551,6 +693,11 @@ void MainWindow::saveAppConfig()
     appS->beginGroup("OtherSettings");
     appS->setValue("DebugEnable", m_debugIsEnable);
     appS->endGroup();
+    // save configs dir path
+    appS->beginGroup("Configs");
+    appS->setValue("Path", m_cfgDirPath);
+    appS->setValue("LastCfg", ui->comboBox_Configs->currentText());
+    appS->endGroup();
     qDebug()<<"done";
 }
 
@@ -561,17 +708,19 @@ void MainWindow::hidDeviceListChanged(int index)
 {
     m_hidDeviceWorker->setSelectedDevice(index);
 }
+
 // reset all pins
 void MainWindow::on_pushButton_ResetAllPins_clicked()
 {
     qDebug()<<"Reset all started";
     gEnv.pDeviceConfig->resetConfig();
 
-    readFromConfig();
+    UiReadFromConfig();
 
     m_pinConfig->resetAllPins();
     qDebug()<<"done";
 }
+
 // read config from device
 void MainWindow::on_pushButton_ReadConfig_clicked()
 {
@@ -581,6 +730,7 @@ void MainWindow::on_pushButton_ReadConfig_clicked()
 
     m_hidDeviceWorker->getConfigFromDevice();
 }
+
 // write config to device
 void MainWindow::on_pushButton_WriteConfig_clicked()
 {
@@ -588,64 +738,69 @@ void MainWindow::on_pushButton_WriteConfig_clicked()
     ui->pushButton_WriteConfig->setEnabled(false);  // не успевает блокироваться? таймер
     ui->pushButton_ReadConfig->setEnabled(false);
 
-    writeToConfig();
+    UiWriteToConfig();
     m_hidDeviceWorker->sendConfigToDevice();
 }
+
 // load from file
 void MainWindow::on_pushButton_LoadFromFile_clicked()
 {
     qDebug()<<"Load from file started";
     QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
+        tr("Open Config"), m_cfgDirPath + "/", tr("Config Files (*.cfg)"));
 
-    QSettings device_settings( fileName, QSettings::IniFormat );
-    loadDeviceConfigFromFile(&device_settings);
+    ConfigToFile::loadDeviceConfigFromFile(this, fileName, gEnv.pDeviceConfig->config);
+    UiReadFromConfig();
     qDebug()<<"done";
 }
+
 // save to file
 void MainWindow::on_pushButton_SaveToFile_clicked()
 {
     qDebug()<<"Save to file started";
-    QString fileName = QFileDialog::getSaveFileName(this,
-        tr("Save Config"), QDir::currentPath() + "/" + gEnv.pDeviceConfig->config.device_name, tr("Config Files (*.cfg)"));
 
-
-    QSettings device_settings( fileName, QSettings::IniFormat );
-    saveDeviceConfigToFile(&device_settings);
-    qDebug()<<"done";
-}
-//set default config
-void MainWindow::on_pushButton_SetDefaultConfig_clicked()
-{
-    qDebug()<<"Set default config started";
-    QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open Config"), QDir::currentPath() + "/", tr("Config Files (*.cfg)"));
-
-    gEnv.pAppSettings->beginGroup("DefaultConfig");
-    gEnv.pAppSettings->setValue("FileName", fileName);
-    gEnv.pAppSettings->endGroup();
-    qDebug()<<"done";
-}
-// load default config file
-void MainWindow::on_pushButton_LoadDefaultConfig_clicked()
-{
-    qDebug()<<"Load default config started";
-    gEnv.pAppSettings->beginGroup("DefaultConfig");
-
-    if (gEnv.pAppSettings->value("FileName", "none") != "none"){
-        QSettings app_settings( gEnv.pAppSettings->value("FileName", "none").toString(), QSettings::IniFormat );
-        loadDeviceConfigFromFile(&app_settings);
+    QString tmpStr(ui->comboBox_Configs->currentText());
+    if (tmpStr == "") {
+        tmpStr = gEnv.pDeviceConfig->config.device_name;
     }
-    QSettings app_settings( "FreeJoySettings.conf", QSettings::IniFormat );
-    gEnv.pAppSettings->endGroup();
-    qDebug()<<"Load default config finished";
+
+    QFileInfo file(QFileDialog::getSaveFileName(this, tr("Save Config"),
+                                                m_cfgDirPath + "/" + tmpStr, tr("Config Files (*.cfg)")));
+    UiWriteToConfig();
+    ConfigToFile::saveDeviceConfigToFile(file.absoluteFilePath(), gEnv.pDeviceConfig->config);
+
+    QTimer::singleShot(200, this, [this, file]{
+        QSignalBlocker bl(ui->comboBox_Configs);
+        ui->comboBox_Configs->clear();
+        ui->comboBox_Configs->addItems(cfgFilesList(m_cfgDirPath));
+        bl.unblock();
+
+        QString fileName(file.fileName());
+        fileName.remove(fileName.size() - 4, 4); // 4 = ".cfg" characters count
+        ui->comboBox_Configs->setCurrentText(fileName);
+    });
+    qDebug()<<"done";
 }
+
+// select configs dir path
+void MainWindow::on_toolButton_ConfigsDir_clicked()
+{
+    SelectFolder dialog(m_cfgDirPath, this);
+    if (dialog.exec() == QDialog::Accepted) {
+        m_cfgDirPath = dialog.folderPath();
+        QSignalBlocker bl(ui->comboBox_Configs);
+        ui->comboBox_Configs->clear();
+        bl.unblock();
+        ui->comboBox_Configs->addItems(cfgFilesList(m_cfgDirPath));
+    }
+}
+
 // Show debug widget
 void MainWindow::on_pushButton_ShowDebug_clicked()
 {
     if (m_debugWindow == nullptr)
     {
-        m_debugWindow = new DebugWindow(this);       // хз мб всё же стоит создать дебаг в конструкторе и оставить скрытым и не экономить пару кб
+        m_debugWindow = new DebugWindow(this);
         gEnv.pDebugWindow = m_debugWindow;
         ui->layoutV_DebugWindow->addWidget(m_debugWindow);
         m_debugWindow->hide();
@@ -659,7 +814,7 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
         }
         m_debugWindow->setVisible(true);
         m_debugIsEnable = true;
-        ui->pushButton_ShowDebug->setText(tr("Hide debug"));    // in MainWindow::languageChanged
+        ui->pushButton_ShowDebug->setText(tr("Hide debug"));    // dont forget in MainWindow::languageChanged
     } else {
         m_debugWindow->setVisible(false);
         m_debugWindow->setMinimumHeight(0);
@@ -670,6 +825,7 @@ void MainWindow::on_pushButton_ShowDebug_clicked()
         ui->pushButton_ShowDebug->setText(tr("Show debug"));
     }
 }
+
 // Wiki
 void MainWindow::on_pushButton_Wiki_clicked()
 {
@@ -678,61 +834,26 @@ void MainWindow::on_pushButton_Wiki_clicked()
 
 
 
-
-////////////////////////////////////////////////// debug tab //////////////////////////////////////////////////
-// style
-#include <QCheckBox>
-void MainWindow::styleSwitched(int index)
+void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    setCursor(Qt::WaitCursor);
-    QString path;
-    if (index == 0) {
-        path = ":/styles/default.qss";
-    } else if (index == 1) {
-        path = ":qss/qss.qss";
-    } else {
-        path = ":qdarkstyle/style.qss";
+    if (event->key() == Qt::Key_Control) {
+        m_axesCurvesConfig->setExclusive(false);
     }
-
-    QFile f(path);
-    if (!f.open(QFile::ReadOnly | QFile::Text)) {
-        qDebug() << "Unable to set stylesheet, file not found\n";
-    } else {
-        QElapsedTimer timer;
-        timer.start();
-
-        for (auto &&child : window()->findChildren<QComboBox *>()) {
-            child->hide();
-        }
-        for (auto &&child : window()->findChildren<QCheckBox *>()) {
-            child->hide();
-        }
-        for (auto &&child : window()->findChildren<QSpinBox *>()) {
-            child->hide();
-        }
-
-        window()->setStyleSheet(QLatin1String(f.readAll()));
-        qApp->setStyleSheet(QLatin1String(""));
-
-        for (auto &&child : window()->findChildren<QComboBox *>()) {
-            child->show();
-        }
-        for (auto &&child : window()->findChildren<QCheckBox *>()) {
-            child->show();
-        }
-        for (auto &&child : window()->findChildren<QSpinBox *>()) {
-            child->show();
-        }
-
-        qDebug() << "Style changed in" <<timer.elapsed() <<"ms";
-        f.close();
-    }
-    unsetCursor();
 }
 
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Control) {
+        m_axesCurvesConfig->setExclusive(true);
+    }
+}
+
+
+
+////////////////////////////////////////////////// debug tab //////////////////////////////////////////////////
 // test buttons in debug tab
 #ifdef QT_DEBUG
-dev_config_t testCfg;
+static dev_config_t testCfg;
 #endif
 void MainWindow::on_pushButton_TestButton_clicked()
 {

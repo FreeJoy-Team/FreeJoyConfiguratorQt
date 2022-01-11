@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AxesCurves</class>
+ <widget class="QWidget" name="AxesCurves">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>965</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="layoutG_AxisCurve" rowstretch="0,1,0,1,0,1,0,1" columnstretch="1,4,1">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>X</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Rx</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="AxesCurvesButton" name="widget_CurveX" native="true"/>
+   </item>
+   <item row="1" column="2">
+    <widget class="AxesCurvesButton" name="widget_CurveRx" native="true"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Y</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Ry</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="AxesCurvesButton" name="widget_CurveY" native="true"/>
+   </item>
+   <item row="3" column="2">
+    <widget class="AxesCurvesButton" name="widget_CurveRy" native="true"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Z</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Rz</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="AxesCurvesButton" name="widget_CurveZ" native="true"/>
+   </item>
+   <item row="5" column="2">
+    <widget class="AxesCurvesButton" name="widget_CurveRz" native="true"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Slider 1</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Slider 2</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="AxesCurvesButton" name="widget_CurveSlider1" native="true"/>
+   </item>
+   <item row="7" column="2">
+    <widget class="AxesCurvesButton" name="widget_CurveSlider2" native="true"/>
+   </item>
+   <item row="0" column="1" rowspan="8">
+    <widget class="AxesCurvesPlot" name="widget_AxesCurvesPlot" native="true"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AxesCurvesPlot</class>
+   <extends>QWidget</extends>
+   <header>axescurvesplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AxesCurvesButton</class>
+   <extends>QWidget</extends>
+   <header>axescurvesbutton.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

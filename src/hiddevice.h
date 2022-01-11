@@ -1,13 +1,9 @@
 #ifndef HIDDEVICE_H
 #define HIDDEVICE_H
 
-#include "hidapi.h"
-#include "reportconverter.h"
-
-#include "deviceconfig.h"
-#include "global.h"
-
 #include <QObject>
+#include <mutex>
+#include "hidapi.h"
 
 class HidDevice : public QObject
 {
@@ -20,7 +16,7 @@ public:
     bool enterToFlashMode();
     void flashFirmware(const QByteArray *firmware);
 
-    void setIsFinish(bool is_finish);
+    void setIsFinish(bool isFinish);
     void setSelectedDevice(int deviceNumber);
 
 public slots:
@@ -30,34 +26,57 @@ signals:
     void deviceDisconnected();
     void deviceConnected();
     void flasherConnected();
-    void paramsPacketReceived(uint8_t *buffer);
+    void paramsPacketReceived(bool firmwareCompatible);
 
-    void configReceived(bool is_success);
-    void configSent(bool is_success);
+    void configReceived(bool isSuccess);
+    void configSent(bool isSuccess);
 
     void hidDeviceList(const QList<QPair<bool, QString>> &deviceNames);
 
-    void flasherFound(bool is_found);
+    void flasherFound(bool isFound);
     void flashStatus(int status, int percent);
 
 private:
+    struct Device
+    {
+        ushort vid;
+        ushort pid;
+        std::wstring serNum;
+        std::string path;
+
+        Device (const hid_device_info *hid) {
+            this->vid = hid->vendor_id;
+            this->pid = hid->product_id;
+            this->serNum = hid->serial_number;
+            this->path = hid->path;
+        }
+
+        void operator = (const hid_device_info *hid) {
+            this->vid = hid->vendor_id;
+            this->pid = hid->product_id;
+            this->serNum = hid->serial_number;
+            this->path = hid->path;
+        }
+    };
+    QList<Device> m_hidDevicesList;  // should be thread safe
+
     hid_device *m_paramsRead;
     hid_device *m_joyRead;
-    bool m_isFinish = false;
-    volatile int m_selectedDevice = -1;
-    volatile int m_currentWork;
 
+    int m_selectedDevice = -1;
+    int m_currentWork;
     bool m_oldFirmwareSelected;
+    bool m_isFinish = false;
 
     void readConfigFromDevice(uint8_t *buffer);
     void writeConfigToDevice(uint8_t *buffer);
     void flashFirmwareToDevice();
 
     QList<QPair<bool, QString>> m_deviceNames;
-    uint8_t m_deviceBuffer[BUFFERSIZE];
-    QList<hid_device_info *> m_HidDevicesAdrList;
-    hid_device_info *m_flasher;
+    QByteArray m_flasherPath;
     const QByteArray *m_firmware;
+
+    mutable std::mutex m_mutex;
 };
 
 #endif // HIDDEVICE_H

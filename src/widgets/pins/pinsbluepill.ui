@@ -1,0 +1,1040 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PinsBluePill</class>
+ <widget class="QWidget" name="PinsBluePill">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>864</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" rowstretch="1,15,1" columnstretch="4,15,16,15,4">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="2">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <layout class="QGridLayout" name="layoutG_pinsLeft" columnstretch="5,1">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="3" column="1">
+      <widget class="QLabel" name="text_B15">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B15</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="text_A8">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A8</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QLabel" name="text_B3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B3</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLabel" name="text_A9">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A9</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="1">
+      <widget class="QLabel" name="text_B6">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B6</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="1">
+      <widget class="QLabel" name="text_B7">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B7</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="19" column="1">
+      <widget class="QLabel" name="text_33V_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">3.3V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="text_B14">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B14</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="1">
+      <widget class="QLabel" name="text_B8">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B8</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLabel" name="text_A11_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(85, 107, 47, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A11</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QLabel" name="text_B4">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B4</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="text_B12">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B12</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="1">
+      <widget class="QLabel" name="text_B5">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B5</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="1">
+      <widget class="QLabel" name="text_B9">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B9</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLabel" name="text_A12_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(85, 107, 47, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A12</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="1">
+      <widget class="QLabel" name="text_5V_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">5V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QLabel" name="text_A15">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A15</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="18" column="1">
+      <widget class="QLabel" name="text_GND_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(128, 128, 128, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="text_B13">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B13</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLabel" name="text_A10">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A10</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="18" column="0">
+      <widget class="QLabel" name="label_GND">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="19" column="0">
+      <widget class="QLabel" name="label_33V">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">3.3V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="0">
+      <widget class="QLabel" name="label_5V">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">5V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_USBDminus">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">USBD-</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_USBDplus">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">USBD+</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="3">
+    <layout class="QGridLayout" name="layoutG_pinsRight" columnstretch="1,5">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="15" column="0">
+      <widget class="QLabel" name="text_A0">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="text_A5">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A5</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="text_B10">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B10</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="18" column="0">
+      <widget class="QLabel" name="text_C13">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">C13</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="text_GND_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(128, 128, 128, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="text_33V_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">3.3V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="text_GND_4">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(128, 128, 128, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="text_A4">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A4</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="19" column="0">
+      <widget class="QLabel" name="text_VB">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 140, 0, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">VB</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="text_A6">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A6</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="text_A7">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A7</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="text_RST">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(85, 107, 47, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">RST</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="0">
+      <widget class="QLabel" name="text_A1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A1</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="0">
+      <widget class="QLabel" name="text_C15">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">C15</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="text_B1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B1</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QLabel" name="text_A3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A3</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="text_B11">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B11</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="0">
+      <widget class="QLabel" name="text_C14">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">C14</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="0">
+      <widget class="QLabel" name="text_A2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(144, 238, 144, 200);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">A2</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="text_B0">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(173, 216, 230, 170);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">B0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_GND_3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_GND_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">GND</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_33V_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">3.3V</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_RST">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">RESET</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="19" column="1">
+      <widget class="QLabel" name="label_VBUS">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid;
+border-color: rgba(124, 124, 124, 130);
+background-color: rgba(105, 105, 105, 20);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string notr="true">VBUS</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLabel" name="label_ControllerImage">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../../resources.qrc">:/Images/BluePill_render.jpg</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="4">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

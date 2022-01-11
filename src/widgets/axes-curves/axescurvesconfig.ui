@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AxesCurvesConfig</class>
+ <widget class="QWidget" name="AxesCurvesConfig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1062</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" rowstretch="4,1" columnstretch="1,0">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_Profiles">
+     <property name="title">
+      <string>Curve profiles</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <layout class="QHBoxLayout" name="layoutH_Profiles">
+      <property name="leftMargin">
+       <number>6</number>
+      </property>
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="rightMargin">
+       <number>6</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="InfoLabel" name="info">
+       <property name="maximumSize">
+        <size>
+         <width>999</width>
+         <height>999</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Curve profiles are saves in the application configuration.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;-&lt;/span&gt; sets profile to the current value of the curve.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/reset.png&quot; height=&quot;16&quot;/&gt; - resets profile value.&lt;/p&gt;&lt;p&gt;Use &lt;span style=&quot; font-weight:600;&quot;&gt;CTRL&lt;/span&gt; for multiple selection.&lt;/p&gt;&lt;p&gt;You can &lt;span style=&quot; font-weight:600;&quot;&gt;drag&lt;/span&gt; curves with the &lt;span style=&quot; font-weight:600;&quot;&gt;mouse.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_Ctrl">
+       <property name="text">
+        <string notr="true">Ctrl</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="AxesCurves" name="widget_AxesCurves" native="true"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AxesCurves</class>
+   <extends>QWidget</extends>
+   <header>axescurves.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>InfoLabel</class>
+   <extends>QLabel</extends>
+   <header>infolabel.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
