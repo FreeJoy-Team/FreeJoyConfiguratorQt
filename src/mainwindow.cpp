@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
     QMainWindow::setWindowIcon(QIcon(":/Images/icon-32.png"));
 
     // firmware version
-    setWindowTitle(tr("FreeJoy Configurator") + " v" + APP_VERSION +" PREVIEW");
+    setWindowTitle(tr("FreeJoy Configurator") + " v" + APP_VERSION);
 
     // load application config
     loadAppConfig();

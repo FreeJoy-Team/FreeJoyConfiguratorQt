@@ -152,7 +152,8 @@ FORMS += \
 
 TRANSLATIONS += \
     FreeJoyQt_ru.ts \
-    FreeJoyQt_zh_CN.ts
+    FreeJoyQt_zh_CN.ts \
+    FreeJoyQt_de_DE.ts
 
 
 # Default rules for deployment.

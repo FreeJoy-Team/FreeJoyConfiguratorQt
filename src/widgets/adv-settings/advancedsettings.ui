@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1062</width>
+    <width>1084</width>
     <height>598</height>
    </rect>
   </property>
@@ -502,73 +502,124 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
-        <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0,0,0">
+        <layout class="QGridLayout" name="layoutG_Lang" rowstretch="0,0,0,0,0" columnstretch="2,5,1,2">
          <property name="leftMargin">
-          <number>50</number>
+          <number>6</number>
          </property>
          <property name="topMargin">
           <number>6</number>
          </property>
          <property name="rightMargin">
-          <number>50</number>
+          <number>6</number>
          </property>
          <property name="bottomMargin">
           <number>6</number>
          </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+         <item row="2" column="0">
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="3">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="4" column="2" colspan="2">
+          <widget class="QPushButton" name="pushButton_RestartApp">
+           <property name="toolTip">
+            <string>Restart for full changes</string>
            </property>
            <property name="text">
-            <string>Restart app for full changes</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <string>Restart</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="1" colspan="2">
+          <widget class="QPushButton" name="pushButton_LangDeutsch">
+           <property name="text">
+            <string notr="true">Deutsch</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../resources.qrc">
+             <normaloff>:/Images/flags/Germany.png</normaloff>:/Images/flags/Germany.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <spacer name="horizontalSpacer_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="1" colspan="2">
+          <widget class="QPushButton" name="pushButton_LangSChinese">
+           <property name="text">
+            <string notr="true">简体中文</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../resources.qrc">
+             <normaloff>:/Images/flags/china.png</normaloff>:/Images/flags/china.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="2">
           <widget class="QPushButton" name="pushButton_LangRussian">
            <property name="text">
             <string notr="true">Русский</string>
            </property>
            <property name="icon">
             <iconset resource="../../resources.qrc">
-             <normaloff>:/Images/rus.png</normaloff>:/Images/rus.png</iconset>
+             <normaloff>:/Images/flags/Russia.png</normaloff>:/Images/flags/Russia.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="0" column="1" colspan="2">
           <widget class="QPushButton" name="pushButton_LangEnglish">
            <property name="text">
             <string notr="true">English</string>
            </property>
            <property name="icon">
             <iconset resource="../../resources.qrc">
-             <normaloff>:/Images/eng.png</normaloff>:/Images/eng.png</iconset>
+             <normaloff>:/Images/flags/United_Kingdom.png</normaloff>:/Images/flags/United_Kingdom.png</iconset>
            </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_LangSChinese">
-           <property name="text">
-            <string>简体中文</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../../resources.qrc">
-             <normaloff>:/Images/china.png</normaloff>:/Images/china.png</iconset>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
            </property>
           </widget>
          </item>
         </layout>
         <zorder>pushButton_LangSChinese</zorder>
         <zorder>pushButton_LangEnglish</zorder>
-        <zorder>label</zorder>
         <zorder>pushButton_LangRussian</zorder>
+        <zorder>pushButton_LangDeutsch</zorder>
+        <zorder>pushButton_RestartApp</zorder>
        </widget>
       </item>
       <item row="1" column="1">
@@ -706,15 +757,15 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>InfoLabel</class>
+   <extends>QLabel</extends>
+   <header>infolabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>SwitchButton</class>
    <extends>QWidget</extends>
    <header>switchbutton.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>InfoLabel</class>
-   <extends>QLabel</extends>
-   <header>infolabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

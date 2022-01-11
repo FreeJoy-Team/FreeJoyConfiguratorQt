@@ -8,6 +8,7 @@
 #include <QSettings>
 #include <QTextStream>
 #include <QTimer>
+#include <QProcess>
 
 #include "version.h"
 #include "deviceconfig.h"
@@ -42,6 +43,10 @@ AdvancedSettings::AdvancedSettings(QWidget *parent)
     ui->text_removeName->setHidden(true);
     ui->pushButton_removeName->setHidden(true);
 #endif
+
+    ui->layoutG_Lang->setAlignment(Qt::AlignCenter);
+    // for future. not ready atm
+    ui->pushButton_LangDeutsch->hide();
 }
 
 AdvancedSettings::~AdvancedSettings()
@@ -85,6 +90,21 @@ void AdvancedSettings::on_pushButton_LangSChinese_clicked()
     gEnv.pAppSettings->endGroup();
 
     emit languageChanged("schinese");
+}
+
+void AdvancedSettings::on_pushButton_LangDeutsch_clicked()
+{
+    gEnv.pAppSettings->beginGroup("LanguageSettings");
+    gEnv.pAppSettings->setValue("Language", "deutsch");
+    gEnv.pAppSettings->endGroup();
+
+    emit languageChanged("deutsch");
+}
+
+void AdvancedSettings::on_pushButton_RestartApp_clicked()
+{
+    qApp->quit();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 }
 
 void AdvancedSettings::on_spinBox_FontSize_valueChanged(int fontSize)
@@ -158,4 +178,3 @@ void AdvancedSettings::writeToConfig()
     // usb exchange period
     gEnv.pDeviceConfig->config.exchange_period_ms = uint8_t(ui->spinBox_USBExchangePeriod->value());
 }
-

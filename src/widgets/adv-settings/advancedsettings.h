@@ -46,6 +46,10 @@ private slots:
 
     void on_pushButton_removeName_clicked();
 
+    void on_pushButton_RestartApp_clicked();
+
+    void on_pushButton_LangDeutsch_clicked();
+
 private:
     Ui::AdvancedSettings *ui;
 

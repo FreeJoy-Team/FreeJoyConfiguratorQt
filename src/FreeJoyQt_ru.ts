@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Restart app for full changes</source>
-        <translation>Требуется перезапуск</translation>
+        <translation type="vanished">Требуется перезапуск</translation>
     </message>
     <message>
         <source>Other settings</source>
@@ -130,10 +130,6 @@
     <message>
         <source>About FreeJoyQt</source>
         <translation>О FreeJoyQt</translation>
-    </message>
-    <message>
-        <source>简体中文</source>
-        <translation></translation>
     </message>
     <message>
         <source>Sometimes Windows does not update the name in gaming devices and has to be deleted in the registry</source>
@@ -175,7 +171,15 @@
     </message>
     <message>
         <source>Additional confirmation when &quot;Write config to Device&quot; button pressed</source>
-        <translation>Дополнительное подтверждение при нажатии кнопки &quot;Запись конфига&quot;</translation>
+        <translation type="vanished">Дополнительное подтверждение при нажатии кнопки &quot;Запись конфига&quot;</translation>
+    </message>
+    <message>
+        <source>Restart for full changes</source>
+        <translation>Требуется перезапуск</translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation>Перезапуск</translation>
     </message>
 </context>
 <context>
@@ -288,19 +292,19 @@
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">Х</translation>
+        <translation>Х</translation>
     </message>
     <message>
         <source>Slider 1</source>
-        <translation type="vanished">Слайдер 1</translation>
+        <translation>Слайдер 1</translation>
     </message>
     <message>
         <source>Slider 2</source>
-        <translation type="vanished">Слайдер 2</translation>
+        <translation>Слайдер 2</translation>
     </message>
     <message>
         <source>Linear</source>
-        <translation>Линейно</translation>
+        <translation type="vanished">Линейно</translation>
     </message>
     <message>
         <source>Linear inverted</source>
@@ -308,15 +312,15 @@
     </message>
     <message>
         <source>Exponent</source>
-        <translation>Экспонента</translation>
+        <translation type="vanished">Экспонента</translation>
     </message>
     <message>
         <source>Exponent inverted</source>
-        <translation>Экспонента перевёрнутая</translation>
+        <translation type="vanished">Экспонента перевёрнутая</translation>
     </message>
     <message>
         <source>Shape</source>
-        <translation>Пьяный водила</translation>
+        <translation type="vanished">Пьяный водила</translation>
     </message>
     <message>
         <source>Reset curves profiles</source>
@@ -364,7 +368,27 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>Кривая</translation>
+        <translation type="vanished">Кривая</translation>
+    </message>
+    <message>
+        <source>Rx</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Ry</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Z</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Rz</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -375,79 +399,67 @@
     </message>
     <message>
         <source>Curves profiles</source>
-        <translation>Профили кривых</translation>
+        <translation type="vanished">Профили кривых</translation>
     </message>
     <message>
         <source>X</source>
-        <translation>Х</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rx</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ry</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rz</source>
-        <translation></translation>
+        <translation type="vanished">Х</translation>
     </message>
     <message>
         <source>Slider 1</source>
-        <translation>Слайдер 1</translation>
+        <translation type="vanished">Слайдер 1</translation>
     </message>
     <message>
         <source>Slider 2</source>
-        <translation>Слайдер 2</translation>
+        <translation type="vanished">Слайдер 2</translation>
     </message>
     <message>
         <source>Reset profiles</source>
-        <translation>Сброс профилей</translation>
+        <translation type="vanished">Сброс профилей</translation>
     </message>
     <message>
         <source>Not used</source>
-        <translation>Не используется</translation>
+        <translation type="vanished">Не используется</translation>
     </message>
     <message>
         <source>Curve 1</source>
-        <translation>Кривая 1</translation>
+        <translation type="vanished">Кривая 1</translation>
     </message>
     <message>
         <source>Curve 2</source>
-        <translation>Кривая 2</translation>
+        <translation type="vanished">Кривая 2</translation>
     </message>
     <message>
         <source>Curve 3</source>
-        <translation>Кривая 3</translation>
+        <translation type="vanished">Кривая 3</translation>
     </message>
     <message>
         <source>Curve 4</source>
-        <translation>Кривая 4</translation>
+        <translation type="vanished">Кривая 4</translation>
     </message>
     <message>
         <source>Curve 5</source>
-        <translation>Кривая 5</translation>
+        <translation type="vanished">Кривая 5</translation>
     </message>
     <message>
         <source>Curve 6</source>
-        <translation>Кривая 6</translation>
+        <translation type="vanished">Кривая 6</translation>
     </message>
     <message>
         <source>Curve 7</source>
-        <translation>Кривая 7</translation>
+        <translation type="vanished">Кривая 7</translation>
     </message>
     <message>
         <source>Curve 8</source>
-        <translation>Кривая 8</translation>
+        <translation type="vanished">Кривая 8</translation>
+    </message>
+    <message>
+        <source>Curve profiles</source>
+        <translation>Профиль кривых</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Curve profiles are saves in the application configuration.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;-&lt;/span&gt; sets profile to the current value of the curve.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/reset.png&quot; height=&quot;16&quot;/&gt; - resets profile value.&lt;/p&gt;&lt;p&gt;Use &lt;span style=&quot; font-weight:600;&quot;&gt;CTRL&lt;/span&gt; for multiple selection.&lt;/p&gt;&lt;p&gt;You can &lt;span style=&quot; font-weight:600;&quot;&gt;drag&lt;/span&gt; curves with the &lt;span style=&quot; font-weight:600;&quot;&gt;mouse.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Профили кривых сорхраняются в настройках приложения.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;-&lt;/span&gt; установить текущее значение кривой в профиль.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/reset.png&quot; height=&quot;16&quot;/&gt; - вернуть стандартный профиль.&lt;/p&gt;&lt;p&gt;используйте &lt;span style=&quot; font-weight:600;&quot;&gt;CTRL&lt;/span&gt; для множественного выбора.&lt;/p&gt;&lt;p&gt;Вы можете &lt;span style=&quot; font-weight:600;&quot;&gt;перетаскивать&lt;/span&gt; профили кривых с помощью &lt;span style=&quot; font-weight:600;&quot;&gt;мыши.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -455,6 +467,53 @@
     <message>
         <source>Form</source>
         <translation type="vanished">Форма</translation>
+    </message>
+</context>
+<context>
+    <name>AxesCurvesProfiles</name>
+    <message>
+        <source>Form</source>
+        <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Set current axis curve to this preset</source>
+        <translation>Установить текущую кривую в этот пресет</translation>
+    </message>
+    <message>
+        <source>Reset to Linear</source>
+        <translation>Сбросить до линейной</translation>
+    </message>
+    <message>
+        <source>Reset to Linear Invert</source>
+        <translation>Сбросить до линейной инвертированной</translation>
+    </message>
+    <message>
+        <source>Reset to Exponent</source>
+        <translation>Сбросить до экспоненты</translation>
+    </message>
+    <message>
+        <source>Reset to Exponent Invert</source>
+        <translation>Сбросить до инвертированной экспоненты</translation>
+    </message>
+    <message>
+        <source>Reset to Shape</source>
+        <translation>Сбросить до Shape</translation>
+    </message>
+    <message>
+        <source>Reset to Shape2</source>
+        <translation>Сбросить до Shape2</translation>
+    </message>
+    <message>
+        <source>Reset to Pulse</source>
+        <translation>Сбросить до пулься</translation>
+    </message>
+    <message>
+        <source>Reset to no Pulse</source>
+        <translation>Сбросить до нет пульса</translation>
     </message>
 </context>
 <context>
@@ -1328,11 +1387,11 @@
     </message>
     <message>
         <source>Load default config</source>
-        <translation>Стандартный конфиг</translation>
+        <translation type="vanished">Стандартный конфиг</translation>
     </message>
     <message>
         <source>Set file to default config</source>
-        <translation>Файл стандартного конфига</translation>
+        <translation type="vanished">Файл стандартного конфига</translation>
     </message>
     <message>
         <source>FreeJoy Configurator</source>
@@ -1450,11 +1509,11 @@ g</source>
     </message>
     <message>
         <source>Confirmation</source>
-        <translation>Подтверждение</translation>
+        <translation type="vanished">Подтверждение</translation>
     </message>
     <message>
         <source>Are you sure you want to write the config?</source>
-        <translation>Вы действительно хотите записать конфиг?</translation>
+        <translation type="vanished">Вы действительно хотите записать конфиг?</translation>
     </message>
 </context>
 <context>
@@ -1757,32 +1816,47 @@ g</source>
 <context>
     <name>SelectDefCfg</name>
     <message>
+        <source>Current file:</source>
+        <translation type="vanished">Текущий файл:</translation>
+    </message>
+    <message>
+        <source>Loading selected config file on startup application.</source>
+        <translation type="vanished">Загружать выбранный конфиг при запуске приложения.</translation>
+    </message>
+    <message>
+        <source>Default config file path</source>
+        <translation type="vanished">Пусть стандартного конфига</translation>
+    </message>
+    <message>
+        <source>Open Config</source>
+        <translation type="vanished">Открыть конфиг</translation>
+    </message>
+    <message>
+        <source>Config Files (*.cfg)</source>
+        <translation type="vanished">Файл конфига (*.cfg)</translation>
+    </message>
+</context>
+<context>
+    <name>SelectFolder</name>
+    <message>
         <source>Dialog</source>
         <translation></translation>
     </message>
     <message>
-        <source>Current file:</source>
-        <translation>Текущий файл:</translation>
-    </message>
-    <message>
         <source>Ok</source>
-        <translation></translation>
+        <translation>Ок</translation>
     </message>
     <message>
-        <source>Loading selected config file on startup application.</source>
-        <translation>Загружать выбранный конфиг при запуске приложения.</translation>
+        <source>Current folder:</source>
+        <translation>Текущая папка:</translation>
     </message>
     <message>
-        <source>Default config file path</source>
-        <translation>Пусть стандартного конфига</translation>
+        <source>Configs folder path</source>
+        <translation>Путь к папке конфигов</translation>
     </message>
     <message>
-        <source>Open Config</source>
-        <translation>Открыть конфиг</translation>
-    </message>
-    <message>
-        <source>Config Files (*.cfg)</source>
-        <translation>Файл конфига (*.cfg)</translation>
+        <source>Select configs folder</source>
+        <translation>Выберите папку с конфигами</translation>
     </message>
 </context>
 <context>
