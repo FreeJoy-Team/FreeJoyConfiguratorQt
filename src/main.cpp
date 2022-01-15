@@ -7,6 +7,8 @@
 #include <QTextStream>
 #include <QStyleFactory>
 #include <QTimer>
+#include <QStandardPaths>
+#include <QDir>
 #include "infolabel.h"
 
 // global environment
@@ -47,11 +49,23 @@ int main(int argc, char *argv[])
     QApplication::setStyle(new InfoProxyStyle(qApp->style()));
     QApplication a(argc, argv);
 
-    // global
-    QSettings appSettings("FreeJoySettings.conf", QSettings::IniFormat);
+    QString docLoc = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (docLoc.isEmpty() == false) {
+        docLoc+= "/FreeJoy/";
+    }
+
+    QDir dir(docLoc);
+    if (dir.exists() == false) {
+        dir.mkpath(".");
+        dir.mkpath("configs");
+    }
+
+    QSettings appSettings(docLoc + "FreeJoySettings.conf", QSettings::IniFormat);
+
     DeviceConfig deviceConfig;
     QTranslator translator;
 
+    // global
     gEnv.pAppSettings = &appSettings;
     gEnv.pDeviceConfig = &deviceConfig;
     gEnv.pTranslator = &translator;

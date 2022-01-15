@@ -661,7 +661,7 @@ void MainWindow::loadAppConfig()
     appS->endGroup();
     // load configs dir path
     appS->beginGroup("Configs");
-    m_cfgDirPath = appS->value("Path", QDir::currentPath() +'/'+ "configs").toString();
+    m_cfgDirPath = appS->value("Path", gEnv.pAppSettings->fileName().remove("FreeJoySettings.conf") + "configs").toString();
     appS->endGroup();
 
     //debug tab, only for debug build
