@@ -108,6 +108,8 @@ private:
     QString m_cfgDirPath;
     void curCfgFileChanged(const QString &fileName);
     QStringList cfgFilesList(const QString &dirPath);
+    QIcon pixmapToIcon(QPixmap pixmap, const QColor &color);
+    void updateColor();
 
     void UiReadFromConfig();
     void UiWriteToConfig();

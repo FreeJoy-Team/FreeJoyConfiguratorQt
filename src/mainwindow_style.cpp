@@ -8,7 +8,7 @@
 #include "deviceconfig.h"
 
 #include <QDebug>
-
+#include <QToolTip>
 ////////////////////////////////////////////////// style //////////////////////////////////////////////////
 // i cannot use qApp->setStyleSheet() because it takes a long time. groupBox_LogicalButtons contains a lot of elements
 // this trick skips groupBox_LogicalButtons. If anyone has any ideas on how to do this better, please tell me
@@ -29,10 +29,11 @@ void MainWindow::themeChanged(bool dark)
 
     if (dark == false)
     {
-        qApp->setPalette(QPalette());
+        //qApp->setPalette(QPalette());
         QPalette pal(QColor(240, 240, 240));
         pal.setColor(QPalette::Disabled, QPalette::Button, QColor(210, 210, 210));
         pal.setColor(QPalette::Dark, QColor(216, 216, 216));     // qframe
+        QToolTip::setPalette(pal);
         qApp->setPalette(pal);
 
         for (int i = 0; i < groupBoxes.size(); ++i) {
@@ -97,7 +98,6 @@ void MainWindow::themeChanged(bool dark)
                     min-height: 30;
                     width: 30;
                     height: 30;
-                    icon: url(\"://Images/ST_wiki.png\");
                 }
 
                 QPushButton#pushButton_Wiki:hover {
@@ -108,14 +108,14 @@ void MainWindow::themeChanged(bool dark)
                 }
             )"));
 
-        // icon: url(); does not work in linux?
+        // stylesheet icon: url(...); does not work in linux?
         ui->pushButton_Wiki->setIcon(QIcon(":/Images/ST_wiki.png"));
 
         styleName = "white";
     }
     else
     {
-        qApp->setPalette(QPalette());
+        //qApp->setPalette(QPalette());
         QPalette pal;
         pal.setColor(QPalette::Window, QColor(52,54,58));//QColor(54,57,63));
         pal.setColor(QPalette::Button, QColor(52,54,58));
@@ -142,6 +142,7 @@ void MainWindow::themeChanged(bool dark)
         pal.setColor(QPalette::Disabled, QPalette::Highlight, QColor(80,80,80));
         pal.setColor(QPalette::HighlightedText, QColor(230,231,232));
         pal.setColor(QPalette::Disabled, QPalette::HighlightedText, QColor(127,127,127));
+        QToolTip::setPalette(pal);
         qApp->setPalette(pal);
 
         for (int i = 0; i < groupBoxes.size(); ++i) {
@@ -207,7 +208,6 @@ void MainWindow::themeChanged(bool dark)
                     min-height: 30;
                     width: 30;
                     height: 30;
-                    icon: url(\"://Images/ST_wiki_dark.png\");
                 }
 
                 QPushButton#pushButton_Wiki:hover {
@@ -218,11 +218,14 @@ void MainWindow::themeChanged(bool dark)
                 }
             )"));
 
-        // icon: url(); does not work in linux?
+        // stylesheet icon: url(...); does not work in linux?
         ui->pushButton_Wiki->setIcon(QIcon(":/Images/ST_wiki_dark.png"));
 
         styleName = "dark";
     }
+
+    updateColor();
+
     gEnv.pAppSettings->beginGroup("StyleSettings");
     gEnv.pAppSettings->setValue("StyleSheet", styleName);
     gEnv.pAppSettings->endGroup();

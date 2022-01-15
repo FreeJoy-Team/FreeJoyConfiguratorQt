@@ -6,6 +6,7 @@
 #include <QSpinBox>
 #include <QCheckBox>
 #include <QKeyEvent>
+#include <QPainter>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -145,7 +146,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_pinConfig, &PinConfig::axesSourceChanged, m_axesConfig, &AxesConfig::addOrDeleteMainSource);
     // language changed
     connect(m_advSettings, &AdvancedSettings::languageChanged, this, &MainWindow::languageChanged);
-    // interface changed
+    // theme changed
     connect(m_advSettings, &AdvancedSettings::themeChanged, this, &MainWindow::themeChanged);
     // font changed
     connect(m_advSettings, &AdvancedSettings::fontChanged, this, &MainWindow::setFont);
@@ -219,7 +220,7 @@ MainWindow::~MainWindow()
 
 
 
-                                                        ///////////////////// device reports /////////////////////
+                                              ///////////////////// device reports /////////////////////
 // device connected
 void MainWindow::showConnectDeviceInfo()
 {
@@ -702,7 +703,7 @@ void MainWindow::saveAppConfig()
 }
 
 
-                                                            ////////////////// buttons //////////////////
+                                                    ////////////////// buttons //////////////////
 // comboBox selected device
 void MainWindow::hidDeviceListChanged(int index)
 {
@@ -848,6 +849,27 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+
+//! QPixmap gray-scale image (an alpha map) to colored QIcon
+QIcon MainWindow::pixmapToIcon(QPixmap pixmap, const QColor &color)
+{
+    // initialize painter to draw on a pixmap and set composition mode
+    QPainter painter(&pixmap);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+    // set color
+    painter.setBrush(color);
+    painter.setPen(color);
+    // paint rect
+    painter.drawRect(pixmap.rect());
+    // here is our new colored icon
+    return QIcon(pixmap);
+}
+
+void MainWindow::updateColor()
+{
+    QColor col = QApplication::palette().color(QPalette::Text);
+    ui->toolButton_ConfigsDir->setIcon(pixmapToIcon(QPixmap(":/Images/setings.png"), col));
+}
 
 
 ////////////////////////////////////////////////// debug tab //////////////////////////////////////////////////

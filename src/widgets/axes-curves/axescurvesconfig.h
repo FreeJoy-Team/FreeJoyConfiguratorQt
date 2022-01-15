@@ -30,6 +30,9 @@ public:
     void updateAxesCurves();
     void deviceStatus(bool isConnect);
 
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
 private slots:
     void setPoints(const QVector<int> &values);
     void on_toolButton_Ctrl_toggled(bool checked);
@@ -37,6 +40,10 @@ private slots:
 private:
     Ui::AxesCurvesConfig *ui;
     QList<AxesCurvesProfiles *> m_profiles;
+
+    void updateColor();
+    QPixmap coloringPixmap(QPixmap pixmap, const QColor &color);
+    QString m_toolTip;
 };
 
 #endif // AXESCURVESCONFIG_H
