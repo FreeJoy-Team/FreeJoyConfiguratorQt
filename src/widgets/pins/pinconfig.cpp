@@ -17,8 +17,7 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
     m_contrLite->hide();
 
     m_maxButtonsWarning = false;
-    m_shiftLatchCount = 0;
-    m_shiftDataCount = 0;
+    m_shiftLatchCount = m_shiftDataCount = m_shiftClkCount = 0;
 
     // create pin combo box. i+1! start from 1
     // возможно использовать одни и те же комбобоксы пинов в разных виджетах плат - изврат,
@@ -173,18 +172,26 @@ void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum,
     // shift register latch selected
     if (currentDeviceEnum == SHIFT_REG_LATCH){
         m_shiftLatchCount++;
-        emit shiftRegSelected(pinNumber, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected(pinNumber, 0, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     } else if (previousDeviceEnum == SHIFT_REG_LATCH){
         m_shiftLatchCount--;
-        emit shiftRegSelected((pinNumber)*-1, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected((pinNumber)*-1, 0, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+    }
+    // shift register CLK selected
+    if (currentDeviceEnum == SHIFT_REG_CLK){
+        m_shiftClkCount++;
+        emit shiftRegSelected(0, pinNumber, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+    } else if (previousDeviceEnum == SHIFT_REG_CLK){
+        m_shiftClkCount--;
+        emit shiftRegSelected(0, (pinNumber)*-1, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     }
     // shift register data selected
     if (currentDeviceEnum == SHIFT_REG_DATA){
         m_shiftDataCount++;
-        emit shiftRegSelected(0, pinNumber, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected(0, 0, pinNumber, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     } else if (previousDeviceEnum == SHIFT_REG_DATA){
         m_shiftDataCount--;
-        emit shiftRegSelected(0, (pinNumber)*-1, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected(0, 0, (pinNumber)*-1, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     }
     // I2C selected
     if (currentDeviceEnum == I2C_SCL){// || current_device_enum == I2C_SDA){

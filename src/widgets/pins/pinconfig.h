@@ -13,7 +13,7 @@ class QGridLayout;
 QT_END_NAMESPACE
 
 #define SOURCE_COUNT 8
-#define PIN_TYPE_LIMIT_COUNT 2
+#define PIN_TYPE_LIMIT_COUNT 3
 
 namespace Ui {
 class PinConfig;
@@ -37,7 +37,7 @@ signals:
     void totalButtonsValueChanged(int count);
     void totalLEDsValueChanged(int totalLed);
     void fastEncoderSelected(const QString &pinGuiName, bool isSelected);
-    void shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName);
+    void shiftRegSelected(int latchPin, int clkPin, int dataPin, const QString &pinGuiName);
     void i2cSelected(bool i2cSelected);
     void axesSourceChanged(int sourceEnum, const QString &sourceName, bool isAdd);
 
@@ -67,6 +67,7 @@ private:
 
     int m_shiftLatchCount;
     int m_shiftDataCount;
+    int m_shiftClkCount;
 
     void signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);
     void pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum);
@@ -104,6 +105,7 @@ private:
     {
         {SHIFT_REG_LATCH,        4},
         {SHIFT_REG_DATA,         4},
+        {SHIFT_REG_CLK,          4},
     };
 
     enum        // and in current config

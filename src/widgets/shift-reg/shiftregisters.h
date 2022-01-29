@@ -26,6 +26,7 @@ public:
     void retranslateUi();
 
     void setLatchPin(int latchPin, QString pinGuiName);
+    void setClkPin(int clkPin, QString pinGuiName);
     void setDataPin(int dataPin, QString pinGuiName);
 
     const QString &defaultText() const;
@@ -44,6 +45,7 @@ private:
     int m_buttonsCount;
     int m_shiftRegNumber;
     int m_latchPin;
+    int m_clkPin;
     int m_dataPin;
 
     const deviceEnum_guiName_t m_shiftRegistersList[SHIFT_REG_TYPES] = // порядов обязан быть как в common_types.h!!!!!!!!!!!
