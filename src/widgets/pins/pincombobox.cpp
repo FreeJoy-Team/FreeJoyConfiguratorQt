@@ -270,7 +270,7 @@ void PinComboBox::indexChanged(int index)
 
     // set current config
     if(m_pinTypesIndex.empty() == false){
-        emit currentIndexChanged(m_enumIndex[index], m_previousIndex, m_pinNumber);
+        emit currentIndexChanged(m_enumIndex[index], m_previousIndex, m_pinNumber, ui->comboBox_PinsType->currentText());
         m_previousIndex = m_enumIndex[index];
         m_currentDevEnum = m_enumIndex[index];
     }

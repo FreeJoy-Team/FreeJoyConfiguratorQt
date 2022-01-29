@@ -39,7 +39,7 @@ signals:
     void fastEncoderSelected(const QString &pinGuiName, bool isSelected);
     void shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName);
     void i2cSelected(bool i2cSelected);
-    void axesSourceChanged(int sourceEnum, bool isAdd);
+    void axesSourceChanged(int sourceEnum, const QString &sourceName, bool isAdd);
 
     //protected:
     //    void resizeEvent(QResizeEvent*) override;
@@ -49,7 +49,7 @@ public slots:
     void shiftRegButtonsCountChanged(int count);
 private slots:
     void pinInteraction(int index, int senderIndex, int pin);
-    void pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
+    void pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);
     void boardChanged(int index);
 
 private:
@@ -68,9 +68,9 @@ private:
     int m_shiftLatchCount;
     int m_shiftDataCount;
 
-    void signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
+    void signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);
     void pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum);
-    void setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
+    void setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);
     void blockPA8PWM(int currentDeviceEnum, int previousDeviceEnum);
 
     struct source_t

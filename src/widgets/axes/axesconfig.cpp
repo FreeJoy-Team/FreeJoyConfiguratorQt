@@ -60,10 +60,10 @@ void AxesConfig::a2bCountCalc(int count, int previousCount)
     emit a2bCountChanged(m_a2bButtonsCount);
 }
 
-void AxesConfig::addOrDeleteMainSource(int sourceEnum, bool isAdd)
+void AxesConfig::addOrDeleteMainSource(int sourceEnum, QString sourceName, bool isAdd)
 {
     for (int i = 0; i < MAX_AXIS_NUM; ++i) {
-        m_axesPtrList[i]->addOrDeleteMainSource(sourceEnum, isAdd);
+        m_axesPtrList[i]->addOrDeleteMainSource(sourceEnum, sourceName, isAdd);
     }
 }
 

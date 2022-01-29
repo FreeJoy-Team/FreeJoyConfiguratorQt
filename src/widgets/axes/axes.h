@@ -30,7 +30,7 @@ public:
     void updateAxisRaw();
     void updateAxisOut();
 
-    void addOrDeleteMainSource(int sourceEnum, bool isAdd);
+    void addOrDeleteMainSource(int sourceEnum, QString sourceName, bool isAdd);
 
 signals:
     void a2bCountChanged(int count, int previousCount);

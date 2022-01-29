@@ -52,11 +52,10 @@ AxesExtended::AxesExtended(int axisNumber, QWidget *parent)
     ui->label_Filter->setText(tr("Filter") + " " + m_filterList[ui->sliderH_Filter->value()].guiName);
 
     // filter changed
-    connect(ui->sliderH_Filter, SIGNAL(valueChanged(int)),
-            this, SLOT(filterChanged(int)));
+    connect(ui->sliderH_Filter, &QSlider::valueChanged, this, &AxesExtended::filterChanged);
     // function changed
-    connect(ui->comboBox_Function, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(functionIndexChanged(int)));
+    connect(ui->comboBox_Function, qOverload<int>(&QComboBox::currentIndexChanged),
+            this, &AxesExtended::functionIndexChanged);
 }
 
 AxesExtended::~AxesExtended()
