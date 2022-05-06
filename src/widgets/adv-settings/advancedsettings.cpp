@@ -46,8 +46,6 @@ AdvancedSettings::AdvancedSettings(QWidget *parent)
 #endif
 
     ui->layoutG_Lang->setAlignment(Qt::AlignCenter);
-    // for future. not ready atm
-    ui->pushButton_LangDeutsch->hide();
 }
 
 AdvancedSettings::~AdvancedSettings()

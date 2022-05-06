@@ -102,6 +102,15 @@ int main(int argc, char *argv[])
             qApp->installTranslator(gEnv.pTranslator);
         }
     }
+    else if (appSettings.value("Language", "english").toString() == "deutsch")
+    {
+        ok = gEnv.pTranslator->load(":/FreeJoyQt_de_DE");
+        if (ok == false) {
+            qCritical()<<"failed to load translate file";
+        } else {
+            qApp->installTranslator(gEnv.pTranslator);
+        }
+    }
     appSettings.endGroup();
 
     MainWindow w;

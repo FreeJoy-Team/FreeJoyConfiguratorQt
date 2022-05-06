@@ -603,7 +603,7 @@ void MainWindow::languageChanged(const QString &language)
     {
         if (trFunc(":/FreeJoyQt_zh_CN") == false) return;
     }
-    else if (language == "schinese")
+    else if (language == "deutsch")
     {
         if (trFunc(":/FreeJoyQt_de_DE") == false) return;
     }
