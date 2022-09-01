@@ -1,7 +1,6 @@
 #include "pinconfig.h"
 #include "ui_pinconfig.h"
 #include <QLabel>
-#include <QDebug>
 
 #include "global.h"
 #include <QSettings>
@@ -63,6 +62,8 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
             this, &PinConfig::totalButtonsValueChanged);
     connect(ui->widget_currConfig, &CurrentConfig::totalLEDsValueChanged,
             this, &PinConfig::totalLEDsValueChanged);
+    connect(ui->widget_currConfig, &CurrentConfig::limitReached,
+            this, &PinConfig::limitReached);
 }
 
 PinConfig::~PinConfig()
@@ -322,6 +323,10 @@ void PinConfig::a2bCountChanged(int count)
     ui->widget_currConfig->a2bCountChanged(count);
 }
 
+bool PinConfig::limitIsReached()
+{
+    return ui->widget_currConfig->limitIsReached();
+}
 
 
 void PinConfig::resetAllPins()

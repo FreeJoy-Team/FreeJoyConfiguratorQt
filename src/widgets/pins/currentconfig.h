@@ -16,15 +16,18 @@ public:
     ~CurrentConfig();
 
     void setConfig(int type, int changedHowMuch);
+    bool limitIsReached();
 
 signals:
     void totalLEDsValueChanged(int totalLed);
     void totalButtonsValueChanged(int count);
+    void limitReached(bool limit);
 
 public slots:
     void a2bCountChanged(int count);
     void shiftRegButtonsCountChanged(int count);
     void totalButtonsChanged(int count);
+    void totalLEDsChanged(int count);
 
 private:
     Ui::CurrentConfig *ui;
@@ -40,6 +43,8 @@ private:
     int m_singleLed;
     int m_rowsOfLed;
     int m_columnsOfLed;
+
+    bool m_limit;
 
     enum
     {

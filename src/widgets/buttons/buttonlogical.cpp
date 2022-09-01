@@ -13,7 +13,7 @@ ButtonLogical::ButtonLogical(int buttonIndex, QWidget *parent)
 {
     ui->setupUi(this);
     m_buttonIndex = buttonIndex;
-    m_functionPrevIndex = 0;
+    m_functionPrevType = BUTTON_NORMAL;
     m_currentState = false;
     m_debugState = false;
     ui->label_LogicalButtonNumber->setNum(m_buttonIndex + 1);
@@ -53,7 +53,7 @@ void ButtonLogical::initialization()
     }
 
     connect(ui->comboBox_ButtonFunction, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(functionTypeChanged(int)));
+            this, SLOT(functionIndexChanged(int)));
     connect(ui->spinBox_PhysicalButtonNumber, SIGNAL(valueChanged(int)),
             this, SLOT(editingOnOff(int)));
 }
@@ -72,10 +72,11 @@ void ButtonLogical::setSpinBoxOnOff(int maxPhysButtons)
     }
 }
 
-void ButtonLogical::functionTypeChanged(int index)
+void ButtonLogical::functionIndexChanged(int index)
 {
-    emit functionIndexChanged(index, m_functionPrevIndex, m_buttonIndex);
-    m_functionPrevIndex = index;
+    int type = m_logicFunctionList[index].deviceEnumIndex;
+    emit functionTypeChanged(type, m_functionPrevType, m_buttonIndex);
+    m_functionPrevType = type;
 }
 
 void ButtonLogical::editingOnOff(int value)
@@ -146,6 +147,23 @@ void ButtonLogical::setAutoPhysBut(bool enabled)
 {
     m_autoPhysButEnabled = enabled;
 }
+
+
+void ButtonLogical::disableButtonType(button_type_t type, bool disable)
+{
+    int CBoxIndex = Converter::EnumToIndex(type, m_logicFunc_enumIndex);
+    if (disable == false){
+        ui->comboBox_ButtonFunction->setItemData(CBoxIndex, 1 | 32, Qt::UserRole - 1);
+    } else {
+        ui->comboBox_ButtonFunction->setItemData(CBoxIndex, 0, Qt::UserRole - 1);
+    }
+}
+
+button_type_t ButtonLogical::currentButtonType()
+{
+    return m_logicFunc_enumIndex[ui->comboBox_ButtonFunction->currentIndex()];
+}
+
 
 bool ButtonLogical::eventFilter(QObject *obj, QEvent *event)
 {

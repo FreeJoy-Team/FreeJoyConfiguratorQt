@@ -47,6 +47,7 @@ private slots:
 
     void configReceived(bool success);
     void configSent(bool success);
+    void blockWRConfigToDevice(bool block);
 
     void deviceFlasherController(bool isStartFlash);
 
