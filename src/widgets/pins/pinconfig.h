@@ -29,6 +29,8 @@ public:
     void writeToConfig();
     void readFromConfig();
 
+    bool limitIsReached();
+
     void retranslateUi();
 
     void resetAllPins();
@@ -40,6 +42,7 @@ signals:
     void shiftRegSelected(int latchPin, int clkPin, int dataPin, const QString &pinGuiName);
     void i2cSelected(bool i2cSelected);
     void axesSourceChanged(int sourceEnum, const QString &sourceName, bool isAdd);
+    void limitReached(bool limit);
 
     //protected:
     //    void resizeEvent(QResizeEvent*) override;
@@ -88,7 +91,7 @@ private:
 
     const source_t m_source[SOURCE_COUNT] =
     {
-        {AXIS_SOURCE,        {AXIS_ANALOG, TLE5011_CS, MCP3201_CS, MCP3202_CS, MCP3204_CS, MCP3208_CS, MLX90393_CS, AS5048A_CS, TLE5012_CS}},
+        {AXIS_SOURCE,        {AXIS_ANALOG, TLE5011_CS, MCP3201_CS, MCP3202_CS, MCP3204_CS, MCP3208_CS, MLX90393_CS, MLX90363_CS, AS5048A_CS, TLE5012_CS}},
 
         {BUTTON_FROM_AXES,   {678}},        // 678 в DeviceConfig
 
