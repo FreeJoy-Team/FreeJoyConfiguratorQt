@@ -306,8 +306,11 @@ void AxesCurvesButton::dropEvent(QDropEvent *event)
     event->acceptProposedAction(); // ???????????????
 }
 
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void AxesCurvesButton::enterEvent(QEvent *event)
+#else
+void AxesCurvesButton::enterEvent(QEnterEvent *event)
+#endif
 {
     Q_UNUSED(event)
     setProperty("hover", true);

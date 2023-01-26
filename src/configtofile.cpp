@@ -18,7 +18,7 @@ void ConfigToFile::loadDeviceConfigFromFile(QWidget *parent, const QString &file
     deviceSettings.beginGroup("DeviceUsbConfig");
 
     devC.firmware_version = QString(deviceSettings.value("FirmwareVersion", devC.firmware_version).toString()).toUShort(&tmp ,16);
-    std::string tmp_string = deviceSettings.value("DeviceName", devC.device_name).toString().toStdString();
+    std::string tmp_string = deviceSettings.value("DeviceName", QString(devC.device_name)).toString().toStdString();
     for (uint i = 0; i < sizeof(devC.device_name); i++) {
         if (i < tmp_string.size()){
             devC.device_name[i] = tmp_string[i];
@@ -237,7 +237,7 @@ void ConfigToFile::saveDeviceConfigToFile(const QString &fileName, dev_config_t 
     // save Device USB config to file
     deviceSettings.beginGroup("DeviceUsbConfig");
     deviceSettings.setValue("FirmwareVersion", QString::number(devC.firmware_version, 16));
-    deviceSettings.setValue("DeviceName", devC.device_name);
+    deviceSettings.setValue("DeviceName", QString(devC.device_name));
     deviceSettings.setValue("Vid", QString::number(devC.vid, 16));
     deviceSettings.setValue("Pid", QString::number(devC.pid, 16));
     deviceSettings.setValue("USBExchange", devC.exchange_period_ms);
