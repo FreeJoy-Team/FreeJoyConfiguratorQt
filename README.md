@@ -1,6 +1,6 @@
 # FreeJoy Configurator
 
-这里是Clara汉化版，官方源在这个[FreeJoyConfiguratorQt](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt)。
+这里是Clara汉化版，官方源在这里[FreeJoyConfiguratorQt](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt)。
 
 Here is Clara's Chinese-language version. The official source is [FreeJoyConfiguratorQt](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt).
 

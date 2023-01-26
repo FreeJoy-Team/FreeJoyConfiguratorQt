@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QElapsedTimer>
 #include <QMap>
+#include <thread>
 #include "hiddevice.h"
 #include "hidapi.h"
 #include "common_defines.h"
