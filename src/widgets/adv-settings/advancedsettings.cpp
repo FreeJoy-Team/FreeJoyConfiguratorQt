@@ -121,7 +121,7 @@ void AdvancedSettings::on_pushButton_About_clicked()
 {
     const QString version("<p align=\"center\">FreeJoyConfiguratorQt v" + QStringLiteral(APP_VERSION) + " ");
     const QString source = tr("<br>Built with Qt %1 (%2)<br>"
-                              R"(Source code available under GPLv3 on <a style="color: #03A9F4; text-decoration:none;
+                              R"(Source code available under GPLv3 on <a style="color: #03A9F4; text-decoration:none;"
                                 href="https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt">Github</a><br>)")
                                .arg(QT_VERSION_STR, QSysInfo::buildCpuArchitecture()); //"Copyright © %3 Reksotiv and contributors"//, "2021"
 
