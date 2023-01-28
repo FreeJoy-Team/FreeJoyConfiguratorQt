@@ -9,6 +9,29 @@
 
 #include <QDebug>
 #include <QToolTip>
+
+#ifdef Q_OS_WIN
+    #include <dwmapi.h>
+    #pragma comment (lib,"Dwmapi.lib") // fixes error LNK2019: unresolved external symbol __imp__DwmExtendFrameIntoClientArea
+
+    enum : WORD {
+        DwmwaUseImmersiveDarkMode = 20,
+        DwmwaUseImmersiveDarkModeBefore20h1 = 19
+    };
+
+    bool setDarkBorderToWindow(HWND hwnd, bool dark)
+    {
+        const BOOL darkBorder = dark ? TRUE : FALSE;
+        const bool ok =
+                SUCCEEDED(DwmSetWindowAttribute(hwnd, DwmwaUseImmersiveDarkMode, &darkBorder, sizeof(darkBorder)))
+                || SUCCEEDED(DwmSetWindowAttribute(hwnd, DwmwaUseImmersiveDarkModeBefore20h1, &darkBorder, sizeof(darkBorder)));
+        if (!ok) {
+            qDebug()<<QString("%1: Unable to set %2 window border.").arg(__FUNCTION__, dark ? "dark" : "light");
+        }
+        return ok;
+    }
+#endif
+
 ////////////////////////////////////////////////// style //////////////////////////////////////////////////
 // i cannot use qApp->setStyleSheet() because it takes a long time. groupBox_LogicalButtons contains a lot of elements
 // this trick skips groupBox_LogicalButtons. If anyone has any ideas on how to do this better, please tell me
@@ -110,8 +133,10 @@ void MainWindow::themeChanged(bool dark)
 
         // stylesheet icon: url(...); does not work in linux?
         ui->pushButton_Wiki->setIcon(QIcon(":/Images/ST_wiki.png"));
-
         styleName = "white";
+#ifdef Q_OS_WIN
+        setDarkBorderToWindow((HWND)window()->winId(), false);
+#endif
     }
     else
     {
@@ -220,8 +245,10 @@ void MainWindow::themeChanged(bool dark)
 
         // stylesheet icon: url(...); does not work in linux?
         ui->pushButton_Wiki->setIcon(QIcon(":/Images/ST_wiki_dark.png"));
-
         styleName = "dark";
+#ifdef Q_OS_WIN
+        setDarkBorderToWindow((HWND)window()->winId(), true);
+#endif
     }
 
     updateColor();
