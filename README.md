@@ -1,9 +1,5 @@
 # FreeJoy Configurator
 
-这里是Clara汉化版，官方源在这里[FreeJoyConfiguratorQt](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt)。
-
-Here is Clara's Chinese-language version. The official source is [FreeJoyConfiguratorQt](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt).
-
 FreeJoy Configurator is a visual utility allowing you to setup your [FreeJoy](https://github.com/vostrenkov/FreeJoy) device for your own requirements.
 
 ![](https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt/blob/master/src/Images/main.png)
