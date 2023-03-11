@@ -44,8 +44,7 @@ private:
 
     int m_shiftButtonsCount;
 
-    static bool sortByPinNumber(const ShiftRegData_t &lhs, const ShiftRegData_t &rhs);
-    static bool sortNullLast(const ShiftRegData_t &lhs, const ShiftRegData_t &rhs);
+    static bool sortByPinNumberAndNullLast(const ShiftRegData_t &lhs, const ShiftRegData_t &rhs);
     void addPinAndSort(int pin, const QString &pinGuiName, std::array<ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> &arr);
 
     std::array<ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> m_latchPinsArray{};

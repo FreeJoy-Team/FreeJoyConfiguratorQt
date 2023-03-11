@@ -42,15 +42,16 @@ void ShiftRegistersConfig::shiftRegButtonsCalc(int currentCount, int previousCou
 }
 
 
-bool ShiftRegistersConfig::sortByPinNumber(const ShiftRegData_t& lhs, const ShiftRegData_t& rhs)
+bool ShiftRegistersConfig::sortByPinNumberAndNullLast(const ShiftRegData_t &lhs, const ShiftRegData_t &rhs)
 {
-    return lhs.pinNumber < rhs.pinNumber;
-}
-
-bool ShiftRegistersConfig::sortNullLast(const ShiftRegData_t& lhs, const ShiftRegData_t& rhs)
-{
-    Q_UNUSED(lhs);
-    return rhs.pinNumber == 0;
+    // sort null last
+    if (lhs.pinNumber == 0) {
+        return false;
+    } else if (rhs.pinNumber == 0) {
+        return true;
+    } else { // sort ascending
+        return lhs.pinNumber < rhs.pinNumber;
+    }
 }
 
 // bullshit
@@ -72,12 +73,11 @@ void ShiftRegistersConfig::addPinAndSort(int pin, const QString &pinGuiName, std
             }
         }
     }
-    // sort ascending
-    std::sort(arr.begin(), arr.end(), sortByPinNumber);           // хз можно ли через 1 сорт
-    // sort null last
-    std::stable_sort(arr.begin(), arr.end(), sortNullLast);
+
+    std::sort(arr.begin(), arr.end(), sortByPinNumberAndNullLast);
+
     //all unused pins (if (m_latchPinsArray[i].pinNumber == 0)) = bigger pin
-    for (uint i = arr.size() -1; i >= 0; --i) {                        // bullshit // todo: refactoring
+    for (int i = arr.size() -1; i >= 0; --i) {                        // bullshit // todo: refactoring
         if (arr[i].pinNumber > 0) {
             // example: we have selected ShiftLatch pins{A0(pinNumber = 1), A2(pinNumber = 3), A6(pinNumber = 7)}
             // in the end it should look like: m_latchPinsArray.pinNumber{1, 3, 7, 7, 7}
@@ -90,7 +90,7 @@ void ShiftRegistersConfig::addPinAndSort(int pin, const QString &pinGuiName, std
                     break;
                 }
             }
-            for (uint j = arr.size() -1; j > i; --j) {
+            for (int j = arr.size() -1; j > i; --j) {
                 arr[j].pinNumber = arr[i].pinNumber;
                 arr[j].guiName = arr[i].guiName;
             }
@@ -134,8 +134,7 @@ void ShiftRegistersConfig::shiftRegSelected(int latchPin, int clkPin, int dataPi
             }
         }
 
-        std::sort(m_dataPinsArray.begin(), m_dataPinsArray.end(), sortByPinNumber);           // хз можно ли через 1 сорт
-        std::stable_sort(m_dataPinsArray.begin(), m_dataPinsArray.end(), sortNullLast);
+        std::sort(m_dataPinsArray.begin(), m_dataPinsArray.end(), sortByPinNumberAndNullLast);
 
         for (uint i = 0; i < m_dataPinsArray.size() - 1; ++i) {
             m_shiftRegsPtrList[i]->setDataPin(m_dataPinsArray[i].pinNumber, m_dataPinsArray[i].guiName);
