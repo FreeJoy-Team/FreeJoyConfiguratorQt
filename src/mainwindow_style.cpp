@@ -10,7 +10,7 @@
 #include <QDebug>
 #include <QToolTip>
 
-#ifdef Q_OS_WIN
+#if defined Q_OS_WIN && _MSC_VER
     #include <dwmapi.h>
     #pragma comment (lib,"Dwmapi.lib") // fixes error LNK2019: unresolved external symbol __imp__DwmExtendFrameIntoClientArea
 
@@ -134,7 +134,7 @@ void MainWindow::themeChanged(bool dark)
         // stylesheet icon: url(...); does not work in linux?
         ui->pushButton_Wiki->setIcon(QIcon(":/Images/ST_wiki.png"));
         styleName = "white";
-#ifdef Q_OS_WIN
+#if defined Q_OS_WIN && _MSC_VER
         setDarkBorderToWindow((HWND)window()->winId(), false);
 #endif
     }
@@ -246,7 +246,7 @@ void MainWindow::themeChanged(bool dark)
         // stylesheet icon: url(...); does not work in linux?
         ui->pushButton_Wiki->setIcon(QIcon(":/Images/ST_wiki_dark.png"));
         styleName = "dark";
-#ifdef Q_OS_WIN
+#if defined Q_OS_WIN && _MSC_VER
         setDarkBorderToWindow((HWND)window()->winId(), true);
 #endif
     }
