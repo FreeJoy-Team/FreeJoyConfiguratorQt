@@ -82,6 +82,8 @@ void ConfigToFile::loadDeviceConfigFromFile(QWidget *parent, const QString &file
     devC.button_timer3_ms = uint16_t(deviceSettings.value("Timer3", devC.button_timer3_ms).toInt());
     devC.button_debounce_ms = uint16_t(deviceSettings.value("Debounce", devC.button_debounce_ms).toInt());
     devC.encoder_press_time_ms = uint8_t(deviceSettings.value("EncoderPress", devC.encoder_press_time_ms).toInt());
+    devC.button_polling_interval_ticks = uint16_t(deviceSettings.value("ButtonsPolling", devC.button_polling_interval_ticks).toInt());
+    devC.encoder_polling_interval_ticks = uint8_t(deviceSettings.value("EncodersPolling", devC.encoder_polling_interval_ticks).toInt());
     deviceSettings.endGroup();
 
     // load Buttons config from file
@@ -291,6 +293,8 @@ void ConfigToFile::saveDeviceConfigToFile(const QString &fileName, dev_config_t 
     deviceSettings.setValue("Timer3", devC.button_timer3_ms);
     deviceSettings.setValue("Debounce", devC.button_debounce_ms);
     deviceSettings.setValue("EncoderPress", devC.encoder_press_time_ms);
+    deviceSettings.setValue("ButtonsPolling", devC.button_polling_interval_ticks);
+    deviceSettings.setValue("EncodersPolling", devC.encoder_polling_interval_ticks);
     deviceSettings.endGroup();
 
     // save Buttons config to file

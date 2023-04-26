@@ -9,6 +9,8 @@
     #include <QScrollBar>
 #endif
 
+static const int TICKS_NS = 500;
+
 ButtonConfig::ButtonConfig(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ButtonConfig)
@@ -39,6 +41,9 @@ ButtonConfig::ButtonConfig(QWidget *parent)
     on_checkBox_AutoPhysBut_toggled(ui->checkBox_AutoPhysBut->isChecked());
 #endif
     logicaButtonsCreator();
+
+    connect(ui->spinBox_ButtonsPolling, qOverload<int>(&QSpinBox::valueChanged), this, &ButtonConfig::spinBoxStep);
+    connect(ui->spinBox_EncoderPolling, qOverload<int>(&QSpinBox::valueChanged), this, &ButtonConfig::spinBoxStep);
 
     Q_ASSERT(ui->groupBox_LogicalButtons->objectName() == QStringLiteral("groupBox_LogicalButtons"));
     Q_ASSERT(ui->groupBox_PhysicalButtons->objectName() == QStringLiteral("groupBox_PhysicalButtons"));
@@ -149,6 +154,21 @@ void ButtonConfig::logicaButtonsCreator()
 #endif
         logicaButtonsCreator();
     });
+}
+
+// single step for spinbox
+void ButtonConfig::spinBoxStep(int value)
+{
+    int remainder = value % TICKS_NS;
+    QSpinBox *sb = qobject_cast<QSpinBox*>(sender());
+    if (sb == nullptr || remainder == 0) return;
+
+    value = (value / TICKS_NS) * TICKS_NS;
+    if (remainder > TICKS_NS / 2) {
+        sb->setValue(value + TICKS_NS);
+    } else {
+        sb->setValue(value);
+    }
 }
 
 // set physical button for focused logical button
@@ -403,6 +423,9 @@ void ButtonConfig::readFromConfig()
     ui->spinBox_A2bDebounce->setValue(devc->a2b_debounce_ms);
 
     ui->spinBox_EncoderPressTimer->setValue(devc->encoder_press_time_ms);
+
+    ui->spinBox_ButtonsPolling->setValue(devc->button_polling_interval_ticks * TICKS_NS);
+    ui->spinBox_EncoderPolling->setValue(devc->encoder_polling_interval_ticks * TICKS_NS);
 }
 
 void ButtonConfig::writeToConfig()
@@ -422,6 +445,9 @@ void ButtonConfig::writeToConfig()
     devc->a2b_debounce_ms = ui->spinBox_A2bDebounce->value();
 
     devc->encoder_press_time_ms = ui->spinBox_EncoderPressTimer->value();
+
+    devc->button_polling_interval_ticks = ui->spinBox_ButtonsPolling->value() / TICKS_NS;
+    devc->encoder_polling_interval_ticks = ui->spinBox_EncoderPolling->value() / TICKS_NS;
 
     // logical buttons
     for (int i = 0; i < m_logicButtonPtrList.size(); ++i) {
