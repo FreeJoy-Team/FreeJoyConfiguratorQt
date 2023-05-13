@@ -82,9 +82,9 @@ void ButtonPhysical::updateStyleColor()
 bool ButtonPhysical::eventFilter(QObject *object, QEvent *event)
 {
     Q_UNUSED(object)
-    if (event->type() == QEvent::ApplicationPaletteChange) {
+    if (event->type() == QEvent::PaletteChange) {
         updateStyleColor();
-        return true;
+        return false;
     }
     return false;
 }

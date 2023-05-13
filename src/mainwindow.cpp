@@ -6,6 +6,7 @@
 #include <QSpinBox>
 #include <QCheckBox>
 #include <QKeyEvent>
+#include <QPainter>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -141,11 +142,13 @@ MainWindow::MainWindow(QWidget *parent)
     // shift reg buttons count shiftRegsButtonsCount
     connect(m_shiftRegConfig, &ShiftRegistersConfig::shiftRegButtonsCountChanged,
             m_pinConfig, &PinConfig::shiftRegButtonsCountChanged);
+    // buttonts/LEDs limit reached
+    connect(m_pinConfig, &PinConfig::limitReached, this, &MainWindow::blockWRConfigToDevice);
     // axes source changed//axesSourceChanged
     connect(m_pinConfig, &PinConfig::axesSourceChanged, m_axesConfig, &AxesConfig::addOrDeleteMainSource);
     // language changed
     connect(m_advSettings, &AdvancedSettings::languageChanged, this, &MainWindow::languageChanged);
-    // interface changed
+    // theme changed
     connect(m_advSettings, &AdvancedSettings::themeChanged, this, &MainWindow::themeChanged);
     // font changed
     connect(m_advSettings, &AdvancedSettings::fontChanged, this, &MainWindow::setFont);
@@ -219,7 +222,7 @@ MainWindow::~MainWindow()
 
 
 
-                                                        ///////////////////// device reports /////////////////////
+                                              ///////////////////// device reports /////////////////////
 // device connected
 void MainWindow::showConnectDeviceInfo()
 {
@@ -227,8 +230,7 @@ void MainWindow::showConnectDeviceInfo()
         m_deviceChanged = true;
     } else {
         // for old(1.6-) firmware
-        ui->pushButton_WriteConfig->setEnabled(false);
-        ui->pushButton_ReadConfig->setEnabled(false);
+        blockWRConfigToDevice(true);
         ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
     }
     m_advSettings->flasher()->deviceConnected(true);
@@ -239,8 +241,7 @@ void MainWindow::hideConnectDeviceInfo()
 {
     ui->label_DeviceStatus->setText(tr("Disconnected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(160, 0, 0);");
-    ui->pushButton_ReadConfig->setEnabled(false);
-    ui->pushButton_WriteConfig->setEnabled(false);
+    blockWRConfigToDevice(true);
     m_advSettings->flasher()->deviceConnected(false);
     // debug window
     if (m_debugWindow) {
@@ -259,8 +260,7 @@ void MainWindow::flasherConnected()
 {
     ui->label_DeviceStatus->setText(tr("Connected"));
     ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
-    ui->pushButton_ReadConfig->setEnabled(false);
-    ui->pushButton_WriteConfig->setEnabled(false);
+    blockWRConfigToDevice(true);
     m_advSettings->flasher()->deviceConnected(false);
     if (m_debugWindow) {
         m_debugWindow->resetPacketsCount();
@@ -294,16 +294,16 @@ void MainWindow::getParamsPacket(bool firmwareCompatible)
 {
     if (m_deviceChanged) {
         if (firmwareCompatible == false) {
-            ui->pushButton_WriteConfig->setEnabled(false);
-            ui->pushButton_ReadConfig->setEnabled(false);
+            blockWRConfigToDevice(true);
             ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
             ui->label_DeviceStatus->setText(tr("Incompatible Firmware"));
         } else {
-            ui->pushButton_WriteConfig->setEnabled(true);
-            ui->pushButton_ReadConfig->setEnabled(true);
+            if (m_pinConfig->limitIsReached() == false) {
+                blockWRConfigToDevice(false);
+            }
             ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
             // set firmware version
-            QString str = QString::number(gEnv.pDeviceConfig->config.firmware_version, 16);
+            QString str = QString::number(gEnv.pDeviceConfig->paramsReport.firmware_version, 16);
             if (str.size() == 4) {
                 ui->label_DeviceStatus->setText(tr("Device firmware") + " v" + str[0] + "." + str[1] + "." + str[2] + "b" + str[3]);
             }
@@ -501,8 +501,7 @@ void MainWindow::configReceived(bool success)
             ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_ReadConfig->setText(button_default_text);
             if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
-                ui->pushButton_ReadConfig->setEnabled(true);
-                ui->pushButton_WriteConfig->setEnabled(true);
+                blockWRConfigToDevice(false);
             }
         });
     } else {
@@ -512,8 +511,7 @@ void MainWindow::configReceived(bool success)
             ui->pushButton_ReadConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_ReadConfig->setText(button_default_text);
             if (ui->comboBox_HidDeviceList->currentIndex() >= 0) {
-                ui->pushButton_ReadConfig->setEnabled(true);
-                ui->pushButton_WriteConfig->setEnabled(true);
+                blockWRConfigToDevice(false);
             }
         });
     }
@@ -536,8 +534,7 @@ void MainWindow::configSent(bool success)
             ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_WriteConfig->setText(button_default_text);
             if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
-                ui->pushButton_ReadConfig->setEnabled(true);
-                ui->pushButton_WriteConfig->setEnabled(true);
+                blockWRConfigToDevice(false);
             }
         });
     } else {
@@ -548,8 +545,7 @@ void MainWindow::configSent(bool success)
             ui->pushButton_WriteConfig->setStyleSheet(m_buttonDefaultStyle);
             ui->pushButton_WriteConfig->setText(button_default_text);
             if (ui->comboBox_HidDeviceList->currentIndex() >= 0){
-                ui->pushButton_ReadConfig->setEnabled(true);
-                ui->pushButton_WriteConfig->setEnabled(true);
+                blockWRConfigToDevice(false);
             }
         });
     }
@@ -564,6 +560,12 @@ void MainWindow::configSent(bool success)
         QSettings(path2.arg(QString::number(gEnv.pDeviceConfig->config.vid, 16), QString::number(gEnv.pDeviceConfig->config.pid, 16)),
                   QSettings::NativeFormat).remove("OEMName");
 #endif
+}
+
+void MainWindow::blockWRConfigToDevice(bool block)
+{
+    ui->pushButton_ReadConfig->setDisabled(block);
+    ui->pushButton_WriteConfig->setDisabled(block);
 }
 
 
@@ -602,7 +604,7 @@ void MainWindow::languageChanged(const QString &language)
     {
         if (trFunc(":/FreeJoyQt_zh_CN") == false) return;
     }
-    else if (language == "schinese")
+    else if (language == "deutsch")
     {
         if (trFunc(":/FreeJoyQt_de_DE") == false) return;
     }
@@ -661,7 +663,7 @@ void MainWindow::loadAppConfig()
     appS->endGroup();
     // load configs dir path
     appS->beginGroup("Configs");
-    m_cfgDirPath = appS->value("Path", QDir::currentPath() +'/'+ "configs").toString();
+    m_cfgDirPath = appS->value("Path", gEnv.pAppSettings->fileName().remove("FreeJoySettings.conf") + "configs").toString();
     appS->endGroup();
 
     //debug tab, only for debug build
@@ -702,7 +704,7 @@ void MainWindow::saveAppConfig()
 }
 
 
-                                                            ////////////////// buttons //////////////////
+                                                    ////////////////// buttons //////////////////
 // comboBox selected device
 void MainWindow::hidDeviceListChanged(int index)
 {
@@ -725,8 +727,7 @@ void MainWindow::on_pushButton_ResetAllPins_clicked()
 void MainWindow::on_pushButton_ReadConfig_clicked()
 {
     qDebug()<<"Read config started";
-    ui->pushButton_ReadConfig->setEnabled(false);
-    ui->pushButton_WriteConfig->setEnabled(false);
+    blockWRConfigToDevice(true);
 
     m_hidDeviceWorker->getConfigFromDevice();
 }
@@ -735,8 +736,7 @@ void MainWindow::on_pushButton_ReadConfig_clicked()
 void MainWindow::on_pushButton_WriteConfig_clicked()
 {
     qDebug()<<"Write config started";
-    ui->pushButton_WriteConfig->setEnabled(false);  // не успевает блокироваться? таймер
-    ui->pushButton_ReadConfig->setEnabled(false);
+    blockWRConfigToDevice(true);  // не успевает блокироваться? таймер
 
     UiWriteToConfig();
     m_hidDeviceWorker->sendConfigToDevice();
@@ -848,6 +848,27 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+
+//! QPixmap gray-scale image (an alpha map) to colored QIcon
+QIcon MainWindow::pixmapToIcon(QPixmap pixmap, const QColor &color)
+{
+    // initialize painter to draw on a pixmap and set composition mode
+    QPainter painter(&pixmap);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+    // set color
+    painter.setBrush(color);
+    painter.setPen(color);
+    // paint rect
+    painter.drawRect(pixmap.rect());
+    // here is our new colored icon
+    return QIcon(pixmap);
+}
+
+void MainWindow::updateColor()
+{
+    QColor col = QApplication::palette().color(QPalette::Text);
+    ui->toolButton_ConfigsDir->setIcon(pixmapToIcon(QPixmap(":/Images/setings.png"), col));
+}
 
 
 ////////////////////////////////////////////////// debug tab //////////////////////////////////////////////////

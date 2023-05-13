@@ -1,7 +1,6 @@
 #include "pinconfig.h"
 #include "ui_pinconfig.h"
 #include <QLabel>
-#include <QDebug>
 
 #include "global.h"
 #include <QSettings>
@@ -17,8 +16,7 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
     m_contrLite->hide();
 
     m_maxButtonsWarning = false;
-    m_shiftLatchCount = 0;
-    m_shiftDataCount = 0;
+    m_shiftLatchCount = m_shiftDataCount = m_shiftClkCount = 0;
 
     // create pin combo box. i+1! start from 1
     // возможно использовать одни и те же комбобоксы пинов в разных виджетах плат - изврат,
@@ -50,21 +48,22 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
     ui->comboBox_board->addItem("Blue Pill");
     ui->comboBox_board->addItem("Controller Lite");
     ui->comboBox_board->setCurrentIndex(m_lastBoard);
-    connect(ui->comboBox_board, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(boardChanged(int)));
+    connect(ui->comboBox_board, qOverload<int>(&CenteredCBox::currentIndexChanged),
+            this, &PinConfig::boardChanged);
 
     for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
-            connect(m_pinCBoxPtrList[i], SIGNAL(valueChangedForInteraction(int, int, int)),       // valgrind сообщает о утечке, но почему?
-                        this, SLOT(pinInteraction(int, int, int)));
-            connect(m_pinCBoxPtrList[i], SIGNAL(currentIndexChanged(int, int, int)),
-                        this, SLOT(pinIndexChanged(int, int, int)));
+            connect(m_pinCBoxPtrList[i], &PinComboBox::valueChangedForInteraction,       // valgrind сообщает о утечке, но почему?
+                        this, &PinConfig::pinInteraction);
+            connect(m_pinCBoxPtrList[i], &PinComboBox::currentIndexChanged,
+                        this, &PinConfig::pinIndexChanged);
     }
 
-    connect(ui->widget_currConfig, SIGNAL(totalButtonsValueChanged(int)),
-            this, SIGNAL(totalButtonsValueChanged(int)));
-    connect(ui->widget_currConfig, SIGNAL(totalLEDsValueChanged(int)),
-            this, SIGNAL(totalLEDsValueChanged(int)));
-
+    connect(ui->widget_currConfig, &CurrentConfig::totalButtonsValueChanged,
+            this, &PinConfig::totalButtonsValueChanged);
+    connect(ui->widget_currConfig, &CurrentConfig::totalLEDsValueChanged,
+            this, &PinConfig::totalLEDsValueChanged);
+    connect(ui->widget_currConfig, &CurrentConfig::limitReached,
+            this, &PinConfig::limitReached);
 }
 
 PinConfig::~PinConfig()
@@ -145,23 +144,23 @@ void PinConfig::pinInteraction(int index, int senderIndex, int pin)
 }
 
 
-void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
+void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName)
 {
     // signals for another widgets
-    signalsForWidgets(currentDeviceEnum, previousDeviceEnum, pinNumber);
+    signalsForWidgets(currentDeviceEnum, previousDeviceEnum, pinNumber, pinName);
 
     // pin type limit  // переизбыток функционала(изи менять в структуре), не думаю, что понадобится в будущем, можно было и захардкодить
     pinTypeLimit(currentDeviceEnum, previousDeviceEnum);
 
     // set current config and generate signals for another widgets
-    setCurrentConfig(currentDeviceEnum, previousDeviceEnum, pinNumber);
+    setCurrentConfig(currentDeviceEnum, previousDeviceEnum, pinNumber, pinName);
 
     // block or reset PWM on PA_8 if selected SPI
     blockPA8PWM(currentDeviceEnum, previousDeviceEnum);
 }
 
 
-void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
+void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName)
 {
     // здесь такой пиздец. индекс хуиндекс 1 = 0 намбер хуямбер. нахуевертил
     int pinIndex = pinNumber - PA_0;
@@ -174,24 +173,32 @@ void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum,
     // shift register latch selected
     if (currentDeviceEnum == SHIFT_REG_LATCH){
         m_shiftLatchCount++;
-        emit shiftRegSelected(pinNumber, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected(pinNumber, 0, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     } else if (previousDeviceEnum == SHIFT_REG_LATCH){
         m_shiftLatchCount--;
-        emit shiftRegSelected((pinNumber)*-1, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected((pinNumber)*-1, 0, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+    }
+    // shift register CLK selected
+    if (currentDeviceEnum == SHIFT_REG_CLK){
+        m_shiftClkCount++;
+        emit shiftRegSelected(0, pinNumber, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+    } else if (previousDeviceEnum == SHIFT_REG_CLK){
+        m_shiftClkCount--;
+        emit shiftRegSelected(0, (pinNumber)*-1, 0, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     }
     // shift register data selected
     if (currentDeviceEnum == SHIFT_REG_DATA){
         m_shiftDataCount++;
-        emit shiftRegSelected(0, pinNumber, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected(0, 0, pinNumber, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     } else if (previousDeviceEnum == SHIFT_REG_DATA){
         m_shiftDataCount--;
-        emit shiftRegSelected(0, (pinNumber)*-1, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
+        emit shiftRegSelected(0, 0, (pinNumber)*-1, m_pinCBoxPtrList[0]->pinList()[pinIndex].guiName);    // hz
     }
     // I2C selected
     if (currentDeviceEnum == I2C_SCL){// || current_device_enum == I2C_SDA){
-        emit axesSourceChanged(-2, true);                                            // -2 enum I2C in axes.h
+        emit axesSourceChanged(-2, pinName, true);                                            // -2 enum I2C in axes.h
     } else if (previousDeviceEnum == I2C_SCL){// || previous_device_enum == I2C_SDA){
-        emit axesSourceChanged(-2, false);
+        emit axesSourceChanged(-2, pinName, false);
     }
 }
 
@@ -242,7 +249,7 @@ void PinConfig::pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum)
     }
 }
 
-void PinConfig::setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
+void PinConfig::setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName)
 {
     for (int i = 0; i < SOURCE_COUNT; ++i) {
         for (int j = 0; j < PIN_TYPE_COUNT; ++j) {
@@ -260,9 +267,9 @@ void PinConfig::setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, 
 
                 if (i == AXIS_SOURCE){      //int source_enum, bool is_add      axesSourceChanged
                     if (tmp > 0){
-                        emit axesSourceChanged(pinNumber - 1, true);
+                        emit axesSourceChanged(pinNumber - 1, pinName, true);
                     } else {
-                        emit axesSourceChanged(pinNumber - 1, false);
+                        emit axesSourceChanged(pinNumber - 1, pinName, false);
                     }
                 }
                 ui->widget_currConfig->setConfig(i, tmp);
@@ -316,6 +323,10 @@ void PinConfig::a2bCountChanged(int count)
     ui->widget_currConfig->a2bCountChanged(count);
 }
 
+bool PinConfig::limitIsReached()
+{
+    return ui->widget_currConfig->limitIsReached();
+}
 
 
 void PinConfig::resetAllPins()

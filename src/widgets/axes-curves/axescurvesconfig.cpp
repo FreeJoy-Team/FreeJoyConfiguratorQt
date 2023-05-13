@@ -2,6 +2,8 @@
 #include "ui_axescurvesconfig.h"
 #include <QSettings>
 #include <QKeyEvent>
+#include <QBuffer>
+#include <QPainter>
 #include <QDebug>
 
 #include "axescurves.h"
@@ -64,7 +66,12 @@ AxesCurvesConfig::AxesCurvesConfig(QWidget *parent) :
     }
     appS->endGroup();
 
+    ui->layoutV_Help->setAlignment(Qt::AlignBottom);
     setFocusPolicy(Qt::StrongFocus);
+
+    m_toolTip = ui->info->toolTip();
+    updateColor();
+    installEventFilter(this);
 }
 
 AxesCurvesConfig::~AxesCurvesConfig()
@@ -130,6 +137,46 @@ void AxesCurvesConfig::updateAxesCurves()
 void AxesCurvesConfig::deviceStatus(bool isConnect)
 {
     ui->widget_AxesCurves->deviceStatus(isConnect);
+}
+
+//! QPixmap gray-scale image (an alpha map) to colored QPixmap
+QPixmap AxesCurvesConfig::coloringPixmap(QPixmap pixmap, const QColor &color)
+{
+    // initialize painter to draw on a pixmap and set composition mode
+    QPainter painter(&pixmap);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+    // set color
+    painter.setBrush(color);
+    painter.setPen(color);
+    // paint rect
+    painter.drawRect(pixmap.rect());
+    // here is our new colored icon
+    return pixmap;
+}
+
+void AxesCurvesConfig::updateColor()
+{
+    QColor col = QApplication::palette().color(QPalette::Text);
+    QPixmap pix = coloringPixmap(QPixmap(":/Images/reset.png"), col);
+
+    QByteArray arr;
+    QBuffer buf(&arr);
+    pix.save(&buf, "PNG");
+    QString url = QString("data:image/png;base64,") + arr.toBase64();
+    QString tt = m_toolTip;
+    tt.replace(":/Images/reset.png", url);
+
+    ui->info->setToolTip(tt);
+}
+
+bool AxesCurvesConfig::eventFilter(QObject *object, QEvent *event)
+{
+    Q_UNUSED(object)
+    if (event->type() == QEvent::PaletteChange) {
+        updateColor();
+        return false;
+    }
+    return false;
 }
 
 

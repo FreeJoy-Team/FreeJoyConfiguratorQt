@@ -117,7 +117,7 @@ public:
 
 signals:
     void valueChangedForInteraction(int index, int senderIndex, int pin);
-    void currentIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
+    void currentIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);
 private slots:
     void indexChanged(int index);
 

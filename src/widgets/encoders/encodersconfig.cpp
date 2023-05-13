@@ -2,6 +2,7 @@
 #include "ui_encodersconfig.h"
 
 #define FAST_ENCODER_COUNT 1
+
 EncodersConfig::EncodersConfig(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EncodersConfig)
@@ -80,10 +81,9 @@ void EncodersConfig::setUiOnOff()
 }
 
 
-void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // ограничитель на макс энкодер или через сортировку
+void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // говнокод
 {
     int tmp_add = 0;
-    int tmp_delete = 0;
 
     // add encoder A input
     if (encoder_A > 0)
@@ -116,9 +116,11 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // �
             {
                 for (int j = i; j < m_encodersInput_A_count; ++j)
                 {
-                    tmp_delete = m_encodersPtrList[j+1]->inputA();
-                    m_encodersPtrList[j]->setInputA(m_encodersPtrList[j+1]->inputA());
-                    encoder_A = tmp_delete;
+                    if (j+1 < m_encodersPtrList.size()) {
+                        m_encodersPtrList[j]->setInputA(m_encodersPtrList[j+1]->inputA());
+                    } else {
+                        m_encodersPtrList[j]->setInputA(0);
+                    }
                 }
                 break;
             }
@@ -158,9 +160,11 @@ void EncodersConfig::encoderInputChanged(int encoder_A, int encoder_B)      // �
             {
                 for (int j = i; j < m_encodersInput_B_count; ++j)
                 {
-                    tmp_delete = m_encodersPtrList[j+1]->inputB();
-                    m_encodersPtrList[j]->setInputB(m_encodersPtrList[j+1]->inputB());
-                    encoder_B = tmp_delete;
+                    if (j+1 < m_encodersPtrList.size()) {
+                        m_encodersPtrList[j]->setInputB(m_encodersPtrList[j+1]->inputB());
+                    } else {
+                        m_encodersPtrList[j]->setInputB(0);
+                    }
                 }
                 break;
             }

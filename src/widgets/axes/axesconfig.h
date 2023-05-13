@@ -34,7 +34,7 @@ signals:
     void a2bCountChanged(int count);
 
 public slots:
-    void addOrDeleteMainSource(int sourceEnum, bool isAdd);
+    void addOrDeleteMainSource(int sourceEnum, QString sourceName, bool isAdd);
 private slots:
     void a2bCountCalc(int count, int previousCount);
     void hideAxis(int index, bool hide);

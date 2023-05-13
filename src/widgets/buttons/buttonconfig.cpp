@@ -30,7 +30,7 @@ ButtonConfig::ButtonConfig(QWidget *parent)
         ButtonLogical *logicalButtonsWidget = new ButtonLogical(i, this);
         ui->layoutV_LogicalButton->addWidget(logicalButtonsWidget);
         m_logicButtonPtrList.append(logicalButtonsWidget);
-        connect(m_logicButtonPtrList[i], &ButtonLogical::functionIndexChanged,
+        connect(m_logicButtonPtrList[i], &ButtonLogical::functionTypeChanged,
                 this, &ButtonConfig::functionTypeChanged);
     }
     gEnv.pAppSettings->beginGroup("OtherSettings");
@@ -194,18 +194,58 @@ void ButtonConfig::physButtonsCreator(int count)
     }
 }
 
-void ButtonConfig::functionTypeChanged(int index, int functionPreviousIndex, int buttonIndex)
+void ButtonConfig::functionTypeChanged(button_type_t current, button_type_t previous, int buttonIndex)
 {
-    if (index == ENCODER_INPUT_A) {
+    if (current == ENCODER_INPUT_A) {
         emit encoderInputChanged(buttonIndex + 1, 0);
-    } else if (index == ENCODER_INPUT_B) {
+    } else if (current == ENCODER_INPUT_B) {
         emit encoderInputChanged(0, buttonIndex + 1);
     }
 
-    if (functionPreviousIndex == ENCODER_INPUT_A) {
+    if (previous == ENCODER_INPUT_A) {
         emit encoderInputChanged((buttonIndex + 1) * -1, 0); // send negative number
-    } else if (functionPreviousIndex == ENCODER_INPUT_B) {
+    } else if (previous == ENCODER_INPUT_B) {
         emit encoderInputChanged(0, (buttonIndex + 1) * -1);
+    }
+    typeLimit(current, previous);
+}
+
+void ButtonConfig::typeLimit(button_type_t current, button_type_t previous)
+{
+    static int limitCountArray[m_typeLimCount]{};
+    static bool limitIsEnable[m_typeLimCount]{};
+
+    for (int i = 0; i < m_typeLimCount; ++i)
+    {
+        if (current == m_ButtonsTypeLimit[i].type)
+        {
+            limitCountArray[i]++;
+        }
+        if (previous == m_ButtonsTypeLimit[i].type)
+        {
+            limitCountArray[i]--;
+        }
+
+        if (limitCountArray[i] >= m_ButtonsTypeLimit[i].maxCount && limitIsEnable[i] == false)
+        {
+            limitIsEnable[i] = true;
+            for (int j = 0; j < m_logicButtonPtrList.size(); ++j)
+            {
+                if (m_logicButtonPtrList[j]->currentButtonType() != current)
+                {
+                    m_logicButtonPtrList[j]->disableButtonType(current, true);
+                }
+            }
+        }
+
+        if (limitIsEnable[i] == true && limitCountArray[i] < m_ButtonsTypeLimit[i].maxCount)
+        {
+            limitIsEnable[i] = false;
+            for (int j = 0; j < m_logicButtonPtrList.size(); ++j)
+            {
+                m_logicButtonPtrList[j]->disableButtonType(previous, false);
+            }
+        }
     }
 }
 

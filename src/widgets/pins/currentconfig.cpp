@@ -19,6 +19,8 @@ CurrentConfig::CurrentConfig(QWidget *parent) :
     m_singleLed = 0;
     m_rowsOfLed = 0;
     m_columnsOfLed = 0;
+
+    m_limit = false;
 }
 
 CurrentConfig::~CurrentConfig()
@@ -61,17 +63,17 @@ void CurrentConfig::setConfig(int type, int changedHowMuch)
     else if (type == SINGLE_LED){
         m_singleLed += changedHowMuch;
         ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
-        emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
+        totalLEDsChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
     }
     else if (type == ROW_OF_LED){
         m_rowsOfLed += changedHowMuch;
         ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
-        emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
+        totalLEDsChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
     }
     else if (type == COLUMN_OF_LED){
         m_columnsOfLed += changedHowMuch;
         ui->label_TotalLEDs->setNum(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
-        emit totalLEDsValueChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
+        totalLEDsChanged(m_singleLed + (m_rowsOfLed * m_columnsOfLed));
     }
 }
 
@@ -97,14 +99,45 @@ void CurrentConfig::totalButtonsChanged(int count)
 {
     if (count > MAX_BUTTONS_NUM){
         m_defaultLabelStyle = ui->label_TotalButtons->styleSheet();
-        //ui->label_TotalButtons->setStyleSheet(default_label_style_ + "background-color: rgb(200, 0, 0);");
+        ui->label_TotalButtons->setStyleSheet(m_defaultLabelStyle + QStringLiteral("background-color: rgb(200, 0, 0);"));
         ui->text_TotalButtons->setStyleSheet(m_defaultLabelStyle + QStringLiteral("background-color: rgb(200, 0, 0);"));
         m_maxButtonsWarning = true;
+        if (m_limit == false) {
+            m_limit = true;
+            emit limitReached(true);
+        }
     } else if (m_maxButtonsWarning == true){   // && count <= MAX_BUTTONS_NUM
-        // а не будет ли тут проблемы, если кнопка активна и в это время изменился стиль приложения
-        // то default_label_style_ будет же со старым стилем?
         ui->text_TotalButtons->setStyleSheet(m_defaultLabelStyle);
         m_maxButtonsWarning = false;
+        if (m_limit) {
+            m_limit = false;
+            emit limitReached(false);
+        }
     }
     emit totalButtonsValueChanged(count);
+}
+
+void CurrentConfig::totalLEDsChanged(int count)
+{
+    if (count > MAX_LEDS_NUM){
+        m_defaultLabelStyle = ui->label_TotalLEDs->styleSheet();
+        ui->label_TotalLEDs->setStyleSheet(m_defaultLabelStyle + QStringLiteral("background-color: rgb(200, 0, 0);"));
+        ui->text_TotalLEDs->setStyleSheet(m_defaultLabelStyle + QStringLiteral("background-color: rgb(200, 0, 0);"));
+        if (m_limit == false) {
+            m_limit = true;
+            emit limitReached(true);
+        }
+    } else {
+        ui->text_TotalLEDs->setStyleSheet(m_defaultLabelStyle);
+        if (m_limit) {
+            m_limit = false;
+            emit limitReached(false);
+        }
+    }
+    emit totalLEDsValueChanged(count);
+}
+
+bool CurrentConfig::limitIsReached()
+{
+    return m_limit;
 }

@@ -29,7 +29,7 @@ signals:
     void shiftRegButtonsCountChanged(int buttonsCount);
 
 public slots:
-    void shiftRegSelected(int latchPin, int dataPin, const QString &pinGuiName);
+    void shiftRegSelected(int latchPin, int clkPin, int dataPin, const QString &pinGuiName);
 private slots:
     void shiftRegButtonsCalc(int currentCount, int previousCount);
 
@@ -44,10 +44,11 @@ private:
 
     int m_shiftButtonsCount;
 
-    static bool sortByPinNumber(const ShiftRegData_t &lhs, const ShiftRegData_t &rhs);
-    static bool sortNullLast(const ShiftRegData_t &lhs, const ShiftRegData_t &rhs);
+    static bool sortByPinNumberAndNullLast(const ShiftRegData_t &lhs, const ShiftRegData_t &rhs);
+    void addPinAndSort(int pin, const QString &pinGuiName, std::array<ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> &arr);
 
     std::array<ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> m_latchPinsArray{};
+    std::array<ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> m_clkPinsArray{};
     std::array<ShiftRegData_t, MAX_SHIFT_REG_NUM + 1> m_dataPinsArray{};
 
     QList<ShiftRegisters *> m_shiftRegsPtrList;

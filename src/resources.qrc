@@ -20,5 +20,6 @@
         <file>Images/flags/Germany.png</file>
         <file>Images/flags/Russia.png</file>
         <file>Images/flags/United_Kingdom.png</file>
+        <file>FreeJoyQt_de_DE.qm</file>
     </qresource>
 </RCC>

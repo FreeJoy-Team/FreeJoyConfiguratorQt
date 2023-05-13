@@ -43,7 +43,7 @@ AxesCurvesPlot::AxesCurvesPlot(bool labelEnabled ,QWidget *parent) :
             label->setNum(m_pointPtrList[i]->current_value);
             label->setMinimumWidth(m_kLabelWidth);
             label->setAlignment(Qt::AlignHCenter);
-            label->setStyleSheet("background:transparent;");
+            //label->setStyleSheet("background:transparent;");
             label->setVisible(true);
             m_labelPtrList.append(label);
         }

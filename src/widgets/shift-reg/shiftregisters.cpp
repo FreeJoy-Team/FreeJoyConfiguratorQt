@@ -24,6 +24,7 @@ ShiftRegisters::ShiftRegisters(int shiftRegNumber, QWidget *parent)
     for (int i = 0; i < SHIFT_REG_TYPES; ++i) {
         ui->comboBox_ShiftRegType->addItem(m_shiftRegistersList[i].guiName);
         ui->label_DataPin->setText(m_notDefined);
+        ui->label_ClkPin->setText(m_notDefined);
         ui->label_LatchPin->setText(m_notDefined);
     }
 
@@ -62,6 +63,18 @@ void ShiftRegisters::setLatchPin(int latchPin, QString pinGuiName)
     setUiOnOff();
 }
 
+void ShiftRegisters::setClkPin(int clkPin, QString pinGuiName)
+{
+    if (clkPin != 0) {
+        m_clkPin = clkPin;
+        ui->label_ClkPin->setText(pinGuiName);
+    } else {
+        m_clkPin = 0;
+        ui->label_ClkPin->setText(m_notDefined);
+    }
+    setUiOnOff();
+}
+
 void ShiftRegisters::setDataPin(int dataPin, QString pinGuiName)
 {
     if (dataPin != 0) {
@@ -76,7 +89,7 @@ void ShiftRegisters::setDataPin(int dataPin, QString pinGuiName)
 
 void ShiftRegisters::setUiOnOff()
 {
-    if (m_latchPin > 0 && m_dataPin > 0) {
+    if (m_latchPin > 0 && m_clkPin > 0 && m_dataPin > 0) {
         for (auto &&child : this->findChildren<QWidget *>()) {
             child->setEnabled(true);
         }

@@ -60,17 +60,13 @@ Axes::Axes(int axisNumber, QWidget *parent)
     // output checked
     connect(ui->checkBox_Output, &QCheckBox::toggled, this, &Axes::outputValueChanged);
     // calibration value changed
-    //connect(ui->spinBox_CalibMax, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Axes::calibMinMaxValueChanged);
-    connect(ui->spinBox_CalibMax, SIGNAL(valueChanged(int)),
-            this, SLOT(calibMinMaxValueChanged(int)));
-    connect(ui->spinBox_CalibMin, SIGNAL(valueChanged(int)),
-            this, SLOT(calibMinMaxValueChanged(int)));
+    connect(ui->spinBox_CalibMax, qOverload<int>(&QSpinBox::valueChanged), this, &Axes::calibMinMaxValueChanged);
+    connect(ui->spinBox_CalibMin, qOverload<int>(&QSpinBox::valueChanged), this, &Axes::calibMinMaxValueChanged);
     // main source changed
-    connect(ui->comboBox_AxisSource1, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(mainSourceIndexChanged(int)));
+    connect(ui->comboBox_AxisSource1, qOverload<int>(&QComboBox::currentIndexChanged),
+            this, &Axes::mainSourceIndexChanged);
     // a2b count changed
-    connect(ui->spinBox_A2bCount, SIGNAL(valueChanged(int)),
-            this, SLOT(a2bSpinBoxChanged(int)));
+    connect(ui->spinBox_A2bCount, qOverload<int>(&QSpinBox::valueChanged), this, &Axes::a2bSpinBoxChanged);
 
     Q_ASSERT(ui->groupBox_AxixName->objectName() == QStringLiteral("groupBox_AxixName"));
 }
@@ -88,15 +84,15 @@ void Axes::retranslateUi()
     m_axesExtend->retranslateUi();
 }
 
-void Axes::addOrDeleteMainSource(int sourceEnum, bool isAdd)
+void Axes::addOrDeleteMainSource(int sourceEnum, QString sourceName, bool isAdd)
 {
     if (isAdd == true) {
-        ui->comboBox_AxisSource1->addItem(m_axesPinList[Converter::EnumToIndex(sourceEnum, m_axesPinList)].guiName);
+        ui->comboBox_AxisSource1->addItem(m_axesPinList[Converter::EnumToIndex(sourceEnum, m_axesPinList)].guiName + " - " + sourceName);
         m_mainSource_enumIndex.push_back(m_axesPinList[Converter::EnumToIndex(sourceEnum, m_axesPinList)].deviceEnumIndex);
     } else {
         for (int i = 0; i < m_mainSource_enumIndex.size(); ++i) {
             if (m_mainSource_enumIndex[i] == sourceEnum) {
-                if (ui->comboBox_AxisSource1->currentIndex() == (int) i) {
+                if (ui->comboBox_AxisSource1->currentIndex() == i) {
                     ui->comboBox_AxisSource1->setCurrentIndex(0);
                 }
                 ui->comboBox_AxisSource1->removeItem(i);

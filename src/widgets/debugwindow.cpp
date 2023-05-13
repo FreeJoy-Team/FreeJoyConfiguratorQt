@@ -6,10 +6,11 @@
 #include <QFile>
 #include <QTextStream>
 #include <QTime>
+#include <QSettings>
 
 #include "global.h"
 #include <QDebug>
-
+#include <QStandardPaths>
 DebugWindow::DebugWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::DebugWindow)
@@ -18,6 +19,16 @@ DebugWindow::DebugWindow(QWidget *parent)
 
     m_packetsCount = 0;
     m_writeToFile = false;
+
+    QString docLoc = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (docLoc.isEmpty() == false) {
+        docLoc+= "/FreeJoy/";
+    }
+    QSettings s(docLoc + "FreeJoySettings.conf", QSettings::IniFormat);
+
+    s.beginGroup("OtherSettings");
+    ui->checkBox_WriteLog->setChecked(s.value("LogEnabled", "false").toBool());
+    s.endGroup();
 }
 
 DebugWindow::~DebugWindow()
@@ -72,7 +83,8 @@ void DebugWindow::printMsg(const QString &msg)
     ui->textBrowser_DebugMsg->moveCursor(QTextCursor::End); // с plainTextEdit криво пашет
 
     if (m_writeToFile) {
-        QFile file(QDir::currentPath() + '/' + "FreeJoyConfigurator_Log.txt");
+        QString date(QDateTime::currentDateTime().toString("YYYY-MM-DDTHH:MM"));
+        QFile file(gEnv.pAppSettings->fileName().remove("FreeJoySettings.conf") + "log/" + "FJLog" + date + ".txt");
         if (!file.open(QIODevice::WriteOnly | QIODevice::Append)) {
             qWarning() << "cant open file";
             return;
@@ -107,16 +119,9 @@ void DebugWindow::buttonLogReset()
 
 void DebugWindow::on_checkBox_WriteLog_clicked(bool checked)
 {
-    QString text = ui->textBrowser_DebugMsg->toPlainText();
-    QFile file(QDir::currentPath() + '/' + "FreeJoyConfigurator_Log.txt");
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Append)) {
-        qDebug() << "cant open file";
-        return;
-    } else {
-        file.resize(0);
-    }
-    QTextStream out(&file);
-    out << "########## START WRITE LOG ##########\n" << text;
+    gEnv.pAppSettings->beginGroup("OtherSettings");
+    gEnv.pAppSettings->setValue("LogEnabled", checked);
+    gEnv.pAppSettings->endGroup();
 
     m_writeToFile = checked;
 }

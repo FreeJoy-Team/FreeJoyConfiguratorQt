@@ -36,21 +36,24 @@ public:
     void setAutoPhysBut(bool enabled);
     int currentFocus() const;
 
+    void disableButtonType(button_type_t type, bool disable);
+    button_type_t currentButtonType();
+
     void retranslateUi();
 
 signals:
-    void functionIndexChanged(int index, int previousIndex, int buttonIndex);
+    void functionTypeChanged(button_type_t current, button_type_t previous, int buttonIndex);
 
 private slots:
     void editingOnOff(int value);
-    void functionTypeChanged(int index);
+    void functionIndexChanged(int index);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
     Ui::ButtonLogical *ui;
-    int m_functionPrevIndex;
+    int m_functionPrevType;
     bool m_currentState;
     bool m_debugState;
     int m_buttonIndex;

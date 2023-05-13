@@ -4,9 +4,7 @@
 
 dev_config_t InitConfig (void)
 {
-#ifdef __clang__
-    /*code specific to clang compiler*/
-#elif __GNUC__
+#ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #elif _MSC_VER

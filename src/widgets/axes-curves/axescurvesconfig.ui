@@ -51,12 +51,24 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="layoutV_Help">
      <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
       <widget class="InfoLabel" name="info">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="maximumSize">
         <size>
          <width>999</width>
@@ -73,6 +85,12 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_Ctrl">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string notr="true">Ctrl</string>
        </property>

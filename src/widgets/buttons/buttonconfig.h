@@ -42,8 +42,9 @@ public slots:
     void setUiOnOff(int value);
 
 private slots:
-    void functionTypeChanged(int index, int functionPreviousIndex, int buttonIndex);
+    void functionTypeChanged(button_type_t current, button_type_t previous, int buttonIndex);
     void setPhysicButton(int buttonIndex);
+    void typeLimit(button_type_t current, button_type_t previous);
 
 #ifdef DYNAMIC_CREATION
 private slots:
@@ -74,6 +75,19 @@ private:
 
     QList<ButtonLogical *> m_logicButtonPtrList;
     QList<ButtonPhysical *> m_PhysButtonPtrList;
+
+    struct pinTypeLimit_t
+    {
+        button_type_t type;
+        int maxCount;
+    };
+
+    static const int m_typeLimCount = 2;
+    const pinTypeLimit_t m_ButtonsTypeLimit[m_typeLimCount] =
+    {
+        {ENCODER_INPUT_A,        15},
+        {ENCODER_INPUT_B,        15},
+    };
 };
 
 #endif // BUTTONCONFIG_H

@@ -47,6 +47,7 @@ private slots:
 
     void configReceived(bool success);
     void configSent(bool success);
+    void blockWRConfigToDevice(bool block);
 
     void deviceFlasherController(bool isStartFlash);
 
@@ -108,6 +109,8 @@ private:
     QString m_cfgDirPath;
     void curCfgFileChanged(const QString &fileName);
     QStringList cfgFilesList(const QString &dirPath);
+    QIcon pixmapToIcon(QPixmap pixmap, const QColor &color);
+    void updateColor();
 
     void UiReadFromConfig();
     void UiWriteToConfig();
