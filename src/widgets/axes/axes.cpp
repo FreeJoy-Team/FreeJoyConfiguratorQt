@@ -246,7 +246,9 @@ void Axes::readFromConfig()
     // output, inverted
     ui->checkBox_Output->setChecked(axCfg->out_enabled);
     ui->checkBox_Inverted->setChecked(axCfg->inverted);
-    ui->comboBox_AxisSource1->setCurrentIndex(Converter::EnumToIndex(axCfg->source_main, m_mainSource_enumIndex));
+    int index = Converter::EnumToIndex(axCfg->source_main, m_mainSource_enumIndex);
+    if (index == -1) index = 0;
+    ui->comboBox_AxisSource1->setCurrentIndex(index);
     // calibration
     ui->spinBox_CalibMin->setValue(axCfg->calib_min);
     ui->spinBox_CalibCenter->setValue(axCfg->calib_center);
