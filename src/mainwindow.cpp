@@ -461,6 +461,7 @@ void MainWindow::finalInitialization()
 void MainWindow::curCfgFileChanged(const QString &fileName)
 {
     QString filePath = m_cfgDirPath + '/' + fileName + ".cfg";
+    gEnv.pDeviceConfig->resetConfig();
     ConfigToFile::loadDeviceConfigFromFile(this, filePath, gEnv.pDeviceConfig->config);
     UiReadFromConfig();
 }
@@ -749,6 +750,7 @@ void MainWindow::on_pushButton_LoadFromFile_clicked()
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open Config"), m_cfgDirPath + "/", tr("Config Files (*.cfg)"));
 
+    gEnv.pDeviceConfig->resetConfig();
     ConfigToFile::loadDeviceConfigFromFile(this, fileName, gEnv.pDeviceConfig->config);
     UiReadFromConfig();
     qDebug()<<"done";
