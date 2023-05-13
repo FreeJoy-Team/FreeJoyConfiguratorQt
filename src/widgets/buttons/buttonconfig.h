@@ -73,6 +73,8 @@ private:
 
     void logicaButtonsCreator();
 
+    void spinBoxStep(int value);
+
     QList<ButtonLogical *> m_logicButtonPtrList;
     QList<ButtonPhysical *> m_PhysButtonPtrList;
 

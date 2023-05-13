@@ -76,6 +76,7 @@ private:
     void pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum);
     void setCurrentConfig(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);
     void blockPA8PWM(int currentDeviceEnum, int previousDeviceEnum);
+    void blockPA10RGB(int currentDeviceEnum, int previousDeviceEnum, int pinNumber);
 
     struct source_t
     {

@@ -157,6 +157,9 @@ void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, i
 
     // block or reset PWM on PA_8 if selected SPI
     blockPA8PWM(currentDeviceEnum, previousDeviceEnum);
+
+    // PA10 RGB should only works if PA8 PWM or FastEncoder is not selected
+    blockPA10RGB(currentDeviceEnum, previousDeviceEnum, pinNumber);
 }
 
 
@@ -306,6 +309,40 @@ void PinConfig::blockPA8PWM(int currentDeviceEnum, int previousDeviceEnum)
             if (m_pinCBoxPtrList[PA8Index]->enumIndex()[i] == LED_PWM)
             {
                 m_pinCBoxPtrList[PA8Index]->setIndexStatus(i, true);
+                break;
+            }
+        }
+    }
+}
+
+// PA10 RGB should only works if PA8 PWM or FastEncoder is not selected
+void PinConfig::blockPA10RGB(int currentDeviceEnum, int previousDeviceEnum, int pinNumber)
+{
+    static int conflictCount = 0;
+    int PA10Index = PA_10 - PA_0;
+
+    if (pinNumber == PA_8 && (currentDeviceEnum == LED_PWM || currentDeviceEnum == FAST_ENCODER)) {
+        conflictCount++;
+    } else if (pinNumber == PA_8 && (previousDeviceEnum == LED_PWM || previousDeviceEnum == FAST_ENCODER)) {
+        conflictCount--;
+    }
+
+    if (conflictCount > 0) {
+        if (m_pinCBoxPtrList[PA10Index]->currentDevEnum() == LED_RGB) {
+            m_pinCBoxPtrList[PA10Index]->resetPin();
+        }
+        for (int i = 0; i < m_pinCBoxPtrList[PA10Index]->enumIndex().size(); ++i) {
+            if (m_pinCBoxPtrList[PA10Index]->enumIndex()[i] == LED_RGB)
+            {
+                m_pinCBoxPtrList[PA10Index]->setIndexStatus(i, false);
+                break;
+            }
+        }
+    } else {
+        for (int i = 0; i < m_pinCBoxPtrList[PA10Index]->enumIndex().size(); ++i) {
+            if (m_pinCBoxPtrList[PA10Index]->enumIndex()[i] == LED_RGB)
+            {
+                m_pinCBoxPtrList[PA10Index]->setIndexStatus(i, true);
                 break;
             }
         }

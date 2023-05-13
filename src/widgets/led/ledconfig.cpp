@@ -3,6 +3,8 @@
 
 //#include <time.h>
 #include "axes.h"
+#include "led.h"
+#include "ledrgbconfig.h"
 #include "common_types.h"
 #include "deviceconfig.h"
 #include "global.h"
@@ -11,6 +13,7 @@
 LedConfig::LedConfig(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::LedConfig)
+    , m_ledsRgb(new LedRGBConfig(this))
 {
     ui->setupUi(this);
     ui->layoutV_LED->setAlignment(Qt::AlignTop);
@@ -28,6 +31,8 @@ LedConfig::LedConfig(QWidget *parent)
         ui->comboBox_axisConPB1->addItem(axesList()[i].guiName);
         ui->comboBox_axisConPB4->addItem(axesList()[i].guiName);
     }
+
+    ui->layoutH_RGB->addWidget(m_ledsRgb);
 }
 
 LedConfig::~LedConfig()
@@ -98,6 +103,8 @@ void LedConfig::readFromConfig()
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         m_ledPtrList[i]->readFromConfig();
     }
+
+    m_ledsRgb->readFromConfig();
 }
 
 void LedConfig::writeToConfig()
@@ -124,4 +131,6 @@ void LedConfig::writeToConfig()
         }
         m_ledPtrList[i]->writeToConfig();
     }
+
+    m_ledsRgb->writeToConfig();
 }

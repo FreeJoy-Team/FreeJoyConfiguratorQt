@@ -3,8 +3,8 @@
 
 #define MAJOR_VERSION 1
 #define MINOR_VERSION 7
-#define PATCH_VERSION 1
-#define BUILD_VERSION 5
+#define PATCH_VERSION 2
+#define BUILD_VERSION 0
 
 #ifdef INNO_SETUP
 	#define APP_VERSION Str(MAJOR_VERSION) + "." + Str(MINOR_VERSION) + "." + Str(PATCH_VERSION) + "." + "b" + Str(BUILD_VERSION)

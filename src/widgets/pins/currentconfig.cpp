@@ -97,7 +97,7 @@ void CurrentConfig::shiftRegButtonsCountChanged(int count)
 
 void CurrentConfig::totalButtonsChanged(int count)
 {
-    if (count > MAX_BUTTONS_NUM){
+    if (count > MAX_BUTTONS_NUM && !m_maxButtonsWarning) {
         m_defaultLabelStyle = ui->label_TotalButtons->styleSheet();
         ui->label_TotalButtons->setStyleSheet(m_defaultLabelStyle + QStringLiteral("background-color: rgb(200, 0, 0);"));
         ui->text_TotalButtons->setStyleSheet(m_defaultLabelStyle + QStringLiteral("background-color: rgb(200, 0, 0);"));
@@ -106,7 +106,8 @@ void CurrentConfig::totalButtonsChanged(int count)
             m_limit = true;
             emit limitReached(true);
         }
-    } else if (m_maxButtonsWarning == true){   // && count <= MAX_BUTTONS_NUM
+    } else if (m_maxButtonsWarning == true) {   // && count <= MAX_BUTTONS_NUM
+        ui->label_TotalButtons->setStyleSheet(m_defaultLabelStyle);
         ui->text_TotalButtons->setStyleSheet(m_defaultLabelStyle);
         m_maxButtonsWarning = false;
         if (m_limit) {
