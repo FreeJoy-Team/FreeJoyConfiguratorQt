@@ -163,7 +163,7 @@ void MainWindow::themeChanged(bool dark)
         pal.setColor(QPalette::Disabled, QPalette::ButtonText, QColor(127,127,127));
         pal.setColor(QPalette::BrightText, Qt::red);
         pal.setColor(QPalette::Link, QColor(20,100,170));
-        pal.setColor(QPalette::Highlight, QColor(20,100,170));
+        pal.setColor(QPalette::Highlight, QColor(20,150,250));// QColor(20,100,170));
         pal.setColor(QPalette::Disabled, QPalette::Highlight, QColor(80,80,80));
         pal.setColor(QPalette::HighlightedText, QColor(230,231,232));
         pal.setColor(QPalette::Disabled, QPalette::HighlightedText, QColor(127,127,127));
