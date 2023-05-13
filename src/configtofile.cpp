@@ -188,6 +188,7 @@ void ConfigToFile::loadDeviceConfigFromFile(QWidget *parent, const QString &file
     devC.led_pwm_config[3].axis_num = uint8_t(deviceSettings.value("PinPB4_AxisNum", devC.led_pwm_config[3].axis_num).toInt());
     deviceSettings.endGroup();
 
+    // ON/OFF LEDs
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         deviceSettings.beginGroup("LedsConfig_" + QString::number(i));
 
@@ -195,6 +196,20 @@ void ConfigToFile::loadDeviceConfigFromFile(QWidget *parent, const QString &file
         devC.leds[i].type = uint8_t(deviceSettings.value("LedType", devC.leds[i].type).toInt());
         deviceSettings.endGroup();
     }
+
+    // RGB LEDs
+    deviceSettings.beginGroup("LedsRGBConfig");
+    devC.rgb_effect = uint8_t(deviceSettings.value("Effect", devC.rgb_effect).toInt());
+    devC.rgb_count = uint8_t(deviceSettings.value("Count", devC.rgb_count).toInt());
+    devC.rgb_brightness = uint8_t(deviceSettings.value("Brightness", devC.rgb_brightness).toInt());
+    devC.rgb_delay_ms = uint16_t(deviceSettings.value("Delay", devC.rgb_delay_ms).toInt());
+
+    for (int i = 0; i < NUM_RGB_LEDS; ++i) {
+        devC.rgb_leds[i].r = uint8_t(deviceSettings.value("Red_" + QString::number(i), devC.rgb_leds[i].r).toInt());
+        devC.rgb_leds[i].g = uint8_t(deviceSettings.value("Green_" + QString::number(i), devC.rgb_leds[i].g).toInt());
+        devC.rgb_leds[i].b = uint8_t(deviceSettings.value("Blue_" + QString::number(i), devC.rgb_leds[i].b).toInt());
+    }
+    deviceSettings.endGroup();
 
     oldConfigHandler(parent, devC);
 }
@@ -399,6 +414,7 @@ void ConfigToFile::saveDeviceConfigToFile(const QString &fileName, dev_config_t 
     deviceSettings.setValue("PinPB4_AxisNum", devC.led_pwm_config[3].axis_num);
     deviceSettings.endGroup();
 
+    // ON/OFF LEDs
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         deviceSettings.beginGroup("LedsConfig_" + QString::number(i));
 
@@ -406,5 +422,19 @@ void ConfigToFile::saveDeviceConfigToFile(const QString &fileName, dev_config_t 
         deviceSettings.setValue("LedType", devC.leds[i].type);
         deviceSettings.endGroup();
     }
+
+    // RGB LEDs
+    deviceSettings.beginGroup("LedsRGBConfig");
+    deviceSettings.setValue("Effect", devC.rgb_effect);
+    deviceSettings.setValue("Count", devC.rgb_count);
+    deviceSettings.setValue("Brightness", devC.rgb_brightness);
+    deviceSettings.setValue("Delay", devC.rgb_delay_ms);
+
+    for (int i = 0; i < NUM_RGB_LEDS; ++i) {
+        deviceSettings.setValue("Red_" + QString::number(i), devC.rgb_leds[i].r);
+        deviceSettings.setValue("Green_" + QString::number(i), devC.rgb_leds[i].g);
+        deviceSettings.setValue("Blue_" + QString::number(i), devC.rgb_leds[i].b);
+    }
+    deviceSettings.endGroup();
     qDebug()<<"SaveDeviceConfigToFile() finished";
 }

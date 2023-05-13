@@ -31,7 +31,9 @@ INCLUDEPATH +="widgets" \
     "widgets/encoders" \
     "widgets/led" \
     "widgets/pins" \
-    "widgets/shift-reg"
+    "widgets/shift-reg" \
+    "widgets/color" \
+    "widgets/led_rgb"
 
 SOURCES += \
     mainwindow_style.cpp \
@@ -48,7 +50,13 @@ SOURCES += \
     mousewheelguard.cpp \
     reportconverter.cpp \
     stm_main.c \
+    widgets/color/colorcells.cpp \
+    widgets/color/colorpicker.cpp \
+    widgets/color/colorvalueslider.cpp \
+    widgets/color/colorwheel.cpp \
     widgets/infolabel.cpp \
+    widgets/led_rgb/ledrgb.cpp \
+    widgets/led_rgb/ledrgbconfig.cpp \
     widgets/selectfolder.cpp \
     widgets/switchbutton.cpp \
     widgets/adv-settings/advancedsettings.cpp \
@@ -93,7 +101,13 @@ HEADERS += \
     mousewheelguard.h \
     reportconverter.h \
     stm_main.h \
+    widgets/color/colorcells.h \
+    widgets/color/colorpicker.h \
+    widgets/color/colorvalueslider.h \
+    widgets/color/colorwheel.h \
     widgets/infolabel.h \
+    widgets/led_rgb/ledrgb.h \
+    widgets/led_rgb/ledrgbconfig.h \
     widgets/selectfolder.h \
     widgets/switchbutton.h \
     version.h \
@@ -135,6 +149,9 @@ FORMS += \
     widgets/buttons/buttonconfig.ui \
     widgets/buttons/buttonlogical.ui \
     widgets/buttons/buttonphysical.ui \
+    widgets/color/colorpicker.ui \
+    widgets/led_rgb/ledrgb.ui \
+    widgets/led_rgb/ledrgbconfig.ui \
     widgets/pins/currentconfig.ui \
     widgets/debugwindow.ui \
     widgets/encoders/encoders.ui \

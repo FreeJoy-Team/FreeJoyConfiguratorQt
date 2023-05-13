@@ -1,8 +1,10 @@
 #ifndef LEDCONFIG_H
 #define LEDCONFIG_H
 
-#include "led.h"
 #include <QWidget>
+
+class LED;
+class LedRGBConfig;
 
 namespace Ui {
 class LedConfig;
@@ -30,6 +32,8 @@ public slots:
 
 private:
     Ui::LedConfig *ui;
+
+    LedRGBConfig *m_ledsRgb;
 
     QList<LED *> m_ledPtrList;
     int m_currentLedCount;

@@ -382,9 +382,6 @@
           <property name="text">
            <string>Automatically set physical button when pressed</string>
           </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
          </widget>
         </item>
         <item>
@@ -1072,9 +1069,6 @@
          </property>
          <item row="0" column="0">
           <widget class="QLabel" name="label_14">
-           <property name="toolTip">
-            <string>Pooling intervals</string>
-           </property>
            <property name="text">
             <string>Buttons polling</string>
            </property>
@@ -1083,7 +1077,7 @@
          <item row="0" column="1">
           <widget class="QSpinBox" name="spinBox_ButtonsPolling">
            <property name="toolTip">
-            <string>Pooling intervals</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pooling intervals. A low value will not improve the operation of the buttons, on the contrary, increasing it may improve encoder operation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="suffix">
             <string> ns</string>
@@ -1105,7 +1099,7 @@
          <item row="1" column="1">
           <widget class="QSpinBox" name="spinBox_EncoderPolling">
            <property name="toolTip">
-            <string>Pooling intervals</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pooling intervals. A low value will not improve the operation of the buttons, on the contrary, increasing it may improve encoder operation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="suffix">
             <string> ns</string>
@@ -1126,9 +1120,6 @@
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_15">
-           <property name="toolTip">
-            <string>Pooling intervals</string>
-           </property>
            <property name="text">
             <string>Encoders polling</string>
            </property>
