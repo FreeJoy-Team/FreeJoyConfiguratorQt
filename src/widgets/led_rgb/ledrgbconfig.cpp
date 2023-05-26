@@ -61,7 +61,6 @@ void LedRGBConfig::setColorToSelectedItems(const QColor &color)
     QIcon icon(pixmapToIcon(QPixmap("://Images/buttonLed.png"), color));
     for (int i = 0; i < m_rgbPtrList.size(); ++i) {
         if (m_rgbPtrList[i]->isSelected()) {
-            //m_rgbPtrList[i]->setColor(color);
             m_rgbPtrList[i]->setIcon(icon, color);
         }
     }
@@ -75,7 +74,8 @@ void LedRGBConfig::on_radioButton_staticColor_clicked(bool checked)
         ui->listWidget_leds->setEnabled(true);
         ui->spinBox_delay->setEnabled(false);
         ui->label_delay->setEnabled(false);
-        //ui->pushButton_selectAll->setEnabled(true);
+        ui->spinBox_RBBrightness->setEnabled(false);
+        ui->label_RBBrightness->setEnabled(false);
     }
 }
 
@@ -86,7 +86,8 @@ void LedRGBConfig::on_radioButton_rainbow_clicked(bool checked)
         ui->listWidget_leds->setEnabled(false);
         ui->spinBox_delay->setEnabled(true);
         ui->label_delay->setEnabled(true);
-        //ui->pushButton_selectAll->setEnabled(false);
+        ui->spinBox_RBBrightness->setEnabled(true);
+        ui->label_RBBrightness->setEnabled(true);
     }
 }
 
@@ -97,7 +98,8 @@ void LedRGBConfig::on_radioButton_simHub_clicked(bool checked)
         ui->listWidget_leds->setEnabled(false);
         ui->spinBox_delay->setEnabled(false);
         ui->label_delay->setEnabled(false);
-        //ui->pushButton_selectAll->setEnabled(false);
+        ui->spinBox_RBBrightness->setEnabled(false);
+        ui->label_RBBrightness->setEnabled(false);
     }
 }
 
@@ -108,19 +110,20 @@ void LedRGBConfig::on_radioButton_flow_clicked(bool checked)
         ui->listWidget_leds->setEnabled(true);
         ui->spinBox_delay->setEnabled(true);
         ui->label_delay->setEnabled(true);
-        //ui->pushButton_selectAll->setEnabled(true);
+        ui->spinBox_RBBrightness->setEnabled(false);
+        ui->label_RBBrightness->setEnabled(false);
     }
 }
 
-void LedRGBConfig::on_spinBox_ledsCount_valueChanged(int arg1)
+void LedRGBConfig::on_spinBox_ledsCount_valueChanged(int value)
 {
     int curCount = m_rgbPtrList.size();
-    if (arg1 == curCount) return;
+    if (value == curCount) return;
 
     dev_config_t *devc = &gEnv.pDeviceConfig->config;
 
-    if (arg1 > curCount) {
-        for (int i = curCount; i < arg1; ++i) {
+    if (value > curCount) {
+        for (int i = curCount; i < value; ++i) {
             LedRGB *led = new LedRGB(this);
             led->setText(QString::number(i+1));
             int red = devc->rgb_leds[i].r;
@@ -131,21 +134,13 @@ void LedRGBConfig::on_spinBox_ledsCount_valueChanged(int arg1)
             ui->listWidget_leds->addItem(led->item());
         }
     } else {
-        for (int i = curCount; i > arg1; --i) {
-            //ui->listWidget_leds->removeItemWidget(m_rgbPtrList.last()->item());
+        for (int i = curCount; i > value; --i) {
             delete ui->listWidget_leds->takeItem(ui->listWidget_leds->row(m_rgbPtrList.last()->item()));
             m_rgbPtrList.last()->deleteLater();
             m_rgbPtrList.removeLast();
         }
     }
 }
-
-//void LedRGBConfig::on_pushButton_selectAll_clicked()
-//{
-//    for (int i = 0; i < m_rgbPtrList.size(); ++i) {
-//        m_rgbPtrList[i]->item()->setSelected(true);
-//    }
-//}
 
 
 void LedRGBConfig::readFromConfig()
@@ -162,26 +157,29 @@ void LedRGBConfig::readFromConfig()
     }
 
     switch(devc->rgb_effect) {
-    case WS2812B_STATIC:
-        ui->radioButton_staticColor->setChecked(true);
-        on_radioButton_staticColor_clicked(true);
-        break;
-    case WS2812B_RAINBOW:
-        ui->radioButton_rainbow->setChecked(true);
-        on_radioButton_rainbow_clicked(true);
-        break;
-    case WS2812B_SIMHUB:
-        ui->radioButton_simHub->setChecked(true);
-        on_radioButton_simHub_clicked(true);
-        break;
-    case WS2812B_FLOW:
-        ui->radioButton_flow->setChecked(true);
-        on_radioButton_flow_clicked(true);
-        break;
+        case WS2812B_STATIC:
+            ui->radioButton_staticColor->setChecked(true);
+            on_radioButton_staticColor_clicked(true);
+            break;
+        case WS2812B_RAINBOW:
+            ui->radioButton_rainbow->setChecked(true);
+            on_radioButton_rainbow_clicked(true);
+            break;
+        case WS2812B_SIMHUB:
+            ui->radioButton_simHub->setChecked(true);
+            on_radioButton_simHub_clicked(true);
+            break;
+        case WS2812B_FLOW:
+            ui->radioButton_flow->setChecked(true);
+            on_radioButton_flow_clicked(true);
+            break;
+        default:
+            break;
     }
 
     ui->spinBox_ledsCount->setValue(devc->rgb_count);
     ui->spinBox_delay->setValue(devc->rgb_delay_ms);
+    ui->spinBox_RBBrightness->setValue(devc->rgb_brightness);
 }
 
 void LedRGBConfig::writeToConfig()
@@ -206,4 +204,5 @@ void LedRGBConfig::writeToConfig()
 
     devc->rgb_count = ui->spinBox_ledsCount->value();
     devc->rgb_delay_ms = ui->spinBox_delay->value();
+    devc->rgb_brightness = ui->spinBox_RBBrightness->value();
 }

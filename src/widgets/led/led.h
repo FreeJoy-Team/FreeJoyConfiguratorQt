@@ -6,7 +6,6 @@
 #include "deviceconfig.h"
 #include "global.h"
 
-#define LED_FUNCTION_COUNT 2
 namespace Ui {
 class LED;
 }
@@ -34,10 +33,19 @@ private:
 
     bool m_currentState;
 
-    const deviceEnum_guiName_t m_ledList[LED_FUNCTION_COUNT] = // порядов обязан быть как в common_types.h!!!!!!!!!!!
+    const deviceEnum_guiName_t m_ledList[2] = // порядок обязан быть как в common_types.h!!!!!!!!!!!
     {
         {LED_NORMAL, tr("Normal")},
         {LED_INVERTED, tr("Inverted")},
+    };
+
+    const deviceEnum_guiName_t m_TimerList[5] = // порядок обязан быть как в common_types.h!!!!!!!!!!!
+    {
+         {-1, tr("-")},
+         {0, tr("Timer 1")},
+         {1, tr("Timer 2")},
+         {2, tr("Timer 3")},
+         {3, tr("Timer 4")},
     };
 };
 

@@ -188,12 +188,19 @@ void ConfigToFile::loadDeviceConfigFromFile(QWidget *parent, const QString &file
     devC.led_pwm_config[3].axis_num = uint8_t(deviceSettings.value("PinPB4_AxisNum", devC.led_pwm_config[3].axis_num).toInt());
     deviceSettings.endGroup();
 
-    // ON/OFF LEDs
+    // Mono LEDs
+    deviceSettings.beginGroup("LedsMonoConfig");
+    for (uint i = 0; i < std::size(devC.led_timer_ms); ++i) {
+        devC.led_timer_ms[i] = uint16_t(deviceSettings.value("Timer_" + QString::number(i +1), devC.led_timer_ms[i]).toInt());
+    }
+    deviceSettings.endGroup();
+
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         deviceSettings.beginGroup("LedsConfig_" + QString::number(i));
 
         devC.leds[i].input_num = int8_t(deviceSettings.value("InputNum", devC.leds[i].input_num).toInt());
         devC.leds[i].type = uint8_t(deviceSettings.value("LedType", devC.leds[i].type).toInt());
+        devC.leds[i].timer = uint8_t(deviceSettings.value("Timer", devC.leds[i].timer).toInt());
         deviceSettings.endGroup();
     }
 
@@ -414,12 +421,19 @@ void ConfigToFile::saveDeviceConfigToFile(const QString &fileName, dev_config_t 
     deviceSettings.setValue("PinPB4_AxisNum", devC.led_pwm_config[3].axis_num);
     deviceSettings.endGroup();
 
-    // ON/OFF LEDs
+    // Mono LEDs
+    deviceSettings.beginGroup("LedsMonoConfig");
+    for (uint i = 0; i < std::size(devC.led_timer_ms); ++i) {
+        deviceSettings.setValue("Timer_" + QString::number(i +1), devC.led_timer_ms[i]);
+    }
+    deviceSettings.endGroup();
+
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         deviceSettings.beginGroup("LedsConfig_" + QString::number(i));
 
         deviceSettings.setValue("InputNum", devC.leds[i].input_num);
         deviceSettings.setValue("LedType", devC.leds[i].type);
+        deviceSettings.setValue("Timer", devC.leds[i].timer);
         deviceSettings.endGroup();
     }
 

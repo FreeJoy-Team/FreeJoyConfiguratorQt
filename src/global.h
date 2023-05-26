@@ -16,7 +16,7 @@ struct GlobalEnvironment
 {
     QElapsedTimer *pApp_start_time = nullptr;
     DeviceConfig *pDeviceConfig = nullptr;
-    QSettings *pAppSettings = nullptr;
+    QSettings *pAppSettings = nullptr;  // нахера?
     DebugWindow *pDebugWindow = nullptr;
     QTranslator *pTranslator = nullptr;
 
@@ -25,6 +25,12 @@ bool readFinished = false;
 #endif
 };
 extern GlobalEnvironment gEnv;
+
+struct deviceEnum_guiName_t
+{
+int deviceEnumIndex;
+QString guiName;
+};
 
 // flasher
 enum {
@@ -36,30 +42,39 @@ enum {
     IN_PROCESS = 99,
 };
 
-struct deviceEnum_guiName_t
-{
-    int deviceEnumIndex;
-    QString guiName;
+enum Pin {
+    PA_0 = 1,
+    PA_1,
+    PA_2,
+    PA_3,
+    PA_4,
+    PA_5,
+    PA_6,
+    PA_7,
+    PA_8,
+    PA_9,
+    PA_10,
+    PA_15,
+
+    PB_0,
+    PB_1,
+    PB_3,
+    PB_4,
+    PB_5,
+    PB_6,
+    PB_7,
+    PB_8,
+    PB_9,
+    PB_10,
+    PB_11,
+    PB_12,
+    PB_13,
+    PB_14,
+    PB_15,
+
+    PC_13,
+    PC_14,
+    PC_15,
 };
 
-//! Remove pointer indirection.
-//        ILINE SSystemGlobalEnvironment* operator->()
-//        {
-//            return this;
-//        }
-//        ILINE SSystemGlobalEnvironment& operator*()
-//        {
-//            return *this;
-//        }
-//        ILINE const bool operator!() const
-//        {
-//            return false;
-//        }
-//        ILINE operator bool() const
-//        {
-//            return true;
-//        }
-
-
 #endif // GLOBAL_H
-//#if defined(SYS_ENV_AS_STRUCT)

@@ -32,8 +32,7 @@ private slots:
     void on_radioButton_simHub_clicked(bool checked);
     void on_radioButton_flow_clicked(bool checked);
 
-    void on_spinBox_ledsCount_valueChanged(int arg1);
-    //void on_pushButton_selectAll_clicked();
+    void on_spinBox_ledsCount_valueChanged(int value);
 
 private:
     Ui::LedRGBConfig *ui;

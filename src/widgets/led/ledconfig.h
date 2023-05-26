@@ -2,6 +2,7 @@
 #define LEDCONFIG_H
 
 #include <QWidget>
+#include "global.h"
 
 class LED;
 class LedRGBConfig;
@@ -29,6 +30,8 @@ public:
 
 public slots:
     void spawnLeds(int ledCount);
+    void ledPwmSelected(Pin pin, bool selected);
+    void ledRgbSelected(Pin pin, bool selected);
 
 private:
     Ui::LedConfig *ui;
@@ -37,6 +40,8 @@ private:
 
     QList<LED *> m_ledPtrList;
     int m_currentLedCount;
+
+    void setEnabledTimers(bool enabled);
 };
 
 #endif // LEDCONFIG_H

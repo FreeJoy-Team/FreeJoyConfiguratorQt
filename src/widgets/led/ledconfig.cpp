@@ -33,6 +33,12 @@ LedConfig::LedConfig(QWidget *parent)
     }
 
     ui->layoutH_RGB->addWidget(m_ledsRgb);
+    setEnabledTimers(false);
+    ui->frame_PwmPa8->setEnabled(false);
+    ui->frame_PwmPb0->setEnabled(false);
+    ui->frame_PwmPb1->setEnabled(false);
+    ui->frame_PwmPb4->setEnabled(false);
+    m_ledsRgb->setEnabled(false);
 }
 
 LedConfig::~LedConfig()
@@ -59,6 +65,38 @@ void LedConfig::spawnLeds(int ledCount)
     for (int i = 0; i < ledCount; i++) {
         m_ledPtrList[i]->show();
     }
+    // enable/disable timers
+    if (ledCount <= 0) {
+        setEnabledTimers(false);
+    } else {
+        setEnabledTimers(true);
+    }
+}
+
+void LedConfig::ledPwmSelected(Pin pin, bool selected)
+{
+    switch(pin) {
+        case PA_8:
+            ui->frame_PwmPa8->setEnabled(selected);
+            break;
+        case PB_0:
+            ui->frame_PwmPb0->setEnabled(selected);
+            break;
+        case PB_1:
+            ui->frame_PwmPb1->setEnabled(selected);
+            break;
+        case PB_4:
+            ui->frame_PwmPb4->setEnabled(selected);
+            break;
+        default:
+            break;
+    }
+}
+
+void LedConfig::ledRgbSelected(Pin pin, bool selected)
+{
+    Q_UNUSED(pin)
+    m_ledsRgb->setEnabled(selected);
 }
 
 void LedConfig::setLedsState()
@@ -82,9 +120,21 @@ void LedConfig::setLedsState()
     }
 }
 
+void LedConfig::setEnabledTimers(bool enabled)
+{
+    for (int i = 0; i < ui->layoutH_Timers->count(); ++i) {
+        QWidget *w = ui->layoutH_Timers->itemAt(i)->widget();
+        if (w) {
+            w->setEnabled(enabled);
+        }
+    }
+}
+
 void LedConfig::readFromConfig()
 {
-    led_pwm_config_t *pwm = gEnv.pDeviceConfig->config.led_pwm_config;
+    dev_config_t *devc = &gEnv.pDeviceConfig->config;
+    // pwm leds
+    led_pwm_config_t *pwm = devc->led_pwm_config;
     ui->spinBox_LedPA8->setValue(pwm[0].duty_cycle);
     ui->spinBox_LedPB0->setValue(pwm[1].duty_cycle);
     ui->spinBox_LedPB1->setValue(pwm[2].duty_cycle);
@@ -100,16 +150,25 @@ void LedConfig::readFromConfig()
     ui->comboBox_axisConPB1->setCurrentIndex(pwm[2].axis_num);
     ui->comboBox_axisConPB4->setCurrentIndex(pwm[3].axis_num);
 
+    // Mono leds
+    ui->spinBox_Timer1->setValue(devc->led_timer_ms[0]);
+    ui->spinBox_Timer2->setValue(devc->led_timer_ms[1]);
+    ui->spinBox_Timer3->setValue(devc->led_timer_ms[2]);
+    ui->spinBox_Timer4->setValue(devc->led_timer_ms[3]);
+
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         m_ledPtrList[i]->readFromConfig();
     }
 
+    // rgb leds
     m_ledsRgb->readFromConfig();
 }
 
 void LedConfig::writeToConfig()
 {
-    led_pwm_config_t *pwm = gEnv.pDeviceConfig->config.led_pwm_config;
+    dev_config_t *devc = &gEnv.pDeviceConfig->config;
+    // pwm leds
+    led_pwm_config_t *pwm = devc->led_pwm_config;
     pwm[0].duty_cycle = ui->spinBox_LedPA8->value();
     pwm[1].duty_cycle = ui->spinBox_LedPB0->value();
     pwm[2].duty_cycle = ui->spinBox_LedPB1->value();
@@ -125,6 +184,12 @@ void LedConfig::writeToConfig()
     pwm[2].axis_num = ui->comboBox_axisConPB1->currentIndex();
     pwm[3].axis_num = ui->comboBox_axisConPB4->currentIndex();
 
+    // Mono leds
+    devc->led_timer_ms[0] = ui->spinBox_Timer1->value();
+    devc->led_timer_ms[1] = ui->spinBox_Timer2->value();
+    devc->led_timer_ms[2] = ui->spinBox_Timer3->value();
+    devc->led_timer_ms[3] = ui->spinBox_Timer4->value();
+
     for (int i = 0; i < MAX_LEDS_NUM; ++i) {
         if (m_ledPtrList[i]->isHidden()) {
             break;
@@ -132,5 +197,6 @@ void LedConfig::writeToConfig()
         m_ledPtrList[i]->writeToConfig();
     }
 
+    // rgb leds
     m_ledsRgb->writeToConfig();
 }

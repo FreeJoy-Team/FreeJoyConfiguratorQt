@@ -43,6 +43,9 @@ signals:
     void i2cSelected(bool i2cSelected);
     void axesSourceChanged(int sourceEnum, const QString &sourceName, bool isAdd);
     void limitReached(bool limit);
+    void ledPwmSelected(Pin pin, bool selected);
+    void ledRgbSelected(Pin pin, bool selected);
+    //void pinTypeSelected(Pin pin, pin_types_t type, bool selected);
 
     //protected:
     //    void resizeEvent(QResizeEvent*) override;

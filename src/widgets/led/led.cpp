@@ -9,8 +9,12 @@ LED::LED(int ledNumber, QWidget *parent)
     m_ledNumber = ledNumber;
     ui->label_LEDNumber->setNum(ledNumber + 1);
 
-    for (int i = 0; i < LED_FUNCTION_COUNT; ++i) {
+    for (uint i = 0; i < std::size(m_ledList); ++i) {
         ui->comboBox_Function->addItem(m_ledList[i].guiName);
+    }
+
+    for (uint i = 0; i < std::size(m_TimerList); ++i) {
+        ui->comboBox_Timer->addItem(m_TimerList[i].guiName);
     }
 }
 
@@ -46,12 +50,18 @@ void LED::setLedState(bool state)
 
 void LED::readFromConfig()
 {
-    ui->spinBox_InputNumber->setValue(gEnv.pDeviceConfig->config.leds[m_ledNumber].input_num + 1);
-    ui->comboBox_Function->setCurrentIndex(gEnv.pDeviceConfig->config.leds[m_ledNumber].type);
+    led_config_t *led = &gEnv.pDeviceConfig->config.leds[m_ledNumber];
+    ui->spinBox_InputNumber->setValue(led->input_num + 1);
+    ui->comboBox_Function->setCurrentIndex(led->type);
+
+    ui->comboBox_Timer->setCurrentIndex(led->timer + 1); // +1 because first element in m_TimerList = -1
 }
 
 void LED::writeToConfig()
 {
-    gEnv.pDeviceConfig->config.leds[m_ledNumber].input_num = ui->spinBox_InputNumber->value() - 1;
-    gEnv.pDeviceConfig->config.leds[m_ledNumber].type = ui->comboBox_Function->currentIndex();
+    led_config_t *led = &gEnv.pDeviceConfig->config.leds[m_ledNumber];
+    led->input_num = ui->spinBox_InputNumber->value() - 1;
+    led->type = ui->comboBox_Function->currentIndex();
+
+    led->timer = ui->comboBox_Timer->currentIndex() - 1; // -1 because first element in m_TimerList = -1
 }

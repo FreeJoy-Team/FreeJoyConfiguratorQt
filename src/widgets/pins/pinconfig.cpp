@@ -5,6 +5,8 @@
 #include "global.h"
 #include <QSettings>
 
+// todo: change "int pinNumber" to enum Pin
+
 PinConfig::PinConfig(QWidget *parent) :         // пины - первое, что я начал кодить в конфигураторе и спустя время
     QWidget(parent),                            // заявляю - это говнокод!1 который даже мне тяжело понять
     ui(new Ui::PinConfig),                      // мои соболезнования тем кто будет разбираться)
@@ -199,9 +201,21 @@ void PinConfig::signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum,
     }
     // I2C selected
     if (currentDeviceEnum == I2C_SCL){// || current_device_enum == I2C_SDA){
-        emit axesSourceChanged(-2, pinName, true);                                            // -2 enum I2C in axes.h
+        emit axesSourceChanged(SOURCE_I2C, pinName, true);
     } else if (previousDeviceEnum == I2C_SCL){// || previous_device_enum == I2C_SDA){
-        emit axesSourceChanged(-2, pinName, false);
+        emit axesSourceChanged(SOURCE_I2C, pinName, false);
+    }
+    // LED PWM
+    if (currentDeviceEnum == LED_PWM) {
+        emit ledPwmSelected(Pin(pinNumber), true);
+    } else if (previousDeviceEnum == LED_PWM) {
+        emit ledPwmSelected(Pin(pinNumber), false);
+    }
+    // LED RGB
+    if (currentDeviceEnum == LED_RGB) {
+        emit ledRgbSelected(Pin(pinNumber), true);
+    } else if (previousDeviceEnum == LED_RGB) {
+        emit ledRgbSelected(Pin(pinNumber), false);
     }
 }
 

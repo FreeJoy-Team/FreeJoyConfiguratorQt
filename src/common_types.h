@@ -245,7 +245,7 @@ typedef struct button_t
 
 typedef struct physical_buttons_state_t
 {
-    uint32_t time_last;
+    int32_t time_last;
     uint8_t pin_state						:1;
     uint8_t prev_pin_state			:1;
     uint8_t current_state				:1;
@@ -266,7 +266,7 @@ typedef uint8_t button_action_t;
 
 typedef struct logical_buttons_state_t
 {
-    uint32_t time_last;
+    int32_t time_last;
     uint8_t curr_physical_state		:1;
     uint8_t prev_physical_state		:1;
     uint8_t on_state 							:1;
@@ -290,7 +290,7 @@ typedef uint8_t encoder_t;
 
 typedef struct
 {
-    uint32_t 				time_last;
+    int32_t 				time_last;
     int32_t 				cnt;
     uint8_t 				state;					//:4?
     int8_t 					pin_a;
@@ -368,6 +368,7 @@ typedef struct
 {
     int8_t				input_num;
     uint8_t				type: 3;
+    int8_t timer 	:4;
     uint8_t				:0;
 
 } led_config_t;
@@ -429,6 +430,7 @@ typedef struct
     // config 15;
     led_pwm_config_t		led_pwm_config[4];
     led_config_t				leds[MAX_LEDS_NUM];
+    uint16_t						led_timer_ms[4];
 
     // config 16;
     encoder_t						encoders[MAX_ENCODERS_NUM];

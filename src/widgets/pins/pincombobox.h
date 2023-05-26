@@ -10,40 +10,7 @@
 #define PIN_TYPE_COUNT 30
 enum // разделить и вынести отдельно?                 // все структуры в global.h?
 {
-  PA_0 = 1,
-  PA_1,
-  PA_2,
-  PA_3,
-  PA_4,
-  PA_5,
-  PA_6,
-  PA_7,
-  PA_8,
-  PA_9,
-  PA_10,
-  PA_15,
-
-  PB_0,
-  PB_1,
-  PB_3,
-  PB_4,
-  PB_5,
-  PB_6,
-  PB_7,
-  PB_8,
-  PB_9,
-  PB_10,
-  PB_11,
-  PB_12,
-  PB_13,
-  PB_14,
-  PB_15,
-
-  PC_13,
-  PC_14,
-  PC_15,
-
-  ANALOG_IN,
+  ANALOG_IN = 100,
   FAST_ENCODER_PIN,
   LED_PWM_PIN,
 
