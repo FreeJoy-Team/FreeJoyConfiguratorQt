@@ -13,6 +13,7 @@ ColorValueSlider::ColorValueSlider(Qt::Orientation orientation, QWidget *parent)
     : QSlider{orientation, parent}
     , m_currentColor(QColor(Qt::white))
     , m_firstColor(QColor(Qt::white))
+    , m_mouseInside(false)
 {
     setTickPosition(NoTicks);
     setMaximum(255);
@@ -95,7 +96,7 @@ void ColorValueSlider::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::NoPen);
     painter.setBrush(grad);
     painter.drawRect(1,1,geometry().width()-2,geometry().height()-2);
-
+    // draw handle // excess functionality
     qreal pos = (maximum() != 0) ?
                     static_cast<qreal>(value() - minimum()) / maximum() : 0;
     QColor color;
@@ -120,33 +121,29 @@ void ColorValueSlider::paintEvent(QPaintEvent *event)
                                  b.second.blueF() * q + a.second.blueF() * (1.0 - q),
                                  b.second.alphaF() * q + a.second.alphaF() * (1.0 - q));
     }
-
-    if (color.valueF() > 0.5 || color.alphaF() < 0.5) {
+    if (color.valueF() > 0.5f || color.alphaF() < 0.5f) {
         painter.setPen(QPen(Qt::black, 3));
     } else {
         painter.setPen(QPen(Qt::white, 3));
     }
-
+    // calc handle position
     QPointF p1;
     QPointF p2;
-
     if (orientation() == Qt::Horizontal) {
         pos = pos * (geometry().width() - 5);
-        p1 = QPointF(2.5, 2.5) + QPointF(pos, 0);
+        p1 = QPointF(pos  + 2.5f, 0);
         p2 = p1 + QPointF(0, geometry().height() - 5);
     } else {
         pos = (1.0 - pos) * (geometry().height() - 5);
-        p1 = QPointF(2.5, 2.5) + QPointF(0, pos);
-        p2 = p1 + QPointF(geometry().width() - 5, 0);
+        p1 = QPointF(0, pos + 2.5f);
+        p2 = p1 + QPointF(geometry().width(), 0);
     }
 
-    if (color.valueF() > 0.5 || color.alphaF() < 0.5) {
-        painter.setPen(QPen(Qt::black, 3));
-    } else {
-        painter.setPen(QPen(Qt::white, 3));
+    QRectF handle = QRectF(p1, p2);
+    if (!m_mouseInside) {
+        handle.adjust(0, 1, 0, -1);
     }
-
-    painter.drawLine(p1, p2);
+    painter.drawRect(handle);
 }
 
 void ColorValueSlider::mousePressEvent(QMouseEvent *event)
@@ -219,6 +216,20 @@ void ColorValueSlider::mouseMoveEvent(QMouseEvent *event)
     } else {
         QSlider::mouseMoveEvent(event);
     }
+}
+
+void ColorValueSlider::leaveEvent(QEvent *event)
+{
+    Q_UNUSED(event)
+    //QSlider::leaveEvent(event);
+    m_mouseInside = false;
+}
+
+void ColorValueSlider::enterEvent(QEvent *event)
+{
+    Q_UNUSED(event)
+    //QSlider::enterEvent(event);
+    m_mouseInside = true;
 }
 
 void ColorValueSlider::wheelEvent(QWheelEvent *event)

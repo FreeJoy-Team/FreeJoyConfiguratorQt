@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_main" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
+  <layout class="QGridLayout" name="gridLayout_main" rowstretch="0,0" columnstretch="0,0,0,0">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -26,16 +26,7 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item row="0" column="1" rowspan="4">
-    <widget class="ColorCells" name="widget_colorCell" native="true"/>
-   </item>
-   <item row="0" column="0" rowspan="4">
-    <widget class="ColorWheel" name="widget_colorWheel" native="true"/>
-   </item>
-   <item row="0" column="2" rowspan="4">
-    <widget class="ColorValueSlider" name="widget_valueSlider" native="true"/>
-   </item>
-   <item row="0" column="3" rowspan="2">
+   <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_3">
      <property name="leftMargin">
       <number>0</number>
@@ -57,7 +48,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QSpinBox" name="spinBox_red">
+      <widget class="AltSpinBox" name="spinBox_red">
        <property name="maximum">
         <number>255</number>
        </property>
@@ -88,21 +79,21 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QSpinBox" name="spinBox_green">
+      <widget class="AltSpinBox" name="spinBox_green">
        <property name="maximum">
         <number>255</number>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QSpinBox" name="spinBox_blue">
+      <widget class="AltSpinBox" name="spinBox_blue">
        <property name="maximum">
         <number>255</number>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QSpinBox" name="spinBox_value">
+      <widget class="AltSpinBox" name="spinBox_value">
        <property name="maximum">
         <number>255</number>
        </property>
@@ -110,7 +101,7 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="3" rowspan="2">
+   <item row="1" column="0">
     <widget class="QFrame" name="frame">
      <property name="maximumSize">
       <size>
@@ -147,6 +138,15 @@
      </layout>
     </widget>
    </item>
+   <item row="0" column="3" rowspan="2">
+    <widget class="ColorCells" name="widget_colorCell" native="true"/>
+   </item>
+   <item row="0" column="2" rowspan="2">
+    <widget class="ColorWheel" name="widget_colorWheel" native="true"/>
+   </item>
+   <item row="0" column="1" rowspan="2">
+    <widget class="ColorValueSlider" name="widget_valueSlider" native="true"/>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -167,6 +167,11 @@
    <extends>QWidget</extends>
    <header>widgets\color\colorcells.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AltSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>altspinbox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

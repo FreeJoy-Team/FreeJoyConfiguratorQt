@@ -454,7 +454,7 @@ public:
     QWellArray *m_standard;
     static const int m_colorsCount = 48;//48
     static const int m_rowCount = 6;//6
-    static const int m_columnCount = 6;//8
+    static const int m_columnCount = 8;//8
     QRgb m_colors[m_colorsCount];
 };
 

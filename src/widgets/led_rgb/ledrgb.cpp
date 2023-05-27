@@ -1,4 +1,3 @@
-
 #include "ledrgb.h"
 #include <QPainter>
 #include <QIcon>
@@ -25,7 +24,7 @@ LedRGB::LedRGB(QObject *parent)
     : QObject{parent}
     , m_item(new QListWidgetItem)
 {
-    m_item->setIcon(m_baseIcon);//(QIcon("://Images/buttonLed.png"));
+    m_item->setIcon(m_baseIcon);
 }
 
 LedRGB::~LedRGB()

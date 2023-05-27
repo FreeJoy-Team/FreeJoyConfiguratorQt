@@ -28,12 +28,15 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
+    void enterEvent(QEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
 
 private:
     QLinearGradient m_gradient;
     QColor m_currentColor;
     QColor m_firstColor;
+    bool m_mouseInside;
 };
 
 #endif // COLORVALUESLIDER_H

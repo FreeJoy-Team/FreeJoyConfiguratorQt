@@ -37,6 +37,7 @@ INCLUDEPATH +="widgets" \
 
 SOURCES += \
     mainwindow_style.cpp \
+    widgets/altspinbox.cpp \
     widgets/axes-curves/axescurvesbutton.cpp \
     widgets/axes-curves/axescurvesprofiles.cpp \
     widgets/centered_cbox.cpp \
@@ -85,6 +86,7 @@ SOURCES += \
     widgets/shift-reg/shiftregistersconfig.cpp
 
 HEADERS += \
+    widgets/altspinbox.h \
     widgets/axes-curves/axescurvesbutton.h \
     widgets/axes-curves/axescurvesprofiles.h \
     widgets/centered_cbox.h \
@@ -150,7 +152,6 @@ FORMS += \
     widgets/buttons/buttonlogical.ui \
     widgets/buttons/buttonphysical.ui \
     widgets/color/colorpicker.ui \
-    widgets/led_rgb/ledrgb.ui \
     widgets/led_rgb/ledrgbconfig.ui \
     widgets/pins/currentconfig.ui \
     widgets/debugwindow.ui \

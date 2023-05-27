@@ -24,8 +24,7 @@ void ColorWheel::setCurrentColor(const QColor &color)
     color.getHsv(&h, &s, &v);
 
     QColor col(color);
-    if (col == QColor(Qt::black)) col = QColor(Qt::white); // ?
-    else col = QColor::fromHsv(h, s, 255);
+    col = QColor::fromHsv(h, s, 255).toRgb();
 
     if (col == m_currentColor) return;
 
@@ -237,21 +236,9 @@ void ColorWheel::mouseMoveEvent(QMouseEvent *event)
 void ColorWheel::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
-//    event->accept();
-//    if(event->size().width() > event->size().height()){
-//        QWidget::resize(event->size().height(),event->size().height());
-//    }else{
-//        QWidget::resize(event->size().width(),event->size().width());
-//    }
-
     m_center = QPoint(width() / 2.0f, height() / 2.0f); ////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!
     m_radius = std::min(width(), height()) / 2.0f - 2*m_margin;
     m_colorWheel = drawColorWheel();
     m_picker.moveCenter(colorToPos(m_currentColor));
     update();
-
-//    int h, s, v;
-//    m_currentColor.getHsv(&h, &s, &v);
-//    qDebug()<<"hsv ="<<h<<s<<v;
-//    QColor c(QColor::fromHsv(h, s, 255));
 }

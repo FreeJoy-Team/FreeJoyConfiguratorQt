@@ -82,7 +82,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox_LedPA8">
+          <widget class="AltSpinBox" name="spinBox_LedPA8">
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -158,7 +158,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox_LedPB1">
+          <widget class="AltSpinBox" name="spinBox_LedPB1">
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -234,7 +234,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox_LedPB0">
+          <widget class="AltSpinBox" name="spinBox_LedPB0">
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -307,7 +307,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox_LedPB4">
+          <widget class="AltSpinBox" name="spinBox_LedPB4">
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -356,7 +356,7 @@
      <property name="title">
       <string>Mono LEDs</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0">
+     <layout class="QGridLayout" name="gridLayout" columnstretch="0">
       <property name="leftMargin">
        <number>6</number>
       </property>
@@ -529,7 +529,7 @@
             </spacer>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_Timer1">
+            <widget class="AltSpinBox" name="spinBox_Timer1">
              <property name="maximumSize">
               <size>
                <width>70</width>
@@ -614,7 +614,7 @@
             </spacer>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_Timer2">
+            <widget class="AltSpinBox" name="spinBox_Timer2">
              <property name="maximumSize">
               <size>
                <width>70</width>
@@ -699,7 +699,7 @@
             </spacer>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_Timer3">
+            <widget class="AltSpinBox" name="spinBox_Timer3">
              <property name="maximumSize">
               <size>
                <width>70</width>
@@ -784,7 +784,7 @@
             </spacer>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_Timer4">
+            <widget class="AltSpinBox" name="spinBox_Timer4">
              <property name="maximumSize">
               <size>
                <width>70</width>
@@ -856,6 +856,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AltSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>altspinbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

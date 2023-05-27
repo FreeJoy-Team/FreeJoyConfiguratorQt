@@ -64,12 +64,15 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox_InputNumber">
+       <widget class="AltSpinBox" name="spinBox_InputNumber">
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
         <property name="correctionMode">
          <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="maximum">
+         <number>128</number>
         </property>
        </widget>
       </item>
@@ -89,6 +92,11 @@
    <class>CenteredCBox</class>
    <extends>QComboBox</extends>
    <header>centered_cbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AltSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>altspinbox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
