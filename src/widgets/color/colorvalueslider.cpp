@@ -225,7 +225,11 @@ void ColorValueSlider::leaveEvent(QEvent *event)
     m_mouseInside = false;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void ColorValueSlider::enterEvent(QEvent *event)
+#else
+void ColorValueSlider::enterEvent(QEnterEvent *event)
+#endif
 {
     Q_UNUSED(event)
     //QSlider::enterEvent(event);
