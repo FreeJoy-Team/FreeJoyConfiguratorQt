@@ -22,5 +22,15 @@
         <file>Images/flags/United_Kingdom.png</file>
         <file>FreeJoyQt_de_DE.qm</file>
         <file>Images/buttonLed.png</file>
+        <file>Images/rgb.png</file>
+        <file>Images/hall2.png</file>
+        <file>Images/potentiometer.png</file>
+        <file>Images/monoLed.png</file>
+        <file>Images/pwmLed.png</file>
+        <file>Images/fastEncoder.png</file>
+        <file>Images/buttonEncToggle.png</file>
+        <file>Images/ADS1115.png</file>
+        <file>Images/AS5600.png</file>
+        <file>Images/MLX90393.png</file>
     </qresource>
 </RCC>

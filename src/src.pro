@@ -58,6 +58,7 @@ SOURCES += \
     widgets/infolabel.cpp \
     widgets/led_rgb/ledrgb.cpp \
     widgets/led_rgb/ledrgbconfig.cpp \
+    widgets/pins/pintypehelper.cpp \
     widgets/selectfolder.cpp \
     widgets/switchbutton.cpp \
     widgets/adv-settings/advancedsettings.cpp \
@@ -110,6 +111,7 @@ HEADERS += \
     widgets/infolabel.h \
     widgets/led_rgb/ledrgb.h \
     widgets/led_rgb/ledrgbconfig.h \
+    widgets/pins/pintypehelper.h \
     widgets/selectfolder.h \
     widgets/switchbutton.h \
     version.h \
@@ -164,6 +166,7 @@ FORMS += \
     widgets/pins/pinconfig.ui \
     widgets/pins/pinsbluepill.ui \
     widgets/pins/pinscontrlite.ui \
+    widgets/pins/pintypehelper.ui \
     widgets/selectfolder.ui \
     widgets/shift-reg/shiftregisters.ui \
     widgets/shift-reg/shiftregistersconfig.ui

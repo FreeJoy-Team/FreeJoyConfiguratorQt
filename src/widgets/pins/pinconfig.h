@@ -4,8 +4,6 @@
 #include <QWidget>
 
 #include "pincombobox.h"
-#include "pinscontrlite.h"
-#include "pinsbluepill.h"
 //#include "currentconfig.h"
 
 QT_BEGIN_NAMESPACE
@@ -14,6 +12,9 @@ QT_END_NAMESPACE
 
 #define SOURCE_COUNT 8
 #define PIN_TYPE_LIMIT_COUNT 3
+
+class PinsBluePill;
+class PinsContrLite;
 
 namespace Ui {
 class PinConfig;
@@ -53,6 +54,7 @@ signals:
 public slots:
     void a2bCountChanged(int);
     void shiftRegButtonsCountChanged(int count);
+    void highlightPins(pin_t pinType, bool enable);
 private slots:
     void pinInteraction(int index, int senderIndex, int pin);
     void pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);

@@ -1,9 +1,11 @@
 #include "pinconfig.h"
 #include "ui_pinconfig.h"
 #include <QLabel>
-
-#include "global.h"
 #include <QSettings>
+#include "pinscontrlite.h"
+#include "pinsbluepill.h"
+#include "pintypehelper.h"
+#include "global.h"
 
 // todo: change "int pinNumber" to enum Pin
 
@@ -66,6 +68,8 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
             this, &PinConfig::totalLEDsValueChanged);
     connect(ui->widget_currConfig, &CurrentConfig::limitReached,
             this, &PinConfig::limitReached);
+    connect(ui->widget_PinTypeHelper, &PinTypeHelper::helpHovered,
+            this, &PinConfig::highlightPins);
 }
 
 PinConfig::~PinConfig()
@@ -379,6 +383,28 @@ bool PinConfig::limitIsReached()
     return ui->widget_currConfig->limitIsReached();
 }
 
+void PinConfig::highlightPins(pin_t pinType, bool enable)
+{
+    bool i2c = false;
+    if (pinType == I2C_SDA) i2c = true;
+
+    for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
+        for (auto &type: m_pinCBoxPtrList[i]->enumIndex()) {
+            if (type == pinType || (i2c && type == I2C_SCL)) {
+                if (enable) {
+                    QPalette pal(m_pinCBoxPtrList[i]->palette());
+                    pal.setColor(QPalette::Button, pal.highlight().color());
+                    m_pinCBoxPtrList[i]->setPalette(pal);
+                } else {
+                    // надо именно так, чтобы при смене темы менялся цвет, а не зависал,
+                    // как, например, при использовании qApp->palette()
+                    PinComboBox tmp(1);
+                    m_pinCBoxPtrList[i]->setPalette(tmp.palette());
+                }
+            }
+        }
+    }
+}
 
 void PinConfig::resetAllPins()
 {
@@ -399,4 +425,3 @@ void PinConfig::writeToConfig(){
         m_pinCBoxPtrList[i]->writeToConfig(i);
     }
 }
-
