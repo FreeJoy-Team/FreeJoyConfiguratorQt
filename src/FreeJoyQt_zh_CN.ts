@@ -771,6 +771,28 @@
         <translation>按下时自动设置物理按钮</translation>
     </message>
     <message>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1073"/>
+        <source>Buttons polling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1080"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1102"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pooling intervals. A low value will not improve the operation of the buttons, on the contrary, increasing it may improve encoder operation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1083"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1105"/>
+        <source> ns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1124"/>
+        <source>Encoders polling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="widgets/buttons/buttonconfig.ui" line="276"/>
         <source>Press timer</source>
         <translation>按动计时器</translation>
@@ -797,57 +819,61 @@
     </message>
     <message>
         <location filename="widgets/buttons/buttonconfig.ui" line="380"/>
-        <location filename="widgets/buttons/buttonconfig.ui" line="393"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="390"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press a physical button for assigning it to a logical one.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;按下物理按钮将其分配给逻辑按钮。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="464"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="461"/>
         <source>Physical buttons</source>
         <translation>物理按钮</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="515"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="512"/>
         <source>Timer settings</source>
         <translation>延时器设置</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="595"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="585"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="657"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="742"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="827"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="925"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1010"/>
+        <source> ms</source>
+        <translation type="unfinished"> 毫秒</translation>
+    </message>
+    <message>
+        <location filename="widgets/buttons/buttonconfig.ui" line="935"/>
         <source>Timer 1</source>
         <translation>计时器 1</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="611"/>
-        <location filename="widgets/buttons/buttonconfig.ui" line="687"/>
-        <location filename="widgets/buttons/buttonconfig.ui" line="763"/>
-        <location filename="widgets/buttons/buttonconfig.ui" line="839"/>
-        <location filename="widgets/buttons/buttonconfig.ui" line="915"/>
-        <location filename="widgets/buttons/buttonconfig.ui" line="991"/>
         <source>ms</source>
-        <translation>毫秒</translation>
+        <translation type="vanished">毫秒</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="677"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="595"/>
         <source>Timer 2</source>
         <translation>计时器 2</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="753"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="765"/>
         <source>Timer 3</source>
         <translation>计时器 3</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="829"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="680"/>
         <source>Debounce timer</source>
         <translation>防抖延时</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="905"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="1020"/>
         <source>Axes to buttons timer</source>
         <translation>轴上按钮延时</translation>
     </message>
     <message>
-        <location filename="widgets/buttons/buttonconfig.ui" line="981"/>
+        <location filename="widgets/buttons/buttonconfig.ui" line="850"/>
         <source>Encoder press timer</source>
         <translation>编码器延时</translation>
     </message>
@@ -1070,19 +1096,47 @@
     </message>
 </context>
 <context>
+    <name>ColorPicker</name>
+    <message>
+        <location filename="widgets/color/colorpicker.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">子菜单</translation>
+    </message>
+    <message>
+        <location filename="widgets/color/colorpicker.ui" line="46"/>
+        <source>Red:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/color/colorpicker.ui" line="63"/>
+        <source>Green:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/color/colorpicker.ui" line="70"/>
+        <source>Blue:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/color/colorpicker.ui" line="77"/>
+        <source>Value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigToFile</name>
     <message>
-        <location filename="configtofile.cpp" line="208"/>
+        <location filename="configtofile.cpp" line="232"/>
         <source>Firmware version in config file doesnt match configurator version. Check settings before write config.</source>
         <translation>配置文件中的固件版本与配置程序版本不匹配。请在写入配置之前检查设置。</translation>
     </message>
     <message>
-        <location filename="configtofile.cpp" line="209"/>
+        <location filename="configtofile.cpp" line="233"/>
         <source>Pins B8, B9 reset! In this version I2C moved from pins B8, B9 to B10, B11. Check it!</source>
         <translation>引脚B8、B9已重新设置!在此版本中,I2C从引脚B8、B9移动到B10、B11。请重新检查引脚!</translation>
     </message>
     <message>
-        <location filename="configtofile.cpp" line="210"/>
+        <location filename="configtofile.cpp" line="234"/>
         <source>Firmware version!</source>
         <translation>固件版本！</translation>
     </message>
@@ -1399,14 +1453,39 @@
         <translation>子菜单</translation>
     </message>
     <message>
-        <location filename="widgets/led/led.h" line="39"/>
+        <location filename="widgets/led/led.h" line="38"/>
         <source>Normal</source>
         <translation>正常</translation>
     </message>
     <message>
-        <location filename="widgets/led/led.h" line="40"/>
+        <location filename="widgets/led/led.h" line="39"/>
         <source>Inverted</source>
         <translation>相反</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/led.h" line="44"/>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led/led.h" line="45"/>
+        <source>Timer 1</source>
+        <translation type="unfinished">计时器 1</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/led.h" line="46"/>
+        <source>Timer 2</source>
+        <translation type="unfinished">计时器 2</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/led.h" line="47"/>
+        <source>Timer 3</source>
+        <translation type="unfinished">计时器 3</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/led.h" line="48"/>
+        <source>Timer 4</source>
+        <translation type="unfinished">计时器 4</translation>
     </message>
 </context>
 <context>
@@ -1418,63 +1497,165 @@
     </message>
     <message>
         <location filename="widgets/led/ledconfig.ui" line="32"/>
-        <source>PWM</source>
-        <translation></translation>
+        <source>PWM LEDs</source>
+        <oldsource>PWM</oldsource>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="50"/>
+        <location filename="widgets/led/ledconfig.ui" line="77"/>
         <source>Pin PA8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="89"/>
-        <location filename="widgets/led/ledconfig.ui" line="153"/>
-        <location filename="widgets/led/ledconfig.ui" line="217"/>
-        <location filename="widgets/led/ledconfig.ui" line="278"/>
+        <location filename="widgets/led/ledconfig.ui" line="116"/>
+        <location filename="widgets/led/ledconfig.ui" line="192"/>
+        <location filename="widgets/led/ledconfig.ui" line="268"/>
+        <location filename="widgets/led/ledconfig.ui" line="341"/>
         <source>Connected to axis</source>
         <translation>绑定到轴</translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="114"/>
+        <location filename="widgets/led/ledconfig.ui" line="229"/>
         <source>Pin PB0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="178"/>
+        <location filename="widgets/led/ledconfig.ui" line="357"/>
+        <source>Mono LEDs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="425"/>
+        <source>Timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="543"/>
+        <location filename="widgets/led/ledconfig.ui" line="628"/>
+        <location filename="widgets/led/ledconfig.ui" line="713"/>
+        <location filename="widgets/led/ledconfig.ui" line="798"/>
+        <source> ms</source>
+        <translation type="unfinished"> 毫秒</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="553"/>
+        <source>Timer 1</source>
+        <translation type="unfinished">计时器 1</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="638"/>
+        <source>Timer 2</source>
+        <translation type="unfinished">计时器 2</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="723"/>
+        <source>Timer 3</source>
+        <translation type="unfinished">计时器 3</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="808"/>
+        <source>Timer 4</source>
+        <translation type="unfinished">计时器 4</translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="839"/>
+        <source>RGB LEDs - pin A10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led/ledconfig.ui" line="153"/>
         <source>Pin PB1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="239"/>
+        <location filename="widgets/led/ledconfig.ui" line="302"/>
         <source>Pin PB4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="307"/>
-        <source>LED</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="widgets/led/ledconfig.ui" line="316"/>
+        <location filename="widgets/led/ledconfig.ui" line="405"/>
         <source>Input №</source>
         <translation>输入 №</translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="326"/>
+        <location filename="widgets/led/ledconfig.ui" line="415"/>
         <source>Function</source>
         <translation>作用</translation>
     </message>
     <message>
-        <location filename="widgets/led/ledconfig.ui" line="336"/>
+        <location filename="widgets/led/ledconfig.ui" line="395"/>
         <source>№</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>LedRGBConfig</name>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">子菜单</translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="54"/>
+        <source>Effects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="72"/>
+        <source>SimHub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="79"/>
+        <source>Static Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="86"/>
+        <source>Rainbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="93"/>
+        <source>Flow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="102"/>
+        <source>LEDs count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="138"/>
+        <source>RB brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="148"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rainbow effect brightness&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="174"/>
+        <source>Effect interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="187"/>
+        <source> ms</source>
+        <translation type="unfinished"> 毫秒</translation>
+    </message>
+    <message>
+        <location filename="widgets/led_rgb/ledrgbconfig.ui" line="208"/>
+        <source>Color selector</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="521"/>
-        <location filename="mainwindow.cpp" line="825"/>
+        <location filename="mainwindow.cpp" line="829"/>
         <source>Show debug</source>
         <translation>显示调试信息</translation>
     </message>
@@ -1527,7 +1708,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="261"/>
+        <location filename="mainwindow.cpp" line="263"/>
         <source>Connected</source>
         <translation>已连接</translation>
     </message>
@@ -1608,56 +1789,56 @@
         <translation>FreeJoy 配置程序 (由@sht2017翻译、@Clara补充完善)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="242"/>
+        <location filename="mainwindow.cpp" line="244"/>
         <source>Disconnected</source>
         <translation>已断开连接</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="299"/>
+        <location filename="mainwindow.cpp" line="301"/>
         <source>Incompatible Firmware</source>
         <translation>固件不兼容</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="308"/>
-        <location filename="mainwindow.cpp" line="495"/>
+        <location filename="mainwindow.cpp" line="310"/>
+        <location filename="mainwindow.cpp" line="498"/>
         <source>Device firmware</source>
         <translation>设备固件</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="498"/>
+        <location filename="mainwindow.cpp" line="501"/>
         <source>Received</source>
         <translation>已接收</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="508"/>
-        <location filename="mainwindow.cpp" line="541"/>
+        <location filename="mainwindow.cpp" line="511"/>
+        <location filename="mainwindow.cpp" line="544"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="530"/>
+        <location filename="mainwindow.cpp" line="533"/>
         <source>Sent</source>
         <translation>已发送</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="750"/>
+        <location filename="mainwindow.cpp" line="753"/>
         <source>Open Config</source>
         <translation>打开配置</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="750"/>
-        <location filename="mainwindow.cpp" line="768"/>
+        <location filename="mainwindow.cpp" line="753"/>
+        <location filename="mainwindow.cpp" line="772"/>
         <source>Config Files (*.cfg)</source>
         <translation>配置文件 (*.cfg)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="767"/>
+        <location filename="mainwindow.cpp" line="771"/>
         <source>Save Config</source>
         <translation>保存配置</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="626"/>
-        <location filename="mainwindow.cpp" line="817"/>
+        <location filename="mainwindow.cpp" line="629"/>
+        <location filename="mainwindow.cpp" line="821"/>
         <source>Hide debug</source>
         <translation>隐藏调试信息</translation>
     </message>
@@ -1670,297 +1851,310 @@
         <translation>子菜单</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="143"/>
+        <location filename="widgets/pins/pincombobox.h" line="110"/>
         <source>Pin A0</source>
         <translation>A0 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="144"/>
+        <location filename="widgets/pins/pincombobox.h" line="111"/>
         <source>Pin A1</source>
         <translation>A1 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="145"/>
+        <location filename="widgets/pins/pincombobox.h" line="112"/>
         <source>Pin A2</source>
         <translation>A2 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="146"/>
+        <location filename="widgets/pins/pincombobox.h" line="113"/>
         <source>Pin A3</source>
         <translation>A3 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="147"/>
+        <location filename="widgets/pins/pincombobox.h" line="114"/>
         <source>Pin A4</source>
         <translation>A4 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="148"/>
+        <location filename="widgets/pins/pincombobox.h" line="115"/>
         <source>Pin A5</source>
         <translation>A5 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="149"/>
+        <location filename="widgets/pins/pincombobox.h" line="116"/>
         <source>Pin A6</source>
         <translation>A6 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="150"/>
+        <location filename="widgets/pins/pincombobox.h" line="117"/>
         <source>Pin A7</source>
         <translation>A7 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="151"/>
+        <location filename="widgets/pins/pincombobox.h" line="118"/>
         <source>Pin A8</source>
         <translation>A8 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="152"/>
+        <location filename="widgets/pins/pincombobox.h" line="119"/>
         <source>Pin A9</source>
         <translation>A9 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="153"/>
+        <location filename="widgets/pins/pincombobox.h" line="120"/>
         <source>Pin A10</source>
         <translation>A10 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="154"/>
+        <location filename="widgets/pins/pincombobox.h" line="121"/>
         <source>Pin A15</source>
         <translation>A15 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="155"/>
+        <location filename="widgets/pins/pincombobox.h" line="122"/>
         <source>Pin B0</source>
         <translation>B0 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="156"/>
+        <location filename="widgets/pins/pincombobox.h" line="123"/>
         <source>Pin B1</source>
         <translation>B1 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="157"/>
+        <location filename="widgets/pins/pincombobox.h" line="124"/>
         <source>Pin B3</source>
         <translation>B3 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="158"/>
+        <location filename="widgets/pins/pincombobox.h" line="125"/>
         <source>Pin B4</source>
         <translation>B4 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="159"/>
+        <location filename="widgets/pins/pincombobox.h" line="126"/>
         <source>Pin B5</source>
         <translation>B5 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="160"/>
+        <location filename="widgets/pins/pincombobox.h" line="127"/>
         <source>Pin B6</source>
         <translation>B6 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="161"/>
+        <location filename="widgets/pins/pincombobox.h" line="128"/>
         <source>Pin B7</source>
         <translation>B7 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="162"/>
+        <location filename="widgets/pins/pincombobox.h" line="129"/>
         <source>Pin B8</source>
         <translation>B8 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="163"/>
+        <location filename="widgets/pins/pincombobox.h" line="130"/>
         <source>Pin B9</source>
         <translation>B9 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="164"/>
+        <location filename="widgets/pins/pincombobox.h" line="131"/>
         <source>Pin B10</source>
         <translation>B10 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="165"/>
+        <location filename="widgets/pins/pincombobox.h" line="132"/>
         <source>Pin B11</source>
         <translation>B11 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="166"/>
+        <location filename="widgets/pins/pincombobox.h" line="133"/>
         <source>Pin B12</source>
         <translation>B12 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="167"/>
+        <location filename="widgets/pins/pincombobox.h" line="134"/>
         <source>Pin B13</source>
         <translation>B13 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="168"/>
+        <location filename="widgets/pins/pincombobox.h" line="135"/>
         <source>Pin B14</source>
         <translation>B14 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="169"/>
+        <location filename="widgets/pins/pincombobox.h" line="136"/>
         <source>Pin B15</source>
         <translation>B15 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="170"/>
+        <location filename="widgets/pins/pincombobox.h" line="137"/>
         <source>Pin C13</source>
         <translation>C13 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="171"/>
+        <location filename="widgets/pins/pincombobox.h" line="138"/>
         <source>Pin C14</source>
         <translation>C14 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="172"/>
+        <location filename="widgets/pins/pincombobox.h" line="139"/>
         <source>Pin C15</source>
         <translation>C15 引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="177"/>
+        <location filename="widgets/pins/pincombobox.h" line="144"/>
         <source>Not Used</source>
         <translation>未使用</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="182"/>
+        <location filename="widgets/pins/pincombobox.h" line="149"/>
+        <source>Button to Gnd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pincombobox.h" line="154"/>
+        <source>Button to Vcc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Button Gnd</source>
-        <translation>按钮 负极</translation>
+        <translation type="vanished">按钮 负极</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="187"/>
         <source>Button Vcc</source>
-        <translation>按钮 正极</translation>
+        <translation type="vanished">按钮 正极</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="192"/>
+        <location filename="widgets/pins/pincombobox.h" line="159"/>
         <source>Button Row</source>
         <translation>按钮 行</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="197"/>
+        <location filename="widgets/pins/pincombobox.h" line="164"/>
         <source>Button Column</source>
         <translation>按钮 列</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="202"/>
+        <location filename="widgets/pins/pincombobox.h" line="169"/>
         <source>ShiftReg LATCH</source>
         <translation>移位寄存器 LATCH引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="207"/>
+        <location filename="widgets/pins/pincombobox.h" line="174"/>
         <source>ShiftReg DATA</source>
         <translation>移位寄存器 DATA引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="212"/>
+        <location filename="widgets/pins/pincombobox.h" line="179"/>
         <source>ShiftReg CLK</source>
         <translation>移位寄存器 CLK引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="217"/>
+        <location filename="widgets/pins/pincombobox.h" line="184"/>
         <source>TLE5011 CS</source>
         <translation>TLE5011 CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="222"/>
+        <location filename="widgets/pins/pincombobox.h" line="189"/>
         <source>TLE5012B CS</source>
         <translation>TLE5012B CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="227"/>
+        <location filename="widgets/pins/pincombobox.h" line="194"/>
         <source>MCP3201 CS</source>
         <translation>MCP3201 CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="232"/>
+        <location filename="widgets/pins/pincombobox.h" line="199"/>
         <source>MCP3202 CS</source>
         <translation>MCP3202 CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="237"/>
+        <location filename="widgets/pins/pincombobox.h" line="204"/>
         <source>MCP3204 CS</source>
         <translation>MCP3204 CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="242"/>
+        <location filename="widgets/pins/pincombobox.h" line="209"/>
         <source>MCP3208 CS</source>
         <translation>MCP3208 CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="247"/>
+        <location filename="widgets/pins/pincombobox.h" line="214"/>
         <source>MLX90393 CS</source>
         <translation>MLX90393 CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="252"/>
+        <location filename="widgets/pins/pincombobox.h" line="219"/>
         <source>MLX90363 CS</source>
         <translation>MLX90363 CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="257"/>
+        <location filename="widgets/pins/pincombobox.h" line="224"/>
         <source>AS5048A CS</source>
         <translation>AS5048A CS引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="262"/>
+        <location filename="widgets/pins/pincombobox.h" line="229"/>
         <source>LED Single</source>
         <translation>单独LED</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="267"/>
+        <location filename="widgets/pins/pincombobox.h" line="234"/>
         <source>LED Row</source>
         <translation>LED 行</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="272"/>
+        <location filename="widgets/pins/pincombobox.h" line="239"/>
         <source>LED Column</source>
         <translation>LED 列</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="277"/>
+        <location filename="widgets/pins/pincombobox.h" line="244"/>
         <source>LED PWM</source>
         <translation>LED PWM引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="282"/>
+        <location filename="widgets/pins/pincombobox.h" line="249"/>
+        <source>LED WS2812b</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pincombobox.h" line="254"/>
         <source>Axis Analog</source>
         <translation>模拟轴</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="287"/>
+        <location filename="widgets/pins/pincombobox.h" line="259"/>
         <source>Fast Encoder</source>
         <translation>高速编码器</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="292"/>
+        <location filename="widgets/pins/pincombobox.h" line="264"/>
         <source>SPI SCK</source>
         <translation>SPI SCK引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="297"/>
+        <location filename="widgets/pins/pincombobox.h" line="269"/>
         <source>SPI MOSI</source>
         <translation>SPI MOSI引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="302"/>
+        <location filename="widgets/pins/pincombobox.h" line="274"/>
         <source>SPI MISO</source>
         <translation>SPI MISO引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="307"/>
+        <location filename="widgets/pins/pincombobox.h" line="279"/>
         <source>TLE5011 GEN</source>
         <translation>TLE5011 GEN引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="312"/>
+        <location filename="widgets/pins/pincombobox.h" line="284"/>
         <source>I2C SCL</source>
         <translation>I2C SCL引脚</translation>
     </message>
     <message>
-        <location filename="widgets/pins/pincombobox.h" line="317"/>
+        <location filename="widgets/pins/pincombobox.h" line="289"/>
         <source>I2C SDA</source>
         <translation>I2C SDA引脚</translation>
     </message>
@@ -1968,9 +2162,119 @@
 <context>
     <name>PinConfig</name>
     <message>
-        <location filename="widgets/pins/pinconfig.ui" line="54"/>
+        <location filename="widgets/pins/pinconfig.ui" line="56"/>
         <source>Select board</source>
         <translation>开发板选择</translation>
+    </message>
+</context>
+<context>
+    <name>PinTypeHelper</name>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">子菜单</translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="32"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Brief information. &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Be sure&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; to read the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; for details&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="35"/>
+        <source>Pin Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="53"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;You can connect buttons, toggle switches, encoders, both directly &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#1982f0;&quot;&gt;Button to GND&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;/&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#aaaa00;&quot;&gt;Vcc&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;, and combining them into a matrix &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#7882fa;&quot;&gt;Button Row/Column&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;. When connected to &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#1982f0;&quot;&gt;Button to GND&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; the second contact of the button is connected to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#010101;&quot;&gt;GND&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, with &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#aaaa00;&quot;&gt;Button Vcc&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; to 3.3v.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/buttonEncToggle.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="59"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buttons, encoders, etc &lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="66"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Shift registers &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;74HC165&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;CD4021&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; are supported. To connect, use the table below on the selected pins, and then set the number of buttons in the &amp;quot;Registers&amp;quot; tab.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;ShiftReg_CLK&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;ShiftReg_LATCH&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; - can be common to each shift register chain, or common to all shift register chains.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;ShiftReg_DATA&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; - individually for each chain of shift registers.&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; border-collapse:collapse;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot; bgcolor=&quot;#22272e&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;Name in configurator&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;74HC165 pin&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;CD4021 pin&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;Alternative pin names&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;ShiftReg_CLK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;CLK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;CLOCK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;SCK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;ShiftReg_DATA&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;Qh&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;Q8&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;DATA/SERIAL_OUT/OUT&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;ShiftReg_LATCH&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;SH/LD&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;PAR/SER CONTROL&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;LATCH&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#ff7f27;&quot;&gt;3.3V&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VCC&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VDD&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;5V/V+&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#000000;&quot;&gt;GND&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;GND&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VSS&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;V-&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="72"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shift registers&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="79"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Potentiometer&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Hall sensor&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; can be connected directly to the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#00a000;&quot;&gt;Axis Analog&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; pin.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/potentiometer.png&quot; width=&quot;240&quot;/&gt;&lt;img src=&quot;:/Images/hall2.png&quot; width=&quot;240&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="85"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Analog Axis&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="92"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Hall sensors &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5011&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5010&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5012B&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90393&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90363&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;AS5048A&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;analog-to-digital converters &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MCP32XX&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;SPI&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. See the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; for details.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/MLX90393.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Hall sensors&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5011&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5010&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5012B&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90393&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90363&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;AS5048A&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;analog-to-digital converters&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MCP32XX&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;SPI&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. See the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; for details.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/MLX90393.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="98"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SPI&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="105"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#5a9b8c;&quot;&gt;I2C SDA/SCL &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;AS5600 Hall sensor&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, no more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., or &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;ADS1115 analog-to-digital converter&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, up to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., but the total number of axes cannot be more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;8&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/ADS1115.png&quot;/&gt;&lt;img src=&quot;:/Images/AS5600.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#5a9b8c;&quot;&gt;I2C SDA/SCL&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;AS5600 Hall sensor&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, no more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., or &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;ADS1115 analog-to-digital converter&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, up to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., but the total number of axes cannot be more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;8&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/ADS1115.png&quot;/&gt;&lt;img src=&quot;:/Images/AS5600.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="111"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;I2C&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="118"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;WS2812b&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; addressable LEDs are supported. It is possible to customize the color of each LED, use some effects, or control the LEDs via &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;SimHub&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. Connect the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;DIN&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pin of the LED to the selected &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#ff55ff;&quot;&gt;WS2812b LED&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pin on the controller board. Settings in the &amp;quot;LED/PWM&amp;quot; tab.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/rgb.png&quot; width=&quot;500&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="124"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;RGB LEDs&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="131"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Single-color LEDs with brightness control in the &amp;quot;LED/PWM&amp;quot; tab, no more than 20mA. Connect the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#d37a0d;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; of the LED to the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c85a46;&quot;&gt;PWM LED&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; pin. The value of the current-limiting resistance is recommended to be calculated individually for the LEDs used.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/pwmLed.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="137"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;PWM LEDs&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="144"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Single-color LEDs, not more than 20mA, linked to the pressed buttons in the &amp;quot;LED/PWM&amp;quot; tab. Both direct &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c89646;&quot;&gt;LED Single&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; and LED matrix &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c88246;&quot;&gt;LED Row/Column&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; connection are supported. The value of the current-limiting resistance is recommended to be calculated individually for the LEDs used.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/monoLed.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="150"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mono LEDs&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="157"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect one incremental encoder with a high frequency, it can only be used as an axis source. Pins &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#379619;&quot;&gt;Fast encoder&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/fastEncoder.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/pins/pintypehelper.ui" line="163"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fast Encoder&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

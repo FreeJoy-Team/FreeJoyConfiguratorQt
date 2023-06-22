@@ -158,7 +158,7 @@
     <message>
         <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;
                                 href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
-        <translation>&lt;br&gt;Собрано с Qt %1 (%2)&lt;br&gt;Исходный код доступен по GPLv3 на &lt;a style=&quot;color: #03A9F4; text-decoration:none;
+        <translation type="vanished">&lt;br&gt;Собрано с Qt %1 (%2)&lt;br&gt;Исходный код доступен по GPLv3 на &lt;a style=&quot;color: #03A9F4; text-decoration:none;
                                 href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</translation>
     </message>
     <message>
@@ -180,6 +180,11 @@
     <message>
         <source>Restart</source>
         <translation>Перезапуск</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Built with Qt %1 (%2)&lt;br&gt;Source code available under GPLv3 on &lt;a style=&quot;color: #03A9F4; text-decoration:none;&quot;
+                                href=&quot;https://github.com/FreeJoy-Team/FreeJoyConfiguratorQt&quot;&gt;Github&lt;/a&gt;&lt;br&gt;</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -754,7 +759,7 @@
     </message>
     <message>
         <source>ms</source>
-        <translation>мс</translation>
+        <translation type="vanished">мс</translation>
     </message>
     <message>
         <source>Timer 2</source>
@@ -791,6 +796,26 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press a physical button for assigning it to a logical one.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите физическую кнопку, чтобы назначить её логической кнопке.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source> ms</source>
+        <translation> мс</translation>
+    </message>
+    <message>
+        <source>Buttons polling</source>
+        <translation>Опрос кнопок</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pooling intervals. A low value will not improve the operation of the buttons, on the contrary, increasing it may improve encoder operation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Интервал опроса. Низкое значение не улучшит работу кнопок, наоборот, его увеличение может улучшить работу энкодера..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source> ns</source>
+        <translation> нс</translation>
+    </message>
+    <message>
+        <source>Encoders polling</source>
+        <translation>Опрос энкодеров</translation>
     </message>
 </context>
 <context>
@@ -977,6 +1002,29 @@
     <message>
         <source>Form</source>
         <translation>Форма</translation>
+    </message>
+</context>
+<context>
+    <name>ColorPicker</name>
+    <message>
+        <source>Form</source>
+        <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Red:</source>
+        <translation>Крас.:</translation>
+    </message>
+    <message>
+        <source>Green:</source>
+        <translation>Зел.:</translation>
+    </message>
+    <message>
+        <source>Blue:</source>
+        <translation>Гол.:</translation>
+    </message>
+    <message>
+        <source>Value:</source>
+        <translation>Ярк.:</translation>
     </message>
 </context>
 <context>
@@ -1259,16 +1307,32 @@
         <source>Inverted</source>
         <translation>Инвертированный</translation>
     </message>
+    <message>
+        <source>-</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Timer 1</source>
+        <translation>Таймер 1</translation>
+    </message>
+    <message>
+        <source>Timer 2</source>
+        <translation>Таймер 2</translation>
+    </message>
+    <message>
+        <source>Timer 3</source>
+        <translation>Таймер 3</translation>
+    </message>
+    <message>
+        <source>Timer 4</source>
+        <translation>Таймер 4</translation>
+    </message>
 </context>
 <context>
     <name>LedConfig</name>
     <message>
         <source>Form</source>
         <translation>Форма</translation>
-    </message>
-    <message>
-        <source>PWM</source>
-        <translation></translation>
     </message>
     <message>
         <source>Pin PB0</source>
@@ -1281,10 +1345,6 @@
     <message>
         <source>Pin PB4</source>
         <translation>Пин PB4</translation>
-    </message>
-    <message>
-        <source>LED</source>
-        <translation></translation>
     </message>
     <message>
         <source>Input №</source>
@@ -1305,6 +1365,93 @@
     <message>
         <source>Connected to axis</source>
         <translation>Соединить с осью</translation>
+    </message>
+    <message>
+        <source>PWM LEDs</source>
+        <translation>Светодиоды ШИМ</translation>
+    </message>
+    <message>
+        <source>Mono LEDs</source>
+        <translation>Одноцветные светодиоды</translation>
+    </message>
+    <message>
+        <source>Timer</source>
+        <translation>Таймер</translation>
+    </message>
+    <message>
+        <source> ms</source>
+        <translation> мс</translation>
+    </message>
+    <message>
+        <source>Timer 1</source>
+        <translation>Таймер 1</translation>
+    </message>
+    <message>
+        <source>Timer 2</source>
+        <translation>Таймер 2</translation>
+    </message>
+    <message>
+        <source>Timer 3</source>
+        <translation>Таймер 3</translation>
+    </message>
+    <message>
+        <source>Timer 4</source>
+        <translation>Таймер 4</translation>
+    </message>
+    <message>
+        <source>RGB LEDs - pin A10</source>
+        <translation>Разноцветные светодионы - пин A10</translation>
+    </message>
+</context>
+<context>
+    <name>LedRGBConfig</name>
+    <message>
+        <source>Form</source>
+        <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Effects</source>
+        <translation>Эффекты</translation>
+    </message>
+    <message>
+        <source>SimHub</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Static Color</source>
+        <translation>Статич. цвет</translation>
+    </message>
+    <message>
+        <source>Rainbow</source>
+        <translation>Радуга</translation>
+    </message>
+    <message>
+        <source>Flow</source>
+        <translation>Поток</translation>
+    </message>
+    <message>
+        <source>LEDs count</source>
+        <translation>Колич. светодиодов</translation>
+    </message>
+    <message>
+        <source>RB brightness</source>
+        <translation>Яркость радуги</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rainbow effect brightness&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Яркость эффекта &quot;Радуга&quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Effect interval</source>
+        <translation>Интервал эффекта</translation>
+    </message>
+    <message>
+        <source> ms</source>
+        <translation> мс</translation>
+    </message>
+    <message>
+        <source>Color selector</source>
+        <translation>Выбор цвета</translation>
     </message>
 </context>
 <context>
@@ -1648,11 +1795,11 @@ g</source>
     </message>
     <message>
         <source>Button Gnd</source>
-        <translation>Кнопка минус</translation>
+        <translation type="vanished">Кнопка минус</translation>
     </message>
     <message>
         <source>Button Vcc</source>
-        <translation>Кнопка плюс</translation>
+        <translation type="vanished">Кнопка плюс</translation>
     </message>
     <message>
         <source>Button Row</source>
@@ -1708,7 +1855,7 @@ g</source>
     </message>
     <message>
         <source>LED PWM</source>
-        <translation>Светодиод PWM</translation>
+        <translation>Светодиод ШИМ</translation>
     </message>
     <message>
         <source>Axis Analog</source>
@@ -1752,10 +1899,22 @@ g</source>
     </message>
     <message>
         <source>ShiftReg CLK</source>
-        <translation></translation>
+        <translation>Регистр CLK</translation>
     </message>
     <message>
         <source>MLX90363 CS</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Button to Gnd</source>
+        <translation>Кнопка к минусу</translation>
+    </message>
+    <message>
+        <source>Button to Vcc</source>
+        <translation>Кнопка к плюсу</translation>
+    </message>
+    <message>
+        <source>LED WS2812b</source>
         <translation></translation>
     </message>
 </context>
@@ -1804,6 +1963,101 @@ g</source>
     <message>
         <source>Select board</source>
         <translation>Выбор платы</translation>
+    </message>
+</context>
+<context>
+    <name>PinTypeHelper</name>
+    <message>
+        <source>Form</source>
+        <translation>Форма</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Brief information. &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Be sure&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; to read the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; for details&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Краткая информация. &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Обязательно&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; прочтите &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; для детальной информации&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Pin Info</source>
+        <translation>О контактах</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;You can connect buttons, toggle switches, encoders, both directly &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#1982f0;&quot;&gt;Button to GND&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;/&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#aaaa00;&quot;&gt;Vcc&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;, and combining them into a matrix &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#7882fa;&quot;&gt;Button Row/Column&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;. When connected to &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#1982f0;&quot;&gt;Button to GND&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; the second contact of the button is connected to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#010101;&quot;&gt;GND&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, with &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#aaaa00;&quot;&gt;Button Vcc&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; to 3.3v.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/buttonEncToggle.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Можно подключать кнопки, тумблеры, энкодеры, как напрямую &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#1982f0;&quot;&gt;Кнопка к минусу&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;/&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#aaaa00;&quot;&gt;плюсу&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;, так и объединяя их в матрицы &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#7882fa;&quot;&gt;Строка/колонка кнопок&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;. При подключении к &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#1982f0;&quot;&gt;Кнопка к минусу&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; второй контакт кнопки подключается к &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#010101;&quot;&gt;GND&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, при &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#aaaa00;&quot;&gt;Кнопка плюсу&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; к 3.3v.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/buttonEncToggle.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buttons, encoders, etc &lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Кнопки, энкодеры и т.д. &lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Shift registers &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;74HC165&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;CD4021&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; are supported. To connect, use the table below on the selected pins, and then set the number of buttons in the &amp;quot;Registers&amp;quot; tab.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;ShiftReg_CLK&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;ShiftReg_LATCH&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; - can be common to each shift register chain, or common to all shift register chains.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;ShiftReg_DATA&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; - individually for each chain of shift registers.&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; border-collapse:collapse;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot; bgcolor=&quot;#22272e&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;Name in configurator&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;74HC165 pin&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;CD4021 pin&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;Alternative pin names&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;ShiftReg_CLK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;CLK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;CLOCK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;SCK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;ShiftReg_DATA&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;Qh&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;Q8&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;DATA/SERIAL_OUT/OUT&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;ShiftReg_LATCH&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;SH/LD&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;PAR/SER CONTROL&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;LATCH&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#ff7f27;&quot;&gt;3.3V&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VCC&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VDD&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;5V/V+&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#000000;&quot;&gt;GND&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;GND&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VSS&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;V-&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Поддерживаются регистры сдвига &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;74HC165&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; и &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;CD4021&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. Для подключения используйте таблицу снизу на выделенных пинах, а после настройте количество кнопок во вкладке &amp;quot;Регистры&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;Регистр CLK&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; и &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;Регистр LATCH&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; - могут быть общими для каждой цепочки сдвиговых регистров, либо общими для всех цепочек сдвиговых регистров.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#69b437;&quot;&gt;Регистр DATA&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; – индивидуально для каждой цепочки сдвиговых регистров.&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; border-collapse:collapse;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot; bgcolor=&quot;#22272e&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;Имя в конфигураторе&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;74HC165 пин&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;CD4021 пин&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; font-weight:700;&quot;&gt;Альт. имя пинов&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;Регистр CLK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;CLK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;CLOCK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;SCK&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;Регистр DATA&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;Qh&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;Q8&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;DATA/SERIAL_OUT/OUT&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#69b437;&quot;&gt;Регистр LATCH&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;SH/LD&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;PAR/SER CONTROL&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;LATCH&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#ff7f27;&quot;&gt;3.3V&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VCC&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VDD&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;5V/V+&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt; color:#000000;&quot;&gt;GND&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;GND&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;VSS&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;td style=&quot; padding-left:7; padding-right:7; padding-top:3; padding-bottom:3; border-top:1px; border-right:1px; border-bottom:1px; border-left:1px; border-top-color:#555555; border-right-color:#555555; border-bottom-color:#555555; border-left-color:#555555; border-top-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-style:solid;&quot;&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;-apple-system&apos;,&apos;BlinkMacSystemFont&apos;,&apos;Segoe UI&apos;,&apos;Noto Sans&apos;,&apos;Helvetica&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;,&apos;Apple Color Emoji&apos;,&apos;Segoe UI Emoji&apos;; font-size:11pt;&quot;&gt;V-&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shift registers&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Сдвиговые регистры&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Potentiometer&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Hall sensor&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; can be connected directly to the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#00a000;&quot;&gt;Axis Analog&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; pin.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/potentiometer.png&quot; width=&quot;240&quot;/&gt;&lt;img src=&quot;:/Images/hall2.png&quot; width=&quot;240&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Потенциометр&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; и &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;датчик Холла&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; возможно подключить напрямую к пину &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#00a000;&quot;&gt;Аналоговая ось&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/potentiometer.png&quot; width=&quot;240&quot;/&gt;&lt;img src=&quot;:/Images/hall2.png&quot; width=&quot;240&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Analog Axis&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Аналоговые оси&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Hall sensors&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5011&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5010&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5012B&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90393&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90363&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;AS5048A&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;analog-to-digital converters&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MCP32XX&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;SPI&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. See the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; for details.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/MLX90393.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Возможно подключить &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;датчики Холла &lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5011&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5010&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5012B&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90393&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90363&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;AS5048A&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; и &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;аналогово-цифровые преобразователи &lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MCP32XX&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; к &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;SPI&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. Смотрите &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; для подробной информации.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/MLX90393.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SPI&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#5a9b8c;&quot;&gt;I2C SDA/SCL&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;AS5600 Hall sensor&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, no more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., or &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;ADS1115 analog-to-digital converter&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, up to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., but the total number of axes cannot be more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;8&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/ADS1115.png&quot;/&gt;&lt;img src=&quot;:/Images/AS5600.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Возможно подключить к &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#5a9b8c;&quot;&gt;I2C SDA/SCL&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt; датчик Холла AS5600&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, не более &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; шт., или &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;аналогово-цифровой преобразователь ADS1115&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, до &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; шт., но общее количество осей не может быть больше &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;8&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/ADS1115.png&quot;/&gt;&lt;img src=&quot;:/Images/AS5600.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;I2C&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;WS2812b&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; addressable LEDs are supported. It is possible to customize the color of each LED, use some effects, or control the LEDs via &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;SimHub&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. Connect the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;DIN&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pin of the LED to the selected &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#ff55ff;&quot;&gt;WS2812b LED&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pin on the controller board. Settings in the &amp;quot;LED/PWM&amp;quot; tab.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/rgb.png&quot; width=&quot;500&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;WS2812b&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; - адресные светодиоды. Возможно настроить цвет каждому светодиоду, испольтзовать некоторые эффекты, или управлять светодиодами через &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;SimHub&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. Подключите контакт &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;DIN&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; светодиода к выбранному контакту &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#ff55ff;&quot;&gt;WS2812b LED&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; на плате контроллера. Настройки во вкладке &amp;quot;Светодиоды/ШИМ&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/rgb.png&quot; width=&quot;500&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;RGB LEDs&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;RGB светодиоды&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Single-color LEDs with brightness control in the &amp;quot;LED/PWM&amp;quot; tab, no more than 20mA. Connect the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#d37a0d;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; of the LED to the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c85a46;&quot;&gt;PWM LED&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; pin. The value of the current-limiting resistance is recommended to be calculated individually for the LEDs used.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/pwmLed.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Одноцветные светодиоды с регулировкой яркости во вкладке &amp;quot;Светодиоды/ШИМ&amp;quot; , не больше 20мА. Подключите &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#d37a0d;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; светодиода к пину &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c85a46;&quot;&gt;Светодиод ШИМ&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;. Величину токоограничивающего сопротивления рекомендуется расчитывать индивидуально для используемых светодиодов.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/pwmLed.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;PWM LEDs&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ШИМ светодиоды&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Single-color LEDs, not more than 20mA, linked to the pressed buttons in the &amp;quot;LED/PWM&amp;quot; tab. Both direct &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c89646;&quot;&gt;LED Single&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; and LED matrix &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c88246;&quot;&gt;LED Row/Column&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot; connection are supported. The value of the current-limiting resistance is recommended to be calculated individually for the LEDs used.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/monoLed.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Одноцветные светодиоды, не больше 20мА, привязанные к нажатым кнопкам во вкладке &amp;quot;Светодиоды/ШИМ&amp;quot; . Поддерживается как прямое &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c89646;&quot;&gt;Светодиод одиночный&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;, так и подключение матрицы светодиодов &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#c88246;&quot;&gt;Светодиодная строка/колонка&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;. Величину токоограничивающего сопротивления рекомендуется расчитывать индивидуально для используемых светодиодов.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/monoLed.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mono LEDs&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Одноцвет. светодиоды&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect one incremental encoder with a high frequency, it can only be used as an axis source. Pins &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#379619;&quot;&gt;Fast encoder&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/fastEncoder.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Возможно подключить один инкрементальный энкодер с высокой частотой, может быть использован только как источник оси. Контакты &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#379619;&quot;&gt;Быстрый энкодер&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/fastEncoder.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fast Encoder&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Быстрый энкодер&lt;img src=&quot;:/Images/info_icon.png&quot; width=&quot;10&quot; align=&quot;right&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Hall sensors &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5011&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5010&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5012B&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90393&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90363&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;AS5048A&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;analog-to-digital converters &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MCP32XX&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;SPI&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. See the &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; for details.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/MLX90393.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Возможно подключить &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;датчики Холла &lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5011&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5010&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;TLE5012B&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90393&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MLX90363&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;AS5048A&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; и &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;аналогово-цифровые преобразователи &lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;MCP32XX&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; к &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#329978;&quot;&gt;SPI&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;. Смотрите &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Wiki&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; для подробной информации.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/MLX90393.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;It is possible to connect to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#5a9b8c;&quot;&gt;I2C SDA/SCL &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;AS5600 Hall sensor&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, no more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., or &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;ADS1115 analog-to-digital converter&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, up to &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; pcs., but the total number of axes cannot be more than &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;8&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/ADS1115.png&quot;/&gt;&lt;img src=&quot;:/Images/AS5600.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Возможно подключить к &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700; color:#5a9b8c;&quot;&gt;I2C SDA/SCL&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;/&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt; датчик Холла AS5600&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, не более &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; шт., или &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;аналогово-цифровой преобразователь ADS1115&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;, до &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; шт., но общее количество осей не может быть больше &lt;/span&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;8&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/ADS1115.png&quot;/&gt;&lt;img src=&quot;:/Images/AS5600.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1907,6 +2161,10 @@ g</source>
     </message>
     <message>
         <source>CD4021 Pull Up</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>CLK pin</source>
         <translation></translation>
     </message>
 </context>
