@@ -146,12 +146,12 @@ private:
         {},
         {}, {}},
 
-        {BUTTON_GND,     tr("Button Gnd"),      // device enum,   ui name   tr(need to translate)
+        {BUTTON_GND,     tr("Button to Gnd"),   // device enum,   ui name   tr(need to translate)
         {ALL},                                  // add to (example: ALL - add to all comboboxes, PA_8 - add to PA_8 combobox
         {},                                     // except pins (example: add to - ALL, except - PA_8 = add everywhere except PA_8)
         {}, {QColor(25, 130, 240)}},            // interaction with pins, style of interaction with other pins // color, background-color, border-color...
 
-        {BUTTON_VCC,     tr("Button Vcc"),
+        {BUTTON_VCC,     tr("Button to Vcc"),
         {ALL},
         {},
         {}, {QColor(170, 170, 0)}},
