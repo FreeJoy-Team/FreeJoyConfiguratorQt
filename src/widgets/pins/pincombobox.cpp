@@ -142,7 +142,7 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
                 break;
             }
             if (m_pinTypes[i].pinExcept[c] == m_pinNumber){
-                ++i;
+                //++i;  // нахера?
                 tmp = true;
                 break;
             }
@@ -152,7 +152,7 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
                     break;
                 }
                 if (m_pinTypes[i].pinExcept[c] == m_pinList[m_pinNumber-1].pinType[k]){
-                    ++i;
+                    //++i;  // нахера?
                     tmp = true;
                     break;
                 }
@@ -161,6 +161,7 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
         if (tmp){
             continue;
         }
+
         // add
         for (int j = 0; j < typeSize; ++j) {
             if (m_pinTypes[i].pinType[j] == 0) {
