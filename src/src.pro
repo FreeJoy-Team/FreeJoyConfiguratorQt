@@ -88,6 +88,7 @@ SOURCES += \
     widgets/shift-reg/shiftregistersconfig.cpp
 
 HEADERS += \
+    bcdconfig.h \
     widgets/altspinbox.h \
     widgets/axes-curves/axescurvesbutton.h \
     widgets/axes-curves/axescurvesprofiles.h \

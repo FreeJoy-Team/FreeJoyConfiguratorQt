@@ -6,6 +6,7 @@
 #include "pinsbluepill.h"
 #include "pintypehelper.h"
 #include "global.h"
+#include "bcdconfig.h"
 
 // todo: change "int pinNumber" to enum Pin
 
@@ -67,9 +68,10 @@ PinConfig::PinConfig(QWidget *parent) :         // пины - первое, чт
     connect(ui->widget_currConfig, &CurrentConfig::totalLEDsValueChanged,
             this, &PinConfig::totalLEDsValueChanged);
     connect(ui->widget_currConfig, &CurrentConfig::limitReached,
-            this, &PinConfig::limitReached);
+            this, [this](bool) { updateValidationState(); });
     connect(ui->widget_PinTypeHelper, &PinTypeHelper::helpHovered,
             this, &PinConfig::highlightPins);
+    updateBcdConfig();
 }
 
 PinConfig::~PinConfig()
@@ -166,6 +168,7 @@ void PinConfig::pinIndexChanged(int currentDeviceEnum, int previousDeviceEnum, i
 
     // PA10 RGB should only works if PA8 PWM or FastEncoder is not selected
     blockPA10RGB(currentDeviceEnum, previousDeviceEnum, pinNumber);
+    updateBcdConfig();
 }
 
 
@@ -375,16 +378,71 @@ void PinConfig::blockPA10RGB(int currentDeviceEnum, int previousDeviceEnum, int 
 void PinConfig::shiftRegButtonsCountChanged(int count)
 {
     ui->widget_currConfig->shiftRegButtonsCountChanged(count);
+    updateBcdConfig();
 }
 
 void PinConfig::a2bCountChanged(int count)
 {
     ui->widget_currConfig->a2bCountChanged(count);
+    updateBcdConfig();
 }
 
 bool PinConfig::limitIsReached()
 {
-    return ui->widget_currConfig->limitIsReached();
+    return !validationError().isEmpty();
+}
+
+QString PinConfig::validationError() const
+{
+    if (!m_bcdError.isEmpty()) return m_bcdError;
+    if (ui->widget_currConfig->totalButtons() > MAX_BUTTONS_NUM)
+        return tr("The configuration exceeds the limit of 128 physical buttons.");
+    if (ui->widget_currConfig->limitIsReached())
+        return tr("The configuration exceeds the LED limit.");
+    return {};
+}
+
+void PinConfig::updateBcdConfig()
+{
+    pin_t pins[PINS_COUNT];
+    for (int pin = 0; pin < PINS_COUNT; ++pin)
+        pins[pin] = pin_t(m_pinCBoxPtrList[pin]->currentDevEnum());
+    const auto layout = BcdConfig::inspect(pins, PINS_COUNT);
+    QStringList errors;
+    for (int group = 0; group < BcdConfig::GroupCount; ++group) {
+        const auto &config = layout.groups[group];
+        for (int bit = 0; bit < config.bitCount; ++bit) {
+            if (!config.assignments[bit])
+                errors << tr("BCD%1: assign bit%2 to a pin.").arg(group + 1).arg(bit);
+            else if (config.assignments[bit] > 1)
+                errors << tr("BCD%1: bit%2 is assigned more than once.").arg(group + 1).arg(bit);
+        }
+    }
+    m_bcdError = errors.join(QLatin1Char('\n'));
+    ui->widget_currConfig->bcdButtonsCountChanged(layout.buttonCount());
+    QStringList summary;
+    int firstButton = ui->widget_currConfig->totalButtons() - layout.buttonCount() + 1;
+    for (int group = 0; group < BcdConfig::GroupCount; ++group) {
+        const int count = layout.groups[group].buttonCount();
+        if (!count) continue;
+        summary << tr("BCD%1: codes 0–%2 → physical buttons %3–%4")
+                   .arg(group + 1).arg(count - 1).arg(firstButton).arg(firstButton + count - 1);
+        firstButton += count;
+    }
+    const QString error = validationError();
+    ui->label_BcdStatus->setText(error.isEmpty() ? summary.join(QLatin1Char('\n')) : error);
+    ui->label_BcdStatus->setStyleSheet(error.isEmpty() ? QString() : QStringLiteral("color: rgb(200, 0, 0);"));
+    ui->label_BcdStatus->setVisible(!summary.isEmpty() || !error.isEmpty());
+    updateValidationState();
+}
+
+void PinConfig::updateValidationState()
+{
+    const bool blocked = limitIsReached();
+    if (blocked != m_validationBlocked) {
+        m_validationBlocked = blocked;
+        emit limitReached(blocked);
+    }
 }
 
 void PinConfig::highlightPins(pin_t pinType, bool enable)
@@ -394,7 +452,8 @@ void PinConfig::highlightPins(pin_t pinType, bool enable)
 
     for (int i = 0; i < m_pinCBoxPtrList.size(); ++i) {
         for (auto &type: m_pinCBoxPtrList[i]->enumIndex()) {
-            if (type == pinType || (i2c && type == I2C_SCL)) {
+            if (type == pinType || (i2c && type == I2C_SCL)
+                    || (BcdConfig::isBcd(pinType) && BcdConfig::isBcd(type))) {
                 if (enable) {
                     QPalette pal(m_pinCBoxPtrList[i]->palette());
                     pal.setColor(QPalette::Button, pal.highlight().color());
@@ -405,6 +464,7 @@ void PinConfig::highlightPins(pin_t pinType, bool enable)
                     PinComboBox tmp(1);
                     m_pinCBoxPtrList[i]->setPalette(tmp.palette());
                 }
+                break;
             }
         }
     }

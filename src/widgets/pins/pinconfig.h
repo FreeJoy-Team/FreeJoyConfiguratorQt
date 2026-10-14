@@ -31,6 +31,7 @@ public:
     void readFromConfig();
 
     bool limitIsReached();
+    QString validationError() const;
 
     void retranslateUi();
 
@@ -76,6 +77,10 @@ private:
     int m_shiftLatchCount;
     int m_shiftDataCount;
     int m_shiftClkCount;
+    QString m_bcdError;
+    bool m_validationBlocked = false;
+    void updateBcdConfig();
+    void updateValidationState();
 
     void signalsForWidgets(int currentDeviceEnum, int previousDeviceEnum, int pinNumber, QString pinName);
     void pinTypeLimit(int currentDeviceEnum, int previousDeviceEnum);

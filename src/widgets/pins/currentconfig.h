@@ -17,6 +17,8 @@ public:
 
     void setConfig(int type, int changedHowMuch);
     bool limitIsReached();
+    void bcdButtonsCountChanged(int count);
+    int totalButtons() const;
 
 signals:
     void totalLEDsValueChanged(int totalLed);
@@ -32,11 +34,10 @@ public slots:
 private:
     Ui::CurrentConfig *ui;
 
-    QString m_defaultLabelStyle;
-    bool m_maxButtonsWarning;
     int m_axisSources;
     int m_buttonsFromAxes;
     int m_buttonsFromShiftRegs;
+    int m_buttonsFromBcd = 0;
     int m_singleButtons;
     int m_rowsOfButtons;
     int m_columnsOfButtons;
@@ -45,6 +46,9 @@ private:
     int m_columnsOfLed;
 
     bool m_limit;
+    int m_totalLEDs = 0;
+    void updateButtons();
+    void updateLimit();
 
     enum
     {

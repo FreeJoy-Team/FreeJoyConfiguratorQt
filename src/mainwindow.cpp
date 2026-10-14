@@ -7,6 +7,7 @@
 #include <QCheckBox>
 #include <QKeyEvent>
 #include <QPainter>
+#include <QMessageBox>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -148,7 +149,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_shiftRegConfig, &ShiftRegistersConfig::shiftRegButtonsCountChanged,
             m_pinConfig, &PinConfig::shiftRegButtonsCountChanged);
     // buttonts/LEDs limit reached
-    connect(m_pinConfig, &PinConfig::limitReached, this, &MainWindow::blockWRConfigToDevice);
+    connect(m_pinConfig, &PinConfig::limitReached, this,
+            [this](bool blocked) {
+        ui->pushButton_WriteConfig->setDisabled(blocked || !ui->pushButton_ReadConfig->isEnabled());
+    });
     // axes source changed//axesSourceChanged
     connect(m_pinConfig, &PinConfig::axesSourceChanged, m_axesConfig, &AxesConfig::addOrDeleteMainSource);
     // language changed
@@ -303,9 +307,7 @@ void MainWindow::getParamsPacket(bool firmwareCompatible)
             ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(168, 168, 0);");
             ui->label_DeviceStatus->setText(tr("Incompatible Firmware"));
         } else {
-            if (m_pinConfig->limitIsReached() == false) {
-                blockWRConfigToDevice(false);
-            }
+            blockWRConfigToDevice(false);
             ui->label_DeviceStatus->setStyleSheet("color: white; background-color: rgb(0, 128, 0);");
             // set firmware version
             QString str = QString::number(gEnv.pDeviceConfig->paramsReport.firmware_version, 16);
@@ -571,7 +573,7 @@ void MainWindow::configSent(bool success)
 void MainWindow::blockWRConfigToDevice(bool block)
 {
     ui->pushButton_ReadConfig->setDisabled(block);
-    ui->pushButton_WriteConfig->setDisabled(block);
+    ui->pushButton_WriteConfig->setDisabled(block || m_pinConfig->limitIsReached());
 }
 
 
@@ -741,6 +743,12 @@ void MainWindow::on_pushButton_ReadConfig_clicked()
 // write config to device
 void MainWindow::on_pushButton_WriteConfig_clicked()
 {
+    const QString error = m_pinConfig->validationError();
+    if (!error.isEmpty()) {
+        QMessageBox::warning(this, tr("Invalid configuration"), error);
+        return;
+    }
+    if (!ui->pushButton_WriteConfig->isEnabled()) return;
     qDebug()<<"Write config started";
     blockWRConfigToDevice(true);  // не успевает блокироваться? таймер
 
@@ -764,6 +772,11 @@ void MainWindow::on_pushButton_LoadFromFile_clicked()
 // save to file
 void MainWindow::on_pushButton_SaveToFile_clicked()
 {
+    const QString error = m_pinConfig->validationError();
+    if (!error.isEmpty()) {
+        QMessageBox::warning(this, tr("Invalid configuration"), error);
+        return;
+    }
     qDebug()<<"Save to file started";
 
     QString tmpStr(ui->comboBox_Configs->currentText());
