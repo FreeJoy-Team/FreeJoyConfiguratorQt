@@ -32,6 +32,13 @@
    <item row="1" column="1">
     <widget class="PinTypeHelper" name="widget_PinTypeHelper" native="true"/>
    </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QLabel" name="label_BcdStatus">
+     <property name="wordWrap"><bool>true</bool></property>
+     <property name="text"><string/></property>
+     <property name="toolTip"><string>Assign BCD bits starting at bit0 without gaps. GND uses pull-up; VCC uses pull-down. Each group creates 2^N positions, including code 0. Map these physical buttons to logical buttons on the Buttons tab.</string></property>
+    </widget>
+   </item>
    <item row="2" column="1">
     <layout class="QGridLayout" name="gridLayout">
      <item row="1" column="0">

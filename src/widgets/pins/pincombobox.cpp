@@ -1,5 +1,6 @@
 #include "pincombobox.h"
 #include "ui_pincombobox.h"
+#include "bcdconfig.h"
 
 //! pinNumber cannot be less 1 and more than PINS_COUNT
 PinComboBox::PinComboBox(uint pinNumber, QWidget *parent) : // пины - первое, что я начал кодить в конфигураторе и спустя время
@@ -195,6 +196,12 @@ void PinComboBox::initializationPins(uint pin)      // pin_number_ - 1 так с
     // change items text color // i = 1 -skip "NOT_USED"
     for (int i = 1; i < m_pinTypesIndex.size(); ++i) {
         ui->comboBox_PinsType->setItemData(i, QBrush(m_pinTypes[m_pinTypesIndex[i]].color), Qt::ForegroundRole);
+        if (BcdConfig::isBcd(m_enumIndex[i])) {
+            ui->comboBox_PinsType->setItemData(i,
+                tr("BCD bits must start at bit0 without gaps or duplicates. "
+                   "GND: active low with pull-up. VCC: active high with pull-down."),
+                Qt::ToolTipRole);
+        }
     }
 }
 
@@ -271,9 +278,10 @@ void PinComboBox::indexChanged(int index)
 
     // set current config
     if(m_pinTypesIndex.empty() == false){
-        emit currentIndexChanged(m_enumIndex[index], m_previousIndex, m_pinNumber, ui->comboBox_PinsType->currentText());
+        const int previous = m_previousIndex;
         m_previousIndex = m_enumIndex[index];
         m_currentDevEnum = m_enumIndex[index];
+        emit currentIndexChanged(m_currentDevEnum, previous, m_pinNumber, ui->comboBox_PinsType->currentText());
     }
 
 }

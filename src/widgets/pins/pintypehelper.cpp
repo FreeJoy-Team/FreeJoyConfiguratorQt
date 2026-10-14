@@ -21,6 +21,7 @@ PinTypeHelper::PinTypeHelper(QWidget *parent) :
 
     ui->label_analogAxis->setProperty("pinType", AXIS_ANALOG);
     ui->label_buttons->setProperty("pinType", BUTTON_GND);
+    ui->label_bcd->setProperty("pinType", BCD1_BIT0_GND);
     ui->label_shiftReg->setProperty("pinType", SHIFT_REG_LATCH);
     ui->label_spi->setProperty("pinType", MCP3201_CS);
     ui->label_i2c->setProperty("pinType", I2C_SDA);
